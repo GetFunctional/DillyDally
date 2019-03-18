@@ -68,7 +68,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="MainWindow.xaml">
+    <Compile Include="ShellController.cs" />
+    <Compile Include="ShellViewModel.cs" />
+    <Page Include="Shell.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -77,8 +79,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Core\Bootstrapper.cs" />
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="Shell.xaml.cs">
+      <DependentUpon>Shell.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -117,6 +119,10 @@
     <ProjectReference Include="..\GF.DillyDally.Local.Core\GF.DillyDally.Local.Core.csproj">
       <Project>{9c641922-049e-49bd-8fed-64385791c402}</Project>
       <Name>GF.DillyDally.Local.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GF.DillyDally.Mvvmc\GF.DillyDally.Mvvmc.csproj">
+      <Project>{2991a81d-e0e1-4143-ac99-395b5191adbd}</Project>
+      <Name>GF.DillyDally.Mvvmc</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

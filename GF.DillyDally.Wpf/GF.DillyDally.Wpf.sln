@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GF.DillyDally.Contracts", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GF.DillyDally.Local.Core", "GF.DillyDally.Local.Core\GF.DillyDally.Local.Core.csproj", "{9C641922-049E-49BD-8FED-64385791C402}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GF.DillyDally.Mvvmc", "GF.DillyDally.Mvvmc\GF.DillyDally.Mvvmc.csproj", "{2991A81D-E0E1-4143-AC99-395B5191ADBD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{9C641922-049E-49BD-8FED-64385791C402}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9C641922-049E-49BD-8FED-64385791C402}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9C641922-049E-49BD-8FED-64385791C402}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2991A81D-E0E1-4143-AC99-395B5191ADBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2991A81D-E0E1-4143-AC99-395B5191ADBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2991A81D-E0E1-4143-AC99-395B5191ADBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2991A81D-E0E1-4143-AC99-395B5191ADBD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
