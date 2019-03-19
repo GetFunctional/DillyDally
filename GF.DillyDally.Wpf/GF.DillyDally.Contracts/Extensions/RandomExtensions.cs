@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GF.DillyDally.Contracts
+namespace GF.DillyDally.Contracts.Extensions
 {
     internal static class RandomExtensions
     {

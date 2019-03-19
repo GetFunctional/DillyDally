@@ -1,5 +1,5 @@
 ﻿using System;
-using GF.DillyDally.Contracts.Shared;
+using GF.DillyDally.Contracts.Models;
 
 namespace GF.DillyDally.Contracts
 {

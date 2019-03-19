@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using GF.DillyDally.Contracts.Shared;
-using GF.DillyDally.Contracts.Templates;
+using GF.DillyDally.Contracts.Extensions;
+using GF.DillyDally.Contracts.Models;
 
 namespace GF.DillyDally.Contracts
 {

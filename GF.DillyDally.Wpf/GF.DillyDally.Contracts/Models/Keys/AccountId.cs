@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace GF.DillyDally.Contracts.Models
+namespace GF.DillyDally.Contracts.Models.Keys
 {
     public sealed class AccountId : IdentityKeyBase<AccountId>
     {

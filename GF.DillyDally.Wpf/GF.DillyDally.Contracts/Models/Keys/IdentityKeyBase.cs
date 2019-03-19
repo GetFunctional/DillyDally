@@ -1,4 +1,4 @@
-﻿namespace GF.DillyDally.Contracts
+﻿namespace GF.DillyDally.Contracts.Models.Keys
 {
     public abstract class IdentityKeyBase<T> : IIdentityKey<T>
     {

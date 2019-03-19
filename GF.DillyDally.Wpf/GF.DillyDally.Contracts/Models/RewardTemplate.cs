@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LootLib
+namespace GF.DillyDally.Contracts.Models
 {
     public sealed class RewardTemplate
     {

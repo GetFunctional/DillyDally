@@ -1,8 +1,6 @@
 ﻿using System;
-using GF.DillyDally.Contracts.Models;
-using GF.DillyDally.Contracts.Templates;
 
-namespace GF.DillyDally.Contracts
+namespace GF.DillyDally.Contracts.Models
 {
     public sealed class Reward
     {

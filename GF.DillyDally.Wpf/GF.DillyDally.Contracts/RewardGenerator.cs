@@ -1,5 +1,6 @@
 ﻿using System;
-using GF.DillyDally.Contracts.Templates;
+using GF.DillyDally.Contracts.Extensions;
+using GF.DillyDally.Contracts.Models;
 
 namespace GF.DillyDally.Contracts
 {

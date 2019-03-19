@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace GF.DillyDally.Contracts
+namespace GF.DillyDally.Contracts.Models
 {
     public class LootBox
     {

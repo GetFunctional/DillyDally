@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using GF.DillyDally.Contracts.Models;
 
-namespace GF.DillyDally.Contracts
+namespace GF.DillyDally.Contracts.Models
 {
     public class UserAccount
     {
