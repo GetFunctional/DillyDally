@@ -1,9 +1,9 @@
-﻿using GF.DillyDally.Mvvmc;
+﻿using GF.DillyDally.Wpf.Client.Core;
 
 namespace GF.DillyDally.Wpf.Client.ContentNavigation
 {
     /// <summary>
-    /// Interaktionslogik für ContentBrowserView.xaml
+    ///     Interaktionslogik für ContentBrowserView.xaml
     /// </summary>
     public partial class ContentBrowserView : IViewFor<ContentBrowserViewModel>
     {
@@ -11,7 +11,7 @@ namespace GF.DillyDally.Wpf.Client.ContentNavigation
 
         public ContentBrowserView()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         #endregion
@@ -20,14 +20,8 @@ namespace GF.DillyDally.Wpf.Client.ContentNavigation
 
         public ContentBrowserViewModel ViewModel
         {
-            get
-            {
-                return (ContentBrowserViewModel)this.DataContext;
-            }
-            set
-            {
-                this.DataContext = value;
-            }
+            get { return (ContentBrowserViewModel) this.DataContext; }
+            set { this.DataContext = value; }
         }
 
         #endregion

@@ -6,14 +6,16 @@ namespace GF.DillyDally.Wpf.Client.ContentNavigation
     {
         #region - Felder privat -
 
-        private readonly ControllerFactory<ContentNavigatorController, ContentNavigatorViewModel> _contentNavigatorControllerFactory;
+        private readonly ControllerFactory<ContentNavigatorController, ContentNavigatorViewModel>
+            _contentNavigatorControllerFactory;
 
         #endregion
 
         #region - Konstruktoren -
 
         public ContentBrowserController(ContentBrowserViewModel viewModel,
-            ControllerFactory<ContentNavigatorController, ContentNavigatorViewModel> contentNavigatorControllerFactory) : base(viewModel)
+            ControllerFactory<ContentNavigatorController, ContentNavigatorViewModel> contentNavigatorControllerFactory)
+            : base(viewModel)
         {
             this._contentNavigatorControllerFactory = contentNavigatorControllerFactory;
         }

@@ -17,10 +17,11 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -47,7 +48,6 @@
     <Compile Include="IController.cs" />
     <Compile Include="IController.Generic.cs" />
     <Compile Include="InitializationBase.cs" />
-    <Compile Include="IViewFor.cs" />
     <Compile Include="IViewModel.cs" />
     <Compile Include="MvvmcServiceFactory.cs" />
     <Compile Include="ObservableObject.cs" />

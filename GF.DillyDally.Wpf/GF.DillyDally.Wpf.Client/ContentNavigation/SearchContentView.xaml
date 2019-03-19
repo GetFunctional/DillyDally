@@ -1,0 +1,82 @@
+﻿<UserControl
+    x:Class="GF.DillyDally.Wpf.Client.ContentNavigation.SearchContentView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+    xmlns:local="clr-namespace:GF.DillyDally.Wpf.Client.ContentNavigation"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DataContext="{d:DesignInstance Type={x:Type local:SearchContentViewModel}}"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+
+    <dxlc:LayoutGroup
+        HorizontalAlignment="Center"
+        ItemLabelsAlignment="Local"
+        Orientation="Vertical">
+        <!--<dxlc:LayoutGroup Margin="0,160,0,30" HorizontalAlignment="Center">
+            <Image Height="90" Source="pack://application:,,,/JTL.Wawi.Style;component/Images/JtlLogos/Wawi_Logo_784x236.png" />
+        </dxlc:LayoutGroup>
+
+        <dxlc:LayoutGroup ItemLabelsAlignment="Local" Orientation="Vertical">
+            <dxlc:LayoutItem HorizontalAlignment="Left" Label="NavigationTarget">
+                <dxlc:LayoutGroup
+                    Height="36"
+                    dxlc:DockLayoutControl.Dock="Top"
+                    Orientation="Horizontal">
+                    <dxe:ComboBoxEdit
+                        x:Name="SearchField"
+                        Width="Auto"
+                        MinWidth="450"
+                        AutoComplete="True"
+                        EditValue="{Binding SearchExpression, Mode=TwoWay}"
+                        IncrementalFiltering="True"
+                        ItemsSource="{Binding SearchAutoCompleteSource, Mode=OneWay}"
+                        NullText="Nach Inhalt suchen oder Url eingeben"
+                        ShowEditorButtons="False"
+                        ShowSizeGrip="False"
+                        ValidateOnEnterKeyPressed="True">
+                        <dxe:ComboBoxEdit.StyleSettings>
+                            <dxe:ComboBoxStyleSettings />
+                        </dxe:ComboBoxEdit.StyleSettings>
+                    </dxe:ComboBoxEdit>
+                    <dx:SimpleButton
+                        MinWidth="20"
+                        HorizontalAlignment="Right"
+                        Command="{Binding Commands.SearchCommand, Mode=OneTime}"
+                        CommandParameter="{Binding ElementName=SearchField, Path=EditValue}"
+                        Content="Navigieren"
+                        IsDefault="True" />
+                </dxlc:LayoutGroup>
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem HorizontalAlignment="Left" Label="Dialog">
+                <dxlc:LayoutGroup Height="36" Orientation="Horizontal">
+                    <dxg:LookUpEdit
+                        MinWidth="450"
+                        MinHeight="36"
+                        VerticalAlignment="Center"
+                        AutoPopulateColumns="False"
+                        DisplayMember="DialogControllerName"
+                        EditValue="{Binding CurrentSelectedDialog, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        IsPopupAutoWidth="False"
+                        IsTextEditable="False"
+                        ItemsSource="{Binding SearchDialogeAutoCompleteSource, Mode=OneWay}"
+                        PopupContentTemplate="{StaticResource DialogeSelectorTemplate}"
+                        PopupMaxWidth="600" />
+                    <dx:SimpleButton
+                        MinWidth="20"
+                        HorizontalAlignment="Right"
+                        Command="{Binding Commands.OpenDialogCommand, Mode=OneTime}"
+                        CommandParameter="{Binding CurrentSelectedDialog}"
+                        Content="Dialog öffnen"
+                        IsDefault="True" />
+                </dxlc:LayoutGroup>
+            </dxlc:LayoutItem>
+        </dxlc:LayoutGroup>-->
+    </dxlc:LayoutGroup>
+
+</UserControl>

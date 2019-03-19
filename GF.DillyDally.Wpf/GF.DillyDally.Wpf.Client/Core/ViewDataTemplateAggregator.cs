@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Windows;
 using GF.DillyDally.Mvvmc;
+using GF.DillyDally.Wpf.Client.Core.Exceptions;
 
 namespace GF.DillyDally.Wpf.Client.Core
 {
@@ -32,7 +33,8 @@ namespace GF.DillyDally.Wpf.Client.Core
             return viewCandidates;
         }
 
-        internal IList<DataTemplate> CreateDataTemplatesForViewModelsInAssembly(Assembly assembly, Application application)
+        internal IList<DataTemplate> CreateDataTemplatesForViewModelsInAssembly(Assembly assembly,
+            Application application)
         {
             var viewModelTypes = assembly.GetTypes().Where(this.TypeRespectsViewModelConvention).ToList();
             var viewTypes = assembly.GetTypes().Where(this.TypeRespectsViewConvention).ToList();
@@ -47,7 +49,8 @@ namespace GF.DillyDally.Wpf.Client.Core
             return this.CreateDataTemplatesFor(viewModelTypesWithoutDataTemplate, viewTypes);
         }
 
-        private IList<DataTemplate> CreateDataTemplatesFor(IList<Type> viewModelTypesWithoutDataTemplate, IList<Type> viewTypes)
+        private IList<DataTemplate> CreateDataTemplatesFor(IList<Type> viewModelTypesWithoutDataTemplate,
+            IList<Type> viewTypes)
         {
             var generatedViewModelDataTemplates = new List<DataTemplate>();
             foreach (var viewModelType in viewModelTypesWithoutDataTemplate)
@@ -61,7 +64,8 @@ namespace GF.DillyDally.Wpf.Client.Core
                 }
 
                 var viewTypeMatch = viewTypeCandidates.First();
-                var createdGenericDataTemplate = this._dataTemplateFactory.CreateViewModelDataTemplate(viewModelType, viewTypeMatch);
+                var createdGenericDataTemplate =
+                    this._dataTemplateFactory.CreateViewModelDataTemplate(viewModelType, viewTypeMatch);
                 generatedViewModelDataTemplates.Add(createdGenericDataTemplate);
             }
 
@@ -77,7 +81,8 @@ namespace GF.DillyDally.Wpf.Client.Core
         {
             return
                 type.GetInterfaces()
-                    .Any(intf => intf.IsGenericType && ViewForTagType.IsAssignableFrom(intf.GetGenericTypeDefinition()));
+                    .Any(intf =>
+                        intf.IsGenericType && ViewForTagType.IsAssignableFrom(intf.GetGenericTypeDefinition()));
         }
 
         private bool TypeRespectsViewModelConvention(Type type)

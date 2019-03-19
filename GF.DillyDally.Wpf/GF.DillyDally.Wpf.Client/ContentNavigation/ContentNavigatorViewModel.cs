@@ -14,14 +14,8 @@ namespace GF.DillyDally.Wpf.Client.ContentNavigation
 
         public IViewModel DisplayTarget
         {
-            get
-            {
-                return this._displayTarget;
-            }
-            set
-            {
-                this.SetField(ref this._displayTarget, value);
-            }
+            get { return this._displayTarget; }
+            set { this.SetField(ref this._displayTarget, value); }
         }
 
         #endregion

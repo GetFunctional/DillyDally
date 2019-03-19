@@ -24,6 +24,7 @@ namespace GF.DillyDally.Mvvmc
             {
                 throw new ArgumentException("MemberExpression is expected in expression.Body", "expression");
             }
+
             const string vblocalPrefix = "$VB$Local_";
             var member = memberExpression.Member;
             if (
@@ -33,6 +34,7 @@ namespace GF.DillyDally.Mvvmc
             {
                 return member.Name.Substring(vblocalPrefix.Length);
             }
+
             return member.Name;
         }
 

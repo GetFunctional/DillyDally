@@ -1,9 +1,9 @@
-﻿using GF.DillyDally.Mvvmc;
+﻿using GF.DillyDally.Wpf.Client.Core;
 
 namespace GF.DillyDally.Wpf.Client.ContentNavigation
 {
     /// <summary>
-    /// Interaktionslogik für ContentNavigatorView.xaml
+    ///     Interaktionslogik für ContentNavigatorView.xaml
     /// </summary>
     public partial class ContentNavigatorView : IViewFor<ContentNavigatorViewModel>
     {
@@ -20,14 +20,8 @@ namespace GF.DillyDally.Wpf.Client.ContentNavigation
 
         public ContentNavigatorViewModel ViewModel
         {
-            get
-            {
-                return (ContentNavigatorViewModel)this.DataContext;
-            }
-            set
-            {
-                this.DataContext = value;
-            }
+            get { return (ContentNavigatorViewModel) this.DataContext; }
+            set { this.DataContext = value; }
         }
 
         #endregion

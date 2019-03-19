@@ -26,14 +26,8 @@ namespace GF.DillyDally.Wpf.Client.ContentNavigation
 
         public ContentNavigatorViewModel CurrentActiveNavigator
         {
-            get
-            {
-                return this._currentActiveNavigator;
-            }
-            set
-            {
-                this.SetField(ref this._currentActiveNavigator, value);
-            }
+            get { return this._currentActiveNavigator; }
+            set { this.SetField(ref this._currentActiveNavigator, value); }
         }
 
         public CloseNavigatorCommand CloseNavigatorCommand { get; }

@@ -15,14 +15,8 @@ namespace GF.DillyDally.Wpf.Client
 
         public ContentBrowserViewModel ContentBrowserViewModel
         {
-            get
-            {
-                return this._contentBrowserViewModel;
-            }
-            set
-            {
-                this.SetField(ref this._contentBrowserViewModel, value);
-            }
+            get { return this._contentBrowserViewModel; }
+            set { this.SetField(ref this._contentBrowserViewModel, value); }
         }
 
         #endregion

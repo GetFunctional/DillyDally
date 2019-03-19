@@ -1,4 +1,4 @@
-﻿using GF.DillyDally.Mvvmc;
+﻿using GF.DillyDally.Wpf.Client.Core;
 
 namespace GF.DillyDally.Wpf.Client
 {
@@ -21,14 +21,8 @@ namespace GF.DillyDally.Wpf.Client
 
         public ShellViewModel ViewModel
         {
-            get
-            {
-                return (ShellViewModel)this.DataContext;
-            }
-            set
-            {
-                this.DataContext = value;
-            }
+            get { return (ShellViewModel) this.DataContext; }
+            set { this.DataContext = value; }
         }
 
         #endregion

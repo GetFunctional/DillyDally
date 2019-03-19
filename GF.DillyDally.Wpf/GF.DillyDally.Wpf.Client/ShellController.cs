@@ -8,7 +8,9 @@ namespace GF.DillyDally.Wpf.Client
         private readonly ControllerFactory<ContentBrowserController, ContentBrowserViewModel> _browserControllerFactory;
         private ContentBrowserController _contentBrowserController;
 
-        public ShellController(ShellViewModel viewModel, ControllerFactory<ContentBrowserController,ContentBrowserViewModel> browserControllerFactory) : base(viewModel)
+        public ShellController(ShellViewModel viewModel,
+            ControllerFactory<ContentBrowserController, ContentBrowserViewModel> browserControllerFactory) : base(
+            viewModel)
         {
             this._browserControllerFactory = browserControllerFactory;
         }

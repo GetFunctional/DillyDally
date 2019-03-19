@@ -13,17 +13,32 @@ namespace GF.DillyDally.Mvvmc
     /// </summary>
     public class ObservableObject : INotifyPropertyChanged, INotifyPropertyChanging
     {
+        #region INotifyPropertyChanged Members
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        #endregion
+
+        #region INotifyPropertyChanging Members
+
+        public event PropertyChangingEventHandler PropertyChanging;
+
+        #endregion
+
         #region - Methoden privat -
 
         /// <summary>
-        /// Setzt den Wert einer Eigenschaft. Prüft, ob sich der Wert geändert hat und ruft in diesem Fall die
-        /// Notification-Events auf.
+        ///     Setzt den Wert einer Eigenschaft. Prüft, ob sich der Wert geändert hat und ruft in diesem Fall die
+        ///     Notification-Events auf.
         /// </summary>
         /// <typeparam name="T">Eigenschaften-Typ</typeparam>
         /// <param name="field">Feld der Eigenschaft</param>
         /// <param name="value">Neuer Wert der Eigenschaft</param>
         /// <param name="propertyName">Name der Eigenschaft (wird ab C# 5 vom Compiler gesetzt)</param>
-        /// <param name="changedCallback">Callback der nach dem Setzen der Eigenschaften aber noch vor dem return der Methode ausgeführt wird.</param>
+        /// <param name="changedCallback">
+        ///     Callback der nach dem Setzen der Eigenschaften aber noch vor dem return der Methode
+        ///     ausgeführt wird.
+        /// </param>
         /// <returns></returns>
         protected bool SetField<T>(ref T field, T value, string propertyName, Action changedCallback)
         {
@@ -75,7 +90,7 @@ namespace GF.DillyDally.Mvvmc
 
         protected void RaisePropertyChanging([CallerMemberName] string propertyName = null)
         {
-            var handler = this.PropertyChanging;
+            var handler = PropertyChanging;
             if (handler != null)
             {
                 handler(this, new PropertyChangingEventArgs(propertyName));
@@ -98,7 +113,7 @@ namespace GF.DillyDally.Mvvmc
 
         protected virtual void RaisePropertyChanged([CallerMemberName] string propertyName = null)
         {
-            var handler = this.PropertyChanged;
+            var handler = PropertyChanged;
             if (handler != null)
             {
                 handler(this, new PropertyChangedEventArgs(propertyName));
@@ -118,18 +133,6 @@ namespace GF.DillyDally.Mvvmc
                 this.RaisePropertyChanged(propertyName);
             }
         }
-
-        #endregion
-
-        #region INotifyPropertyChanged Members
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        #endregion
-
-        #region INotifyPropertyChanging Members
-
-        public event PropertyChangingEventHandler PropertyChanging;
 
         #endregion
     }

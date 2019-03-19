@@ -6,7 +6,6 @@ namespace GF.DillyDally.Wpf.Client.Core
 {
     internal sealed class DataTemplateFactory
     {
-        private string DataTemplateSchema { get; }
         private const string defaultDataTemplateSchema = @"<DataTemplate DataType=""{{x:Type vm:{0}}}"">
 <v:{1}>
 </v:{1}>
@@ -14,13 +13,14 @@ namespace GF.DillyDally.Wpf.Client.Core
 
         public DataTemplateFactory() : this(defaultDataTemplateSchema)
         {
-            
         }
 
-        public DataTemplateFactory( string dataTemplateSchema )
+        public DataTemplateFactory(string dataTemplateSchema)
         {
             this.DataTemplateSchema = dataTemplateSchema;
         }
+
+        private string DataTemplateSchema { get; }
 
         internal DataTemplate CreateViewModelDataTemplate(Type viewModelType, Type viewType)
         {
@@ -39,7 +39,7 @@ namespace GF.DillyDally.Wpf.Client.Core
             context.XmlnsDictionary.Add("vm", "vm");
             context.XmlnsDictionary.Add("v", "v");
 
-            var template = (DataTemplate)XamlReader.Parse(xaml, context);
+            var template = (DataTemplate) XamlReader.Parse(xaml, context);
             return template;
         }
     }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace GF.DillyDally.Wpf.Client.Core
+namespace GF.DillyDally.Wpf.Client.Core.Exceptions
 {
     internal sealed class MultipleViewDefinitionException : Exception
     {

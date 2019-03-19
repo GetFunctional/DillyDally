@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using DevExpress.Xpf.Core;
 using GF.DillyDally.Mvvmc;
 using GF.DillyDally.Wpf.Client.Core;
 using LightInject;
@@ -11,20 +12,35 @@ namespace GF.DillyDally.Wpf.Client
     public partial class App : Application
     {
         private Bootstrapper _bootstrapper;
-        private IServiceContainer _serviceContainer;
 
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+            ThemeManager.EnableDefaultThemeLoading = false;
+            ThemeManager.EnableDPICorrection = true;
+            ApplicationThemeHelper.ApplicationThemeName = "VS2017Light";
 
-            this._serviceContainer = new ServiceContainer(new ContainerOptions
-                {EnablePropertyInjection = false, EnableVariance = false});
-            this._bootstrapper = new Bootstrapper(App.Current, this._serviceContainer);
+            var currentApplication = Current;
+            var serviceContainer = this.CreateDependencyInjectionContainer();
+            this._bootstrapper = new Bootstrapper(currentApplication, serviceContainer);
             this._bootstrapper.Run();
 
-            var shellController = this._serviceContainer.GetInstance<ControllerFactory<ShellController,ShellViewModel>>().CreateController();
-            var shell = new Shell(shellController.ViewModel);
+            var shell = this.CreateShell(serviceContainer);
             shell.ShowDialog();
+        }
+
+        private Shell CreateShell(ServiceContainer serviceContainer)
+        {
+            var shellController = serviceContainer
+                .GetInstance<ControllerFactory<ShellController, ShellViewModel>>().CreateController();
+            var shell = new Shell(shellController.ViewModel);
+            return shell;
+        }
+
+        private ServiceContainer CreateDependencyInjectionContainer()
+        {
+            return new ServiceContainer(new ContainerOptions
+                {EnablePropertyInjection = false, EnableVariance = false});
         }
     }
 }
