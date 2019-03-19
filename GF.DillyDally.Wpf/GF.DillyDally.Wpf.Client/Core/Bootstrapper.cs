@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using System.Windows;
 using GF.DillyDally.Mvvmc;
 using LightInject;
 using MediatR;
@@ -9,17 +10,42 @@ namespace GF.DillyDally.Wpf.Client.Core
 {
     internal sealed class Bootstrapper
     {
+        #region - Felder privat -
+
+        private readonly Application _application;
         private readonly IServiceContainer _serviceContainer;
 
-        public Bootstrapper() : this(new ServiceContainer(new ContainerOptions
-            {EnablePropertyInjection = false, EnableVariance = false}))
+        #endregion
+
+        #region - Konstruktoren -
+
+        public Bootstrapper(Application application) : this(application, new ServiceContainer(new ContainerOptions
+                                                                                              {EnablePropertyInjection = false, EnableVariance = false}))
         {
         }
 
-        public Bootstrapper(IServiceContainer serviceContainer)
+        public Bootstrapper(Application application, IServiceContainer serviceContainer)
         {
+            this._application = application;
             this._serviceContainer = serviceContainer;
         }
+
+        #endregion
+
+        #region - Methoden oeffentlich -
+
+        public void Run()
+        {
+            var serviceContainer = this._serviceContainer;
+            this.RegisterMediatRFramework(serviceContainer);
+            this.RegisterMvvmcDependencies(serviceContainer);
+            this.RegisterControllersAndViewModels(serviceContainer);
+            this.RegisterDataTemplates(this._application);
+        }
+
+        #endregion
+
+        #region - Methoden privat -
 
         private void RegisterControllersAndViewModels(IServiceContainer serviceContainer)
         {
@@ -43,23 +69,26 @@ namespace GF.DillyDally.Wpf.Client.Core
                     serviceType.GetGenericTypeDefinition() == typeof(IRequestHandler<,>) ||
                     serviceType.GetGenericTypeDefinition() == typeof(INotificationHandler<>)
                 ));
-                    
+
             serviceContainer.RegisterOrdered(typeof(IPipelineBehavior<,>),
                 new[]
                 {
                     typeof(RequestPreProcessorBehavior<,>),
                     typeof(RequestPostProcessorBehavior<,>),
                 }, type => new PerContainerLifetime());
-            
+
             serviceContainer.Register<ServiceFactory>(fac => fac.GetInstance);
         }
 
-        public void Run()
+        private void RegisterDataTemplates(Application application)
         {
-            var serviceContainer = this._serviceContainer;
-            this.RegisterMediatRFramework(serviceContainer);
-            this.RegisterMvvmcDependencies(serviceContainer);
-            this.RegisterControllersAndViewModels(serviceContainer);
+            var dataTemplateAggregator = new ViewDataTemplateAggregator();
+            var dataTemplates = dataTemplateAggregator.CreateDataTemplatesForViewModelsInAssembly(typeof(Bootstrapper).GetTypeInfo().Assembly, application);
+
+            foreach (var dataTemplate in dataTemplates)
+            {
+                application.Resources.Add(dataTemplate.DataTemplateKey, dataTemplate);
+            }
         }
 
         private void RegisterMvvmcDependencies(IServiceContainer serviceContainer)
@@ -67,5 +96,7 @@ namespace GF.DillyDally.Wpf.Client.Core
             serviceContainer.Register<MvvmcServiceFactory>(fac => fac.GetInstance);
             serviceContainer.Register(typeof(ControllerFactory<,>));
         }
+
+        #endregion
     }
 }

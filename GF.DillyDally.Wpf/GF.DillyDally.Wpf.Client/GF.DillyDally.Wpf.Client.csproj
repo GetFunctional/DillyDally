@@ -68,8 +68,31 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ContentNavigation\AddNewNavigatorCommand.cs" />
+    <Compile Include="ContentNavigation\CloseNavigatorCommand.cs" />
+    <Compile Include="ContentNavigation\ContentBrowserController.cs" />
+    <Compile Include="ContentNavigation\ContentBrowserView.xaml.cs">
+      <DependentUpon>ContentBrowserView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ContentNavigation\ContentBrowserViewModel.cs" />
+    <Compile Include="ContentNavigation\ContentNavigatorController.cs" />
+    <Compile Include="ContentNavigation\ContentNavigatorView.xaml.cs">
+      <DependentUpon>ContentNavigatorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ContentNavigation\ContentNavigatorViewModel.cs" />
+    <Compile Include="Core\DataTemplateFactory.cs" />
+    <Compile Include="Core\Exceptions\MultipleViewDefinitionException.cs" />
+    <Compile Include="Core\ViewDataTemplateAggregator.cs" />
     <Compile Include="ShellController.cs" />
     <Compile Include="ShellViewModel.cs" />
+    <Page Include="ContentNavigation\ContentBrowserView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ContentNavigation\ContentNavigatorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Shell.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

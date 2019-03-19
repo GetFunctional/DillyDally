@@ -1,29 +1,28 @@
 ﻿using GF.DillyDally.Mvvmc;
 
-namespace GF.DillyDally.Wpf.Client
+namespace GF.DillyDally.Wpf.Client.ContentNavigation
 {
     /// <summary>
-    ///     Interaktionslogik für Shell.xaml
+    /// Interaktionslogik für ContentNavigatorView.xaml
     /// </summary>
-    public partial class Shell : IViewFor<ShellViewModel>
+    public partial class ContentNavigatorView : IViewFor<ContentNavigatorViewModel>
     {
         #region - Konstruktoren -
 
-        public Shell(ShellViewModel shellViewModel)
+        public ContentNavigatorView()
         {
             this.InitializeComponent();
-            this.ViewModel = shellViewModel;
         }
 
         #endregion
 
         #region - Properties oeffentlich -
 
-        public ShellViewModel ViewModel
+        public ContentNavigatorViewModel ViewModel
         {
             get
             {
-                return (ShellViewModel)this.DataContext;
+                return (ContentNavigatorViewModel)this.DataContext;
             }
             set
             {

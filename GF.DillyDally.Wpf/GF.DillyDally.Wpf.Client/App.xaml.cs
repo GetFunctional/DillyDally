@@ -19,7 +19,7 @@ namespace GF.DillyDally.Wpf.Client
 
             this._serviceContainer = new ServiceContainer(new ContainerOptions
                 {EnablePropertyInjection = false, EnableVariance = false});
-            this._bootstrapper = new Bootstrapper(this._serviceContainer);
+            this._bootstrapper = new Bootstrapper(App.Current, this._serviceContainer);
             this._bootstrapper.Run();
 
             var shellController = this._serviceContainer.GetInstance<ControllerFactory<ShellController,ShellViewModel>>().CreateController();
