@@ -1,26 +1,28 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using GF.DillyDally.Contracts.RewardSystem.Models.Keys;
 
-namespace GF.DillyDally.Contracts.RewardSystem.Models.Keys
+namespace GF.DillyDally.Wpf.Client.Core.Navigator
 {
-    public sealed class AccountId : IdentityKeyBase<AccountId>
+    public sealed class NavigationTargetKey : IdentityKeyBase<NavigationTargetKey>
     {
         #region - Konstruktoren -
 
-        public AccountId(Guid accountId)
+        public NavigationTargetKey(Guid navigationTargetId)
         {
+            this.NavigationTargetId = navigationTargetId;
         }
 
         #endregion
 
         #region - Methoden oeffentlich -
 
-        public static AccountId Create()
+        public static NavigationTargetKey Create()
         {
-            return new AccountId(Guid.NewGuid());
+            return new NavigationTargetKey(Guid.NewGuid());
         }
 
-        public override bool Equals(AccountId other)
+        public override bool Equals(NavigationTargetKey other)
         {
             if (ReferenceEquals(null, other))
             {
@@ -32,7 +34,7 @@ namespace GF.DillyDally.Contracts.RewardSystem.Models.Keys
                 return true;
             }
 
-            return this.AccountIdValue == other.AccountIdValue;
+            return this.NavigationTargetId == other.NavigationTargetId;
         }
 
         public override bool Equals(object obj)
@@ -52,20 +54,20 @@ namespace GF.DillyDally.Contracts.RewardSystem.Models.Keys
                 return false;
             }
 
-            return this.Equals((AccountId)obj);
+            return this.Equals((NavigationTargetKey)obj);
         }
 
         public override int GetHashCode()
         {
-            return this.AccountIdValue.GetHashCode();
+            return this.NavigationTargetId.GetHashCode();
         }
 
         #endregion
 
         #region - Properties oeffentlich -
 
-        [DataMember(Name = "AccountIdValue")]
-        public Guid AccountIdValue { get; }
+        [DataMember(Name = "NavigationTargetId")]
+        public Guid NavigationTargetId { get; }
 
         #endregion
     }

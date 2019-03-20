@@ -10,6 +10,9 @@ namespace GF.DillyDally.Wpf.Client.Core
 {
     internal sealed class Bootstrapper
     {
+        private readonly NavigationInitializer _navigationInitializer = new NavigationInitializer();
+        private readonly DataTemplateInitializer _dataTemplateInitializer = new DataTemplateInitializer();
+
         #region - Methoden oeffentlich -
 
         public void Run()
@@ -18,8 +21,11 @@ namespace GF.DillyDally.Wpf.Client.Core
             this.RegisterMediatRFramework(serviceContainer);
             this.RegisterMvvmcDependencies(serviceContainer);
             this.RegisterControllersAndViewModels(serviceContainer);
-            this.RegisterDataTemplates(this._application);
+            this._dataTemplateInitializer.RegisterDataTemplates(this._application);
+            this._navigationInitializer.InitializeNavigation(serviceContainer);
         }
+
+        
 
         #endregion
 
@@ -82,22 +88,12 @@ namespace GF.DillyDally.Wpf.Client.Core
             serviceContainer.Register<ServiceFactory>(fac => fac.GetInstance);
         }
 
-        private void RegisterDataTemplates(Application application)
-        {
-            var dataTemplateAggregator = new ViewDataTemplateAggregator();
-            var dataTemplates =
-                dataTemplateAggregator.CreateDataTemplatesForViewModelsInAssembly(
-                    typeof(Bootstrapper).GetTypeInfo().Assembly, application);
-
-            foreach (var dataTemplate in dataTemplates)
-            {
-                application.Resources.Add(dataTemplate.DataTemplateKey, dataTemplate);
-            }
-        }
+        
 
         private void RegisterMvvmcDependencies(IServiceContainer serviceContainer)
         {
             serviceContainer.Register<MvvmcServiceFactory>(fac => fac.GetInstance);
+            serviceContainer.Register<ControllerFactory>();
             serviceContainer.Register(typeof(ControllerFactory<,>));
         }
 

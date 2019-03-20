@@ -1,8 +1,7 @@
-﻿using System;
-
-namespace GF.DillyDally.Mvvmc
+﻿namespace GF.DillyDally.Mvvmc
 {
-    public sealed class ControllerFactory
+    public sealed class ControllerFactory<TController, TViewModel> where TController : IController<TViewModel>
+        where TViewModel : IViewModel
     {
         #region - Felder privat -
 
@@ -21,12 +20,12 @@ namespace GF.DillyDally.Mvvmc
 
         #region - Methoden oeffentlich -
 
-        public IController CreateController(Type controllerType)
+        public TController CreateController()
         {
-            var controller = this._mvvmcServiceFactory(controllerType);
+            var controller = this._mvvmcServiceFactory(typeof(TController));
             ((InitializationBase)controller).Initialize();
             ((InitializationBase)controller).InitializeAsync().ConfigureAwait(false);
-            return (IController)controller;
+            return (TController)controller;
         }
 
         #endregion

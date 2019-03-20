@@ -87,6 +87,7 @@
     <Reference Include="System.IO" />
     <Reference Include="System.Linq.Expressions" />
     <Reference Include="System.Runtime" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Threading.Tasks" />
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
@@ -109,6 +110,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Core\DataTemplateInitializer.cs" />
+    <Compile Include="Core\NavigationInitializer.cs" />
+    <Compile Include="Core\Navigator\ContentNavigator.cs" />
+    <Compile Include="Core\Navigator\IContentNavigator.cs" />
+    <Compile Include="Core\Navigator\INavigationAware.cs" />
+    <Compile Include="Core\Navigator\INavigationJournal.cs" />
+    <Compile Include="Core\Navigator\INavigationJournalEntry.cs" />
+    <Compile Include="Core\Navigator\INavigationTarget.cs" />
+    <Compile Include="Core\Navigator\INavigationTargetProvider.cs" />
+    <Compile Include="Core\Navigator\NavigationJournal.cs" />
+    <Compile Include="Core\Navigator\NavigationJournalEntry.cs" />
+    <Compile Include="Core\Navigator\NavigationTargetKey.cs" />
+    <Compile Include="Core\Navigator\NavigationTargetMap.cs" />
+    <Compile Include="RewardSystem\AccountsController.cs" />
+    <Compile Include="RewardSystem\AccountsControllerNavigationTarget.cs" />
+    <Compile Include="RewardSystem\AccountsViewModel.cs" />
     <Compile Include="ContentNavigation\AddNewNavigatorCommand.cs" />
     <Compile Include="ContentNavigation\CloseNavigatorCommand.cs" />
     <Compile Include="ContentNavigation\ContentBrowserController.cs" />
@@ -130,6 +147,14 @@
     <Compile Include="Core\Exceptions\MultipleViewDefinitionException.cs" />
     <Compile Include="Core\IViewFor.cs" />
     <Compile Include="Core\ViewDataTemplateAggregator.cs" />
+    <Compile Include="RewardSystem\AccountsView.xaml.cs">
+      <DependentUpon>AccountsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RewardSystem\TasksListController.cs" />
+    <Compile Include="RewardSystem\TasksListView.xaml.cs">
+      <DependentUpon>TasksListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RewardSystem\TasksListViewModel.cs" />
     <Compile Include="ShellController.cs" />
     <Compile Include="ShellViewModel.cs" />
     <Page Include="ContentNavigation\ContentBrowserView.xaml">
@@ -141,6 +166,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ContentNavigation\SearchContentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RewardSystem\AccountsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RewardSystem\TasksListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -199,8 +232,6 @@
       <Name>GF.DillyDally.Mvvmc</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="RewardSystem\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
