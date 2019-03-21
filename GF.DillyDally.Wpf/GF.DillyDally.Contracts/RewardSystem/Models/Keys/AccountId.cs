@@ -13,6 +13,12 @@ namespace GF.DillyDally.Contracts.RewardSystem.Models.Keys
 
         #endregion
 
+        #region - Properties oeffentlich -
+
+        [DataMember(Name = "AccountIdValue")] public Guid AccountIdValue { get; }
+
+        #endregion
+
         #region - Methoden oeffentlich -
 
         public static AccountId Create()
@@ -52,20 +58,13 @@ namespace GF.DillyDally.Contracts.RewardSystem.Models.Keys
                 return false;
             }
 
-            return this.Equals((AccountId)obj);
+            return this.Equals((AccountId) obj);
         }
 
         public override int GetHashCode()
         {
             return this.AccountIdValue.GetHashCode();
         }
-
-        #endregion
-
-        #region - Properties oeffentlich -
-
-        [DataMember(Name = "AccountIdValue")]
-        public Guid AccountIdValue { get; }
 
         #endregion
     }

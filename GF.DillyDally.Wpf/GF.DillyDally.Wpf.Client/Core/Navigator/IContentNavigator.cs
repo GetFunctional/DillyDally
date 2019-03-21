@@ -1,4 +1,5 @@
-﻿using GF.DillyDally.Mvvmc;
+﻿using System;
+using GF.DillyDally.Mvvmc;
 
 namespace GF.DillyDally.Wpf.Client.Core.Navigator
 {
@@ -7,25 +8,25 @@ namespace GF.DillyDally.Wpf.Client.Core.Navigator
         #region - Methoden oeffentlich -
 
         /// <summary>
-        /// Resolves the new Target and informs the involving instances of their change in the navigationprocess.
+        ///     Resolves the new Target and informs the involving instances of their change in the navigationprocess.
         /// </summary>
         /// <param name="target">Target to navigate to</param>
         /// <returns></returns>
         IController Navigate(INavigationTarget target);
 
         /// <summary>
-        /// Resolves the new Target and informs the involving instances of their change in the navigationprocess.
+        ///     Resolves the new Target and informs the involving instances of their change in the navigationprocess.
         /// </summary>
-        /// <param name="navigationTargetKey">Target to navigate to</param>
+        /// <param name="navigationTargetId">Target to navigate to</param>
         /// <returns></returns>
-        IController Navigate(NavigationTargetKey navigationTargetKey);
+        IController Navigate(Guid navigationTargetId);
 
         #endregion
 
         #region - Properties oeffentlich -
 
         /// <summary>
-        /// Gets the Current NavigationTarget.
+        ///     Gets the Current NavigationTarget.
         /// </summary>
         INavigationTarget CurrentTarget { get; }
 

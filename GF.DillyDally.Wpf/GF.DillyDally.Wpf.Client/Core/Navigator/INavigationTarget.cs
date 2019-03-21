@@ -6,7 +6,7 @@ namespace GF.DillyDally.Wpf.Client.Core.Navigator
     {
         #region - Properties oeffentlich -
 
-        NavigationTargetKey NavigationTargetKey { get; }
+        Guid NavigationTargetId { get; }
 
         string DisplayName { get; }
 

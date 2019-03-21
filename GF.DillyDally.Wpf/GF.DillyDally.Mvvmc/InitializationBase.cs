@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 
 namespace GF.DillyDally.Mvvmc
@@ -34,7 +33,7 @@ namespace GF.DillyDally.Mvvmc
             }
 
             await this.OnInitializeAsync();
-           
+
             this.OnInitializeAsyncCompleted();
         }
 

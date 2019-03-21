@@ -1,18 +1,11 @@
-﻿using GF.DillyDally.Mvvmc;
+﻿using System;
+using GF.DillyDally.Mvvmc;
 using GF.DillyDally.Wpf.Client.Core.Exceptions;
 
 namespace GF.DillyDally.Wpf.Client.Core.Navigator
 {
     public sealed class ContentNavigator : IContentNavigator
     {
-        #region - Felder privat -
-
-        private readonly INavigationTargetProvider _navigationTargetProvider;
-        private readonly ControllerFactory _controllerFactory;
-        private IController _currentRealTarget;
-
-        #endregion
-
         #region - Konstruktoren -
 
         public ContentNavigator(INavigationTargetProvider navigationTargetProvider, ControllerFactory controllerFactory)
@@ -21,6 +14,14 @@ namespace GF.DillyDally.Wpf.Client.Core.Navigator
             this._controllerFactory = controllerFactory;
             this.Journal = new NavigationJournal();
         }
+
+        #endregion
+
+        #region - Felder privat -
+
+        private readonly INavigationTargetProvider _navigationTargetProvider;
+        private readonly ControllerFactory _controllerFactory;
+        private IController _currentRealTarget;
 
         #endregion
 
@@ -39,6 +40,7 @@ namespace GF.DillyDally.Wpf.Client.Core.Navigator
             {
                 throw new NavigationTargetNotFoundException();
             }
+
             this.CurrentTarget = navigationTarget;
             this._currentRealTarget = nextContent;
 
@@ -54,7 +56,7 @@ namespace GF.DillyDally.Wpf.Client.Core.Navigator
 
         private bool CurrentTargetDeniesNavigation(IController currentRealTarget)
         {
-            return (currentRealTarget is INavigationAware navigationAware) && !navigationAware.ConfirmNavigationAway();
+            return currentRealTarget is INavigationAware navigationAware && !navigationAware.ConfirmNavigationAway();
         }
 
         #endregion
@@ -68,9 +70,10 @@ namespace GF.DillyDally.Wpf.Client.Core.Navigator
 
         #region IContentNavigator Members
 
-        public IController Navigate(NavigationTargetKey navigationTargetKey)
+        public IController Navigate(Guid navigationTargetId)
         {
-            return this.InternalNavigate(this._currentRealTarget, this._navigationTargetProvider.FindNavigationTargetWithKey(navigationTargetKey));
+            return this.InternalNavigate(this._currentRealTarget,
+                this._navigationTargetProvider.FindNavigationTargetWithKey(navigationTargetId));
         }
 
         public IController Navigate(INavigationTarget target)

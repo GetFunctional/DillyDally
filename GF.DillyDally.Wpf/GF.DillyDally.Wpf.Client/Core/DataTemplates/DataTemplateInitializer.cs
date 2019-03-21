@@ -12,7 +12,7 @@ namespace GF.DillyDally.Wpf.Client.Core.DataTemplates
             var dataTemplateAggregator = new ViewDataTemplateAggregator();
             var dataTemplates =
                 dataTemplateAggregator.CreateDataTemplatesForViewModelsInAssembly(
-                    typeof(Bootstrapper).GetTypeInfo().Assembly, application);
+                    typeof(DataTemplateInitializer).GetTypeInfo().Assembly, application);
 
             foreach (var dataTemplate in dataTemplates)
             {

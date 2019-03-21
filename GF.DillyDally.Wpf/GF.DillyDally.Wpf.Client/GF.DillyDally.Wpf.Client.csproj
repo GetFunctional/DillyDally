@@ -127,7 +127,6 @@
     <Compile Include="Core\Navigator\INavigationTargetProvider.cs" />
     <Compile Include="Core\Navigator\NavigationJournal.cs" />
     <Compile Include="Core\Navigator\NavigationJournalEntry.cs" />
-    <Compile Include="Core\Navigator\NavigationTargetKey.cs" />
     <Compile Include="Core\Navigator\NavigationTargetMap.cs" />
     <Compile Include="Core\Exceptions\NavigationTargetNotFoundException.cs" />
     <Compile Include="RewardSystem\AccountsController.cs" />

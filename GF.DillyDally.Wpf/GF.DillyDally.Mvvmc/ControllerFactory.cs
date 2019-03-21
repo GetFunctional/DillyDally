@@ -26,13 +26,13 @@ namespace GF.DillyDally.Mvvmc
         public IController CreateController(Type controllerType)
         {
             var controller = this._mvvmcServiceFactory(controllerType);
-            ((InitializationBase)controller).Initialize();
+            ((InitializationBase) controller).Initialize();
             var cancellationToken = new CancellationTokenSource();
 
-            Task.Run(() => ((InitializationBase)controller).InitializeAsync(cancellationToken.Token),
+            Task.Run(() => ((InitializationBase) controller).InitializeAsync(cancellationToken.Token),
                 cancellationToken.Token);
 
-            return (IController)controller;
+            return (IController) controller;
         }
 
         #endregion

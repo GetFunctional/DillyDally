@@ -1,10 +1,9 @@
-﻿using GF.DillyDally.Wpf.Client.Core;
-using GF.DillyDally.Wpf.Client.Core.DataTemplates;
+﻿using GF.DillyDally.Wpf.Client.Core.DataTemplates;
 
 namespace GF.DillyDally.Wpf.Client.RewardSystem
 {
     /// <summary>
-    /// Interaktionslogik für AccountsView.xaml
+    ///     Interaktionslogik für AccountsView.xaml
     /// </summary>
     public partial class AccountsView : IViewFor<AccountsViewModel>
     {
@@ -12,7 +11,7 @@ namespace GF.DillyDally.Wpf.Client.RewardSystem
 
         public AccountsView()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         #endregion
@@ -21,10 +20,7 @@ namespace GF.DillyDally.Wpf.Client.RewardSystem
 
         public AccountsViewModel ViewModel
         {
-            get
-            {
-                return (AccountsViewModel)this.DataContext;
-            }
+            get { return (AccountsViewModel) this.DataContext; }
         }
 
         #endregion

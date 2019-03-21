@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace GF.DillyDally.Wpf.Client.Core.Navigator
@@ -7,19 +8,19 @@ namespace GF.DillyDally.Wpf.Client.Core.Navigator
     {
         #region - Felder privat -
 
-        private readonly IDictionary<NavigationTargetKey, INavigationTarget> _navigationTargets;
+        private readonly IDictionary<Guid, INavigationTarget> _navigationTargets;
 
         #endregion
 
         #region - Konstruktoren -
 
-        public NavigationTargetMap() : this(new Dictionary<NavigationTargetKey, INavigationTarget>())
+        public NavigationTargetMap() : this(new Dictionary<Guid, INavigationTarget>())
         {
         }
 
-        public NavigationTargetMap(IDictionary<NavigationTargetKey, INavigationTarget> existingTargets)
+        public NavigationTargetMap(IDictionary<Guid, INavigationTarget> existingTargets)
         {
-            this._navigationTargets = new Dictionary<NavigationTargetKey, INavigationTarget>(existingTargets);
+            this._navigationTargets = new Dictionary<Guid, INavigationTarget>(existingTargets);
         }
 
         #endregion
@@ -31,14 +32,14 @@ namespace GF.DillyDally.Wpf.Client.Core.Navigator
             return this._navigationTargets.Single(x => x.Value.DisplayName == navigationTargetName).Value;
         }
 
-        public INavigationTarget FindNavigationTargetWithKey(NavigationTargetKey navigationTargetKey)
+        public INavigationTarget FindNavigationTargetWithKey(Guid navigationTargetId)
         {
-            return this._navigationTargets[navigationTargetKey];
+            return this._navigationTargets[navigationTargetId];
         }
 
         public void RegisterTarget(INavigationTarget target)
         {
-            this._navigationTargets.Add(target.NavigationTargetKey, target);
+            this._navigationTargets.Add(target.NavigationTargetId, target);
         }
 
         #endregion

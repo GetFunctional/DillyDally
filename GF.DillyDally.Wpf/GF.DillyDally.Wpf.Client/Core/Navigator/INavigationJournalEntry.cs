@@ -8,7 +8,7 @@
         #region Properties (oeffentlich)
 
         /// <summary>
-        /// Target of the journalentry.
+        ///     Target of the journalentry.
         /// </summary>
         INavigationTarget NavigationTarget { get; }
 

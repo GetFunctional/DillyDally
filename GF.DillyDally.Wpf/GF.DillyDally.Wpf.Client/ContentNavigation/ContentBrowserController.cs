@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Threading.Tasks;
 using GF.DillyDally.Mvvmc;
 
 namespace GF.DillyDally.Wpf.Client.ContentNavigation
@@ -10,7 +9,9 @@ namespace GF.DillyDally.Wpf.Client.ContentNavigation
 
         private readonly ControllerFactory<ContentNavigatorController, ContentNavigatorViewModel>
             _contentNavigatorControllerFactory;
-        private readonly IList<ContentNavigatorController> _navigatorControllers = new List<ContentNavigatorController>();
+
+        private readonly IList<ContentNavigatorController> _navigatorControllers =
+            new List<ContentNavigatorController>();
 
         #endregion
 

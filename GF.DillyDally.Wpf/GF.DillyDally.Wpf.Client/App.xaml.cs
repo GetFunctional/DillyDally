@@ -21,7 +21,7 @@ namespace GF.DillyDally.Wpf.Client
             ThemeManager.EnableDPICorrection = true;
             ApplicationThemeHelper.ApplicationThemeName = "VS2017Light";
 
-            this.DispatcherUnhandledException+= HandleUnhandledException;
+            DispatcherUnhandledException += this.HandleUnhandledException;
             var currentApplication = Current;
             var serviceContainer = this.CreateDependencyInjectionContainer();
             this._bootstrapper = new Bootstrapper(currentApplication, serviceContainer);

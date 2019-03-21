@@ -7,16 +7,10 @@ namespace GF.DillyDally.Wpf.Client.ContentNavigation
 {
     public sealed class ContentNavigatorController : ControllerBase<ContentNavigatorViewModel>
     {
-        #region - Felder privat -
-
-        private readonly IContentNavigator _contentNavigator;
-        private IController _currentContentController;
-
-        #endregion
-
         #region - Konstruktoren -
 
-        public ContentNavigatorController(ContentNavigatorViewModel viewModel, IContentNavigator contentNavigator) : base(viewModel)
+        public ContentNavigatorController(ContentNavigatorViewModel viewModel, IContentNavigator contentNavigator) :
+            base(viewModel)
         {
             this._contentNavigator = contentNavigator;
         }
@@ -29,10 +23,18 @@ namespace GF.DillyDally.Wpf.Client.ContentNavigation
         {
             await Task.Run(() =>
             {
-                this._currentContentController = this._contentNavigator.Navigate(new AccountsControllerNavigationTarget());
+                this._currentContentController =
+                    this._contentNavigator.Navigate(new AccountsControllerNavigationTarget());
                 this.ViewModel.AssignDisplayTarget(this._currentContentController.ViewModel);
             });
         }
+
+        #endregion
+
+        #region - Felder privat -
+
+        private readonly IContentNavigator _contentNavigator;
+        private IController _currentContentController;
 
         #endregion
     }

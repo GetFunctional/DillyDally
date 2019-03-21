@@ -1,10 +1,9 @@
-﻿using GF.DillyDally.Wpf.Client.Core;
-using GF.DillyDally.Wpf.Client.Core.DataTemplates;
+﻿using GF.DillyDally.Wpf.Client.Core.DataTemplates;
 
 namespace GF.DillyDally.Wpf.Client.RewardSystem
 {
     /// <summary>
-    /// Interaktionslogik für TasksListView.xaml
+    ///     Interaktionslogik für TasksListView.xaml
     /// </summary>
     public partial class TasksListView : IViewFor<TasksListViewModel>
     {
@@ -12,7 +11,7 @@ namespace GF.DillyDally.Wpf.Client.RewardSystem
 
         public TasksListView()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         #endregion
@@ -21,10 +20,7 @@ namespace GF.DillyDally.Wpf.Client.RewardSystem
 
         public TasksListViewModel ViewModel
         {
-            get
-            {
-                return (TasksListViewModel)this.DataContext;
-            }
+            get { return (TasksListViewModel) this.DataContext; }
         }
 
         #endregion

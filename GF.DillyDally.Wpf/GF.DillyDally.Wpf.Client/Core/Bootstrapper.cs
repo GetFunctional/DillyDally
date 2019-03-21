@@ -14,8 +14,8 @@ namespace GF.DillyDally.Wpf.Client.Core
 {
     internal sealed class Bootstrapper
     {
-        private readonly NavigationInitializer _navigationInitializer = new NavigationInitializer();
         private readonly DataTemplateInitializer _dataTemplateInitializer = new DataTemplateInitializer();
+        private readonly NavigationInitializer _navigationInitializer = new NavigationInitializer();
 
         #region - Methoden oeffentlich -
 
@@ -29,10 +29,10 @@ namespace GF.DillyDally.Wpf.Client.Core
             this._navigationInitializer.InitializeNavigation(serviceContainer, this.GetNavigationTargets());
         }
 
-        
+
         private IList<INavigationTarget> GetNavigationTargets()
         {
-            return new List<INavigationTarget>()
+            return new List<INavigationTarget>
             {
                 new AccountsControllerNavigationTarget()
             };
@@ -99,7 +99,6 @@ namespace GF.DillyDally.Wpf.Client.Core
             serviceContainer.Register<ServiceFactory>(fac => fac.GetInstance);
         }
 
-        
 
         private void RegisterMvvmcDependencies(IServiceContainer serviceContainer)
         {

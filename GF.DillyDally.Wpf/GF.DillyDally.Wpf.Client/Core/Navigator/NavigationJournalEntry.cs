@@ -2,11 +2,11 @@
 {
     public sealed class NavigationJournalEntry : INavigationJournalEntry
     {
-        public INavigationTarget NavigationTarget { get; }
-
         public NavigationJournalEntry(INavigationTarget navigationTarget)
         {
             this.NavigationTarget = navigationTarget;
         }
+
+        public INavigationTarget NavigationTarget { get; }
     }
 }

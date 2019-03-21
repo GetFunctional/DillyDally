@@ -21,7 +21,7 @@ namespace GF.DillyDally.Wpf.Client.Core.Navigator
         private static NavigationTargetMap CreateNavigationTargetMap(IList<INavigationTarget> navigationTargets)
         {
             var foundNavigationTargets =
-                navigationTargets.ToDictionary(keySelector => keySelector.NavigationTargetKey,
+                navigationTargets.ToDictionary(keySelector => keySelector.NavigationTargetId,
                     valueSelector => valueSelector);
             var navigationTargetProvider = new NavigationTargetMap(foundNavigationTargets);
             return navigationTargetProvider;

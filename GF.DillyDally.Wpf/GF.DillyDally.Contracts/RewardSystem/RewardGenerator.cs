@@ -1,5 +1,5 @@
 ﻿using System;
-using GF.DillyDally.Contracts.RewardSystem.Extensions;
+using GF.DillyDally.Contracts.Extensions;
 using GF.DillyDally.Contracts.RewardSystem.Models;
 
 namespace GF.DillyDally.Contracts.RewardSystem
