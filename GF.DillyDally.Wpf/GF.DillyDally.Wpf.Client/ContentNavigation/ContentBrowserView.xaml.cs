@@ -1,4 +1,5 @@
 ﻿using GF.DillyDally.Wpf.Client.Core;
+using GF.DillyDally.Wpf.Client.Core.DataTemplates;
 
 namespace GF.DillyDally.Wpf.Client.ContentNavigation
 {

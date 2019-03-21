@@ -6,7 +6,7 @@ using System.Windows;
 using GF.DillyDally.Mvvmc;
 using GF.DillyDally.Wpf.Client.Core.Exceptions;
 
-namespace GF.DillyDally.Wpf.Client.Core
+namespace GF.DillyDally.Wpf.Client.Core.DataTemplates
 {
     internal sealed class ViewDataTemplateAggregator
     {

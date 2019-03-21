@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace GF.DillyDally.Mvvmc
 {
@@ -24,9 +26,15 @@ namespace GF.DillyDally.Mvvmc
             return Task.FromResult(0);
         }
 
-        internal async Task InitializeAsync()
+        internal async Task InitializeAsync(CancellationToken cancellationTokenToken)
         {
+            if (cancellationTokenToken.IsCancellationRequested)
+            {
+                await Task.FromResult(0);
+            }
+
             await this.OnInitializeAsync();
+           
             this.OnInitializeAsyncCompleted();
         }
 

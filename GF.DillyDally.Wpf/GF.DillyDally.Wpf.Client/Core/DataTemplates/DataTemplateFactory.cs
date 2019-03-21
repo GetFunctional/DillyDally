@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Markup;
 
-namespace GF.DillyDally.Wpf.Client.Core
+namespace GF.DillyDally.Wpf.Client.Core.DataTemplates
 {
     internal sealed class DataTemplateFactory
     {

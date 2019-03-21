@@ -12,12 +12,17 @@
     d:DesignWidth="800"
     mc:Ignorable="d">
 
-    <dx:DXTabControl>
+    <dx:DXTabControl
+        IsSynchronizedWithCurrentItem="True"
+        ItemsSource="{Binding ActiveNavigators, Mode=OneWay}"
+        SelectedItem="{Binding CurrentActiveNavigator, Mode=TwoWay}">
+
         <!--
             ItemContainerStyle="{StaticResource ViewModelBrowserTabItemStyle}"
             Style="{StaticResource InvisibleTabControlStyle}"
         -->
-        <!--<dxmvvm:Interaction.Behaviors>
+
+        <dxmvvm:Interaction.Behaviors>
             <dxmvvm:EventToCommand
                 Command="{Binding CloseNavigatorCommand}"
                 EventName="TabHiding"
@@ -28,6 +33,6 @@
                 NewButtonShowMode="InTabPanel"
                 NewTabCommand="{Binding AddNavigatorCommand, Mode=OneTime}"
                 RemoveTabItemsOnHiding="False" />
-        </dx:DXTabControl.View>-->
+        </dx:DXTabControl.View>
     </dx:DXTabControl>
 </UserControl>

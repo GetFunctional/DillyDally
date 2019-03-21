@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace GF.DillyDally.Mvvmc
 {
@@ -25,7 +27,11 @@ namespace GF.DillyDally.Mvvmc
         {
             var controller = this._mvvmcServiceFactory(controllerType);
             ((InitializationBase)controller).Initialize();
-            ((InitializationBase)controller).InitializeAsync().ConfigureAwait(false);
+            var cancellationToken = new CancellationTokenSource();
+
+            Task.Run(() => ((InitializationBase)controller).InitializeAsync(cancellationToken.Token),
+                cancellationToken.Token);
+
             return (IController)controller;
         }
 

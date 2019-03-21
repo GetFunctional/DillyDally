@@ -116,8 +116,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Core\DataTemplateInitializer.cs" />
-    <Compile Include="Core\NavigationInitializer.cs" />
+    <Compile Include="Core\DataTemplates\DataTemplateInitializer.cs" />
+    <Compile Include="Core\Navigator\NavigationInitializer.cs" />
     <Compile Include="Core\Navigator\ContentNavigator.cs" />
     <Compile Include="Core\Navigator\IContentNavigator.cs" />
     <Compile Include="Core\Navigator\INavigationAware.cs" />
@@ -129,6 +129,7 @@
     <Compile Include="Core\Navigator\NavigationJournalEntry.cs" />
     <Compile Include="Core\Navigator\NavigationTargetKey.cs" />
     <Compile Include="Core\Navigator\NavigationTargetMap.cs" />
+    <Compile Include="Core\Exceptions\NavigationTargetNotFoundException.cs" />
     <Compile Include="RewardSystem\AccountsController.cs" />
     <Compile Include="RewardSystem\AccountsControllerNavigationTarget.cs" />
     <Compile Include="RewardSystem\AccountsViewModel.cs" />
@@ -149,10 +150,10 @@
       <DependentUpon>SearchContentView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ContentNavigation\SearchContentViewModel.cs" />
-    <Compile Include="Core\DataTemplateFactory.cs" />
+    <Compile Include="Core\DataTemplates\DataTemplateFactory.cs" />
     <Compile Include="Core\Exceptions\MultipleViewDefinitionException.cs" />
-    <Compile Include="Core\IViewFor.cs" />
-    <Compile Include="Core\ViewDataTemplateAggregator.cs" />
+    <Compile Include="Core\DataTemplates\IViewFor.cs" />
+    <Compile Include="Core\DataTemplates\ViewDataTemplateAggregator.cs" />
     <Compile Include="RewardSystem\AccountsView.xaml.cs">
       <DependentUpon>AccountsView.xaml</DependentUpon>
     </Compile>

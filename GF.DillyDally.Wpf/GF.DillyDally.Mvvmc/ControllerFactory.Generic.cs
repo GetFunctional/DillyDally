@@ -3,17 +3,13 @@
     public sealed class ControllerFactory<TController, TViewModel> where TController : IController<TViewModel>
         where TViewModel : IViewModel
     {
-        #region - Felder privat -
-
-        private readonly MvvmcServiceFactory _mvvmcServiceFactory;
-
-        #endregion
+        private readonly ControllerFactory _nonGenericControllerFactory;
 
         #region - Konstruktoren -
 
         public ControllerFactory(MvvmcServiceFactory mvvmcServiceFactory)
         {
-            this._mvvmcServiceFactory = mvvmcServiceFactory;
+            this._nonGenericControllerFactory = new ControllerFactory(mvvmcServiceFactory);
         }
 
         #endregion
@@ -22,10 +18,7 @@
 
         public TController CreateController()
         {
-            var controller = this._mvvmcServiceFactory(typeof(TController));
-            ((InitializationBase)controller).Initialize();
-            ((InitializationBase)controller).InitializeAsync().ConfigureAwait(false);
-            return (TController)controller;
+            return (TController) this._nonGenericControllerFactory.CreateController(typeof(TController));
         }
 
         #endregion

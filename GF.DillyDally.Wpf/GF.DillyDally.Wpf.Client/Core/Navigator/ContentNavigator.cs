@@ -1,4 +1,5 @@
 ﻿using GF.DillyDally.Mvvmc;
+using GF.DillyDally.Wpf.Client.Core.Exceptions;
 
 namespace GF.DillyDally.Wpf.Client.Core.Navigator
 {
@@ -34,6 +35,10 @@ namespace GF.DillyDally.Wpf.Client.Core.Navigator
 
             // Resolve the next Target
             var nextContent = this.ResolveNextNavigationTarget(navigationTarget);
+            if (nextContent == null)
+            {
+                throw new NavigationTargetNotFoundException();
+            }
             this.CurrentTarget = navigationTarget;
             this._currentRealTarget = nextContent;
 
@@ -49,7 +54,7 @@ namespace GF.DillyDally.Wpf.Client.Core.Navigator
 
         private bool CurrentTargetDeniesNavigation(IController currentRealTarget)
         {
-            return !(currentRealTarget is INavigationAware navigationAware) || navigationAware.ConfirmNavigationAway();
+            return (currentRealTarget is INavigationAware navigationAware) && !navigationAware.ConfirmNavigationAway();
         }
 
         #endregion

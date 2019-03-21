@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 using System.Windows;
 using GF.DillyDally.Mvvmc;
+using GF.DillyDally.Wpf.Client.Core.DataTemplates;
+using GF.DillyDally.Wpf.Client.Core.Navigator;
+using GF.DillyDally.Wpf.Client.RewardSystem;
 using LightInject;
 using MediatR;
 using MediatR.Pipeline;
@@ -22,10 +26,17 @@ namespace GF.DillyDally.Wpf.Client.Core
             this.RegisterMvvmcDependencies(serviceContainer);
             this.RegisterControllersAndViewModels(serviceContainer);
             this._dataTemplateInitializer.RegisterDataTemplates(this._application);
-            this._navigationInitializer.InitializeNavigation(serviceContainer);
+            this._navigationInitializer.InitializeNavigation(serviceContainer, this.GetNavigationTargets());
         }
 
         
+        private IList<INavigationTarget> GetNavigationTargets()
+        {
+            return new List<INavigationTarget>()
+            {
+                new AccountsControllerNavigationTarget()
+            };
+        }
 
         #endregion
 

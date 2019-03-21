@@ -23,13 +23,13 @@ namespace GF.DillyDally.Wpf.Client.ContentNavigation
             this._contentNavigatorControllerFactory = contentNavigatorControllerFactory;
         }
 
-        protected override Task OnInitializeAsync()
+        protected override void OnInitialize()
         {
+            base.OnInitialize();
+
             var newNavigator = this._contentNavigatorControllerFactory.CreateController();
             this._navigatorControllers.Add(newNavigator);
             this.ViewModel.SelectCurrentNavigator(newNavigator.ViewModel);
-
-            return base.OnInitializeAsync();
         }
 
         #endregion
