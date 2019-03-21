@@ -19,6 +19,6 @@
             <TextBlock FontSize="28" Text="Sonstiges" />
         </dxlc:LayoutGroup>
 
-        <ContentControl Content="{Binding ContentBrowserViewModel, Mode=OneWay, IsAsync=True}" />
+        <ContentControl Content="{Binding ContentBrowserViewModel, Mode=OneWay}" />
     </dxlc:LayoutGroup>
 </Window>

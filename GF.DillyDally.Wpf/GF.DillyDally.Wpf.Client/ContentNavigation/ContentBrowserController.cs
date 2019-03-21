@@ -1,4 +1,6 @@
-﻿using GF.DillyDally.Mvvmc;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using GF.DillyDally.Mvvmc;
 
 namespace GF.DillyDally.Wpf.Client.ContentNavigation
 {
@@ -8,6 +10,7 @@ namespace GF.DillyDally.Wpf.Client.ContentNavigation
 
         private readonly ControllerFactory<ContentNavigatorController, ContentNavigatorViewModel>
             _contentNavigatorControllerFactory;
+        private readonly IList<ContentNavigatorController> _navigatorControllers = new List<ContentNavigatorController>();
 
         #endregion
 
@@ -18,6 +21,15 @@ namespace GF.DillyDally.Wpf.Client.ContentNavigation
             : base(viewModel)
         {
             this._contentNavigatorControllerFactory = contentNavigatorControllerFactory;
+        }
+
+        protected override Task OnInitializeAsync()
+        {
+            var newNavigator = this._contentNavigatorControllerFactory.CreateController();
+            this._navigatorControllers.Add(newNavigator);
+            this.ViewModel.SelectCurrentNavigator(newNavigator.ViewModel);
+
+            return base.OnInitializeAsync();
         }
 
         #endregion

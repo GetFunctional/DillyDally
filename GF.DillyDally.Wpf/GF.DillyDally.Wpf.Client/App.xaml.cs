@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Threading;
 using DevExpress.Xpf.Core;
 using GF.DillyDally.Mvvmc;
 using GF.DillyDally.Wpf.Client.Core;
@@ -20,6 +21,7 @@ namespace GF.DillyDally.Wpf.Client
             ThemeManager.EnableDPICorrection = true;
             ApplicationThemeHelper.ApplicationThemeName = "VS2017Light";
 
+            this.DispatcherUnhandledException+= HandleUnhandledException;
             var currentApplication = Current;
             var serviceContainer = this.CreateDependencyInjectionContainer();
             this._bootstrapper = new Bootstrapper(currentApplication, serviceContainer);
@@ -27,6 +29,11 @@ namespace GF.DillyDally.Wpf.Client
 
             var shell = this.CreateShell(serviceContainer);
             shell.ShowDialog();
+        }
+
+        private void HandleUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+        {
+            MessageBox.Show("Exit");
         }
 
         private Shell CreateShell(ServiceContainer serviceContainer)

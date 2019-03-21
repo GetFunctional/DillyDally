@@ -3,7 +3,7 @@ using GF.DillyDally.Mvvmc;
 
 namespace GF.DillyDally.Wpf.Client.ContentNavigation
 {
-    public class ContentBrowserViewModel : ViewModelBase
+    public sealed class ContentBrowserViewModel : ViewModelBase
     {
         #region - Felder privat -
 
@@ -20,14 +20,34 @@ namespace GF.DillyDally.Wpf.Client.ContentNavigation
 
         #endregion
 
+        #region - Methoden oeffentlich -
+
+        public void SelectCurrentNavigator(ContentNavigatorViewModel contentNavigatorViewModel)
+        {
+            if (!this.ActiveNavigators.Contains(contentNavigatorViewModel))
+            {
+                this.ActiveNavigators.Add(contentNavigatorViewModel);
+            }
+
+            this.CurrentActiveNavigator = contentNavigatorViewModel;
+        }
+
+        #endregion
+
         #region - Properties oeffentlich -
 
         public ObservableCollection<ContentNavigatorViewModel> ActiveNavigators { get; set; }
 
         public ContentNavigatorViewModel CurrentActiveNavigator
         {
-            get { return this._currentActiveNavigator; }
-            set { this.SetField(ref this._currentActiveNavigator, value); }
+            get
+            {
+                return this._currentActiveNavigator;
+            }
+            set
+            {
+                this.SetField(ref this._currentActiveNavigator, value);
+            }
         }
 
         public CloseNavigatorCommand CloseNavigatorCommand { get; }
