@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Runtime.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
+using GF.DillyDally.Mvvmc.Exceptions;
 
 namespace GF.DillyDally.Mvvmc
 {
@@ -29,8 +31,13 @@ namespace GF.DillyDally.Mvvmc
             ((InitializationBase) controller).Initialize();
             var cancellationToken = new CancellationTokenSource();
 
-            Task.Run(() => ((InitializationBase) controller).InitializeAsync(cancellationToken.Token),
-                cancellationToken.Token);
+            var currentSynchronizationContext = SynchronizationContext.Current;
+            Task.Run(() => ((InitializationBase)controller).InitializeAsync(cancellationToken.Token),
+                cancellationToken.Token).ContinueWith(t =>
+                {
+                    currentSynchronizationContext.Send(state =>
+                        throw new InitializationException("Exception was raised during initialization", t.Exception), null);
+                }, TaskContinuationOptions.OnlyOnFaulted).ConfigureAwait(false);
 
             return (IController) controller;
         }

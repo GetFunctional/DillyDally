@@ -26,6 +26,7 @@ namespace GF.DillyDally.Wpf.Client.ContentNavigation
                 this._currentContentController =
                     this._contentNavigator.Navigate(new AccountsControllerNavigationTarget());
                 this.ViewModel.AssignDisplayTarget(this._currentContentController.ViewModel);
+
             });
         }
 

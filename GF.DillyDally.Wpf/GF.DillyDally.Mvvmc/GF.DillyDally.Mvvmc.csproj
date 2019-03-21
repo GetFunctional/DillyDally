@@ -49,6 +49,7 @@
     <Compile Include="IController.cs" />
     <Compile Include="IController.Generic.cs" />
     <Compile Include="InitializationBase.cs" />
+    <Compile Include="Exceptions\InitializationException.cs" />
     <Compile Include="IViewModel.cs" />
     <Compile Include="MvvmcServiceFactory.cs" />
     <Compile Include="ObservableObject.cs" />
