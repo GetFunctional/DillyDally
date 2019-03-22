@@ -1,12 +1,11 @@
 ﻿<UserControl
-    x:Class="GF.DillyDally.Wpf.Client.RewardSystem.AccountsView"
+    x:Class="GF.DillyDally.Wpf.Client.Presentation.Rewards.AccountsView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:GF.DillyDally.Wpf.Client"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:rewardSystem="clr-namespace:GF.DillyDally.Wpf.Client.RewardSystem"
-    d:DataContext="{d:DesignInstance Type={x:Type rewardSystem:AccountsViewModel}}"
+    xmlns:rewards="clr-namespace:GF.DillyDally.Wpf.Client.Presentation.Rewards"
+    d:DataContext="{d:DesignInstance Type={x:Type rewards:AccountsViewModel}}"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">

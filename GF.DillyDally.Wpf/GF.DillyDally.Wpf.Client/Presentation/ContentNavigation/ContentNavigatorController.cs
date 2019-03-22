@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
 using GF.DillyDally.Mvvmc;
 using GF.DillyDally.Wpf.Client.Core.Navigator;
-using GF.DillyDally.Wpf.Client.RewardSystem;
+using GF.DillyDally.Wpf.Client.Presentation.Rewards;
 
-namespace GF.DillyDally.Wpf.Client.ContentNavigation
+namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
 {
     public sealed class ContentNavigatorController : ControllerBase<ContentNavigatorViewModel>
     {

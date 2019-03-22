@@ -1,6 +1,6 @@
 ﻿using GF.DillyDally.Wpf.Client.Core.DataTemplates;
 
-namespace GF.DillyDally.Wpf.Client
+namespace GF.DillyDally.Wpf.Client.Presentation
 {
     /// <summary>
     ///     Interaktionslogik für Shell.xaml

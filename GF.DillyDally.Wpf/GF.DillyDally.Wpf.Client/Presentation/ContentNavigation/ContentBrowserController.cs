@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using GF.DillyDally.Mvvmc;
 
-namespace GF.DillyDally.Wpf.Client.ContentNavigation
+namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
 {
     public class ContentBrowserController : ControllerBase<ContentBrowserViewModel>
     {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using GF.DillyDally.Mvvmc;
 
-namespace GF.DillyDally.Wpf.Client.ContentNavigation
+namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
 {
     public sealed class ContentBrowserViewModel : ViewModelBase
     {

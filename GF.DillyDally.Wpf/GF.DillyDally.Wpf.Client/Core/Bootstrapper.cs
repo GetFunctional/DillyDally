@@ -5,7 +5,7 @@ using System.Windows;
 using GF.DillyDally.Mvvmc;
 using GF.DillyDally.Wpf.Client.Core.DataTemplates;
 using GF.DillyDally.Wpf.Client.Core.Navigator;
-using GF.DillyDally.Wpf.Client.RewardSystem;
+using GF.DillyDally.Wpf.Client.Presentation.Rewards;
 using LightInject;
 using MediatR;
 using MediatR.Pipeline;

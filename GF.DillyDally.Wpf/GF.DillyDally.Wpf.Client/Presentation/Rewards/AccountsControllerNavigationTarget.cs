@@ -1,7 +1,7 @@
 using System;
 using GF.DillyDally.Wpf.Client.Core.Navigator;
 
-namespace GF.DillyDally.Wpf.Client.RewardSystem
+namespace GF.DillyDally.Wpf.Client.Presentation.Rewards
 {
     public sealed class AccountsControllerNavigationTarget : INavigationTarget
     {

@@ -3,6 +3,7 @@ using System.Windows.Threading;
 using DevExpress.Xpf.Core;
 using GF.DillyDally.Mvvmc;
 using GF.DillyDally.Wpf.Client.Core;
+using GF.DillyDally.Wpf.Client.Presentation;
 using LightInject;
 
 namespace GF.DillyDally.Wpf.Client
@@ -13,6 +14,7 @@ namespace GF.DillyDally.Wpf.Client
     public partial class App : Application
     {
         private Bootstrapper _bootstrapper;
+        private DillyDallyApplication _dillyDallyApplication;
 
         protected override void OnStartup(StartupEventArgs e)
         {
@@ -21,14 +23,23 @@ namespace GF.DillyDally.Wpf.Client
             ThemeManager.EnableDPICorrection = true;
             ApplicationThemeHelper.ApplicationThemeName = "VS2017Light";
 
-            DispatcherUnhandledException += this.HandleUnhandledException;
+            this.DispatcherUnhandledException += this.HandleUnhandledException;
             var currentApplication = Current;
             var serviceContainer = this.CreateDependencyInjectionContainer();
             this._bootstrapper = new Bootstrapper(currentApplication, serviceContainer);
             this._bootstrapper.Run();
 
-            var shell = this.CreateShell(serviceContainer);
-            shell.ShowDialog();
+            this._dillyDallyApplication = this.CreateDillyDallyApplication(serviceContainer);
+            this._dillyDallyApplication.ShowUi();
+        }
+
+        private DillyDallyApplication CreateDillyDallyApplication(ServiceContainer serviceContainer)
+        {
+            var shellController = this.CreateShellController(serviceContainer);
+            var shell = new Presentation.Shell(shellController.ViewModel);
+            var dillyDallyApplication = new DillyDallyApplication(shellController,shell);
+            serviceContainer.RegisterInstance<IDillyDallyApplication>(dillyDallyApplication);
+            return dillyDallyApplication;
         }
 
         private void HandleUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
@@ -36,12 +47,11 @@ namespace GF.DillyDally.Wpf.Client
             MessageBox.Show("Exit");
         }
 
-        private Shell CreateShell(ServiceContainer serviceContainer)
+        private ShellController CreateShellController(ServiceContainer serviceContainer)
         {
             var shellController = serviceContainer
                 .GetInstance<ControllerFactory<ShellController, ShellViewModel>>().CreateController();
-            var shell = new Shell(shellController.ViewModel);
-            return shell;
+            return shellController;
         }
 
         private ServiceContainer CreateDependencyInjectionContainer()

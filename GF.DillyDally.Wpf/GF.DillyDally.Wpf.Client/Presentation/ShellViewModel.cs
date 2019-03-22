@@ -1,7 +1,7 @@
 ﻿using GF.DillyDally.Mvvmc;
-using GF.DillyDally.Wpf.Client.ContentNavigation;
+using GF.DillyDally.Wpf.Client.Presentation.ContentNavigation;
 
-namespace GF.DillyDally.Wpf.Client
+namespace GF.DillyDally.Wpf.Client.Presentation
 {
     public sealed class ShellViewModel : ViewModelBase
     {

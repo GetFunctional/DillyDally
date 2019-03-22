@@ -1,15 +1,12 @@
 ﻿<UserControl
-    x:Class="GF.DillyDally.Wpf.Client.ContentNavigation.SearchContentView"
+    x:Class="GF.DillyDally.Wpf.Client.Presentation.ContentNavigation.SearchContentView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:contentNavigation="clr-namespace:GF.DillyDally.Wpf.Client.Presentation.ContentNavigation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
-    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
-    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
     xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
-    xmlns:local="clr-namespace:GF.DillyDally.Wpf.Client.ContentNavigation"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    d:DataContext="{d:DesignInstance Type={x:Type local:SearchContentViewModel}}"
+    d:DataContext="{d:DesignInstance Type={x:Type contentNavigation:SearchContentViewModel}}"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">

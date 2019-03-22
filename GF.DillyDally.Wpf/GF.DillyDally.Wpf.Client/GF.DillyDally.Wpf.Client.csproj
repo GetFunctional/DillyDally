@@ -129,61 +129,63 @@
     <Compile Include="Core\Navigator\NavigationJournalEntry.cs" />
     <Compile Include="Core\Navigator\NavigationTargetMap.cs" />
     <Compile Include="Core\Exceptions\NavigationTargetNotFoundException.cs" />
-    <Compile Include="RewardSystem\AccountsController.cs" />
-    <Compile Include="RewardSystem\AccountsControllerNavigationTarget.cs" />
-    <Compile Include="RewardSystem\AccountsViewModel.cs" />
-    <Compile Include="ContentNavigation\AddNewNavigatorCommand.cs" />
-    <Compile Include="ContentNavigation\CloseNavigatorCommand.cs" />
-    <Compile Include="ContentNavigation\ContentBrowserController.cs" />
-    <Compile Include="ContentNavigation\ContentBrowserView.xaml.cs">
+    <Compile Include="DillyDallyApplication.cs" />
+    <Compile Include="IDillyDallyApplication.cs" />
+    <Compile Include="Presentation\Rewards\AccountsController.cs" />
+    <Compile Include="Presentation\Rewards\AccountsControllerNavigationTarget.cs" />
+    <Compile Include="Presentation\Rewards\AccountsViewModel.cs" />
+    <Compile Include="Presentation\ContentNavigation\AddNewNavigatorCommand.cs" />
+    <Compile Include="Presentation\ContentNavigation\CloseNavigatorCommand.cs" />
+    <Compile Include="Presentation\ContentNavigation\ContentBrowserController.cs" />
+    <Compile Include="Presentation\ContentNavigation\ContentBrowserView.xaml.cs">
       <DependentUpon>ContentBrowserView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ContentNavigation\ContentBrowserViewModel.cs" />
-    <Compile Include="ContentNavigation\ContentNavigatorController.cs" />
-    <Compile Include="ContentNavigation\ContentNavigatorView.xaml.cs">
+    <Compile Include="Presentation\ContentNavigation\ContentBrowserViewModel.cs" />
+    <Compile Include="Presentation\ContentNavigation\ContentNavigatorController.cs" />
+    <Compile Include="Presentation\ContentNavigation\ContentNavigatorView.xaml.cs">
       <DependentUpon>ContentNavigatorView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ContentNavigation\ContentNavigatorViewModel.cs" />
-    <Compile Include="ContentNavigation\SearchContentController.cs" />
-    <Compile Include="ContentNavigation\SearchContentView.xaml.cs">
+    <Compile Include="Presentation\ContentNavigation\ContentNavigatorViewModel.cs" />
+    <Compile Include="Presentation\ContentNavigation\SearchContentController.cs" />
+    <Compile Include="Presentation\ContentNavigation\SearchContentView.xaml.cs">
       <DependentUpon>SearchContentView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ContentNavigation\SearchContentViewModel.cs" />
+    <Compile Include="Presentation\ContentNavigation\SearchContentViewModel.cs" />
     <Compile Include="Core\DataTemplates\DataTemplateFactory.cs" />
     <Compile Include="Core\Exceptions\MultipleViewDefinitionException.cs" />
     <Compile Include="Core\DataTemplates\IViewFor.cs" />
     <Compile Include="Core\DataTemplates\ViewDataTemplateAggregator.cs" />
-    <Compile Include="RewardSystem\AccountsView.xaml.cs">
+    <Compile Include="Presentation\Rewards\AccountsView.xaml.cs">
       <DependentUpon>AccountsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="RewardSystem\TasksListController.cs" />
-    <Compile Include="RewardSystem\TasksListView.xaml.cs">
+    <Compile Include="Presentation\Tasks\TasksListController.cs" />
+    <Compile Include="Presentation\Tasks\TasksListView.xaml.cs">
       <DependentUpon>TasksListView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="RewardSystem\TasksListViewModel.cs" />
-    <Compile Include="ShellController.cs" />
-    <Compile Include="ShellViewModel.cs" />
-    <Page Include="ContentNavigation\ContentBrowserView.xaml">
+    <Compile Include="Presentation\Tasks\TasksListViewModel.cs" />
+    <Compile Include="Presentation\ShellController.cs" />
+    <Compile Include="Presentation\ShellViewModel.cs" />
+    <Page Include="Presentation\ContentNavigation\ContentBrowserView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ContentNavigation\ContentNavigatorView.xaml">
+    <Page Include="Presentation\ContentNavigation\ContentNavigatorView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ContentNavigation\SearchContentView.xaml">
+    <Page Include="Presentation\ContentNavigation\SearchContentView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="RewardSystem\AccountsView.xaml">
+    <Page Include="Presentation\Rewards\AccountsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="RewardSystem\TasksListView.xaml">
+    <Page Include="Presentation\Tasks\TasksListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Shell.xaml">
+    <Page Include="Presentation\Shell.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -192,7 +194,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Core\Bootstrapper.cs" />
-    <Compile Include="Shell.xaml.cs">
+    <Compile Include="Presentation\Shell.xaml.cs">
       <DependentUpon>Shell.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
