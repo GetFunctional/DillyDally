@@ -158,6 +158,7 @@
     <Compile Include="Presentation\Rewards\AccountsView.xaml.cs">
       <DependentUpon>AccountsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Presentation\Rewards\SearchContentNavigationTarget.cs" />
     <Compile Include="Presentation\Tasks\TasksListController.cs" />
     <Compile Include="Presentation\Tasks\TasksListView.xaml.cs">
       <DependentUpon>TasksListView.xaml</DependentUpon>

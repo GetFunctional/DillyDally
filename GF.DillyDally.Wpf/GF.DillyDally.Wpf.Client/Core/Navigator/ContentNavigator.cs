@@ -6,6 +6,13 @@ namespace GF.DillyDally.Wpf.Client.Core.Navigator
 {
     public sealed class ContentNavigator : IContentNavigator
     {
+        #region - Felder privat -
+
+        private readonly INavigationTargetProvider _navigationTargetProvider;
+        private readonly ControllerFactory _controllerFactory;
+
+        #endregion
+
         #region - Konstruktoren -
 
         public ContentNavigator(INavigationTargetProvider navigationTargetProvider, ControllerFactory controllerFactory)
@@ -17,21 +24,13 @@ namespace GF.DillyDally.Wpf.Client.Core.Navigator
 
         #endregion
 
-        #region - Felder privat -
-
-        private readonly INavigationTargetProvider _navigationTargetProvider;
-        private readonly ControllerFactory _controllerFactory;
-        private IController _currentRealTarget;
-
-        #endregion
-
         #region - Methoden privat -
 
         private IController InternalNavigate(IController currentRealTarget, INavigationTarget navigationTarget)
         {
             if (this.CurrentTargetDeniesNavigation(currentRealTarget))
             {
-                return this._currentRealTarget;
+                return this.CurrentContentController;
             }
 
             // Resolve the next Target
@@ -42,11 +41,13 @@ namespace GF.DillyDally.Wpf.Client.Core.Navigator
             }
 
             this.CurrentTarget = navigationTarget;
-            this._currentRealTarget = nextContent;
+            this.CurrentContentController = nextContent;
 
             INavigationJournalEntry journalEntry = new NavigationJournalEntry(navigationTarget);
             this.Journal.RecordNavigation(journalEntry);
-            return this._currentRealTarget;
+
+            this.RaiseNavigated();
+            return this.CurrentContentController;
         }
 
         private IController ResolveNextNavigationTarget(INavigationTarget navigationTarget)
@@ -59,26 +60,34 @@ namespace GF.DillyDally.Wpf.Client.Core.Navigator
             return currentRealTarget is INavigationAware navigationAware && !navigationAware.ConfirmNavigationAway();
         }
 
+        private void RaiseNavigated()
+        {
+            this.Navigated?.Invoke(this, EventArgs.Empty);
+        }
+
         #endregion
 
         #region - Properties oeffentlich -
 
         public INavigationTarget CurrentTarget { get; private set; }
         public INavigationJournal Journal { get; }
+        public IController CurrentContentController { get; private set; }
 
         #endregion
 
         #region IContentNavigator Members
 
+        public event EventHandler Navigated;
+
         public IController Navigate(Guid navigationTargetId)
         {
-            return this.InternalNavigate(this._currentRealTarget,
+            return this.InternalNavigate(this.CurrentContentController,
                 this._navigationTargetProvider.FindNavigationTargetWithKey(navigationTargetId));
         }
 
         public IController Navigate(INavigationTarget target)
         {
-            return this.InternalNavigate(this._currentRealTarget, target);
+            return this.InternalNavigate(this.CurrentContentController, target);
         }
 
         #endregion

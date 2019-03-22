@@ -4,6 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:contentNavigation="clr-namespace:GF.DillyDally.Wpf.Client.Presentation.ContentNavigation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
     xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DataContext="{d:DesignInstance Type={x:Type contentNavigation:SearchContentViewModel}}"
@@ -11,15 +13,36 @@
     d:DesignWidth="800"
     mc:Ignorable="d">
 
-    <dxlc:LayoutGroup
-        HorizontalAlignment="Center"
-        ItemLabelsAlignment="Local"
-        Orientation="Vertical">
-        <!--<dxlc:LayoutGroup Margin="0,160,0,30" HorizontalAlignment="Center">
-            <Image Height="90" Source="pack://application:,,,/JTL.Wawi.Style;component/Images/JtlLogos/Wawi_Logo_784x236.png" />
-        </dxlc:LayoutGroup>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="17*" />
+            <ColumnDefinition Width="66*" />
+            <ColumnDefinition Width="17*" />
+        </Grid.ColumnDefinitions>
 
-        <dxlc:LayoutGroup ItemLabelsAlignment="Local" Orientation="Vertical">
+        <dxlc:LayoutGroup Grid.Column="1" Orientation="Vertical">
+            <TextBlock
+                Margin="0,160,0,30"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                FontSize="45"
+                Text="SEARCH..." />
+
+
+            <dxlc:LayoutGroup
+                Height="24"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Top">
+                <dxe:TextEdit Width="380" HorizontalAlignment="Center" />
+                <dx:SimpleButton
+                    Width="120"
+                    HorizontalAlignment="Center"
+                    Content="Search" />
+            </dxlc:LayoutGroup>
+        </dxlc:LayoutGroup>
+        <!--<dxlc:LayoutGroup ItemLabelsAlignment="Local" Orientation="Vertical">
+
+
             <dxlc:LayoutItem HorizontalAlignment="Left" Label="NavigationTarget">
                 <dxlc:LayoutGroup
                     Height="36"
@@ -74,6 +97,6 @@
                 </dxlc:LayoutGroup>
             </dxlc:LayoutItem>
         </dxlc:LayoutGroup>-->
-    </dxlc:LayoutGroup>
+    </Grid>
 
 </UserControl>

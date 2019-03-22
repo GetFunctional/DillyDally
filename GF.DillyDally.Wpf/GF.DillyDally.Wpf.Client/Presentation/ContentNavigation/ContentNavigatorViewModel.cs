@@ -7,6 +7,17 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
         #region - Felder privat -
 
         private IViewModel _displayTarget;
+        private string _contentTitle;
+
+        #endregion
+
+        #region - Methoden privat -
+
+        internal void AssignDisplayTarget(IViewModel displayTarget, string contentTitle)
+        {
+            this.DisplayTarget = displayTarget;
+            this.ContentTitle = contentTitle;
+        }
 
         #endregion
 
@@ -14,17 +25,26 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
 
         public IViewModel DisplayTarget
         {
-            get { return this._displayTarget; }
-            set { this.SetField(ref this._displayTarget, value); }
+            get
+            {
+                return this._displayTarget;
+            }
+            private set
+            {
+                this.SetField(ref this._displayTarget, value);
+            }
         }
 
-        #endregion
-
-        #region - Methoden privat -
-
-        internal void AssignDisplayTarget(IViewModel displayTarget)
+        public string ContentTitle
         {
-            this.DisplayTarget = displayTarget;
+            get
+            {
+                return this._contentTitle;
+            }
+            private set
+            {
+                this.SetField(ref this._contentTitle, value);
+            }
         }
 
         #endregion

@@ -7,20 +7,25 @@
     xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
     xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:native="http://schemas.devexpress.com/winfx/2008/xaml/core/internal"
     d:DataContext="{d:DesignInstance Type={x:Type contentNavigation:ContentBrowserViewModel}}"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style x:Key="ViewModelBrowserTabItemStyle" TargetType="{x:Type dx:DXTabItem}">
+            <Setter Property="native:TabControlDragWidgetHelper.UseWPFMethod" Value="False" />
+            <Setter Property="VisibleInHeaderMenu" Value="True" />
+            <Setter Property="Header" Value="{Binding ContentTitle, Mode=OneWay}" />
+        </Style>
+    </UserControl.Resources>
 
     <dx:DXTabControl
         IsSynchronizedWithCurrentItem="True"
+        ItemContainerStyle="{StaticResource ViewModelBrowserTabItemStyle}"
         ItemsSource="{Binding ActiveNavigators, Mode=OneWay}"
-        SelectedItem="{Binding CurrentActiveNavigator, Mode=TwoWay}">
-
-        <!--
-            ItemContainerStyle="{StaticResource ViewModelBrowserTabItemStyle}"
-            Style="{StaticResource InvisibleTabControlStyle}"
-        -->
+        SelectedItem="{Binding CurrentActiveNavigator, Mode=TwoWay}"
+        TabContentCacheMode="CacheTabsOnSelecting">
 
         <dxmvvm:Interaction.Behaviors>
             <dxmvvm:EventToCommand

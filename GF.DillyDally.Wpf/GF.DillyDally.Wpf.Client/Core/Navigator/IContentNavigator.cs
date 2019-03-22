@@ -36,6 +36,13 @@ namespace GF.DillyDally.Wpf.Client.Core.Navigator
         /// <value>The journal.</value>
         INavigationJournal Journal { get; }
 
+        /// <summary>
+        /// Gets the Controller handling the current content.
+        /// </summary>
+        IController CurrentContentController { get; }
+
+        event EventHandler Navigated;
+
         #endregion
     }
 }

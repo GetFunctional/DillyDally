@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using GF.DillyDally.Mvvmc;
 using GF.DillyDally.Wpf.Client.Core.Navigator;
 using GF.DillyDally.Wpf.Client.Presentation.Rewards;
@@ -7,35 +8,42 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
 {
     public sealed class ContentNavigatorController : ControllerBase<ContentNavigatorViewModel>
     {
+        #region - Felder privat -
+
+        private readonly IContentNavigator _contentNavigator;
+
+        #endregion
+
         #region - Konstruktoren -
 
         public ContentNavigatorController(ContentNavigatorViewModel viewModel, IContentNavigator contentNavigator) :
             base(viewModel)
         {
             this._contentNavigator = contentNavigator;
+            this.SynchronizeCurrentDisplayTargetWithNavigator();
+            this._contentNavigator.Navigated += this.HandleNavigatorNavigated;
         }
 
         #endregion
 
         #region - Methoden privat -
 
-        protected override async Task OnInitializeAsync()
+        private void HandleNavigatorNavigated(object sender, EventArgs e)
         {
-            await Task.Run(() =>
-            {
-                this._currentContentController =
-                    this._contentNavigator.Navigate(new AccountsControllerNavigationTarget());
-                this.ViewModel.AssignDisplayTarget(this._currentContentController.ViewModel);
-
-            });
+            this.SynchronizeCurrentDisplayTargetWithNavigator();
         }
 
-        #endregion
+        private void SynchronizeCurrentDisplayTargetWithNavigator()
+        {
+            this.ViewModel.AssignDisplayTarget(this._contentNavigator.CurrentContentController?.ViewModel, this._contentNavigator.CurrentTarget?.DisplayName);
+        }
 
-        #region - Felder privat -
 
-        private readonly IContentNavigator _contentNavigator;
-        private IController _currentContentController;
+        protected override async Task OnInitializeAsync()
+        {
+            this._contentNavigator.Navigate(new SearchContentNavigationTarget());
+            await base.OnInitializeAsync();
+        }
 
         #endregion
     }
