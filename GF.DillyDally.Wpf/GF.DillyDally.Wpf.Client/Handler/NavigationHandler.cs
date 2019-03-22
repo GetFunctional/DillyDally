@@ -1,8 +1,10 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
+using GF.DillyDally.Wpf.Client.Core.Mediation.Navigation;
 using MediatR;
+using Task = System.Threading.Tasks.Task;
 
-namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
+namespace GF.DillyDally.Wpf.Client.Handler
 {
     internal sealed class NavigationHandler : IRequestHandler<NavigationRequest, NavigationResponse>
     {

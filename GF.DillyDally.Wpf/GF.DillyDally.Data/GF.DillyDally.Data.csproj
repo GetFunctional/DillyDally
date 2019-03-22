@@ -41,10 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataInitializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tasks\ITasksRepository.cs" />
     <Compile Include="Tasks\Tag.cs" />
     <Compile Include="Tasks\Task.cs" />
-    <Compile Include="Tasks\TaskRepository.cs" />
+    <Compile Include="Tasks\TasksRepository.cs" />
     <Compile Include="Tasks\TaskTemplate.cs" />
   </ItemGroup>
   <ItemGroup>

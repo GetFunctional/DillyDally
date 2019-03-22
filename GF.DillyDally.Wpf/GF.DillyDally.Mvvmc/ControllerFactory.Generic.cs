@@ -1,9 +1,12 @@
 ﻿namespace GF.DillyDally.Mvvmc
 {
-    public sealed class ControllerFactory<TController, TViewModel> where TController : IController<TViewModel>
-        where TViewModel : IViewModel
+    public sealed class ControllerFactory<TController> where TController : IController
     {
+        #region - Felder privat -
+
         private readonly ControllerFactory _nonGenericControllerFactory;
+
+        #endregion
 
         #region - Konstruktoren -
 
@@ -18,7 +21,7 @@
 
         public TController CreateController()
         {
-            return (TController) this._nonGenericControllerFactory.CreateController(typeof(TController));
+            return (TController)this._nonGenericControllerFactory.CreateController(typeof(TController));
         }
 
         #endregion

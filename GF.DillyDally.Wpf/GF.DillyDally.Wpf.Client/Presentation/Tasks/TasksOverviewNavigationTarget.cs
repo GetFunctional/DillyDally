@@ -1,25 +1,25 @@
 using System;
 using GF.DillyDally.Wpf.Client.Core.Navigator;
-using GF.DillyDally.Wpf.Client.Presentation.ContentNavigation;
+using GF.DillyDally.Wpf.Client.Presentation.Tasks;
 
-namespace GF.DillyDally.Wpf.Client.Presentation.Rewards
+namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
 {
-    public sealed class SearchContentNavigationTarget: INavigationTarget
+    public sealed class TasksOverviewNavigationTarget: INavigationTarget
     {
         #region - Konstruktoren -
 
-        public SearchContentNavigationTarget()
+        public TasksOverviewNavigationTarget()
         {
-            this.NavigationTargetId = Guid.Parse("{A333DEC8-9109-4518-807A-C0E8E3ACFAA6}");
-            this.DisplayName = "Suchen";
-            this.NavigationTargetControllerType = typeof(SearchContentController);
+            this.NavigationTargetId = Guid.Parse("{8F0D2BD9-3B9E-4E5D-A786-111A2FEAB664}");
+            this.DisplayName = "Tasks overview";
+            this.NavigationTargetControllerType = typeof(TasksOverviewController);
         }
 
         #endregion
 
         #region - Methoden privat -
 
-        private bool Equals(SearchContentNavigationTarget other)
+        private bool Equals(TasksOverviewNavigationTarget other)
         {
             return Equals(this.NavigationTargetId, other.NavigationTargetId);
         }
@@ -30,7 +30,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Rewards
 
         public bool Equals(INavigationTarget other)
         {
-            if (other is SearchContentNavigationTarget otherTarget)
+            if (other is TasksOverviewNavigationTarget otherTarget)
             {
                 return this.Equals(otherTarget);
             }
@@ -50,7 +50,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Rewards
                 return true;
             }
 
-            return obj is SearchContentNavigationTarget other && this.Equals(other);
+            return obj is TasksOverviewNavigationTarget other && this.Equals(other);
         }
 
         public override int GetHashCode()

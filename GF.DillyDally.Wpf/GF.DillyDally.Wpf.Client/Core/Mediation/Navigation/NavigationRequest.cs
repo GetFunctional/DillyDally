@@ -1,7 +1,7 @@
 ﻿using GF.DillyDally.Wpf.Client.Core.Navigator;
 using MediatR;
 
-namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
+namespace GF.DillyDally.Wpf.Client.Core.Mediation.Navigation
 {
     internal sealed class NavigationRequest : IRequest<NavigationResponse>
     {

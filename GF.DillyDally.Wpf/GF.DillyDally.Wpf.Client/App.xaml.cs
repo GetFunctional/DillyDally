@@ -13,8 +13,14 @@ namespace GF.DillyDally.Wpf.Client
     /// </summary>
     public partial class App : Application
     {
+        #region - Felder privat -
+
         private Bootstrapper _bootstrapper;
         private DillyDallyApplication _dillyDallyApplication;
+
+        #endregion
+
+        #region - Methoden privat -
 
         protected override void OnStartup(StartupEventArgs e)
         {
@@ -37,7 +43,7 @@ namespace GF.DillyDally.Wpf.Client
         {
             var shellController = this.CreateShellController(serviceContainer);
             var shell = new Presentation.Shell(shellController.ViewModel);
-            var dillyDallyApplication = new DillyDallyApplication(shellController,shell);
+            var dillyDallyApplication = new DillyDallyApplication(shellController, shell);
             serviceContainer.RegisterInstance<IDillyDallyApplication>(dillyDallyApplication);
             return dillyDallyApplication;
         }
@@ -50,14 +56,16 @@ namespace GF.DillyDally.Wpf.Client
         private ShellController CreateShellController(ServiceContainer serviceContainer)
         {
             var shellController = serviceContainer
-                .GetInstance<ControllerFactory<ShellController, ShellViewModel>>().CreateController();
+                .GetInstance<ControllerFactory<ShellController>>().CreateController();
             return shellController;
         }
 
         private ServiceContainer CreateDependencyInjectionContainer()
         {
             return new ServiceContainer(new ContainerOptions
-                {EnablePropertyInjection = false, EnableVariance = false});
+                                        {EnablePropertyInjection = false, EnableVariance = false});
         }
+
+        #endregion
     }
 }

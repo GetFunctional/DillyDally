@@ -117,7 +117,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Core\DataTemplates\DataTemplateInitializer.cs" />
-    <Compile Include="Core\Mediation\Navigation\NavigationHandler.cs" />
+    <Compile Include="Handler\NavigationHandler.cs" />
     <Compile Include="Core\Mediation\Navigation\NavigationResponse.cs" />
     <Compile Include="Core\Navigator\NavigationInitializer.cs" />
     <Compile Include="Core\Navigator\ContentNavigator.cs" />
@@ -132,6 +132,7 @@
     <Compile Include="Core\Navigator\NavigationTargetMap.cs" />
     <Compile Include="Core\Exceptions\NavigationTargetNotFoundException.cs" />
     <Compile Include="DillyDallyApplication.cs" />
+    <Compile Include="Handler\OpenTasksListControllerHandler.cs" />
     <Compile Include="IDillyDallyApplication.cs" />
     <Compile Include="Presentation\ContentNavigation\NavigateToTargetCommand.cs" />
     <Compile Include="Core\Mediation\Navigation\NavigationRequest.cs" />
@@ -164,14 +165,18 @@
     <Compile Include="Presentation\Rewards\AccountsView.xaml.cs">
       <DependentUpon>AccountsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Presentation\Rewards\SearchContentNavigationTarget.cs" />
+    <Compile Include="Presentation\ContentNavigation\SearchContentNavigationTarget.cs" />
+    <Compile Include="Presentation\Tasks\OpenTasksListControllerRequest.cs" />
+    <Compile Include="Presentation\Tasks\TasksOverviewController.cs" />
+    <Compile Include="Presentation\Tasks\TasksOverviewNavigationTarget.cs" />
     <Compile Include="Presentation\Tasks\TasksListController.cs" />
-    <Compile Include="Presentation\Tasks\TasksListView.xaml.cs">
-      <DependentUpon>TasksListView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Presentation\Tasks\TasksListViewModel.cs" />
     <Compile Include="Presentation\ShellController.cs" />
     <Compile Include="Presentation\ShellViewModel.cs" />
+    <Compile Include="Presentation\Tasks\TaskViewModel.cs" />
+    <Compile Include="Presentation\Tasks\TaskViewModelFactory.cs" />
+    <Compile Include="Wpf\DesignTimeInvestigator.cs" />
+    <Compile Include="Wpf\SharedResourceDictionary.cs" />
     <Page Include="Presentation\ContentNavigation\ContentBrowserView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -188,7 +193,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Presentation\Tasks\TasksListView.xaml">
+    <Page Include="Presentation\Tasks\TasksListTemplates.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -205,8 +210,16 @@
       <DependentUpon>Shell.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Presentation\Tasks\TasksOverviewView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Presentation\Tasks\TasksOverviewView.xaml.cs">
+      <DependentUpon>TasksOverviewView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Presentation\Tasks\TasksOverviewViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -237,6 +250,10 @@
     <ProjectReference Include="..\GF.DillyDally.Contracts\GF.DillyDally.Contracts.csproj">
       <Project>{68646e87-6271-4ae4-bd5f-10615209eb5b}</Project>
       <Name>GF.DillyDally.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GF.DillyDally.Data\GF.DillyDally.Data.csproj">
+      <Project>{fdc6883a-7d43-4a81-a274-67e082185293}</Project>
+      <Name>GF.DillyDally.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\GF.DillyDally.Local.Core\GF.DillyDally.Local.Core.csproj">
       <Project>{9c641922-049e-49bd-8fed-64385791c402}</Project>

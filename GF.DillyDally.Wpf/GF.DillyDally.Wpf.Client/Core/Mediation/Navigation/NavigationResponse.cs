@@ -1,4 +1,4 @@
-﻿namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
+﻿namespace GF.DillyDally.Wpf.Client.Core.Mediation.Navigation
 {
     internal sealed class NavigationResponse
     {

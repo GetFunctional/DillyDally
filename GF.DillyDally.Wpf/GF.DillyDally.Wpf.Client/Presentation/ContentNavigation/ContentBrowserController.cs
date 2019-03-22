@@ -6,11 +6,11 @@ using GF.DillyDally.Wpf.Client.Core.Navigator;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
 {
-    public class ContentBrowserController : ControllerBase<ContentBrowserViewModel>
+    public sealed class ContentBrowserController : ControllerBase<ContentBrowserViewModel>
     {
         #region - Felder privat -
 
-        private readonly ControllerFactory<ContentNavigatorController, ContentNavigatorViewModel>
+        private readonly ControllerFactory<ContentNavigatorController>
             _contentNavigatorControllerFactory;
 
         private readonly IList<ContentNavigatorController> _navigatorControllers =
@@ -21,22 +21,15 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
         #region - Konstruktoren -
 
         public ContentBrowserController(ContentBrowserViewModel viewModel,
-            ControllerFactory<ContentNavigatorController, ContentNavigatorViewModel> contentNavigatorControllerFactory)
+            ControllerFactory<ContentNavigatorController> contentNavigatorControllerFactory)
             : base(viewModel)
         {
             this._contentNavigatorControllerFactory = contentNavigatorControllerFactory;
         }
 
-        protected override async Task OnInitializeAsync()
-        {
-            var newNavigator = this._contentNavigatorControllerFactory.CreateController();
-            this._navigatorControllers.Add(newNavigator);
-            this.ViewModel.SelectCurrentNavigator(newNavigator.ViewModel);
-
-            await base.OnInitializeAsync();
-        }
-        
         #endregion
+
+        #region - Methoden oeffentlich -
 
         public bool NavigateInCurrentNavigatorTo(INavigationTarget navigationTarget)
         {
@@ -49,5 +42,20 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
 
             return false;
         }
+
+        #endregion
+
+        #region - Methoden privat -
+
+        protected override async Task OnInitializeAsync()
+        {
+            var newNavigator = this._contentNavigatorControllerFactory.CreateController();
+            this._navigatorControllers.Add(newNavigator);
+            this.ViewModel.SelectCurrentNavigator(newNavigator.ViewModel);
+
+            await base.OnInitializeAsync();
+        }
+
+        #endregion
     }
 }
