@@ -26,6 +26,16 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
 
         #endregion
 
+        #region - Methoden oeffentlich -
+
+        public bool NavigateToTarget(INavigationTarget navigationTarget)
+        {
+            var controller = this._contentNavigator.Navigate(navigationTarget);
+            return controller != null;
+        }
+
+        #endregion
+
         #region - Methoden privat -
 
         private void HandleNavigatorNavigated(object sender, EventArgs e)

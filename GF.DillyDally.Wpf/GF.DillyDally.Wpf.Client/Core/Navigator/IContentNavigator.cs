@@ -41,8 +41,8 @@ namespace GF.DillyDally.Wpf.Client.Core.Navigator
         /// </summary>
         IController CurrentContentController { get; }
 
-        event EventHandler Navigated;
-
         #endregion
+
+        event EventHandler Navigated;
     }
 }

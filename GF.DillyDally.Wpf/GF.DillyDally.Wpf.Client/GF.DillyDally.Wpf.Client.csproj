@@ -117,6 +117,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Core\DataTemplates\DataTemplateInitializer.cs" />
+    <Compile Include="Core\Mediation\Navigation\NavigationHandler.cs" />
+    <Compile Include="Core\Mediation\Navigation\NavigationResponse.cs" />
     <Compile Include="Core\Navigator\NavigationInitializer.cs" />
     <Compile Include="Core\Navigator\ContentNavigator.cs" />
     <Compile Include="Core\Navigator\IContentNavigator.cs" />
@@ -131,6 +133,9 @@
     <Compile Include="Core\Exceptions\NavigationTargetNotFoundException.cs" />
     <Compile Include="DillyDallyApplication.cs" />
     <Compile Include="IDillyDallyApplication.cs" />
+    <Compile Include="Presentation\ContentNavigation\NavigateToTargetCommand.cs" />
+    <Compile Include="Core\Mediation\Navigation\NavigationRequest.cs" />
+    <Compile Include="Core\Mediation\Navigation\NavigationRequestFactory.cs" />
     <Compile Include="Presentation\ContentNavigation\NavigationTargetViewModel.cs" />
     <Compile Include="Presentation\Rewards\AccountsController.cs" />
     <Compile Include="Presentation\Rewards\AccountsControllerNavigationTarget.cs" />

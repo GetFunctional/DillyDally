@@ -37,6 +37,7 @@
                     Width="380"
                     HorizontalAlignment="Center"
                     DisplayMember="{Binding NavigationTargetDisplayMember, Mode=OneTime}"
+                    EditValue="{Binding SelectedTarget, Mode=TwoWay}"
                     FilterCondition="Contains"
                     FindMode="Always"
                     ImmediatePopup="True"
@@ -53,66 +54,11 @@
                 <dx:SimpleButton
                     Width="90"
                     HorizontalAlignment="Center"
+                    Command="{Binding NavigateToTargetCommand, Mode=OneWay}"
+                    CommandParameter="{Binding SelectedTarget.NavigationTargetId, Mode=OneWay}"
                     Content="Search" />
             </dxlc:LayoutGroup>
         </dxlc:LayoutGroup>
-        <!--<dxlc:LayoutGroup ItemLabelsAlignment="Local" Orientation="Vertical">
-
-
-            <dxlc:LayoutItem HorizontalAlignment="Left" Label="NavigationTarget">
-                <dxlc:LayoutGroup
-                    Height="36"
-                    dxlc:DockLayoutControl.Dock="Top"
-                    Orientation="Horizontal">
-                    <dxe:ComboBoxEdit
-                        x:Name="SearchField"
-                        Width="Auto"
-                        MinWidth="450"
-                        AutoComplete="True"
-                        EditValue="{Binding SearchExpression, Mode=TwoWay}"
-                        IncrementalFiltering="True"
-                        ItemsSource="{Binding SearchAutoCompleteSource, Mode=OneWay}"
-                        NullText="Nach Inhalt suchen oder Url eingeben"
-                        ShowEditorButtons="False"
-                        ShowSizeGrip="False"
-                        ValidateOnEnterKeyPressed="True">
-                        <dxe:ComboBoxEdit.StyleSettings>
-                            <dxe:ComboBoxStyleSettings />
-                        </dxe:ComboBoxEdit.StyleSettings>
-                    </dxe:ComboBoxEdit>
-                    <dx:SimpleButton
-                        MinWidth="20"
-                        HorizontalAlignment="Right"
-                        Command="{Binding Commands.SearchCommand, Mode=OneTime}"
-                        CommandParameter="{Binding ElementName=SearchField, Path=EditValue}"
-                        Content="Navigieren"
-                        IsDefault="True" />
-                </dxlc:LayoutGroup>
-            </dxlc:LayoutItem>
-            <dxlc:LayoutItem HorizontalAlignment="Left" Label="Dialog">
-                <dxlc:LayoutGroup Height="36" Orientation="Horizontal">
-                    <dxg:LookUpEdit
-                        MinWidth="450"
-                        MinHeight="36"
-                        VerticalAlignment="Center"
-                        AutoPopulateColumns="False"
-                        DisplayMember="DialogControllerName"
-                        EditValue="{Binding CurrentSelectedDialog, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                        IsPopupAutoWidth="False"
-                        IsTextEditable="False"
-                        ItemsSource="{Binding SearchDialogeAutoCompleteSource, Mode=OneWay}"
-                        PopupContentTemplate="{StaticResource DialogeSelectorTemplate}"
-                        PopupMaxWidth="600" />
-                    <dx:SimpleButton
-                        MinWidth="20"
-                        HorizontalAlignment="Right"
-                        Command="{Binding Commands.OpenDialogCommand, Mode=OneTime}"
-                        CommandParameter="{Binding CurrentSelectedDialog}"
-                        Content="Dialog öffnen"
-                        IsDefault="True" />
-                </dxlc:LayoutGroup>
-            </dxlc:LayoutItem>
-        </dxlc:LayoutGroup>-->
     </Grid>
 
 </UserControl>

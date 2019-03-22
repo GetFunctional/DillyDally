@@ -1,4 +1,6 @@
-﻿using GF.DillyDally.Mvvmc;
+﻿using System.Threading.Tasks;
+using GF.DillyDally.Mvvmc;
+using GF.DillyDally.Wpf.Client.Core.Navigator;
 using GF.DillyDally.Wpf.Client.Presentation.ContentNavigation;
 
 namespace GF.DillyDally.Wpf.Client.Presentation
@@ -14,14 +16,18 @@ namespace GF.DillyDally.Wpf.Client.Presentation
         {
             this._browserControllerFactory = browserControllerFactory;
         }
-
-        protected override void OnInitialize()
+        
+        protected override Task OnInitializeAsync()
         {
-            base.OnInitialize();
-
             this._contentBrowserController = this._browserControllerFactory.CreateController();
-
             this.ViewModel.ContentBrowserViewModel = this._contentBrowserController.ViewModel;
+
+            return base.OnInitializeAsync();
+        }
+
+        public bool NavigateInCurrentNavigatorTo(INavigationTarget navigationTarget)
+        {
+            return this._contentBrowserController.NavigateInCurrentNavigatorTo(navigationTarget);
         }
     }
 }

@@ -1,14 +1,15 @@
 ﻿using System.Collections.Generic;
-using GF.DillyDally.Mvvmc;
+using ViewModelBase = GF.DillyDally.Mvvmc.ViewModelBase;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
 {
-    public class SearchContentViewModel : ViewModelBase
+    public sealed class SearchContentViewModel : ViewModelBase
     {
         #region - Felder privat -
 
         private IList<NavigationTargetViewModel> _availableNavigationTargets;
         private NavigationTargetViewModel _selectedTarget;
+        private NavigateToTargetCommand _navigateToTargetCommand;
 
         #endregion
 
@@ -56,6 +57,18 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
             get
             {
                 return nameof(NavigationTargetViewModel.DisplayName);
+            }
+        }
+
+        public NavigateToTargetCommand NavigateToTargetCommand
+        {
+            get
+            {
+                return this._navigateToTargetCommand;
+            }
+            internal set
+            {
+                this.SetField(ref this._navigateToTargetCommand, value);
             }
         }
 

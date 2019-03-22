@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using GF.DillyDally.Mvvmc;
+using GF.DillyDally.Wpf.Client.Core.Navigator;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
 {
@@ -24,15 +27,27 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
             this._contentNavigatorControllerFactory = contentNavigatorControllerFactory;
         }
 
-        protected override void OnInitialize()
+        protected override async Task OnInitializeAsync()
         {
-            base.OnInitialize();
-
             var newNavigator = this._contentNavigatorControllerFactory.CreateController();
             this._navigatorControllers.Add(newNavigator);
             this.ViewModel.SelectCurrentNavigator(newNavigator.ViewModel);
-        }
 
+            await base.OnInitializeAsync();
+        }
+        
         #endregion
+
+        public bool NavigateInCurrentNavigatorTo(INavigationTarget navigationTarget)
+        {
+            var currentActiveNavigator = this.ViewModel.CurrentActiveNavigator;
+            if (currentActiveNavigator != null)
+            {
+                var controllerForViewModel = this._navigatorControllers.Single(nc => nc.ViewModel == currentActiveNavigator);
+                return controllerForViewModel.NavigateToTarget(navigationTarget);
+            }
+
+            return false;
+        }
     }
 }
