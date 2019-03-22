@@ -1,32 +1,23 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace GF.DillyDally.Contracts.RewardSystem.Models.Keys
+namespace GF.DillyDally.Contracts.Keys
 {
-    public sealed class AccountId : IdentityKeyBase<AccountId>
+    [DataContract(Name = "TaskKey")]
+    public sealed class TaskKey : IdentityKeyBase<TaskKey>
     {
         #region - Konstruktoren -
 
-        public AccountId(Guid accountId)
+        public TaskKey(Guid taskTemplateId)
         {
+            this.TaskId = taskTemplateId;
         }
-
-        #endregion
-
-        #region - Properties oeffentlich -
-
-        [DataMember(Name = "AccountIdValue")] public Guid AccountIdValue { get; }
 
         #endregion
 
         #region - Methoden oeffentlich -
 
-        public static AccountId Create()
-        {
-            return new AccountId(Guid.NewGuid());
-        }
-
-        public override bool Equals(AccountId other)
+        public override bool Equals(TaskKey other)
         {
             if (ReferenceEquals(null, other))
             {
@@ -38,7 +29,7 @@ namespace GF.DillyDally.Contracts.RewardSystem.Models.Keys
                 return true;
             }
 
-            return this.AccountIdValue == other.AccountIdValue;
+            return this.TaskId == other.TaskId;
         }
 
         public override bool Equals(object obj)
@@ -58,13 +49,20 @@ namespace GF.DillyDally.Contracts.RewardSystem.Models.Keys
                 return false;
             }
 
-            return this.Equals((AccountId) obj);
+            return this.Equals((TaskKey)obj);
         }
 
         public override int GetHashCode()
         {
-            return this.AccountIdValue.GetHashCode();
+            return this.TaskId.GetHashCode();
         }
+
+        #endregion
+
+        #region - Properties oeffentlich -
+
+        [DataMember(Name = "TaskId")]
+        public Guid TaskId { get; }
 
         #endregion
     }

@@ -1,4 +1,4 @@
-﻿namespace GF.DillyDally.Contracts.RewardSystem.Models.Keys
+﻿namespace GF.DillyDally.Contracts.Keys
 {
     public abstract class IdentityKeyBase<T> : IIdentityKey<T>
     {
@@ -9,12 +9,7 @@
         #endregion
 
         #region - Methoden oeffentlich -
-
-        public static bool IsNull(IIdentityKey<T> src)
-        {
-            return src == null;
-        }
-
+        
         public abstract override bool Equals(object obj);
 
         public abstract override int GetHashCode();
