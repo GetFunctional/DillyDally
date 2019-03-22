@@ -57,16 +57,19 @@ namespace GF.DillyDally.Wpf.Client.Core.DataTemplates
             {
                 var viewTypeCandidates = this.FindViewMatchesForViewModel(viewModelType, viewTypes).ToList();
 
-                if (viewTypeCandidates.Count > 1)
+                if (viewTypeCandidates.Count > 0)
                 {
-                    throw new MultipleViewDefinitionException(
-                        $"Found more than one View match for a single ViewModel. Check Namingconventions. ViewModel - {viewModelType}");
-                }
+                    if (viewTypeCandidates.Count > 1)
+                    {
+                        throw new MultipleViewDefinitionException(
+                            $"Found more than one View match for a single ViewModel. Check Namingconventions. ViewModel - {viewModelType}");
+                    }
 
-                var viewTypeMatch = viewTypeCandidates.First();
-                var createdGenericDataTemplate =
-                    this._dataTemplateFactory.CreateViewModelDataTemplate(viewModelType, viewTypeMatch);
-                generatedViewModelDataTemplates.Add(createdGenericDataTemplate);
+                    var viewTypeMatch = viewTypeCandidates.First();
+                    var createdGenericDataTemplate =
+                        this._dataTemplateFactory.CreateViewModelDataTemplate(viewModelType, viewTypeMatch);
+                    generatedViewModelDataTemplates.Add(createdGenericDataTemplate);
+                }
             }
 
             return generatedViewModelDataTemplates;

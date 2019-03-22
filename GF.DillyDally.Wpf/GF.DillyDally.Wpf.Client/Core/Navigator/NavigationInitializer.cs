@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using LightInject;
 
 namespace GF.DillyDally.Wpf.Client.Core.Navigator
@@ -8,10 +9,13 @@ namespace GF.DillyDally.Wpf.Client.Core.Navigator
     {
         #region - Methoden privat -
 
-        internal void InitializeNavigation(IServiceContainer serviceContainer,
-            IList<INavigationTarget> navigationTargets)
+        internal void InitializeNavigation(IServiceContainer serviceContainer)
         {
-            var navigationTargetProvider = CreateNavigationTargetMap(navigationTargets);
+            serviceContainer.RegisterAssembly(typeof(NavigationInitializer).GetTypeInfo().Assembly, (serviceType, implementingType) =>
+                !implementingType.IsAbstract && typeof(INavigationTarget).IsAssignableFrom(implementingType));
+
+            var availableNavigationTargets = this.GetNavigationTargets(serviceContainer);
+            var navigationTargetProvider = CreateNavigationTargetMap(availableNavigationTargets);
 
             serviceContainer.Register<IContentNavigator, ContentNavigator>();
             serviceContainer.RegisterInstance(navigationTargetProvider);
@@ -25,6 +29,11 @@ namespace GF.DillyDally.Wpf.Client.Core.Navigator
                     valueSelector => valueSelector);
             var navigationTargetProvider = new NavigationTargetMap(foundNavigationTargets);
             return navigationTargetProvider;
+        }
+
+        private IList<INavigationTarget> GetNavigationTargets(IServiceContainer serviceContainer)
+        {
+            return serviceContainer.GetAllInstances<INavigationTarget>().ToList();
         }
 
         #endregion

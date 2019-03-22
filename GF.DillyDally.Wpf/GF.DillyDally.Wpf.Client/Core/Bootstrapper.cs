@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Windows;
 using GF.DillyDally.Mvvmc;
@@ -26,18 +27,11 @@ namespace GF.DillyDally.Wpf.Client.Core
             this.RegisterMvvmcDependencies(serviceContainer);
             this.RegisterControllersAndViewModels(serviceContainer);
             this._dataTemplateInitializer.RegisterDataTemplates(this._application);
-            this._navigationInitializer.InitializeNavigation(serviceContainer, this.GetNavigationTargets());
+            this._navigationInitializer.InitializeNavigation(serviceContainer);
         }
 
 
-        private IList<INavigationTarget> GetNavigationTargets()
-        {
-            return new List<INavigationTarget>
-            {
-                new AccountsControllerNavigationTarget()
-            };
-        }
-
+       
         #endregion
 
         #region - Felder privat -

@@ -12,7 +12,6 @@
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
-
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="17*" />
@@ -33,9 +32,26 @@
                 Height="24"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Top">
-                <dxe:TextEdit Width="380" HorizontalAlignment="Center" />
+                <dxe:ComboBoxEdit
+                    x:Name="SearchField"
+                    Width="380"
+                    HorizontalAlignment="Center"
+                    DisplayMember="{Binding NavigationTargetDisplayMember, Mode=OneTime}"
+                    FilterCondition="Contains"
+                    FindMode="Always"
+                    ImmediatePopup="True"
+                    IncrementalFiltering="True"
+                    ItemsSource="{Binding AvailableNavigationTargets, Mode=OneWay}"
+                    NullText="Nach Inhalt suchen..."
+                    ShowEditorButtons="True"
+                    ShowSizeGrip="False"
+                    ValidateOnTextInput="False">
+                    <dxe:ComboBoxEdit.StyleSettings>
+                        <dxe:ComboBoxStyleSettings />
+                    </dxe:ComboBoxEdit.StyleSettings>
+                </dxe:ComboBoxEdit>
                 <dx:SimpleButton
-                    Width="120"
+                    Width="90"
                     HorizontalAlignment="Center"
                     Content="Search" />
             </dxlc:LayoutGroup>

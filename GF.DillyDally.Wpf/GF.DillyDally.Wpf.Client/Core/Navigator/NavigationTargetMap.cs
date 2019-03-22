@@ -42,6 +42,11 @@ namespace GF.DillyDally.Wpf.Client.Core.Navigator
             this._navigationTargets.Add(target.NavigationTargetId, target);
         }
 
+        public IReadOnlyList<INavigationTarget> GetAllNavigationTargets()
+        {
+            return this._navigationTargets.Values.ToList();
+        }
+
         #endregion
     }
 }

@@ -16,7 +16,13 @@
         <Style x:Key="ViewModelBrowserTabItemStyle" TargetType="{x:Type dx:DXTabItem}">
             <Setter Property="native:TabControlDragWidgetHelper.UseWPFMethod" Value="False" />
             <Setter Property="VisibleInHeaderMenu" Value="True" />
-            <Setter Property="Header" Value="{Binding ContentTitle, Mode=OneWay}" />
+            <Setter Property="HeaderTemplate">
+                <Setter.Value>
+                    <DataTemplate DataType="{x:Type contentNavigation:ContentNavigatorViewModel}">
+                        <TextBlock Text="{Binding ContentTitle, Mode=OneWay}" />
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
     </UserControl.Resources>
 

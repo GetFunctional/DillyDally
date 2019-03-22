@@ -131,6 +131,7 @@
     <Compile Include="Core\Exceptions\NavigationTargetNotFoundException.cs" />
     <Compile Include="DillyDallyApplication.cs" />
     <Compile Include="IDillyDallyApplication.cs" />
+    <Compile Include="Presentation\ContentNavigation\NavigationTargetViewModel.cs" />
     <Compile Include="Presentation\Rewards\AccountsController.cs" />
     <Compile Include="Presentation\Rewards\AccountsControllerNavigationTarget.cs" />
     <Compile Include="Presentation\Rewards\AccountsViewModel.cs" />
