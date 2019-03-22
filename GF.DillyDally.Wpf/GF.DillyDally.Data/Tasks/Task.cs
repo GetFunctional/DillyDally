@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using GF.DillyDally.Contracts;
 using GF.DillyDally.Contracts.Keys;
 
-namespace GF.DillyDally.Domain.Models.TaskContext
+namespace GF.DillyDally.Data.Tasks
 {
-    internal sealed class Task
+    public sealed class Task
     {
         public TaskKey TaskKey { get; }
         public string Name { get; }
@@ -14,6 +14,6 @@ namespace GF.DillyDally.Domain.Models.TaskContext
         public DateTime? DueDate { get; }
         public DateTime CreatedOn { get; }
         public IList<Tag> Tags { get; }
-        public DateTime? CompletedOn { get; }
+        public DateTime? CompletedOn { get; set; }
     }
 }

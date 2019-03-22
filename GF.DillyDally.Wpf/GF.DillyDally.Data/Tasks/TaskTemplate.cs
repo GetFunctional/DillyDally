@@ -1,9 +1,9 @@
 ﻿using GF.DillyDally.Contracts;
 using GF.DillyDally.Contracts.Keys;
 
-namespace GF.DillyDally.Domain.Models.TaskContext
+namespace GF.DillyDally.Data.Tasks
 {
-    class TaskTemplate
+    public sealed class TaskTemplate
     {
         public TaskTemplateKey TaskTemplateKey { get; }
         public string Name { get; }

@@ -1,4 +1,4 @@
-﻿namespace GF.DillyDally.Domain.Models.TaskContext
+﻿namespace GF.DillyDally.Contracts
 {
     public enum Workload
     {

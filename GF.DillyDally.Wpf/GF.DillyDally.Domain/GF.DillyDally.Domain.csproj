@@ -45,7 +45,6 @@
     <Compile Include="Models\Tag.cs" />
     <Compile Include="Models\TaskContext\Task.cs" />
     <Compile Include="Models\TaskContext\TaskTemplate.cs" />
-    <Compile Include="Models\TaskContext\Workload.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
