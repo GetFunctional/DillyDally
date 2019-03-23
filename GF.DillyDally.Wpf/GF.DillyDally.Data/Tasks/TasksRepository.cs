@@ -30,7 +30,7 @@ namespace GF.DillyDally.Data.Tasks
 
         public Task<IList<Task>> GetSpecificTasks(IList<TaskKey> taskKeys)
         {
-            return System.Threading.Tasks.Task.Run(() => (IList<Task>)new List<Task>(){new Task()});
+            return System.Threading.Tasks.Task.Run(() => (IList<Task>) new List<Task> {new Task()});
         }
 
         #endregion

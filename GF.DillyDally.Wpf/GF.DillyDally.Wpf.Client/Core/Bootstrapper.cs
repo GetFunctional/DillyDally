@@ -45,7 +45,7 @@ namespace GF.DillyDally.Wpf.Client.Core
             this._dataTemplateInitializer.RegisterDataTemplates(this._application);
             this._navigationInitializer.InitializeNavigation(serviceContainer);
         }
-        
+
         private void RegisterControllersAndViewModels(IServiceContainer serviceContainer)
         {
             serviceContainer.RegisterAssembly(typeof(Bootstrapper).GetTypeInfo().Assembly,
