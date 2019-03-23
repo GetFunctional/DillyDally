@@ -7,16 +7,10 @@ namespace GF.DillyDally.Wpf.Client.Wpf
 {
     public static class DesignTimeInvestigator
     {
-        #region Constructors
-
         static DesignTimeInvestigator()
         {
             RegisterPackScheme();
         }
-
-        #endregion
-
-        #region Properties, Indexers
 
         public static bool IsInDesignMode
         {
@@ -26,8 +20,6 @@ namespace GF.DillyDally.Wpf.Client.Wpf
                     .DefaultValue;
             }
         }
-
-        #endregion
 
         public static void RegisterPackScheme()
         {

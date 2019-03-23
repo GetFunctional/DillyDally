@@ -11,39 +11,10 @@ namespace GF.DillyDally.Wpf.Client.Wpf
     /// </summary>
     public sealed class SharedResourceDictionary : ResourceDictionary
     {
-        #region - Methoden oeffentlich -
-
-        public static void ClearCache()
-        {
-            InternalSharedCache.Clear();
-        }
-
-        #endregion
-
-        #region - Methoden privat -
-
-        private static void CacheSource(Uri source, ResourceDictionary dictionary)
-        {
-            if (SharedCache.ContainsKey(source))
-            {
-                InternalSharedCache.Remove(source);
-            }
-
-            InternalSharedCache.Add(source, new WeakReference(dictionary, false));
-        }
-
-        #endregion
-
-        #region - Felder privat -
-
         private static readonly Dictionary<Uri, WeakReference> InternalSharedCache =
             new Dictionary<Uri, WeakReference>();
 
         private Uri _sourceCore;
-
-        #endregion
-
-        #region - Konstruktoren -
 
         public SharedResourceDictionary()
         {
@@ -53,10 +24,6 @@ namespace GF.DillyDally.Wpf.Client.Wpf
         {
             this.Source = source;
         }
-
-        #endregion
-
-        #region - Properties oeffentlich -
 
         /// <summary>
         ///     Internal cache of loaded dictionaries
@@ -109,6 +76,19 @@ namespace GF.DillyDally.Wpf.Client.Wpf
             }
         }
 
-        #endregion
+        public static void ClearCache()
+        {
+            InternalSharedCache.Clear();
+        }
+
+        private static void CacheSource(Uri source, ResourceDictionary dictionary)
+        {
+            if (SharedCache.ContainsKey(source))
+            {
+                InternalSharedCache.Remove(source);
+            }
+
+            InternalSharedCache.Add(source, new WeakReference(dictionary, false));
+        }
     }
 }

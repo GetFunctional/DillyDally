@@ -7,19 +7,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
 {
     public sealed class ContentNavigatorController : ControllerBase<ContentNavigatorViewModel>
     {
-        #region Fields, Constants
-
-        #region - Felder privat -
-
         private readonly IContentNavigator _contentNavigator;
-
-        #endregion
-
-        #endregion
-
-        #region Constructors
-
-        #region - Konstruktoren -
 
         public ContentNavigatorController(ContentNavigatorViewModel viewModel, IContentNavigator contentNavigator) :
             base(viewModel)
@@ -29,21 +17,11 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
             this._contentNavigator.Navigated += this.HandleNavigatorNavigated;
         }
 
-        #endregion
-
-        #endregion
-
-        #region - Methoden oeffentlich -
-
         public bool NavigateToTarget(INavigationTarget navigationTarget)
         {
             var controller = this._contentNavigator.Navigate(navigationTarget);
             return controller != null;
         }
-
-        #endregion
-
-        #region - Methoden privat -
 
         private void HandleNavigatorNavigated(object sender, EventArgs e)
         {
@@ -62,7 +40,5 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
             this._contentNavigator.Navigate(new SearchContentNavigationTarget());
             await base.OnInitializeAsync();
         }
-
-        #endregion
     }
 }

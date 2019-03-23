@@ -13,14 +13,8 @@ namespace GF.DillyDally.Wpf.Client
     /// </summary>
     public partial class App : Application
     {
-        #region - Felder privat -
-
         private Bootstrapper _bootstrapper;
         private DillyDallyApplication _dillyDallyApplication;
-
-        #endregion
-
-        #region - Methoden privat -
 
         protected override void OnStartup(StartupEventArgs e)
         {
@@ -29,7 +23,7 @@ namespace GF.DillyDally.Wpf.Client
             ThemeManager.EnableDPICorrection = true;
             ApplicationThemeHelper.ApplicationThemeName = "VS2017Light";
 
-            this.DispatcherUnhandledException += this.HandleUnhandledException;
+            DispatcherUnhandledException += this.HandleUnhandledException;
             var currentApplication = Current;
             var serviceContainer = this.CreateDependencyInjectionContainer();
             this._bootstrapper = new Bootstrapper(currentApplication, serviceContainer);
@@ -65,7 +59,5 @@ namespace GF.DillyDally.Wpf.Client
             return new ServiceContainer(new ContainerOptions
                 {EnablePropertyInjection = false, EnableVariance = false});
         }
-
-        #endregion
     }
 }

@@ -2,16 +2,12 @@
 {
     public sealed class NavigationJournalEntry : INavigationJournalEntry
     {
-        #region Constructors
-
         public NavigationJournalEntry(INavigationTarget navigationTarget)
         {
             this.NavigationTarget = navigationTarget;
         }
 
-        #endregion
-
-        #region Properties, Indexers
+        #region INavigationJournalEntry Members
 
         public INavigationTarget NavigationTarget { get; }
 

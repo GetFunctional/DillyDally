@@ -13,8 +13,6 @@ namespace GF.DillyDally.Mvvmc
     /// </summary>
     public class ObservableObject : INotifyPropertyChanged, INotifyPropertyChanging
     {
-        #region Interface Implementations
-
         #region INotifyPropertyChanged Members
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -26,10 +24,6 @@ namespace GF.DillyDally.Mvvmc
         public event PropertyChangingEventHandler PropertyChanging;
 
         #endregion
-
-        #endregion
-
-        #region - Methoden privat -
 
         /// <summary>
         ///     Setzt den Wert einer Eigenschaft. Prüft, ob sich der Wert geändert hat und ruft in diesem Fall die
@@ -94,7 +88,7 @@ namespace GF.DillyDally.Mvvmc
 
         protected void RaisePropertyChanging([CallerMemberName] string propertyName = null)
         {
-            var handler = this.PropertyChanging;
+            var handler = PropertyChanging;
             if (handler != null)
             {
                 handler(this, new PropertyChangingEventArgs(propertyName));
@@ -117,7 +111,7 @@ namespace GF.DillyDally.Mvvmc
 
         protected virtual void RaisePropertyChanged([CallerMemberName] string propertyName = null)
         {
-            var handler = this.PropertyChanged;
+            var handler = PropertyChanged;
             if (handler != null)
             {
                 handler(this, new PropertyChangedEventArgs(propertyName));
@@ -137,7 +131,5 @@ namespace GF.DillyDally.Mvvmc
                 this.RaisePropertyChanged(propertyName);
             }
         }
-
-        #endregion
     }
 }

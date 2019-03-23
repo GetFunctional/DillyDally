@@ -5,17 +5,9 @@
     /// </summary>
     public interface INavigationJournalEntry
     {
-        #region Properties, Indexers
-
-        #region Properties (oeffentlich)
-
         /// <summary>
         ///     Target of the journalentry.
         /// </summary>
         INavigationTarget NavigationTarget { get; }
-
-        #endregion
-
-        #endregion
     }
 }

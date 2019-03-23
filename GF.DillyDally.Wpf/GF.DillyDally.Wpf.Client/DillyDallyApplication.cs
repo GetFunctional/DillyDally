@@ -5,21 +5,15 @@ namespace GF.DillyDally.Wpf.Client
 {
     internal sealed class DillyDallyApplication : IDillyDallyApplication
     {
-        #region Constructors
+        private readonly Shell _shell;
 
-        #region - Konstruktoren -
+        private readonly ShellController _shellController;
 
         internal DillyDallyApplication(ShellController shellController, Shell shell)
         {
             this._shellController = shellController;
             this._shell = shell;
         }
-
-        #endregion
-
-        #endregion
-
-        #region Interface Implementations
 
         #region IDillyDallyApplication Members
 
@@ -30,22 +24,9 @@ namespace GF.DillyDally.Wpf.Client
 
         #endregion
 
-        #endregion
-
-        #region - Methoden oeffentlich -
-
         public void ShowUi()
         {
             this._shell.ShowDialog();
         }
-
-        #endregion
-
-        #region - Felder privat -
-
-        private readonly ShellController _shellController;
-        private readonly Shell _shell;
-
-        #endregion
     }
 }

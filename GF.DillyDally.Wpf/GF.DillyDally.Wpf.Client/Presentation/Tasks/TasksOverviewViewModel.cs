@@ -4,15 +4,9 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Tasks
 {
     public class TasksOverviewViewModel : ViewModelBase
     {
-        #region - Felder privat -
-
         private TasksListViewModel _openTasksListViewModel;
-        private TasksListViewModel _repeatableTasksListViewModel;
         private TasksListViewModel _recentlyCompletedTasksListViewModel;
-
-        #endregion
-
-        #region - Properties oeffentlich -
+        private TasksListViewModel _repeatableTasksListViewModel;
 
         public TasksListViewModel OpenTasksListViewModel
         {
@@ -31,7 +25,5 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Tasks
             get { return this._recentlyCompletedTasksListViewModel; }
             set { this.SetField(ref this._recentlyCompletedTasksListViewModel, value); }
         }
-
-        #endregion
     }
 }

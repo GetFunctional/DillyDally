@@ -4,24 +4,9 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
 {
     public sealed class ContentNavigatorViewModel : ViewModelBase
     {
-        #region - Methoden privat -
-
-        internal void AssignDisplayTarget(IViewModel displayTarget, string contentTitle)
-        {
-            this.DisplayTarget = displayTarget;
-            this.ContentTitle = contentTitle;
-        }
-
-        #endregion
-
-        #region - Felder privat -
-
-        private IViewModel _displayTarget;
         private string _contentTitle;
 
-        #endregion
-
-        #region - Properties oeffentlich -
+        private IViewModel _displayTarget;
 
         public IViewModel DisplayTarget
         {
@@ -35,6 +20,10 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
             private set { this.SetField(ref this._contentTitle, value); }
         }
 
-        #endregion
+        internal void AssignDisplayTarget(IViewModel displayTarget, string contentTitle)
+        {
+            this.DisplayTarget = displayTarget;
+            this.ContentTitle = contentTitle;
+        }
     }
 }

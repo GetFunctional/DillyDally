@@ -5,10 +5,6 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Rewards
 {
     public sealed class AccountsControllerNavigationTarget : INavigationTarget
     {
-        #region Constructors
-
-        #region - Konstruktoren -
-
         public AccountsControllerNavigationTarget()
         {
             this.NavigationTargetId = Guid.Parse("{28F71947-B0D7-4C0C-866E-9E122C6E3285}");
@@ -16,20 +12,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Rewards
             this.NavigationTargetControllerType = typeof(AccountsController);
         }
 
-        #endregion
-
-        #endregion
-
-        #region - Methoden privat -
-
-        private bool Equals(AccountsControllerNavigationTarget other)
-        {
-            return Equals(this.NavigationTargetId, other.NavigationTargetId);
-        }
-
-        #endregion
-
-        #region - Methoden oeffentlich -
+        #region INavigationTarget Members
 
         public bool Equals(INavigationTarget other)
         {
@@ -39,6 +22,17 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Rewards
             }
 
             return false;
+        }
+
+        public Guid NavigationTargetId { get; }
+        public string DisplayName { get; }
+        public Type NavigationTargetControllerType { get; }
+
+        #endregion
+
+        private bool Equals(AccountsControllerNavigationTarget other)
+        {
+            return Equals(this.NavigationTargetId, other.NavigationTargetId);
         }
 
         public override bool Equals(object obj)
@@ -60,15 +54,5 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Rewards
         {
             return this.NavigationTargetId.GetHashCode();
         }
-
-        #endregion
-
-        #region - Properties oeffentlich -
-
-        public Guid NavigationTargetId { get; }
-        public string DisplayName { get; }
-        public Type NavigationTargetControllerType { get; }
-
-        #endregion
     }
 }

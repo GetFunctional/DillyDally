@@ -6,17 +6,7 @@ namespace GF.DillyDally.Wpf.Client.Core.Navigator
 {
     public sealed class NavigationTargetMap : INavigationTargetProvider
     {
-        #region Fields, Constants
-
-        #region - Felder privat -
-
         private readonly IDictionary<Guid, INavigationTarget> _navigationTargets;
-
-        #endregion
-
-        #endregion
-
-        #region - Konstruktoren -
 
         public NavigationTargetMap() : this(new Dictionary<Guid, INavigationTarget>())
         {
@@ -26,8 +16,6 @@ namespace GF.DillyDally.Wpf.Client.Core.Navigator
         {
             this._navigationTargets = new Dictionary<Guid, INavigationTarget>(existingTargets);
         }
-
-        #endregion
 
         #region INavigationTargetProvider Members
 

@@ -7,29 +7,17 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Tasks
     /// </summary>
     public partial class TasksOverviewView : IViewFor<TasksOverviewViewModel>
     {
-        #region Constructors
-
-        #region - Konstruktoren -
-
         public TasksOverviewView()
         {
             this.InitializeComponent();
         }
 
-        #endregion
-
-        #endregion
-
-        #region Properties, Indexers
-
-        #region - Properties oeffentlich -
+        #region IViewFor<TasksOverviewViewModel> Members
 
         public TasksOverviewViewModel ViewModel
         {
             get { return (TasksOverviewViewModel) this.DataContext; }
         }
-
-        #endregion
 
         #endregion
     }

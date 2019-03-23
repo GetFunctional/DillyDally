@@ -10,9 +10,10 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
 {
     public class SearchContentController : ControllerBase<SearchContentViewModel>
     {
-        #region Constructors
+        private readonly IMediator _mediator;
+        private readonly NavigationRequestFactory _navigationRequestFactory = new NavigationRequestFactory();
 
-        #region - Konstruktoren -
+        private readonly INavigationTargetProvider _navigationTargetProvider;
 
         public SearchContentController(INavigationTargetProvider navigationTargetProvider, IMediator mediator) : base(
             new SearchContentViewModel(CreateNavigationTargetsFrom(navigationTargetProvider)))
@@ -22,20 +23,6 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
 
             this.ViewModel.NavigateToTargetCommand = new NavigateToTargetCommand(this.NavigateToTarget);
         }
-
-        #endregion
-
-        #endregion
-
-        #region - Felder privat -
-
-        private readonly INavigationTargetProvider _navigationTargetProvider;
-        private readonly IMediator _mediator;
-        private readonly NavigationRequestFactory _navigationRequestFactory = new NavigationRequestFactory();
-
-        #endregion
-
-        #region - Methoden privat -
 
         private void NavigateToTarget(Guid targetId)
         {
@@ -52,7 +39,5 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
                     new NavigationTargetViewModel(nt.DisplayName, nt.NavigationTargetId))
                 .ToList();
         }
-
-        #endregion
     }
 }

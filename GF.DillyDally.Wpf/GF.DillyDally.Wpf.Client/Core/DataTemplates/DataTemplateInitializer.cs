@@ -5,8 +5,6 @@ namespace GF.DillyDally.Wpf.Client.Core.DataTemplates
 {
     internal sealed class DataTemplateInitializer
     {
-        #region - Methoden privat -
-
         internal void RegisterDataTemplates(Application application)
         {
             var dataTemplateAggregator = new ViewDataTemplateAggregator();
@@ -19,7 +17,5 @@ namespace GF.DillyDally.Wpf.Client.Core.DataTemplates
                 application.Resources.Add(dataTemplate.DataTemplateKey, dataTemplate);
             }
         }
-
-        #endregion
     }
 }

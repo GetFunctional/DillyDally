@@ -42,9 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DomainInitializer.cs" />
     <Compile Include="Models\Tag.cs" />
     <Compile Include="Models\TaskContext\Task.cs" />
     <Compile Include="Models\TaskContext\TaskTemplate.cs" />
+    <Compile Include="Models\TaskService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

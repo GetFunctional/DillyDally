@@ -7,8 +7,6 @@ namespace GF.DillyDally.Wpf.Client.Core.Navigator
 {
     internal sealed class NavigationInitializer
     {
-        #region - Methoden privat -
-
         internal void InitializeNavigation(IServiceContainer serviceContainer)
         {
             serviceContainer.RegisterAssembly(typeof(NavigationInitializer).GetTypeInfo().Assembly,
@@ -36,7 +34,5 @@ namespace GF.DillyDally.Wpf.Client.Core.Navigator
         {
             return serviceContainer.GetAllInstances<INavigationTarget>().ToList();
         }
-
-        #endregion
     }
 }

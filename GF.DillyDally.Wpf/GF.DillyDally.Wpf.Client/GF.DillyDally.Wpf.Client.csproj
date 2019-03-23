@@ -133,6 +133,7 @@
     <Compile Include="Core\Exceptions\NavigationTargetNotFoundException.cs" />
     <Compile Include="DillyDallyApplication.cs" />
     <Compile Include="Handler\OpenTasksListControllerHandler.cs" />
+    <Compile Include="Handler\Tasks\CreateNewTaskHandler.cs" />
     <Compile Include="IDillyDallyApplication.cs" />
     <Compile Include="Presentation\ContentNavigation\NavigateToTargetCommand.cs" />
     <Compile Include="Core\Mediation\Navigation\NavigationRequest.cs" />
@@ -166,6 +167,8 @@
       <DependentUpon>AccountsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Presentation\ContentNavigation\SearchContentNavigationTarget.cs" />
+    <Compile Include="Presentation\Tasks\AddTaskCommand.cs" />
+    <Compile Include="Presentation\Tasks\CreateNewTaskRequest.cs" />
     <Compile Include="Presentation\Tasks\OpenTasksListControllerRequest.cs" />
     <Compile Include="Presentation\Tasks\TasksOverviewController.cs" />
     <Compile Include="Presentation\Tasks\TasksOverviewNavigationTarget.cs" />
@@ -254,6 +257,10 @@
     <ProjectReference Include="..\GF.DillyDally.Data\GF.DillyDally.Data.csproj">
       <Project>{fdc6883a-7d43-4a81-a274-67e082185293}</Project>
       <Name>GF.DillyDally.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GF.DillyDally.Domain\GF.DillyDally.Domain.csproj">
+      <Project>{5e931f79-1c48-474e-bdc3-f8b859a6a9c4}</Project>
+      <Name>GF.DillyDally.Domain</Name>
     </ProjectReference>
     <ProjectReference Include="..\GF.DillyDally.Local.Core\GF.DillyDally.Local.Core.csproj">
       <Project>{9c641922-049e-49bd-8fed-64385791c402}</Project>

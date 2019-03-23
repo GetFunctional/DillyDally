@@ -10,14 +10,8 @@ namespace GF.DillyDally.Wpf.Client.Handler
     internal sealed class
         OpenTasksListControllerHandler : IRequestHandler<OpenTasksListControllerRequest, TasksListController>
     {
-        #region Fields, Constants
-
         private readonly ControllerFactory<TasksListController> _tasksControllerFactory;
         private readonly ITasksRepository _tasksRepository;
-
-        #endregion
-
-        #region Constructors
 
         public OpenTasksListControllerHandler(ControllerFactory<TasksListController> tasksControllerFactory,
             ITasksRepository tasksRepository)
@@ -26,15 +20,13 @@ namespace GF.DillyDally.Wpf.Client.Handler
             this._tasksRepository = tasksRepository;
         }
 
-        #endregion
-
-        #region Interface Implementations
+        #region IRequestHandler<OpenTasksListControllerRequest,TasksListController> Members
 
         public async Task<TasksListController> Handle(OpenTasksListControllerRequest request,
             CancellationToken cancellationToken)
         {
             var controller = this._tasksControllerFactory.CreateController();
-            controller.DataSource = () => this._tasksRepository.GetOpenTasksAsync();
+            controller.ExternalDataSource = () => this._tasksRepository.GetOpenTasksAsync();
             await controller.LoadDataAsync();
             return controller;
         }

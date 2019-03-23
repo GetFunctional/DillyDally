@@ -5,15 +5,9 @@ namespace GF.DillyDally.Mvvmc
 {
     public abstract class InitializationBase
     {
-        #region - Methoden privat -
-
         protected virtual void OnInitialize()
         {
         }
-
-        #endregion
-
-        #region IController Members
 
         internal void Initialize()
         {
@@ -40,7 +34,5 @@ namespace GF.DillyDally.Mvvmc
         protected virtual void OnInitializeAsyncCompleted()
         {
         }
-
-        #endregion
     }
 }

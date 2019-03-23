@@ -5,15 +5,9 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
 {
     public sealed class SearchContentViewModel : ViewModelBase
     {
-        #region - Felder privat -
-
         private IList<NavigationTargetViewModel> _availableNavigationTargets;
-        private NavigationTargetViewModel _selectedTarget;
         private NavigateToTargetCommand _navigateToTargetCommand;
-
-        #endregion
-
-        #region - Konstruktoren -
+        private NavigationTargetViewModel _selectedTarget;
 
         public SearchContentViewModel() : this(new List<NavigationTargetViewModel>())
         {
@@ -23,10 +17,6 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
         {
             this._availableNavigationTargets = availableNavigationTargets;
         }
-
-        #endregion
-
-        #region - Properties oeffentlich -
 
         public IList<NavigationTargetViewModel> AvailableNavigationTargets
         {
@@ -50,7 +40,5 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
             get { return this._navigateToTargetCommand; }
             internal set { this.SetField(ref this._navigateToTargetCommand, value); }
         }
-
-        #endregion
     }
 }

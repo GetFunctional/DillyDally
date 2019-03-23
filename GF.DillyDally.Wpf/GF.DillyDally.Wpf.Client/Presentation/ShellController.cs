@@ -7,9 +7,8 @@ namespace GF.DillyDally.Wpf.Client.Presentation
 {
     internal sealed class ShellController : ControllerBase<ShellViewModel>
     {
-        #region Constructors
-
-        #region - Konstruktoren -
+        private readonly ControllerFactory<ContentBrowserController> _browserControllerFactory;
+        private ContentBrowserController _contentBrowserController;
 
         public ShellController(ShellViewModel viewModel,
             ControllerFactory<ContentBrowserController> browserControllerFactory) : base(
@@ -18,20 +17,10 @@ namespace GF.DillyDally.Wpf.Client.Presentation
             this._browserControllerFactory = browserControllerFactory;
         }
 
-        #endregion
-
-        #endregion
-
-        #region - Methoden oeffentlich -
-
         public bool NavigateInCurrentNavigatorTo(INavigationTarget navigationTarget)
         {
             return this._contentBrowserController.NavigateInCurrentNavigatorTo(navigationTarget);
         }
-
-        #endregion
-
-        #region - Methoden privat -
 
         protected override Task OnInitializeAsync()
         {
@@ -40,14 +29,5 @@ namespace GF.DillyDally.Wpf.Client.Presentation
 
             return base.OnInitializeAsync();
         }
-
-        #endregion
-
-        #region - Felder privat -
-
-        private readonly ControllerFactory<ContentBrowserController> _browserControllerFactory;
-        private ContentBrowserController _contentBrowserController;
-
-        #endregion
     }
 }

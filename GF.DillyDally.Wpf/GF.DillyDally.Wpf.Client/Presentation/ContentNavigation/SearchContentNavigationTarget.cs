@@ -5,10 +5,6 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
 {
     public sealed class SearchContentNavigationTarget : INavigationTarget
     {
-        #region Constructors
-
-        #region - Konstruktoren -
-
         public SearchContentNavigationTarget()
         {
             this.NavigationTargetId = Guid.Parse("{A333DEC8-9109-4518-807A-C0E8E3ACFAA6}");
@@ -16,20 +12,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
             this.NavigationTargetControllerType = typeof(SearchContentController);
         }
 
-        #endregion
-
-        #endregion
-
-        #region - Methoden privat -
-
-        private bool Equals(SearchContentNavigationTarget other)
-        {
-            return Equals(this.NavigationTargetId, other.NavigationTargetId);
-        }
-
-        #endregion
-
-        #region - Methoden oeffentlich -
+        #region INavigationTarget Members
 
         public bool Equals(INavigationTarget other)
         {
@@ -39,6 +22,17 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
             }
 
             return false;
+        }
+
+        public Guid NavigationTargetId { get; }
+        public string DisplayName { get; }
+        public Type NavigationTargetControllerType { get; }
+
+        #endregion
+
+        private bool Equals(SearchContentNavigationTarget other)
+        {
+            return Equals(this.NavigationTargetId, other.NavigationTargetId);
         }
 
         public override bool Equals(object obj)
@@ -60,15 +54,5 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
         {
             return this.NavigationTargetId.GetHashCode();
         }
-
-        #endregion
-
-        #region - Properties oeffentlich -
-
-        public Guid NavigationTargetId { get; }
-        public string DisplayName { get; }
-        public Type NavigationTargetControllerType { get; }
-
-        #endregion
     }
 }

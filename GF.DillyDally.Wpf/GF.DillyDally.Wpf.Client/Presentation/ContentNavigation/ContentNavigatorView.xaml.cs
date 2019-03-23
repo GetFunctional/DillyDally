@@ -7,30 +7,18 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
     /// </summary>
     public partial class ContentNavigatorView : IViewFor<ContentNavigatorViewModel>
     {
-        #region Constructors
-
-        #region - Konstruktoren -
-
         public ContentNavigatorView()
         {
             this.InitializeComponent();
         }
 
-        #endregion
-
-        #endregion
-
-        #region Properties, Indexers
-
-        #region - Properties oeffentlich -
+        #region IViewFor<ContentNavigatorViewModel> Members
 
         public ContentNavigatorViewModel ViewModel
         {
             get { return (ContentNavigatorViewModel) this.DataContext; }
             set { this.DataContext = value; }
         }
-
-        #endregion
 
         #endregion
     }

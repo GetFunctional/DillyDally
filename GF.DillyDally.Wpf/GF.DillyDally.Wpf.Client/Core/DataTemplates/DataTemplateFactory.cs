@@ -6,16 +6,10 @@ namespace GF.DillyDally.Wpf.Client.Core.DataTemplates
 {
     internal sealed class DataTemplateFactory
     {
-        #region Fields, Constants
-
         private const string DefaultDataTemplateSchema = @"<DataTemplate DataType=""{{x:Type vm:{0}}}"">
 <v:{1}>
 </v:{1}>
 </DataTemplate>";
-
-        #endregion
-
-        #region Constructors
 
         public DataTemplateFactory() : this(DefaultDataTemplateSchema)
         {
@@ -26,13 +20,7 @@ namespace GF.DillyDally.Wpf.Client.Core.DataTemplates
             this.DataTemplateSchema = dataTemplateSchema;
         }
 
-        #endregion
-
-        #region Properties, Indexers
-
         private string DataTemplateSchema { get; }
-
-        #endregion
 
         internal DataTemplate CreateViewModelDataTemplate(Type viewModelType, Type viewType)
         {

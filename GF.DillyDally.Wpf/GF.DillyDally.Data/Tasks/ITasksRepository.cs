@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using GF.DillyDally.Contracts.Keys;
 
 namespace GF.DillyDally.Data.Tasks
 {
@@ -10,5 +11,7 @@ namespace GF.DillyDally.Data.Tasks
         IList<Task> GetRecentlyCompletedTasks();
 
         Task<IList<Task>> GetOpenTasksAsync();
+        Task<Task> GetSpecificTask(TaskKey taskKey);
+        Task<IList<Task>> GetSpecificTasks(IList<TaskKey> taskKeys);
     }
 }

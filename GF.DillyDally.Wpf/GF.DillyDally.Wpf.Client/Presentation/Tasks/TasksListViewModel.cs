@@ -3,21 +3,10 @@ using GF.DillyDally.Mvvmc;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Tasks
 {
-    public class TasksListViewModel : ViewModelBase
+    public sealed class TasksListViewModel : ViewModelBase
     {
-        #region Fields, Constants
-
-        #region - Felder privat -
-
+        private AddTaskCommand _addTaskCommand;
         private ObservableCollection<TaskViewModel> _tasks;
-
-        #endregion
-
-        #endregion
-
-        #region Properties, Indexers
-
-        #region - Properties oeffentlich -
 
         public ObservableCollection<TaskViewModel> Tasks
         {
@@ -25,8 +14,10 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Tasks
             set { this.SetField(ref this._tasks, value); }
         }
 
-        #endregion
-
-        #endregion
+        public AddTaskCommand AddTaskCommand
+        {
+            get { return this._addTaskCommand; }
+            set { this.SetField(ref this._addTaskCommand, value); }
+        }
     }
 }

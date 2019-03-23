@@ -10,15 +10,10 @@ namespace GF.DillyDally.Wpf.Client.Core.DataTemplates
 {
     internal sealed class ViewDataTemplateAggregator
     {
-        #region - Felder privat -
-
-        private readonly DataTemplateFactory _dataTemplateFactory = new DataTemplateFactory();
         private static readonly Type ViewForTagType = typeof(IViewFor<>);
         private static readonly Type ViewModelConventionType = typeof(IViewModel);
 
-        #endregion
-
-        #region - Methoden privat -
+        private readonly DataTemplateFactory _dataTemplateFactory = new DataTemplateFactory();
 
         private object TryFindResource(Type associatedType, Application application)
         {
@@ -95,7 +90,5 @@ namespace GF.DillyDally.Wpf.Client.Core.DataTemplates
             var isNotInterface = !type.IsInterface;
             return isClass && isNotAbstract && isNotInterface && ViewModelConventionType.IsAssignableFrom(type);
         }
-
-        #endregion
     }
 }

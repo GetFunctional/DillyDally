@@ -2,10 +2,6 @@
 {
     public interface IController
     {
-        #region Properties, Indexers
-
         IViewModel ViewModel { get; }
-
-        #endregion
     }
 }

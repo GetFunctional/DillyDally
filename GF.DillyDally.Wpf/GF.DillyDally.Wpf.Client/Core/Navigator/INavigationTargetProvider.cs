@@ -5,8 +5,6 @@ namespace GF.DillyDally.Wpf.Client.Core.Navigator
 {
     public interface INavigationTargetProvider
     {
-        #region - Methoden oeffentlich -
-
         INavigationTarget FindNavigationTargetWithName(string navigationTargetName);
 
         INavigationTarget FindNavigationTargetWithKey(Guid navigationTargetId);
@@ -14,7 +12,5 @@ namespace GF.DillyDally.Wpf.Client.Core.Navigator
         void RegisterTarget(INavigationTarget target);
 
         IReadOnlyList<INavigationTarget> GetAllNavigationTargets();
-
-        #endregion
     }
 }

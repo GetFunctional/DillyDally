@@ -5,28 +5,6 @@ namespace GF.DillyDally.Wpf.Client.Core.Navigator
 {
     public interface IContentNavigator
     {
-        event EventHandler Navigated;
-
-        #region - Methoden oeffentlich -
-
-        /// <summary>
-        ///     Resolves the new Target and informs the involving instances of their change in the navigationprocess.
-        /// </summary>
-        /// <param name="target">Target to navigate to</param>
-        /// <returns></returns>
-        IController Navigate(INavigationTarget target);
-
-        /// <summary>
-        ///     Resolves the new Target and informs the involving instances of their change in the navigationprocess.
-        /// </summary>
-        /// <param name="navigationTargetId">Target to navigate to</param>
-        /// <returns></returns>
-        IController Navigate(Guid navigationTargetId);
-
-        #endregion
-
-        #region - Properties oeffentlich -
-
         /// <summary>
         ///     Gets the Current NavigationTarget.
         /// </summary>
@@ -43,6 +21,20 @@ namespace GF.DillyDally.Wpf.Client.Core.Navigator
         /// </summary>
         IController CurrentContentController { get; }
 
-        #endregion
+        event EventHandler Navigated;
+
+        /// <summary>
+        ///     Resolves the new Target and informs the involving instances of their change in the navigationprocess.
+        /// </summary>
+        /// <param name="target">Target to navigate to</param>
+        /// <returns></returns>
+        IController Navigate(INavigationTarget target);
+
+        /// <summary>
+        ///     Resolves the new Target and informs the involving instances of their change in the navigationprocess.
+        /// </summary>
+        /// <param name="navigationTargetId">Target to navigate to</param>
+        /// <returns></returns>
+        IController Navigate(Guid navigationTargetId);
     }
 }

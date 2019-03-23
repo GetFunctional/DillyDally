@@ -7,30 +7,12 @@ namespace GF.DillyDally.Mvvmc
 {
     public sealed class ControllerFactory
     {
-        #region Fields, Constants
-
-        #region - Felder privat -
-
         private readonly MvvmcServiceFactory _mvvmcServiceFactory;
-
-        #endregion
-
-        #endregion
-
-        #region Constructors
-
-        #region - Konstruktoren -
 
         public ControllerFactory(MvvmcServiceFactory mvvmcServiceFactory)
         {
             this._mvvmcServiceFactory = mvvmcServiceFactory;
         }
-
-        #endregion
-
-        #endregion
-
-        #region - Methoden oeffentlich -
 
         public IController CreateController(Type controllerType)
         {
@@ -48,7 +30,5 @@ namespace GF.DillyDally.Mvvmc
 
             return (IController) controller;
         }
-
-        #endregion
     }
 }

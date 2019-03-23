@@ -4,8 +4,6 @@ namespace GF.DillyDally.Contracts.RewardSystem.Models
 {
     public class Currency : IEquatable<Currency>
     {
-        #region Constructors
-
         public Currency(Guid currencyId, string name, string kuerzel)
         {
             this.CurrencyId = currencyId;
@@ -13,19 +11,13 @@ namespace GF.DillyDally.Contracts.RewardSystem.Models
             this.Kuerzel = kuerzel;
         }
 
-        #endregion
-
-        #region Properties, Indexers
-
         public Guid CurrencyId { get; }
 
         public string Name { get; }
 
         public string Kuerzel { get; }
 
-        #endregion
-
-        #region Interface Implementations
+        #region IEquatable<Currency> Members
 
         public bool Equals(Currency other)
         {

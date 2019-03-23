@@ -6,16 +6,10 @@ namespace GF.DillyDally.Mvvmc
 {
     internal static class ObservableObjectExtensions
     {
-        #region - Methoden oeffentlich -
-
         internal static string GetPropertyName<T>(Expression<Func<T>> expression)
         {
             return GetPropertyNameFast(expression);
         }
-
-        #endregion
-
-        #region - Methoden privat -
 
         private static string GetPropertyNameFast(LambdaExpression expression)
         {
@@ -37,7 +31,5 @@ namespace GF.DillyDally.Mvvmc
 
             return member.Name;
         }
-
-        #endregion
     }
 }

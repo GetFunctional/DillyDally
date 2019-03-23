@@ -4,13 +4,9 @@ namespace GF.DillyDally.Wpf.Client.Core.Mediation.Navigation
 {
     internal sealed class NavigationRequestFactory
     {
-        #region - Methoden privat -
-
         internal NavigationRequest WithTargetForCurrentNavigator(INavigationTarget navigationTarget)
         {
             return new NavigationRequest(navigationTarget);
         }
-
-        #endregion
     }
 }

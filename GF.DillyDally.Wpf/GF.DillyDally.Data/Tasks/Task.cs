@@ -7,8 +7,6 @@ namespace GF.DillyDally.Data.Tasks
 {
     public sealed class Task
     {
-        #region Properties, Indexers
-
         public TaskKey TaskKey { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
@@ -17,7 +15,5 @@ namespace GF.DillyDally.Data.Tasks
         public DateTime CreatedOn { get; set; }
         public IList<Tag> Tags { get; }
         public DateTime? CompletedOn { get; set; }
-
-        #endregion
     }
 }

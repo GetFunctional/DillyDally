@@ -6,14 +6,10 @@ namespace GF.DillyDally.Wpf.Client.Core.Navigator
 {
     public sealed class NavigationJournal : INavigationJournal
     {
-        #region Felder (privat)
-
         private readonly Stack<INavigationJournalEntry> _backStack = new Stack<INavigationJournalEntry>();
         private readonly Stack<INavigationJournalEntry> _forwardStack = new Stack<INavigationJournalEntry>();
 
-        #endregion
-
-        #region Properties (oeffentlich)
+        #region INavigationJournal Members
 
         public IReadOnlyCollection<INavigationJournalEntry> BackNavigationHistory
         {
@@ -45,10 +41,6 @@ namespace GF.DillyDally.Wpf.Client.Core.Navigator
         {
             get { return this._forwardStack.Count > 0; }
         }
-
-        #endregion
-
-        #region INavigationJournal Members
 
         public bool ContainsNavigationTarget(INavigationTarget navigationTarget)
         {

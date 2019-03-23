@@ -6,11 +6,7 @@ namespace GF.DillyDally.Contracts.RewardSystem
 {
     public sealed class RewardGenerator
     {
-        #region Fields, Constants
-
         private static readonly Random RewardAmountRandomizer = new Random(Guid.NewGuid().GetHashCode());
-
-        #endregion
 
         public Reward GenerateRewardFrom(RewardTemplate rewardTemplate)
         {

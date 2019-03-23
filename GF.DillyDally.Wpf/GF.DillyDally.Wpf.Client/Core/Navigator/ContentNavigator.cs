@@ -6,9 +6,9 @@ namespace GF.DillyDally.Wpf.Client.Core.Navigator
 {
     public sealed class ContentNavigator : IContentNavigator
     {
-        #region Constructors
+        private readonly ControllerFactory _controllerFactory;
 
-        #region - Konstruktoren -
+        private readonly INavigationTargetProvider _navigationTargetProvider;
 
         public ContentNavigator(INavigationTargetProvider navigationTargetProvider, ControllerFactory controllerFactory)
         {
@@ -17,18 +17,26 @@ namespace GF.DillyDally.Wpf.Client.Core.Navigator
             this.Journal = new NavigationJournal();
         }
 
-        #endregion
+        #region IContentNavigator Members
+
+        public INavigationTarget CurrentTarget { get; private set; }
+        public INavigationJournal Journal { get; }
+        public IController CurrentContentController { get; private set; }
+
+        public event EventHandler Navigated;
+
+        public IController Navigate(Guid navigationTargetId)
+        {
+            return this.InternalNavigate(this.CurrentContentController,
+                this._navigationTargetProvider.FindNavigationTargetWithKey(navigationTargetId));
+        }
+
+        public IController Navigate(INavigationTarget target)
+        {
+            return this.InternalNavigate(this.CurrentContentController, target);
+        }
 
         #endregion
-
-        #region - Felder privat -
-
-        private readonly INavigationTargetProvider _navigationTargetProvider;
-        private readonly ControllerFactory _controllerFactory;
-
-        #endregion
-
-        #region - Methoden privat -
 
         private IController InternalNavigate(IController currentRealTarget, INavigationTarget navigationTarget)
         {
@@ -66,34 +74,7 @@ namespace GF.DillyDally.Wpf.Client.Core.Navigator
 
         private void RaiseNavigated()
         {
-            this.Navigated?.Invoke(this, EventArgs.Empty);
+            Navigated?.Invoke(this, EventArgs.Empty);
         }
-
-        #endregion
-
-        #region - Properties oeffentlich -
-
-        public INavigationTarget CurrentTarget { get; private set; }
-        public INavigationJournal Journal { get; }
-        public IController CurrentContentController { get; private set; }
-
-        #endregion
-
-        #region IContentNavigator Members
-
-        public event EventHandler Navigated;
-
-        public IController Navigate(Guid navigationTargetId)
-        {
-            return this.InternalNavigate(this.CurrentContentController,
-                this._navigationTargetProvider.FindNavigationTargetWithKey(navigationTargetId));
-        }
-
-        public IController Navigate(INavigationTarget target)
-        {
-            return this.InternalNavigate(this.CurrentContentController, target);
-        }
-
-        #endregion
     }
 }

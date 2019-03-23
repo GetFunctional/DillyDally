@@ -6,31 +6,13 @@ namespace GF.DillyDally.Contracts.Keys
     [DataContract(Name = "TagKey")]
     public sealed class TagKey : IdentityKeyBase<TagKey>
     {
-        #region Constructors
-
-        #region - Konstruktoren -
-
         public TagKey(Guid taskTemplateId)
         {
             this.TagId = taskTemplateId;
         }
 
-        #endregion
-
-        #endregion
-
-        #region Properties, Indexers
-
-        #region - Properties oeffentlich -
-
         [DataMember(Name = "TagId")]
         public Guid TagId { get; }
-
-        #endregion
-
-        #endregion
-
-        #region - Methoden oeffentlich -
 
         public override bool Equals(TagKey other)
         {
@@ -71,7 +53,5 @@ namespace GF.DillyDally.Contracts.Keys
         {
             return this.TagId.GetHashCode();
         }
-
-        #endregion
     }
 }

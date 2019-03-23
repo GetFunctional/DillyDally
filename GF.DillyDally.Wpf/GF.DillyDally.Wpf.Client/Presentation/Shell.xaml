@@ -7,8 +7,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:presentation="clr-namespace:GF.DillyDally.Wpf.Client.Presentation"
     Title="Dilly Dally"
-    Width="800"
-    Height="450"
+    Width="1280"
+    Height="800"
     d:DataContext="{d:DesignInstance Type={x:Type presentation:ShellViewModel}}"
     mc:Ignorable="d">
 

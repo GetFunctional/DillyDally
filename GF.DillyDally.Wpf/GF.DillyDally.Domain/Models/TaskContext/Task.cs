@@ -7,8 +7,6 @@ namespace GF.DillyDally.Domain.Models.TaskContext
 {
     internal sealed class Task
     {
-        #region Properties, Indexers
-
         public TaskKey TaskKey { get; }
         public string Name { get; }
         public string Description { get; }
@@ -17,7 +15,5 @@ namespace GF.DillyDally.Domain.Models.TaskContext
         public DateTime CreatedOn { get; }
         public IList<Tag> Tags { get; }
         public DateTime? CompletedOn { get; }
-
-        #endregion
     }
 }

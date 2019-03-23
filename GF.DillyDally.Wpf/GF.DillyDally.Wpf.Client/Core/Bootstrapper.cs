@@ -2,6 +2,7 @@
 using System.Reflection;
 using System.Windows;
 using GF.DillyDally.Data;
+using GF.DillyDally.Domain;
 using GF.DillyDally.Mvvmc;
 using GF.DillyDally.Wpf.Client.Core.DataTemplates;
 using GF.DillyDally.Wpf.Client.Core.Navigator;
@@ -13,32 +14,12 @@ namespace GF.DillyDally.Wpf.Client.Core
 {
     internal sealed class Bootstrapper
     {
-        #region - Methoden oeffentlich -
-
-        public void Run()
-        {
-            var serviceContainer = this._serviceContainer;
-            this.RegisterMediatRFramework(serviceContainer);
-            this.RegisterMvvmcDependencies(serviceContainer);
-            this.RegisterControllersAndViewModels(serviceContainer);
-            this.RegisterDataRepositories(serviceContainer);
-            this._dataTemplateInitializer.RegisterDataTemplates(this._application);
-            this._navigationInitializer.InitializeNavigation(serviceContainer);
-        }
-
-        #endregion
-
-        #region - Felder privat -
-
-        private readonly DataTemplateInitializer _dataTemplateInitializer = new DataTemplateInitializer();
-        private readonly NavigationInitializer _navigationInitializer = new NavigationInitializer();
-
         private readonly Application _application;
+        private readonly DataInitializer _dataInitializer = new DataInitializer();
+        private readonly DataTemplateInitializer _dataTemplateInitializer = new DataTemplateInitializer();
+        private readonly DomainInitializer _domainInitializer = new DomainInitializer();
+        private readonly NavigationInitializer _navigationInitializer = new NavigationInitializer();
         private readonly IServiceContainer _serviceContainer;
-
-        #endregion
-
-        #region - Konstruktoren -
 
         public Bootstrapper(Application application) : this(application, new ServiceContainer(new ContainerOptions
             {EnablePropertyInjection = false, EnableVariance = false}))
@@ -51,17 +32,20 @@ namespace GF.DillyDally.Wpf.Client.Core
             this._serviceContainer = serviceContainer;
         }
 
-        #endregion
-
-        #region - Methoden privat -
-
-        private void RegisterDataRepositories(IServiceContainer serviceContainer)
+        public void Run()
         {
-            var dataInitializer = new DataInitializer();
-            dataInitializer.InitializeDataLayer((serviceType, implementation) =>
+            var serviceContainer = this._serviceContainer;
+            this.RegisterMediatRFramework(serviceContainer);
+            this.RegisterMvvmcDependencies(serviceContainer);
+            this.RegisterControllersAndViewModels(serviceContainer);
+            this._dataInitializer.InitializeDataLayer((serviceType, implementation) =>
                 serviceContainer.Register(serviceType, implementation));
+            this._domainInitializer.InitializeDomainLayer((serviceType, implementation) =>
+                serviceContainer.Register(serviceType, implementation));
+            this._dataTemplateInitializer.RegisterDataTemplates(this._application);
+            this._navigationInitializer.InitializeNavigation(serviceContainer);
         }
-
+        
         private void RegisterControllersAndViewModels(IServiceContainer serviceContainer)
         {
             serviceContainer.RegisterAssembly(typeof(Bootstrapper).GetTypeInfo().Assembly,
@@ -104,7 +88,5 @@ namespace GF.DillyDally.Wpf.Client.Core
             serviceContainer.Register<ControllerFactory>();
             serviceContainer.Register(typeof(ControllerFactory<>));
         }
-
-        #endregion
     }
 }
