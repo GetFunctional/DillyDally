@@ -42,7 +42,7 @@ namespace GF.DillyDally.Wpf.Client
         private DillyDallyApplication CreateDillyDallyApplication(ServiceContainer serviceContainer)
         {
             var shellController = this.CreateShellController(serviceContainer);
-            var shell = new Presentation.Shell(shellController.ViewModel);
+            var shell = new Shell(shellController.ViewModel);
             var dillyDallyApplication = new DillyDallyApplication(shellController, shell);
             serviceContainer.RegisterInstance<IDillyDallyApplication>(dillyDallyApplication);
             return dillyDallyApplication;
@@ -63,7 +63,7 @@ namespace GF.DillyDally.Wpf.Client
         private ServiceContainer CreateDependencyInjectionContainer()
         {
             return new ServiceContainer(new ContainerOptions
-                                        {EnablePropertyInjection = false, EnableVariance = false});
+                {EnablePropertyInjection = false, EnableVariance = false});
         }
 
         #endregion

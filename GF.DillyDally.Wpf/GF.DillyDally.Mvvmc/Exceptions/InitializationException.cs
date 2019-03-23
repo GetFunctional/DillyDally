@@ -4,6 +4,8 @@ namespace GF.DillyDally.Mvvmc.Exceptions
 {
     public sealed class InitializationException : Exception
     {
+        #region Constructors
+
         public InitializationException()
         {
         }
@@ -15,5 +17,7 @@ namespace GF.DillyDally.Mvvmc.Exceptions
         public InitializationException(string message, Exception innerException) : base(message, innerException)
         {
         }
+
+        #endregion
     }
 }

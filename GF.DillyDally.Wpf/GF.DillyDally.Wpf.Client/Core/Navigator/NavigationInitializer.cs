@@ -11,8 +11,9 @@ namespace GF.DillyDally.Wpf.Client.Core.Navigator
 
         internal void InitializeNavigation(IServiceContainer serviceContainer)
         {
-            serviceContainer.RegisterAssembly(typeof(NavigationInitializer).GetTypeInfo().Assembly, (serviceType, implementingType) =>
-                !implementingType.IsAbstract && typeof(INavigationTarget).IsAssignableFrom(implementingType));
+            serviceContainer.RegisterAssembly(typeof(NavigationInitializer).GetTypeInfo().Assembly,
+                (serviceType, implementingType) =>
+                    !implementingType.IsAbstract && typeof(INavigationTarget).IsAssignableFrom(implementingType));
 
             var availableNavigationTargets = this.GetNavigationTargets(serviceContainer);
             var navigationTargetProvider = CreateNavigationTargetMap(availableNavigationTargets);

@@ -13,31 +13,6 @@ namespace GF.DillyDally.Wpf.Client.Core
 {
     internal sealed class Bootstrapper
     {
-        #region - Felder privat -
-
-        private readonly DataTemplateInitializer _dataTemplateInitializer = new DataTemplateInitializer();
-        private readonly NavigationInitializer _navigationInitializer = new NavigationInitializer();
-
-        private readonly Application _application;
-        private readonly IServiceContainer _serviceContainer;
-
-        #endregion
-
-        #region - Konstruktoren -
-
-        public Bootstrapper(Application application) : this(application, new ServiceContainer(new ContainerOptions
-                                                                                              {EnablePropertyInjection = false, EnableVariance = false}))
-        {
-        }
-
-        public Bootstrapper(Application application, IServiceContainer serviceContainer)
-        {
-            this._application = application;
-            this._serviceContainer = serviceContainer;
-        }
-
-        #endregion
-
         #region - Methoden oeffentlich -
 
         public void Run()
@@ -53,12 +28,38 @@ namespace GF.DillyDally.Wpf.Client.Core
 
         #endregion
 
+        #region - Felder privat -
+
+        private readonly DataTemplateInitializer _dataTemplateInitializer = new DataTemplateInitializer();
+        private readonly NavigationInitializer _navigationInitializer = new NavigationInitializer();
+
+        private readonly Application _application;
+        private readonly IServiceContainer _serviceContainer;
+
+        #endregion
+
+        #region - Konstruktoren -
+
+        public Bootstrapper(Application application) : this(application, new ServiceContainer(new ContainerOptions
+            {EnablePropertyInjection = false, EnableVariance = false}))
+        {
+        }
+
+        public Bootstrapper(Application application, IServiceContainer serviceContainer)
+        {
+            this._application = application;
+            this._serviceContainer = serviceContainer;
+        }
+
+        #endregion
+
         #region - Methoden privat -
 
         private void RegisterDataRepositories(IServiceContainer serviceContainer)
         {
             var dataInitializer = new DataInitializer();
-            dataInitializer.InitializeDataLayer((serviceType, implementation) => serviceContainer.Register(serviceType, implementation));
+            dataInitializer.InitializeDataLayer((serviceType, implementation) =>
+                serviceContainer.Register(serviceType, implementation));
         }
 
         private void RegisterControllersAndViewModels(IServiceContainer serviceContainer)

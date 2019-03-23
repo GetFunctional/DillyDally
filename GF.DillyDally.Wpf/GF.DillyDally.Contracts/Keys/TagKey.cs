@@ -6,12 +6,27 @@ namespace GF.DillyDally.Contracts.Keys
     [DataContract(Name = "TagKey")]
     public sealed class TagKey : IdentityKeyBase<TagKey>
     {
+        #region Constructors
+
         #region - Konstruktoren -
 
         public TagKey(Guid taskTemplateId)
         {
             this.TagId = taskTemplateId;
         }
+
+        #endregion
+
+        #endregion
+
+        #region Properties, Indexers
+
+        #region - Properties oeffentlich -
+
+        [DataMember(Name = "TagId")]
+        public Guid TagId { get; }
+
+        #endregion
 
         #endregion
 
@@ -49,20 +64,13 @@ namespace GF.DillyDally.Contracts.Keys
                 return false;
             }
 
-            return this.Equals((TagKey)obj);
+            return this.Equals((TagKey) obj);
         }
 
         public override int GetHashCode()
         {
             return this.TagId.GetHashCode();
         }
-
-        #endregion
-
-        #region - Properties oeffentlich -
-
-        [DataMember(Name = "TagId")]
-        public Guid TagId { get; }
 
         #endregion
     }

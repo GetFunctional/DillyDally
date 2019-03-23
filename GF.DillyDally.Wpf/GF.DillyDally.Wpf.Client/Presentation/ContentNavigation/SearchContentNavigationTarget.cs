@@ -3,8 +3,10 @@ using GF.DillyDally.Wpf.Client.Core.Navigator;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
 {
-    public sealed class SearchContentNavigationTarget: INavigationTarget
+    public sealed class SearchContentNavigationTarget : INavigationTarget
     {
+        #region Constructors
+
         #region - Konstruktoren -
 
         public SearchContentNavigationTarget()
@@ -13,6 +15,8 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
             this.DisplayName = "Suchen";
             this.NavigationTargetControllerType = typeof(SearchContentController);
         }
+
+        #endregion
 
         #endregion
 

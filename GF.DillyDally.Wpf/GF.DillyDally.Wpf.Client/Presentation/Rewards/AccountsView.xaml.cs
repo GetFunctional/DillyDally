@@ -7,6 +7,8 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Rewards
     /// </summary>
     public partial class AccountsView : IViewFor<AccountsViewModel>
     {
+        #region Constructors
+
         #region - Konstruktoren -
 
         public AccountsView()
@@ -16,12 +18,18 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Rewards
 
         #endregion
 
+        #endregion
+
+        #region Properties, Indexers
+
         #region - Properties oeffentlich -
 
         public AccountsViewModel ViewModel
         {
             get { return (AccountsViewModel) this.DataContext; }
         }
+
+        #endregion
 
         #endregion
     }

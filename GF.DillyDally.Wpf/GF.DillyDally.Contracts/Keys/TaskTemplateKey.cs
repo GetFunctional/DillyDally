@@ -6,12 +6,27 @@ namespace GF.DillyDally.Contracts.Keys
     [DataContract(Name = "TaskTemplateKey")]
     public sealed class TaskTemplateKey : IdentityKeyBase<TaskTemplateKey>
     {
+        #region Constructors
+
         #region - Konstruktoren -
 
         public TaskTemplateKey(Guid taskTemplateId)
         {
             this.TaskTemplateId = taskTemplateId;
         }
+
+        #endregion
+
+        #endregion
+
+        #region Properties, Indexers
+
+        #region - Properties oeffentlich -
+
+        [DataMember(Name = "TaskTemplateId")]
+        public Guid TaskTemplateId { get; }
+
+        #endregion
 
         #endregion
 
@@ -49,20 +64,13 @@ namespace GF.DillyDally.Contracts.Keys
                 return false;
             }
 
-            return this.Equals((TaskTemplateKey)obj);
+            return this.Equals((TaskTemplateKey) obj);
         }
 
         public override int GetHashCode()
         {
             return this.TaskTemplateId.GetHashCode();
         }
-
-        #endregion
-
-        #region - Properties oeffentlich -
-
-        [DataMember(Name = "TaskTemplateId")]
-        public Guid TaskTemplateId { get; }
 
         #endregion
     }

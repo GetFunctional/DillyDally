@@ -5,6 +5,8 @@ namespace GF.DillyDally.Wpf.Client.Core.Navigator
 {
     public interface IContentNavigator
     {
+        event EventHandler Navigated;
+
         #region - Methoden oeffentlich -
 
         /// <summary>
@@ -37,12 +39,10 @@ namespace GF.DillyDally.Wpf.Client.Core.Navigator
         INavigationJournal Journal { get; }
 
         /// <summary>
-        /// Gets the Controller handling the current content.
+        ///     Gets the Controller handling the current content.
         /// </summary>
         IController CurrentContentController { get; }
 
         #endregion
-
-        event EventHandler Navigated;
     }
 }

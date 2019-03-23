@@ -4,6 +4,8 @@ namespace GF.DillyDally.Contracts.RewardSystem.Models
 {
     public sealed class RewardTemplate
     {
+        #region Constructors
+
         public RewardTemplate(Guid rewardTemplateId, RewardRarity rewardRarity, string name, decimal amountRangeBegin,
             decimal amountRangeEnd, Currency currency, int amountOfDecimalPlaces = 0)
         {
@@ -15,6 +17,10 @@ namespace GF.DillyDally.Contracts.RewardSystem.Models
             this.Currency = currency;
             this.AmountOfDecimalPlaces = amountOfDecimalPlaces;
         }
+
+        #endregion
+
+        #region Properties, Indexers
 
         public Guid RewardTemplateId { get; }
 
@@ -28,5 +34,7 @@ namespace GF.DillyDally.Contracts.RewardSystem.Models
 
         public Currency Currency { get; }
         public int AmountOfDecimalPlaces { get; }
+
+        #endregion
     }
 }

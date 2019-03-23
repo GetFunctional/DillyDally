@@ -5,6 +5,8 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
 {
     public sealed class NavigationTargetViewModel : ViewModelBase
     {
+        #region Constructors
+
         #region - Konstruktoren -
 
         public NavigationTargetViewModel(string displayName, Guid navigationTargetId)
@@ -12,6 +14,8 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
             this.DisplayName = displayName;
             this.NavigationTargetId = navigationTargetId;
         }
+
+        #endregion
 
         #endregion
 

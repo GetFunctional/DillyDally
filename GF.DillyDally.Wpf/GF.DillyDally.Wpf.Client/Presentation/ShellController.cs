@@ -7,12 +7,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation
 {
     internal sealed class ShellController : ControllerBase<ShellViewModel>
     {
-        #region - Felder privat -
-
-        private readonly ControllerFactory<ContentBrowserController> _browserControllerFactory;
-        private ContentBrowserController _contentBrowserController;
-
-        #endregion
+        #region Constructors
 
         #region - Konstruktoren -
 
@@ -22,6 +17,8 @@ namespace GF.DillyDally.Wpf.Client.Presentation
         {
             this._browserControllerFactory = browserControllerFactory;
         }
+
+        #endregion
 
         #endregion
 
@@ -43,6 +40,13 @@ namespace GF.DillyDally.Wpf.Client.Presentation
 
             return base.OnInitializeAsync();
         }
+
+        #endregion
+
+        #region - Felder privat -
+
+        private readonly ControllerFactory<ContentBrowserController> _browserControllerFactory;
+        private ContentBrowserController _contentBrowserController;
 
         #endregion
     }

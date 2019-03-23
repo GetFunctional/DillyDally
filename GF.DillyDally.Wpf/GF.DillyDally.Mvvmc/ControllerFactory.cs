@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using GF.DillyDally.Mvvmc.Exceptions;
@@ -8,11 +7,17 @@ namespace GF.DillyDally.Mvvmc
 {
     public sealed class ControllerFactory
     {
+        #region Fields, Constants
+
         #region - Felder privat -
 
         private readonly MvvmcServiceFactory _mvvmcServiceFactory;
 
         #endregion
+
+        #endregion
+
+        #region Constructors
 
         #region - Konstruktoren -
 
@@ -20,6 +25,8 @@ namespace GF.DillyDally.Mvvmc
         {
             this._mvvmcServiceFactory = mvvmcServiceFactory;
         }
+
+        #endregion
 
         #endregion
 
@@ -32,12 +39,12 @@ namespace GF.DillyDally.Mvvmc
             var cancellationToken = new CancellationTokenSource();
 
             var currentSynchronizationContext = SynchronizationContext.Current;
-            Task.Run(() => ((InitializationBase)controller).InitializeAsync(cancellationToken.Token),
+            Task.Run(() => ((InitializationBase) controller).InitializeAsync(cancellationToken.Token),
                 cancellationToken.Token).ContinueWith(t =>
-                {
-                    currentSynchronizationContext.Send(state =>
-                        throw new InitializationException("Exception was raised during initialization", t.Exception), null);
-                }, TaskContinuationOptions.OnlyOnFaulted).ConfigureAwait(false);
+            {
+                currentSynchronizationContext.Send(state =>
+                    throw new InitializationException("Exception was raised during initialization", t.Exception), null);
+            }, TaskContinuationOptions.OnlyOnFaulted).ConfigureAwait(false);
 
             return (IController) controller;
         }

@@ -4,8 +4,10 @@ using GF.DillyDally.Wpf.Client.Presentation.Tasks;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
 {
-    public sealed class TasksOverviewNavigationTarget: INavigationTarget
+    public sealed class TasksOverviewNavigationTarget : INavigationTarget
     {
+        #region Constructors
+
         #region - Konstruktoren -
 
         public TasksOverviewNavigationTarget()
@@ -14,6 +16,8 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
             this.DisplayName = "Tasks overview";
             this.NavigationTargetControllerType = typeof(TasksOverviewController);
         }
+
+        #endregion
 
         #endregion
 

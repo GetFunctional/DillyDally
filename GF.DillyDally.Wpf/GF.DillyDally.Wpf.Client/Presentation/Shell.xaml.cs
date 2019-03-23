@@ -7,6 +7,8 @@ namespace GF.DillyDally.Wpf.Client.Presentation
     /// </summary>
     public partial class Shell : IViewFor<ShellViewModel>
     {
+        #region Constructors
+
         #region - Konstruktoren -
 
         public Shell(ShellViewModel shellViewModel)
@@ -17,6 +19,10 @@ namespace GF.DillyDally.Wpf.Client.Presentation
 
         #endregion
 
+        #endregion
+
+        #region Properties, Indexers
+
         #region - Properties oeffentlich -
 
         public ShellViewModel ViewModel
@@ -24,6 +30,8 @@ namespace GF.DillyDally.Wpf.Client.Presentation
             get { return (ShellViewModel) this.DataContext; }
             set { this.DataContext = value; }
         }
+
+        #endregion
 
         #endregion
     }

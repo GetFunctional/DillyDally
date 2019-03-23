@@ -5,6 +5,8 @@ namespace GF.DillyDally.Wpf.Client.Core.Exceptions
 {
     internal sealed class NavigationTargetNotFoundException : Exception
     {
+        #region Constructors
+
         public NavigationTargetNotFoundException()
         {
         }
@@ -21,5 +23,7 @@ namespace GF.DillyDally.Wpf.Client.Core.Exceptions
         public NavigationTargetNotFoundException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
         }
+
+        #endregion
     }
 }

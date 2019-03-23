@@ -11,26 +11,6 @@ namespace GF.DillyDally.Wpf.Client.Wpf
     /// </summary>
     public sealed class SharedResourceDictionary : ResourceDictionary
     {
-        #region - Felder privat -
-
-        private static readonly Dictionary<Uri, WeakReference> InternalSharedCache = new Dictionary<Uri, WeakReference>();
-        private Uri _sourceCore;
-
-        #endregion
-
-        #region - Konstruktoren -
-
-        public SharedResourceDictionary()
-        {
-        }
-
-        public SharedResourceDictionary(Uri source)
-        {
-            this.Source = source;
-        }
-
-        #endregion
-
         #region - Methoden oeffentlich -
 
         public static void ClearCache()
@@ -54,28 +34,44 @@ namespace GF.DillyDally.Wpf.Client.Wpf
 
         #endregion
 
+        #region - Felder privat -
+
+        private static readonly Dictionary<Uri, WeakReference> InternalSharedCache =
+            new Dictionary<Uri, WeakReference>();
+
+        private Uri _sourceCore;
+
+        #endregion
+
+        #region - Konstruktoren -
+
+        public SharedResourceDictionary()
+        {
+        }
+
+        public SharedResourceDictionary(Uri source)
+        {
+            this.Source = source;
+        }
+
+        #endregion
+
         #region - Properties oeffentlich -
 
         /// <summary>
-        /// Internal cache of loaded dictionaries 
+        ///     Internal cache of loaded dictionaries
         /// </summary>
         public static IReadOnlyDictionary<Uri, WeakReference> SharedCache
         {
-            get
-            {
-                return InternalSharedCache;
-            }
+            get { return InternalSharedCache; }
         }
 
         /// <summary>
-        /// Gets or sets the uniform resource identifier (URI) to load resources from.
+        ///     Gets or sets the uniform resource identifier (URI) to load resources from.
         /// </summary>
         public new Uri Source
         {
-            get
-            {
-                return this._sourceCore;
-            }
+            get { return this._sourceCore; }
             set
             {
                 this._sourceCore = value;
@@ -95,7 +91,7 @@ namespace GF.DillyDally.Wpf.Client.Wpf
                 }
                 else
                 {
-                    var resourceDictionary = (ResourceDictionary)SharedCache[this._sourceCore].Target;
+                    var resourceDictionary = (ResourceDictionary) SharedCache[this._sourceCore].Target;
                     if (resourceDictionary != null)
                     {
                         this.MergedDictionaries.Add(resourceDictionary);

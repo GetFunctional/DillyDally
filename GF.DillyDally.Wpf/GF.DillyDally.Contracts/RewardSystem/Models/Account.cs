@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace GF.DillyDally.Contracts.RewardSystem.Models
+﻿namespace GF.DillyDally.Contracts.RewardSystem.Models
 {
     public sealed class Account
     {

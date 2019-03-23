@@ -8,8 +8,12 @@ namespace GF.DillyDally.Contracts.RewardSystem
 {
     public class LootBoxContentGenerator
     {
+        #region Fields, Constants
+
         private static readonly Random RewardPickerRandomizer = new Random(Guid.NewGuid().GetHashCode());
         private readonly RewardGenerator _rewardGenerator = new RewardGenerator();
+
+        #endregion
 
         public IReadOnlyList<Reward> GenerateLootBoxRewards(RewardGeneratorSettings settings)
         {

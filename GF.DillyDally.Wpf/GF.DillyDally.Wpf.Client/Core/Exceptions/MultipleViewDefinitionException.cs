@@ -5,6 +5,8 @@ namespace GF.DillyDally.Wpf.Client.Core.Exceptions
 {
     internal sealed class MultipleViewDefinitionException : Exception
     {
+        #region Constructors
+
         public MultipleViewDefinitionException()
         {
         }
@@ -20,5 +22,7 @@ namespace GF.DillyDally.Wpf.Client.Core.Exceptions
         public MultipleViewDefinitionException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
         }
+
+        #endregion
     }
 }

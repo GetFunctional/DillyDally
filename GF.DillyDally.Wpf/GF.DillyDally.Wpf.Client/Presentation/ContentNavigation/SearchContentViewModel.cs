@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using ViewModelBase = GF.DillyDally.Mvvmc.ViewModelBase;
+using GF.DillyDally.Mvvmc;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
 {
@@ -30,46 +30,25 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
 
         public IList<NavigationTargetViewModel> AvailableNavigationTargets
         {
-            get
-            {
-                return this._availableNavigationTargets;
-            }
-            set
-            {
-                this.SetField(ref this._availableNavigationTargets, value);
-            }
+            get { return this._availableNavigationTargets; }
+            set { this.SetField(ref this._availableNavigationTargets, value); }
         }
 
         public NavigationTargetViewModel SelectedTarget
         {
-            get
-            {
-                return this._selectedTarget;
-            }
-            set
-            {
-                this.SetField(ref this._selectedTarget, value);
-            }
+            get { return this._selectedTarget; }
+            set { this.SetField(ref this._selectedTarget, value); }
         }
 
         public string NavigationTargetDisplayMember
         {
-            get
-            {
-                return nameof(NavigationTargetViewModel.DisplayName);
-            }
+            get { return nameof(NavigationTargetViewModel.DisplayName); }
         }
 
         public NavigateToTargetCommand NavigateToTargetCommand
         {
-            get
-            {
-                return this._navigateToTargetCommand;
-            }
-            internal set
-            {
-                this.SetField(ref this._navigateToTargetCommand, value);
-            }
+            get { return this._navigateToTargetCommand; }
+            internal set { this.SetField(ref this._navigateToTargetCommand, value); }
         }
 
         #endregion

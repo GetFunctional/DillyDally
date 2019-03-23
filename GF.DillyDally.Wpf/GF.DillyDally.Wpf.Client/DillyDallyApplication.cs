@@ -5,20 +5,30 @@ namespace GF.DillyDally.Wpf.Client
 {
     internal sealed class DillyDallyApplication : IDillyDallyApplication
     {
-        #region - Felder privat -
-
-        private readonly ShellController _shellController;
-        private readonly Presentation.Shell _shell;
-
-        #endregion
+        #region Constructors
 
         #region - Konstruktoren -
 
-        internal DillyDallyApplication(ShellController shellController, Presentation.Shell shell)
+        internal DillyDallyApplication(ShellController shellController, Shell shell)
         {
             this._shellController = shellController;
             this._shell = shell;
         }
+
+        #endregion
+
+        #endregion
+
+        #region Interface Implementations
+
+        #region IDillyDallyApplication Members
+
+        public bool NavigateInCurrentNavigatorTo(INavigationTarget navigationTarget)
+        {
+            return this._shellController.NavigateInCurrentNavigatorTo(navigationTarget);
+        }
+
+        #endregion
 
         #endregion
 
@@ -31,12 +41,10 @@ namespace GF.DillyDally.Wpf.Client
 
         #endregion
 
-        #region IDillyDallyApplication Members
+        #region - Felder privat -
 
-        public bool NavigateInCurrentNavigatorTo(INavigationTarget navigationTarget)
-        {
-            return this._shellController.NavigateInCurrentNavigatorTo(navigationTarget);
-        }
+        private readonly ShellController _shellController;
+        private readonly Shell _shell;
 
         #endregion
     }

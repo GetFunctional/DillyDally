@@ -10,11 +10,17 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Tasks
 {
     public class TasksListController : ControllerBase<TasksListViewModel>
     {
+        #region Fields, Constants
+
         #region - Felder privat -
 
         private readonly TaskViewModelFactory _taskViewModelFactory = new TaskViewModelFactory();
 
         #endregion
+
+        #endregion
+
+        #region Constructors
 
         #region - Konstruktoren -
 
@@ -24,20 +30,27 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Tasks
 
         #endregion
 
+        #endregion
+
+        #region Properties, Indexers
+
+        #region - Properties oeffentlich -
+
+        public Func<System.Threading.Tasks.Task<IList<Task>>> DataSource { get; set; }
+
+        #endregion
+
+        #endregion
+
         #region - Methoden oeffentlich -
 
         public async Task<IList<TaskViewModel>> LoadDataAsync()
         {
             var data = await this.DataSource();
-            this.ViewModel.Tasks = new ObservableCollection<TaskViewModel>(data.Select(t => this._taskViewModelFactory.CreateFromTask(t)));
+            this.ViewModel.Tasks =
+                new ObservableCollection<TaskViewModel>(data.Select(t => this._taskViewModelFactory.CreateFromTask(t)));
             return this.ViewModel.Tasks;
         }
-
-        #endregion
-
-        #region - Properties oeffentlich -
-
-        public Func<Task<IList<Task>>> DataSource { get; set; }
 
         #endregion
     }

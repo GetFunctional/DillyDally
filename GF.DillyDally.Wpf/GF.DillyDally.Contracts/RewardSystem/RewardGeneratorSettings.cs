@@ -5,6 +5,8 @@ namespace GF.DillyDally.Contracts.RewardSystem
 {
     public class RewardGeneratorSettings
     {
+        #region Constructors
+
         public RewardGeneratorSettings(int amountOfRewards,
             IDictionary<RewardRarity, List<RewardTemplate>> rewardBuckets)
         {
@@ -12,7 +14,13 @@ namespace GF.DillyDally.Contracts.RewardSystem
             this.RewardBuckets = rewardBuckets;
         }
 
+        #endregion
+
+        #region Properties, Indexers
+
         public int AmountOfRewards { get; set; }
         public IDictionary<RewardRarity, List<RewardTemplate>> RewardBuckets { get; }
+
+        #endregion
     }
 }

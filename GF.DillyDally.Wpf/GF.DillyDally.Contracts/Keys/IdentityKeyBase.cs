@@ -2,14 +2,18 @@
 {
     public abstract class IdentityKeyBase<T> : IIdentityKey<T>
     {
+        #region Interface Implementations
+
         #region IIdentityKey<T> Members
 
         public abstract bool Equals(T other);
 
         #endregion
 
+        #endregion
+
         #region - Methoden oeffentlich -
-        
+
         public abstract override bool Equals(object obj);
 
         public abstract override int GetHashCode();

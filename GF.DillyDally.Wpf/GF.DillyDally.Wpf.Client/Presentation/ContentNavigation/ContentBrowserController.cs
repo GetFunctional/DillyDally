@@ -8,15 +8,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
 {
     public sealed class ContentBrowserController : ControllerBase<ContentBrowserViewModel>
     {
-        #region - Felder privat -
-
-        private readonly ControllerFactory<ContentNavigatorController>
-            _contentNavigatorControllerFactory;
-
-        private readonly IList<ContentNavigatorController> _navigatorControllers =
-            new List<ContentNavigatorController>();
-
-        #endregion
+        #region Constructors
 
         #region - Konstruktoren -
 
@@ -29,6 +21,8 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
 
         #endregion
 
+        #endregion
+
         #region - Methoden oeffentlich -
 
         public bool NavigateInCurrentNavigatorTo(INavigationTarget navigationTarget)
@@ -36,7 +30,8 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
             var currentActiveNavigator = this.ViewModel.CurrentActiveNavigator;
             if (currentActiveNavigator != null)
             {
-                var controllerForViewModel = this._navigatorControllers.Single(nc => nc.ViewModel == currentActiveNavigator);
+                var controllerForViewModel =
+                    this._navigatorControllers.Single(nc => nc.ViewModel == currentActiveNavigator);
                 return controllerForViewModel.NavigateToTarget(navigationTarget);
             }
 
@@ -55,6 +50,16 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
 
             await base.OnInitializeAsync();
         }
+
+        #endregion
+
+        #region - Felder privat -
+
+        private readonly ControllerFactory<ContentNavigatorController>
+            _contentNavigatorControllerFactory;
+
+        private readonly IList<ContentNavigatorController> _navigatorControllers =
+            new List<ContentNavigatorController>();
 
         #endregion
     }

@@ -1,0 +1,6 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/InjectedLayers/FileInjectedLayer/=4234737FAEF2D04BA15023BA41A137EF/AbsolutePath/@EntryValue">C:\Users\Micha\Documents\Repositories\DillyDally\GF.DillyDally.Wpf\DillyDally.DotSettings</s:String>
+	<s:String x:Key="/Default/Environment/InjectedLayers/FileInjectedLayer/=4234737FAEF2D04BA15023BA41A137EF/RelativePath/@EntryValue">..\DillyDally.DotSettings</s:String>
+	<s:Boolean x:Key="/Default/Environment/InjectedLayers/FileInjectedLayer/=4234737FAEF2D04BA15023BA41A137EF/@KeyIndexDefined">True</s:Boolean>
+	<s:Boolean x:Key="/Default/Environment/InjectedLayers/InjectedLayerCustomization/=File4234737FAEF2D04BA15023BA41A137EF/@KeyIndexDefined">True</s:Boolean>
+	<s:Double x:Key="/Default/Environment/InjectedLayers/InjectedLayerCustomization/=File4234737FAEF2D04BA15023BA41A137EF/RelativePriority/@EntryValue">1</s:Double></wpf:ResourceDictionary>

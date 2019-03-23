@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using GF.DillyDally.Mvvmc;
 using GF.DillyDally.Wpf.Client.Core.Exceptions;
 
@@ -7,12 +6,7 @@ namespace GF.DillyDally.Wpf.Client.Core.Navigator
 {
     public sealed class ContentNavigator : IContentNavigator
     {
-        #region - Felder privat -
-
-        private readonly INavigationTargetProvider _navigationTargetProvider;
-        private readonly ControllerFactory _controllerFactory;
-
-        #endregion
+        #region Constructors
 
         #region - Konstruktoren -
 
@@ -22,6 +16,15 @@ namespace GF.DillyDally.Wpf.Client.Core.Navigator
             this._controllerFactory = controllerFactory;
             this.Journal = new NavigationJournal();
         }
+
+        #endregion
+
+        #endregion
+
+        #region - Felder privat -
+
+        private readonly INavigationTargetProvider _navigationTargetProvider;
+        private readonly ControllerFactory _controllerFactory;
 
         #endregion
 
@@ -69,7 +72,7 @@ namespace GF.DillyDally.Wpf.Client.Core.Navigator
         #endregion
 
         #region - Properties oeffentlich -
-        
+
         public INavigationTarget CurrentTarget { get; private set; }
         public INavigationJournal Journal { get; }
         public IController CurrentContentController { get; private set; }

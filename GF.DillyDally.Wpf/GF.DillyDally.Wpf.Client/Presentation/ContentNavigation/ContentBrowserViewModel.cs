@@ -5,11 +5,17 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
 {
     public sealed class ContentBrowserViewModel : ViewModelBase
     {
+        #region Fields, Constants
+
         #region - Felder privat -
 
         private ContentNavigatorViewModel _currentActiveNavigator;
 
         #endregion
+
+        #endregion
+
+        #region Constructors
 
         #region - Konstruktoren -
 
@@ -17,6 +23,8 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
         {
             this.ActiveNavigators = new ObservableCollection<ContentNavigatorViewModel>();
         }
+
+        #endregion
 
         #endregion
 

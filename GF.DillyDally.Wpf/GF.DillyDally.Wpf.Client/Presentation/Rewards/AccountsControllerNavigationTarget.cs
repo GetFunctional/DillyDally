@@ -5,6 +5,8 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Rewards
 {
     public sealed class AccountsControllerNavigationTarget : INavigationTarget
     {
+        #region Constructors
+
         #region - Konstruktoren -
 
         public AccountsControllerNavigationTarget()
@@ -13,6 +15,8 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Rewards
             this.DisplayName = "Accounts";
             this.NavigationTargetControllerType = typeof(AccountsController);
         }
+
+        #endregion
 
         #endregion
 

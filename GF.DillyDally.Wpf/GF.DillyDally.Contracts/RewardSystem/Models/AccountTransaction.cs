@@ -1,5 +1,4 @@
-﻿
-namespace GF.DillyDally.Contracts.RewardSystem.Models
+﻿namespace GF.DillyDally.Contracts.RewardSystem.Models
 {
     public class AccountTransaction
     {

@@ -7,6 +7,8 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
     /// </summary>
     public partial class ContentBrowserView : IViewFor<ContentBrowserViewModel>
     {
+        #region Constructors
+
         #region - Konstruktoren -
 
         public ContentBrowserView()
@@ -16,6 +18,10 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
 
         #endregion
 
+        #endregion
+
+        #region Properties, Indexers
+
         #region - Properties oeffentlich -
 
         public ContentBrowserViewModel ViewModel
@@ -23,6 +29,8 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
             get { return (ContentBrowserViewModel) this.DataContext; }
             set { this.DataContext = value; }
         }
+
+        #endregion
 
         #endregion
     }

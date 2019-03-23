@@ -10,12 +10,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
 {
     public class SearchContentController : ControllerBase<SearchContentViewModel>
     {
-        #region - Felder privat -
-
-        private readonly INavigationTargetProvider _navigationTargetProvider;
-        private readonly IMediator _mediator;
-        private readonly NavigationRequestFactory _navigationRequestFactory = new NavigationRequestFactory();
-        #endregion
+        #region Constructors
 
         #region - Konstruktoren -
 
@@ -30,18 +25,31 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
 
         #endregion
 
+        #endregion
+
+        #region - Felder privat -
+
+        private readonly INavigationTargetProvider _navigationTargetProvider;
+        private readonly IMediator _mediator;
+        private readonly NavigationRequestFactory _navigationRequestFactory = new NavigationRequestFactory();
+
+        #endregion
+
         #region - Methoden privat -
 
         private void NavigateToTarget(Guid targetId)
         {
             var navigationRequest =
-                this._navigationRequestFactory.WithTargetForCurrentNavigator(this._navigationTargetProvider.FindNavigationTargetWithKey(targetId));
+                this._navigationRequestFactory.WithTargetForCurrentNavigator(
+                    this._navigationTargetProvider.FindNavigationTargetWithKey(targetId));
             this._mediator.Send(navigationRequest);
         }
 
-        private static IList<NavigationTargetViewModel> CreateNavigationTargetsFrom(INavigationTargetProvider navigationTargetProvider)
+        private static IList<NavigationTargetViewModel> CreateNavigationTargetsFrom(
+            INavigationTargetProvider navigationTargetProvider)
         {
-            return navigationTargetProvider.GetAllNavigationTargets().Select(nt => new NavigationTargetViewModel(nt.DisplayName, nt.NavigationTargetId))
+            return navigationTargetProvider.GetAllNavigationTargets().Select(nt =>
+                    new NavigationTargetViewModel(nt.DisplayName, nt.NavigationTargetId))
                 .ToList();
         }
 

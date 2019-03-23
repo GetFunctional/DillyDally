@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace GF.DillyDally.Data.Tasks
@@ -30,7 +29,7 @@ namespace GF.DillyDally.Data.Tasks
 
         private IList<Task> ContinuationAction(System.Threading.Tasks.Task obj)
         {
-            return new List<Task>() { new Task() { Name = "Wow"} };
+            return new List<Task> {new Task {Name = "Wow"}};
         }
 
         #endregion
