@@ -8,7 +8,7 @@ namespace GF.DillyDally.Data
 {
     public sealed class DataInitializer
     {
-        private const string DefaultDatabaseName = "Data.sqlite";
+        private const string DefaultDatabaseName = "Data.db";
 
         public void InitializeDataLayer(Action<Type, Type> serviceRegister)
         {
