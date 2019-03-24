@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GF.DillyDally.Domain", "GF.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GF.DillyDally.Data", "GF.DillyDally.Data\GF.DillyDally.Data.csproj", "{FDC6883A-7D43-4A81-A274-67E082185293}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GF.DillyDally.ExternalLibraries", "GF.DillyDally.ExternalLibraries\GF.DillyDally.ExternalLibraries.csproj", "{D5AB61AF-1E18-491F-8F08-31803FE6F146}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{FDC6883A-7D43-4A81-A274-67E082185293}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FDC6883A-7D43-4A81-A274-67E082185293}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FDC6883A-7D43-4A81-A274-67E082185293}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5AB61AF-1E18-491F-8F08-31803FE6F146}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5AB61AF-1E18-491F-8F08-31803FE6F146}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5AB61AF-1E18-491F-8F08-31803FE6F146}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5AB61AF-1E18-491F-8F08-31803FE6F146}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
