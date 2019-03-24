@@ -10,8 +10,6 @@ namespace GF.DillyDally.Data
 {
     public sealed class DataInitializer
     {
-        private const string DefaultDatabaseName = "Data.db";
-
         public void InitializeDataLayer(Action<Type, Type> serviceRegister)
         {
             RegisterTypes(serviceRegister);
@@ -29,7 +27,7 @@ namespace GF.DillyDally.Data
 
         private void CreateOrUpdateDatabase()
         {
-            var databaseFile = Path.Combine(Directories.GetUserApplicationDatabasesDirectory(), DefaultDatabaseName);
+            var databaseFile = DatabaseFile.GetDefault();
             if (!File.Exists(databaseFile))
             {
                 if (!Directory.Exists(Directories.GetUserApplicationDatabasesDirectory()))
@@ -47,7 +45,7 @@ namespace GF.DillyDally.Data
             SQLiteConnection.CreateFile(databaseFile);
 
             using (var connection =
-                new SQLiteConnection($"Data Source={DefaultDatabaseName};Version=3;"))
+                new SQLiteConnection($"Data Source={databaseFile};Version=3;"))
             {
                 connection.Open();
 

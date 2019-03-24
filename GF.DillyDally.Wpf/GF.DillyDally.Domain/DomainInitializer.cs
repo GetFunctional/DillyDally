@@ -8,6 +8,11 @@ namespace GF.DillyDally.Domain
     {
         public void InitializeDomainLayer(Action<Type, Type> serviceRegister)
         {
+            this.RegisterServices(serviceRegister);
+        }
+
+        private void RegisterServices(Action<Type, Type> serviceRegister)
+        {
             serviceRegister(typeof(ITaskService), typeof(TaskService));
         }
     }

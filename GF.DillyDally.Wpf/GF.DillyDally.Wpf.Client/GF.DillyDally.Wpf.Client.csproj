@@ -90,9 +90,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\DevExpress.Xpf.Themes.VS2017Light.v18.2.dll</HintPath>
     </Reference>
-    <Reference Include="EventFlow">
-      <HintPath>..\Libs\EventFlow.dll</HintPath>
-    </Reference>
     <Reference Include="LightInject, Version=5.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\LightInject.dll</HintPath>
@@ -307,15 +304,10 @@
       <Project>{5e931f79-1c48-474e-bdc3-f8b859a6a9c4}</Project>
       <Name>GF.DillyDally.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\GF.DillyDally.Local.Core\GF.DillyDally.Local.Core.csproj">
-      <Project>{9c641922-049e-49bd-8fed-64385791c402}</Project>
-      <Name>GF.DillyDally.Local.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\GF.DillyDally.Mvvmc\GF.DillyDally.Mvvmc.csproj">
       <Project>{2991a81d-e0e1-4143-ac99-395b5191adbd}</Project>
       <Name>GF.DillyDally.Mvvmc</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
