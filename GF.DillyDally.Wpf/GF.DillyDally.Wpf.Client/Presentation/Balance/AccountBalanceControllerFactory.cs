@@ -13,7 +13,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Balance
         public AccountBalanceController CreateAccountBalanceController(AccountEntity accountEntity)
         {
             var currencyViewModel = this._commonDataViewModelFactory.CreateCurrentViewModelFrom(accountEntity.Currency);
-            var viewModel = new AccountBalanceViewModel(currencyViewModel, 0.0m);
+            var viewModel = new AccountBalanceViewModel(currencyViewModel, accountEntity.Balance);
             var controller = new AccountBalanceController(viewModel);
             this._controllerInitializer.InitializeController(controller);
             return controller;

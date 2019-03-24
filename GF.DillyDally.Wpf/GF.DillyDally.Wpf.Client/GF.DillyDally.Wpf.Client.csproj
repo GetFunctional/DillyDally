@@ -125,6 +125,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Core\DataTemplates\DataTemplateInitializer.cs" />
+    <Compile Include="Handler\GetAllAccountsHandler.cs" />
     <Compile Include="Handler\GetAllCurrenciesHandler.cs" />
     <Compile Include="Handler\NavigationHandler.cs" />
     <Compile Include="Core\Mediation\Navigation\NavigationResponse.cs" />
@@ -153,6 +154,7 @@
       <DependentUpon>BalanceOverviewView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Presentation\Balance\BalanceOverviewViewModel.cs" />
+    <Compile Include="Presentation\Balance\GetAllAccountsRequest.cs" />
     <Compile Include="Presentation\Common\GetAllCurrenciesRequest.cs" />
     <Compile Include="Presentation\Common\CommonDataViewModelFactory.cs" />
     <Compile Include="Presentation\Common\CurrencyViewModel.cs" />

@@ -16,7 +16,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Balance
     {
         private readonly IMediator _mediator;
         private readonly AccountBalanceControllerFactory _accountBalanceControllerFactory = new AccountBalanceControllerFactory();
-        private List<AccountBalanceController> _currencyControllers;
+        private List<AccountBalanceController> _accountControllers;
 
         public BalanceOverviewController(BalanceOverviewViewModel viewModel, IMediator mediator) : base(viewModel)
         {
@@ -25,18 +25,13 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Balance
 
         protected override async Task OnInitializeAsync()
         {
-            var currencies = await this._mediator.Send(new GetAllCurrenciesRequest());
+            var accounts = await this._mediator.Send(new GetAllAccountsRequest());
 
-            this._currencyControllers = currencies.Select(currency =>
-                this._accountBalanceControllerFactory.CreateAccountBalanceController(new AccountEntity()
-                {
-                    Currency = currency,
-                    Balance = 0.0m,
-                    AccountKey = new AccountKey(Guid.NewGuid())
-                })).ToList();
+            this._accountControllers = accounts.Select(account =>
+                this._accountBalanceControllerFactory.CreateAccountBalanceController(account)).ToList();
 
             this.ViewModel.AccountBalances =
-                new ObservableCollection<AccountBalanceViewModel>(this._currencyControllers
+                new ObservableCollection<AccountBalanceViewModel>(this._accountControllers
                     .Select(ctrl => ctrl.ViewModel));
         }
     }
