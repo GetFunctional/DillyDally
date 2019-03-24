@@ -30,7 +30,7 @@ namespace GF.DillyDally.Data.Account
                         accounts.Add(new AccountEntity
                         {
                             Currency = currencyEntity,
-                            Balance = 134.6m,
+                            Balance = 44.7m,
                             AccountKey = new AccountKey(Guid.NewGuid())
                         });
                         break;
@@ -38,7 +38,7 @@ namespace GF.DillyDally.Data.Account
                         accounts.Add(new AccountEntity
                         {
                             Currency = currencyEntity,
-                            Balance = 26.02m,
+                            Balance = 26.98m,
                             AccountKey = new AccountKey(Guid.NewGuid())
                         });
                         break;
@@ -46,7 +46,7 @@ namespace GF.DillyDally.Data.Account
                         accounts.Add(new AccountEntity
                         {
                             Currency = currencyEntity,
-                            Balance = 0.0m,
+                            Balance = 0.65m,
                             AccountKey = new AccountKey(Guid.NewGuid())
                         });
                         break;
@@ -54,7 +54,7 @@ namespace GF.DillyDally.Data.Account
                         accounts.Add(new AccountEntity
                         {
                             Currency = currencyEntity,
-                            Balance = 3.85m,
+                            Balance = 4.51m,
                             AccountKey = new AccountKey(Guid.NewGuid())
                         });
                         break;
@@ -62,7 +62,7 @@ namespace GF.DillyDally.Data.Account
                         accounts.Add(new AccountEntity
                         {
                             Currency = currencyEntity,
-                            Balance = 102.0m,
+                            Balance = 136.0m,
                             AccountKey = new AccountKey(Guid.NewGuid())
                         });
                         break;
@@ -70,7 +70,7 @@ namespace GF.DillyDally.Data.Account
                         accounts.Add(new AccountEntity
                         {
                             Currency = currencyEntity,
-                            Balance = 31.0m,
+                            Balance = 96.0m,
                             AccountKey = new AccountKey(Guid.NewGuid())
                         });
                         break;
