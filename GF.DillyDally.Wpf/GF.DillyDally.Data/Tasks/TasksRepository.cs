@@ -8,41 +8,41 @@ namespace GF.DillyDally.Data.Tasks
     {
         #region ITasksRepository Members
 
-        public IList<Task> GetRepeatingTasks()
+        public IList<TaskEntity> GetRepeatingTasks()
         {
-            return new List<Task>();
+            return new List<TaskEntity>();
         }
 
-        public IList<Task> GetRecentlyCompletedTasks()
+        public IList<TaskEntity> GetRecentlyCompletedTasks()
         {
-            return new List<Task>();
+            return new List<TaskEntity>();
         }
 
-        public Task<IList<Task>> GetOpenTasksAsync()
+        public Task<IList<TaskEntity>> GetOpenTasksAsync()
         {
             return System.Threading.Tasks.Task.Delay(2000).ContinueWith(this.ContinuationAction);
         }
 
-        public Task<Task> GetSpecificTask(TaskKey taskKey)
+        public Task<TaskEntity> GetSpecificTask(TaskKey taskKey)
         {
-            return System.Threading.Tasks.Task.Run(() => new Task());
+            return System.Threading.Tasks.Task.Run(() => new TaskEntity());
         }
 
-        public Task<IList<Task>> GetSpecificTasks(IList<TaskKey> taskKeys)
+        public Task<IList<TaskEntity>> GetSpecificTasks(IList<TaskKey> taskKeys)
         {
-            return System.Threading.Tasks.Task.Run(() => (IList<Task>) new List<Task> {new Task()});
+            return System.Threading.Tasks.Task.Run(() => (IList<TaskEntity>) new List<TaskEntity> {new TaskEntity()});
         }
 
         #endregion
 
-        public IList<Task> GetOpenTasks()
+        public IList<TaskEntity> GetOpenTasks()
         {
-            return new List<Task>();
+            return new List<TaskEntity>();
         }
 
-        private IList<Task> ContinuationAction(System.Threading.Tasks.Task obj)
+        private IList<TaskEntity> ContinuationAction(System.Threading.Tasks.Task obj)
         {
-            return new List<Task> {new Task {Name = "Wow"}};
+            return new List<TaskEntity> {new TaskEntity {Name = "Wow"}};
         }
     }
 }

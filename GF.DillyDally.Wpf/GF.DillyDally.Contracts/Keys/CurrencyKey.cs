@@ -3,18 +3,18 @@ using System.Runtime.Serialization;
 
 namespace GF.DillyDally.Contracts.Keys
 {
-    [DataContract(Name = "TaskKey")]
-    public sealed class TaskKey : IdentityKeyBase<TaskKey>
+    [DataContract(Name = "CurrencyKey")]
+    public sealed class CurrencyKey : IdentityKeyBase<CurrencyKey>
     {
-        public TaskKey(Guid taskId)
+        public CurrencyKey(Guid currencyId)
         {
-            this.TaskId = taskId;
+            this.CurrencyId = currencyId;
         }
 
-        [DataMember(Name = "TaskId")]
-        public Guid TaskId { get; }
+        [DataMember(Name = "CurrencyId")]
+        public Guid CurrencyId { get; }
 
-        public override bool Equals(TaskKey other)
+        public override bool Equals(CurrencyKey other)
         {
             if (ReferenceEquals(null, other))
             {
@@ -26,7 +26,7 @@ namespace GF.DillyDally.Contracts.Keys
                 return true;
             }
 
-            return this.TaskId == other.TaskId;
+            return this.CurrencyId == other.CurrencyId;
         }
 
         public override bool Equals(object obj)
@@ -46,12 +46,12 @@ namespace GF.DillyDally.Contracts.Keys
                 return false;
             }
 
-            return this.Equals((TaskKey) obj);
+            return this.Equals((CurrencyKey) obj);
         }
 
         public override int GetHashCode()
         {
-            return this.TaskId.GetHashCode();
+            return this.CurrencyId.GetHashCode();
         }
     }
 }

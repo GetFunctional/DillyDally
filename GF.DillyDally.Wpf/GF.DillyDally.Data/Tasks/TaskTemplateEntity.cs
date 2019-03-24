@@ -3,7 +3,7 @@ using GF.DillyDally.Contracts.Keys;
 
 namespace GF.DillyDally.Data.Tasks
 {
-    public sealed class TaskTemplate
+    public sealed class TaskTemplateEntity
     {
         public TaskTemplateKey TaskTemplateKey { get; }
         public string Name { get; }

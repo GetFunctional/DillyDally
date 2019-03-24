@@ -3,7 +3,7 @@ using MediatR;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Tasks
 {
-    internal sealed class CreateNewTaskRequest : IRequest<Task>
+    internal sealed class CreateNewTaskRequest : IRequest<TaskEntity>
     {
         public CreateNewTaskRequest(string initialName)
         {

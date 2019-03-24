@@ -6,7 +6,7 @@ using MediatR;
 
 namespace GF.DillyDally.Wpf.Client.Handler.Tasks
 {
-    internal sealed class CreateNewTaskHandler : IRequestHandler<CreateNewTaskRequest, Task>
+    internal sealed class CreateNewTaskHandler : IRequestHandler<CreateNewTaskRequest, TaskEntity>
     {
         private readonly ITaskService _taskService;
         private readonly ITasksRepository _tasksRepository;
@@ -17,9 +17,9 @@ namespace GF.DillyDally.Wpf.Client.Handler.Tasks
             this._taskService = taskService;
         }
 
-        #region IRequestHandler<CreateNewTaskRequest,Task> Members
+        #region IRequestHandler<CreateNewTaskRequest,TaskEntity> Members
 
-        public async System.Threading.Tasks.Task<Task> Handle(CreateNewTaskRequest request,
+        public async System.Threading.Tasks.Task<TaskEntity> Handle(CreateNewTaskRequest request,
             CancellationToken cancellationToken)
         {
             var newTask = this._taskService.CreateNewTask(request.InitialName);

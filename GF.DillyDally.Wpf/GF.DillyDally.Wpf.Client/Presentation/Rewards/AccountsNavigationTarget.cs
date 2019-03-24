@@ -3,9 +3,9 @@ using GF.DillyDally.Wpf.Client.Core.Navigator;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Rewards
 {
-    public sealed class AccountsControllerNavigationTarget : INavigationTarget
+    public sealed class AccountsNavigationTarget : INavigationTarget
     {
-        public AccountsControllerNavigationTarget()
+        public AccountsNavigationTarget()
         {
             this.NavigationTargetId = Guid.Parse("{28F71947-B0D7-4C0C-866E-9E122C6E3285}");
             this.DisplayName = "Accounts";
@@ -16,7 +16,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Rewards
 
         public bool Equals(INavigationTarget other)
         {
-            if (other is AccountsControllerNavigationTarget otherTarget)
+            if (other is AccountsNavigationTarget otherTarget)
             {
                 return this.Equals(otherTarget);
             }
@@ -30,7 +30,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Rewards
 
         #endregion
 
-        private bool Equals(AccountsControllerNavigationTarget other)
+        private bool Equals(AccountsNavigationTarget other)
         {
             return Equals(this.NavigationTargetId, other.NavigationTargetId);
         }
@@ -47,7 +47,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Rewards
                 return true;
             }
 
-            return obj is AccountsControllerNavigationTarget other && this.Equals(other);
+            return obj is AccountsNavigationTarget other && this.Equals(other);
         }
 
         public override int GetHashCode()

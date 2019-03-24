@@ -4,16 +4,16 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Tasks
 {
     public class TaskViewModelFactory
     {
-        public TaskViewModel CreateFromTask(Task task)
+        public TaskViewModel CreateFromTask(TaskEntity taskEntity)
         {
             return new TaskViewModel
             {
-                CompletedOn = task.CompletedOn,
-                Name = task.Name,
-                Workload = task.Workload,
-                CreatedOn = task.CreatedOn,
-                Description = task.Description,
-                DueDate = task.DueDate
+                CompletedOn = taskEntity.CompletedOn,
+                Name = taskEntity.Name,
+                Workload = taskEntity.Workload,
+                CreatedOn = taskEntity.CreatedOn,
+                Description = taskEntity.Description,
+                DueDate = taskEntity.DueDate
             };
         }
     }

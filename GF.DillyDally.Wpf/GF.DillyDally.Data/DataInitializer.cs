@@ -2,6 +2,8 @@
 using System.Data.SQLite;
 using System.IO;
 using GF.DillyDally.Contracts;
+using GF.DillyDally.Data.Account;
+using GF.DillyDally.Data.Common;
 using GF.DillyDally.Data.Tasks;
 
 namespace GF.DillyDally.Data
@@ -11,6 +13,21 @@ namespace GF.DillyDally.Data
         private const string DefaultDatabaseName = "Data.db";
 
         public void InitializeDataLayer(Action<Type, Type> serviceRegister)
+        {
+            RegisterTypes(serviceRegister);
+
+            this.CreateOrUpdateDatabase();
+        }
+
+        private static void RegisterTypes(Action<Type, Type> serviceRegister)
+        {
+            serviceRegister(typeof(ITasksRepository), typeof(TasksRepository));
+            serviceRegister(typeof(ICommonDataRepository), typeof(CommonDataRepository));
+            serviceRegister(typeof(IAccountRepository), typeof(AccountRepository));
+
+        }
+
+        private void CreateOrUpdateDatabase()
         {
             var databaseFile = Path.Combine(Directories.GetUserApplicationDatabasesDirectory(), DefaultDatabaseName);
             if (!File.Exists(databaseFile))
@@ -22,9 +39,6 @@ namespace GF.DillyDally.Data
 
                 this.CreateDillyDallyDatabase(databaseFile);
             }
-
-
-            serviceRegister(typeof(ITasksRepository), typeof(TasksRepository));
         }
 
 

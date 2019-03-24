@@ -5,7 +5,7 @@ using GF.DillyDally.Contracts.Keys;
 
 namespace GF.DillyDally.Data.Tasks
 {
-    public sealed class Task
+    public sealed class TaskEntity
     {
         public TaskKey TaskKey { get; set; }
         public string Name { get; set; }
@@ -13,7 +13,7 @@ namespace GF.DillyDally.Data.Tasks
         public Workload Workload { get; set; }
         public DateTime? DueDate { get; set; }
         public DateTime CreatedOn { get; set; }
-        public IList<Tag> Tags { get; }
+        public IList<TagEntity> Tags { get; }
         public DateTime? CompletedOn { get; set; }
     }
 }

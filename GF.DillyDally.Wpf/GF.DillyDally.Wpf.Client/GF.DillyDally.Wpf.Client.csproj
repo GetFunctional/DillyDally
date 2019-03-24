@@ -125,6 +125,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Core\DataTemplates\DataTemplateInitializer.cs" />
+    <Compile Include="Handler\GetAllCurrenciesHandler.cs" />
     <Compile Include="Handler\NavigationHandler.cs" />
     <Compile Include="Core\Mediation\Navigation\NavigationResponse.cs" />
     <Compile Include="Core\Navigator\NavigationInitializer.cs" />
@@ -143,12 +144,24 @@
     <Compile Include="Handler\OpenTasksListControllerHandler.cs" />
     <Compile Include="Handler\Tasks\CreateNewTaskHandler.cs" />
     <Compile Include="IDillyDallyApplication.cs" />
+    <Compile Include="Presentation\Balance\AccountBalanceController.cs" />
+    <Compile Include="Presentation\Balance\AccountBalanceControllerFactory.cs" />
+    <Compile Include="Presentation\Balance\AccountBalanceViewModel.cs" />
+    <Compile Include="Presentation\Balance\BalanceOverviewController.cs" />
+    <Compile Include="Presentation\Balance\BalanceOverviewNavigationTarget.cs" />
+    <Compile Include="Presentation\Balance\BalanceOverviewView.xaml.cs">
+      <DependentUpon>BalanceOverviewView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Presentation\Balance\BalanceOverviewViewModel.cs" />
+    <Compile Include="Presentation\Common\GetAllCurrenciesRequest.cs" />
+    <Compile Include="Presentation\Common\CommonDataViewModelFactory.cs" />
+    <Compile Include="Presentation\Common\CurrencyViewModel.cs" />
     <Compile Include="Presentation\ContentNavigation\NavigateToTargetCommand.cs" />
     <Compile Include="Core\Mediation\Navigation\NavigationRequest.cs" />
     <Compile Include="Core\Mediation\Navigation\NavigationRequestFactory.cs" />
     <Compile Include="Presentation\ContentNavigation\NavigationTargetViewModel.cs" />
     <Compile Include="Presentation\Rewards\AccountsController.cs" />
-    <Compile Include="Presentation\Rewards\AccountsControllerNavigationTarget.cs" />
+    <Compile Include="Presentation\Rewards\AccountsNavigationTarget.cs" />
     <Compile Include="Presentation\Rewards\AccountsViewModel.cs" />
     <Compile Include="Presentation\ContentNavigation\AddNewNavigatorCommand.cs" />
     <Compile Include="Presentation\ContentNavigation\CloseNavigatorCommand.cs" />
@@ -188,6 +201,14 @@
     <Compile Include="Presentation\Tasks\TaskViewModelFactory.cs" />
     <Compile Include="Wpf\DesignTimeInvestigator.cs" />
     <Compile Include="Wpf\SharedResourceDictionary.cs" />
+    <Page Include="Presentation\Balance\BalanceOverviewView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Presentation\Balance\AccountBalanceTemplates.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Presentation\ContentNavigation\ContentBrowserView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -6,9 +6,9 @@ namespace GF.DillyDally.Contracts.Keys
     [DataContract(Name = "TagKey")]
     public sealed class TagKey : IdentityKeyBase<TagKey>
     {
-        public TagKey(Guid taskTemplateId)
+        public TagKey(Guid tagId)
         {
-            this.TagId = taskTemplateId;
+            this.TagId = tagId;
         }
 
         [DataMember(Name = "TagId")]

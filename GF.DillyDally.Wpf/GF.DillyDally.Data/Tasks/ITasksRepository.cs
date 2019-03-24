@@ -6,12 +6,12 @@ namespace GF.DillyDally.Data.Tasks
 {
     public interface ITasksRepository
     {
-        IList<Task> GetRepeatingTasks();
+        IList<TaskEntity> GetRepeatingTasks();
 
-        IList<Task> GetRecentlyCompletedTasks();
+        IList<TaskEntity> GetRecentlyCompletedTasks();
 
-        Task<IList<Task>> GetOpenTasksAsync();
-        Task<Task> GetSpecificTask(TaskKey taskKey);
-        Task<IList<Task>> GetSpecificTasks(IList<TaskKey> taskKeys);
+        Task<IList<TaskEntity>> GetOpenTasksAsync();
+        Task<TaskEntity> GetSpecificTask(TaskKey taskKey);
+        Task<IList<TaskEntity>> GetSpecificTasks(IList<TaskKey> taskKeys);
     }
 }

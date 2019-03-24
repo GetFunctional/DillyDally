@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using GF.DillyDally.Data.Tasks;
 using GF.DillyDally.Mvvmc;
 using MediatR;
-using Task = GF.DillyDally.Data.Tasks.Task;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Tasks
 {
@@ -20,7 +20,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Tasks
             this.ViewModel.AddTaskCommand = new AddTaskCommand(this.AddTask);
         }
 
-        public Func<System.Threading.Tasks.Task<IList<Task>>> ExternalDataSource { get; set; }
+        public Func<System.Threading.Tasks.Task<IList<TaskEntity>>> ExternalDataSource { get; set; }
 
         private async System.Threading.Tasks.Task AddTask(string initialName)
         {
