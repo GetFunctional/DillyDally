@@ -51,6 +51,7 @@
             VerticalAlignment="Top"
             NullText="Suchen..." />
 
-        <ItemsControl ItemTemplate="{StaticResource AccountBalanceTemplate}" ItemsSource="{Binding AccountBalances, Mode=OneWay}" />
+        <ItemsControl ItemTemplate="{StaticResource AccountBalanceTemplate}"
+                      ItemsSource="{Binding AccountBalances, Mode=OneWay}" />
     </dxlc:LayoutGroup>
 </UserControl>

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Reflection;
 using System.Windows;
-using GF.DillyDally.Data;
-using GF.DillyDally.Domain;
 using GF.DillyDally.Mvvmc;
+using GF.DillyDally.ReadModel;
 using GF.DillyDally.Wpf.Client.Core.DataTemplates;
 using GF.DillyDally.Wpf.Client.Core.Navigator;
+using GF.DillyDally.WriteModel;
 using LightInject;
 using MediatR;
 using MediatR.Pipeline;
@@ -15,9 +15,9 @@ namespace GF.DillyDally.Wpf.Client.Core
     internal sealed class Bootstrapper
     {
         private readonly Application _application;
-        private readonly DataInitializer _dataInitializer = new DataInitializer();
+        private readonly ReadModelInitializer _readModelInitializer = new ReadModelInitializer();
         private readonly DataTemplateInitializer _dataTemplateInitializer = new DataTemplateInitializer();
-        private readonly DomainInitializer _domainInitializer = new DomainInitializer();
+        private readonly WriteModelInitializer _writeModelInitializer = new WriteModelInitializer();
         private readonly NavigationInitializer _navigationInitializer = new NavigationInitializer();
         private readonly IServiceContainer _serviceContainer;
 
@@ -38,9 +38,9 @@ namespace GF.DillyDally.Wpf.Client.Core
             this.RegisterMediatRFramework(serviceContainer);
             this.RegisterMvvmcDependencies(serviceContainer);
             this.RegisterControllersAndViewModels(serviceContainer);
-            this._dataInitializer.InitializeDataLayer((serviceType, implementation) =>
+            this._readModelInitializer.Initialize((serviceType, implementation) =>
                 serviceContainer.Register(serviceType, implementation));
-            this._domainInitializer.InitializeDomainLayer((serviceType, implementation) =>
+            this._writeModelInitializer.Initialize((serviceType, implementation) =>
                 serviceContainer.Register(serviceType, implementation));
             this._dataTemplateInitializer.RegisterDataTemplates(this._application);
             this._navigationInitializer.InitializeNavigation(serviceContainer);

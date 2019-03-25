@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using GF.DillyDally.Data.Tasks;
 using GF.DillyDally.Mvvmc;
+using GF.DillyDally.ReadModel.Tasks;
 using MediatR;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Tasks
@@ -20,9 +20,9 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Tasks
             this.ViewModel.AddTaskCommand = new AddTaskCommand(this.AddTask);
         }
 
-        public Func<System.Threading.Tasks.Task<IList<TaskEntity>>> ExternalDataSource { get; set; }
+        public Func<Task<IList<TaskEntity>>> ExternalDataSource { get; set; }
 
-        private async System.Threading.Tasks.Task AddTask(string initialName)
+        private async Task AddTask(string initialName)
         {
             var newTask = await this._mediator.Send(new CreateNewTaskRequest(initialName));
             this.ViewModel.Tasks.Add(this._taskViewModelFactory.CreateFromTask(newTask));

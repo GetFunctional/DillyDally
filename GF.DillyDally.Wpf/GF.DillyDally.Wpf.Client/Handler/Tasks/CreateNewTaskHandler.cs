@@ -1,7 +1,8 @@
 ﻿using System.Threading;
-using GF.DillyDally.Contracts.Models.Tasks;
-using GF.DillyDally.Data.Tasks;
+using System.Threading.Tasks;
+using GF.DillyDally.ReadModel.Tasks;
 using GF.DillyDally.Wpf.Client.Presentation.Tasks;
+using GF.DillyDally.WriteModel;
 using MediatR;
 
 namespace GF.DillyDally.Wpf.Client.Handler.Tasks
@@ -19,7 +20,7 @@ namespace GF.DillyDally.Wpf.Client.Handler.Tasks
 
         #region IRequestHandler<CreateNewTaskRequest,TaskEntity> Members
 
-        public async System.Threading.Tasks.Task<TaskEntity> Handle(CreateNewTaskRequest request,
+        public async Task<TaskEntity> Handle(CreateNewTaskRequest request,
             CancellationToken cancellationToken)
         {
             var newTask = this._taskService.CreateNewTask(request.InitialName);

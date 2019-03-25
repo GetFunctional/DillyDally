@@ -1,7 +1,7 @@
 ﻿using System;
-using GF.DillyDally.Contracts;
 using GF.DillyDally.Contracts.Keys;
 using GF.DillyDally.Mvvmc;
+using GF.DillyDally.ReadModel;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Tasks
 {

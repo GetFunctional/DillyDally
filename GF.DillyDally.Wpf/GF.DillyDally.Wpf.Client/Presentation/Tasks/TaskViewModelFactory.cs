@@ -1,4 +1,4 @@
-﻿using GF.DillyDally.Data.Tasks;
+﻿using GF.DillyDally.ReadModel.Tasks;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Tasks
 {

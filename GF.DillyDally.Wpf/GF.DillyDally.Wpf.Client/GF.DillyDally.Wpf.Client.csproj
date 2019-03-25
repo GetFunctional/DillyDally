@@ -42,6 +42,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\Dapper.dll</HintPath>
     </Reference>
+    <Reference Include="Dapper.Contrib">
+      <HintPath>..\Libs\Dapper.Contrib.dll</HintPath>
+    </Reference>
     <Reference Include="DevExpress.Data.v18.2, Version=18.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\DevExpress.Data.v18.2.dll</HintPath>
@@ -129,6 +132,9 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="Z.Dapper.Plus">
+      <HintPath>..\Libs\Z.Dapper.Plus.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -299,17 +305,17 @@
       <Project>{68646e87-6271-4ae4-bd5f-10615209eb5b}</Project>
       <Name>GF.DillyDally.Contracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\GF.DillyDally.Data\GF.DillyDally.Data.csproj">
-      <Project>{fdc6883a-7d43-4a81-a274-67e082185293}</Project>
-      <Name>GF.DillyDally.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\GF.DillyDally.Domain\GF.DillyDally.Domain.csproj">
-      <Project>{5e931f79-1c48-474e-bdc3-f8b859a6a9c4}</Project>
-      <Name>GF.DillyDally.Domain</Name>
-    </ProjectReference>
     <ProjectReference Include="..\GF.DillyDally.Mvvmc\GF.DillyDally.Mvvmc.csproj">
       <Project>{2991a81d-e0e1-4143-ac99-395b5191adbd}</Project>
       <Name>GF.DillyDally.Mvvmc</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GF.DillyDally.ReadModel\GF.DillyDally.ReadModel.csproj">
+      <Project>{24f297fb-5d67-4d69-b8fa-b3b7c73675d0}</Project>
+      <Name>GF.DillyDally.ReadModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GF.DillyDally.WriteModel\GF.DillyDally.WriteModel.csproj">
+      <Project>{179ba6bf-8201-4a12-b1f4-4e9e54713e84}</Project>
+      <Name>GF.DillyDally.WriteModel</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

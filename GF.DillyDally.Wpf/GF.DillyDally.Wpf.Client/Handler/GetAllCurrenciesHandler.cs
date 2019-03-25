@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using GF.DillyDally.Data.Common;
+using GF.DillyDally.ReadModel.Common;
 using GF.DillyDally.Wpf.Client.Presentation.Common;
 using MediatR;
 
@@ -16,9 +16,13 @@ namespace GF.DillyDally.Wpf.Client.Handler
             this._commonDataRepository = commonDataRepository;
         }
 
+        #region IRequestHandler<GetAllCurrenciesRequest,IList<CurrencyEntity>> Members
+
         public Task<IList<CurrencyEntity>> Handle(GetAllCurrenciesRequest request, CancellationToken cancellationToken)
         {
             return this._commonDataRepository.GetAllCurrencies();
         }
+
+        #endregion
     }
 }

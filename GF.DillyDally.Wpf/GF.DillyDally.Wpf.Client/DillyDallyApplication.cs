@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Data;
 using System.Data.SQLite;
 using System.IO;
 using Dapper;
 using GF.DillyDally.Contracts;
-using GF.DillyDally.Data.Common;
+using GF.DillyDally.ReadModel.Common;
 using GF.DillyDally.Wpf.Client.Core.Navigator;
 using GF.DillyDally.Wpf.Client.Presentation;
 
@@ -40,6 +39,7 @@ namespace GF.DillyDally.Wpf.Client
                 {
                     Directory.CreateDirectory(Directories.GetUserApplicationDatabasesDirectory());
                 }
+
                 this.CreateDillyDallyDatabase(databaseFile);
             }
         }
@@ -50,11 +50,11 @@ namespace GF.DillyDally.Wpf.Client
             var dbTemplateFile = Path.Combine(Environment.CurrentDirectory, "Resources/DatabaseTemplate/DbSchema.db");
             File.Copy(dbTemplateFile, databaseFile, true);
 
-            SQLiteConnectionStringBuilder builder = new SQLiteConnectionStringBuilder()
+            var builder = new SQLiteConnectionStringBuilder
             {
                 DataSource = databaseFile,
                 Version = 3,
-                BinaryGUID = true,
+                BinaryGUID = true
             };
 
             using (var connection =
@@ -62,15 +62,17 @@ namespace GF.DillyDally.Wpf.Client
             {
                 connection.Open();
                 //connection.AddTypeMapping()
-                
+
                 //connection.
-                var sql = new SQLiteCommand(@"INSERT INTO Currency ( CurrencyId, Name, Code ) VALUES ( @currencyId, @name, @code);", connection);
+                var sql = new SQLiteCommand(
+                    @"INSERT INTO Currency ( CurrencyKey, Name, Code ) VALUES ( @currencyId, @name, @code);",
+                    connection);
                 sql.Parameters.AddWithValue("@currencyId", Guid.NewGuid());
                 sql.Parameters.AddWithValue("@name", "Test");
                 sql.Parameters.AddWithValue("@code", "CodeTest");
                 sql.ExecuteNonQuery();
 
-                var read = @"SELECT CurrencyId, Name, Code FROM Currency";
+                var read = @"SELECT CurrencyKey, Name, Code FROM Currency";
                 var data = connection.Query<CurrencyEntity>(read);
                 //string sql = "create table highscores (name varchar(20), score int)";
 

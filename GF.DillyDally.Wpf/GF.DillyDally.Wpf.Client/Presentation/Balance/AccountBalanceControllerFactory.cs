@@ -1,6 +1,5 @@
-﻿using GF.DillyDally.Data.Account;
-using GF.DillyDally.Data.Common;
-using GF.DillyDally.Mvvmc;
+﻿using GF.DillyDally.Mvvmc;
+using GF.DillyDally.ReadModel.Account;
 using GF.DillyDally.Wpf.Client.Presentation.Common;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Balance

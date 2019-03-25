@@ -1,4 +1,4 @@
-﻿using GF.DillyDally.Data.Common;
+﻿using GF.DillyDally.ReadModel.Common;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Common
 {
@@ -6,7 +6,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Common
     {
         internal CurrencyViewModel CreateCurrentViewModelFrom(CurrencyEntity currencyEntity)
         {
-            return new CurrencyViewModel(currencyEntity.CurrencyKey,currencyEntity.Name,currencyEntity.Code);
+            return new CurrencyViewModel(currencyEntity.CurrencyKey, currencyEntity.Name, currencyEntity.Code);
         }
     }
 }

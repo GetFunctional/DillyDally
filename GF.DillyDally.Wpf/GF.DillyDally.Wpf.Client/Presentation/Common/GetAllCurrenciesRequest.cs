@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using GF.DillyDally.Data.Common;
+using GF.DillyDally.ReadModel.Common;
 using MediatR;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Common

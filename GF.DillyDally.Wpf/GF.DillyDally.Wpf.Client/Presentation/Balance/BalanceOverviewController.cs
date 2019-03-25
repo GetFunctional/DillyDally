@@ -1,21 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using GF.DillyDally.Contracts.Keys;
-using GF.DillyDally.Data.Account;
-using GF.DillyDally.Data.Common;
 using GF.DillyDally.Mvvmc;
-using GF.DillyDally.Wpf.Client.Presentation.Common;
 using MediatR;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Balance
 {
     public sealed class BalanceOverviewController : ControllerBase<BalanceOverviewViewModel>
     {
+        private readonly AccountBalanceControllerFactory _accountBalanceControllerFactory =
+            new AccountBalanceControllerFactory();
+
         private readonly IMediator _mediator;
-        private readonly AccountBalanceControllerFactory _accountBalanceControllerFactory = new AccountBalanceControllerFactory();
         private List<AccountBalanceController> _accountControllers;
 
         public BalanceOverviewController(BalanceOverviewViewModel viewModel, IMediator mediator) : base(viewModel)

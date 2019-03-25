@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using GF.DillyDally.Data.Account;
+using GF.DillyDally.ReadModel.Account;
 using GF.DillyDally.Wpf.Client.Presentation.Balance;
 using MediatR;
 
