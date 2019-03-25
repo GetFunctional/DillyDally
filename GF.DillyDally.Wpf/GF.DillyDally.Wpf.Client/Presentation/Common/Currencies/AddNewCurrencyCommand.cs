@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Threading.Tasks;
 using DevExpress.Mvvm;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Common.Currencies
 {
-    public sealed class AddNewCurrencyCommand: DelegateCommand
+    public sealed class AddNewCurrencyCommand : AsyncCommand
     {
-        public AddNewCurrencyCommand(Action executeMethod) : base(executeMethod)
+        public AddNewCurrencyCommand(Func<Task> executeMethod) : base(executeMethod)
         {
         }
     }

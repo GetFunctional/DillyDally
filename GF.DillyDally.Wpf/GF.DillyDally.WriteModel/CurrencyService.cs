@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.Data.SQLite;
 using System.Linq;
 using System.Threading.Tasks;
 using Dapper.Contrib.Extensions;
@@ -19,9 +20,9 @@ namespace GF.DillyDally.WriteModel
         {
             using (var connection = StoreConnection.CreateConnection())
             {
-                using (var transaction = connection.BeginTransaction(IsolationLevel.ReadUncommitted))
+                using (var transaction = connection.BeginTransaction())
                 {
-                    var allAccountHolders = await this._currencyRepository.GetAllAccountHolderAsync();
+                    var allAccountHolders = await this._currencyRepository.GetAllAccountHolderAsync(connection);
                     var newCurrencyKey = new CurrencyKey(Guid.NewGuid());
                     var currency = new CurrencyEntity(newCurrencyKey, name, code);
 
@@ -34,8 +35,11 @@ namespace GF.DillyDally.WriteModel
                                 currency))
                         .ToList();
 
+                    if (newAccountEntities.Any())
+                    {
+                        connection.BulkInsert<AccountEntity>(newAccountEntities);
+                    }
 
-                    connection.BulkInsert<AccountEntity>(newAccountEntities);
                     transaction.Commit();
                     return newCurrencyKey;
                 }

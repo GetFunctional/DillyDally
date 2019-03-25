@@ -12,6 +12,7 @@ namespace GF.DillyDally.WriteModel
         private void RegisterServices(Action<Type, Type> serviceRegister)
         {
             serviceRegister(typeof(ITaskService), typeof(TaskService));
+            serviceRegister(typeof(ICurrencyService), typeof(CurrencyService));
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
+using Dapper.Contrib.Extensions;
 
 namespace GF.DillyDally.WriteModel
 {
@@ -18,8 +19,7 @@ namespace GF.DillyDally.WriteModel
 
         internal async Task<IList<AccountHolderEntity>> GetAllAccountHolderAsync(IDbConnection connection)
         {
-            var sql = @"SELECT * FROM AccountHolder;";
-            var holders = await connection.QueryAsync<AccountHolderEntity>(sql);
+            var holders = await connection.GetAllAsync<AccountHolderEntity>();
             return holders.ToList();
         }
     }

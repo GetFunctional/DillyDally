@@ -1,5 +1,7 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using System.Data.SQLite;
+using System.Diagnostics;
 using GF.DillyDally.Contracts;
 
 namespace GF.DillyDally.WriteModel
@@ -15,7 +17,14 @@ namespace GF.DillyDally.WriteModel
                 BinaryGUID = true
             };
 
-            return new SQLiteConnection(builder.ConnectionString);
+            var connection = new SQLiteConnection(builder.ConnectionString);
+            connection.Trace+= HandleConnectionTrace;
+            return connection.OpenAndReturn();
+        }
+
+        private static void HandleConnectionTrace(object sender, TraceEventArgs e)
+        {
+            Trace.Write(e.Statement);
         }
     }
 }

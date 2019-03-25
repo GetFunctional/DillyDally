@@ -4,6 +4,7 @@ using System.Windows;
 using GF.DillyDally.Mvvmc;
 using GF.DillyDally.ReadModel;
 using GF.DillyDally.Wpf.Client.Core.DataTemplates;
+using GF.DillyDally.Wpf.Client.Core.Dialoge;
 using GF.DillyDally.Wpf.Client.Core.Navigator;
 using GF.DillyDally.WriteModel;
 using LightInject;
@@ -38,12 +39,18 @@ namespace GF.DillyDally.Wpf.Client.Core
             this.RegisterMediatRFramework(serviceContainer);
             this.RegisterMvvmcDependencies(serviceContainer);
             this.RegisterControllersAndViewModels(serviceContainer);
+            this.RegisterDialogService(serviceContainer);
             this._readModelInitializer.Initialize((serviceType, implementation) =>
                 serviceContainer.Register(serviceType, implementation));
             this._writeModelInitializer.Initialize((serviceType, implementation) =>
                 serviceContainer.Register(serviceType, implementation));
             this._dataTemplateInitializer.RegisterDataTemplates(this._application);
             this._navigationInitializer.InitializeNavigation(serviceContainer);
+        }
+
+        private void RegisterDialogService(IServiceContainer serviceContainer)
+        {
+            serviceContainer.Register<IDialogService, DialogService>();
         }
 
         private void RegisterControllersAndViewModels(IServiceContainer serviceContainer)

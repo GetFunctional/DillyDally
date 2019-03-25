@@ -142,6 +142,19 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Core\DataTemplates\DataTemplateInitializer.cs" />
+    <Compile Include="Core\Dialoge\DialogCommandResult.cs" />
+    <Compile Include="Core\Dialoge\DialogCommandViewModel.cs" />
+    <Compile Include="Core\Dialoge\DialogService.cs" />
+    <Compile Include="Core\Dialoge\DialogSettings.cs" />
+    <Compile Include="Core\Dialoge\DialogWindowController.cs" />
+    <Compile Include="Core\Dialoge\DialogWindowFactory.cs" />
+    <Compile Include="Core\Dialoge\DialogWindowView.xaml.cs">
+      <DependentUpon>DialogWindowView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Core\Dialoge\DialogWindowViewModel.cs" />
+    <Compile Include="Core\Dialoge\IDialogResult.cs" />
+    <Compile Include="Core\Dialoge\IDialogService.cs" />
+    <Compile Include="Core\Dialoge\IDialogSettings.cs" />
     <Compile Include="Handler\GetAllAccountsHandler.cs" />
     <Compile Include="Handler\GetAllCurrenciesHandler.cs" />
     <Compile Include="Handler\NavigationHandler.cs" />
@@ -162,6 +175,8 @@
     <Compile Include="Handler\OpenTasksListControllerHandler.cs" />
     <Compile Include="Handler\Tasks\CreateNewTaskHandler.cs" />
     <Compile Include="IDillyDallyApplication.cs" />
+    <Compile Include="Presentation\Common\Currencies\NewCurrencyController.cs" />
+    <Compile Include="Presentation\Common\Currencies\NewCurrencyViewModel.cs" />
     <Compile Include="Presentation\Balance\AccountBalanceController.cs" />
     <Compile Include="Presentation\Balance\AccountBalanceControllerFactory.cs" />
     <Compile Include="Presentation\Balance\AccountBalanceViewModel.cs" />
@@ -179,6 +194,15 @@
       <DependentUpon>CurrenciesOverviewView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Presentation\Common\Currencies\CurrenciesOverviewViewModel.cs" />
+    <Compile Include="Presentation\Common\Currencies\NewCurrencyRequestHandler.cs" />
+    <Compile Include="Presentation\Common\Currencies\NewCurrencyResponse.cs" />
+    <Compile Include="Presentation\Common\Currencies\NewCurrencyView.xaml.cs">
+      <DependentUpon>NewCurrencyView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Presentation\Common\Currencies\NewCurrencyRequest.cs" />
+    <Compile Include="Presentation\Common\Currencies\SaveNewCurrencyHandler.cs" />
+    <Compile Include="Presentation\Common\Currencies\SaveNewCurrencyRequest.cs" />
+    <Compile Include="Presentation\Common\Currencies\SaveNewCurrencyResponse.cs" />
     <Compile Include="Presentation\Common\GetAllCurrenciesRequest.cs" />
     <Compile Include="Presentation\Common\CommonDataViewModelFactory.cs" />
     <Compile Include="Presentation\Common\CurrencyViewModel.cs" />
@@ -227,6 +251,10 @@
     <Compile Include="Presentation\Tasks\TaskViewModelFactory.cs" />
     <Compile Include="Wpf\DesignTimeInvestigator.cs" />
     <Compile Include="Wpf\SharedResourceDictionary.cs" />
+    <Page Include="Core\Dialoge\DialogWindowView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Presentation\Balance\BalanceOverviewView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -236,6 +264,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Presentation\Common\Currencies\CurrenciesOverviewView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Presentation\Common\Currencies\NewCurrencyView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

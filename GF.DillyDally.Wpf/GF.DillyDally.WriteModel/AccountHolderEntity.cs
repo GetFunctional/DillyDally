@@ -7,6 +7,10 @@ namespace GF.DillyDally.WriteModel
     [Table("AccountHolder")]
     internal sealed class AccountHolderEntity
     {
+        public AccountHolderEntity()
+        {
+        }
+
         public AccountHolderEntity(AccountHolderKey accountHolderKey)
         {
             this.AccountHolderId = accountHolderKey.AccountHolderId;

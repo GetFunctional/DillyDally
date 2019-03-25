@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Data.SQLite;
 using System.IO;
-using Dapper;
 using GF.DillyDally.Contracts;
-using GF.DillyDally.ReadModel.Common;
 using GF.DillyDally.Wpf.Client.Core.Navigator;
 using GF.DillyDally.Wpf.Client.Presentation;
 
@@ -64,16 +62,16 @@ namespace GF.DillyDally.Wpf.Client
                 //connection.AddTypeMapping()
 
                 //connection.
-                var sql = new SQLiteCommand(
-                    @"INSERT INTO Currency ( CurrencyKey, Name, Code ) VALUES ( @currencyId, @name, @code);",
-                    connection);
-                sql.Parameters.AddWithValue("@currencyId", Guid.NewGuid());
-                sql.Parameters.AddWithValue("@name", "Test");
-                sql.Parameters.AddWithValue("@code", "CodeTest");
-                sql.ExecuteNonQuery();
+                //var sql = new SQLiteCommand(
+                //    @"INSERT INTO Currency ( CurrencyKey, Name, Code ) VALUES ( @currencyId, @name, @code);",
+                //    connection);
+                //sql.Parameters.AddWithValue("@currencyId", Guid.NewGuid());
+                //sql.Parameters.AddWithValue("@name", "Test");
+                //sql.Parameters.AddWithValue("@code", "CodeTest");
+                //sql.ExecuteNonQuery();
 
-                var read = @"SELECT CurrencyKey, Name, Code FROM Currency";
-                var data = connection.Query<CurrencyEntity>(read);
+                //var read = @"SELECT CurrencyKey, Name, Code FROM Currency";
+                //var data = connection.Query<CurrencyEntity>(read);
                 //string sql = "create table highscores (name varchar(20), score int)";
 
                 //SQLiteCommand command = new SQLiteCommand(sql, m_dbConnection);
