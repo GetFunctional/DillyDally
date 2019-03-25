@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using GF.DillyDally.Contracts;
 using GF.DillyDally.Contracts.Keys;
 
 namespace GF.DillyDally.ReadModel.Tasks

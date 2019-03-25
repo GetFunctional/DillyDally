@@ -11,7 +11,7 @@ namespace GF.DillyDally.ReadModel.Common
         [Column("CurrencyKey")]
         public Guid CurrencyId
         {
-            get { return this._currencyId;}
+            get { return this._currencyId; }
             set
             {
                 this._currencyId = value;

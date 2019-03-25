@@ -172,6 +172,13 @@
     </Compile>
     <Compile Include="Presentation\Balance\BalanceOverviewViewModel.cs" />
     <Compile Include="Presentation\Balance\GetAllAccountsRequest.cs" />
+    <Compile Include="Presentation\Common\Currencies\AddNewCurrencyCommand.cs" />
+    <Compile Include="Presentation\Common\Currencies\CurrenciesOverviewNavigationTarget.cs" />
+    <Compile Include="Presentation\Common\Currencies\CurrenciesOverviewController.cs" />
+    <Compile Include="Presentation\Common\Currencies\CurrenciesOverviewView.xaml.cs">
+      <DependentUpon>CurrenciesOverviewView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Presentation\Common\Currencies\CurrenciesOverviewViewModel.cs" />
     <Compile Include="Presentation\Common\GetAllCurrenciesRequest.cs" />
     <Compile Include="Presentation\Common\CommonDataViewModelFactory.cs" />
     <Compile Include="Presentation\Common\CurrencyViewModel.cs" />
@@ -227,6 +234,10 @@
     <Page Include="Presentation\Balance\AccountBalanceTemplates.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Presentation\Common\Currencies\CurrenciesOverviewView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Presentation\ContentNavigation\ContentBrowserView.xaml">
       <SubType>Designer</SubType>

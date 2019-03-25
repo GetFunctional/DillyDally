@@ -6,7 +6,7 @@ namespace GF.DillyDally.ReadModel.Common
     {
         internal CurrencyEntity CreateCurrencyEntity(CurrencyKey currencyKey, string name, string code)
         {
-            return new CurrencyEntity()
+            return new CurrencyEntity
             {
                 Name = name,
                 Code = code,

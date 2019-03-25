@@ -20,7 +20,7 @@ namespace GF.DillyDally.ReadModel.Tasks
 
         public Task<IList<TaskEntity>> GetOpenTasksAsync()
         {
-            return System.Threading.Tasks.Task.Delay(2000).ContinueWith(this.ContinuationAction);
+            return Task.Delay(2000).ContinueWith(this.ContinuationAction);
         }
 
         //public Task<TaskEntity> GetSpecificTask(TaskKey taskKey)
@@ -35,12 +35,12 @@ namespace GF.DillyDally.ReadModel.Tasks
 
         public Task<TaskEntity> GetSpecificTask(TaskKey taskKey)
         {
-            return System.Threading.Tasks.Task.Run(() => new TaskEntity());
+            return Task.Run(() => new TaskEntity());
         }
 
         public Task<IList<TaskEntity>> GetSpecificTasks(IList<TaskKey> taskKeys)
         {
-            return System.Threading.Tasks.Task.Run(() => (IList<TaskEntity>) new List<TaskEntity> {new TaskEntity()});
+            return Task.Run(() => (IList<TaskEntity>) new List<TaskEntity> {new TaskEntity()});
         }
 
         #endregion
@@ -50,7 +50,7 @@ namespace GF.DillyDally.ReadModel.Tasks
             return new List<TaskEntity>();
         }
 
-        private IList<TaskEntity> ContinuationAction(System.Threading.Tasks.Task obj)
+        private IList<TaskEntity> ContinuationAction(Task obj)
         {
             return new List<TaskEntity> {new TaskEntity {Name = "Wow"}};
         }

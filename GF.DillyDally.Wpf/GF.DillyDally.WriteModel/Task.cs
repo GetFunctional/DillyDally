@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using GF.DillyDally.Contracts;
 using GF.DillyDally.Contracts.Keys;
 
 namespace GF.DillyDally.WriteModel
 {
-
     internal sealed class Task
     {
         public TaskKey TaskKey { get; }

@@ -16,7 +16,7 @@ namespace GF.DillyDally.ReadModel.Account
         }
 
         #region IAccountRepository Members
-        
+
         public async Task<IList<AccountEntity>> GetAllAccounts()
         {
             var currencies = await this._commonDataRepository.GetAllCurrencies();

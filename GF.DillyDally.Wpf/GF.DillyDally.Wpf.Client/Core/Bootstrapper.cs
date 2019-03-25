@@ -15,11 +15,11 @@ namespace GF.DillyDally.Wpf.Client.Core
     internal sealed class Bootstrapper
     {
         private readonly Application _application;
-        private readonly ReadModelInitializer _readModelInitializer = new ReadModelInitializer();
         private readonly DataTemplateInitializer _dataTemplateInitializer = new DataTemplateInitializer();
-        private readonly WriteModelInitializer _writeModelInitializer = new WriteModelInitializer();
         private readonly NavigationInitializer _navigationInitializer = new NavigationInitializer();
+        private readonly ReadModelInitializer _readModelInitializer = new ReadModelInitializer();
         private readonly IServiceContainer _serviceContainer;
+        private readonly WriteModelInitializer _writeModelInitializer = new WriteModelInitializer();
 
         public Bootstrapper(Application application) : this(application, new ServiceContainer(new ContainerOptions
             {EnablePropertyInjection = false, EnableVariance = false}))
