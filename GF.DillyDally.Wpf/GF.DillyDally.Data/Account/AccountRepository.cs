@@ -30,7 +30,7 @@ namespace GF.DillyDally.Data.Account
                         accounts.Add(new AccountEntity
                         {
                             Currency = currencyEntity,
-                            Balance = 44.7m,
+                            Balance = 95.7m,
                             AccountKey = new AccountKey(Guid.NewGuid())
                         });
                         break;
@@ -38,7 +38,7 @@ namespace GF.DillyDally.Data.Account
                         accounts.Add(new AccountEntity
                         {
                             Currency = currencyEntity,
-                            Balance = 26.98m,
+                            Balance = 28.45m,
                             AccountKey = new AccountKey(Guid.NewGuid())
                         });
                         break;
@@ -54,7 +54,7 @@ namespace GF.DillyDally.Data.Account
                         accounts.Add(new AccountEntity
                         {
                             Currency = currencyEntity,
-                            Balance = 4.51m,
+                            Balance = 0.82m,
                             AccountKey = new AccountKey(Guid.NewGuid())
                         });
                         break;
@@ -62,7 +62,7 @@ namespace GF.DillyDally.Data.Account
                         accounts.Add(new AccountEntity
                         {
                             Currency = currencyEntity,
-                            Balance = 136.0m,
+                            Balance = 166.0m,
                             AccountKey = new AccountKey(Guid.NewGuid())
                         });
                         break;
@@ -70,7 +70,7 @@ namespace GF.DillyDally.Data.Account
                         accounts.Add(new AccountEntity
                         {
                             Currency = currencyEntity,
-                            Balance = 96.0m,
+                            Balance = 38.0m,
                             AccountKey = new AccountKey(Guid.NewGuid())
                         });
                         break;

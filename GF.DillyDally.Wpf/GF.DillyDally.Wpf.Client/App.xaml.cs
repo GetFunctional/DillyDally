@@ -30,6 +30,7 @@ namespace GF.DillyDally.Wpf.Client
             this._bootstrapper.Run();
 
             this._dillyDallyApplication = this.CreateDillyDallyApplication(serviceContainer);
+            this._dillyDallyApplication.CreateOrUpdateDatabase();
             this._dillyDallyApplication.ShowUi();
         }
 
