@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using GF.DillyDally.Contracts.Keys;
 
@@ -12,6 +13,7 @@ namespace GF.DillyDally.WriteModel
             this.AccountHolderId = accountKey.AccountId;
         }
 
+        [Key]
         [Column("AccountId")]
         public Guid AccountId { get; set; }
 

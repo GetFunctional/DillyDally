@@ -58,19 +58,11 @@ namespace GF.DillyDally.ReadModel.Account
                             AccountKey = new AccountKey(Guid.NewGuid())
                         });
                         break;
-                    case "Extra Kalorien":
-                        accounts.Add(new AccountEntity
-                        {
-                            Currency = currencyEntity,
-                            Balance = 250.0m,
-                            AccountKey = new AccountKey(Guid.NewGuid())
-                        });
-                        break;
                     case "Gold":
                         accounts.Add(new AccountEntity
                         {
                             Currency = currencyEntity,
-                            Balance = 65.0m,
+                            Balance = 315.0m,
                             AccountKey = new AccountKey(Guid.NewGuid())
                         });
                         break;

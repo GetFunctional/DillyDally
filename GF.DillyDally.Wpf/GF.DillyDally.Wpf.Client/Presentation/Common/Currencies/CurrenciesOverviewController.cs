@@ -11,7 +11,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Common.Currencies
         public CurrenciesOverviewController(CurrenciesOverviewViewModel viewModel, IMediator mediator) : base(viewModel)
         {
             this._mediator = mediator;
-            this.ViewModel.AddNewCurrencyCommand = new AddNewCurrencyCommand(this.OpenAddNewCurrencyDialogAsync);
+            this.ViewModel.AddNewCurrencyCommand = new AddNewCurrencyCommand( async () => await this.OpenAddNewCurrencyDialogAsync());
         }
 
         private async Task OpenAddNewCurrencyDialogAsync()

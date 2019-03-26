@@ -5,7 +5,7 @@ using GF.DillyDally.Contracts.Keys;
 
 namespace GF.DillyDally.WriteModel
 {
-    [Table("CurrencyEntity")]
+    [Table("Currency")]
     internal sealed class CurrencyEntity
     {
         public CurrencyEntity(CurrencyKey currencyKey, string name, string code)
