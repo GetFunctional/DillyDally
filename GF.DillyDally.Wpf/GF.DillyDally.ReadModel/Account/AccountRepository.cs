@@ -30,7 +30,7 @@ namespace GF.DillyDally.ReadModel.Account
                         accounts.Add(new AccountEntity
                         {
                             Currency = currencyEntity,
-                            Balance = 125.9m,
+                            Balance = 391.3m,
                             AccountKey = new AccountKey(Guid.NewGuid())
                         });
                         break;
@@ -38,7 +38,7 @@ namespace GF.DillyDally.ReadModel.Account
                         accounts.Add(new AccountEntity
                         {
                             Currency = currencyEntity,
-                            Balance = 30.14m,
+                            Balance = 31.48m,
                             AccountKey = new AccountKey(Guid.NewGuid())
                         });
                         break;
@@ -54,7 +54,7 @@ namespace GF.DillyDally.ReadModel.Account
                         accounts.Add(new AccountEntity
                         {
                             Currency = currencyEntity,
-                            Balance = 3.72m,
+                            Balance = 22.27m,
                             AccountKey = new AccountKey(Guid.NewGuid())
                         });
                         break;
@@ -62,7 +62,7 @@ namespace GF.DillyDally.ReadModel.Account
                         accounts.Add(new AccountEntity
                         {
                             Currency = currencyEntity,
-                            Balance = 315.0m,
+                            Balance = 37.0m,
                             AccountKey = new AccountKey(Guid.NewGuid())
                         });
                         break;
