@@ -30,7 +30,7 @@ namespace GF.DillyDally.ReadModel.Account
                         accounts.Add(new AccountEntity
                         {
                             Currency = currencyEntity,
-                            Balance = 95.7m,
+                            Balance = 125.9m,
                             AccountKey = new AccountKey(Guid.NewGuid())
                         });
                         break;
@@ -38,7 +38,7 @@ namespace GF.DillyDally.ReadModel.Account
                         accounts.Add(new AccountEntity
                         {
                             Currency = currencyEntity,
-                            Balance = 28.45m,
+                            Balance = 30.14m,
                             AccountKey = new AccountKey(Guid.NewGuid())
                         });
                         break;
@@ -54,7 +54,7 @@ namespace GF.DillyDally.ReadModel.Account
                         accounts.Add(new AccountEntity
                         {
                             Currency = currencyEntity,
-                            Balance = 0.82m,
+                            Balance = 3.72m,
                             AccountKey = new AccountKey(Guid.NewGuid())
                         });
                         break;
@@ -62,7 +62,7 @@ namespace GF.DillyDally.ReadModel.Account
                         accounts.Add(new AccountEntity
                         {
                             Currency = currencyEntity,
-                            Balance = 166.0m,
+                            Balance = 250.0m,
                             AccountKey = new AccountKey(Guid.NewGuid())
                         });
                         break;
@@ -70,7 +70,7 @@ namespace GF.DillyDally.ReadModel.Account
                         accounts.Add(new AccountEntity
                         {
                             Currency = currencyEntity,
-                            Balance = 38.0m,
+                            Balance = 65.0m,
                             AccountKey = new AccountKey(Guid.NewGuid())
                         });
                         break;
