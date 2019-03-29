@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.IO;
 using System.Linq;
 using GF.DillyDally.Data.Contracts;
@@ -6,6 +7,7 @@ using NUnit.Framework;
 
 namespace GF.DillyDally.Data.Sqlite.Tests
 {
+    [TestFixture]
     public class CreateDatabaseTests
     {
         [Test]
@@ -13,7 +15,7 @@ namespace GF.DillyDally.Data.Sqlite.Tests
         {
             // Arrange
             var databaseFileHandler = new DatabaseFileHandler();
-            var exampleFile = "DillyDallyData.db";
+            var exampleFile = "DillyDallyDataTest3.db";
 
             // Act && Assert
             var fullexampleFile = Path.Combine(Directories.GetUserApplicationDatabasesDirectory(), exampleFile);
@@ -41,7 +43,7 @@ namespace GF.DillyDally.Data.Sqlite.Tests
         {
             // Arrange
             var databaseFileHandler = new DatabaseFileHandler();
-            var exampleFile = "DillyDallyData.db";
+            var exampleFile = "DillyDallyDataTest2.db";
 
             // Act
             var fullexampleFile = Path.Combine(Directories.GetUserApplicationDatabasesDirectory(), exampleFile);
@@ -51,6 +53,30 @@ namespace GF.DillyDally.Data.Sqlite.Tests
 
             // Assert
             Assert.That(!File.Exists(fullexampleFile));
+        }
+
+        [Test]
+        public void Database_Create_ConnectionCouldBeEstablished()
+        {
+            // Arrange
+            var databaseFileHandler = new DatabaseFileHandler();
+            var exampleFile = "DillyDallyDataTest1.db";
+
+            // Act && Assert
+            var fullexampleFile = Path.Combine(Directories.GetUserApplicationDatabasesDirectory(), exampleFile);
+            Assert.DoesNotThrow(() => databaseFileHandler.CreateNewDatabase(exampleFile));
+            var fileWasCreated = File.Exists(fullexampleFile);
+            var connectionWasOpened = false;
+            using (var connection = databaseFileHandler.OpenConnection(exampleFile))
+            {
+                connectionWasOpened = connection.State == ConnectionState.Open;
+            }
+
+            databaseFileHandler.DeleteDatabase(exampleFile);
+
+
+            Assert.That(fileWasCreated);
+            Assert.That(connectionWasOpened);
         }
     }
 }
