@@ -15,7 +15,7 @@ namespace GF.DillyDally.Data.Sqlite.Tests
         {
             // Arrange
             var databaseFileHandler = new DatabaseFileHandler();
-            var exampleFile = "DillyDallyDataTest3.db";
+            var exampleFile = "CreateFileTest.db";
             databaseFileHandler.DeleteDatabase(exampleFile);
 
             // Act && Assert
@@ -23,6 +23,7 @@ namespace GF.DillyDally.Data.Sqlite.Tests
             Assert.DoesNotThrow(() => databaseFileHandler.CreateNewDatabase(exampleFile));
 
             Assert.That(File.Exists(fullexampleFile));
+            databaseFileHandler.DeleteDatabase(exampleFile);
         }
 
         [Test]
@@ -43,7 +44,7 @@ namespace GF.DillyDally.Data.Sqlite.Tests
         {
             // Arrange
             var databaseFileHandler = new DatabaseFileHandler();
-            var exampleFile = "DillyDallyDataTest2.db";
+            var exampleFile = "DeleteTest.db";
             databaseFileHandler.DeleteDatabase(exampleFile);
 
             // Act
@@ -61,7 +62,7 @@ namespace GF.DillyDally.Data.Sqlite.Tests
         {
             // Arrange
             var databaseFileHandler = new DatabaseFileHandler();
-            var exampleFile = "DillyDallyDataTest1.db";
+            var exampleFile = "ConnectionAfterCreateTest.db";
             databaseFileHandler.DeleteDatabase(exampleFile);
 
             // Act && Assert

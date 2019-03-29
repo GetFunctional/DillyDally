@@ -18,7 +18,7 @@ namespace GF.DillyDally.Data.Sqlite.Tests
             // Arrange
             var databaseFileHandler = new DatabaseFileHandler();
             var databaseUpdater = new DatabaseUpdater(new SqlScriptSelector());
-            var exampleFile = "DillyDallyDataTest4.db";
+            var exampleFile = "UpdateTest.db";
             databaseFileHandler.DeleteDatabase(exampleFile);
 
             // Act && Assert
@@ -31,7 +31,6 @@ namespace GF.DillyDally.Data.Sqlite.Tests
             }
 
             Assert.That(fileExists);
-            databaseFileHandler.DeleteDatabase(exampleFile);
         }
     }
 }
