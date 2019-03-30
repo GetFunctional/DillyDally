@@ -64,6 +64,7 @@
     <Compile Include="Entities\Keys\TaskCompletionKey.cs" />
     <Compile Include="Entities\Keys\TaskRewardKey.cs" />
     <Compile Include="Entities\Keys\TaskKey.cs" />
+    <Compile Include="Entities\Rarity.cs" />
     <Compile Include="Entities\TaskType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UpdateStep.cs" />

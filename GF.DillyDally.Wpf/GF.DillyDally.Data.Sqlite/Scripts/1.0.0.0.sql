@@ -37,7 +37,12 @@ CREATE TABLE [RewardTemplate]
 	[RowID] INTEGER PRIMARY KEY AUTOINCREMENT, 
 	[RewardTemplateId] GUID NOT NULL UNIQUE,
 	[Name] VARCHAR2(255) NOT NULL,
-	[CurrencyId] GUID NOT NULL REFERENCES [Currency]([CurrencyId])
+	[CurrencyId] GUID NOT NULL REFERENCES [Currency]([CurrencyId]),
+	[Rarity] INTEGER NOT NULL,
+	[AmountRangeBegin] DECIMAL NOT NULL,
+	[AmountRangeEnd] DECIMAL NOT NULL,
+	[ExcludeFromRandomization] BOOL NOT NULL,
+	[ExcludeFromLootboxRandomization] BOOL NOT NULL
 	);
 
 CREATE UNIQUE INDEX [IX_RewardTemplate_RewardTemplateId] ON [RewardTemplate]([RewardTemplateId]);
@@ -49,7 +54,12 @@ CREATE TABLE [Reward]
 	[RewardId] GUID NOT NULL UNIQUE,
 	[Name] VARCHAR2(255) NOT NULL,
 	[CurrencyId] GUID NOT NULL REFERENCES [Currency]([CurrencyId]),
-	[RewardTemplateId] GUID NOT NULL REFERENCES [RewardTemplate]([RewardTemplateId])
+	[RewardTemplateId] GUID NOT NULL REFERENCES [RewardTemplate]([RewardTemplateId]),
+	[Rarity] INTEGER NOT NULL,
+	[AmountRangeBegin] DECIMAL NOT NULL,
+	[AmountRangeEnd] DECIMAL NOT NULL,
+	[ExcludeFromRandomization] BOOL NOT NULL,
+	[ExcludeFromLootboxRandomization] BOOL NOT NULL
 	);
 
 CREATE UNIQUE INDEX [IX_Reward_RewardId] ON [Reward]([RewardId]);
@@ -85,7 +95,7 @@ CREATE TABLE [TaskReward]
 	[TaskRewardId] GUID NOT NULL UNIQUE,
 	[TaskId] GUID NOT NULL REFERENCES [Task]([TaskId]),
 	[RewardId] GUID NOT NULL REFERENCES [Reward]([RewardId]),	
-	[Amount] DECIMAL NOT NULL,
+	[Amount] DECIMAL NULL,
 	[ClaimedOn] DATETIME NULL,
 	UNIQUE([TaskId] ASC, [RewardId] ASC)
 	);

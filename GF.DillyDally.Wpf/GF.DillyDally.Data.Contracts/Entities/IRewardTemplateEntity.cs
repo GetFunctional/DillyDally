@@ -11,5 +11,15 @@ namespace GF.DillyDally.Data.Contracts.Entities
         string Name { get; set; }
 
         CurrencyKey CurrencyKey { get; set; }
+
+        Rarity Rarity { get; set; }
+
+        decimal AmountRangeBegin { get; set; }
+
+        decimal AmountRangeEnd { get; set; }
+
+        bool ExcludeFromRandomization { get; set; }
+
+        bool ExcludeFromLootboxRandomization { get; set; }
     }
 }

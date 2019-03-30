@@ -11,8 +11,9 @@ namespace GF.DillyDally.Data.Contracts.Entities
 
         RewardKey RewardKey { get; set; }
 
-        decimal Amount { get; set; }
+        decimal? Amount { get; set; }
 
         DateTime? ClaimedOn { get; set; }
+
     }
 }

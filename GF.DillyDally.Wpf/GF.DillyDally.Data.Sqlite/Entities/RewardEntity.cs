@@ -70,6 +70,21 @@ namespace GF.DillyDally.Data.Sqlite.Entities
         [Column("Name")]
         public string Name { get; set; }
 
+        [Column("Rarity")]
+        public Rarity Rarity { get; set; }
+
+        [Column("AmountRangeBegin")]
+        public decimal AmountRangeBegin { get; set; }
+
+        [Column("AmountRangeEnd")]
+        public decimal AmountRangeEnd { get; set; }
+
+        [Column("ExcludeFromRandomization")]
+        public bool ExcludeFromRandomization { get; set; }
+
+        
+        [Column("ExcludeFromLootboxRandomization")]
+        public bool ExcludeFromLootboxRandomization { get; set; }
         #endregion
     }
 }

@@ -63,6 +63,7 @@
     <Compile Include="DatabaseFileHandler.cs" />
     <Compile Include="DatabaseUpdater.cs" />
     <Compile Include="EntityFactory.cs" />
+    <Compile Include="FoundationDataProvider.cs" />
     <Compile Include="GuidGenerator.cs" />
     <Compile Include="IGuidGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

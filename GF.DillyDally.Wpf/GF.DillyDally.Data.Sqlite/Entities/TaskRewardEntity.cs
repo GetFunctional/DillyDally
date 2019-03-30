@@ -58,7 +58,7 @@ namespace GF.DillyDally.Data.Sqlite.Entities
         }
 
         [Column("Amount")]
-        public decimal Amount { get; set; }
+        public decimal? Amount { get; set; }
 
         [Column("ClaimedOn")]
         public DateTime? ClaimedOn { get; set; }
