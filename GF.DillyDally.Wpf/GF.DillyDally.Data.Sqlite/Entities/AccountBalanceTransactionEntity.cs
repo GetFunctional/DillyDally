@@ -4,14 +4,18 @@ using Dapper.Contrib.Extensions;
 using GF.DillyDally.Data.Contracts.Entities;
 using GF.DillyDally.Data.Contracts.Entities.Keys;
 
-namespace GF.DillyDally.Data.Sqlite.Repositories.Entities
+namespace GF.DillyDally.Data.Sqlite.Entities
 {
     [System.ComponentModel.DataAnnotations.Schema.Table("AccountBalanceTransaction")]
-    internal sealed class AccountBalanceTransactionEntity : IAccountBalanceTransactionEntity
+    public sealed class AccountBalanceTransactionEntity : IAccountBalanceTransactionEntity
     {
         private AccountBalanceKey _accountBalanceKey;
         private AccountBalanceTransactionKey _accountBalanceTransactionKey;
         private CurrencyKey _currencyKey;
+
+        internal AccountBalanceTransactionEntity()
+        {
+        }
 
         [ExplicitKey]
         [Column("AccountBalanceId")]
@@ -25,6 +29,7 @@ namespace GF.DillyDally.Data.Sqlite.Repositories.Entities
 
         #region IAccountBalanceTransactionEntity Members
 
+        [Computed]
         public AccountBalanceTransactionKey AccountBalanceTransactionKey
         {
             get
@@ -34,6 +39,7 @@ namespace GF.DillyDally.Data.Sqlite.Repositories.Entities
             }
         }
 
+        [Computed]
         public AccountBalanceKey AccountBalanceKey
         {
             get
@@ -48,6 +54,7 @@ namespace GF.DillyDally.Data.Sqlite.Repositories.Entities
             }
         }
 
+        [Computed]
         public CurrencyKey CurrencyKey
         {
             get { return this._currencyKey ?? (this._currencyKey = new CurrencyKey(this.CurrencyId)); }

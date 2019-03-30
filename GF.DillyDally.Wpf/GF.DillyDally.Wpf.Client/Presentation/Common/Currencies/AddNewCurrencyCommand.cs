@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using DevExpress.Mvvm;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Common.Currencies
@@ -11,7 +10,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Common.Currencies
         }
         //public AddNewCurrencyCommand() : base()
         //{
-            
+
         //}
 
         //public override void Execute(object parameter)

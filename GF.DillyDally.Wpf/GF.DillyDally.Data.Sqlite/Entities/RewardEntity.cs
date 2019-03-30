@@ -5,14 +5,18 @@ using Dapper.Contrib.Extensions;
 using GF.DillyDally.Data.Contracts.Entities;
 using GF.DillyDally.Data.Contracts.Entities.Keys;
 
-namespace GF.DillyDally.Data.Sqlite.Repositories.Entities
+namespace GF.DillyDally.Data.Sqlite.Entities
 {
     [System.ComponentModel.DataAnnotations.Schema.Table("Reward")]
-    internal sealed class RewardEntity : IRewardEntity
+    public sealed class RewardEntity : IRewardEntity
     {
         private CurrencyKey _currencyKey;
         private RewardKey _rewardKey;
         private RewardTemplateKey _rewardTemplateKey;
+
+        internal RewardEntity()
+        {
+        }
 
         [ExplicitKey]
         [Column("RewardId")]
@@ -26,6 +30,7 @@ namespace GF.DillyDally.Data.Sqlite.Repositories.Entities
 
         #region IRewardEntity Members
 
+        [Computed]
         public RewardKey RewardKey
         {
             get
@@ -35,6 +40,7 @@ namespace GF.DillyDally.Data.Sqlite.Repositories.Entities
             }
         }
 
+        [Computed]
         public CurrencyKey CurrencyKey
         {
             get { return this._currencyKey ?? (this._currencyKey = new CurrencyKey(this.CurrencyId)); }
@@ -45,6 +51,7 @@ namespace GF.DillyDally.Data.Sqlite.Repositories.Entities
             }
         }
 
+        [Computed]
         public RewardTemplateKey RewardTemplateKey
         {
             get

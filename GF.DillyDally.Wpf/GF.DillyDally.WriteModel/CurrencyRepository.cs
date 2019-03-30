@@ -2,7 +2,6 @@
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
-using Dapper;
 using Dapper.Contrib.Extensions;
 
 namespace GF.DillyDally.WriteModel

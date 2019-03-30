@@ -5,12 +5,16 @@ using Dapper.Contrib.Extensions;
 using GF.DillyDally.Data.Contracts.Entities;
 using GF.DillyDally.Data.Contracts.Entities.Keys;
 
-namespace GF.DillyDally.Data.Sqlite.Repositories.Entities
+namespace GF.DillyDally.Data.Sqlite.Entities
 {
     [System.ComponentModel.DataAnnotations.Schema.Table("Currency")]
-    internal sealed class CurrencyEntity : ICurrencyEntity
+    public sealed class CurrencyEntity : ICurrencyEntity
     {
         private CurrencyKey _currencyKey;
+
+        internal CurrencyEntity()
+        {
+        }
 
         [ExplicitKey]
         [Column("CurrencyId")]
@@ -18,6 +22,7 @@ namespace GF.DillyDally.Data.Sqlite.Repositories.Entities
 
         #region ICurrencyEntity Members
 
+        [Computed]
         public CurrencyKey CurrencyKey
         {
             get

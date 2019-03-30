@@ -4,14 +4,18 @@ using Dapper.Contrib.Extensions;
 using GF.DillyDally.Data.Contracts.Entities;
 using GF.DillyDally.Data.Contracts.Entities.Keys;
 
-namespace GF.DillyDally.Data.Sqlite.Repositories.Entities
+namespace GF.DillyDally.Data.Sqlite.Entities
 {
     [System.ComponentModel.DataAnnotations.Schema.Table("TaskReward")]
-    internal sealed class TaskRewardEntity : ITaskRewardEntity
+    public sealed class TaskRewardEntity : ITaskRewardEntity
     {
         private RewardKey _rewardKey;
         private TaskKey _taskKey;
         private TaskRewardKey _taskRewardKey;
+
+        internal TaskRewardEntity()
+        {
+        }
 
         [ExplicitKey]
         [Column("TaskRewardId")]
@@ -25,11 +29,13 @@ namespace GF.DillyDally.Data.Sqlite.Repositories.Entities
 
         #region ITaskRewardEntity Members
 
+        [Computed]
         public TaskRewardKey TaskRewardKey
         {
             get { return this._taskRewardKey ?? (this._taskRewardKey = new TaskRewardKey(this.TaskRewardId)); }
         }
 
+        [Computed]
         public TaskKey TaskKey
         {
             get { return this._taskKey ?? (this._taskKey = new TaskKey(this.TaskId)); }
@@ -40,6 +46,7 @@ namespace GF.DillyDally.Data.Sqlite.Repositories.Entities
             }
         }
 
+        [Computed]
         public RewardKey RewardKey
         {
             get { return this._rewardKey ?? (this._rewardKey = new RewardKey(this.RewardId)); }

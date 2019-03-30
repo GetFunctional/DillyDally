@@ -16,7 +16,8 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <wpf:SharedResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Client;component/Presentation/Tasks/TasksListTemplates.xaml" />
+                <wpf:SharedResourceDictionary
+                    Source="pack://application:,,,/GF.DillyDally.Wpf.Client;component/Presentation/Tasks/TasksListTemplates.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -31,13 +32,16 @@
         <dxlc:LayoutGroup Orientation="Horizontal">
 
             <!--  Open Tasks  -->
-            <ContentControl Content="{Binding OpenTasksListViewModel}" ContentTemplate="{StaticResource TaskListTemplate}" />
+            <ContentControl Content="{Binding OpenTasksListViewModel}"
+                            ContentTemplate="{StaticResource TaskListTemplate}" />
 
             <!--  Repeatable Tasks  -->
-            <ContentControl Content="{Binding RepeatableTasksListViewModel}" ContentTemplate="{StaticResource TaskListTemplate}" />
+            <ContentControl Content="{Binding RepeatableTasksListViewModel}"
+                            ContentTemplate="{StaticResource TaskListTemplate}" />
 
             <!--  Recently completed  -->
-            <ContentControl Content="{Binding RecentlyCompletedTasksListViewModel}" ContentTemplate="{StaticResource TaskListTemplate}" />
+            <ContentControl Content="{Binding RecentlyCompletedTasksListViewModel}"
+                            ContentTemplate="{StaticResource TaskListTemplate}" />
         </dxlc:LayoutGroup>
     </dxlc:LayoutGroup>
 </UserControl>

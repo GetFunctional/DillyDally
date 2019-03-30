@@ -1,5 +1,4 @@
-﻿using System;
-using System.Data;
+﻿using System.Data;
 using System.Data.SQLite;
 using System.Diagnostics;
 using GF.DillyDally.Contracts;
@@ -18,7 +17,7 @@ namespace GF.DillyDally.WriteModel
             };
 
             var connection = new SQLiteConnection(builder.ConnectionString);
-            connection.Trace+= HandleConnectionTrace;
+            connection.Trace += HandleConnectionTrace;
             return connection.OpenAndReturn();
         }
 

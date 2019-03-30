@@ -4,13 +4,17 @@ using Dapper.Contrib.Extensions;
 using GF.DillyDally.Data.Contracts.Entities;
 using GF.DillyDally.Data.Contracts.Entities.Keys;
 
-namespace GF.DillyDally.Data.Sqlite.Repositories.Entities
+namespace GF.DillyDally.Data.Sqlite.Entities
 {
     [System.ComponentModel.DataAnnotations.Schema.Table("TaskCompletion")]
-    internal sealed class TaskCompletionEntity : ITaskCompletionEntity
+    public sealed class TaskCompletionEntity : ITaskCompletionEntity
     {
         private TaskCompletionKey _taskCompletionKey;
         private TaskKey _taskKey;
+
+        internal TaskCompletionEntity()
+        {
+        }
 
         [ExplicitKey]
         [Column("TaskCompletionId")]
@@ -21,6 +25,7 @@ namespace GF.DillyDally.Data.Sqlite.Repositories.Entities
 
         #region ITaskCompletionEntity Members
 
+        [Computed]
         public TaskCompletionKey TaskCompletionKey
         {
             get
@@ -30,6 +35,7 @@ namespace GF.DillyDally.Data.Sqlite.Repositories.Entities
             }
         }
 
+        [Computed]
         public TaskKey TaskKey
         {
             get { return this._taskKey ?? (this._taskKey = new TaskKey(this.TaskId)); }

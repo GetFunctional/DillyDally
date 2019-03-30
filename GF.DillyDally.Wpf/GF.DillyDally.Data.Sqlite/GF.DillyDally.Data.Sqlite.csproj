@@ -62,15 +62,18 @@
     <Compile Include="ConnectionStringFactory.cs" />
     <Compile Include="DatabaseFileHandler.cs" />
     <Compile Include="DatabaseUpdater.cs" />
+    <Compile Include="EntityFactory.cs" />
+    <Compile Include="GuidGenerator.cs" />
+    <Compile Include="IGuidGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\Entities\AccountBalanceEntity.cs" />
-    <Compile Include="Repositories\Entities\AccountBalanceTransactionEntity.cs" />
-    <Compile Include="Repositories\Entities\CurrencyEntity.cs" />
-    <Compile Include="Repositories\Entities\RewardEntity.cs" />
-    <Compile Include="Repositories\Entities\RewardTemplateEntity.cs" />
-    <Compile Include="Repositories\Entities\TaskCompletionEntity.cs" />
-    <Compile Include="Repositories\Entities\TaskEntity.cs" />
-    <Compile Include="Repositories\Entities\TaskRewardEntity.cs" />
+    <Compile Include="Entities\AccountBalanceEntity.cs" />
+    <Compile Include="Entities\AccountBalanceTransactionEntity.cs" />
+    <Compile Include="Entities\CurrencyEntity.cs" />
+    <Compile Include="Entities\RewardEntity.cs" />
+    <Compile Include="Entities\RewardTemplateEntity.cs" />
+    <Compile Include="Entities\TaskCompletionEntity.cs" />
+    <Compile Include="Entities\TaskEntity.cs" />
+    <Compile Include="Entities\TaskRewardEntity.cs" />
     <Compile Include="SqlScriptReader.cs" />
     <Compile Include="SqlScriptSelector.cs" />
   </ItemGroup>
