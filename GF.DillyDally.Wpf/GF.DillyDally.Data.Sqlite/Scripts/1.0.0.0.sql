@@ -68,7 +68,7 @@ CREATE TABLE [Task]
 CREATE UNIQUE INDEX [IX_Task_TaskId] ON [Task]([TaskId]);
 GO
 
-CREATE TABLE [TaskCompletions]
+CREATE TABLE [TaskCompletion]
 	(
 	[RowID] INTEGER PRIMARY KEY AUTOINCREMENT, 
 	[TaskCompletionId] GUID NOT NULL UNIQUE,
@@ -76,10 +76,10 @@ CREATE TABLE [TaskCompletions]
 	[CompletedOn] DATETIME NOT NULL
 	);
 
-CREATE UNIQUE INDEX [IX_TaskCompletions_TaskCompletionId] ON [TaskCompletions]([TaskCompletionId]);
+CREATE UNIQUE INDEX [IX_TaskCompletion_TaskCompletionId] ON [TaskCompletion]([TaskCompletionId]);
 GO
 
-CREATE TABLE [TaskRewards]
+CREATE TABLE [TaskReward]
 	(
 	[RowID] INTEGER PRIMARY KEY AUTOINCREMENT, 
 	[TaskRewardId] GUID NOT NULL UNIQUE,
@@ -90,5 +90,5 @@ CREATE TABLE [TaskRewards]
 	UNIQUE([TaskId] ASC, [RewardId] ASC)
 	);
 
-CREATE UNIQUE INDEX [IX_TaskRewards_TaskRewardId] ON [TaskRewards]([TaskRewardId]);
+CREATE UNIQUE INDEX [IX_TaskReward_TaskRewardId] ON [TaskReward]([TaskRewardId]);
 GO
