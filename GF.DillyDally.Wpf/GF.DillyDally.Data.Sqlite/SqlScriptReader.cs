@@ -16,17 +16,7 @@ namespace GF.DillyDally.Data.Sqlite
             this._stream = stream;
         }
 
-        private string ReadStream()
-        {
-            var stream = this._stream;
-            if (stream == null)
-                return string.Empty;
-
-            using (var reader = new StreamReader(stream))
-            {
-                return reader.ReadToEnd();
-            }
-        }
+        #region IEnumerable<string> Members
 
         public IEnumerator<string> GetEnumerator()
         {
@@ -34,6 +24,27 @@ namespace GF.DillyDally.Data.Sqlite
                     Environment.NewLine), @"/\*NEXT\*/|\bGO\b")
                 .Select(line => line.Trim())
                 .Where(line => !string.IsNullOrWhiteSpace(line)).GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return this.GetEnumerator();
+        }
+
+        #endregion
+
+        private string ReadStream()
+        {
+            var stream = this._stream;
+            if (stream == null)
+            {
+                return string.Empty;
+            }
+
+            using (var reader = new StreamReader(stream))
+            {
+                return reader.ReadToEnd();
+            }
         }
 
         public IList<string> ToList()
@@ -48,11 +59,6 @@ namespace GF.DillyDally.Data.Sqlite
             }
 
             return list;
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return this.GetEnumerator();
         }
     }
 }
