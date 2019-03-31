@@ -12,7 +12,6 @@ namespace GF.DillyDally.Data.Sqlite.Entities
     {
         private CurrencyKey _currencyKey;
         private RewardKey _rewardKey;
-        private RewardTemplateKey _rewardTemplateKey;
 
         internal RewardEntity()
         {
@@ -24,9 +23,6 @@ namespace GF.DillyDally.Data.Sqlite.Entities
 
         [Column("CurrencyId")]
         public Guid CurrencyId { get; set; }
-
-        [Column("RewardTemplateId")]
-        public Guid RewardTemplateId { get; set; }
 
         #region IRewardEntity Members
 
@@ -48,21 +44,6 @@ namespace GF.DillyDally.Data.Sqlite.Entities
             {
                 this._currencyKey = value;
                 this.CurrencyId = value.CurrencyId;
-            }
-        }
-
-        [Computed]
-        public RewardTemplateKey RewardTemplateKey
-        {
-            get
-            {
-                return this._rewardTemplateKey ??
-                       (this._rewardTemplateKey = new RewardTemplateKey(this.RewardTemplateId));
-            }
-            set
-            {
-                this._rewardTemplateKey = value;
-                this.RewardTemplateId = value.RewardTemplateId;
             }
         }
 

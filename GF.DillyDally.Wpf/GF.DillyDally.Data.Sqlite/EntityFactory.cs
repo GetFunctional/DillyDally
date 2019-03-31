@@ -62,7 +62,7 @@ namespace GF.DillyDally.Data.Sqlite
             };
         }
 
-        public RewardTemplateEntity CreateRewardTemplate(CurrencyKey currencyKey, Rarity rarity,
+        public RewardEntity CreateReward(CurrencyKey currencyKey, Rarity rarity,
             string rewardTemplateName, decimal randomValueRangeBegin, decimal randomValueRangeEnd,
             bool excludeFromRandomization = false, bool excludeFromLootboxRandomization = false)
         {
@@ -72,9 +72,9 @@ namespace GF.DillyDally.Data.Sqlite
                 throw new ArgumentException();
             }
 
-            return new RewardTemplateEntity
+            return new RewardEntity
             {
-                RewardTemplateId = this._guidGenerator.GenerateGuid(),
+                RewardId = this._guidGenerator.GenerateGuid(),
                 CurrencyKey = currencyKey,
                 Rarity = rarity,
                 Name = rewardTemplateName,

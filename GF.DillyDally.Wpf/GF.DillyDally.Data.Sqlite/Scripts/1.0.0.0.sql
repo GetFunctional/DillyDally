@@ -32,29 +32,12 @@ CREATE TABLE [AccountBalanceTransaction]
 CREATE UNIQUE INDEX [IX_AccountBalanceTransaction_AccountBalanceTransactionId] ON [AccountBalanceTransaction]([AccountBalanceTransactionId]);
 GO
 
-CREATE TABLE [RewardTemplate]
-	(
-	[RowID] INTEGER PRIMARY KEY AUTOINCREMENT, 
-	[RewardTemplateId] GUID NOT NULL UNIQUE,
-	[Name] VARCHAR2(255) NOT NULL,
-	[CurrencyId] GUID NOT NULL REFERENCES [Currency]([CurrencyId]),
-	[Rarity] INTEGER NOT NULL,
-	[AmountRangeBegin] DECIMAL NOT NULL,
-	[AmountRangeEnd] DECIMAL NOT NULL,
-	[ExcludeFromRandomization] BOOL NOT NULL,
-	[ExcludeFromLootboxRandomization] BOOL NOT NULL
-	);
-
-CREATE UNIQUE INDEX [IX_RewardTemplate_RewardTemplateId] ON [RewardTemplate]([RewardTemplateId]);
-GO
-
 CREATE TABLE [Reward]
 	(
 	[RowID] INTEGER PRIMARY KEY AUTOINCREMENT, 
 	[RewardId] GUID NOT NULL UNIQUE,
 	[Name] VARCHAR2(255) NOT NULL,
 	[CurrencyId] GUID NOT NULL REFERENCES [Currency]([CurrencyId]),
-	[RewardTemplateId] GUID NOT NULL REFERENCES [RewardTemplate]([RewardTemplateId]),
 	[Rarity] INTEGER NOT NULL,
 	[AmountRangeBegin] DECIMAL NOT NULL,
 	[AmountRangeEnd] DECIMAL NOT NULL,

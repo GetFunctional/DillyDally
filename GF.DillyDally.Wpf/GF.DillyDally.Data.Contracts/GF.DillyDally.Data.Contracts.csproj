@@ -51,13 +51,11 @@
     <Compile Include="Entities\ICurrencyEntity.cs" />
     <Compile Include="Entities\IOpenTaskEntity.cs" />
     <Compile Include="Entities\IRewardEntity.cs" />
-    <Compile Include="Entities\IRewardTemplateEntity.cs" />
     <Compile Include="Entities\ITaskCompletionEntity.cs" />
     <Compile Include="Entities\ITaskEntity.cs" />
     <Compile Include="Entities\ITaskRewardEntity.cs" />
     <Compile Include="Entities\Keys\AccountBalanceTransactionKey.cs" />
     <Compile Include="Entities\Keys\AccountBalanceKey.cs" />
-    <Compile Include="Entities\Keys\RewardTemplateKey.cs" />
     <Compile Include="Entities\Keys\RewardKey.cs" />
     <Compile Include="Entities\Keys\CurrencyKey.cs" />
     <Compile Include="Entities\Keys\IdentityKeyBase.cs" />

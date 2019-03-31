@@ -45,9 +45,9 @@ namespace GF.DillyDally.Data.Sqlite.Tests
             {
                 var currencies = connection.GetAll<CurrencyEntity>().ToList();
                 var balances = connection.GetAll<AccountBalanceEntity>().ToList();
-                var rewardTemplates = connection.GetAll<RewardTemplateEntity>().ToList();
+                var rewards = connection.GetAll<RewardEntity>().ToList();
                 entityInsertSuccessful = currencies.Count() == 6 && balances.Count() == currencies.Count() &&
-                                         rewardTemplates.Count() == 19;
+                                         rewards.Count() == 19;
             }
 
             Assert.That(entityInsertSuccessful, Is.True);

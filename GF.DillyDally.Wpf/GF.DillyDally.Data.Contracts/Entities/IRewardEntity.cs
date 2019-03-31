@@ -12,8 +12,6 @@ namespace GF.DillyDally.Data.Contracts.Entities
 
         CurrencyKey CurrencyKey { get; set; }
 
-        RewardTemplateKey RewardTemplateKey { get; set; }
-
         Rarity Rarity { get; set; }
 
         decimal AmountRangeBegin { get; set; }

@@ -38,9 +38,9 @@ namespace GF.DillyDally.Data.Sqlite
             }
         }
 
-        private List<RewardTemplateEntity> CreateRewardTemplates(List<CurrencyEntity> baseCurrencies)
+        private List<RewardEntity> CreateRewardTemplates(List<CurrencyEntity> baseCurrencies)
         {
-            var baseRewards = new List<RewardTemplateEntity>();
+            var baseRewards = new List<RewardEntity>();
 
             decimal gametimeInitialValueBegin = 8;
             decimal gametimeInitialValueEnd = 12;
@@ -60,68 +60,68 @@ namespace GF.DillyDally.Data.Sqlite
                 switch (currencyEntity.Name)
                 {
                     case "Gametime":
-                        baseRewards.Add(this._entityFactory.CreateRewardTemplate(currentCurrencyKey, Rarity.Common,
+                        baseRewards.Add(this._entityFactory.CreateReward(currentCurrencyKey, Rarity.Common,
                             "Some Gametime", gametimeInitialValueBegin, gametimeInitialValueEnd));
-                        baseRewards.Add(this._entityFactory.CreateRewardTemplate(currentCurrencyKey, Rarity.Rare,
+                        baseRewards.Add(this._entityFactory.CreateReward(currentCurrencyKey, Rarity.Rare,
                             "More Gametime", gametimeInitialValueBegin * rareMultiplier,
                             gametimeInitialValueEnd * rareMultiplier));
-                        baseRewards.Add(this._entityFactory.CreateRewardTemplate(currentCurrencyKey, Rarity.Epic,
+                        baseRewards.Add(this._entityFactory.CreateReward(currentCurrencyKey, Rarity.Epic,
                             "Much Gametime", gametimeInitialValueBegin * epicMultiplier,
                             gametimeInitialValueEnd * epicMultiplier));
-                        baseRewards.Add(this._entityFactory.CreateRewardTemplate(currentCurrencyKey, Rarity.Legendary,
+                        baseRewards.Add(this._entityFactory.CreateReward(currentCurrencyKey, Rarity.Legendary,
                             "Very Much Gametime", gametimeInitialValueBegin * legendaryMultiplier,
                             gametimeInitialValueEnd * legendaryMultiplier));
                         break;
 
                     case "Gold":
-                        baseRewards.Add(this._entityFactory.CreateRewardTemplate(currentCurrencyKey, Rarity.Common,
+                        baseRewards.Add(this._entityFactory.CreateReward(currentCurrencyKey, Rarity.Common,
                             "Some Gold", goldInitialValueBegin, goldInitialValueEnd, false, true));
-                        baseRewards.Add(this._entityFactory.CreateRewardTemplate(currentCurrencyKey, Rarity.Rare,
+                        baseRewards.Add(this._entityFactory.CreateReward(currentCurrencyKey, Rarity.Rare,
                             "More Gold", goldInitialValueBegin * rareMultiplier, goldInitialValueEnd * rareMultiplier,
                             false, true));
-                        baseRewards.Add(this._entityFactory.CreateRewardTemplate(currentCurrencyKey, Rarity.Epic,
+                        baseRewards.Add(this._entityFactory.CreateReward(currentCurrencyKey, Rarity.Epic,
                             "Much Gold", goldInitialValueBegin * epicMultiplier, goldInitialValueEnd * epicMultiplier,
                             false, true));
-                        baseRewards.Add(this._entityFactory.CreateRewardTemplate(currentCurrencyKey, Rarity.Legendary,
+                        baseRewards.Add(this._entityFactory.CreateReward(currentCurrencyKey, Rarity.Legendary,
                             "Very Much Gold", goldInitialValueBegin * legendaryMultiplier,
                             goldInitialValueEnd * legendaryMultiplier, false, true));
                         break;
 
                     case "HS Matches":
-                        baseRewards.Add(this._entityFactory.CreateRewardTemplate(currentCurrencyKey, Rarity.Common,
+                        baseRewards.Add(this._entityFactory.CreateReward(currentCurrencyKey, Rarity.Common,
                             "Some HS Matches", hsInitialValueBegin, hsInitialValueEnd));
-                        baseRewards.Add(this._entityFactory.CreateRewardTemplate(currentCurrencyKey, Rarity.Rare,
+                        baseRewards.Add(this._entityFactory.CreateReward(currentCurrencyKey, Rarity.Rare,
                             "More HS Matches", hsInitialValueBegin * rareMultiplier,
                             hsInitialValueEnd * rareMultiplier));
                         break;
 
                     case "Gamecredits":
-                        baseRewards.Add(this._entityFactory.CreateRewardTemplate(currentCurrencyKey, Rarity.Common,
+                        baseRewards.Add(this._entityFactory.CreateReward(currentCurrencyKey, Rarity.Common,
                             "Some Gamecredits", credInitialValueBegin, credInitialValueEnd));
-                        baseRewards.Add(this._entityFactory.CreateRewardTemplate(currentCurrencyKey, Rarity.Rare,
+                        baseRewards.Add(this._entityFactory.CreateReward(currentCurrencyKey, Rarity.Rare,
                             "More Gamecredits", credInitialValueBegin * rareMultiplier,
                             credInitialValueEnd * rareMultiplier));
-                        baseRewards.Add(this._entityFactory.CreateRewardTemplate(currentCurrencyKey, Rarity.Epic,
+                        baseRewards.Add(this._entityFactory.CreateReward(currentCurrencyKey, Rarity.Epic,
                             "Much Gamecredits", credInitialValueBegin * epicMultiplier,
                             credInitialValueEnd * epicMultiplier));
-                        baseRewards.Add(this._entityFactory.CreateRewardTemplate(currentCurrencyKey, Rarity.Legendary,
+                        baseRewards.Add(this._entityFactory.CreateReward(currentCurrencyKey, Rarity.Legendary,
                             "Very Much Gamecredits", credInitialValueBegin * legendaryMultiplier,
                             credInitialValueEnd * legendaryMultiplier));
                         break;
 
                     case "Days off":
-                        baseRewards.Add(this._entityFactory.CreateRewardTemplate(currentCurrencyKey, Rarity.Legendary,
+                        baseRewards.Add(this._entityFactory.CreateReward(currentCurrencyKey, Rarity.Legendary,
                             "Take a day off", 0.25m, 0.75m));
                         break;
 
                     case "Randomdrops":
-                        baseRewards.Add(this._entityFactory.CreateRewardTemplate(currentCurrencyKey, Rarity.None,
+                        baseRewards.Add(this._entityFactory.CreateReward(currentCurrencyKey, Rarity.None,
                             "1 Randomdrop", 1, 1, true, true));
-                        baseRewards.Add(this._entityFactory.CreateRewardTemplate(currentCurrencyKey, Rarity.None,
+                        baseRewards.Add(this._entityFactory.CreateReward(currentCurrencyKey, Rarity.None,
                             "2 Randomdrops", 2, 2, true, true));
-                        baseRewards.Add(this._entityFactory.CreateRewardTemplate(currentCurrencyKey, Rarity.None,
+                        baseRewards.Add(this._entityFactory.CreateReward(currentCurrencyKey, Rarity.None,
                             "4 Randomdrops", 4, 4, true, true));
-                        baseRewards.Add(this._entityFactory.CreateRewardTemplate(currentCurrencyKey, Rarity.None,
+                        baseRewards.Add(this._entityFactory.CreateReward(currentCurrencyKey, Rarity.None,
                             "8 Randomdrops", 8, 8, true, true));
                         break;
                 }

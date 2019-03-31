@@ -72,7 +72,6 @@
     <Compile Include="Entities\AccountBalanceTransactionEntity.cs" />
     <Compile Include="Entities\CurrencyEntity.cs" />
     <Compile Include="Entities\RewardEntity.cs" />
-    <Compile Include="Entities\RewardTemplateEntity.cs" />
     <Compile Include="Entities\TaskCompletionEntity.cs" />
     <Compile Include="Entities\TaskEntity.cs" />
     <Compile Include="Entities\TaskRewardEntity.cs" />
