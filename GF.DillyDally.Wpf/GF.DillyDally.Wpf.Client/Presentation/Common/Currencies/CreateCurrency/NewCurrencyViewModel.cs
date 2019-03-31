@@ -1,6 +1,6 @@
 using GF.DillyDally.Mvvmc;
 
-namespace GF.DillyDally.Wpf.Client.Presentation.Common.Currencies
+namespace GF.DillyDally.Wpf.Client.Presentation.Common.Currencies.CreateCurrency
 {
     public sealed class NewCurrencyViewModel : ViewModelBase
     {

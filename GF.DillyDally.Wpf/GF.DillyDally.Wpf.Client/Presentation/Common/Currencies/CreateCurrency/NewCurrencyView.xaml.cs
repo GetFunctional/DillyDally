@@ -1,6 +1,6 @@
 ﻿using GF.DillyDally.Wpf.Client.Core.DataTemplates;
 
-namespace GF.DillyDally.Wpf.Client.Presentation.Common.Currencies
+namespace GF.DillyDally.Wpf.Client.Presentation.Common.Currencies.CreateCurrency
 {
     /// <summary>
     ///     Interaktionslogik für NewCurrencyView.xaml

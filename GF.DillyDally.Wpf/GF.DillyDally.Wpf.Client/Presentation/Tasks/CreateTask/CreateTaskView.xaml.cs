@@ -1,6 +1,6 @@
 ﻿using GF.DillyDally.Wpf.Client.Core.DataTemplates;
 
-namespace GF.DillyDally.Wpf.Client.Presentation.Tasks
+namespace GF.DillyDally.Wpf.Client.Presentation.Tasks.CreateTask
 {
     /// <summary>
     ///     Interaktionslogik für CreateTaskView.xaml

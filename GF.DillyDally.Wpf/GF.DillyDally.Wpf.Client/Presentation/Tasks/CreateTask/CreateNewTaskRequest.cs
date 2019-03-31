@@ -1,8 +1,7 @@
 ﻿using GF.DillyDally.Data.Contracts.Entities;
-using GF.DillyDally.Wpf.Client.Handler.Tasks;
 using MediatR;
 
-namespace GF.DillyDally.Wpf.Client.Presentation.Tasks
+namespace GF.DillyDally.Wpf.Client.Presentation.Tasks.CreateTask
 {
     internal sealed class CreateNewTaskRequest : IRequest<CreateNewTaskResponse>
     {
