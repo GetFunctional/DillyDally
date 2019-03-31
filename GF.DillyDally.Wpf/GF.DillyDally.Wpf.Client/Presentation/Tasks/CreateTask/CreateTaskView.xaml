@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:createTask="clr-namespace:GF.DillyDally.Wpf.Client.Presentation.Tasks.CreateTask"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
     xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
     xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
     xmlns:local="clr-namespace:GF.DillyDally.Wpf.Client.Presentation.Tasks"
@@ -23,6 +24,19 @@
         </dxlc:LayoutItem>
         <dxlc:LayoutItem Label="Description / Notes" LabelPosition="Top">
             <dxe:TextEdit EditValue="{Binding Description, Mode=TwoWay}" EditValuePostMode="Delayed" />
+        </dxlc:LayoutItem>
+
+        <dxlc:LayoutItem Label="Rewards" LabelPosition="Top">
+            <dxlc:LayoutGroup Orientation="Vertical">
+                <ItemsControl ItemsSource="{Binding Rewards, Mode=OneWay}" />
+                <dxlc:LayoutGroup>
+                    <dxe:ComboBoxEdit x:Name="RewardsList" ItemsSource="{Binding AvailableRewards, Mode=OneWay}" />
+                    <dx:SimpleButton
+                        Command="{Binding AddRewardCommand}"
+                        CommandParameter="{Binding ElementName=RewardsList, Path=SelectedItem}"
+                        Content="Hinzufügen" />
+                </dxlc:LayoutGroup>
+            </dxlc:LayoutGroup>
         </dxlc:LayoutItem>
     </dxlc:LayoutGroup>
 </UserControl>

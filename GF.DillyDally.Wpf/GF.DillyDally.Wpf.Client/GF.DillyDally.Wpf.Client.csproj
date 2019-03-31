@@ -244,6 +244,7 @@
       <DependentUpon>CreateTaskView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Presentation\Tasks\CreateTask\CreateTaskViewModel.cs" />
+    <Compile Include="Presentation\Common\Rewards\SelectRewardViewModel.cs" />
     <Compile Include="Presentation\Tasks\OpenTasksListControllerRequest.cs" />
     <Compile Include="Presentation\Tasks\RewardViewModel.cs" />
     <Compile Include="Presentation\Tasks\TasksOverviewController.cs" />

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using GF.DillyDally.Data.Contracts.Entities;
 using GF.DillyDally.Data.Contracts.Entities.Keys;
@@ -24,5 +25,10 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Tasks.CreateTask
         public DateTime? DueDate { get; set; }
 
         public ObservableCollection<RewardViewModel> Rewards { get; set; }
+
+        public IList<SelectRewardViewModel> AvailableRewards
+        {
+            get { throw new NotImplementedException(); }
+        }
     }
 }
