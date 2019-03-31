@@ -3,7 +3,7 @@ using GF.DillyDally.Data.Contracts.Entities.Keys;
 using GF.DillyDally.Mvvmc;
 using MediatR;
 
-namespace GF.DillyDally.Wpf.Client.Presentation.Common.Currencies
+namespace GF.DillyDally.Wpf.Client.Presentation.Common.Currencies.CreateCurrency
 {
     public sealed class NewCurrencyController : ControllerBase<NewCurrencyViewModel>
     {

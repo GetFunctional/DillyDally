@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using GF.DillyDally.Mvvmc;
+using GF.DillyDally.Wpf.Client.Presentation.Common.Currencies.CreateCurrency;
 using MediatR;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Common.Currencies

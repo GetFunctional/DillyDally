@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using GF.DillyDally.Data.Contracts.Entities;
 using GF.DillyDally.Mvvmc;
+using GF.DillyDally.Wpf.Client.Presentation.Tasks.CreateTask;
 using MediatR;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Tasks

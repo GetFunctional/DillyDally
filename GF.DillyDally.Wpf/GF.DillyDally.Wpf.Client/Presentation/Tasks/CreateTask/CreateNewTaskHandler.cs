@@ -4,10 +4,9 @@ using System.Threading.Tasks;
 using System.Windows;
 using GF.DillyDally.Mvvmc;
 using GF.DillyDally.Wpf.Client.Core.Dialoge;
-using GF.DillyDally.Wpf.Client.Presentation.Tasks;
 using MediatR;
 
-namespace GF.DillyDally.Wpf.Client.Handler.Tasks
+namespace GF.DillyDally.Wpf.Client.Presentation.Tasks.CreateTask
 {
     internal sealed class CreateNewTaskHandler : IRequestHandler<CreateNewTaskRequest, CreateNewTaskResponse>
     {

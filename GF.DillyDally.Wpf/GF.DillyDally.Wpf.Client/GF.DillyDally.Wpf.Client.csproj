@@ -172,11 +172,11 @@
     <Compile Include="Core\Exceptions\NavigationTargetNotFoundException.cs" />
     <Compile Include="DillyDallyApplication.cs" />
     <Compile Include="Handler\OpenTasksListControllerHandler.cs" />
-    <Compile Include="Handler\Tasks\CreateNewTaskHandler.cs" />
-    <Compile Include="Handler\Tasks\CreateNewTaskResponse.cs" />
+    <Compile Include="Presentation\Tasks\CreateTask\CreateNewTaskHandler.cs" />
+    <Compile Include="Presentation\Tasks\CreateTask\CreateNewTaskResponse.cs" />
     <Compile Include="IDillyDallyApplication.cs" />
-    <Compile Include="Presentation\Common\Currencies\NewCurrencyController.cs" />
-    <Compile Include="Presentation\Common\Currencies\NewCurrencyViewModel.cs" />
+    <Compile Include="Presentation\Common\Currencies\CreateCurrency\NewCurrencyController.cs" />
+    <Compile Include="Presentation\Common\Currencies\CreateCurrency\NewCurrencyViewModel.cs" />
     <Compile Include="Presentation\Balance\AccountBalanceController.cs" />
     <Compile Include="Presentation\Balance\AccountBalanceControllerFactory.cs" />
     <Compile Include="Presentation\Balance\AccountBalanceViewModel.cs" />
@@ -193,12 +193,12 @@
       <DependentUpon>CurrenciesOverviewView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Presentation\Common\Currencies\CurrenciesOverviewViewModel.cs" />
-    <Compile Include="Presentation\Common\Currencies\NewCurrencyRequestHandler.cs" />
-    <Compile Include="Presentation\Common\Currencies\NewCurrencyResponse.cs" />
-    <Compile Include="Presentation\Common\Currencies\NewCurrencyView.xaml.cs">
+    <Compile Include="Presentation\Common\Currencies\CreateCurrency\NewCurrencyRequestHandler.cs" />
+    <Compile Include="Presentation\Common\Currencies\CreateCurrency\NewCurrencyResponse.cs" />
+    <Compile Include="Presentation\Common\Currencies\CreateCurrency\NewCurrencyView.xaml.cs">
       <DependentUpon>NewCurrencyView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Presentation\Common\Currencies\NewCurrencyRequest.cs" />
+    <Compile Include="Presentation\Common\Currencies\CreateCurrency\NewCurrencyRequest.cs" />
     <Compile Include="Presentation\Common\Currencies\SaveNewCurrencyHandler.cs" />
     <Compile Include="Presentation\Common\Currencies\SaveNewCurrencyRequest.cs" />
     <Compile Include="Presentation\Common\Currencies\SaveNewCurrencyResponse.cs" />
@@ -238,12 +238,12 @@
     </Compile>
     <Compile Include="Presentation\ContentNavigation\SearchContentNavigationTarget.cs" />
     <Compile Include="Presentation\Tasks\AddTaskCommand.cs" />
-    <Compile Include="Presentation\Tasks\CreateNewTaskRequest.cs" />
-    <Compile Include="Presentation\Tasks\CreateTaskController.cs" />
-    <Compile Include="Presentation\Tasks\CreateTaskView.xaml.cs">
+    <Compile Include="Presentation\Tasks\CreateTask\CreateNewTaskRequest.cs" />
+    <Compile Include="Presentation\Tasks\CreateTask\CreateTaskController.cs" />
+    <Compile Include="Presentation\Tasks\CreateTask\CreateTaskView.xaml.cs">
       <DependentUpon>CreateTaskView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Presentation\Tasks\CreateTaskViewModel.cs" />
+    <Compile Include="Presentation\Tasks\CreateTask\CreateTaskViewModel.cs" />
     <Compile Include="Presentation\Tasks\OpenTasksListControllerRequest.cs" />
     <Compile Include="Presentation\Tasks\RewardViewModel.cs" />
     <Compile Include="Presentation\Tasks\TasksOverviewController.cs" />
@@ -272,7 +272,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Presentation\Common\Currencies\NewCurrencyView.xaml">
+    <Page Include="Presentation\Common\Currencies\CreateCurrency\NewCurrencyView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -292,7 +292,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Presentation\Tasks\CreateTaskView.xaml">
+    <Page Include="Presentation\Tasks\CreateTask\CreateTaskView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

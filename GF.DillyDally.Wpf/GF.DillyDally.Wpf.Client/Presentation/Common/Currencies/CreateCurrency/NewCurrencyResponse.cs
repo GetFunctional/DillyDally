@@ -1,6 +1,6 @@
 ﻿using GF.DillyDally.Data.Contracts.Entities.Keys;
 
-namespace GF.DillyDally.Wpf.Client.Presentation.Common.Currencies
+namespace GF.DillyDally.Wpf.Client.Presentation.Common.Currencies.CreateCurrency
 {
     public sealed class NewCurrencyResponse
     {

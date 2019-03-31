@@ -1,6 +1,6 @@
 ﻿using GF.DillyDally.Data.Contracts.Entities.Keys;
 
-namespace GF.DillyDally.Wpf.Client.Handler.Tasks
+namespace GF.DillyDally.Wpf.Client.Presentation.Tasks.CreateTask
 {
     public sealed class CreateNewTaskResponse
     {

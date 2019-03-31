@@ -4,7 +4,7 @@ using GF.DillyDally.Data.Contracts.Entities;
 using GF.DillyDally.Data.Contracts.Entities.Keys;
 using GF.DillyDally.Mvvmc;
 
-namespace GF.DillyDally.Wpf.Client.Presentation.Tasks
+namespace GF.DillyDally.Wpf.Client.Presentation.Tasks.CreateTask
 {
     public sealed class CreateTaskViewModel : ViewModelBase
     {
