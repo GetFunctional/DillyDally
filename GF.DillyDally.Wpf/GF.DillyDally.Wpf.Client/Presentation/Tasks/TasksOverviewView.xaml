@@ -34,10 +34,12 @@
             <ContentControl Content="{Binding OpenTasksListViewModel}" ContentTemplate="{StaticResource TaskListTemplate}" />
 
             <!--  Repeatable Tasks  -->
-            <ContentControl Content="{Binding RepeatableTasksListViewModel}" ContentTemplate="{StaticResource TaskListTemplate}" />
+            <!--<ContentControl Content="{Binding RepeatableTasksListViewModel}" ContentTemplate="{StaticResource TaskListTemplate}" />
 
+            -->
             <!--  Recently completed  -->
-            <ContentControl Content="{Binding RecentlyCompletedTasksListViewModel}" ContentTemplate="{StaticResource TaskListTemplate}" />
+            <!--
+            <ContentControl Content="{Binding RecentlyCompletedTasksListViewModel}" ContentTemplate="{StaticResource TaskListTemplate}" />-->
         </dxlc:LayoutGroup>
     </dxlc:LayoutGroup>
 </UserControl>

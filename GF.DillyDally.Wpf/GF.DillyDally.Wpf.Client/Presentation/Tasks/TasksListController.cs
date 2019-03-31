@@ -24,8 +24,13 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Tasks
 
         private async Task AddTask(string initialName)
         {
-            var newTask = await this._mediator.Send(new CreateNewTaskRequest(initialName, TaskType.SingleCompletion));
-            this.ViewModel.Tasks.Add(this._taskViewModelFactory.CreateFromTask(newTask));
+            // Dialog aufrufen für Details
+            var response = await this._mediator.Send(new CreateNewTaskRequest(initialName, TaskType.SingleCompletion));
+            if (!response.ProcessCanceled)
+            {
+                // Get new Task for List
+                await this.LoadDataAsync();
+            }
         }
 
         public async Task<IList<TaskViewModel>> LoadDataAsync()

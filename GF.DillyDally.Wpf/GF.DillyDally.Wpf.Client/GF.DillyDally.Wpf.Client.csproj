@@ -173,6 +173,7 @@
     <Compile Include="DillyDallyApplication.cs" />
     <Compile Include="Handler\OpenTasksListControllerHandler.cs" />
     <Compile Include="Handler\Tasks\CreateNewTaskHandler.cs" />
+    <Compile Include="Handler\Tasks\CreateNewTaskResponse.cs" />
     <Compile Include="IDillyDallyApplication.cs" />
     <Compile Include="Presentation\Common\Currencies\NewCurrencyController.cs" />
     <Compile Include="Presentation\Common\Currencies\NewCurrencyViewModel.cs" />
@@ -238,7 +239,13 @@
     <Compile Include="Presentation\ContentNavigation\SearchContentNavigationTarget.cs" />
     <Compile Include="Presentation\Tasks\AddTaskCommand.cs" />
     <Compile Include="Presentation\Tasks\CreateNewTaskRequest.cs" />
+    <Compile Include="Presentation\Tasks\CreateTaskController.cs" />
+    <Compile Include="Presentation\Tasks\CreateTaskView.xaml.cs">
+      <DependentUpon>CreateTaskView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Presentation\Tasks\CreateTaskViewModel.cs" />
     <Compile Include="Presentation\Tasks\OpenTasksListControllerRequest.cs" />
+    <Compile Include="Presentation\Tasks\RewardViewModel.cs" />
     <Compile Include="Presentation\Tasks\TasksOverviewController.cs" />
     <Compile Include="Presentation\Tasks\TasksOverviewNavigationTarget.cs" />
     <Compile Include="Presentation\Tasks\TasksListController.cs" />
@@ -282,6 +289,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Presentation\Rewards\AccountsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Presentation\Tasks\CreateTaskView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

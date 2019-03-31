@@ -100,5 +100,23 @@ namespace GF.DillyDally.Data.Sqlite
                 CreatedOn = DateTime.Now
             };
         }
+
+        public TaskEntity CreateTaskEntity(ITaskEntity task)
+        {
+            if (task == null)
+            {
+                throw new ArgumentException();
+            }
+
+            return new TaskEntity
+            {
+                TaskId = task.TaskKey.TaskId,
+                Name = task.Name,
+                Description = task.Description,
+                TaskType = task.TaskType,
+                CreatedOn = task.CreatedOn,
+                DueDate = task.DueDate
+            };
+        }
     }
 }

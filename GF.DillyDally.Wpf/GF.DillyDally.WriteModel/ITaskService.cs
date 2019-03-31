@@ -6,6 +6,7 @@ namespace GF.DillyDally.WriteModel
 {
     public interface ITaskService
     {
-        Task<TaskKey> CreateNewTaskAsync(string initialName, TaskType taskType);
+        ITaskEntity CreateNewTask(string initialName, TaskType requestTaskType);
+        Task<TaskKey> SaveTaskAsync(ITaskEntity task);
     }
 }

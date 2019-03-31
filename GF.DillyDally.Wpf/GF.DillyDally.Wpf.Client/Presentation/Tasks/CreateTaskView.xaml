@@ -1,0 +1,27 @@
+﻿<UserControl
+    x:Class="GF.DillyDally.Wpf.Client.Presentation.Tasks.CreateTaskView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+    xmlns:local="clr-namespace:GF.DillyDally.Wpf.Client.Presentation.Tasks"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DataContext="{d:DesignInstance Type={x:Type local:CreateTaskViewModel}}"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+
+
+    <dxlc:LayoutGroup Orientation="Vertical">
+        <dxlc:LayoutItem Label="Titel" LabelPosition="Top">
+            <dxe:TextEdit
+                EditValue="{Binding TaskName, Mode=TwoWay}"
+                EditValuePostMode="Delayed"
+                MaxLength="255" />
+        </dxlc:LayoutItem>
+        <dxlc:LayoutItem Label="Description / Notes" LabelPosition="Top">
+            <dxe:TextEdit EditValue="{Binding Description, Mode=TwoWay}" EditValuePostMode="Delayed" />
+        </dxlc:LayoutItem>
+    </dxlc:LayoutGroup>
+</UserControl>
