@@ -9,7 +9,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Tasks.CreateTask
     public class CreateTaskController : ControllerBase<CreateTaskViewModel>
     {
         private readonly ITaskService _taskService;
-        private ITaskEntity _newTask;
+        private ITask _newTask;
 
         public CreateTaskController(ITaskService taskService, CreateTaskViewModel viewModel) : base(viewModel)
         {
@@ -37,12 +37,16 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Tasks.CreateTask
             return newTaskKey;
         }
 
-        private ITaskEntity CollectDataFromViewModel()
+        private ITask CollectDataFromViewModel()
         {
             this._newTask.Name = this.ViewModel.TaskName;
             this._newTask.Description = this.ViewModel.Description;
             this._newTask.DueDate = this.ViewModel.DueDate;
-            this._newTask.TaskType = this.ViewModel.TaskType;
+            if (this.ViewModel.TaskType != this._newTask.TaskType)
+            {
+                this._newTask.ChangeTaskType(this.ViewModel.TaskType);
+            }
+
             return this._newTask;
         }
     }

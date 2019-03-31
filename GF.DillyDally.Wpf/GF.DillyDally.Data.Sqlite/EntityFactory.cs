@@ -101,21 +101,28 @@ namespace GF.DillyDally.Data.Sqlite
             };
         }
 
-        public TaskEntity CreateTaskEntity(ITaskEntity task)
+        public TaskEntity CreateTaskEntityForInsert(TaskKey taskKey, string taskDescription, TaskType taskType,
+            DateTime? taskDueDate, string taskName)
         {
-            if (task == null)
-            {
-                throw new ArgumentException();
-            }
-
             return new TaskEntity
             {
-                TaskId = task.TaskKey.TaskId,
-                Name = task.Name,
-                Description = task.Description,
-                TaskType = task.TaskType,
-                CreatedOn = task.CreatedOn,
-                DueDate = task.DueDate
+                TaskId = taskKey.TaskId,
+                Name = taskName,
+                TaskType = taskType,
+                CreatedOn = DateTime.Now,
+                Description = taskDescription
+            };
+        }
+
+        public TaskRewardEntity CreateTaskReward(RewardKey rewardKey, TaskRewardKey taskRewardKey, TaskKey taskKey,
+            int amount)
+        {
+            return new TaskRewardEntity
+            {
+                TaskKey = taskKey,
+                Amount = amount,
+                RewardKey = rewardKey,
+                TaskRewardId = taskRewardKey.TaskRewardId
             };
         }
     }

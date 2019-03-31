@@ -56,6 +56,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DillyDallyTask.cs" />
+    <Compile Include="ITask.cs" />
+    <Compile Include="ITaskReward.cs" />
     <Compile Include="ITaskService.cs" />
     <Compile Include="RandomExtensions.cs" />
     <Compile Include="WriteModelInitializer.cs" />

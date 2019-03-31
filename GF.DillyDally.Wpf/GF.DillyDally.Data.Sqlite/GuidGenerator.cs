@@ -2,7 +2,7 @@
 
 namespace GF.DillyDally.Data.Sqlite
 {
-    internal sealed class GuidGenerator : IGuidGenerator
+    public sealed class GuidGenerator : IGuidGenerator
     {
         #region IGuidGenerator Members
 

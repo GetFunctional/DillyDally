@@ -1,9 +1,11 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using Dapper.Contrib.Extensions;
 using GF.DillyDally.Data.Contracts.Entities;
 using GF.DillyDally.Data.Contracts.Entities.Keys;
 using GF.DillyDally.Data.Sqlite;
 using GF.DillyDally.Data.Sqlite.Entities;
+using Z.Dapper.Plus;
 
 namespace GF.DillyDally.WriteModel
 {
@@ -11,6 +13,7 @@ namespace GF.DillyDally.WriteModel
     {
         private readonly DatabaseFileHandler _databaseFileHandler;
         private readonly EntityFactory _entityFactory = new EntityFactory();
+        private readonly IGuidGenerator _guidGenerator = new GuidGenerator();
 
         public TaskService(DatabaseFileHandler databaseFileHandler)
         {
@@ -19,27 +22,41 @@ namespace GF.DillyDally.WriteModel
 
         #region ITaskService Members
 
-        public ITaskEntity CreateNewTask(string initialName, TaskType requestTaskType)
+        public ITask CreateNewTask(string initialName, TaskType taskType)
         {
-            var taskEntity = this._entityFactory.CreateTaskEntity(initialName, requestTaskType);
+            var taskKey = new TaskKey(this._guidGenerator.GenerateGuid());
+            var taskEntity = new DillyDallyTask(taskKey, initialName, taskType);
             return taskEntity;
         }
 
-        public async Task<TaskKey> SaveTaskAsync(ITaskEntity task)
+        public async Task<TaskKey> SaveTaskAsync(ITask task)
         {
             using (var connection = await this._databaseFileHandler.OpenConnectionAsync())
             {
                 var existingTask = connection.Get<TaskEntity>(task.TaskKey.TaskId);
-                var taskUpdateData = this._entityFactory.CreateTaskEntity(task);
 
                 if (existingTask != null)
                 {
                     // Update
-                    connection.Update(taskUpdateData);
+                    existingTask.Description = task.Description;
+                    existingTask.DueDate = task.DueDate;
+                    existingTask.Name = task.Name;
+                    connection.Update(existingTask);
+
+                    // Rewards updaten
+
                 }
                 else
                 {
-                    connection.Insert(taskUpdateData);
+                    var taskToCreate = this._entityFactory.CreateTaskEntityForInsert(task.TaskKey, task.Description,
+                        task.TaskType, task.DueDate, task.Name);
+                    connection.Insert(taskToCreate);
+
+                    // Rewards eintragen
+                    var rewardsToCreate = task.Rewards.Select(rw =>
+                        this._entityFactory.CreateTaskReward(rw.RewardKey, rw.TaskRewardKey, taskToCreate.TaskKey, rw.Amount)).ToList();
+
+                    connection.BulkInsert(rewardsToCreate);
                 }
 
                 return task.TaskKey;
