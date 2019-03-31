@@ -14,21 +14,21 @@ namespace GF.DillyDally.Data.Sqlite.Tests
         public void Database_Create_ConnectionCouldBeEstablished()
         {
             // Arrange
-            var databaseFileHandler = new DatabaseFileHandler();
             var exampleFile = "ConnectionAfterCreateTest.db";
-            databaseFileHandler.DeleteDatabase(exampleFile);
+            var databaseFileHandler = new DatabaseFileHandler(exampleFile);
+            databaseFileHandler.DeleteDatabase();
 
             // Act && Assert
             var fullexampleFile = Path.Combine(Directories.GetUserApplicationDatabasesDirectory(), exampleFile);
-            Assert.DoesNotThrow(() => databaseFileHandler.CreateNewDatabase(exampleFile));
+            Assert.DoesNotThrow(() => databaseFileHandler.CreateNewDatabase());
             var fileWasCreated = File.Exists(fullexampleFile);
             var connectionWasOpened = false;
-            using (var connection = databaseFileHandler.OpenConnection(exampleFile))
+            using (var connection = databaseFileHandler.OpenConnection())
             {
                 connectionWasOpened = connection.State == ConnectionState.Open;
             }
 
-            databaseFileHandler.DeleteDatabase(exampleFile);
+            databaseFileHandler.DeleteDatabase();
 
 
             Assert.That(fileWasCreated);
@@ -39,45 +39,42 @@ namespace GF.DillyDally.Data.Sqlite.Tests
         public void Database_Create_GetsCreated()
         {
             // Arrange
-            var databaseFileHandler = new DatabaseFileHandler();
             var exampleFile = "CreateFileTest.db";
-            databaseFileHandler.DeleteDatabase(exampleFile);
+            var databaseFileHandler = new DatabaseFileHandler(exampleFile);
+            databaseFileHandler.DeleteDatabase();
 
             // Act && Assert
             var fullexampleFile = Path.Combine(Directories.GetUserApplicationDatabasesDirectory(), exampleFile);
-            Assert.DoesNotThrow(() => databaseFileHandler.CreateNewDatabase(exampleFile));
+            Assert.DoesNotThrow(() => databaseFileHandler.CreateNewDatabase());
 
             Assert.That(File.Exists(fullexampleFile));
-            databaseFileHandler.DeleteDatabase(exampleFile);
+            databaseFileHandler.DeleteDatabase();
         }
 
         [Test]
         public void Database_CreateWithIncorrectNaming_ThrowsException()
         {
-            // Arrange
-            var databaseFileHandler = new DatabaseFileHandler();
-
             // Act && Assert
-            Assert.Throws<ArgumentException>(() => databaseFileHandler.CreateNewDatabase(""));
-            Assert.Throws<ArgumentException>(() => databaseFileHandler.CreateNewDatabase("   "));
-            Assert.Throws<ArgumentException>(() => databaseFileHandler.CreateNewDatabase(null));
+            Assert.Throws<ArgumentException>(() => new DatabaseFileHandler(""));
+            Assert.Throws<ArgumentException>(() => new DatabaseFileHandler("   "));
+            Assert.Throws<ArgumentException>(() => new DatabaseFileHandler(null));
             Assert.Throws<ArgumentException>(() =>
-                databaseFileHandler.CreateNewDatabase(string.Join("", Enumerable.Repeat("a", 256).Select(x => x))));
+                new DatabaseFileHandler(string.Join("", Enumerable.Repeat("a", 256).Select(x => x))));
         }
 
         [Test]
         public void Database_Delete_GetsDeleted()
         {
             // Arrange
-            var databaseFileHandler = new DatabaseFileHandler();
             var exampleFile = "DeleteTest.db";
-            databaseFileHandler.DeleteDatabase(exampleFile);
+            var databaseFileHandler = new DatabaseFileHandler(exampleFile);
+            databaseFileHandler.DeleteDatabase();
 
             // Act
             var fullexampleFile = Path.Combine(Directories.GetUserApplicationDatabasesDirectory(), exampleFile);
-            Assert.DoesNotThrow(() => databaseFileHandler.CreateNewDatabase(exampleFile));
+            Assert.DoesNotThrow(() => databaseFileHandler.CreateNewDatabase());
             Assert.That(File.Exists(fullexampleFile));
-            databaseFileHandler.DeleteDatabase(exampleFile);
+            databaseFileHandler.DeleteDatabase();
 
             // Assert
             Assert.That(!File.Exists(fullexampleFile));

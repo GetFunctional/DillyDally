@@ -1,10 +1,10 @@
-﻿using GF.DillyDally.ReadModel.Common;
+﻿using GF.DillyDally.Data.Contracts.Entities;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Common
 {
-    internal class CommonDataViewModelFactory
+    internal sealed class CommonDataViewModelFactory
     {
-        internal CurrencyViewModel CreateCurrentViewModelFrom(CurrencyEntity currencyEntity)
+        internal CurrencyViewModel CreateCurrentViewModelFrom(ICurrencyEntity currencyEntity)
         {
             return new CurrencyViewModel(currencyEntity.CurrencyKey, currencyEntity.Name, currencyEntity.Code);
         }

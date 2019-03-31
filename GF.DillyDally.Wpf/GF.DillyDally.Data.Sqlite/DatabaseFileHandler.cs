@@ -2,13 +2,17 @@
 using System.Data;
 using System.Data.SQLite;
 using System.IO;
+using System.Threading.Tasks;
 using GF.DillyDally.Data.Contracts;
 
 namespace GF.DillyDally.Data.Sqlite
 {
     public sealed class DatabaseFileHandler
     {
-        public void CreateNewDatabase(string databaseName)
+        private readonly string _databaseName;
+        private readonly string _fullDatabaseFilePath;
+
+        public DatabaseFileHandler(string databaseName)
         {
             if (string.IsNullOrEmpty(databaseName) || string.IsNullOrWhiteSpace(databaseName) ||
                 databaseName.Length > 255)
@@ -16,33 +20,47 @@ namespace GF.DillyDally.Data.Sqlite
                 throw new ArgumentException("Please provider a database name with Length > 0 and Length < 256");
             }
 
-            var databaseFile = !databaseName.EndsWith(".db") ? string.Concat(databaseName, ".db") : databaseName;
-            var fullDatabaseFilePath = Path.Combine(Directories.GetUserApplicationDatabasesDirectory(), databaseFile);
-            if (!File.Exists(fullDatabaseFilePath))
+            this._databaseName = databaseName;
+            this._fullDatabaseFilePath = this.GetFullDatabaseFilePath(databaseName);
+        }
+
+        public bool DatabaseExists()
+        {
+            return File.Exists(this._fullDatabaseFilePath);
+        }
+
+        public void CreateNewDatabase()
+        {
+            if (!this.DatabaseExists())
             {
                 if (!Directory.Exists(Directories.GetUserApplicationDatabasesDirectory()))
                 {
                     Directory.CreateDirectory(Directories.GetUserApplicationDatabasesDirectory());
                 }
 
-                this.CreateDillyDallyDatabase(fullDatabaseFilePath);
+                this.CreateDillyDallyDatabase(this._fullDatabaseFilePath);
             }
         }
 
-        public void DeleteDatabase(string databaseName)
+        public void DeleteDatabase()
         {
-            var fullDatabaseFilePath = GetFullDatabaseFilePath(databaseName);
+            var fullDatabaseFilePath = this.GetFullDatabaseFilePath(this._databaseName);
             if (File.Exists(fullDatabaseFilePath))
             {
                 File.Delete(fullDatabaseFilePath);
             }
         }
 
-        private static string GetFullDatabaseFilePath(string databaseName)
+        private string GetFullDatabaseFilePath(string databaseName)
         {
-            var databaseFile = !databaseName.EndsWith(".db") ? string.Concat(databaseName, ".db") : databaseName;
+            var databaseFile = this.GetDatabaseFileName(databaseName);
             var fullDatabaseFilePath = Path.Combine(Directories.GetUserApplicationDatabasesDirectory(), databaseFile);
             return fullDatabaseFilePath;
+        }
+
+        private string GetDatabaseFileName(string databaseName)
+        {
+            return !databaseName.EndsWith(".db") ? string.Concat(databaseName, ".db") : databaseName;
         }
 
         private void CreateDillyDallyDatabase(string fullDatabaseFilePath)
@@ -50,11 +68,11 @@ namespace GF.DillyDally.Data.Sqlite
             SQLiteConnection.CreateFile(fullDatabaseFilePath);
         }
 
-        private string BuildConnectionString(string databaseFileName)
+        private string BuildConnectionString(string fullDatabaseFilePath)
         {
             var builder = new SQLiteConnectionStringBuilder
             {
-                DataSource = databaseFileName,
+                DataSource = fullDatabaseFilePath,
                 Version = 3,
                 BinaryGUID = true
             };
@@ -62,15 +80,23 @@ namespace GF.DillyDally.Data.Sqlite
             return builder.ConnectionString;
         }
 
-        private IDbConnection CreateConnection(string databaseName)
+        private SQLiteConnection CreateConnection(string fullDatabaseFilePath)
         {
-            var connection = new SQLiteConnection(this.BuildConnectionString(GetFullDatabaseFilePath(databaseName)));
+            var connection = new SQLiteConnection(this.BuildConnectionString(fullDatabaseFilePath));
+            return connection;
+        }
+
+        public IDbConnection OpenConnection()
+        {
+            var connection = this.CreateConnection(this._fullDatabaseFilePath);
             return connection.OpenAndReturn();
         }
 
-        public IDbConnection OpenConnection(string databaseName)
+        public async Task<IDbConnection> OpenConnectionAsync()
         {
-            return this.CreateConnection(databaseName);
+            var connection = this.CreateConnection(this._fullDatabaseFilePath);
+            await connection.OpenAsync();
+            return connection;
         }
     }
 }

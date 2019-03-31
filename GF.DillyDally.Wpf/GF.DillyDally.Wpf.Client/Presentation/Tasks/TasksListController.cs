@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using GF.DillyDally.Data.Contracts.Entities;
 using GF.DillyDally.Mvvmc;
-using GF.DillyDally.ReadModel.Tasks;
 using MediatR;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Tasks
@@ -17,14 +17,14 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Tasks
         public TasksListController(TasksListViewModel viewModel, IMediator mediator) : base(viewModel)
         {
             this._mediator = mediator;
-            this.ViewModel.AddTaskCommand = new AddTaskCommand(this.AddTask);
+            this.ViewModel.AddTaskCommand = new AddTaskCommand(async name => await this.AddTask(name));
         }
 
-        public Func<Task<IList<TaskEntity>>> ExternalDataSource { get; set; }
+        public Func<Task<IList<IOpenTaskEntity>>> ExternalDataSource { get; set; }
 
         private async Task AddTask(string initialName)
         {
-            var newTask = await this._mediator.Send(new CreateNewTaskRequest(initialName));
+            var newTask = await this._mediator.Send(new CreateNewTaskRequest(initialName, TaskType.SingleCompletion));
             this.ViewModel.Tasks.Add(this._taskViewModelFactory.CreateFromTask(newTask));
         }
 

@@ -155,7 +155,6 @@
     <Compile Include="Core\Dialoge\IDialogResult.cs" />
     <Compile Include="Core\Dialoge\IDialogService.cs" />
     <Compile Include="Core\Dialoge\IDialogSettings.cs" />
-    <Compile Include="Handler\GetAllAccountsHandler.cs" />
     <Compile Include="Handler\GetAllCurrenciesHandler.cs" />
     <Compile Include="Handler\NavigationHandler.cs" />
     <Compile Include="Core\Mediation\Navigation\NavigationResponse.cs" />
@@ -186,7 +185,6 @@
       <DependentUpon>BalanceOverviewView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Presentation\Balance\BalanceOverviewViewModel.cs" />
-    <Compile Include="Presentation\Balance\GetAllAccountsRequest.cs" />
     <Compile Include="Presentation\Common\Currencies\AddNewCurrencyCommand.cs" />
     <Compile Include="Presentation\Common\Currencies\CurrenciesOverviewNavigationTarget.cs" />
     <Compile Include="Presentation\Common\Currencies\CurrenciesOverviewController.cs" />
@@ -341,9 +339,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GF.DillyDally.Contracts\GF.DillyDally.Contracts.csproj">
-      <Project>{68646e87-6271-4ae4-bd5f-10615209eb5b}</Project>
-      <Name>GF.DillyDally.Contracts</Name>
+    <ProjectReference Include="..\GF.DillyDally.Data.Contracts\GF.DillyDally.Data.Contracts.csproj">
+      <Project>{ba07a76b-05d6-4682-bad9-2872cb3f95bd}</Project>
+      <Name>GF.DillyDally.Data.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GF.DillyDally.Data.Sqlite\GF.DillyDally.Data.Sqlite.csproj">
+      <Project>{cb0541c1-d36e-4e82-b1f8-d82520b80fd6}</Project>
+      <Name>GF.DillyDally.Data.Sqlite</Name>
     </ProjectReference>
     <ProjectReference Include="..\GF.DillyDally.Mvvmc\GF.DillyDally.Mvvmc.csproj">
       <Project>{2991a81d-e0e1-4143-ac99-395b5191adbd}</Project>

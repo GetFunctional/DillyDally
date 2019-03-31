@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using GF.DillyDally.Data.Contracts.Entities;
 using GF.DillyDally.ReadModel.Common;
 using GF.DillyDally.Wpf.Client.Presentation.Common;
 using MediatR;
 
 namespace GF.DillyDally.Wpf.Client.Handler
 {
-    internal sealed class GetAllCurrenciesHandler : IRequestHandler<GetAllCurrenciesRequest, IList<CurrencyEntity>>
+    internal sealed class GetAllCurrenciesHandler : IRequestHandler<GetAllCurrenciesRequest, IList<ICurrencyEntity>>
     {
         private readonly ICommonDataRepository _commonDataRepository;
 
@@ -16,11 +17,12 @@ namespace GF.DillyDally.Wpf.Client.Handler
             this._commonDataRepository = commonDataRepository;
         }
 
-        #region IRequestHandler<GetAllCurrenciesRequest,IList<CurrencyEntity>> Members
+        #region IRequestHandler<GetAllCurrenciesRequest,IList<ICurrencyEntity>> Members
 
-        public Task<IList<CurrencyEntity>> Handle(GetAllCurrenciesRequest request, CancellationToken cancellationToken)
+        public async Task<IList<ICurrencyEntity>> Handle(GetAllCurrenciesRequest request,
+            CancellationToken cancellationToken)
         {
-            return this._commonDataRepository.GetAllCurrencies();
+            return await this._commonDataRepository.GetAllCurrencies();
         }
 
         #endregion

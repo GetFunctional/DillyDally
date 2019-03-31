@@ -1,5 +1,4 @@
 using System;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Dapper.Contrib.Extensions;
 using GF.DillyDally.Data.Contracts.Entities;
@@ -7,28 +6,22 @@ using GF.DillyDally.Data.Contracts.Entities.Keys;
 
 namespace GF.DillyDally.Data.Sqlite.Entities
 {
-    [System.ComponentModel.DataAnnotations.Schema.Table("Task")]
-    public sealed class TaskEntity : ITaskEntity
+    [Dapper.Contrib.Extensions.Table("OpenTasksView")]
+    public sealed class OpenTaskEntity : IOpenTaskEntity
     {
         private TaskKey _taskKey;
 
-        internal TaskEntity()
-        {
-        }
-
-        [ExplicitKey]
         [Column("TaskId")]
+        [ExplicitKey]
         public Guid TaskId { get; set; }
 
-        #region ITaskEntity Members
+        #region IOpenTaskEntity Members
 
-        [Computed]
         public TaskKey TaskKey
         {
             get { return this._taskKey ?? (this._taskKey = new TaskKey(this.TaskId)); }
         }
 
-        [StringLength(255)]
         [Column("Name")]
         public string Name { get; set; }
 
@@ -41,8 +34,8 @@ namespace GF.DillyDally.Data.Sqlite.Entities
         [Column("DueDate")]
         public DateTime? DueDate { get; set; }
 
-        [Column("CreatedOn")]
-        public DateTime CreatedOn { get; set; }
+        [Column("RewardCount")]
+        public int RewardCount { get; set; }
 
         #endregion
     }

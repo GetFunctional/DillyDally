@@ -16,5 +16,7 @@ namespace GF.DillyDally.Data.Contracts.Entities
         string Description { get; set; }
 
         DateTime? DueDate { get; set; }
+
+        DateTime CreatedOn { get; set; }
     }
 }

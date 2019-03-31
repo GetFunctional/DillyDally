@@ -1,9 +1,11 @@
-﻿using GF.DillyDally.Contracts.Keys;
+﻿using System.Threading.Tasks;
+using GF.DillyDally.Data.Contracts.Entities;
+using GF.DillyDally.Data.Contracts.Entities.Keys;
 
 namespace GF.DillyDally.WriteModel
 {
     public interface ITaskService
     {
-        TaskKey CreateNewTask(string initialName);
+        Task<TaskKey> CreateNewTaskAsync(string initialName, TaskType taskType);
     }
 }

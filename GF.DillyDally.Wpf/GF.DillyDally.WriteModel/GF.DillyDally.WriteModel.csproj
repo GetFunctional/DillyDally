@@ -56,27 +56,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AccountEntity.cs" />
-    <Compile Include="AccountEntityFactory.cs" />
-    <Compile Include="AccountHolderEntity.cs" />
-    <Compile Include="CurrencyRepository.cs" />
     <Compile Include="ITaskService.cs" />
-    <Compile Include="Workload.cs" />
+    <Compile Include="RandomExtensions.cs" />
     <Compile Include="WriteModelInitializer.cs" />
     <Compile Include="CurrencyService.cs" />
-    <Compile Include="CurrencyEntity.cs" />
     <Compile Include="ICurrencyService.cs" />
-    <Compile Include="Tag.cs" />
-    <Compile Include="Task.cs" />
-    <Compile Include="TaskTemplate.cs" />
     <Compile Include="TaskService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StoreConnection.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GF.DillyDally.Contracts\GF.DillyDally.Contracts.csproj">
-      <Project>{68646e87-6271-4ae4-bd5f-10615209eb5b}</Project>
-      <Name>GF.DillyDally.Contracts</Name>
+    <ProjectReference Include="..\GF.DillyDally.Data.Contracts\GF.DillyDally.Data.Contracts.csproj">
+      <Project>{ba07a76b-05d6-4682-bad9-2872cb3f95bd}</Project>
+      <Name>GF.DillyDally.Data.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GF.DillyDally.Data.Sqlite\GF.DillyDally.Data.Sqlite.csproj">
+      <Project>{cb0541c1-d36e-4e82-b1f8-d82520b80fd6}</Project>
+      <Name>GF.DillyDally.Data.Sqlite</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

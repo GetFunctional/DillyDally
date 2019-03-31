@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Data;
 using GF.DillyDally.Data.Contracts.Entities;
 using GF.DillyDally.Data.Sqlite.Entities;
 using Z.Dapper.Plus;
@@ -8,26 +7,34 @@ namespace GF.DillyDally.Data.Sqlite
 {
     public sealed class FoundationDataProvider
     {
+        private readonly DatabaseFileHandler _databaseFileHandler;
         private readonly EntityFactory _entityFactory = new EntityFactory();
 
-
-        public void InsertBaseDataIntoDatabase(IDbConnection connection)
+        public FoundationDataProvider(DatabaseFileHandler databaseFileHandler)
         {
-            using (var transaction = connection.BeginTransaction())
+            this._databaseFileHandler = databaseFileHandler;
+        }
+
+        public void InsertBaseDataIntoDatabase()
+        {
+            using (var connection = this._databaseFileHandler.OpenConnection())
             {
-                // Insert Currencies
-                var baseCurrencies = this.CreateBaseCurrencies();
-                connection.BulkInsert(baseCurrencies);
+                using (var transaction = connection.BeginTransaction())
+                {
+                    // Insert Currencies
+                    var baseCurrencies = this.CreateBaseCurrencies();
+                    connection.BulkInsert(baseCurrencies);
 
-                // Basierend auf den Currencies die Konten erstellen
-                var accountBalances = this.CreateAccountsBalances(baseCurrencies);
-                connection.BulkInsert(accountBalances);
+                    // Basierend auf den Currencies die Konten erstellen
+                    var accountBalances = this.CreateAccountsBalances(baseCurrencies);
+                    connection.BulkInsert(accountBalances);
 
-                // RewardTemplates anlegen
-                var rewardTemplates = this.CreateRewardTemplates(baseCurrencies);
-                connection.BulkInsert(rewardTemplates);
+                    // RewardTemplates anlegen
+                    var rewardTemplates = this.CreateRewardTemplates(baseCurrencies);
+                    connection.BulkInsert(rewardTemplates);
 
-                transaction.Commit();
+                    transaction.Commit();
+                }
             }
         }
 

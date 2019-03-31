@@ -4,9 +4,9 @@ using DevExpress.Mvvm;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Tasks
 {
-    public sealed class AddTaskCommand : AsyncCommand<string>
+    public sealed class AddTaskCommand : DelegateCommand<string>
     {
-        public AddTaskCommand(Func<string, Task> executeMethod) : base(executeMethod)
+        public AddTaskCommand(Action<string> executeMethod) : base(executeMethod)
         {
         }
 

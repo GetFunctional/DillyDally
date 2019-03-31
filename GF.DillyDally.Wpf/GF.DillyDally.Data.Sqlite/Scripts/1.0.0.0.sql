@@ -71,8 +71,9 @@ CREATE TABLE [Task]
 	[TaskId] GUID NOT NULL UNIQUE,
 	[Name] VARCHAR2(255) NOT NULL,
 	[TaskType] int NOT NULL,
-	[Description] VARCHAR2 NOT NULL,
-	[DueDate] DATETIME NULL
+	[Description] VARCHAR2 NULL,
+	[DueDate] DATETIME NULL,
+	[CreatedOn] DATETIME NOT NULL
 	);
 
 CREATE UNIQUE INDEX [IX_Task_TaskId] ON [Task]([TaskId]);
@@ -101,4 +102,21 @@ CREATE TABLE [TaskReward]
 	);
 
 CREATE UNIQUE INDEX [IX_TaskReward_TaskRewardId] ON [TaskReward]([TaskRewardId]);
+GO
+
+CREATE VIEW [OpenTasksView]
+AS
+SELECT 
+       [Task].[TaskId], 
+       [Task].[Name], 
+       [TaskType], 
+       [Description], 
+       [DueDate], 
+       COUNT ([TaskReward].[TaskRewardId]) AS [RewardCount]
+FROM   [Task]
+       LEFT JOIN [TaskCompletion] ON [TaskCompletion].[TaskId] = [Task].[TaskId]
+       LEFT JOIN [TaskReward] ON [TaskReward].[TaskId] = [Task].[TaskId]
+WHERE  [TaskCompletion].[CompletedOn] IS NULL
+       OR  [Task].[TaskType] = 1
+GROUP  BY [Task].[TaskId];
 GO

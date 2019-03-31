@@ -1,17 +1,25 @@
-﻿using GF.DillyDally.ReadModel.Tasks;
+﻿using GF.DillyDally.Data.Contracts.Entities;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Tasks
 {
     public class TaskViewModelFactory
     {
-        public TaskViewModel CreateFromTask(TaskEntity taskEntity)
+        public TaskViewModel CreateFromTask(ITaskEntity taskEntity)
         {
-            return new TaskViewModel
+            return new TaskViewModel(taskEntity.TaskKey)
             {
-                CompletedOn = taskEntity.CompletedOn,
                 Name = taskEntity.Name,
-                Workload = taskEntity.Workload,
                 CreatedOn = taskEntity.CreatedOn,
+                Description = taskEntity.Description,
+                DueDate = taskEntity.DueDate
+            };
+        }
+
+        public TaskViewModel CreateFromTask(IOpenTaskEntity taskEntity)
+        {
+            return new TaskViewModel(taskEntity.TaskKey)
+            {
+                Name = taskEntity.Name,
                 Description = taskEntity.Description,
                 DueDate = taskEntity.DueDate
             };

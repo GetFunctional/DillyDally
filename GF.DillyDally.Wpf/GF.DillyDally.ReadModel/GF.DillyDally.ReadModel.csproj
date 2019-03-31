@@ -33,6 +33,14 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dapper, Version=1.60.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Dapper.Contrib, Version=1.60.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Dapper.Contrib.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -40,35 +48,25 @@
       <HintPath>..\Libs\System.Data.SQLite.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="Z.Dapper.Plus, Version=1.4.10.0, Culture=neutral, PublicKeyToken=59b66d028979105b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Z.Dapper.Plus.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Account\AccountEntity.cs" />
     <Compile Include="Account\AccountRepository.cs" />
     <Compile Include="Account\IAccountRepository.cs" />
     <Compile Include="Common\CommonDataRepository.cs" />
-    <Compile Include="Common\CurrencyEntity.cs" />
-    <Compile Include="Common\CurrencyEntityFactory.cs" />
     <Compile Include="Common\ICommonDataRepository.cs" />
     <Compile Include="ReadModelInitializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StoreConnection.cs" />
     <Compile Include="Tasks\ITasksRepository.cs" />
-    <Compile Include="Tasks\TagEntity.cs" />
-    <Compile Include="Tasks\TaskEntity.cs" />
+    <Compile Include="Tasks\TaskNotFoundInStoreException.cs" />
     <Compile Include="Tasks\TasksRepository.cs" />
-    <Compile Include="Tasks\TaskTemplateEntity.cs" />
-    <Compile Include="Workload.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GF.DillyDally.Contracts\GF.DillyDally.Contracts.csproj">
-      <Project>{68646e87-6271-4ae4-bd5f-10615209eb5b}</Project>
-      <Name>GF.DillyDally.Contracts</Name>
-    </ProjectReference>
     <ProjectReference Include="..\GF.DillyDally.Data.Contracts\GF.DillyDally.Data.Contracts.csproj">
       <Project>{ba07a76b-05d6-4682-bad9-2872cb3f95bd}</Project>
       <Name>GF.DillyDally.Data.Contracts</Name>

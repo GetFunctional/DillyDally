@@ -62,33 +62,12 @@ namespace GF.DillyDally.Data.Sqlite
             };
         }
 
-        //public IRewardEntity CreateRewardEntity()
-        //{
-
-        //}
-
-        //public IRewardTemplateEntity CreateRewardTemplateEntity()
-        //{
-
-        //}
-
-        //public ITaskCompletionEntity CreateTaskCompletionEntity()
-        //{
-
-        //}
-
-        //public ITaskEntity CreateTaskEntity()
-        //{
-
-        //}
-
-        //public ITaskRewardEntity CreateTaskRewardEntity()
-        //{
-
-        //}
-        public RewardTemplateEntity CreateRewardTemplate(CurrencyKey currencyKey, Rarity rarity, string rewardTemplateName, decimal randomValueRangeBegin, decimal randomValueRangeEnd, bool excludeFromRandomization = false,bool excludeFromLootboxRandomization = false)
+        public RewardTemplateEntity CreateRewardTemplate(CurrencyKey currencyKey, Rarity rarity,
+            string rewardTemplateName, decimal randomValueRangeBegin, decimal randomValueRangeEnd,
+            bool excludeFromRandomization = false, bool excludeFromLootboxRandomization = false)
         {
-            if (currencyKey.CurrencyId == Guid.Empty || randomValueRangeEnd < randomValueRangeBegin || string.IsNullOrWhiteSpace(rewardTemplateName))
+            if (currencyKey.CurrencyId == Guid.Empty || randomValueRangeEnd < randomValueRangeBegin ||
+                string.IsNullOrWhiteSpace(rewardTemplateName))
             {
                 throw new ArgumentException();
             }
@@ -103,6 +82,22 @@ namespace GF.DillyDally.Data.Sqlite
                 AmountRangeEnd = randomValueRangeEnd,
                 ExcludeFromRandomization = excludeFromRandomization,
                 ExcludeFromLootboxRandomization = excludeFromLootboxRandomization
+            };
+        }
+
+        public TaskEntity CreateTaskEntity(string initialName, TaskType taskType)
+        {
+            if (string.IsNullOrWhiteSpace(initialName))
+            {
+                throw new ArgumentException();
+            }
+
+            return new TaskEntity
+            {
+                TaskId = this._guidGenerator.GenerateGuid(),
+                Name = initialName,
+                TaskType = taskType,
+                CreatedOn = DateTime.Now
             };
         }
     }

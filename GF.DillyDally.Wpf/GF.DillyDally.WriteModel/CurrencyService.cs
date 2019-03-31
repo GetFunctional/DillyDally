@@ -1,45 +1,40 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Dapper.Contrib.Extensions;
-using GF.DillyDally.Contracts.Keys;
-using Z.Dapper.Plus;
+using GF.DillyDally.Data.Contracts.Entities.Keys;
+using GF.DillyDally.Data.Sqlite;
 
 namespace GF.DillyDally.WriteModel
 {
     public sealed class CurrencyService : ICurrencyService
     {
-        private readonly AccountEntityFactory _accountEntityFactory = new AccountEntityFactory();
-        private readonly CurrencyRepository _currencyRepository = new CurrencyRepository();
+        private readonly DatabaseFileHandler _databaseFileHandler;
+        private readonly EntityFactory _entityFactory = new EntityFactory();
+
+        public CurrencyService(DatabaseFileHandler databaseFileHandler)
+        {
+            this._databaseFileHandler = databaseFileHandler;
+        }
 
         #region ICurrencyService Members
 
         public async Task<CurrencyKey> CreateCurrencyAsync(string name, string code)
         {
-            using (var connection = StoreConnection.CreateConnection())
+            using (var connection = await this._databaseFileHandler.OpenConnectionAsync())
             {
                 using (var transaction = connection.BeginTransaction())
                 {
-                    var allAccountHolders = await this._currencyRepository.GetAllAccountHolderAsync(connection);
-                    var newCurrencyKey = new CurrencyKey(Guid.NewGuid());
-                    var currency = new CurrencyEntity(newCurrencyKey, name, code);
+                    var newCurrency = this._entityFactory.CreateCurrencyEntity(name, code);
+                    var accountBalance =
+                        this._entityFactory.CreateAccountBalanceEntity(newCurrency.CurrencyKey, newCurrency.Name);
 
                     // Create new Currency
-                    connection.Insert(currency);
+                    await connection.InsertAsync(newCurrency);
 
                     // Create new AccountEntity for each holder with matching currency
-                    var newAccountEntities = allAccountHolders.Select(x =>
-                            this._accountEntityFactory.CreateAccountForHolder(new AccountHolderKey(x.AccountHolderId),
-                                currency))
-                        .ToList();
-
-                    if (newAccountEntities.Any())
-                    {
-                        connection.BulkInsert<AccountEntity>(newAccountEntities);
-                    }
+                    await connection.InsertAsync(accountBalance);
 
                     transaction.Commit();
-                    return newCurrencyKey;
+                    return newCurrency.CurrencyKey;
                 }
             }
         }

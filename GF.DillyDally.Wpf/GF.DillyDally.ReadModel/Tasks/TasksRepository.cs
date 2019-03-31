@@ -1,58 +1,48 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
-using GF.DillyDally.Contracts.Keys;
+using Dapper.Contrib.Extensions;
+using GF.DillyDally.Data.Contracts.Entities;
+using GF.DillyDally.Data.Contracts.Entities.Keys;
+using GF.DillyDally.Data.Sqlite;
+using GF.DillyDally.Data.Sqlite.Entities;
 
 namespace GF.DillyDally.ReadModel.Tasks
 {
     internal sealed class TasksRepository : ITasksRepository
     {
+        private readonly DatabaseFileHandler _databaseFileHandler;
+
+        public TasksRepository(DatabaseFileHandler databaseFileHandler)
+        {
+            this._databaseFileHandler = databaseFileHandler;
+        }
+
         #region ITasksRepository Members
 
-        public IList<TaskEntity> GetRepeatingTasks()
+        public async Task<IList<IOpenTaskEntity>> GetOpenTasksAsync()
         {
-            return new List<TaskEntity>();
+            using (var connection = this._databaseFileHandler.OpenConnection())
+            {
+                var openTasks = await connection.GetAllAsync<OpenTaskEntity>();
+                return openTasks.Cast<IOpenTaskEntity>().ToList();
+            }
         }
 
-        public IList<TaskEntity> GetRecentlyCompletedTasks()
+        public async Task<ITaskEntity> GetSpecificTaskAsync(TaskKey taskKey)
         {
-            return new List<TaskEntity>();
-        }
+            using (var connection = this._databaseFileHandler.OpenConnection())
+            {
+                var task = await connection.GetAsync<TaskEntity>(taskKey.TaskId);
+                if (task == null)
+                {
+                    throw new TaskNotFoundInStoreException();
+                }
 
-        public Task<IList<TaskEntity>> GetOpenTasksAsync()
-        {
-            return Task.Delay(2000).ContinueWith(this.ContinuationAction);
-        }
-
-        //public Task<TaskEntity> GetSpecificTask(TaskKey taskKey)
-        //{
-        //    throw new System.NotImplementedException();
-        //}
-
-        //Task<IList<TaskEntity>> ITasksRepository.GetSpecificTasks(IList<TaskKey> taskKeys)
-        //{
-        //    return this.GetSpecificTasks(taskKeys);
-        //}
-
-        public Task<TaskEntity> GetSpecificTask(TaskKey taskKey)
-        {
-            return Task.Run(() => new TaskEntity());
-        }
-
-        public Task<IList<TaskEntity>> GetSpecificTasks(IList<TaskKey> taskKeys)
-        {
-            return Task.Run(() => (IList<TaskEntity>) new List<TaskEntity> {new TaskEntity()});
+                return task;
+            }
         }
 
         #endregion
-
-        public IList<TaskEntity> GetOpenTasks()
-        {
-            return new List<TaskEntity>();
-        }
-
-        private IList<TaskEntity> ContinuationAction(Task obj)
-        {
-            return new List<TaskEntity> {new TaskEntity {Name = "Wow"}};
-        }
     }
 }

@@ -16,20 +16,17 @@ namespace GF.DillyDally.Data.Sqlite.Tests
         public void Setup()
         {
             // Arrange
-            var databaseFileHandler = new DatabaseFileHandler();
-            var databaseUpdater = new DatabaseUpdater(new SqlScriptSelector());
             this._exampleFile = "FoundationDataTests.db";
             var exampleFile = this._exampleFile;
-            databaseFileHandler.DeleteDatabase(exampleFile);
+            var databaseFileHandler = new DatabaseFileHandler(exampleFile);
+            var databaseUpdater = new DatabaseUpdater(new SqlScriptSelector(), databaseFileHandler);
+            databaseFileHandler.DeleteDatabase();
 
             // Act && Assert
             var fullexampleFile = Path.Combine(Directories.GetUserApplicationDatabasesDirectory(), exampleFile);
-            Assert.DoesNotThrow(() => databaseFileHandler.CreateNewDatabase(exampleFile));
+            Assert.DoesNotThrow(() => databaseFileHandler.CreateNewDatabase());
             var fileExists = File.Exists(fullexampleFile);
-            using (var connection = databaseFileHandler.OpenConnection(exampleFile))
-            {
-                Assert.DoesNotThrow(() => databaseUpdater.UpdateDatabase(connection));
-            }
+            Assert.DoesNotThrow(() => databaseUpdater.UpdateDatabase());
 
             Assert.That(fileExists);
         }
@@ -38,18 +35,19 @@ namespace GF.DillyDally.Data.Sqlite.Tests
         public void FoundationData_Insert_AllDataIsPresent()
         {
             // Arrange
-            var foundationDataProvider = new FoundationDataProvider();
-            var databaseFileHandler = new DatabaseFileHandler();
+            var databaseFileHandler = new DatabaseFileHandler(this._exampleFile);
+            var foundationDataProvider = new FoundationDataProvider(databaseFileHandler);
 
             var entityInsertSuccessful = false;
-            using (var connection = databaseFileHandler.OpenConnection(this._exampleFile))
-            {
-                foundationDataProvider.InsertBaseDataIntoDatabase(connection);
+            foundationDataProvider.InsertBaseDataIntoDatabase();
 
+            using (var connection = databaseFileHandler.OpenConnection())
+            {
                 var currencies = connection.GetAll<CurrencyEntity>().ToList();
                 var balances = connection.GetAll<AccountBalanceEntity>().ToList();
                 var rewardTemplates = connection.GetAll<RewardTemplateEntity>().ToList();
-                entityInsertSuccessful = currencies.Count() == 6 && balances.Count() == currencies.Count() && rewardTemplates.Count() == 19;
+                entityInsertSuccessful = currencies.Count() == 6 && balances.Count() == currencies.Count() &&
+                                         rewardTemplates.Count() == 19;
             }
 
             Assert.That(entityInsertSuccessful, Is.True);

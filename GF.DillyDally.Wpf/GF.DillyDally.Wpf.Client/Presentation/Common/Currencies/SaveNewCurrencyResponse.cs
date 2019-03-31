@@ -1,4 +1,4 @@
-using GF.DillyDally.Contracts.Keys;
+using GF.DillyDally.Data.Contracts.Entities.Keys;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Common.Currencies
 {

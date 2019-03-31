@@ -62,6 +62,7 @@
     <Compile Include="ConnectionStringFactory.cs" />
     <Compile Include="DatabaseFileHandler.cs" />
     <Compile Include="DatabaseUpdater.cs" />
+    <Compile Include="Entities\OpenTaskEntity.cs" />
     <Compile Include="EntityFactory.cs" />
     <Compile Include="FoundationDataProvider.cs" />
     <Compile Include="GuidGenerator.cs" />

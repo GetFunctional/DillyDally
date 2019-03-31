@@ -49,6 +49,7 @@
     <Compile Include="Entities\IAccountBalanceEntity.cs" />
     <Compile Include="Entities\IAccountBalanceTransactionEntity.cs" />
     <Compile Include="Entities\ICurrencyEntity.cs" />
+    <Compile Include="Entities\IOpenTaskEntity.cs" />
     <Compile Include="Entities\IRewardEntity.cs" />
     <Compile Include="Entities\IRewardTemplateEntity.cs" />
     <Compile Include="Entities\ITaskCompletionEntity.cs" />

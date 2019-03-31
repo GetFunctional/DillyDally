@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Threading;
 using DevExpress.Xpf.Core;
+using GF.DillyDally.Data.Sqlite;
 using GF.DillyDally.Mvvmc;
 using GF.DillyDally.Wpf.Client.Core;
 using GF.DillyDally.Wpf.Client.Presentation;
@@ -15,6 +16,7 @@ namespace GF.DillyDally.Wpf.Client
     {
         private Bootstrapper _bootstrapper;
         private DillyDallyApplication _dillyDallyApplication;
+        private const string DefaultDatabaseName = "DillyDallyData.db";
 
         protected override void OnStartup(StartupEventArgs e)
         {
@@ -29,8 +31,18 @@ namespace GF.DillyDally.Wpf.Client
             this._bootstrapper = new Bootstrapper(currentApplication, serviceContainer);
             this._bootstrapper.Run();
 
+            var databaseFileHandler = new DatabaseFileHandler(DefaultDatabaseName);
+            if (!databaseFileHandler.DatabaseExists())
+            {
+                databaseFileHandler.CreateNewDatabase();
+                var databaseUpdater = new DatabaseUpdater(new SqlScriptSelector(), databaseFileHandler);
+                databaseUpdater.UpdateDatabase();
+                var baseDataFiller = new FoundationDataProvider(databaseFileHandler);
+                baseDataFiller.InsertBaseDataIntoDatabase();
+            }
+
+            serviceContainer.RegisterInstance(databaseFileHandler);
             this._dillyDallyApplication = this.CreateDillyDallyApplication(serviceContainer);
-            this._dillyDallyApplication.CreateOrUpdateDatabase();
             this._dillyDallyApplication.ShowUi();
         }
 

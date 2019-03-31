@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using GF.DillyDally.Contracts.Keys;
+using GF.DillyDally.Data.Contracts.Entities.Keys;
 using GF.DillyDally.Mvvmc;
 using MediatR;
 

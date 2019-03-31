@@ -7,20 +7,31 @@ namespace GF.DillyDally.Data.Sqlite
     public class DatabaseUpdater
     {
         private readonly SqlScriptSelector _sqlScriptSelector;
+        private readonly DatabaseFileHandler _databaseFileHandler;
 
-        public DatabaseUpdater(SqlScriptSelector sqlScriptSelector)
+        public DatabaseUpdater(SqlScriptSelector sqlScriptSelector, DatabaseFileHandler databaseFileHandler)
         {
             this._sqlScriptSelector = sqlScriptSelector;
+            this._databaseFileHandler = databaseFileHandler;
         }
 
-        public void UpdateDatabase(IDbConnection connection)
+        public void UpdateDatabase()
         {
-            var scriptsToRun = this._sqlScriptSelector.GetUpdateStepsBeginningFromVersion(new Version(1, 0, 0, 0));
-            foreach (var updateStep in scriptsToRun)
+            using (var connection = this._databaseFileHandler.OpenConnection())
             {
-                foreach (var updateStepSqlCommand in updateStep.SqlCommands)
+                using (var transaction = connection.BeginTransaction())
                 {
-                    connection.Execute(updateStepSqlCommand);
+                    var scriptsToRun =
+                        this._sqlScriptSelector.GetUpdateStepsBeginningFromVersion(new Version(1, 0, 0, 0));
+                    foreach (var updateStep in scriptsToRun)
+                    {
+                        foreach (var updateStepSqlCommand in updateStep.SqlCommands)
+                        {
+                            connection.Execute(updateStepSqlCommand);
+                        }
+                    }
+
+                    transaction.Commit();
                 }
             }
         }

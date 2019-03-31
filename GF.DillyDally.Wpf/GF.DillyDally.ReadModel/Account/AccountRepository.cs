@@ -1,75 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
-using GF.DillyDally.Contracts.Keys;
-using GF.DillyDally.ReadModel.Common;
+using Dapper.Contrib.Extensions;
+using GF.DillyDally.Data.Contracts.Entities;
+using GF.DillyDally.Data.Sqlite;
+using GF.DillyDally.Data.Sqlite.Entities;
 
 namespace GF.DillyDally.ReadModel.Account
 {
     internal sealed class AccountRepository : IAccountRepository
     {
-        private readonly ICommonDataRepository _commonDataRepository;
+        private readonly DatabaseFileHandler _databaseFileHandler;
 
-        public AccountRepository(ICommonDataRepository commonDataRepository)
+        public AccountRepository(DatabaseFileHandler databaseFileHandler)
         {
-            this._commonDataRepository = commonDataRepository;
+            this._databaseFileHandler = databaseFileHandler;
         }
 
         #region IAccountRepository Members
 
-        public async Task<IList<AccountEntity>> GetAllAccounts()
+        public async Task<IList<IAccountBalanceEntity>> GetAllAccounts()
         {
-            var currencies = await this._commonDataRepository.GetAllCurrencies();
-            IList<AccountEntity> accounts = new List<AccountEntity>();
-
-            foreach (var currencyEntity in currencies)
+            using (var connection = this._databaseFileHandler.OpenConnection())
             {
-                switch (currencyEntity.Name)
-                {
-                    case "Gametime":
-                        accounts.Add(new AccountEntity
-                        {
-                            Currency = currencyEntity,
-                            Balance = 391.3m,
-                            AccountKey = new AccountKey(Guid.NewGuid())
-                        });
-                        break;
-                    case "GameCredits":
-                        accounts.Add(new AccountEntity
-                        {
-                            Currency = currencyEntity,
-                            Balance = 31.48m,
-                            AccountKey = new AccountKey(Guid.NewGuid())
-                        });
-                        break;
-                    case "Days off":
-                        accounts.Add(new AccountEntity
-                        {
-                            Currency = currencyEntity,
-                            Balance = 0.65m,
-                            AccountKey = new AccountKey(Guid.NewGuid())
-                        });
-                        break;
-                    case "Hearthstone Matches":
-                        accounts.Add(new AccountEntity
-                        {
-                            Currency = currencyEntity,
-                            Balance = 22.27m,
-                            AccountKey = new AccountKey(Guid.NewGuid())
-                        });
-                        break;
-                    case "Gold":
-                        accounts.Add(new AccountEntity
-                        {
-                            Currency = currencyEntity,
-                            Balance = 37.0m,
-                            AccountKey = new AccountKey(Guid.NewGuid())
-                        });
-                        break;
-                }
+                var accounts = await connection.GetAllAsync<AccountBalanceEntity>();
+                return accounts.Cast<IAccountBalanceEntity>().ToList();
             }
-
-            return accounts;
         }
 
         #endregion

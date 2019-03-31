@@ -15,20 +15,17 @@ namespace GF.DillyDally.Data.Sqlite.Tests
         public void Setup()
         {
             // Arrange
-            var databaseFileHandler = new DatabaseFileHandler();
-            var databaseUpdater = new DatabaseUpdater(new SqlScriptSelector());
             this._exampleFile = "EntityTests.db";
             var exampleFile = this._exampleFile;
-            databaseFileHandler.DeleteDatabase(exampleFile);
+            var databaseFileHandler = new DatabaseFileHandler(exampleFile);
+            var databaseUpdater = new DatabaseUpdater(new SqlScriptSelector(), databaseFileHandler);
+            databaseFileHandler.DeleteDatabase();
 
             // Act && Assert
             var fullexampleFile = Path.Combine(Directories.GetUserApplicationDatabasesDirectory(), exampleFile);
-            Assert.DoesNotThrow(() => databaseFileHandler.CreateNewDatabase(exampleFile));
+            Assert.DoesNotThrow(() => databaseFileHandler.CreateNewDatabase());
             var fileExists = File.Exists(fullexampleFile);
-            using (var connection = databaseFileHandler.OpenConnection(exampleFile))
-            {
-                Assert.DoesNotThrow(() => databaseUpdater.UpdateDatabase(connection));
-            }
+            Assert.DoesNotThrow(() => databaseUpdater.UpdateDatabase());
 
             Assert.That(fileExists);
         }
@@ -37,11 +34,11 @@ namespace GF.DillyDally.Data.Sqlite.Tests
         public void Currency_Insert_InsertsRecord()
         {
             // Arrange
-            var databaseFileHandler = new DatabaseFileHandler();
+            var databaseFileHandler = new DatabaseFileHandler(this._exampleFile);
             var entityFactory = new EntityFactory();
 
             var entityInsertSuccessful = false;
-            using (var connection = databaseFileHandler.OpenConnection(this._exampleFile))
+            using (var connection = databaseFileHandler.OpenConnection())
             {
                 var currency = entityFactory.CreateCurrencyEntity("Test1", "T");
                 var currencyId = currency.CurrencyKey;

@@ -13,23 +13,23 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Balance
             new AccountBalanceControllerFactory();
 
         private readonly IMediator _mediator;
-        private List<AccountBalanceController> _accountControllers;
+        //private List<AccountBalanceController> _accountControllers;
 
         public BalanceOverviewController(BalanceOverviewViewModel viewModel, IMediator mediator) : base(viewModel)
         {
             this._mediator = mediator;
         }
 
-        protected override async Task OnInitializeAsync()
-        {
-            var accounts = await this._mediator.Send(new GetAllAccountsRequest());
+        //protected override async Task OnInitializeAsync()
+        //{
+        //    //var accounts = await this._mediator.Send(new GetAllAccountsRequest());
 
-            this._accountControllers = accounts.Select(account =>
-                this._accountBalanceControllerFactory.CreateAccountBalanceController(account)).ToList();
+        //    //this._accountControllers = accounts.Select(account =>
+        //    //    this._accountBalanceControllerFactory.CreateAccountBalanceController(account)).ToList();
 
-            this.ViewModel.AccountBalances =
-                new ObservableCollection<AccountBalanceViewModel>(this._accountControllers
-                    .Select(ctrl => ctrl.ViewModel));
-        }
+        //    //this.ViewModel.AccountBalances =
+        //    //    new ObservableCollection<AccountBalanceViewModel>(this._accountControllers
+        //    //        .Select(ctrl => ctrl.ViewModel));
+        //}
     }
 }

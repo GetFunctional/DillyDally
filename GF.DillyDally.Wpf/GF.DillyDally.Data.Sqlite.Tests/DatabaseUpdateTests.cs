@@ -11,19 +11,16 @@ namespace GF.DillyDally.Data.Sqlite.Tests
         public void Database_CreateAndUpdate_UpdatesRunWithoutException()
         {
             // Arrange
-            var databaseFileHandler = new DatabaseFileHandler();
-            var databaseUpdater = new DatabaseUpdater(new SqlScriptSelector());
             var exampleFile = "UpdateTest.db";
-            databaseFileHandler.DeleteDatabase(exampleFile);
+            var databaseFileHandler = new DatabaseFileHandler(exampleFile);
+            var databaseUpdater = new DatabaseUpdater(new SqlScriptSelector(), databaseFileHandler);
+            databaseFileHandler.DeleteDatabase();
 
             // Act && Assert
             var fullexampleFile = Path.Combine(Directories.GetUserApplicationDatabasesDirectory(), exampleFile);
-            Assert.DoesNotThrow(() => databaseFileHandler.CreateNewDatabase(exampleFile));
+            Assert.DoesNotThrow(() => databaseFileHandler.CreateNewDatabase());
             var fileExists = File.Exists(fullexampleFile);
-            using (var connection = databaseFileHandler.OpenConnection(exampleFile))
-            {
-                Assert.DoesNotThrow(() => databaseUpdater.UpdateDatabase(connection));
-            }
+            Assert.DoesNotThrow(() => databaseUpdater.UpdateDatabase());
 
             Assert.That(fileExists);
         }
