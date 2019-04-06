@@ -7,7 +7,7 @@
     xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:tasks="clr-namespace:GF.DillyDally.Wpf.Client.Presentation.Tasks"
-    xmlns:wpf="clr-namespace:GF.DillyDally.Wpf.Client.Wpf"
+    xmlns:wpf="http://schemas.getfunctional.de/dillydally/wpf"
     d:DataContext="{d:DesignInstance Type={x:Type tasks:TasksOverviewViewModel}}"
     d:DesignHeight="450"
     d:DesignWidth="800"

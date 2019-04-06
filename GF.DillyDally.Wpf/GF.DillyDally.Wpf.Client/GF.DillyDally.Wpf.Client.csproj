@@ -255,8 +255,6 @@
     <Compile Include="Presentation\ShellViewModel.cs" />
     <Compile Include="Presentation\Tasks\TaskViewModel.cs" />
     <Compile Include="Presentation\Tasks\TaskViewModelFactory.cs" />
-    <Compile Include="Wpf\DesignTimeInvestigator.cs" />
-    <Compile Include="Wpf\SharedResourceDictionary.cs" />
     <Page Include="Core\Dialoge\DialogWindowView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -366,6 +364,10 @@
     <ProjectReference Include="..\GF.DillyDally.ReadModel\GF.DillyDally.ReadModel.csproj">
       <Project>{24f297fb-5d67-4d69-b8fa-b3b7c73675d0}</Project>
       <Name>GF.DillyDally.ReadModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GF.DillyDally.Wpf.Theme\GF.DillyDally.Wpf.Theme.csproj">
+      <Project>{3149aaa7-f9dd-4191-924c-e5c0347486dc}</Project>
+      <Name>GF.DillyDally.Wpf.Theme</Name>
     </ProjectReference>
     <ProjectReference Include="..\GF.DillyDally.WriteModel\GF.DillyDally.WriteModel.csproj">
       <Project>{179ba6bf-8201-4a12-b1f4-4e9e54713e84}</Project>

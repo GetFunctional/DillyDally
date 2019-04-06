@@ -2,7 +2,7 @@
 using GF.DillyDally.Data.Contracts.Entities.Keys;
 using GF.DillyDally.Mvvmc;
 
-namespace GF.DillyDally.Wpf.Client.Presentation.Tasks.CreateTask
+namespace GF.DillyDally.Wpf.Client.Presentation.Common.Rewards
 {
     public sealed class SelectRewardViewModel : ViewModelBase
     {

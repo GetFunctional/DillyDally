@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Windows;
 
-namespace GF.DillyDally.Wpf.Client.Wpf
+namespace GF.DillyDally.Wpf.Theme.Wpf
 {
     /// <summary>
     ///     The shared resource dictionary is a specialized resource dictionary

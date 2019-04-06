@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using GF.DillyDally.Data.Contracts.Entities;
 using GF.DillyDally.Data.Contracts.Entities.Keys;
 using GF.DillyDally.Mvvmc;
+using GF.DillyDally.Wpf.Client.Presentation.Common.Rewards;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Tasks.CreateTask
 {

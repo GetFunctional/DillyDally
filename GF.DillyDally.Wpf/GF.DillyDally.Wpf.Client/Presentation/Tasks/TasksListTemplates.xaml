@@ -5,7 +5,15 @@
     xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
     xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
     xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
-    xmlns:tasks="clr-namespace:GF.DillyDally.Wpf.Client.Presentation.Tasks">
+    xmlns:tasks="clr-namespace:GF.DillyDally.Wpf.Client.Presentation.Tasks"
+    xmlns:wpf="http://schemas.getfunctional.de/dillydally/wpf">
+
+    <ResourceDictionary.MergedDictionaries>
+        <wpf:SharedResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Colors.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <SolidColorBrush x:Key="TaskIndicatorColorBlue" Color="{StaticResource HighlightBlue}" />
+
 
     <Style x:Key="RowStyle" TargetType="dxg:RowControl">
         <Style.Triggers>
@@ -22,6 +30,29 @@
         </Style.Triggers>
     </Style>
 
+
+    <DataTemplate x:Key="TaskItemTemplate" DataType="{x:Type tasks:TaskViewModel}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="30" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="40" />
+            </Grid.ColumnDefinitions>
+            <Border
+                Grid.Column="0"
+                Width="4"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Stretch"
+                Background="{StaticResource TaskIndicatorColorBlue}" />
+            <dxlc:LayoutGroup Grid.Column="1" Orientation="Vertical">
+                <TextBlock Text="{Binding DueDate}" />
+                <TextBlock Text="{Binding Name}" />
+                <TextBlock Text="{Binding Description}" />
+            </dxlc:LayoutGroup>
+        </Grid>
+    </DataTemplate>
+
     <DataTemplate x:Key="TaskListTemplate" DataType="{x:Type tasks:TasksListViewModel}">
         <dxlc:LayoutGroup Orientation="Vertical">
             <dxlc:LayoutGroup VerticalAlignment="Top" Orientation="Horizontal">
@@ -33,10 +64,8 @@
                     Content="Hinzufügen" />
             </dxlc:LayoutGroup>
 
-
             <dxg:GridControl
                 dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
-                AutoExpandAllGroups="True"
                 ItemsSource="{Binding Tasks}"
                 ShowBorder="True">
                 <dxg:GridControl.Columns>
@@ -46,18 +75,18 @@
                 <dxg:GridControl.View>
                     <dxg:TableView
                         AllowEditing="False"
-                        CompactPanelShowMode="Never"
+                        CompactPanelShowMode="Always"
+                        DataRowCompactTemplate="{StaticResource CompactRowTemplate}"
                         LeftGroupAreaIndent="0"
                         NavigationStyle="Row"
                         RowDetailsVisibilityMode="Collapsed"
                         RowStyle="{StaticResource RowStyle}"
-                        SearchPanelNullText="Durchsuche Aufgaben"
                         ShowFilterPanelMode="ShowAlways"
                         ShowGroupPanel="False"
                         ShowIndicator="False"
-                        ShowSearchPanelMode="Never"
-                        ShowVerticalLines="False">
-                        <dxg:TableView.FormatConditions>
+                        ShowVerticalLines="False"
+                        SwitchToCompactModeWidth="2000">
+                        <!--<dxg:TableView.FormatConditions>
                             <dxg:FormatCondition ApplyToRow="True" Expression="[Read] = False">
                                 <dxg:FormatCondition.Format>
                                     <dxg:Format FontWeight="Bold" Foreground="#FF0072C6" />
@@ -67,7 +96,7 @@
                         <dxg:TableView.CompactModeFilterItems>
                             <dxg:CompactModeFilterItem DisplayValue="All" />
                             <dxg:CompactModeFilterItem DisplayValue="Unread" EditValue="[Read] = False" />
-                        </dxg:TableView.CompactModeFilterItems>
+                        </dxg:TableView.CompactModeFilterItems>-->
                     </dxg:TableView>
                 </dxg:GridControl.View>
             </dxg:GridControl>

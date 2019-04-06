@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.IO.Packaging;
 using System.Windows;
 
-namespace GF.DillyDally.Wpf.Client.Wpf
+namespace GF.DillyDally.Wpf.Theme.Wpf
 {
     public static class DesignTimeInvestigator
     {
