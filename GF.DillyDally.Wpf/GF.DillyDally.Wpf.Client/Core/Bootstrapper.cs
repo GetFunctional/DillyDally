@@ -2,11 +2,9 @@
 using System.Reflection;
 using System.Windows;
 using GF.DillyDally.Mvvmc;
-using GF.DillyDally.ReadModel;
 using GF.DillyDally.Wpf.Client.Core.DataTemplates;
 using GF.DillyDally.Wpf.Client.Core.Dialoge;
 using GF.DillyDally.Wpf.Client.Core.Navigator;
-using GF.DillyDally.WriteModel;
 using LightInject;
 using MediatR;
 using MediatR.Pipeline;
@@ -17,12 +15,10 @@ namespace GF.DillyDally.Wpf.Client.Core
     {
         private const string DefaultDatabaseName = "DillyDallyData.db";
         private readonly Application _application;
-        private readonly DataStoreInitializer _dataStoreInitializer = new DataStoreInitializer();
+        private readonly DataBootstrapper _dataBootstrapper;
         private readonly DataTemplateInitializer _dataTemplateInitializer = new DataTemplateInitializer();
         private readonly NavigationInitializer _navigationInitializer = new NavigationInitializer();
-        private readonly ReadModelInitializer _readModelInitializer = new ReadModelInitializer();
         private readonly IServiceContainer _serviceContainer;
-        private readonly WriteModelInitializer _writeModelInitializer = new WriteModelInitializer();
 
         public Bootstrapper(Application application) : this(application, new ServiceContainer(new ContainerOptions
             {EnablePropertyInjection = false, EnableVariance = false}))
@@ -33,6 +29,7 @@ namespace GF.DillyDally.Wpf.Client.Core
         {
             this._application = application;
             this._serviceContainer = serviceContainer;
+            this._dataBootstrapper = new DataBootstrapper(serviceContainer);
         }
 
 
@@ -40,14 +37,7 @@ namespace GF.DillyDally.Wpf.Client.Core
         {
             var serviceContainer = this._serviceContainer;
 
-            var databaseFileHandler = this._dataStoreInitializer.Initialize(DefaultDatabaseName);
-            serviceContainer.RegisterInstance(databaseFileHandler);
-
-            this._readModelInitializer.Initialize((serviceType, implementation) =>
-                serviceContainer.Register(serviceType, implementation), (serviceType, implementation) => serviceContainer.RegisterInstance(serviceType,implementation));
-            this._writeModelInitializer.Initialize((serviceType, implementation) =>
-                serviceContainer.Register(serviceType, implementation), (serviceType, implementation) => serviceContainer.RegisterInstance(serviceType,implementation), databaseFileHandler.GetConnectionString());
-
+            this._dataBootstrapper.Run(DefaultDatabaseName);
             this.RegisterMediatRFramework(serviceContainer);
             this.RegisterMvvmcDependencies(serviceContainer);
             this.RegisterControllersAndViewModels(serviceContainer);

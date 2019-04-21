@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Data.SQLite;
-using System.Windows.Input;
-using GF.DillyDally.Data.Sqlite;
 using GF.DillyDally.WriteModel.Deprecated;
+using GF.DillyDally.WriteModel.Domain.Lanes;
 using GF.DillyDally.WriteModel.Infrastructure;
 using NEventStore;
 using NEventStore.Logging;
@@ -23,19 +22,17 @@ namespace GF.DillyDally.WriteModel
         public void Initialize(Action<Type, Type> registerType, Action<Type, object> registerTypeInstance,
             string dillyDallyStoreConnectionString)
         {
-
             var storeEvents = this.WireupEventStore(dillyDallyStoreConnectionString);
             var eventDispatcher = this.CreateEventDispatcher();
             var aggregateRepository = new AggregateRepository(storeEvents, eventDispatcher);
             var commandDispatcher = this.CreateCommandDispatcher(aggregateRepository);
             registerTypeInstance(typeof(IStoreEvents), storeEvents);
-            registerTypeInstance(typeof(ICommandDispatcher),commandDispatcher);
-            registerTypeInstance(typeof(EventDispatcher),eventDispatcher);
+            registerTypeInstance(typeof(ICommandDispatcher), commandDispatcher);
+            registerTypeInstance(typeof(EventDispatcher), eventDispatcher);
 
             this.RegisterServices(registerType);
         }
 
-     
 
         private void RegisterServices(Action<Type, Type> registerType)
         {
@@ -69,6 +66,8 @@ namespace GF.DillyDally.WriteModel
         {
             var eventDispatcher = new EventDispatcher();
 
+            var laneEventHandler = new LaneEventHandler();
+            eventDispatcher.RegisterHandler(laneEventHandler);
 
             return eventDispatcher;
         }
@@ -77,70 +76,11 @@ namespace GF.DillyDally.WriteModel
         {
             var commandDispatcher = new CommandDispatcher(aggregateRepository);
 
-            //var customerCommandHandler = new TestCommandHandler();
-            //commandDispatcher.RegisterHandler<CreateCustomer>(customerCommandHandler);
-            //commandDispatcher.RegisterHandler<MarkCustomerAsPreferred>(customerCommandHandler);
+            var lanecommandHandler = new LaneCommandHandler();
+            commandDispatcher.RegisterHandler(lanecommandHandler);
 
-            //var productCommandHandler = new ProductCommandHandler(aggregateRepository);
-            //commandDispatcher.RegisterHandler(productCommandHandler);
-
-            //var basketCommandHandler = new BasketCommandHandler(aggregateRepository);
-            //commandDispatcher.RegisterHandler<CreateBasket>(basketCommandHandler);
-            //commandDispatcher.RegisterHandler<AddItemToBasket>(basketCommandHandler);
-            //commandDispatcher.RegisterHandler<ProceedToCheckout>(basketCommandHandler);
-            //commandDispatcher.RegisterHandler<CheckoutBasket>(basketCommandHandler);
-            //commandDispatcher.RegisterHandler<MakePayment>(basketCommandHandler);
-
-            //var orderCommandHanler = new OrderHandler(aggregateRepository);
-            //commandDispatcher.RegisterHandler<ApproveOrder>(orderCommandHanler);
-            //commandDispatcher.RegisterHandler<StartShippingProcess>(orderCommandHanler);
-            //commandDispatcher.RegisterHandler<CancelOrder>(orderCommandHanler);
-            //commandDispatcher.RegisterHandler<ShipOrder>(orderCommandHanler);
 
             return commandDispatcher;
         }
     }
-
-    //internal class TestCommandHandler : CommandHandlerBase, ICommandHandler<CreateTestAggregateCommand>
-    //{
-    //    private readonly IAggregateRepository _aggregateRepository;
-    //    private readonly IGuidGenerator
-
-    //    public TestCommandHandler(IAggregateRepository aggregateRepository)
-    //    {
-    //        this._aggregateRepository = aggregateRepository;
-    //    }
-
-    //    public IAggregateRoot Handle(CreateTestAggregateCommand command)
-    //    {
-    //        try
-    //        {
-    //            var basket = _aggregateRepository.GetById<TestAggregate>(command.AggregateId);
-    //            throw new InvalidOperationException();
-    //        }
-    //        catch
-    //        {
-    //            //Expect this
-    //        }
-
-    //        return TestAggregate.Create(GuidGenerator.GenerateGuid(), command.Title, command.Category);
-    //    }
-    //}
-
-    //internal class TestAggregate
-    //{
-    //}
-
-    //internal class CreateTestAggregateCommand : AggregateCommandBase
-    //{
-    //    public string Title { get; }
-    //    public string Category { get; }
-
-    //    public CreateTestAggregateCommand(string title, string category) : base(Guid.NewGuid())
-    //    {
-    //        this.Title = title;
-    //        this.Category = category;
-    //    }
-
-    //}
 }

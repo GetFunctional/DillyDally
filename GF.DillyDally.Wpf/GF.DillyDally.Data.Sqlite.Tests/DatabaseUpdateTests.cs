@@ -14,7 +14,7 @@ namespace GF.DillyDally.Data.Sqlite.Tests
             var exampleFile = "UpdateTest.db";
             var databaseFileHandler = new DatabaseFileHandler(exampleFile);
             var databaseUpdater = new DatabaseUpdater(new SqlScriptSelector(), databaseFileHandler);
-            databaseFileHandler.DeleteDatabase();
+            databaseFileHandler.DeleteDatabaseIfExists();
 
             // Act && Assert
             var fullexampleFile = Path.Combine(Directories.GetUserApplicationDatabasesDirectory(), exampleFile);

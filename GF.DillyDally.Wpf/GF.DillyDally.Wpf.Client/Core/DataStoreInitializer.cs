@@ -17,8 +17,6 @@ namespace GF.DillyDally.Wpf.Client.Core
                 databaseFileHandler.CreateNewDatabase();
                 var databaseUpdater = new DatabaseUpdater(new SqlScriptSelector(), databaseFileHandler);
                 databaseUpdater.UpdateDatabase();
-                var baseDataFiller = new FoundationDataProvider(databaseFileHandler);
-                baseDataFiller.InsertBaseDataIntoDatabase();
             }
 
             return databaseFileHandler;

@@ -42,7 +42,7 @@ namespace GF.DillyDally.Data.Sqlite
             }
         }
 
-        public void DeleteDatabase()
+        public void DeleteDatabaseIfExists()
         {
             var fullDatabaseFilePath = this.GetFullDatabaseFilePath(this._databaseName);
             if (File.Exists(fullDatabaseFilePath))

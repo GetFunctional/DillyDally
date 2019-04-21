@@ -141,6 +141,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Core\DataBootstrapper.cs" />
     <Compile Include="Core\DataStoreInitializer.cs" />
     <Compile Include="Core\DataTemplates\DataTemplateInitializer.cs" />
     <Compile Include="Core\Dialoge\DialogCommandResult.cs" />

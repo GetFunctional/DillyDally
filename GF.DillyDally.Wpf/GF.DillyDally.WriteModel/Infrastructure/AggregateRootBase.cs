@@ -16,7 +16,7 @@ namespace GF.DillyDally.WriteModel.Infrastructure
             return this._uncommitedEvents;
         }
 
-        public int Version { get; protected set; } = -1;
+        public int Version { get; protected set; } = 0;
 
         public Guid AggregateId { get; protected set; }
 
