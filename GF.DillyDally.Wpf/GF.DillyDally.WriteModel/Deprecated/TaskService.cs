@@ -5,7 +5,6 @@ using GF.DillyDally.Data.Contracts.Entities;
 using GF.DillyDally.Data.Contracts.Entities.Keys;
 using GF.DillyDally.Data.Sqlite;
 using GF.DillyDally.Data.Sqlite.Entities;
-using Z.Dapper.Plus;
 
 namespace GF.DillyDally.WriteModel.Deprecated
 {
@@ -56,7 +55,7 @@ namespace GF.DillyDally.WriteModel.Deprecated
                     var rewardsToCreate = task.Rewards.Select(rw =>
                         this._entityFactory.CreateTaskReward(rw.RewardKey, rw.TaskRewardKey, taskToCreate.TaskKey, rw.Amount)).ToList();
 
-                    connection.BulkInsert(rewardsToCreate);
+                    //connection.BulkInsert(rewardsToCreate);
                 }
 
                 return task.TaskKey;

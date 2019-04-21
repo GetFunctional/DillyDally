@@ -53,10 +53,6 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="Z.Dapper.Plus, Version=1.4.10.0, Culture=neutral, PublicKeyToken=59b66d028979105b, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libs\Z.Dapper.Plus.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConnectionStringFactory.cs" />
@@ -64,7 +60,7 @@
     <Compile Include="DatabaseUpdater.cs" />
     <Compile Include="Deprecated\OpenTaskEntity.cs" />
     <Compile Include="EntityFactory.cs" />
-    <Compile Include="FoundationDataProvider.cs" />
+    <Compile Include="Deprecated\FoundationDataProvider.cs" />
     <Compile Include="GuidGenerator.cs" />
     <Compile Include="IGuidGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

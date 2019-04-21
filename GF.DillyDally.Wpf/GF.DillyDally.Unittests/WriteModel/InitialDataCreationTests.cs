@@ -7,7 +7,7 @@ using GF.DillyDally.WriteModel.Infrastructure;
 using LightInject;
 using NUnit.Framework;
 
-namespace GF.DillyDally.WriteModel.Tests
+namespace GF.DillyDally.Unittests.WriteModel
 {
     [TestFixture]
     public class InitialDataCreationTests

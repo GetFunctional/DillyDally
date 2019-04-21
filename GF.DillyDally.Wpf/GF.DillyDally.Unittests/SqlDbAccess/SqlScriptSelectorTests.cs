@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Linq;
+using GF.DillyDally.Data.Sqlite;
 using NUnit.Framework;
 
-namespace GF.DillyDally.Data.Sqlite.Tests
+namespace GF.DillyDally.Unittests.SqlDbAccess
 {
     [TestFixture]
     internal class SqlScriptSelectorTests

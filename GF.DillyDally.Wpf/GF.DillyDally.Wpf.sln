@@ -17,11 +17,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GF.DillyDally.Data.Sqlite",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GF.DillyDally.Data.Contracts", "GF.DillyDally.Data.Contracts\GF.DillyDally.Data.Contracts.csproj", "{BA07A76B-05D6-4682-BAD9-2872CB3F95BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GF.DillyDally.Data.Sqlite.Tests", "GF.DillyDally.Data.Sqlite.Tests\GF.DillyDally.Data.Sqlite.Tests.csproj", "{A85EC9F2-D776-48C8-9021-02C19F3B9C2F}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GF.DillyDally.Wpf.Theme", "GF.DillyDally.Wpf.Theme\GF.DillyDally.Wpf.Theme.csproj", "{3149AAA7-F9DD-4191-924C-E5C0347486DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GF.DillyDally.WriteModel.Tests", "GF.DillyDally.WriteModel.Tests\GF.DillyDally.WriteModel.Tests.csproj", "{93052946-271D-4A9B-974D-3283049C7765}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GF.DillyDally.Unittests", "GF.DillyDally.Unittests\GF.DillyDally.Unittests.csproj", "{F177746B-54B7-4853-A694-1F80E4641B0A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,18 +55,14 @@ Global
 		{BA07A76B-05D6-4682-BAD9-2872CB3F95BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA07A76B-05D6-4682-BAD9-2872CB3F95BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA07A76B-05D6-4682-BAD9-2872CB3F95BD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A85EC9F2-D776-48C8-9021-02C19F3B9C2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A85EC9F2-D776-48C8-9021-02C19F3B9C2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A85EC9F2-D776-48C8-9021-02C19F3B9C2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A85EC9F2-D776-48C8-9021-02C19F3B9C2F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3149AAA7-F9DD-4191-924C-E5C0347486DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3149AAA7-F9DD-4191-924C-E5C0347486DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3149AAA7-F9DD-4191-924C-E5C0347486DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3149AAA7-F9DD-4191-924C-E5C0347486DC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{93052946-271D-4A9B-974D-3283049C7765}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{93052946-271D-4A9B-974D-3283049C7765}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{93052946-271D-4A9B-974D-3283049C7765}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{93052946-271D-4A9B-974D-3283049C7765}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F177746B-54B7-4853-A694-1F80E4641B0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F177746B-54B7-4853-A694-1F80E4641B0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F177746B-54B7-4853-A694-1F80E4641B0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F177746B-54B7-4853-A694-1F80E4641B0A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

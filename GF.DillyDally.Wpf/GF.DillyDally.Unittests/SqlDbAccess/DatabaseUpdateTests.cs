@@ -1,8 +1,9 @@
 ﻿using System.IO;
 using GF.DillyDally.Data.Contracts;
+using GF.DillyDally.Data.Sqlite;
 using NUnit.Framework;
 
-namespace GF.DillyDally.Data.Sqlite.Tests
+namespace GF.DillyDally.Unittests.SqlDbAccess
 {
     [TestFixture]
     public class DatabaseUpdateTests
