@@ -6,19 +6,29 @@
     xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:presentation="clr-namespace:GF.DillyDally.Wpf.Client.Presentation"
+    xmlns:wpf="http://schemas.getfunctional.de/dillydally/wpf"
     Title="Dilly Dally"
     Width="1280"
     Height="800"
     d:DataContext="{d:DesignInstance Type={x:Type presentation:ShellViewModel}}"
     mc:Ignorable="d">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <wpf:SharedResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Typography.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
 
-    <dxlc:LayoutGroup Orientation="Vertical">
-        <dxlc:LayoutGroup VerticalAlignment="Top" Orientation="Horizontal">
-            <TextBlock FontSize="28" Text="Rewardsytem" />
-            <TextBlock FontSize="28" Text="Ernährung" />
-            <TextBlock FontSize="28" Text="Sonstiges" />
+    <ContentControl FontFamily="{StaticResource SourceSansProBlack}" FontSize="{StaticResource ParagraphFontSize}">
+        <dxlc:LayoutGroup Orientation="Vertical">
+            <dxlc:LayoutGroup VerticalAlignment="Top" Orientation="Horizontal">
+                <TextBlock FontSize="28" Text="Rewardsytem" />
+                <TextBlock FontSize="28" Text="Ernährung" />
+                <TextBlock FontSize="28" Text="Sonstiges" />
+            </dxlc:LayoutGroup>
+
+            <ContentControl Content="{Binding ContentBrowserViewModel, Mode=OneWay}" />
         </dxlc:LayoutGroup>
-
-        <ContentControl Content="{Binding ContentBrowserViewModel, Mode=OneWay}" />
-    </dxlc:LayoutGroup>
+    </ContentControl>
 </Window>

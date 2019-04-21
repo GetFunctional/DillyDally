@@ -39,6 +39,19 @@
     <Reference Include="Dapper.Contrib">
       <HintPath>..\Libs\Dapper.Contrib.dll</HintPath>
     </Reference>
+    <Reference Include="NEventStore">
+      <HintPath>..\Libs\NEventStore.dll</HintPath>
+    </Reference>
+    <Reference Include="NEventStore.Persistence.Sql">
+      <HintPath>..\Libs\NEventStore.Persistence.Sql.dll</HintPath>
+    </Reference>
+    <Reference Include="NEventStore.Serialization.Json">
+      <HintPath>..\Libs\NEventStore.Serialization.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -56,15 +69,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DillyDallyTask.cs" />
-    <Compile Include="ITask.cs" />
-    <Compile Include="ITaskReward.cs" />
-    <Compile Include="ITaskService.cs" />
+    <Compile Include="AuthorizationPipelineHook.cs" />
+    <Compile Include="Deprecated\DillyDallyTask.cs" />
+    <Compile Include="Deprecated\ITask.cs" />
+    <Compile Include="Deprecated\ITaskReward.cs" />
+    <Compile Include="Deprecated\ITaskService.cs" />
     <Compile Include="RandomExtensions.cs" />
     <Compile Include="WriteModelInitializer.cs" />
-    <Compile Include="CurrencyService.cs" />
-    <Compile Include="ICurrencyService.cs" />
-    <Compile Include="TaskService.cs" />
+    <Compile Include="Deprecated\CurrencyService.cs" />
+    <Compile Include="Deprecated\ICurrencyService.cs" />
+    <Compile Include="Deprecated\TaskService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

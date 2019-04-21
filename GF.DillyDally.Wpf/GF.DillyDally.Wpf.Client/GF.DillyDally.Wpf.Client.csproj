@@ -141,6 +141,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Core\DataStoreInitializer.cs" />
     <Compile Include="Core\DataTemplates\DataTemplateInitializer.cs" />
     <Compile Include="Core\Dialoge\DialogCommandResult.cs" />
     <Compile Include="Core\Dialoge\DialogCommandViewModel.cs" />
@@ -155,6 +156,7 @@
     <Compile Include="Core\Dialoge\IDialogResult.cs" />
     <Compile Include="Core\Dialoge\IDialogService.cs" />
     <Compile Include="Core\Dialoge\IDialogSettings.cs" />
+    <Compile Include="Core\Navigator\NavigationTargetBase.cs" />
     <Compile Include="Handler\GetAllCurrenciesHandler.cs" />
     <Compile Include="Handler\NavigationHandler.cs" />
     <Compile Include="Core\Mediation\Navigation\NavigationResponse.cs" />
@@ -172,6 +174,12 @@
     <Compile Include="Core\Exceptions\NavigationTargetNotFoundException.cs" />
     <Compile Include="DillyDallyApplication.cs" />
     <Compile Include="Handler\OpenTasksListControllerHandler.cs" />
+    <Compile Include="Presentation\ShowCase\ShowCaseController.cs" />
+    <Compile Include="Presentation\ShowCase\ShowCaseNavigationTarget.cs" />
+    <Compile Include="Presentation\ShowCase\ShowCaseView.xaml.cs">
+      <DependentUpon>ShowCaseView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Presentation\ShowCase\ShowCaseViewModel.cs" />
     <Compile Include="Presentation\Tasks\CreateTask\CreateNewTaskHandler.cs" />
     <Compile Include="Presentation\Tasks\CreateTask\CreateNewTaskResponse.cs" />
     <Compile Include="IDillyDallyApplication.cs" />
@@ -288,6 +296,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Presentation\Rewards\AccountsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Presentation\ShowCase\ShowCaseView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

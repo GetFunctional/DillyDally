@@ -15,7 +15,9 @@ namespace GF.DillyDally.Wpf.Client.Core
 {
     internal sealed class Bootstrapper
     {
+        private const string DefaultDatabaseName = "DillyDallyData.db";
         private readonly Application _application;
+        private readonly DataStoreInitializer _dataStoreInitializer = new DataStoreInitializer();
         private readonly DataTemplateInitializer _dataTemplateInitializer = new DataTemplateInitializer();
         private readonly NavigationInitializer _navigationInitializer = new NavigationInitializer();
         private readonly ReadModelInitializer _readModelInitializer = new ReadModelInitializer();
@@ -33,17 +35,23 @@ namespace GF.DillyDally.Wpf.Client.Core
             this._serviceContainer = serviceContainer;
         }
 
+
         public void Run()
         {
             var serviceContainer = this._serviceContainer;
+
+            var databaseFileHandler = this._dataStoreInitializer.Initialize(DefaultDatabaseName);
+            serviceContainer.RegisterInstance(databaseFileHandler);
+
+            this._readModelInitializer.Initialize((serviceType, implementation) =>
+                serviceContainer.Register(serviceType, implementation));
+            this._writeModelInitializer.Initialize((serviceType, implementation) =>
+                serviceContainer.Register(serviceType, implementation), databaseFileHandler.GetConnectionString());
+
             this.RegisterMediatRFramework(serviceContainer);
             this.RegisterMvvmcDependencies(serviceContainer);
             this.RegisterControllersAndViewModels(serviceContainer);
             this.RegisterDialogService(serviceContainer);
-            this._readModelInitializer.Initialize((serviceType, implementation) =>
-                serviceContainer.Register(serviceType, implementation));
-            this._writeModelInitializer.Initialize((serviceType, implementation) =>
-                serviceContainer.Register(serviceType, implementation));
             this._dataTemplateInitializer.RegisterDataTemplates(this._application);
             this._navigationInitializer.InitializeNavigation(serviceContainer);
         }

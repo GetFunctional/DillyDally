@@ -98,5 +98,10 @@ namespace GF.DillyDally.Data.Sqlite
             await connection.OpenAsync();
             return connection;
         }
+
+        public string GetConnectionString()
+        {
+            return this.BuildConnectionString(this._fullDatabaseFilePath);
+        }
     }
 }

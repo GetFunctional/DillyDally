@@ -26,6 +26,7 @@ using System.Windows.Markup;
 [assembly: XmlnsPrefix("http://schemas.getfunctional.de/dillydally/wpf", "wpf")]
 [assembly: XmlnsDefinition("http://schemas.getfunctional.de/dillydally/styleguide", "GF.DillyDally.Wpf.Theme.StyleGuide")]
 [assembly: XmlnsDefinition("http://schemas.getfunctional.de/dillydally/wpf", "GF.DillyDally.Wpf.Theme.Wpf")]
+[assembly: XmlnsDefinition("http://schemas.getfunctional.de/dillydally/wpf", "GF.DillyDally.Wpf.Theme.Extensions")]
 
 //Um mit dem Erstellen lokalisierbarer Anwendungen zu beginnen, legen Sie
 //<UICulture>ImCodeVerwendeteKultur</UICulture> in der .csproj-Datei
