@@ -7,16 +7,16 @@ namespace GF.DillyDally.ReadModel
 {
     public sealed class ReadModelInitializer
     {
-        public void Initialize(Action<Type, Type> serviceRegister)
+        public void Initialize(Action<Type, Type> registerType, Action<Type, Type> registerTypeInstance)
         {
-            RegisterTypes(serviceRegister);
+            RegisterTypes(registerType, registerTypeInstance);
         }
 
-        private static void RegisterTypes(Action<Type, Type> serviceRegister)
+        private static void RegisterTypes(Action<Type, Type> registerType, Action<Type, Type> registerTypeInstance)
         {
-            serviceRegister(typeof(ITasksRepository), typeof(TasksRepository));
-            serviceRegister(typeof(ICommonDataRepository), typeof(CommonDataRepository));
-            serviceRegister(typeof(IAccountRepository), typeof(AccountRepository));
+            registerType(typeof(ITasksRepository), typeof(TasksRepository));
+            registerType(typeof(ICommonDataRepository), typeof(CommonDataRepository));
+            registerType(typeof(IAccountRepository), typeof(AccountRepository));
         }
     }
 }

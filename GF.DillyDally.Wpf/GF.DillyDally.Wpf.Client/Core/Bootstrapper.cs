@@ -44,9 +44,9 @@ namespace GF.DillyDally.Wpf.Client.Core
             serviceContainer.RegisterInstance(databaseFileHandler);
 
             this._readModelInitializer.Initialize((serviceType, implementation) =>
-                serviceContainer.Register(serviceType, implementation));
+                serviceContainer.Register(serviceType, implementation), (serviceType, implementation) => serviceContainer.RegisterInstance(serviceType,implementation));
             this._writeModelInitializer.Initialize((serviceType, implementation) =>
-                serviceContainer.Register(serviceType, implementation), databaseFileHandler.GetConnectionString());
+                serviceContainer.Register(serviceType, implementation), (serviceType, implementation) => serviceContainer.RegisterInstance(serviceType,implementation), databaseFileHandler.GetConnectionString());
 
             this.RegisterMediatRFramework(serviceContainer);
             this.RegisterMvvmcDependencies(serviceContainer);
