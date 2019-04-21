@@ -5,7 +5,7 @@ namespace GF.DillyDally.WriteModel.Infrastructure
 {
     internal interface IAggregateRepository
     {
-        IEnumerable<IAggregateEvent> Save<TAggregate>(TAggregate aggregate) where TAggregate : IAggregate;
-        TAggregate GetById<TAggregate>(Guid aggregateId) where TAggregate : IAggregate, new();
+        IEnumerable<IAggregateEvent> Save<TAggregate>(TAggregate aggregate) where TAggregate : IAggregateRoot;
+        TAggregate GetById<TAggregate>(Guid aggregateId) where TAggregate : IAggregateRoot, new();
     }
 }

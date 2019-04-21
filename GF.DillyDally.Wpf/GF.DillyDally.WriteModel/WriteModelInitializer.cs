@@ -2,6 +2,7 @@
 using System.Data.SQLite;
 using System.Windows.Input;
 using GF.DillyDally.Data.Sqlite;
+using GF.DillyDally.WriteModel.Deprecated;
 using GF.DillyDally.WriteModel.Infrastructure;
 using NEventStore;
 using NEventStore.Logging;
@@ -28,7 +29,7 @@ namespace GF.DillyDally.WriteModel
             var aggregateRepository = new AggregateRepository(storeEvents, eventDispatcher);
             var commandDispatcher = this.CreateCommandDispatcher(aggregateRepository);
             registerTypeInstance(typeof(IStoreEvents), storeEvents);
-            registerTypeInstance(typeof(CommandDispatcher),commandDispatcher);
+            registerTypeInstance(typeof(ICommandDispatcher),commandDispatcher);
             registerTypeInstance(typeof(EventDispatcher),eventDispatcher);
 
             this.RegisterServices(registerType);
@@ -110,7 +111,7 @@ namespace GF.DillyDally.WriteModel
     //        this._aggregateRepository = aggregateRepository;
     //    }
 
-    //    public IAggregate Handle(CreateTestAggregateCommand command)
+    //    public IAggregateRoot Handle(CreateTestAggregateCommand command)
     //    {
     //        try
     //        {

@@ -7,7 +7,7 @@ using GF.DillyDally.Data.Sqlite;
 using GF.DillyDally.Data.Sqlite.Entities;
 using Z.Dapper.Plus;
 
-namespace GF.DillyDally.WriteModel
+namespace GF.DillyDally.WriteModel.Deprecated
 {
     internal sealed class TaskService : ITaskService
     {

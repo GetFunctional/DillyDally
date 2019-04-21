@@ -20,7 +20,7 @@ namespace GF.DillyDally.WriteModel.Infrastructure
 
         #region IAggregateRepository Members
 
-        public IEnumerable<IAggregateEvent> Save<TAggregate>(TAggregate aggregate) where TAggregate : IAggregate
+        public IEnumerable<IAggregateEvent> Save<TAggregate>(TAggregate aggregate) where TAggregate : IAggregateRoot
         {
             var events = aggregate.GetUncommitedEvents();
             if (!events.Any())
@@ -65,7 +65,7 @@ namespace GF.DillyDally.WriteModel.Infrastructure
             return events;
         }
 
-        public TAggregate GetById<TAggregate>(Guid aggregateId) where TAggregate : IAggregate, new()
+        public TAggregate GetById<TAggregate>(Guid aggregateId) where TAggregate : IAggregateRoot, new()
         {
             var latestSnapshot = this._eventStore.Advanced.GetSnapshot(aggregateId, int.MaxValue);
             IEventStream stream = null;
@@ -86,14 +86,14 @@ namespace GF.DillyDally.WriteModel.Infrastructure
 
         #endregion
 
-        private int CalculateExpectedVersion(IAggregate aggregate)
+        private int CalculateExpectedVersion(IAggregateRoot aggregateRoot)
         {
-            var expectedVersion = aggregate.Version - aggregate.GetUncommitedEvents().Count;
+            var expectedVersion = aggregateRoot.Version - aggregateRoot.GetUncommitedEvents().Count;
             return expectedVersion;
         }
 
         private TResult BuildAggregate<TResult>(ICollection<EventMessage> eventMessages)
-            where TResult : IAggregate, new()
+            where TResult : IAggregateRoot, new()
         {
             var result = new TResult();
             foreach (var eventMessage in eventMessages)

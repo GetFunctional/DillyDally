@@ -2,13 +2,17 @@
 
 namespace GF.DillyDally.WriteModel.Infrastructure
 {
-    public abstract class AggregateCommandBase : IAggregateCommand
+    internal abstract class AggregateEventBase : IAggregateEvent
     {
-        protected AggregateCommandBase(Guid aggregateId)
+        protected AggregateEventBase(Guid aggregateId)
         {
             this.AggregateId = aggregateId;
         }
 
+        #region IAggregateEvent Members
+
         public Guid AggregateId { get; }
+
+        #endregion
     }
 }

@@ -5,15 +5,15 @@ using ICommand = System.Windows.Input.ICommand;
 
 namespace GF.DillyDally.WriteModel.Infrastructure
 {
-    internal sealed class CommandDispatcher
+    internal sealed class CommandDispatcher : ICommandDispatcher
     {
         private readonly IAggregateRepository _aggregateRepository;
-        private readonly Dictionary<Type, Func<object, IAggregate>> _routes;
+        private readonly Dictionary<Type, Func<object, IAggregateRoot>> _routes;
 
         public CommandDispatcher(IAggregateRepository aggregateRepository)
         {
             this._aggregateRepository = aggregateRepository;
-            this._routes = new Dictionary<Type, Func<object, IAggregate>>();
+            this._routes = new Dictionary<Type, Func<object, IAggregateRoot>>();
         }
 
         public void RegisterHandler<TCommand>(ICommandHandler<TCommand> handler) where TCommand : class, IAggregateCommand
@@ -21,7 +21,7 @@ namespace GF.DillyDally.WriteModel.Infrastructure
             this._routes.Add(typeof(TCommand), command => handler.Handle(command as TCommand));
         }
 
-        public void ExecuteCommand<TCommand>(TCommand command) where TCommand : IAggregateCommand
+        public Guid ExecuteCommand<TCommand>(TCommand command) where TCommand : IAggregateCommand
         {
             var commandType = command.GetType();
 
@@ -30,8 +30,10 @@ namespace GF.DillyDally.WriteModel.Infrastructure
                 throw new MissingCommandHandlerException("Missing handler for " + commandType.Name);
             }
 
-            var aggregate = this._routes[commandType](command);
+            var commandHandler = this._routes[commandType];
+            var aggregate = commandHandler(command);
             var savedEvents = this._aggregateRepository.Save(aggregate);
+            return aggregate.AggregateId;
         }
     }
 }

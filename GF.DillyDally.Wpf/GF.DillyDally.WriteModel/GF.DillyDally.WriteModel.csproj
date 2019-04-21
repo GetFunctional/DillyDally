@@ -69,6 +69,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\Lanes\CreateLaneCommand.cs" />
+    <Compile Include="Domain\Lanes\InvalidColorCodeGivenException.cs" />
+    <Compile Include="Domain\Lanes\LaneAggregateRoot.cs" />
+    <Compile Include="Domain\Lanes\LaneCommandHandler.cs" />
+    <Compile Include="Domain\Lanes\LaneCreatedEvent.cs" />
+    <Compile Include="Domain\Lanes\LaneEventHandler.cs" />
+    <Compile Include="Infrastructure\AggregateEventBase.cs" />
     <Compile Include="Infrastructure\AggregateCommandBase.cs" />
     <Compile Include="AuthorizationPipelineHook.cs" />
     <Compile Include="Infrastructure\CommandHandlerBase.cs" />
@@ -76,14 +83,15 @@
     <Compile Include="Deprecated\ITask.cs" />
     <Compile Include="Deprecated\ITaskReward.cs" />
     <Compile Include="Deprecated\ITaskService.cs" />
-    <Compile Include="Infrastructure\AggregateBase.cs" />
+    <Compile Include="Infrastructure\AggregateRootBase.cs" />
     <Compile Include="Infrastructure\AggregateRepository.cs" />
     <Compile Include="Infrastructure\AggregateRevisionException.cs" />
     <Compile Include="Infrastructure\CommandDispatcher.cs" />
     <Compile Include="Infrastructure\EventDispatcher.cs" />
-    <Compile Include="Infrastructure\IAggregate.cs" />
+    <Compile Include="Infrastructure\IAggregateRoot.cs" />
     <Compile Include="Infrastructure\IAggregateCommand.cs" />
     <Compile Include="Infrastructure\IAggregateRepository.cs" />
+    <Compile Include="Infrastructure\ICommandDispatcher.cs" />
     <Compile Include="Infrastructure\ICommandHandler.cs" />
     <Compile Include="Infrastructure\IAggregateEvent.cs" />
     <Compile Include="Infrastructure\IEventHandler.cs" />

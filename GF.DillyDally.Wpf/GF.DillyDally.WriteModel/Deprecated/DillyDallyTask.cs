@@ -4,7 +4,7 @@ using System.Linq;
 using GF.DillyDally.Data.Contracts.Entities;
 using GF.DillyDally.Data.Contracts.Entities.Keys;
 
-namespace GF.DillyDally.WriteModel
+namespace GF.DillyDally.WriteModel.Deprecated
 {
     internal sealed class DillyDallyTask : ITask
     {

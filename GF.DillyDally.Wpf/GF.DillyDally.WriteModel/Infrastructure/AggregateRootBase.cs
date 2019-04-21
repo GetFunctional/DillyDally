@@ -3,13 +3,13 @@ using System.Collections.Generic;
 
 namespace GF.DillyDally.WriteModel.Infrastructure
 {
-    internal class AggregateBase : IAggregate
+    internal class AggregateRootBase : IAggregateRoot
     {
         private readonly Dictionary<Type, Action<IAggregateEvent>> _routes = new Dictionary<Type, Action<IAggregateEvent>>();
 
         private readonly List<IAggregateEvent> _uncommitedEvents = new List<IAggregateEvent>();
 
-        #region IAggregate Members
+        #region IAggregateRoot Members
 
         public IReadOnlyList<IAggregateEvent> GetUncommitedEvents()
         {

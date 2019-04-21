@@ -6,7 +6,7 @@ namespace GF.DillyDally.WriteModel.Infrastructure
 {
     internal sealed class EventDispatcher
     {
-        private readonly Dictionary<Type, IList<Action<IAggregateEvent>>> _routes;
+        private readonly IDictionary<Type, IList<Action<IAggregateEvent>>> _routes;
 
         public EventDispatcher()
         {

@@ -3,7 +3,7 @@ using Dapper.Contrib.Extensions;
 using GF.DillyDally.Data.Contracts.Entities.Keys;
 using GF.DillyDally.Data.Sqlite;
 
-namespace GF.DillyDally.WriteModel
+namespace GF.DillyDally.WriteModel.Deprecated
 {
     public sealed class CurrencyService : ICurrencyService
     {
