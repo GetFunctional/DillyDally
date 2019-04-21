@@ -40,76 +40,76 @@
   <ItemGroup>
     <Reference Include="Dapper, Version=1.60.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\Dapper.dll</HintPath>
+      <HintPath>..\..\Libs\Dapper.dll</HintPath>
     </Reference>
     <Reference Include="Dapper.Contrib">
-      <HintPath>..\Libs\Dapper.Contrib.dll</HintPath>
+      <HintPath>..\..\Libs\Dapper.Contrib.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.Data.v18.2, Version=18.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\DevExpress.Data.v18.2.dll</HintPath>
+      <HintPath>..\..\Libs\DevExpress.Data.v18.2.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.Mvvm.v18.2, Version=18.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\DevExpress.Mvvm.v18.2.dll</HintPath>
+      <HintPath>..\..\Libs\DevExpress.Mvvm.v18.2.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.Printing.v18.2.Core, Version=18.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\DevExpress.Printing.v18.2.Core.dll</HintPath>
+      <HintPath>..\..\Libs\DevExpress.Printing.v18.2.Core.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.Xpf.Controls.v18.2, Version=18.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\DevExpress.Xpf.Controls.v18.2.dll</HintPath>
+      <HintPath>..\..\Libs\DevExpress.Xpf.Controls.v18.2.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.Xpf.Core.v18.2, Version=18.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\DevExpress.Xpf.Core.v18.2.dll</HintPath>
+      <HintPath>..\..\Libs\DevExpress.Xpf.Core.v18.2.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.Xpf.Core.v18.2.Extensions, Version=18.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\DevExpress.Xpf.Core.v18.2.Extensions.dll</HintPath>
+      <HintPath>..\..\Libs\DevExpress.Xpf.Core.v18.2.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.Xpf.Grid.v18.2, Version=18.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\DevExpress.Xpf.Grid.v18.2.dll</HintPath>
+      <HintPath>..\..\Libs\DevExpress.Xpf.Grid.v18.2.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.Xpf.Grid.v18.2.Core, Version=18.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\DevExpress.Xpf.Grid.v18.2.Core.dll</HintPath>
+      <HintPath>..\..\Libs\DevExpress.Xpf.Grid.v18.2.Core.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.Xpf.Grid.v18.2.Extensions, Version=18.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\DevExpress.Xpf.Grid.v18.2.Extensions.dll</HintPath>
+      <HintPath>..\..\Libs\DevExpress.Xpf.Grid.v18.2.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.Xpf.Layout.v18.2.Core, Version=18.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\DevExpress.Xpf.Layout.v18.2.Core.dll</HintPath>
+      <HintPath>..\..\Libs\DevExpress.Xpf.Layout.v18.2.Core.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.Xpf.LayoutControl.v18.2, Version=18.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\DevExpress.Xpf.LayoutControl.v18.2.dll</HintPath>
+      <HintPath>..\..\Libs\DevExpress.Xpf.LayoutControl.v18.2.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.Xpf.Themes.VS2017Light.v18.2, Version=18.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\DevExpress.Xpf.Themes.VS2017Light.v18.2.dll</HintPath>
+      <HintPath>..\..\Libs\DevExpress.Xpf.Themes.VS2017Light.v18.2.dll</HintPath>
     </Reference>
     <Reference Include="LightInject, Version=5.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\LightInject.dll</HintPath>
+      <HintPath>..\..\Libs\LightInject.dll</HintPath>
     </Reference>
     <Reference Include="MediatR, Version=6.0.0.0, Culture=neutral, PublicKeyToken=bb9a41a5e8aaa7e2, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\MediatR.dll</HintPath>
+      <HintPath>..\..\Libs\MediatR.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\Libs\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.SQLite, Version=1.0.110.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\System.Data.SQLite.dll</HintPath>
+      <HintPath>..\..\Libs\System.Data.SQLite.dll</HintPath>
     </Reference>
     <Reference Include="System.IO" />
     <Reference Include="System.Linq.Expressions" />
@@ -133,7 +133,7 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="Z.Dapper.Plus">
-      <HintPath>..\Libs\Z.Dapper.Plus.dll</HintPath>
+      <HintPath>..\..\Libs\Z.Dapper.Plus.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

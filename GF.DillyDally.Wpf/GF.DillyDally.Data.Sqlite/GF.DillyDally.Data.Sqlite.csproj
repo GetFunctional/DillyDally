@@ -35,17 +35,17 @@
   <ItemGroup>
     <Reference Include="Dapper, Version=1.60.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\Dapper.dll</HintPath>
+      <HintPath>..\..\Libs\Dapper.dll</HintPath>
     </Reference>
     <Reference Include="Dapper.Contrib, Version=1.60.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\Dapper.Contrib.dll</HintPath>
+      <HintPath>..\..\Libs\Dapper.Contrib.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.SQLite">
-      <HintPath>..\Libs\System.Data.SQLite.dll</HintPath>
+      <HintPath>..\..\Libs\System.Data.SQLite.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -55,7 +55,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="Z.Dapper.Plus, Version=1.4.10.0, Culture=neutral, PublicKeyToken=59b66d028979105b, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\Z.Dapper.Plus.dll</HintPath>
+      <HintPath>..\..\Libs\Z.Dapper.Plus.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

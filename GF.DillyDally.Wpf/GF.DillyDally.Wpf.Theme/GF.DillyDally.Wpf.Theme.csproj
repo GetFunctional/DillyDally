@@ -36,47 +36,47 @@
   <ItemGroup>
     <Reference Include="DevExpress.Data.v18.2, Version=18.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\DevExpress.Data.v18.2.dll</HintPath>
+      <HintPath>..\..\Libs\DevExpress.Data.v18.2.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.Mvvm.v18.2, Version=18.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\DevExpress.Mvvm.v18.2.dll</HintPath>
+      <HintPath>..\..\Libs\DevExpress.Mvvm.v18.2.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.Printing.v18.2.Core, Version=18.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\DevExpress.Printing.v18.2.Core.dll</HintPath>
+      <HintPath>..\..\Libs\DevExpress.Printing.v18.2.Core.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.Xpf.Controls.v18.2, Version=18.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\DevExpress.Xpf.Controls.v18.2.dll</HintPath>
+      <HintPath>..\..\Libs\DevExpress.Xpf.Controls.v18.2.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.Xpf.Core.v18.2, Version=18.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\DevExpress.Xpf.Core.v18.2.dll</HintPath>
+      <HintPath>..\..\Libs\DevExpress.Xpf.Core.v18.2.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.Xpf.Core.v18.2.Extensions, Version=18.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\DevExpress.Xpf.Core.v18.2.Extensions.dll</HintPath>
+      <HintPath>..\..\Libs\DevExpress.Xpf.Core.v18.2.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.Xpf.Grid.v18.2, Version=18.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\DevExpress.Xpf.Grid.v18.2.dll</HintPath>
+      <HintPath>..\..\Libs\DevExpress.Xpf.Grid.v18.2.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.Xpf.Grid.v18.2.Core, Version=18.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\DevExpress.Xpf.Grid.v18.2.Core.dll</HintPath>
+      <HintPath>..\..\Libs\DevExpress.Xpf.Grid.v18.2.Core.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.Xpf.Grid.v18.2.Extensions, Version=18.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\DevExpress.Xpf.Grid.v18.2.Extensions.dll</HintPath>
+      <HintPath>..\..\Libs\DevExpress.Xpf.Grid.v18.2.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.Xpf.Layout.v18.2.Core, Version=18.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\DevExpress.Xpf.Layout.v18.2.Core.dll</HintPath>
+      <HintPath>..\..\Libs\DevExpress.Xpf.Layout.v18.2.Core.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.Xpf.LayoutControl.v18.2, Version=18.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\DevExpress.Xpf.LayoutControl.v18.2.dll</HintPath>
+      <HintPath>..\..\Libs\DevExpress.Xpf.LayoutControl.v18.2.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
