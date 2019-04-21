@@ -20,7 +20,7 @@ namespace GF.DillyDally.WriteModel.Infrastructure
 
         #region IAggregateRepository Members
 
-        public IEnumerable<IEvent> Save<TAggregate>(TAggregate aggregate) where TAggregate : IAggregate
+        public IEnumerable<IAggregateEvent> Save<TAggregate>(TAggregate aggregate) where TAggregate : IAggregate
         {
             var events = aggregate.GetUncommitedEvents();
             if (!events.Any())
@@ -98,7 +98,7 @@ namespace GF.DillyDally.WriteModel.Infrastructure
             var result = new TResult();
             foreach (var eventMessage in eventMessages)
             {
-                result.ApplyEvent((IEvent) eventMessage.Body);
+                result.ApplyEvent((IAggregateEvent) eventMessage.Body);
             }
 
             return result;

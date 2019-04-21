@@ -16,12 +16,12 @@ namespace GF.DillyDally.WriteModel.Infrastructure
             this._routes = new Dictionary<Type, Func<object, IAggregate>>();
         }
 
-        public void RegisterHandler<TCommand>(ICommandHandler<TCommand> handler) where TCommand : class, ICommand
+        public void RegisterHandler<TCommand>(ICommandHandler<TCommand> handler) where TCommand : class, IAggregateCommand
         {
             this._routes.Add(typeof(TCommand), command => handler.Handle(command as TCommand));
         }
 
-        public void ExecuteCommand<TCommand>(TCommand command) where TCommand : ICommand
+        public void ExecuteCommand<TCommand>(TCommand command) where TCommand : IAggregateCommand
         {
             var commandType = command.GetType();
 

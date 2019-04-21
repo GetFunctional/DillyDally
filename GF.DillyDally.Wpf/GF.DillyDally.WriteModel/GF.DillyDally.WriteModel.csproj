@@ -69,7 +69,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Infrastructure\AggregateCommandBase.cs" />
     <Compile Include="AuthorizationPipelineHook.cs" />
+    <Compile Include="Infrastructure\CommandHandlerBase.cs" />
     <Compile Include="Deprecated\DillyDallyTask.cs" />
     <Compile Include="Deprecated\ITask.cs" />
     <Compile Include="Deprecated\ITaskReward.cs" />
@@ -80,9 +82,10 @@
     <Compile Include="Infrastructure\CommandDispatcher.cs" />
     <Compile Include="Infrastructure\EventDispatcher.cs" />
     <Compile Include="Infrastructure\IAggregate.cs" />
+    <Compile Include="Infrastructure\IAggregateCommand.cs" />
     <Compile Include="Infrastructure\IAggregateRepository.cs" />
     <Compile Include="Infrastructure\ICommandHandler.cs" />
-    <Compile Include="Infrastructure\IEvent.cs" />
+    <Compile Include="Infrastructure\IAggregateEvent.cs" />
     <Compile Include="Infrastructure\IEventHandler.cs" />
     <Compile Include="Infrastructure\MissingCommandHandlerException.cs" />
     <Compile Include="RandomExtensions.cs" />

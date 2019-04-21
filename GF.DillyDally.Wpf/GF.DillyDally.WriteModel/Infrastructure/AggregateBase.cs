@@ -5,13 +5,13 @@ namespace GF.DillyDally.WriteModel.Infrastructure
 {
     internal class AggregateBase : IAggregate
     {
-        private readonly Dictionary<Type, Action<IEvent>> _routes = new Dictionary<Type, Action<IEvent>>();
+        private readonly Dictionary<Type, Action<IAggregateEvent>> _routes = new Dictionary<Type, Action<IAggregateEvent>>();
 
-        private readonly List<IEvent> _uncommitedEvents = new List<IEvent>();
+        private readonly List<IAggregateEvent> _uncommitedEvents = new List<IAggregateEvent>();
 
         #region IAggregate Members
 
-        public IReadOnlyList<IEvent> GetUncommitedEvents()
+        public IReadOnlyList<IAggregateEvent> GetUncommitedEvents()
         {
             return this._uncommitedEvents;
         }
@@ -20,12 +20,12 @@ namespace GF.DillyDally.WriteModel.Infrastructure
 
         public Guid AggregateId { get; protected set; }
 
-        public void ApplyEvent(IEvent @event)
+        public void ApplyEvent(IAggregateEvent aggregateEvent)
         {
-            var eventType = @event.GetType();
+            var eventType = aggregateEvent.GetType();
             if (this._routes.ContainsKey(eventType))
             {
-                this._routes[eventType](@event);
+                this._routes[eventType](aggregateEvent);
             }
 
             this.Version++;
@@ -33,10 +33,10 @@ namespace GF.DillyDally.WriteModel.Infrastructure
 
         #endregion
 
-        protected void RaiseEvent(IEvent @event)
+        protected void RaiseEvent(IAggregateEvent aggregateEvent)
         {
-            this.ApplyEvent(@event);
-            this._uncommitedEvents.Add(@event);
+            this.ApplyEvent(aggregateEvent);
+            this._uncommitedEvents.Add(aggregateEvent);
         }
 
         protected void RegisterTransition<T>(Action<T> transition) where T : class
@@ -44,7 +44,7 @@ namespace GF.DillyDally.WriteModel.Infrastructure
             this._routes.Add(typeof(T), o => transition(o as T));
         }
 
-        public IEnumerable<IEvent> UncommitedEvents()
+        public IEnumerable<IAggregateEvent> UncommitedEvents()
         {
             return this._uncommitedEvents;
         }

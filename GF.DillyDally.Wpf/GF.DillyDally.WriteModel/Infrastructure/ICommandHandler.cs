@@ -2,7 +2,7 @@
 
 namespace GF.DillyDally.WriteModel.Infrastructure
 {
-    internal interface ICommandHandler<in TCommand> where TCommand : ICommand
+    internal interface ICommandHandler<in TCommand> where TCommand : IAggregateCommand
     {
         IAggregate Handle(TCommand command);
     }
