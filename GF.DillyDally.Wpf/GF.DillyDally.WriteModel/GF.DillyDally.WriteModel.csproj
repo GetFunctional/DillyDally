@@ -59,6 +59,11 @@
     <Compile Include="Domain\Lanes\LaneCommandHandler.cs" />
     <Compile Include="Domain\Lanes\LaneCreatedEvent.cs" />
     <Compile Include="Domain\Lanes\LaneEventHandler.cs" />
+    <Compile Include="Domain\Rewards\CreateRewardCommand.cs" />
+    <Compile Include="Domain\Rewards\RewardAggregateRoot.cs" />
+    <Compile Include="Domain\Rewards\RewardCommandHandler.cs" />
+    <Compile Include="Domain\Rewards\RewardCreatedEvent.cs" />
+    <Compile Include="Domain\Rewards\RewardEventHandler.cs" />
     <Compile Include="Infrastructure\AggregateEventBase.cs" />
     <Compile Include="Infrastructure\AggregateCommandBase.cs" />
     <Compile Include="AuthorizationPipelineHook.cs" />

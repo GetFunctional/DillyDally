@@ -4,16 +4,17 @@ namespace GF.DillyDally.Wpf.Client.Core
 {
     internal class DataStoreInitializer
     {
-        public DatabaseFileHandler Initialize(string defaultDatabaseName)
+        public DatabaseFileHandler Initialize(InitializationSettings settings)
         {
-            return this.InitializeDatabase(defaultDatabaseName);
+            return this.InitializeDatabase(settings);
         }
 
-        private DatabaseFileHandler InitializeDatabase(string defaultDatabaseName)
+        private DatabaseFileHandler InitializeDatabase(InitializationSettings settings)
         {
-            var databaseFileHandler = new DatabaseFileHandler(defaultDatabaseName);
-            if (!databaseFileHandler.DatabaseExists())
+            var databaseFileHandler = new DatabaseFileHandler(settings.DatabaseName);
+            if (settings.EnforceRecreationOfDatabase || !databaseFileHandler.DatabaseExists())
             {
+                databaseFileHandler.DeleteDatabaseIfExists();
                 databaseFileHandler.CreateNewDatabase();
                 var databaseUpdater = new DatabaseUpdater(new SqlScriptSelector(), databaseFileHandler);
                 databaseUpdater.UpdateDatabase();

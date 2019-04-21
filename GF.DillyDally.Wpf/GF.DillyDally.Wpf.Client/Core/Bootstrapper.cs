@@ -37,7 +37,7 @@ namespace GF.DillyDally.Wpf.Client.Core
         {
             var serviceContainer = this._serviceContainer;
 
-            this._dataBootstrapper.Run(DefaultDatabaseName);
+            this._dataBootstrapper.Run(new InitializationSettings(DefaultDatabaseName, false,true));
             this.RegisterMediatRFramework(serviceContainer);
             this.RegisterMvvmcDependencies(serviceContainer);
             this.RegisterControllersAndViewModels(serviceContainer);

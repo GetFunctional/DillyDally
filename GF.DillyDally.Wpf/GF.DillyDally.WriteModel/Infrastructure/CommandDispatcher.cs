@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using ICommand = System.Windows.Input.ICommand;
 
 namespace GF.DillyDally.WriteModel.Infrastructure
 {
@@ -16,10 +14,7 @@ namespace GF.DillyDally.WriteModel.Infrastructure
             this._routes = new Dictionary<Type, Func<object, IAggregateRoot>>();
         }
 
-        public void RegisterHandler<TCommand>(ICommandHandler<TCommand> handler) where TCommand : class, IAggregateCommand
-        {
-            this._routes.Add(typeof(TCommand), command => handler.Handle(command as TCommand));
-        }
+        #region ICommandDispatcher Members
 
         public Guid ExecuteCommand<TCommand>(TCommand command) where TCommand : IAggregateCommand
         {
@@ -34,6 +29,14 @@ namespace GF.DillyDally.WriteModel.Infrastructure
             var aggregate = commandHandler(command);
             var savedEvents = this._aggregateRepository.Save(aggregate);
             return aggregate.AggregateId;
+        }
+
+        #endregion
+
+        public void RegisterHandler<TCommand>(ICommandHandler<TCommand> handler)
+            where TCommand : class, IAggregateCommand
+        {
+            this._routes.Add(typeof(TCommand), command => handler.Handle(command as TCommand));
         }
     }
 }

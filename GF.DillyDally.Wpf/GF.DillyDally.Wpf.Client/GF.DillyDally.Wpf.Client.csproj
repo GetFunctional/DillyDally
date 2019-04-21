@@ -164,6 +164,7 @@
     <Compile Include="Core\Dialoge\IDialogResult.cs" />
     <Compile Include="Core\Dialoge\IDialogService.cs" />
     <Compile Include="Core\Dialoge\IDialogSettings.cs" />
+    <Compile Include="Core\InitializationSettings.cs" />
     <Compile Include="Core\Navigator\NavigationTargetBase.cs" />
     <Compile Include="Handler\GetAllCurrenciesHandler.cs" />
     <Compile Include="Handler\NavigationHandler.cs" />
