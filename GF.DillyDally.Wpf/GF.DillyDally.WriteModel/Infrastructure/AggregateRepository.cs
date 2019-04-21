@@ -8,8 +8,8 @@ namespace GF.DillyDally.WriteModel.Infrastructure
 {
     internal sealed class AggregateRepository : IAggregateRepository
     {
-        private readonly IStoreEvents _eventStore;
         private readonly EventDispatcher _eventDispatcher;
+        private readonly IStoreEvents _eventStore;
         private readonly IGuidGenerator _guidGenerator = new GuidGenerator();
 
         public AggregateRepository(IStoreEvents eventStore, EventDispatcher eventDispatcher)
@@ -27,20 +27,8 @@ namespace GF.DillyDally.WriteModel.Infrastructure
             {
                 return events;
             }
-            
-            var latestSnapshot = this._eventStore.Advanced.GetSnapshot(aggregate.AggregateId, int.MaxValue);
-            IEventStream stream = null;
 
-            if (latestSnapshot != null)
-            {
-                stream = this._eventStore.OpenStream(latestSnapshot, int.MaxValue);
-            }
-            else
-            {
-                stream = this._eventStore.OpenStream(aggregate.AggregateId, 0, int.MaxValue);
-            }
-
-            using (stream)
+            using (var stream = this.GetEventStream(aggregate))
             {
                 var expectedVersion = this.CalculateExpectedVersion(aggregate);
                 if (stream.StreamRevision != expectedVersion)
@@ -85,6 +73,23 @@ namespace GF.DillyDally.WriteModel.Infrastructure
         }
 
         #endregion
+
+        private IEventStream GetEventStream<TAggregate>(TAggregate aggregate) where TAggregate : IAggregateRoot
+        {
+            /** Maybe adding snapshots later ? **/
+            //var latestSnapshot = this._eventStore.Advanced.GetSnapshot(aggregate.AggregateId, int.MaxValue);
+            IEventStream stream = null;
+
+            //if (latestSnapshot != null)
+            //{
+            //    stream = this._eventStore.OpenStream(latestSnapshot, int.MaxValue);
+            //}
+            //else
+            //{
+            stream = this._eventStore.OpenStream(aggregate.AggregateId, 0, int.MaxValue);
+            //}
+            return stream;
+        }
 
         private int CalculateExpectedVersion(IAggregateRoot aggregateRoot)
         {
