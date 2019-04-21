@@ -5,7 +5,7 @@ namespace GF.DillyDally.WriteModel.Infrastructure
 {
     internal interface IAggregate
     {
-        IList<IEvent> UncommitedEvents();
+        IReadOnlyList<IEvent> GetUncommitedEvents();
         int Version { get; }
         Guid AggregateId { get; }
         void ApplyEvent(IEvent @event);

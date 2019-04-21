@@ -20,13 +20,19 @@ namespace GF.DillyDally.WriteModel
         public void Initialize(Action<Type, Type> registerType, Action<Type, object> registerTypeInstance,
             string dillyDallyStoreConnectionString)
         {
+
             var storeEvents = this.WireupEventStore(dillyDallyStoreConnectionString);
+            var eventDispatcher = this.CreateEventDispatcher();
+            var aggregateRepository = new AggregateRepository(storeEvents, eventDispatcher);
+            var commandDispatcher = this.CreateCommandDispatcher(aggregateRepository);
+            registerTypeInstance(typeof(IStoreEvents), storeEvents);
+            registerTypeInstance(typeof(CommandDispatcher),commandDispatcher);
+            registerTypeInstance(typeof(EventDispatcher),eventDispatcher);
 
             this.RegisterServices(registerType);
-            registerTypeInstance(typeof(IStoreEvents), storeEvents);
-            registerTypeInstance(typeof(CommandDispatcher),
-                this.CreateCommandDispatcher(new AggregateRepository(storeEvents)));
         }
+
+     
 
         private void RegisterServices(Action<Type, Type> registerType)
         {
@@ -54,6 +60,14 @@ namespace GF.DillyDally.WriteModel
                 .Build();
 
             return store;
+        }
+
+        private EventDispatcher CreateEventDispatcher()
+        {
+            var eventDispatcher = new EventDispatcher();
+
+
+            return eventDispatcher;
         }
 
         private CommandDispatcher CreateCommandDispatcher(IAggregateRepository domainRepository)

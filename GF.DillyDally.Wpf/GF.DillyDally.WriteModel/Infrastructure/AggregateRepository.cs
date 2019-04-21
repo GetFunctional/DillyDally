@@ -9,24 +9,25 @@ namespace GF.DillyDally.WriteModel.Infrastructure
     internal sealed class AggregateRepository : IAggregateRepository
     {
         private readonly IStoreEvents _eventStore;
+        private readonly EventDispatcher _eventDispatcher;
         private readonly IGuidGenerator _guidGenerator = new GuidGenerator();
 
-        public AggregateRepository(IStoreEvents eventStore)
+        public AggregateRepository(IStoreEvents eventStore, EventDispatcher eventDispatcher)
         {
             this._eventStore = eventStore;
+            this._eventDispatcher = eventDispatcher;
         }
 
         #region IAggregateRepository Members
 
         public IEnumerable<IEvent> Save<TAggregate>(TAggregate aggregate) where TAggregate : IAggregate
         {
-            var events = aggregate.UncommitedEvents();
+            var events = aggregate.GetUncommitedEvents();
             if (!events.Any())
             {
                 return events;
             }
-
-
+            
             var latestSnapshot = this._eventStore.Advanced.GetSnapshot(aggregate.AggregateId, int.MaxValue);
             IEventStream stream = null;
 
@@ -53,6 +54,12 @@ namespace GF.DillyDally.WriteModel.Infrastructure
                 }
 
                 stream.CommitChanges(this._guidGenerator.GenerateGuid());
+
+                // Dispatch Event to all Handlers. This could also be done somewhere else.
+                foreach (var uncommitedEvent in events)
+                {
+                    this._eventDispatcher.HandleEvent(uncommitedEvent);
+                }
             }
 
             return events;
@@ -81,7 +88,7 @@ namespace GF.DillyDally.WriteModel.Infrastructure
 
         private int CalculateExpectedVersion(IAggregate aggregate)
         {
-            var expectedVersion = aggregate.Version - aggregate.UncommitedEvents().Count;
+            var expectedVersion = aggregate.Version - aggregate.GetUncommitedEvents().Count;
             return expectedVersion;
         }
 

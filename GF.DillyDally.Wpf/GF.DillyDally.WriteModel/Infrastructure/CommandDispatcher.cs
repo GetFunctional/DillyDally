@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Windows.Input;
+using System.Linq;
+using ICommand = System.Windows.Input.ICommand;
 
 namespace GF.DillyDally.WriteModel.Infrastructure
 {
