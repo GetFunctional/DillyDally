@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data.SQLite;
 using GF.DillyDally.WriteModel.Deprecated;
+using GF.DillyDally.WriteModel.Domain.Categories;
 using GF.DillyDally.WriteModel.Domain.Lanes;
 using GF.DillyDally.WriteModel.Domain.Rewards;
 using GF.DillyDally.WriteModel.Infrastructure;
@@ -73,6 +74,9 @@ namespace GF.DillyDally.WriteModel
             var rewardEventHandler = new RewardEventHandler();
             eventDispatcher.RegisterHandler(rewardEventHandler);
 
+            var categoryEventHandler = new CategoryEventHandler();
+            eventDispatcher.RegisterHandler(categoryEventHandler);
+
             return eventDispatcher;
         }
 
@@ -86,6 +90,8 @@ namespace GF.DillyDally.WriteModel
             var rewardCommandHandler = new RewardCommandHandler();
             commandDispatcher.RegisterHandler(rewardCommandHandler);
 
+            var categoryCommandHandler = new CategoryCommandHandler();
+            commandDispatcher.RegisterHandler(categoryCommandHandler);
 
             return commandDispatcher;
         }

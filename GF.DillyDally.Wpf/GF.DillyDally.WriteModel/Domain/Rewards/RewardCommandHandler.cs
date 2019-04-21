@@ -1,4 +1,5 @@
 ﻿using GF.DillyDally.WriteModel.Domain.Lanes;
+using GF.DillyDally.WriteModel.Domain.Rewards.Commands;
 using GF.DillyDally.WriteModel.Infrastructure;
 
 namespace GF.DillyDally.WriteModel.Domain.Rewards

@@ -1,11 +1,11 @@
 ﻿using System;
 using GF.DillyDally.WriteModel.Infrastructure;
 
-namespace GF.DillyDally.WriteModel.Domain.Rewards
+namespace GF.DillyDally.WriteModel.Domain.Rewards.Commands
 {
-    internal sealed class RewardCreatedEvent : AggregateEventBase
+    public sealed class CreateRewardCommand : AggregateCommandBase
     {
-        public RewardCreatedEvent(Guid rewardId, string name, string currencyCode) : base(rewardId)
+        public CreateRewardCommand(string name, string currencyCode) : base(Guid.Empty)
         {
             this.Name = name;
             this.CurrencyCode = currencyCode;

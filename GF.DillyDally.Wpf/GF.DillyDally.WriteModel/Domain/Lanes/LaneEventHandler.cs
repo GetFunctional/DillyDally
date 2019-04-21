@@ -1,4 +1,5 @@
-﻿using GF.DillyDally.WriteModel.Infrastructure;
+﻿using GF.DillyDally.WriteModel.Domain.Lanes.Events;
+using GF.DillyDally.WriteModel.Infrastructure;
 
 namespace GF.DillyDally.WriteModel.Domain.Lanes
 {

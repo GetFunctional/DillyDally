@@ -1,7 +1,7 @@
 ﻿using System;
 using GF.DillyDally.WriteModel.Infrastructure;
 
-namespace GF.DillyDally.WriteModel.Domain.Lanes
+namespace GF.DillyDally.WriteModel.Domain.Lanes.Commands
 {
     public sealed class CreateLaneCommand : AggregateCommandBase
     {
