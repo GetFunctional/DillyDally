@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using GF.DillyDally.WriteModel.Infrastructure.Exceptions;
 
 namespace GF.DillyDally.WriteModel.Infrastructure
 {
@@ -27,7 +28,10 @@ namespace GF.DillyDally.WriteModel.Infrastructure
             {
                 this._routes[eventType](aggregateEvent);
             }
-
+            else
+            {
+                throw new MssingEventRouteException(eventType, this.GetType());
+            }
             this.Version++;
         }
 
@@ -42,11 +46,6 @@ namespace GF.DillyDally.WriteModel.Infrastructure
         protected void RegisterTransition<T>(Action<T> transition) where T : class
         {
             this._routes.Add(typeof(T), o => transition(o as T));
-        }
-
-        public IEnumerable<IAggregateEvent> UncommitedEvents()
-        {
-            return this._uncommitedEvents;
         }
     }
 }

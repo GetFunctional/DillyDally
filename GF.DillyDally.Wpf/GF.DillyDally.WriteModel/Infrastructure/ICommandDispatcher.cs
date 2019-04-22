@@ -5,7 +5,7 @@ namespace GF.DillyDally.WriteModel.Infrastructure
     public interface ICommandDispatcher
     {
         /// <summary>
-        /// Executes a command on the Domain.
+        ///     Executes a command on the Domain.
         /// </summary>
         /// <typeparam name="TCommand">Type of the Command</typeparam>
         /// <param name="command">Command to Execute</param>

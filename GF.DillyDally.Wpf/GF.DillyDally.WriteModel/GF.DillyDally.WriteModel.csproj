@@ -54,17 +54,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Domain\Achievements\AchievementAggregateRootBase.cs" />
+    <Compile Include="Domain\Achievements\AchievementAggregateWithChilds.cs" />
+    <Compile Include="Domain\Achievements\Events\AchievementDetachedEvent.cs" />
+    <Compile Include="Domain\Achievements\Exceptions\ContributorNotFoundException.cs" />
+    <Compile Include="Domain\Achievements\Events\AchievementAttachedEvent.cs" />
+    <Compile Include="Domain\Achievements\Exceptions\DuplicateContributorException.cs" />
     <Compile Include="Domain\Achievements\LevelingAchievementAggregateRoot.cs" />
     <Compile Include="Domain\Achievements\Events\LevelingAchievementCreatedEvent.cs" />
     <Compile Include="Domain\Achievements\RegularAchievementAggregateRoot.cs" />
     <Compile Include="Domain\Achievements\AchievementCommandHandler.cs" />
     <Compile Include="Domain\Achievements\AchievementEventHandler.cs" />
     <Compile Include="Domain\Achievements\AchievementType.cs" />
-    <Compile Include="Domain\Achievements\Category.cs" />
     <Compile Include="Domain\Achievements\Commands\CreateRegularAchievementCommand.cs" />
     <Compile Include="Domain\Achievements\Events\RegularAchievementCreatedEvent.cs" />
-    <Compile Include="Domain\Achievements\Lane.cs" />
-    <Compile Include="Domain\Achievements\ParentAchievement.cs" />
     <Compile Include="Domain\Categories\Commands\CreateCategoryCommand.cs" />
     <Compile Include="Domain\Categories\CategoryAggregateRoot.cs" />
     <Compile Include="Domain\Categories\CategoryCommandHandler.cs" />
@@ -91,6 +93,7 @@
     <Compile Include="Deprecated\ITaskService.cs" />
     <Compile Include="Infrastructure\AggregateRootBase.cs" />
     <Compile Include="Infrastructure\AggregateRepository.cs" />
+    <Compile Include="Infrastructure\Exceptions\MssingEventRouteException.cs" />
     <Compile Include="Infrastructure\Exceptions\AggregateRevisionException.cs" />
     <Compile Include="Infrastructure\CommandDispatcher.cs" />
     <Compile Include="Infrastructure\EventDispatcher.cs" />

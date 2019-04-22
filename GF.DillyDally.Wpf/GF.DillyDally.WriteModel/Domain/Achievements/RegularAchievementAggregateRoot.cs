@@ -11,35 +11,35 @@ namespace GF.DillyDally.WriteModel.Domain.Achievements
         }
 
         private RegularAchievementAggregateRoot(Guid achievementId, string name,
-            Category category, Lane lane, int amountOfRewards, Guid previewImageId,
-            ParentAchievement contributionAchievement) : base(achievementId, AchievementType.Regular)
+            Guid categoryId, Guid laneId, int amountOfRewards, Guid? previewImageId,
+            Guid? contributionAchievement) : base(achievementId, AchievementType.Regular)
         {
-            var creationEvent = new RegularAchievementCreatedEvent(achievementId, name, category, lane,
+            var creationEvent = new RegularAchievementCreatedEvent(achievementId, name, categoryId, laneId,
                 amountOfRewards, previewImageId, contributionAchievement);
             this.Apply(creationEvent);
             this.RaiseEvent(creationEvent);
         }
 
         public int AmountOfRewards { get; private set; }
-        public ParentAchievement ContributionAchievement { get; private set; }
+        public Guid? ContributionAchievement { get; private set; }
 
         private void Apply(RegularAchievementCreatedEvent obj)
         {
             this.AggregateId = obj.AggregateId;
             this.Name = obj.Name;
-            this.Category = obj.Category;
-            this.Lane = obj.Lane;
+            this.CategoryId = obj.CategoryId;
+            this.LaneId = obj.LaneId;
             this.AmountOfRewards = obj.AmountOfRewards;
             this.PreviewImageId = obj.PreviewImageId;
             this.ContributionAchievement = obj.ContributionAchievement;
         }
 
         internal static RegularAchievementAggregateRoot CreateRegularAchievement(Guid achievementId, string name,
-            Category category,
-            Lane lane, int amountOfRewards,
-            Guid previewImageId, ParentAchievement contributionAchievement)
+            Guid categoryId,
+            Guid laneId, int amountOfRewards,
+            Guid? previewImageId, Guid? contributionAchievement)
         {
-            return new RegularAchievementAggregateRoot(achievementId, name, category, lane,
+            return new RegularAchievementAggregateRoot(achievementId, name, categoryId, laneId,
                 amountOfRewards, previewImageId, contributionAchievement);
         }
     }

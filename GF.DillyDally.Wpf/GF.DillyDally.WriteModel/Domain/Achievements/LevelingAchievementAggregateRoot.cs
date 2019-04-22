@@ -3,7 +3,7 @@ using GF.DillyDally.WriteModel.Domain.Achievements.Events;
 
 namespace GF.DillyDally.WriteModel.Domain.Achievements
 {
-    internal sealed class LevelingAchievementAggregateRoot : AchievementAggregateRootBase
+    internal sealed class LevelingAchievementAggregateRoot : AchievementAggregateWithChilds
     {
         public LevelingAchievementAggregateRoot() : base(AchievementType.Leveling)
         {
@@ -11,9 +11,9 @@ namespace GF.DillyDally.WriteModel.Domain.Achievements
         }
 
         private LevelingAchievementAggregateRoot(Guid achievementId, string name,
-            Category category, Lane lane, Guid previewImageId) : base(achievementId, AchievementType.Leveling)
+            Guid categoryId, Guid laneId, Guid? previewImageId) : base(achievementId, AchievementType.Leveling)
         {
-            var creationEvent = new LevelingAchievementCreatedEvent(achievementId, name, category, lane,
+            var creationEvent = new LevelingAchievementCreatedEvent(achievementId, name, categoryId, laneId,
                 previewImageId);
             this.Apply(creationEvent);
             this.RaiseEvent(creationEvent);
@@ -23,17 +23,17 @@ namespace GF.DillyDally.WriteModel.Domain.Achievements
         {
             this.AggregateId = obj.AggregateId;
             this.Name = obj.Name;
-            this.Category = obj.Category;
-            this.Lane = obj.Lane;
+            this.CategoryId = obj.CategoryId;
+            this.LaneId = obj.LaneId;
             this.PreviewImageId = obj.PreviewImageId;
         }
 
 
         internal static LevelingAchievementAggregateRoot CreateLevelingAchievement(Guid achievementId, string name,
-            Category category,
-            Lane lane, Guid previewImageId, ParentAchievement contributionAchievement)
+            Guid categoryId,
+            Guid laneId, Guid? previewImageId)
         {
-            return new LevelingAchievementAggregateRoot(achievementId, name, category, lane,
+            return new LevelingAchievementAggregateRoot(achievementId, name, categoryId, laneId,
                 previewImageId);
         }
     }

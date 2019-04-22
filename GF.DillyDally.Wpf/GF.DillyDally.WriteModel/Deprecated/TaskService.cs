@@ -43,7 +43,6 @@ namespace GF.DillyDally.WriteModel.Deprecated
                     connection.Update(existingTask);
 
                     // Rewards updaten
-
                 }
                 else
                 {
@@ -53,7 +52,8 @@ namespace GF.DillyDally.WriteModel.Deprecated
 
                     // Rewards eintragen
                     var rewardsToCreate = task.Rewards.Select(rw =>
-                        this._entityFactory.CreateTaskReward(rw.RewardKey, rw.TaskRewardKey, taskToCreate.TaskKey, rw.Amount)).ToList();
+                        this._entityFactory.CreateTaskReward(rw.RewardKey, rw.TaskRewardKey, taskToCreate.TaskKey,
+                            rw.Amount)).ToList();
 
                     //connection.BulkInsert(rewardsToCreate);
                 }

@@ -1,12 +1,12 @@
-﻿using System;
-using GF.DillyDally.WriteModel.Domain.Achievements.Commands;
+﻿using GF.DillyDally.WriteModel.Domain.Achievements.Commands;
 using GF.DillyDally.WriteModel.Domain.Categories;
 using GF.DillyDally.WriteModel.Domain.Lanes;
 using GF.DillyDally.WriteModel.Infrastructure;
 
 namespace GF.DillyDally.WriteModel.Domain.Achievements
 {
-    internal sealed class AchievementCommandHandler : CommandHandlerBase, ICommandHandler<CreateRegularAchievementCommand>
+    internal sealed class AchievementCommandHandler : CommandHandlerBase,
+        ICommandHandler<CreateRegularAchievementCommand>
     {
         private readonly IAggregateRepository _aggregateRepository;
 
@@ -15,7 +15,7 @@ namespace GF.DillyDally.WriteModel.Domain.Achievements
             this._aggregateRepository = aggregateRepository;
         }
 
-        #region ICommandHandler<CreateAchievementCommand> Members
+        #region ICommandHandler<CreateRegularAchievementCommand> Members
 
         public IAggregateRoot Handle(CreateRegularAchievementCommand command)
         {
@@ -23,18 +23,19 @@ namespace GF.DillyDally.WriteModel.Domain.Achievements
             var lane = this._aggregateRepository.GetById<LaneAggregateRoot>(command.LaneId);
             var achievementId = this.GuidGenerator.GenerateGuid();
 
-            if (command.ContributionAchievementId != Guid.Empty)
+            var newAchievement = RegularAchievementAggregateRoot.CreateRegularAchievement(achievementId, command.Name,
+                category.AggregateId, lane.AggregateId, command.AmountOfRewards, command.PreviewImageId,
+                command.ContributionAchievementId);
+            if (command.ContributionAchievementId != null)
             {
-                var parentData =
-                    this._aggregateRepository.GetById<LevelingAchievementAggregateRoot>(command
-                        .ContributionAchievementId);
-                var parent = new ParentAchievement(parentData.AggregateId);
-
-                return RegularAchievementAggregateRoot.CreateRegularAchievement(achievementId, command.Name, new Category(category.AggregateId), new Lane(lane.AggregateId),command.AmountOfRewards, command.PreviewImageId, parent);
+                if (this._aggregateRepository.TryGetById<LevelingAchievementAggregateRoot>(command
+                    .ContributionAchievementId.Value, out var parentLeveling))
+                {
+                    parentLeveling.AttachContributor(newAchievement.AggregateId);
+                }
             }
 
-            return RegularAchievementAggregateRoot.CreateRegularAchievement(achievementId, command.Name, new Category(category.AggregateId), new Lane(lane.AggregateId),command.AmountOfRewards, command.PreviewImageId, null);
-
+            return newAchievement;
         }
 
         #endregion

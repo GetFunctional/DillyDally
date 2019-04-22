@@ -17,8 +17,8 @@ namespace GF.DillyDally.WriteModel.Domain.Achievements
 
         public AchievementType AchievementType { get; }
         public string Name { get; protected set; }
-        public Category Category { get; protected set; }
-        public Lane Lane { get; protected set; }
-        public Guid PreviewImageId { get; protected set; }
+        public Guid CategoryId { get; protected set; }
+        public Guid LaneId { get; protected set; }
+        public Guid? PreviewImageId { get; protected set; }
     }
 }

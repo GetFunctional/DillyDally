@@ -11,7 +11,7 @@ namespace GF.DillyDally.WriteModel.Infrastructure
         public EventDispatcher()
         {
             // Handlers should not be dependent upon an order of execution. Otherwise they should be handled together.
-            this._routes = new Dictionary<Type,IList<Action<IAggregateEvent>>>();
+            this._routes = new Dictionary<Type, IList<Action<IAggregateEvent>>>();
         }
 
         public void RegisterHandler<TEvent>(IEventHandler<TEvent> handler) where TEvent : class, IAggregateEvent
@@ -25,7 +25,7 @@ namespace GF.DillyDally.WriteModel.Infrastructure
             this._routes[handlerType].Add(@event => handler.Handle(@event as TEvent));
         }
 
-        public void HandleEvent<TEvent>(TEvent @event) where TEvent : class,IAggregateEvent
+        public void HandleEvent<TEvent>(TEvent @event) where TEvent : class, IAggregateEvent
         {
             var eventType = @event.GetType();
 

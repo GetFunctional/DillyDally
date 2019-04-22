@@ -11,6 +11,7 @@ namespace GF.DillyDally.WriteModel.Infrastructure
             {
                 throw new InvalidAggregateIdException(aggregateId);
             }
+
             this.AggregateId = aggregateId;
         }
 

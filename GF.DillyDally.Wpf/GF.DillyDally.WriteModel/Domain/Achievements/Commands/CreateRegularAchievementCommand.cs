@@ -6,18 +6,18 @@ namespace GF.DillyDally.WriteModel.Domain.Achievements.Commands
     public sealed class CreateRegularAchievementCommand : AggregateCommandBase
     {
         public CreateRegularAchievementCommand(string name, Guid categoryId, Guid laneId, int amountOfRewards) : this(
-            name, categoryId, laneId, amountOfRewards, Guid.Empty)
+            name, categoryId, laneId, amountOfRewards, null)
         {
         }
 
 
         public CreateRegularAchievementCommand(string name, Guid categoryId, Guid laneId, int amountOfRewards,
-            Guid previewImageId) : this(name, categoryId, laneId, amountOfRewards, previewImageId, Guid.Empty)
+            Guid? previewImageId) : this(name, categoryId, laneId, amountOfRewards, previewImageId, null)
         {
         }
 
         public CreateRegularAchievementCommand(string name, Guid categoryId, Guid laneId, int amountOfRewards,
-            Guid previewImageId, Guid contributionAchievementId) : base(Guid.Empty)
+            Guid? previewImageId, Guid? contributionAchievementId) : base(Guid.Empty)
         {
             this.Name = name;
             this.CategoryId = categoryId;
@@ -32,7 +32,7 @@ namespace GF.DillyDally.WriteModel.Domain.Achievements.Commands
         public Guid CategoryId { get; }
         public Guid LaneId { get; }
         public int AmountOfRewards { get; }
-        public Guid PreviewImageId { get; }
-        public Guid ContributionAchievementId { get; }
+        public Guid? PreviewImageId { get; }
+        public Guid? ContributionAchievementId { get; }
     }
 }

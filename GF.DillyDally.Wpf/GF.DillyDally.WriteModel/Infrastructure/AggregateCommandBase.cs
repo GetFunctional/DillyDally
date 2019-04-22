@@ -9,6 +9,10 @@ namespace GF.DillyDally.WriteModel.Infrastructure
             this.AggregateId = aggregateId;
         }
 
+        #region IAggregateCommand Members
+
         public Guid AggregateId { get; }
+
+        #endregion
     }
 }

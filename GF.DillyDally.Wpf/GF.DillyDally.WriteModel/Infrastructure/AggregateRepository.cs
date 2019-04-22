@@ -62,6 +62,15 @@ namespace GF.DillyDally.WriteModel.Infrastructure
             }
         }
 
+        public bool TryGetById<TAggregate>(Guid aggregateId, out TAggregate aggregate)
+            where TAggregate : IAggregateRoot, new()
+        {
+            using (var stream = this.GetEventStream(aggregateId))
+            {
+                return this.TryBuildAggregate(stream.CommittedEvents, out aggregate);
+            }
+        }
+
         #endregion
 
         private IEventStream GetEventStream(Guid aggregateId)
@@ -85,6 +94,21 @@ namespace GF.DillyDally.WriteModel.Infrastructure
         {
             var expectedVersion = aggregateRoot.Version - aggregateRoot.GetUncommitedEvents().Count;
             return expectedVersion;
+        }
+
+        private bool TryBuildAggregate<TResult>(ICollection<EventMessage> eventMessages, out TResult aggregateResult)
+            where TResult : IAggregateRoot, new()
+        {
+            try
+            {
+                aggregateResult = this.BuildAggregate<TResult>(eventMessages);
+                return true;
+            }
+            catch (Exception)
+            {
+                aggregateResult = default(TResult);
+                return false;
+            }
         }
 
         private TResult BuildAggregate<TResult>(ICollection<EventMessage> eventMessages)
