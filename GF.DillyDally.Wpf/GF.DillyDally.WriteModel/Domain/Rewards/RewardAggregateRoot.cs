@@ -13,11 +13,9 @@ namespace GF.DillyDally.WriteModel.Domain.Rewards
 
         private RewardAggregateRoot(Guid rewardId, string name, string currencyCode) : this()
         {
-            this.AggregateId = rewardId;
-            this.Name = name;
-            this.CurrencyCode = currencyCode;
-
-            this.RaiseEvent(new RewardCreatedEvent(rewardId, name, currencyCode));
+            var creationEvent = new RewardCreatedEvent(rewardId, name, currencyCode);
+            this.Apply(creationEvent);
+            this.RaiseEvent(creationEvent);
         }
 
         public string Name { get; private set; }

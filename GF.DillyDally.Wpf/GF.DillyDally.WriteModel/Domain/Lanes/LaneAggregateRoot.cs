@@ -6,7 +6,7 @@ namespace GF.DillyDally.WriteModel.Domain.Lanes
 {
     internal sealed class LaneAggregateRoot : AggregateRootBase
     {
-        private LaneAggregateRoot()
+        public LaneAggregateRoot()
         {
             this.RegisterTransition<LaneCreatedEvent>(this.Apply);
         }
@@ -18,11 +18,9 @@ namespace GF.DillyDally.WriteModel.Domain.Lanes
                 throw new InvalidColorCodeGivenException(colorCode);
             }
 
-            this.AggregateId = laneId;
-            this.Name = name;
-            this.ColorCode = colorCode;
-
-            this.RaiseEvent(new LaneCreatedEvent(laneId, name, colorCode));
+            var creationEvent = new LaneCreatedEvent(laneId, name, colorCode);
+            this.Apply(creationEvent);
+            this.RaiseEvent(creationEvent);
         }
 
         public string Name { get; private set; }

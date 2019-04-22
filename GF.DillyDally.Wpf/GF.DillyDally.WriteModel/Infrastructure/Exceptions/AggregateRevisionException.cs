@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GF.DillyDally.WriteModel.Infrastructure
+namespace GF.DillyDally.WriteModel.Infrastructure.Exceptions
 {
     internal class AggregateRevisionException : Exception
     {

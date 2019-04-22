@@ -53,6 +53,18 @@
     <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\Achievements\AchievementAggregateRootBase.cs" />
+    <Compile Include="Domain\Achievements\LevelingAchievementAggregateRoot.cs" />
+    <Compile Include="Domain\Achievements\Events\LevelingAchievementCreatedEvent.cs" />
+    <Compile Include="Domain\Achievements\RegularAchievementAggregateRoot.cs" />
+    <Compile Include="Domain\Achievements\AchievementCommandHandler.cs" />
+    <Compile Include="Domain\Achievements\AchievementEventHandler.cs" />
+    <Compile Include="Domain\Achievements\AchievementType.cs" />
+    <Compile Include="Domain\Achievements\Category.cs" />
+    <Compile Include="Domain\Achievements\Commands\CreateRegularAchievementCommand.cs" />
+    <Compile Include="Domain\Achievements\Events\RegularAchievementCreatedEvent.cs" />
+    <Compile Include="Domain\Achievements\Lane.cs" />
+    <Compile Include="Domain\Achievements\ParentAchievement.cs" />
     <Compile Include="Domain\Categories\Commands\CreateCategoryCommand.cs" />
     <Compile Include="Domain\Categories\CategoryAggregateRoot.cs" />
     <Compile Include="Domain\Categories\CategoryCommandHandler.cs" />
@@ -79,7 +91,7 @@
     <Compile Include="Deprecated\ITaskService.cs" />
     <Compile Include="Infrastructure\AggregateRootBase.cs" />
     <Compile Include="Infrastructure\AggregateRepository.cs" />
-    <Compile Include="Infrastructure\AggregateRevisionException.cs" />
+    <Compile Include="Infrastructure\Exceptions\AggregateRevisionException.cs" />
     <Compile Include="Infrastructure\CommandDispatcher.cs" />
     <Compile Include="Infrastructure\EventDispatcher.cs" />
     <Compile Include="Infrastructure\IAggregateRoot.cs" />
@@ -89,7 +101,8 @@
     <Compile Include="Infrastructure\ICommandHandler.cs" />
     <Compile Include="Infrastructure\IAggregateEvent.cs" />
     <Compile Include="Infrastructure\IEventHandler.cs" />
-    <Compile Include="Infrastructure\MissingCommandHandlerException.cs" />
+    <Compile Include="Infrastructure\Exceptions\InvalidAggregateIdException.cs" />
+    <Compile Include="Infrastructure\Exceptions\MissingCommandHandlerException.cs" />
     <Compile Include="RandomExtensions.cs" />
     <Compile Include="WriteModelInitializer.cs" />
     <Compile Include="Deprecated\CurrencyService.cs" />

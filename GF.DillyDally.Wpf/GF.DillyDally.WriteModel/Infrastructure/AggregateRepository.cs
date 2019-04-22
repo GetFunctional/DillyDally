@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using GF.DillyDally.Data.Sqlite;
+using GF.DillyDally.WriteModel.Infrastructure.Exceptions;
 using NEventStore;
 
 namespace GF.DillyDally.WriteModel.Infrastructure
@@ -28,7 +29,7 @@ namespace GF.DillyDally.WriteModel.Infrastructure
                 return events;
             }
 
-            using (var stream = this.GetEventStream(aggregate))
+            using (var stream = this.GetEventStream(aggregate.AggregateId))
             {
                 var expectedVersion = this.CalculateExpectedVersion(aggregate);
                 if (stream.StreamRevision != expectedVersion)
@@ -55,18 +56,7 @@ namespace GF.DillyDally.WriteModel.Infrastructure
 
         public TAggregate GetById<TAggregate>(Guid aggregateId) where TAggregate : IAggregateRoot, new()
         {
-            var latestSnapshot = this._eventStore.Advanced.GetSnapshot(aggregateId, int.MaxValue);
-            IEventStream stream = null;
-
-            if (latestSnapshot != null)
-            {
-                using (stream = this._eventStore.OpenStream(latestSnapshot, int.MaxValue))
-                {
-                    return this.BuildAggregate<TAggregate>(stream.CommittedEvents);
-                }
-            }
-
-            using (stream = this._eventStore.OpenStream(aggregateId, 0, int.MaxValue))
+            using (var stream = this.GetEventStream(aggregateId))
             {
                 return this.BuildAggregate<TAggregate>(stream.CommittedEvents);
             }
@@ -74,7 +64,7 @@ namespace GF.DillyDally.WriteModel.Infrastructure
 
         #endregion
 
-        private IEventStream GetEventStream<TAggregate>(TAggregate aggregate) where TAggregate : IAggregateRoot
+        private IEventStream GetEventStream(Guid aggregateId)
         {
             /** Maybe adding snapshots later ? **/
             //var latestSnapshot = this._eventStore.Advanced.GetSnapshot(aggregate.AggregateId, int.MaxValue);
@@ -86,7 +76,7 @@ namespace GF.DillyDally.WriteModel.Infrastructure
             //}
             //else
             //{
-            stream = this._eventStore.OpenStream(aggregate.AggregateId, 0, int.MaxValue);
+            stream = this._eventStore.OpenStream(aggregateId, 0, int.MaxValue);
             //}
             return stream;
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using GF.DillyDally.WriteModel.Infrastructure.Exceptions;
 
 namespace GF.DillyDally.WriteModel.Infrastructure
 {

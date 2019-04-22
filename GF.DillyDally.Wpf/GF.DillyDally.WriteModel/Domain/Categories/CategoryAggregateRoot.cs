@@ -6,18 +6,16 @@ namespace GF.DillyDally.WriteModel.Domain.Categories
 {
     internal sealed class CategoryAggregateRoot : AggregateRootBase
     {
-        private CategoryAggregateRoot()
+        public CategoryAggregateRoot()
         {
             this.RegisterTransition<CategoryCreatedEvent>(this.Apply);
         }
 
         private CategoryAggregateRoot(Guid categoryId, string name, string colorCode) : this()
         {
-            this.AggregateId = categoryId;
-            this.Name = name;
-            this.ColorCode = colorCode;
-
-            this.RaiseEvent(new CategoryCreatedEvent(categoryId, name, colorCode));
+            var creationEvent = new CategoryCreatedEvent(categoryId, name, colorCode);
+            this.Apply(creationEvent);
+            this.RaiseEvent(creationEvent);
         }
 
         public string Name { get; private set; }

@@ -137,6 +137,7 @@
     <Compile Include="SqlDbAccess\EntityTests.cs" />
     <Compile Include="SqlDbAccess\FoundationDataTests.cs" />
     <Compile Include="SqlDbAccess\SqlScriptSelectorTests.cs" />
+    <Compile Include="WriteModel\AchievementTests.cs" />
     <Compile Include="WriteModel\InitialDataCreationTests.cs" />
   </ItemGroup>
   <ItemGroup>

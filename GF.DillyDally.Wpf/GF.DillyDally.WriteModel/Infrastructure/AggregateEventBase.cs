@@ -1,4 +1,5 @@
 ﻿using System;
+using GF.DillyDally.WriteModel.Infrastructure.Exceptions;
 
 namespace GF.DillyDally.WriteModel.Infrastructure
 {
@@ -6,6 +7,10 @@ namespace GF.DillyDally.WriteModel.Infrastructure
     {
         protected AggregateEventBase(Guid aggregateId)
         {
+            if (aggregateId == Guid.Empty)
+            {
+                throw new InvalidAggregateIdException(aggregateId);
+            }
             this.AggregateId = aggregateId;
         }
 
