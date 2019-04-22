@@ -4,7 +4,7 @@ using System.Diagnostics;
 
 namespace GF.DillyDally.WriteModel.Infrastructure
 {
-    internal sealed class EventDispatcher
+    internal sealed class EventDispatcher : IEventDispatcher
     {
         private readonly IDictionary<Type, IList<Action<IAggregateEvent>>> _routes;
 
@@ -25,7 +25,7 @@ namespace GF.DillyDally.WriteModel.Infrastructure
             this._routes[handlerType].Add(@event => handler.Handle(@event as TEvent));
         }
 
-        public void HandleEvent<TEvent>(TEvent @event) where TEvent : class, IAggregateEvent
+        internal void HandleEvent<TEvent>(TEvent @event) where TEvent : class, IAggregateEvent
         {
             var eventType = @event.GetType();
 

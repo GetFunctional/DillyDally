@@ -63,7 +63,6 @@
     <Compile Include="Domain\Achievements\Events\LevelingAchievementCreatedEvent.cs" />
     <Compile Include="Domain\Achievements\RegularAchievementAggregateRoot.cs" />
     <Compile Include="Domain\Achievements\AchievementCommandHandler.cs" />
-    <Compile Include="Domain\Achievements\AchievementEventHandler.cs" />
     <Compile Include="Domain\Achievements\AchievementType.cs" />
     <Compile Include="Domain\Achievements\Commands\CreateRegularAchievementCommand.cs" />
     <Compile Include="Domain\Achievements\Events\RegularAchievementCreatedEvent.cs" />
@@ -71,18 +70,15 @@
     <Compile Include="Domain\Categories\CategoryAggregateRoot.cs" />
     <Compile Include="Domain\Categories\CategoryCommandHandler.cs" />
     <Compile Include="Domain\Categories\Events\CategoryCreatedEvent.cs" />
-    <Compile Include="Domain\Categories\CategoryEventHandler.cs" />
     <Compile Include="Domain\Lanes\Commands\CreateLaneCommand.cs" />
     <Compile Include="Domain\Lanes\InvalidColorCodeGivenException.cs" />
     <Compile Include="Domain\Lanes\LaneAggregateRoot.cs" />
     <Compile Include="Domain\Lanes\LaneCommandHandler.cs" />
     <Compile Include="Domain\Lanes\Events\LaneCreatedEvent.cs" />
-    <Compile Include="Domain\Lanes\LaneEventHandler.cs" />
     <Compile Include="Domain\Rewards\Commands\CreateRewardCommand.cs" />
     <Compile Include="Domain\Rewards\RewardAggregateRoot.cs" />
     <Compile Include="Domain\Rewards\RewardCommandHandler.cs" />
     <Compile Include="Domain\Rewards\Events\RewardCreatedEvent.cs" />
-    <Compile Include="Domain\Rewards\RewardEventHandler.cs" />
     <Compile Include="Infrastructure\AggregateEventBase.cs" />
     <Compile Include="Infrastructure\AggregateCommandBase.cs" />
     <Compile Include="AuthorizationPipelineHook.cs" />
@@ -103,6 +99,7 @@
     <Compile Include="Infrastructure\ICommandDispatcher.cs" />
     <Compile Include="Infrastructure\ICommandHandler.cs" />
     <Compile Include="Infrastructure\IAggregateEvent.cs" />
+    <Compile Include="Infrastructure\IEventDispatcher.cs" />
     <Compile Include="Infrastructure\IEventHandler.cs" />
     <Compile Include="Infrastructure\Exceptions\InvalidAggregateIdException.cs" />
     <Compile Include="Infrastructure\Exceptions\MissingCommandHandlerException.cs" />

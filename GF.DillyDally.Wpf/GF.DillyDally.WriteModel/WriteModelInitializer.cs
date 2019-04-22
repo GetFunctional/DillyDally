@@ -30,11 +30,16 @@ namespace GF.DillyDally.WriteModel
             var commandDispatcher = this.CreateCommandDispatcher(aggregateRepository);
             registerTypeInstance(typeof(IStoreEvents), storeEvents);
             registerTypeInstance(typeof(ICommandDispatcher), commandDispatcher);
-            registerTypeInstance(typeof(EventDispatcher), eventDispatcher);
+            registerTypeInstance(typeof(IEventDispatcher), eventDispatcher);
 
             this.RegisterServices(registerType);
         }
 
+        private EventDispatcher CreateEventDispatcher()
+        {
+            var eventDispatcher = new EventDispatcher();
+            return eventDispatcher;
+        }
 
         private void RegisterServices(Action<Type, Type> registerType)
         {
@@ -64,21 +69,7 @@ namespace GF.DillyDally.WriteModel
             return store;
         }
 
-        private EventDispatcher CreateEventDispatcher()
-        {
-            var eventDispatcher = new EventDispatcher();
-
-            var laneEventHandler = new LaneEventHandler();
-            eventDispatcher.RegisterHandler(laneEventHandler);
-
-            var rewardEventHandler = new RewardEventHandler();
-            eventDispatcher.RegisterHandler(rewardEventHandler);
-
-            var categoryEventHandler = new CategoryEventHandler();
-            eventDispatcher.RegisterHandler(categoryEventHandler);
-
-            return eventDispatcher;
-        }
+       
 
         private CommandDispatcher CreateCommandDispatcher(IAggregateRepository aggregateRepository)
         {

@@ -21,7 +21,7 @@ namespace GF.DillyDally.WriteModel.Infrastructure
 
         #region IAggregateRepository Members
 
-        public IEnumerable<IAggregateEvent> Save<TAggregate>(TAggregate aggregate) where TAggregate : IAggregateRoot
+        public IReadOnlyList<IAggregateEvent> Save<TAggregate>(TAggregate aggregate) where TAggregate : IAggregateRoot
         {
             var events = aggregate.GetUncommitedEvents();
             if (!events.Any())
@@ -43,15 +43,20 @@ namespace GF.DillyDally.WriteModel.Infrastructure
                 }
 
                 stream.CommitChanges(this._guidGenerator.GenerateGuid());
-
-                // Dispatch Event to all Handlers. This could also be done somewhere else.
-                foreach (var uncommitedEvent in events)
-                {
-                    this._eventDispatcher.HandleEvent(uncommitedEvent);
-                }
             }
 
+            // Dispatch Event to all Handlers. This could also be done somewhere else.
+            this.DispatchEvents(events);
+
             return events;
+        }
+
+        private void DispatchEvents(IReadOnlyList<IAggregateEvent> events)
+        {
+            foreach (var uncommitedEvent in events)
+            {
+                this._eventDispatcher.HandleEvent(uncommitedEvent);
+            }
         }
 
         public TAggregate GetById<TAggregate>(Guid aggregateId) where TAggregate : IAggregateRoot, new()

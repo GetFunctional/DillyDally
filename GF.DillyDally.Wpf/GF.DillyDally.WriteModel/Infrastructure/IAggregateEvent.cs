@@ -2,7 +2,7 @@
 
 namespace GF.DillyDally.WriteModel.Infrastructure
 {
-    internal interface IAggregateEvent
+    public interface IAggregateEvent
     {
         Guid AggregateId { get; }
     }

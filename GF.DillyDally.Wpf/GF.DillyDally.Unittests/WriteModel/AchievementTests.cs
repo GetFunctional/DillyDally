@@ -112,6 +112,8 @@ namespace GF.DillyDally.Unittests.WriteModel
             // Act && Assert
             var commandDispatcher = this._diContainer.GetInstance<ICommandDispatcher>();
 
+
+        
            //var achievementData = 
 
            // var createdIds = new List<Guid>();

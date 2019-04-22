@@ -3,7 +3,7 @@ using GF.DillyDally.WriteModel.Infrastructure;
 
 namespace GF.DillyDally.WriteModel.Domain.Achievements.Events
 {
-    internal class LevelingAchievementCreatedEvent : AggregateEventBase
+    public sealed class LevelingAchievementCreatedEvent : AggregateEventBase
     {
         public LevelingAchievementCreatedEvent(Guid achievementId, string name, Guid categoryId, Guid laneId,
             Guid? previewImageId) : base(achievementId)

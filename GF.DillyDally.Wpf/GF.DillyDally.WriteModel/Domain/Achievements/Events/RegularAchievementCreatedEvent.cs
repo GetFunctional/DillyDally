@@ -3,7 +3,7 @@ using GF.DillyDally.WriteModel.Infrastructure;
 
 namespace GF.DillyDally.WriteModel.Domain.Achievements.Events
 {
-    internal sealed class RegularAchievementCreatedEvent : AggregateEventBase
+    public sealed class RegularAchievementCreatedEvent : AggregateEventBase
     {
         public RegularAchievementCreatedEvent(Guid achievementId, string name, Guid categoryId, Guid laneId,
             int amountOfRewards,

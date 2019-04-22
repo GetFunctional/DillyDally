@@ -3,7 +3,7 @@ using GF.DillyDally.WriteModel.Infrastructure.Exceptions;
 
 namespace GF.DillyDally.WriteModel.Infrastructure
 {
-    internal abstract class AggregateEventBase : IAggregateEvent
+    public abstract class AggregateEventBase : IAggregateEvent
     {
         protected AggregateEventBase(Guid aggregateId)
         {

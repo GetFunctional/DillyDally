@@ -1,5 +1,6 @@
 ﻿using GF.DillyDally.ReadModel;
 using GF.DillyDally.WriteModel;
+using GF.DillyDally.WriteModel.Infrastructure;
 using LightInject;
 
 namespace GF.DillyDally.Wpf.Client.Core
@@ -22,13 +23,18 @@ namespace GF.DillyDally.Wpf.Client.Core
             var databaseFileHandler = this._dataStoreInitializer.Initialize(dataInitializationSettings);
             serviceContainer.RegisterInstance(databaseFileHandler);
 
-            this._readModelInitializer.Initialize(
-                (serviceType, implementation) => serviceContainer.Register(serviceType, implementation),
-                (serviceType, implementation) => serviceContainer.RegisterInstance(serviceType, implementation));
+            
             this._writeModelInitializer.Initialize(
                 (serviceType, implementation) => serviceContainer.Register(serviceType, implementation),
                 (serviceType, implementation) => serviceContainer.RegisterInstance(serviceType, implementation),
                 databaseFileHandler.GetConnectionString());
+
+            this._readModelInitializer.Initialize(
+                (serviceType, implementation) => serviceContainer.Register(serviceType, implementation),
+                (serviceType, implementation) => serviceContainer.RegisterInstance(serviceType, implementation));
+
+            var eventDispatcher = serviceContainer.GetInstance<IEventDispatcher>();
+            this._readModelInitializer.RegisterForDomainEvents(eventDispatcher);
         }
     }
 }

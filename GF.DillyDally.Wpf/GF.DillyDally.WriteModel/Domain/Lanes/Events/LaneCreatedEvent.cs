@@ -3,7 +3,7 @@ using GF.DillyDally.WriteModel.Infrastructure;
 
 namespace GF.DillyDally.WriteModel.Domain.Lanes.Events
 {
-    internal sealed class LaneCreatedEvent : AggregateEventBase
+    public sealed class LaneCreatedEvent : AggregateEventBase
     {
         public LaneCreatedEvent(Guid laneId, string name, string colorCode) : base(laneId)
         {

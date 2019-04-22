@@ -3,7 +3,7 @@ using GF.DillyDally.WriteModel.Infrastructure;
 
 namespace GF.DillyDally.WriteModel.Domain.Categories.Events
 {
-    internal sealed class CategoryCreatedEvent : AggregateEventBase
+    public sealed class CategoryCreatedEvent : AggregateEventBase
     {
         public CategoryCreatedEvent(Guid categoryId, string name, string colorCode) : base(categoryId)
         {

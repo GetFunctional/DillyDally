@@ -6,7 +6,8 @@ namespace GF.DillyDally.WriteModel.Infrastructure
 {
     internal class AggregateRootBase : IAggregateRoot
     {
-        private readonly Dictionary<Type, Action<IAggregateEvent>> _routes = new Dictionary<Type, Action<IAggregateEvent>>();
+        private readonly Dictionary<Type, Action<IAggregateEvent>> _routes =
+            new Dictionary<Type, Action<IAggregateEvent>>();
 
         private readonly List<IAggregateEvent> _uncommitedEvents = new List<IAggregateEvent>();
 
@@ -17,7 +18,7 @@ namespace GF.DillyDally.WriteModel.Infrastructure
             return this._uncommitedEvents;
         }
 
-        public int Version { get; protected set; } = 0;
+        public int Version { get; protected set; }
 
         public Guid AggregateId { get; protected set; }
 
@@ -32,6 +33,7 @@ namespace GF.DillyDally.WriteModel.Infrastructure
             {
                 throw new MssingEventRouteException(eventType, this.GetType());
             }
+
             this.Version++;
         }
 
