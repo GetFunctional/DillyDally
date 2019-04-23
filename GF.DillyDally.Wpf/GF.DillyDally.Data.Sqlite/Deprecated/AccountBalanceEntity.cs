@@ -5,7 +5,7 @@ using Dapper.Contrib.Extensions;
 using GF.DillyDally.Data.Contracts.Entities;
 using GF.DillyDally.Data.Contracts.Entities.Keys;
 
-namespace GF.DillyDally.Data.Sqlite.Entities
+namespace GF.DillyDally.Data.Sqlite.Deprecated
 {
     [Dapper.Contrib.Extensions.Table("AccountBalance")]
     public sealed class AccountBalanceEntity : IAccountBalanceEntity

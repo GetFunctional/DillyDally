@@ -4,7 +4,7 @@ using Dapper.Contrib.Extensions;
 using GF.DillyDally.Data.Contracts.Entities;
 using GF.DillyDally.Data.Contracts.Entities.Keys;
 
-namespace GF.DillyDally.Data.Sqlite.Entities
+namespace GF.DillyDally.Data.Sqlite.Deprecated
 {
     [System.ComponentModel.DataAnnotations.Schema.Table("TaskReward")]
     public sealed class TaskRewardEntity : ITaskRewardEntity

@@ -3,7 +3,6 @@ using System.Linq;
 using Dapper.Contrib.Extensions;
 using GF.DillyDally.Data.Contracts;
 using GF.DillyDally.Data.Sqlite;
-using GF.DillyDally.Data.Sqlite.Entities;
 using NUnit.Framework;
 
 namespace GF.DillyDally.Unittests.SqlDbAccess

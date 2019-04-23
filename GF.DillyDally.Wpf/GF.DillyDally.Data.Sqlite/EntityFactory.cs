@@ -1,7 +1,7 @@
 ﻿using System;
 using GF.DillyDally.Data.Contracts.Entities;
 using GF.DillyDally.Data.Contracts.Entities.Keys;
-using GF.DillyDally.Data.Sqlite.Entities;
+using GF.DillyDally.Data.Sqlite.Deprecated;
 
 namespace GF.DillyDally.Data.Sqlite
 {

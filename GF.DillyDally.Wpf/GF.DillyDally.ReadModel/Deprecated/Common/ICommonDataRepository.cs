@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using GF.DillyDally.Data.Contracts.Entities;
 
-namespace GF.DillyDally.ReadModel.Common
+namespace GF.DillyDally.ReadModel.Deprecated.Common
 {
     public interface ICommonDataRepository
     {

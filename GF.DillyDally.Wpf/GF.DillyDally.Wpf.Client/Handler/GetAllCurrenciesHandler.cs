@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using GF.DillyDally.Data.Contracts.Entities;
-using GF.DillyDally.ReadModel.Common;
+using GF.DillyDally.ReadModel.Deprecated.Common;
 using GF.DillyDally.Wpf.Client.Presentation.Common;
 using MediatR;
 

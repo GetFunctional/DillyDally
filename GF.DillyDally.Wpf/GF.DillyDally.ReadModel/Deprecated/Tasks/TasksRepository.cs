@@ -5,9 +5,9 @@ using Dapper.Contrib.Extensions;
 using GF.DillyDally.Data.Contracts.Entities;
 using GF.DillyDally.Data.Contracts.Entities.Keys;
 using GF.DillyDally.Data.Sqlite;
-using GF.DillyDally.Data.Sqlite.Entities;
+using GF.DillyDally.Data.Sqlite.Deprecated;
 
-namespace GF.DillyDally.ReadModel.Tasks
+namespace GF.DillyDally.ReadModel.Deprecated.Tasks
 {
     internal sealed class TasksRepository : ITasksRepository
     {

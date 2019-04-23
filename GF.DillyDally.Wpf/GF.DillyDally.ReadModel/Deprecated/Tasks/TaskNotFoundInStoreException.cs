@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GF.DillyDally.ReadModel.Tasks
+namespace GF.DillyDally.ReadModel.Deprecated.Tasks
 {
     internal sealed class TaskNotFoundInStoreException : Exception
     {

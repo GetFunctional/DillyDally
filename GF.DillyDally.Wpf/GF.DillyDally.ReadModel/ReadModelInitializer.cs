@@ -1,10 +1,10 @@
 ﻿using System;
-using GF.DillyDally.ReadModel.Account;
-using GF.DillyDally.ReadModel.Common;
+using GF.DillyDally.ReadModel.Deprecated.Account;
+using GF.DillyDally.ReadModel.Deprecated.Common;
+using GF.DillyDally.ReadModel.Deprecated.Tasks;
 using GF.DillyDally.ReadModel.Projection.Categories;
 using GF.DillyDally.ReadModel.Projection.Lanes;
 using GF.DillyDally.ReadModel.Projection.Rewards;
-using GF.DillyDally.ReadModel.Tasks;
 using GF.DillyDally.WriteModel.Domain.Categories;
 using GF.DillyDally.WriteModel.Domain.Lanes;
 using GF.DillyDally.WriteModel.Domain.Rewards;

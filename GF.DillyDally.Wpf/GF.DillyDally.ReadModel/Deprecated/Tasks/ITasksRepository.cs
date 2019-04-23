@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using GF.DillyDally.Data.Contracts.Entities;
 using GF.DillyDally.Data.Contracts.Entities.Keys;
 
-namespace GF.DillyDally.ReadModel.Tasks
+namespace GF.DillyDally.ReadModel.Deprecated.Tasks
 {
     public interface ITasksRepository
     {

@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 using Dapper.Contrib.Extensions;
 using GF.DillyDally.Data.Contracts.Entities;
 using GF.DillyDally.Data.Sqlite;
-using GF.DillyDally.Data.Sqlite.Entities;
+using GF.DillyDally.Data.Sqlite.Deprecated;
 
-namespace GF.DillyDally.ReadModel.Account
+namespace GF.DillyDally.ReadModel.Deprecated.Account
 {
     internal sealed class AccountRepository : IAccountRepository
     {

@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using GF.DillyDally.Mvvmc;
-using GF.DillyDally.ReadModel.Tasks;
+using GF.DillyDally.ReadModel.Deprecated.Tasks;
 using GF.DillyDally.Wpf.Client.Presentation.Tasks;
 using MediatR;
 

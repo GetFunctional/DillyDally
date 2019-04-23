@@ -5,7 +5,7 @@ namespace GF.DillyDally.ReadModel.Projection.Rewards
 {
     internal sealed class RewardEventHandler : IEventHandler<RewardCreatedEvent>
     {
-        #region IEventHandler<RewardCreatedEvent> Members
+        #region IEventHandler<RunningNumberCounterCreatedEvent> Members
 
         public void Handle(RewardCreatedEvent @event)
         {

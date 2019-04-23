@@ -56,7 +56,6 @@
     <Compile Include="Deprecated\Account\IAccountRepository.cs" />
     <Compile Include="Deprecated\Common\CommonDataRepository.cs" />
     <Compile Include="Deprecated\Common\ICommonDataRepository.cs" />
-    <Compile Include="Projection\Achievements\AchievementEventHandler.cs" />
     <Compile Include="Projection\Categories\CategoryEventHandler.cs" />
     <Compile Include="Projection\Lanes\LaneEventHandler.cs" />
     <Compile Include="Projection\Rewards\RewardEventHandler.cs" />

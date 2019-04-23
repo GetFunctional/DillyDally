@@ -5,7 +5,7 @@ namespace GF.DillyDally.WriteModel.Domain.Rewards
 {
     internal sealed class RewardCommandHandler : CommandHandlerBase, ICommandHandler<CreateRewardCommand>
     {
-        #region ICommandHandler<CreateRewardCommand> Members
+        #region ICommandHandler<CreateRunningNumberCounterCommand> Members
 
         public IAggregateRoot Handle(CreateRewardCommand command)
         {
