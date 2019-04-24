@@ -43,6 +43,7 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks
             var newRunningNumberId = this.GuidGenerator.GenerateGuid();
             runningNumbers.AddNextNumber(newRunningNumberId);
             this._aggregateRepository.Save(runningNumbers);
+
             return newRunningNumberId;
         }
     }

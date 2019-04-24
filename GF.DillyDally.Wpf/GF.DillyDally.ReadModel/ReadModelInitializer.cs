@@ -5,6 +5,7 @@ using GF.DillyDally.ReadModel.Deprecated.Tasks;
 using GF.DillyDally.ReadModel.Projection.Categories;
 using GF.DillyDally.ReadModel.Projection.Lanes;
 using GF.DillyDally.ReadModel.Projection.Rewards;
+using GF.DillyDally.ReadModel.Repository;
 using GF.DillyDally.WriteModel.Domain.Categories;
 using GF.DillyDally.WriteModel.Domain.Lanes;
 using GF.DillyDally.WriteModel.Domain.Rewards;
@@ -21,6 +22,9 @@ namespace GF.DillyDally.ReadModel
 
         private static void RegisterTypes(Action<Type, Type> registerType, Action<Type, Type> registerTypeInstance)
         {
+            registerType(typeof(ICategoryRepository), typeof(CategoryRepository));
+            registerType(typeof(ILaneRepository), typeof(LaneRepository));
+
             registerType(typeof(ITasksRepository), typeof(TasksRepository));
             registerType(typeof(ICommonDataRepository), typeof(CommonDataRepository));
             registerType(typeof(IAccountRepository), typeof(AccountRepository));

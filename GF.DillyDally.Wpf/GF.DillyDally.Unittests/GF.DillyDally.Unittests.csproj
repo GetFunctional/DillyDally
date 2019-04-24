@@ -73,7 +73,8 @@
     <Compile Include="SqlDbAccess\DatabaseUpdateTests.cs" />
     <Compile Include="SqlDbAccess\FoundationDataTests.cs" />
     <Compile Include="SqlDbAccess\SqlScriptSelectorTests.cs" />
-    <Compile Include="WriteModel\AchievementTests.cs" />
+    <Compile Include="WriteModel\RealTestSetup.cs" />
+    <Compile Include="WriteModel\TaskTests.cs" />
     <Compile Include="WriteModel\InitialDataCreationTests.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -104,6 +105,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ReadModel\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

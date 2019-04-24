@@ -41,6 +41,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libs\Dapper.Contrib.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -52,10 +53,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Repository\Base\IRepository.Generic.cs" />
+    <Compile Include="Repository\Base\Repository.Generic.cs" />
     <Compile Include="Deprecated\Account\AccountRepository.cs" />
     <Compile Include="Deprecated\Account\IAccountRepository.cs" />
     <Compile Include="Deprecated\Common\CommonDataRepository.cs" />
     <Compile Include="Deprecated\Common\ICommonDataRepository.cs" />
+    <Compile Include="Repository\CategoryRepository.cs" />
+    <Compile Include="Repository\Entities\Category.cs" />
     <Compile Include="Projection\Categories\CategoryEventHandler.cs" />
     <Compile Include="Projection\Lanes\LaneEventHandler.cs" />
     <Compile Include="Projection\Rewards\RewardEventHandler.cs" />
@@ -64,6 +69,10 @@
     <Compile Include="Deprecated\Tasks\ITasksRepository.cs" />
     <Compile Include="Deprecated\Tasks\TaskNotFoundInStoreException.cs" />
     <Compile Include="Deprecated\Tasks\TasksRepository.cs" />
+    <Compile Include="Repository\Entities\Lane.cs" />
+    <Compile Include="Repository\ICategoryRepository.cs" />
+    <Compile Include="Repository\ILaneRepository.cs" />
+    <Compile Include="Repository\LaneRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GF.DillyDally.Data.Contracts\GF.DillyDally.Data.Contracts.csproj">
@@ -80,7 +89,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Views\" />
+    <Folder Include="Views\Categories\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

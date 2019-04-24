@@ -10,6 +10,57 @@
 CREATE UNIQUE INDEX [IX_Files_FileId] ON [Files]([FileId]);
 GO
 
+CREATE TABLE [RunningNumberCounters](
+  [RowID] INTEGER PRIMARY KEY AUTOINCREMENT, 
+  [RunningNumberCounterId] GUID NOT NULL UNIQUE,
+  [CurrentNumber] INTEGER NOT NULL, 
+  [CounterArea] INTEGER NOT NULL,
+  [Prefix] VARCHAR2(10) NOT NULL);
+
+CREATE UNIQUE INDEX [IX_RunningNumberCounters_RunningNumberCounterId] ON [RunningNumberCounters]([RunningNumberCounterId]);
+GO
+
+CREATE TABLE [RunningNumbers](
+  [RowID] INTEGER PRIMARY KEY AUTOINCREMENT, 
+  [RunningNumberId] GUID NOT NULL UNIQUE,
+  [RunningNumber] VARCHAR2(100) NOT NULL, 
+  [RunningNumberCounterId] GUID NOT NULL REFERENCES [RunningNumberCounters]([RunningNumberCounterId]));
+
+CREATE UNIQUE INDEX [IX_RunningNumbers_RunningNumberId] ON [RunningNumbers]([RunningNumberId]);
+GO
+
+CREATE TABLE [Category]
+	(
+	[RowID] INTEGER PRIMARY KEY AUTOINCREMENT, 
+	[CategoryId] GUID NOT NULL UNIQUE,
+	[RunningNumberId] GUID NOT NULL REFERENCES [RunningNumbers]([RunningNumberId]),
+	[Name] VARCHAR2(255) NOT NULL,
+	[ColorCode] NVARCHAR2(9) NOT NULL
+	);
+
+
+CREATE UNIQUE INDEX [IX_Category_CategoryId] ON [Category]([CategoryId]);
+GO
+
+CREATE TABLE [Lane]
+	(
+	[RowID] INTEGER PRIMARY KEY AUTOINCREMENT, 
+	[LaneId] GUID NOT NULL UNIQUE,
+	[RunningNumberId] GUID NOT NULL REFERENCES [RunningNumbers]([RunningNumberId]),
+	[Name] VARCHAR2(255) NOT NULL,
+	[ColorCode] NVARCHAR2(9) NOT NULL,
+	[IsCompletedLane] BOOL NOT NULL,
+	[IsRejectedLane] BOOL NOT NULL
+	);
+
+CREATE UNIQUE INDEX [IX_Lane_LaneId] ON [Lane]([LaneId]);
+GO
+
+
+
+
+
+
 CREATE TABLE [Images](
   [RowID] INTEGER PRIMARY KEY AUTOINCREMENT, 
   [ImageId] GUID NOT NULL UNIQUE,
@@ -20,27 +71,10 @@ CREATE TABLE [Images](
 CREATE UNIQUE INDEX [IX_Images_ImageId] ON [Images]([ImageId]);
 GO
 
-CREATE TABLE [Category]
-	(
-	[RowID] INTEGER PRIMARY KEY AUTOINCREMENT, 
-	[CategoryId] GUID NOT NULL UNIQUE,
-	[Name] VARCHAR2(255) NOT NULL,
-	[ColorCode] NVARCHAR2(9) NOT NULL
-	);
 
-CREATE UNIQUE INDEX [IX_Category_CategoryId] ON [Category]([CategoryId]);
-GO
 
-CREATE TABLE [Lane]
-	(
-	[RowID] INTEGER PRIMARY KEY AUTOINCREMENT, 
-	[LaneId] GUID NOT NULL UNIQUE,
-	[Name] VARCHAR2(255) NOT NULL,
-	[ColorCode] NVARCHAR2(9) NOT NULL
-	);
 
-CREATE UNIQUE INDEX [IX_Lane_LaneId] ON [Lane]([LaneId]);
-GO
+
 
 CREATE TABLE [Achievement]
 	(

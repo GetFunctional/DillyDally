@@ -12,7 +12,7 @@ namespace GF.DillyDally.Wpf.Client.Core
         private readonly IServiceContainer _serviceContainer;
         private readonly WriteModelInitializer _writeModelInitializer = new WriteModelInitializer();
 
-        public DataBootstrapper(IServiceContainer serviceContainer)
+        public DataBootstrapper(LightInject.IServiceContainer serviceContainer)
         {
             this._serviceContainer = serviceContainer;
         }
