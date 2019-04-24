@@ -29,7 +29,7 @@ CREATE TABLE [RunningNumbers](
 CREATE UNIQUE INDEX [IX_RunningNumbers_RunningNumberId] ON [RunningNumbers]([RunningNumberId]);
 GO
 
-CREATE TABLE [Category]
+CREATE TABLE [Categories]
 	(
 	[RowID] INTEGER PRIMARY KEY AUTOINCREMENT, 
 	[CategoryId] GUID NOT NULL UNIQUE,
@@ -38,11 +38,10 @@ CREATE TABLE [Category]
 	[ColorCode] NVARCHAR2(9) NOT NULL
 	);
 
-
-CREATE UNIQUE INDEX [IX_Category_CategoryId] ON [Category]([CategoryId]);
+CREATE UNIQUE INDEX [IX_Categories_CategoryId] ON [Categories]([CategoryId]);
 GO
 
-CREATE TABLE [Lane]
+CREATE TABLE [Lanes]
 	(
 	[RowID] INTEGER PRIMARY KEY AUTOINCREMENT, 
 	[LaneId] GUID NOT NULL UNIQUE,
@@ -53,7 +52,7 @@ CREATE TABLE [Lane]
 	[IsRejectedLane] BOOL NOT NULL
 	);
 
-CREATE UNIQUE INDEX [IX_Lane_LaneId] ON [Lane]([LaneId]);
+CREATE UNIQUE INDEX [IX_Lanes_LaneId] ON [Lanes]([LaneId]);
 GO
 
 
