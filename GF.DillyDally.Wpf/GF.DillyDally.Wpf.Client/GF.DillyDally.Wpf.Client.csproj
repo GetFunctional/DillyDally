@@ -38,14 +38,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Dapper, Version=1.60.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libs\Dapper.dll</HintPath>
-    </Reference>
-    <Reference Include="Dapper.Contrib, Version=1.60.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libs\Dapper.Contrib.dll</HintPath>
-    </Reference>
     <Reference Include="DevExpress.Data.v18.2, Version=18.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libs\DevExpress.Data.v18.2.dll</HintPath>
@@ -58,17 +50,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libs\DevExpress.Printing.v18.2.Core.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.Xpf.Controls.v18.2, Version=18.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libs\DevExpress.Xpf.Controls.v18.2.dll</HintPath>
-    </Reference>
     <Reference Include="DevExpress.Xpf.Core.v18.2, Version=18.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libs\DevExpress.Xpf.Core.v18.2.dll</HintPath>
-    </Reference>
-    <Reference Include="DevExpress.Xpf.Core.v18.2.Extensions, Version=18.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libs\DevExpress.Xpf.Core.v18.2.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.Xpf.Grid.v18.2, Version=18.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -78,21 +62,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libs\DevExpress.Xpf.Grid.v18.2.Core.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.Xpf.Grid.v18.2.Extensions, Version=18.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libs\DevExpress.Xpf.Grid.v18.2.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="DevExpress.Xpf.Layout.v18.2.Core, Version=18.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libs\DevExpress.Xpf.Layout.v18.2.Core.dll</HintPath>
-    </Reference>
     <Reference Include="DevExpress.Xpf.LayoutControl.v18.2, Version=18.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libs\DevExpress.Xpf.LayoutControl.v18.2.dll</HintPath>
-    </Reference>
-    <Reference Include="DevExpress.Xpf.Themes.VS2017Light.v18.2, Version=18.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libs\DevExpress.Xpf.Themes.VS2017Light.v18.2.dll</HintPath>
     </Reference>
     <Reference Include="LightInject, Version=5.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -102,31 +74,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libs\MediatR.dll</HintPath>
     </Reference>
-    <Reference Include="NEventStore, Version=6.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libs\NEventStore.dll</HintPath>
-    </Reference>
-    <Reference Include="NEventStore.Persistence.Sql, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libs\NEventStore.Persistence.Sql.dll</HintPath>
-    </Reference>
-    <Reference Include="NEventStore.Serialization.Json, Version=6.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libs\NEventStore.Serialization.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libs\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.framework, Version=3.11.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libs\nunit.framework.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Data.SQLite, Version=1.0.110.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libs\System.Data.SQLite.dll</HintPath>
-    </Reference>
     <Reference Include="System.IO" />
     <Reference Include="System.Linq.Expressions" />
     <Reference Include="System.Runtime" />
@@ -394,13 +342,8 @@
       <Name>GF.DillyDally.WriteModel</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="x64\SQLite.Interop.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="x86\SQLite.Interop.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>xcopy /i /e /s /y /f "$(SolutionDir)..\Libs\*" "$(TargetDir)"</PreBuildEvent>
+  </PropertyGroup>
 </Project>
