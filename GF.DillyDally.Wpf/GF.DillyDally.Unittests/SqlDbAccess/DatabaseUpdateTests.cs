@@ -24,6 +24,7 @@ namespace GF.DillyDally.Unittests.SqlDbAccess
             Assert.DoesNotThrow(() => databaseUpdater.UpdateDatabase());
 
             Assert.That(fileExists);
+            databaseFileHandler.DeleteDatabaseIfExists();
         }
     }
 }

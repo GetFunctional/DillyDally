@@ -5,8 +5,8 @@ namespace GF.DillyDally.WriteModel.Domain.RunningNumbers.Events
 {
     public sealed class AddNextNumberEvent : AggregateEventBase
     {
-        public AddNextNumberEvent(Guid numberCounterId, Guid nextNumberId, string prefix, int nextNumberInRow) : base(
-            numberCounterId)
+        public AddNextNumberEvent(Guid aggregateId, Guid nextNumberId, string prefix, int nextNumberInRow) : base(
+            aggregateId)
         {
             this.NextNumberId = nextNumberId;
             this.Prefix = prefix;

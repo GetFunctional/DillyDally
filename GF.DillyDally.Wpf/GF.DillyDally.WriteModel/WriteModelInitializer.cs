@@ -4,6 +4,7 @@ using GF.DillyDally.WriteModel.Domain.Categories;
 using GF.DillyDally.WriteModel.Domain.Lanes;
 using GF.DillyDally.WriteModel.Domain.Rewards;
 using GF.DillyDally.WriteModel.Domain.RunningNumbers;
+using GF.DillyDally.WriteModel.Domain.Tasks;
 using GF.DillyDally.WriteModel.Infrastructure;
 using LightInject;
 using NEventStore;
@@ -53,6 +54,9 @@ namespace GF.DillyDally.WriteModel
 
             var categoryCommandHandler = serviceContainer.Create<CategoryCommandHandler>();
             commandDispatcher.RegisterHandler(categoryCommandHandler);
+
+            var taskCommandHandler = serviceContainer.Create<TaskCommandHandler>();
+            commandDispatcher.RegisterHandler(taskCommandHandler);
         }
 
         internal CommandDispatcher CommandDispatcher { get; private set; }

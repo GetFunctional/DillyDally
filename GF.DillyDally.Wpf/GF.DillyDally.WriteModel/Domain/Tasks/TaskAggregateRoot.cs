@@ -10,11 +10,13 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks
     {
         public TaskAggregateRoot()
         {
-            this.AggregateId = Guid.Empty;
+            this.RegisterTransition<TaskCreatedEvent>(this.Apply);
+            this.RegisterTransition<UnLinkTasksEvent>(this.Apply);
+            this.RegisterTransition<TaskLinkCreatedEvent>(this.Apply);
         }
 
         protected TaskAggregateRoot(Guid taskId, string name, Guid runningNumberId,
-            Guid categoryId, Guid laneId, int amountOfRewards, Guid? previewImageId)
+            Guid categoryId, Guid laneId, int amountOfRewards, Guid? previewImageId) : this()
         {
             var creationEvent = new TaskCreatedEvent(taskId, name, runningNumberId, categoryId, laneId,
                 amountOfRewards, previewImageId);
@@ -72,11 +74,9 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks
         }
 
         internal static TaskAggregateRoot CreateTask(Guid taskId, string name, Guid runningNumberId,
-            Guid categoryId, Guid laneId, int amountOfRewards, Guid? previewImageId)
-        {
-            return new TaskAggregateRoot(taskId, name, runningNumberId, categoryId, laneId,
+            Guid categoryId, Guid laneId, int amountOfRewards, Guid? previewImageId) =>
+            new TaskAggregateRoot(taskId, name, runningNumberId, categoryId, laneId,
                 amountOfRewards, previewImageId);
-        }
 
         private void Apply(TaskCreatedEvent obj)
         {

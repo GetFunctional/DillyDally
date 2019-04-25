@@ -29,11 +29,9 @@ namespace GF.DillyDally.Unittests.SqlDbAccess
                 connectionWasOpened = connection.State == ConnectionState.Open;
             }
 
-            databaseFileHandler.DeleteDatabaseIfExists();
-
-
             Assert.That(fileWasCreated);
             Assert.That(connectionWasOpened);
+            databaseFileHandler.DeleteDatabaseIfExists();
         }
 
         [Test]

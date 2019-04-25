@@ -5,9 +5,9 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks.Events
 {
     public sealed class TaskCreatedEvent : AggregateEventBase
     {
-        public TaskCreatedEvent(Guid taskId, string name, Guid runningNumberId, Guid categoryId, Guid laneId,
+        public TaskCreatedEvent(Guid aggregateId, string name, Guid runningNumberId, Guid categoryId, Guid laneId,
             int amountOfRewards,
-            Guid? previewImageId) : base(taskId)
+            Guid? previewImageId) : base(aggregateId)
         {
             this.Name = name;
             this.RunningNumberId = runningNumberId;

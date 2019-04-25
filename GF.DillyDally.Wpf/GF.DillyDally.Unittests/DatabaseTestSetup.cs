@@ -73,21 +73,21 @@ namespace GF.DillyDally.Unittests
             // Act && Assert
             var commandDispatcher = this._diContainer.GetInstance<ICommandDispatcher>();
 
-            var data = new List<Tuple<string, string>>
+            var data = new List<Tuple<string, string, bool,bool>>
                        {
-                           new Tuple<string, string>("Backlog Level 3", "#0C53BD"),
-                           new Tuple<string, string>("Backlog Level 2", "#0C53BD"),
-                           new Tuple<string, string>("Backlog Level 1", "#0C53BD"),
-                           new Tuple<string, string>("Pending", "#0C53BD"),
-                           new Tuple<string, string>("Rejected", "#0C53BD"),
-                           new Tuple<string, string>("Infinite", "#0C53BD"),
-                           new Tuple<string, string>("Done", "#0C53BD")
+                           new Tuple<string, string, bool,bool>("Backlog Level 3", "#0C53BD",false,false),
+                           new Tuple<string, string, bool,bool>("Backlog Level 2", "#0C53BD",false,false),
+                           new Tuple<string, string, bool,bool>("Backlog Level 1", "#0C53BD",false,false),
+                           new Tuple<string, string, bool,bool>("Pending", "#0C53BD",false,false),
+                           new Tuple<string, string, bool,bool>("Rejected", "#0C53BD",false, true),
+                           new Tuple<string, string, bool,bool>("Infinite", "#0C53BD", false,false),
+                           new Tuple<string, string, bool,bool>("Done", "#0C53BD", true, false)
                        };
 
             var createdIds = new List<Guid>();
             foreach (var lane in data)
             {
-                var createLaneCommand = new CreateLaneCommand(lane.Item1, lane.Item2);
+                var createLaneCommand = new CreateLaneCommand(lane.Item1, lane.Item2, lane.Item3, lane.Item4);
                 createdIds.Add(commandDispatcher.ExecuteCommand(createLaneCommand));
             }
         }

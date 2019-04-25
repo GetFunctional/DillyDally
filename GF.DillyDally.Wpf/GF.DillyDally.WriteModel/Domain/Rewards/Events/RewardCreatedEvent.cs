@@ -5,7 +5,7 @@ namespace GF.DillyDally.WriteModel.Domain.Rewards.Events
 {
     public sealed class RewardCreatedEvent : AggregateEventBase
     {
-        public RewardCreatedEvent(Guid rewardId, string name, string currencyCode) : base(rewardId)
+        public RewardCreatedEvent(Guid aggregateId, string name, string currencyCode) : base(aggregateId)
         {
             this.Name = name;
             this.CurrencyCode = currencyCode;
