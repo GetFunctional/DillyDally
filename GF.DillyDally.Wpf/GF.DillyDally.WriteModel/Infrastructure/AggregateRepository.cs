@@ -63,6 +63,10 @@ namespace GF.DillyDally.WriteModel.Infrastructure
         {
             using (var stream = this.GetEventStream(aggregateId))
             {
+                if (stream.CommitSequence == 0)
+                {
+                    throw new AggregateNotFoundException(aggregateId);
+                }
                 return this.BuildAggregate<TAggregate>(stream.CommittedEvents);
             }
         }
@@ -72,6 +76,11 @@ namespace GF.DillyDally.WriteModel.Infrastructure
         {
             using (var stream = this.GetEventStream(aggregateId))
             {
+                if (stream.CommitSequence == 0)
+                {
+                    aggregate = default(TAggregate);
+                    return false;
+                }
                 return this.TryBuildAggregate(stream.CommittedEvents, out aggregate);
             }
         }
@@ -104,6 +113,11 @@ namespace GF.DillyDally.WriteModel.Infrastructure
         private bool TryBuildAggregate<TResult>(ICollection<EventMessage> eventMessages, out TResult aggregateResult)
             where TResult : IAggregateRoot, new()
         {
+            if (eventMessages.Count == 0)
+            {
+                aggregateResult = default(TResult);
+                return false;
+            }
             try
             {
                 aggregateResult = this.BuildAggregate<TResult>(eventMessages);
@@ -119,6 +133,11 @@ namespace GF.DillyDally.WriteModel.Infrastructure
         private TResult BuildAggregate<TResult>(ICollection<EventMessage> eventMessages)
             where TResult : IAggregateRoot, new()
         {
+            if (eventMessages.Count == 0)
+            {
+                throw new MissingEventsForAggregateException();
+            }
+
             var result = new TResult();
             foreach (var eventMessage in eventMessages)
             {

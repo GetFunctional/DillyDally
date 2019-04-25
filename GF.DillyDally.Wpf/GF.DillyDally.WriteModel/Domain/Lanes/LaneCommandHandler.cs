@@ -10,7 +10,9 @@ namespace GF.DillyDally.WriteModel.Domain.Lanes
         public IAggregateRoot Handle(CreateLaneCommand command)
         {
             var laneId = this.GuidGenerator.GenerateGuid();
-            return LaneAggregateRoot.Create(laneId, command.Name, command.ColorCode);
+
+            var aggregate = LaneAggregateRoot.Create(laneId, command.Name, command.ColorCode);
+            return aggregate;
         }
 
         #endregion

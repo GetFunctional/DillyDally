@@ -16,7 +16,7 @@ namespace GF.DillyDally.WriteModel.Domain.RunningNumbers
             {
                 { RunningNumberCounterArea.Task, Guid.Parse("{885D3926-FBAB-4EE9-823B-756BA812275D}")},
                 { RunningNumberCounterArea.Category, Guid.Parse("{BE434835-ACAA-4CD6-87E0-F7EA338CD23D}")},
-                { RunningNumberCounterArea.Lane, Guid.Parse("{BE434835-ACAA-4CD6-87E0-F7EA338CD23D}")},
+                { RunningNumberCounterArea.Lane, Guid.Parse("{E8652CB7-2908-48CA-882D-DF989FE4957F}")},
             };
 
         public RunningNumberCounterCommandHandler(IAggregateRepository aggregateRepository)
@@ -34,8 +34,10 @@ namespace GF.DillyDally.WriteModel.Domain.RunningNumbers
                 throw new RunningNumberCounterAlreadyExistException(runningNumberId);
             }
 
-            return RunningNumberCounterAggregateRoot.Create(runningNumberId, counterCommand.CounterArea, counterCommand.Prefix,
+            var aggregate =  RunningNumberCounterAggregateRoot.Create(runningNumberId, counterCommand.CounterArea, counterCommand.Prefix,
                 counterCommand.InitialNumber);
+            this._aggregateRepository.Save(aggregate);
+            return aggregate;
         }
 
         #endregion

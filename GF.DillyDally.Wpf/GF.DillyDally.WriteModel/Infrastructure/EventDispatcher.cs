@@ -33,6 +33,7 @@ namespace GF.DillyDally.WriteModel.Infrastructure
             {
                 // Just Log
                 Trace.WriteLine($"No EventHandler found for {eventType.Name}");
+                return;
             }
 
             foreach (var eventHandler in this._routes[eventType])

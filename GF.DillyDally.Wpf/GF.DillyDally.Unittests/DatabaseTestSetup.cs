@@ -1,35 +1,49 @@
 ﻿using System;
 using System.Collections.Generic;
-using GF.DillyDally.Wpf.Client.Core;
+using GF.DillyDally.Data.Sqlite;
 using GF.DillyDally.WriteModel.Domain.Categories.Commands;
 using GF.DillyDally.WriteModel.Domain.Lanes.Commands;
 using GF.DillyDally.WriteModel.Domain.Rewards.Commands;
+using GF.DillyDally.WriteModel.Domain.RunningNumbers.Commands;
+using GF.DillyDally.WriteModel.Domain.RunningNumbers.Events;
 using GF.DillyDally.WriteModel.Infrastructure;
 using LightInject;
 
-namespace GF.DillyDally.Unittests.WriteModel
+namespace GF.DillyDally.Unittests
 {
-    internal class RealTestSetup
+    internal class DatabaseTestSetup
     {
+        private readonly InfrastructureTestSetup _infrastructureSetup;
         private ServiceContainer _diContainer;
+
+        public DatabaseTestSetup() => this._infrastructureSetup = new InfrastructureTestSetup();
 
         public void Setup(string exampleFile)
         {
-            this._diContainer = this.CreateDependencyInjectionContainer();
-            var dataBootstrapper = new DataBootstrapper(this._diContainer);
-            dataBootstrapper.Run(new InitializationSettings(exampleFile, true, true));
+            this._infrastructureSetup.Setup(exampleFile);
+            this._diContainer = this._infrastructureSetup.DiContainer;
+            this.CreateNumberCounters();
             this.CreateTestCategories();
             this.CreateTestLanes();
             this.CreateTestRewards();
         }
 
-        private ServiceContainer CreateDependencyInjectionContainer() =>
-            new ServiceContainer(new ContainerOptions
-                                 {EnablePropertyInjection = false, EnableVariance = false});
+        private void CreateNumberCounters()
+        {
+            var commandDispatcher = this._diContainer.GetInstance<ICommandDispatcher>();
+            var createCommand = new CreateRunningNumberCounterCommand(RunningNumberCounterArea.Category, "CAT", 0);
+            commandDispatcher.ExecuteCommand(createCommand);
+
+            createCommand = new CreateRunningNumberCounterCommand(RunningNumberCounterArea.Task, "TSK", 0);
+            commandDispatcher.ExecuteCommand(createCommand);
+
+            createCommand = new CreateRunningNumberCounterCommand(RunningNumberCounterArea.Lane, "LN", 0);
+            commandDispatcher.ExecuteCommand(createCommand);
+        }
+
 
         private void CreateTestCategories()
         {
-            // Act && Assert
             var commandDispatcher = this._diContainer.GetInstance<ICommandDispatcher>();
 
             var data = new List<Tuple<string, string>>
@@ -99,6 +113,10 @@ namespace GF.DillyDally.Unittests.WriteModel
             }
         }
 
-        public T GetInstance<T>() => this._diContainer.GetInstance<T>();
+
+        public void DeleteDatabase()
+        {
+            this._diContainer.GetInstance<DatabaseFileHandler>().DeleteDatabaseIfExists();
+        }
     }
 }

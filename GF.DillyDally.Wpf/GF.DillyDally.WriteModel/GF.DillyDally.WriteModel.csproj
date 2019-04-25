@@ -36,6 +36,10 @@
     <Reference Include="Dapper.Contrib">
       <HintPath>..\..\Libs\Dapper.Contrib.dll</HintPath>
     </Reference>
+    <Reference Include="LightInject, Version=5.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libs\LightInject.dll</HintPath>
+    </Reference>
     <Reference Include="NEventStore">
       <HintPath>..\..\Libs\NEventStore.dll</HintPath>
     </Reference>
@@ -88,6 +92,7 @@
     <Compile Include="Infrastructure\AggregateEventBase.cs" />
     <Compile Include="Infrastructure\AggregateCommandBase.cs" />
     <Compile Include="AuthorizationPipelineHook.cs" />
+    <Compile Include="Infrastructure\Exceptions\AggregateNotFoundException.cs" />
     <Compile Include="Infrastructure\CommandHandlerBase.cs" />
     <Compile Include="Deprecated\DillyDallyTask.cs" />
     <Compile Include="Deprecated\ITask.cs" />
@@ -109,6 +114,7 @@
     <Compile Include="Infrastructure\IEventHandler.cs" />
     <Compile Include="Infrastructure\Exceptions\InvalidAggregateIdException.cs" />
     <Compile Include="Infrastructure\Exceptions\MissingCommandHandlerException.cs" />
+    <Compile Include="Infrastructure\Exceptions\MissingEventsForAggregateException.cs" />
     <Compile Include="RandomExtensions.cs" />
     <Compile Include="WriteModelInitializer.cs" />
     <Compile Include="Deprecated\CurrencyService.cs" />

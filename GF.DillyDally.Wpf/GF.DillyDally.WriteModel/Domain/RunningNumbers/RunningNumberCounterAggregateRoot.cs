@@ -23,10 +23,10 @@ namespace GF.DillyDally.WriteModel.Domain.RunningNumbers
             this.RaiseEvent(creationEvent);
         }
 
-        public RunningNumberCounterArea CounterArea { get; set; }
+        private RunningNumberCounterArea CounterArea { get; set; }
         private string Prefix { get; set; }
         private int InitialNumber { get; set; }
-        private List<RunningNumber> Numbers { get; set; }
+        private List<RunningNumber> Numbers { get; } = new List<RunningNumber>();
 
         private void Apply(RunningNumberCounterCreatedEvent obj)
         {

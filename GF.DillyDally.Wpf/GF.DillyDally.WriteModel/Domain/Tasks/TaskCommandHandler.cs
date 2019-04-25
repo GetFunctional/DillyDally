@@ -27,9 +27,10 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks
             var newRunningNumberId = this.CreateNewRunningNumberForTask();
             var taskId = this.GuidGenerator.GenerateGuid();
 
-            var newTask = TaskAggregateRoot.CreateTask(taskId, command.Name, newRunningNumberId,
+            var aggregate = TaskAggregateRoot.CreateTask(taskId, command.Name, newRunningNumberId,
                 category.AggregateId, lane.AggregateId, command.Storypoints, command.PreviewImageId);
-            return newTask;
+            this._aggregateRepository.Save(aggregate);
+            return aggregate;
         }
 
         #endregion

@@ -1,44 +1,41 @@
-﻿using System;
-using GF.DillyDally.ReadModel.Deprecated.Account;
+﻿using GF.DillyDally.ReadModel.Deprecated.Account;
 using GF.DillyDally.ReadModel.Deprecated.Common;
 using GF.DillyDally.ReadModel.Deprecated.Tasks;
 using GF.DillyDally.ReadModel.Projection.Categories;
 using GF.DillyDally.ReadModel.Projection.Lanes;
 using GF.DillyDally.ReadModel.Projection.Rewards;
 using GF.DillyDally.ReadModel.Repository;
-using GF.DillyDally.WriteModel.Domain.Categories;
-using GF.DillyDally.WriteModel.Domain.Lanes;
-using GF.DillyDally.WriteModel.Domain.Rewards;
 using GF.DillyDally.WriteModel.Infrastructure;
+using LightInject;
 
 namespace GF.DillyDally.ReadModel
 {
     public sealed class ReadModelInitializer
     {
-        public void Initialize(Action<Type, Type> registerType, Action<Type, Type> registerTypeInstance)
+        public void Initialize(IServiceContainer serviceContainer, IEventDispatcher eventDispatcher)
         {
-            RegisterTypes(registerType, registerTypeInstance);
+            RegisterTypes(serviceContainer);
+            this.RegisterForDomainEvents(serviceContainer, eventDispatcher);
         }
 
-        private static void RegisterTypes(Action<Type, Type> registerType, Action<Type, Type> registerTypeInstance)
+        private static void RegisterTypes(IServiceContainer serviceContainer)
         {
-            registerType(typeof(ICategoryRepository), typeof(CategoryRepository));
-            registerType(typeof(ILaneRepository), typeof(LaneRepository));
-
-            registerType(typeof(ITasksRepository), typeof(TasksRepository));
-            registerType(typeof(ICommonDataRepository), typeof(CommonDataRepository));
-            registerType(typeof(IAccountRepository), typeof(AccountRepository));
+            serviceContainer.Register<ICategoryRepository, CategoryRepository>();
+            serviceContainer.Register<ILaneRepository, LaneRepository>();
+            serviceContainer.Register<ITasksRepository, TasksRepository>();
+            serviceContainer.Register<ICommonDataRepository, CommonDataRepository>();
+            serviceContainer.Register<IAccountRepository, AccountRepository>();
         }
 
-        public void RegisterForDomainEvents(IEventDispatcher eventDispatcher)
+        private void RegisterForDomainEvents(IServiceContainer serviceContainer, IEventDispatcher eventDispatcher)
         {
-            var laneEventHandler = new LaneEventHandler();
+            var laneEventHandler = serviceContainer.Create<LaneEventHandler>();
             eventDispatcher.RegisterHandler(laneEventHandler);
 
-            var rewardEventHandler = new RewardEventHandler();
+            var rewardEventHandler = serviceContainer.Create<RewardEventHandler>();
             eventDispatcher.RegisterHandler(rewardEventHandler);
 
-            var categoryEventHandler = new CategoryEventHandler();
+            var categoryEventHandler = serviceContainer.Create<CategoryEventHandler>();
             eventDispatcher.RegisterHandler(categoryEventHandler);
         }
     }

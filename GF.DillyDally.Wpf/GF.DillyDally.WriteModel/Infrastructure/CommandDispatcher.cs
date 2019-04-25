@@ -6,14 +6,9 @@ namespace GF.DillyDally.WriteModel.Infrastructure
 {
     internal sealed class CommandDispatcher : ICommandDispatcher
     {
-        private readonly IAggregateRepository _aggregateRepository;
         private readonly Dictionary<Type, Func<object, IAggregateRoot>> _routes;
 
-        public CommandDispatcher(IAggregateRepository aggregateRepository)
-        {
-            this._aggregateRepository = aggregateRepository;
-            this._routes = new Dictionary<Type, Func<object, IAggregateRoot>>();
-        }
+        public CommandDispatcher() => this._routes = new Dictionary<Type, Func<object, IAggregateRoot>>();
 
         #region ICommandDispatcher Members
 
@@ -28,7 +23,6 @@ namespace GF.DillyDally.WriteModel.Infrastructure
 
             var commandHandler = this._routes[commandType];
             var aggregate = commandHandler(command);
-            var savedEvents = this._aggregateRepository.Save(aggregate);
             return aggregate.AggregateId;
         }
 
