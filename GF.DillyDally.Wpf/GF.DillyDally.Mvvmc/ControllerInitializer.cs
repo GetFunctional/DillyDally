@@ -17,7 +17,7 @@ namespace GF.DillyDally.Mvvmc
             var cancellationToken = new CancellationTokenSource();
 
             var currentSynchronizationContext = SynchronizationContext.Current;
-            Task.Run(() => initializeComponent.InitializeAsync(cancellationToken.Token),
+            Task.Run(async () => await initializeComponent.InitializeAsync(cancellationToken.Token),
                 cancellationToken.Token).ContinueWith(t =>
             {
                 currentSynchronizationContext.Send(state =>
