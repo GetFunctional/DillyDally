@@ -10,6 +10,16 @@
 CREATE UNIQUE INDEX [IX_Files_FileId] ON [Files]([FileId]);
 GO
 
+CREATE TABLE [Images](
+  [RowID] INTEGER PRIMARY KEY AUTOINCREMENT, 
+  [ImageId] GUID NOT NULL UNIQUE,
+  [Binary] BLOB NOT NULL, 
+  [OriginalFileId] GUID NOT NULL REFERENCES [Files]([FileId]),
+  [SizeType] INTEGER NOT NULL);
+
+CREATE UNIQUE INDEX [IX_Images_ImageId] ON [Images]([ImageId]);
+GO
+
 CREATE TABLE [RunningNumberCounters](
   [RowID] INTEGER PRIMARY KEY AUTOINCREMENT, 
   [RunningNumberCounterId] GUID NOT NULL UNIQUE,
@@ -55,44 +65,44 @@ CREATE TABLE [Lanes]
 CREATE UNIQUE INDEX [IX_Lanes_LaneId] ON [Lanes]([LaneId]);
 GO
 
-
-
-
-
-
-CREATE TABLE [Images](
-  [RowID] INTEGER PRIMARY KEY AUTOINCREMENT, 
-  [ImageId] GUID NOT NULL UNIQUE,
-  [Binary] BLOB NOT NULL, 
-  [OriginalFileId] GUID NOT NULL REFERENCES [Files]([FileId]),
-  [SizeType] INTEGER NOT NULL);
-
-CREATE UNIQUE INDEX [IX_Images_ImageId] ON [Images]([ImageId]);
-GO
-
-
-
-
-
-
-CREATE TABLE [Achievement]
+CREATE TABLE [Tasks]
 	(
 	[RowID] INTEGER PRIMARY KEY AUTOINCREMENT, 
-	[AchievementId] GUID NOT NULL UNIQUE,
-	[Name] VARCHAR2(255) NOT NULL,
-	[Type] INTEGER NOT NULL,
+	[TaskId] GUID NOT NULL UNIQUE,	
 	[CategoryId] GUID NOT NULL REFERENCES [Category]([CategoryId]),
 	[LaneId] GUID NOT NULL REFERENCES [Lane]([LaneId]),
-	[RewardCount] INTEGER NOT NULL,
-	[LinkAchievementId] GUID NULL REFERENCES [Achievement]([AchievementId]),
+	[RunningNumberId] GUID NOT NULL REFERENCES [RunningNumbers]([RunningNumberId]),
+	[Name] VARCHAR2(255) NOT NULL,
+	[StoryPoints] INTEGER NOT NULL,
 	[DueDate] DATETIME NULL,
 	[CreatedOn] DATETIME NOT NULL,
 	[Description] VARCHAR2 NULL,
 	[PreviewImageId] GUID NULL REFERENCES [Images]([ImageId])
 	);
 
-CREATE UNIQUE INDEX [IX_Achievement_AchievementId] ON [Achievement]([AchievementId]);
+CREATE UNIQUE INDEX [IX_Tasks_TaskId] ON [Tasks]([TaskId]);
 GO
+
+
+
+--CREATE TABLE [Achievement]
+--	(
+--	[RowID] INTEGER PRIMARY KEY AUTOINCREMENT, 
+--	[AchievementId] GUID NOT NULL UNIQUE,
+--	[Name] VARCHAR2(255) NOT NULL,
+--	[Type] INTEGER NOT NULL,
+--	[CategoryId] GUID NOT NULL REFERENCES [Category]([CategoryId]),
+--	[LaneId] GUID NOT NULL REFERENCES [Lane]([LaneId]),
+--	[RewardCount] INTEGER NOT NULL,
+--	[LinkAchievementId] GUID NULL REFERENCES [Achievement]([AchievementId]),
+--	[DueDate] DATETIME NULL,
+--	[CreatedOn] DATETIME NOT NULL,
+--	[Description] VARCHAR2 NULL,
+--	[PreviewImageId] GUID NULL REFERENCES [Images]([ImageId])
+--	);
+
+--CREATE UNIQUE INDEX [IX_Achievement_AchievementId] ON [Achievement]([AchievementId]);
+--GO
 
 
 

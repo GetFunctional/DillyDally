@@ -69,9 +69,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Guideline\EventClassGuideline.cs" />
+    <Compile Include="Guideline\EventHandlerGuideline.cs" />
     <Compile Include="InfrastructureTestSetup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReadModel\Projection\CategoryTests.cs" />
+    <Compile Include="ReadModel\Projection\TaskTests.cs" />
     <Compile Include="SqlDbAccess\CreateDatabaseTests.cs" />
     <Compile Include="SqlDbAccess\DatabaseUpdateTests.cs" />
     <Compile Include="SqlDbAccess\SqlScriptSelectorTests.cs" />

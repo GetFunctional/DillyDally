@@ -1,10 +1,13 @@
-﻿using GF.DillyDally.ReadModel.Deprecated.Account;
+﻿using System.Linq;
+using System.Reflection;
+using GF.DillyDally.ReadModel.Deprecated.Account;
 using GF.DillyDally.ReadModel.Deprecated.Common;
-using GF.DillyDally.ReadModel.Deprecated.Tasks;
 using GF.DillyDally.ReadModel.Projection.Categories;
 using GF.DillyDally.ReadModel.Projection.Lanes;
 using GF.DillyDally.ReadModel.Projection.Rewards;
+using GF.DillyDally.ReadModel.Projection.Tasks;
 using GF.DillyDally.ReadModel.Repository;
+using GF.DillyDally.ReadModel.Repository.Base;
 using GF.DillyDally.WriteModel.Infrastructure;
 using LightInject;
 
@@ -17,14 +20,14 @@ namespace GF.DillyDally.ReadModel
             RegisterTypes(serviceContainer);
             this.RegisterForDomainEvents(serviceContainer, eventDispatcher);
         }
-
+        
         private static void RegisterTypes(IServiceContainer serviceContainer)
         {
             serviceContainer.Register<ICategoryRepository, CategoryRepository>();
             serviceContainer.Register<ILaneRepository, LaneRepository>();
-            serviceContainer.Register<ITasksRepository, TasksRepository>();
             serviceContainer.Register<ICommonDataRepository, CommonDataRepository>();
             serviceContainer.Register<IAccountRepository, AccountRepository>();
+            serviceContainer.Register<ITaskRepository, TaskRepository>();
         }
 
         private void RegisterForDomainEvents(IServiceContainer serviceContainer, IEventDispatcher eventDispatcher)
@@ -37,6 +40,9 @@ namespace GF.DillyDally.ReadModel
 
             var categoryEventHandler = serviceContainer.Create<CategoryEventHandler>();
             eventDispatcher.RegisterHandler(categoryEventHandler);
+
+            var taskEventHandler = serviceContainer.Create<TaskEventHandler>();
+            eventDispatcher.RegisterHandler(taskEventHandler);
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using GF.DillyDally.Mvvmc;
-using GF.DillyDally.ReadModel.Deprecated.Tasks;
 using GF.DillyDally.Wpf.Client.Presentation.Tasks;
 using MediatR;
 
@@ -11,13 +10,10 @@ namespace GF.DillyDally.Wpf.Client.Handler
         OpenTasksListControllerHandler : IRequestHandler<OpenTasksListControllerRequest, TasksListController>
     {
         private readonly ControllerFactory<TasksListController> _tasksControllerFactory;
-        private readonly ITasksRepository _tasksRepository;
 
-        public OpenTasksListControllerHandler(ControllerFactory<TasksListController> tasksControllerFactory,
-            ITasksRepository tasksRepository)
+        public OpenTasksListControllerHandler(ControllerFactory<TasksListController> tasksControllerFactory)
         {
             this._tasksControllerFactory = tasksControllerFactory;
-            this._tasksRepository = tasksRepository;
         }
 
         #region IRequestHandler<OpenTasksListControllerRequest,TasksListController> Members
@@ -26,7 +22,6 @@ namespace GF.DillyDally.Wpf.Client.Handler
             CancellationToken cancellationToken)
         {
             var controller = this._tasksControllerFactory.CreateController();
-            controller.ExternalDataSource = () => this._tasksRepository.GetOpenTasksAsync();
             await controller.LoadDataAsync();
             return controller;
         }

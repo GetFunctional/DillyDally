@@ -7,36 +7,46 @@ namespace GF.DillyDally.WriteModel.Infrastructure
     internal sealed class EventDispatcher : IEventDispatcher
     {
         private readonly IDictionary<Type, IList<Action<IAggregateEvent>>> _routes;
+        public EventDispatcher() => this._routes = new Dictionary<Type, IList<Action<IAggregateEvent>>>();
 
-        public EventDispatcher()
-        {
-            // Handlers should not be dependent upon an order of execution. Otherwise they should be handled together.
-            this._routes = new Dictionary<Type, IList<Action<IAggregateEvent>>>();
-        }
+        #region IEventDispatcher Members
 
         public void RegisterHandler<TEvent>(IEventHandler<TEvent> handler) where TEvent : class, IAggregateEvent
         {
-            var handlerType = typeof(TEvent);
-            if (!this._routes.ContainsKey(handlerType))
-            {
-                this._routes.Add(handlerType, new List<Action<IAggregateEvent>>());
-            }
-
-            this._routes[handlerType].Add(@event => handler.Handle(@event as TEvent));
-        }
-
-        internal void HandleEvent<TEvent>(TEvent @event) where TEvent : class, IAggregateEvent
-        {
-            var eventType = @event.GetType();
-
+            var eventType = typeof(TEvent);
             if (!this._routes.ContainsKey(eventType))
             {
-                // Just Log
-                Trace.WriteLine($"No EventHandler found for {eventType.Name}");
-                return;
+                this._routes.Add(eventType, new List<Action<IAggregateEvent>>());
             }
 
-            foreach (var eventHandler in this._routes[eventType])
+            this._routes[eventType].Add(@event => handler.Handle(@event as TEvent));
+        }
+
+        public bool HasHandlerForEvent(Type eventImplementation) =>
+            this._routes.ContainsKey(eventImplementation) && this._routes[eventImplementation].Count > 0;
+
+        #endregion
+
+        internal IList<Action<IAggregateEvent>> GetRegisteredHandler<TEvent>() where TEvent : class, IAggregateEvent
+        {
+            var eventType = typeof(TEvent);
+            return this.GetRegisteredHandler(typeof(TEvent));
+        }
+
+        internal IList<Action<IAggregateEvent>> GetRegisteredHandler(Type type)
+        {
+            if (!this.HasHandlerForEvent(type))
+            {
+                Trace.WriteLine($"No EventHandler found for {type.Name}");
+                return new List<Action<IAggregateEvent>>();
+            }
+
+            return this._routes[type];
+        }
+
+        internal void HandleEvent(IAggregateEvent @event)
+        {
+            foreach (var eventHandler in this.GetRegisteredHandler(@event.GetType()))
             {
                 eventHandler(@event);
             }

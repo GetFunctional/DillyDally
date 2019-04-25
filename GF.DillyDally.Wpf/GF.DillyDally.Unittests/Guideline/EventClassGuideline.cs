@@ -15,14 +15,14 @@ namespace GF.DillyDally.Unittests.Guideline
         {
             // Arrange
             var baseTypeForEvents = typeof(IAggregateEvent);
-            var allImplementations = Assembly.GetAssembly(typeof(AggregateEventBase)).GetTypes()
+            var eventImplementations = Assembly.GetAssembly(typeof(AggregateEventBase)).GetTypes()
                 .Where(type => baseTypeForEvents.IsAssignableFrom(type) && !type.IsAbstract && !type.IsInterface)
                 .ToList();
 
             var eventsDisregardingGuidelines = new List<Type>();
 
             // Act
-            foreach (var eventImplementation in allImplementations)
+            foreach (var eventImplementation in eventImplementations)
             {
                 var constructorParameters = eventImplementation.GetConstructors().FirstOrDefault();
                 var parameters = constructorParameters.GetParameters();
