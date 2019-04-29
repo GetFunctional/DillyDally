@@ -35,17 +35,26 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
             var taskRepository = this._infrastructureSetup.DiContainer.GetInstance<ITaskRepository>();
             var categoryRepository = this._infrastructureSetup.DiContainer.GetInstance<ICategoryRepository>();
             var laneRepository = this._infrastructureSetup.DiContainer.GetInstance<ILaneRepository>();
+            var testTaskName = "Test";
+            var timeStampBeforeCreation = DateTime.Now;
+            var storyPoints = 5;
 
             var exampleCategory = (await categoryRepository.GetAllAsync()).FirstOrDefault();
             var exampleLane = (await laneRepository.GetAllAsync()).FirstOrDefault();
 
-            var newTaskId = commandDispatcher.ExecuteCommand(new CreateTaskCommand("Test", exampleCategory.CategoryId, exampleLane.LaneId, 5));
+            var newTaskId = commandDispatcher.ExecuteCommand(new CreateTaskCommand(testTaskName, exampleCategory.CategoryId, exampleLane.LaneId, storyPoints));
             var projection = await taskRepository.GetByIdAsync(newTaskId);
 
             // Assert
             Assert.That(newTaskId, Is.Not.EqualTo(Guid.Empty));
-            Assert.That(projection.TaskId, Is.EqualTo(newTaskId));
             Assert.That(projection, Is.Not.Null);
+            Assert.That(projection.TaskId, Is.EqualTo(newTaskId));
+            Assert.That(projection.Name, Is.EqualTo(testTaskName));
+            Assert.That(projection.CategoryId, Is.EqualTo(exampleCategory.CategoryId));
+            Assert.That(projection.LaneId, Is.EqualTo(exampleLane.LaneId));
+            Assert.That(projection.CreatedOn, Is.GreaterThan(timeStampBeforeCreation));
+            Assert.That(projection.StoryPoints, Is.EqualTo(storyPoints));
+            Assert.That(projection.DueDate, Is.Null);
         }
     }
 }
