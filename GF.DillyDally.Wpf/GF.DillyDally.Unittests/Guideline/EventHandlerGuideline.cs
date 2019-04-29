@@ -45,7 +45,7 @@ namespace GF.DillyDally.Unittests.Guideline
             }
 
             // Assert
-            Assert.That(eventsWithoutRegistration.Count, Is.EqualTo(5));
+            Assert.That(eventsWithoutRegistration.Count, Is.EqualTo(4));
         }
     }
 }

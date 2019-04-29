@@ -16,16 +16,15 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks
         }
 
         protected TaskAggregateRoot(Guid taskId, string name, Guid runningNumberId,
-            Guid categoryId, Guid laneId, int storyPoints, Guid? previewImageId) : this()
+            Guid categoryId, Guid laneId, Guid? previewImageId) : this()
         {
             var creationEvent = new TaskCreatedEvent(taskId, name, runningNumberId, categoryId, laneId,
-                storyPoints, previewImageId, DateTime.Now);
+                 previewImageId, DateTime.Now);
             this.Apply(creationEvent);
             this.RaiseEvent(creationEvent);
         }
 
         private List<TaskLink> Links { get; set; }
-        public int StoryPoints { get; set; }
         public string Name { get; protected set; }
         public Guid CategoryId { get; protected set; }
         public Guid LaneId { get; protected set; }
@@ -74,9 +73,11 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks
         }
 
         internal static TaskAggregateRoot CreateTask(Guid taskId, string name, Guid runningNumberId,
-            Guid categoryId, Guid laneId, int storyPoints, Guid? previewImageId) =>
-            new TaskAggregateRoot(taskId, name, runningNumberId, categoryId, laneId,
-                storyPoints, previewImageId);
+            Guid categoryId, Guid laneId, Guid? previewImageId)
+        {
+            return new TaskAggregateRoot(taskId, name, runningNumberId, categoryId, laneId,
+                previewImageId);
+        }
 
         private void Apply(TaskCreatedEvent obj)
         {
@@ -84,7 +85,6 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks
             this.Name = obj.Name;
             this.CategoryId = obj.CategoryId;
             this.LaneId = obj.LaneId;
-            this.StoryPoints = obj.StoryPoints;
             this.PreviewImageId = obj.PreviewImageId;
         }
     }

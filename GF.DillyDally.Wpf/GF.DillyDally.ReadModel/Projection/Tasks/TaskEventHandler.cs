@@ -31,7 +31,6 @@ namespace GF.DillyDally.ReadModel.Projection.Tasks
                                                                  RunningNumberId = @event.RunningNumberId,
                                                                  CreatedOn = @event.CreatedOn,
                                                                  LaneId = @event.LaneId,
-                                                                 StoryPoints = @event.StoryPoints,
                                                                  PreviewImageId = @event.PreviewImageId
                                                              });
             }

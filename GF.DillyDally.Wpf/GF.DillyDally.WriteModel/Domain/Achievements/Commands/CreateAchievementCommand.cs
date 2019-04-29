@@ -1,7 +1,7 @@
 ﻿using System;
 using GF.DillyDally.WriteModel.Infrastructure;
 
-namespace GF.DillyDally.WriteModel.Domain.Rewards.Commands
+namespace GF.DillyDally.WriteModel.Domain.Achievements.Commands
 {
     public sealed class CreateAchievementCommand : AggregateCommandBase
     {

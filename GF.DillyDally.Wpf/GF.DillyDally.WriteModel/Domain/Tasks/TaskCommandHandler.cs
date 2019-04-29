@@ -28,7 +28,7 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks
             var taskId = this.GuidGenerator.GenerateGuid();
 
             var aggregate = TaskAggregateRoot.CreateTask(taskId, command.Name, newRunningNumberId,
-                category.AggregateId, lane.AggregateId, command.Storypoints, command.PreviewImageId);
+                category.AggregateId, lane.AggregateId, command.PreviewImageId);
             this._aggregateRepository.Save(aggregate);
             return aggregate;
         }

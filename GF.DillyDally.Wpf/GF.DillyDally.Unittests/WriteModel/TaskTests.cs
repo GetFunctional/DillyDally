@@ -30,7 +30,7 @@ namespace GF.DillyDally.Unittests.WriteModel
             var exampleCategory = (await categoryRepository.GetAllAsync()).FirstOrDefault();
             var exampleLane = (await laneRepository.GetAllAsync()).FirstOrDefault();
 
-            var newTaskId = commandDispatcher.ExecuteCommand(new CreateTaskCommand("Test", exampleCategory.CategoryId, exampleLane.LaneId, 5));
+            var newTaskId = commandDispatcher.ExecuteCommand(new CreateTaskCommand("Test", exampleCategory.CategoryId, exampleLane.LaneId));
 
             Assert.That(newTaskId != null, Is.True);
         }

@@ -1,4 +1,5 @@
-﻿using GF.DillyDally.WriteModel.Domain.Rewards.Commands;
+﻿using GF.DillyDally.WriteModel.Domain.Achievements.Commands;
+using GF.DillyDally.WriteModel.Domain.Rewards.Commands;
 using GF.DillyDally.WriteModel.Infrastructure;
 using LightInject;
 using NUnit.Framework;

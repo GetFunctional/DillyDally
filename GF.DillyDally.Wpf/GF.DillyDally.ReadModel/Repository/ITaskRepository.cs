@@ -7,4 +7,9 @@ namespace GF.DillyDally.ReadModel.Repository
     {
 
     }
+
+    public interface IAchievementRepository : IRepository<Achievement>
+    {
+
+    }
 }

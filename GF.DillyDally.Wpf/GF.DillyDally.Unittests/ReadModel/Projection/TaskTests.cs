@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using GF.DillyDally.ReadModel.Repository;
-using GF.DillyDally.WriteModel.Domain.Categories.Commands;
 using GF.DillyDally.WriteModel.Domain.Tasks.Commands;
 using GF.DillyDally.WriteModel.Infrastructure;
 using LightInject;
@@ -32,28 +29,25 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
         {
             // Arrange
             var commandDispatcher = this._infrastructureSetup.DiContainer.GetInstance<ICommandDispatcher>();
-            var taskRepository = this._infrastructureSetup.DiContainer.GetInstance<ITaskRepository>();
+            var repository = this._infrastructureSetup.DiContainer.GetInstance<ITaskRepository>();
             var categoryRepository = this._infrastructureSetup.DiContainer.GetInstance<ICategoryRepository>();
             var laneRepository = this._infrastructureSetup.DiContainer.GetInstance<ILaneRepository>();
-            var testTaskName = "Test";
-            var timeStampBeforeCreation = DateTime.Now;
-            var storyPoints = 5;
-
             var exampleCategory = (await categoryRepository.GetAllAsync()).FirstOrDefault();
             var exampleLane = (await laneRepository.GetAllAsync()).FirstOrDefault();
+            var timeStampBeforeCreation = DateTime.Now;
+            var command = new CreateTaskCommand("Test", exampleCategory.CategoryId, exampleLane.LaneId);
 
-            var newTaskId = commandDispatcher.ExecuteCommand(new CreateTaskCommand(testTaskName, exampleCategory.CategoryId, exampleLane.LaneId, storyPoints));
-            var projection = await taskRepository.GetByIdAsync(newTaskId);
+            var newId = commandDispatcher.ExecuteCommand(command);
+            var projection = await repository.GetByIdAsync(newId);
 
             // Assert
-            Assert.That(newTaskId, Is.Not.EqualTo(Guid.Empty));
+            Assert.That(newId, Is.Not.EqualTo(Guid.Empty));
             Assert.That(projection, Is.Not.Null);
-            Assert.That(projection.TaskId, Is.EqualTo(newTaskId));
-            Assert.That(projection.Name, Is.EqualTo(testTaskName));
+            Assert.That(projection.TaskId, Is.EqualTo(newId));
+            Assert.That(projection.Name, Is.EqualTo(command.Name));
             Assert.That(projection.CategoryId, Is.EqualTo(exampleCategory.CategoryId));
             Assert.That(projection.LaneId, Is.EqualTo(exampleLane.LaneId));
             Assert.That(projection.CreatedOn, Is.GreaterThan(timeStampBeforeCreation));
-            Assert.That(projection.StoryPoints, Is.EqualTo(storyPoints));
             Assert.That(projection.DueDate, Is.Null);
         }
     }

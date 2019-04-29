@@ -57,7 +57,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Projection\Achievements\AchievementEventHandler.cs" />
     <Compile Include="Projection\Tasks\TaskEventHandler.cs" />
+    <Compile Include="Repository\AchievementRepository.cs" />
     <Compile Include="Repository\Base\IRepository.Generic.cs" />
     <Compile Include="Repository\Base\Repository.Generic.cs" />
     <Compile Include="Deprecated\Account\AccountRepository.cs" />
@@ -65,6 +67,7 @@
     <Compile Include="Deprecated\Common\CommonDataRepository.cs" />
     <Compile Include="Deprecated\Common\ICommonDataRepository.cs" />
     <Compile Include="Repository\CategoryRepository.cs" />
+    <Compile Include="Repository\Entities\Achievement.cs" />
     <Compile Include="Repository\Entities\Category.cs" />
     <Compile Include="Projection\Categories\CategoryEventHandler.cs" />
     <Compile Include="Projection\Lanes\LaneEventHandler.cs" />
@@ -94,7 +97,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Projection\Achievements\" />
     <Folder Include="Views\Categories\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

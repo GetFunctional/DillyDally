@@ -1,4 +1,5 @@
 ﻿using System;
+using GF.DillyDally.WriteModel.Domain.Achievements.Commands;
 using GF.DillyDally.WriteModel.Domain.Rewards.Commands;
 using GF.DillyDally.WriteModel.Domain.RunningNumbers;
 using GF.DillyDally.WriteModel.Domain.RunningNumbers.Events;
@@ -23,7 +24,7 @@ namespace GF.DillyDally.WriteModel.Domain.Achievements
             var newRunningNumberId = this.CreateNewRunningNumberForAchievement();
 
             var aggregate = AchievementAggregateRoot.Create(achievementId, newRunningNumberId, command.Name,
-                command.CounterIncrease, command.CounterIncrease);
+                command.CounterIncrease, command.Storypoints);
 
             this._aggregateRepository.Save(aggregate);
 
