@@ -13,8 +13,9 @@ namespace GF.DillyDally.ReadModel.Repository.Base
 {
     public class Repository<T> : IRepository<T> where T : class, new()
     {
-        private static readonly ConcurrentDictionary<RuntimeTypeHandle, string> TypeTableName = new ConcurrentDictionary<RuntimeTypeHandle, string>();
-        private readonly DatabaseFileHandler _fileHandler;
+        private static readonly ConcurrentDictionary<RuntimeTypeHandle, string> TypeTableName =
+            new ConcurrentDictionary<RuntimeTypeHandle, string>();
+
         private readonly string _primaryKeyName;
         private readonly string _tableName;
 
@@ -22,14 +23,16 @@ namespace GF.DillyDally.ReadModel.Repository.Base
         {
             this._tableName = this.GetTableName();
             this._primaryKeyName = this.GetPrimaryKeyName();
-            this._fileHandler = fileHandler;
+            this.FileHandler = fileHandler;
         }
+
+        protected DatabaseFileHandler FileHandler { get; }
 
         #region IRepository<T> Members
 
         public async Task<List<T>> GetAllAsync()
         {
-            using (var connection = await this._fileHandler.OpenConnectionAsync())
+            using (var connection = await this.FileHandler.OpenConnectionAsync())
             {
                 return await this.GetAllAsync(connection);
             }
@@ -37,7 +40,7 @@ namespace GF.DillyDally.ReadModel.Repository.Base
 
         public async Task<T> GetByIdAsync(Guid id)
         {
-            using (var connection = await this._fileHandler.OpenConnectionAsync())
+            using (var connection = await this.FileHandler.OpenConnectionAsync())
             {
                 return await this.GetByIdAsync(connection, id);
             }
@@ -45,7 +48,7 @@ namespace GF.DillyDally.ReadModel.Repository.Base
 
         public async Task<int> InsertAsync(T entity)
         {
-            using (var connection = await this._fileHandler.OpenConnectionAsync())
+            using (var connection = await this.FileHandler.OpenConnectionAsync())
             {
                 return await this.InsertAsync(connection, entity);
             }
@@ -53,7 +56,7 @@ namespace GF.DillyDally.ReadModel.Repository.Base
 
         public async Task<bool> UpdateAsync(T entity)
         {
-            using (var connection = await this._fileHandler.OpenConnectionAsync())
+            using (var connection = await this.FileHandler.OpenConnectionAsync())
             {
                 return await this.UpdateAsync(connection, entity);
             }
@@ -61,22 +64,37 @@ namespace GF.DillyDally.ReadModel.Repository.Base
 
         public async Task<bool> DeleteAsync(T entity)
         {
-            using (var connection = await this._fileHandler.OpenConnectionAsync())
+            using (var connection = await this.FileHandler.OpenConnectionAsync())
             {
                 return await this.DeleteAsync(connection, entity);
             }
         }
 
-        public async Task<List<T>> GetAllAsync(IDbConnection connection) => (await connection.GetAllAsync<T>()).ToList();
+        public async Task<List<T>> GetAllAsync(IDbConnection connection)
+        {
+            return (await connection.GetAllAsync<T>()).ToList();
+        }
 
-        public async Task<T> GetByIdAsync(IDbConnection connection, Guid id) =>
-            await connection.QuerySingleOrDefaultAsync<T>($"SELECT * FROM {this._tableName} WHERE {this._primaryKeyName} = @RecordId", new {RecordId = id});
+        public async Task<T> GetByIdAsync(IDbConnection connection, Guid id)
+        {
+            return await connection.QuerySingleOrDefaultAsync<T>(
+                $"SELECT * FROM {this._tableName} WHERE {this._primaryKeyName} = @RecordId", new {RecordId = id});
+        }
 
-        public async Task<int> InsertAsync(IDbConnection connection, T entity) => await connection.InsertAsync(entity);
+        public async Task<int> InsertAsync(IDbConnection connection, T entity)
+        {
+            return await connection.InsertAsync(entity);
+        }
 
-        public async Task<bool> UpdateAsync(IDbConnection connection, T entity) => await connection.UpdateAsync(entity);
+        public async Task<bool> UpdateAsync(IDbConnection connection, T entity)
+        {
+            return await connection.UpdateAsync(entity);
+        }
 
-        public async Task<bool> DeleteAsync(IDbConnection connection, T entity) => await connection.DeleteAsync(entity);
+        public async Task<bool> DeleteAsync(IDbConnection connection, T entity)
+        {
+            return await connection.DeleteAsync(entity);
+        }
 
         #endregion
 
@@ -85,7 +103,8 @@ namespace GF.DillyDally.ReadModel.Repository.Base
             var type = typeof(T);
             string name = null;
             var keyAttributeName =
-                type.GetProperties().FirstOrDefault(prop => prop.GetCustomAttribute<ExplicitKeyAttribute>(false) != null)?.Name;
+                type.GetProperties()
+                    .FirstOrDefault(prop => prop.GetCustomAttribute<ExplicitKeyAttribute>(false) != null)?.Name;
 
             if (keyAttributeName != null)
             {
@@ -119,7 +138,8 @@ namespace GF.DillyDally.ReadModel.Repository.Base
             //NOTE: This as dynamic trick falls back to handle both our own Table-attribute as well as the one in EntityFramework 
             var tableAttrName =
                 info.GetCustomAttribute<TableAttribute>(false)?.Name
-                ?? (info.GetCustomAttributes(false).FirstOrDefault(attr => attr.GetType().Name == "TableAttribute") as dynamic)?.Name;
+                ?? (info.GetCustomAttributes(false)
+                    .FirstOrDefault(attr => attr.GetType().Name == "TableAttribute") as dynamic)?.Name;
 
             if (tableAttrName != null)
             {

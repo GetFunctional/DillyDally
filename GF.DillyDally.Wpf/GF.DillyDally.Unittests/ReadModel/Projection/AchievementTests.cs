@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using GF.DillyDally.ReadModel.Repository;
 using GF.DillyDally.WriteModel.Domain.Achievements.Commands;
@@ -22,6 +23,30 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
         #endregion
 
         private readonly InfrastructureTestSetup _infrastructureSetup = new InfrastructureTestSetup();
+
+        [Test]
+        public async Task Completing_Achievement_ShouldCreateProjection()
+        {
+            // Arrange
+            var commandDispatcher = this._infrastructureSetup.DiContainer.GetInstance<ICommandDispatcher>();
+            var createCommand = new CreateAchievementCommand("Test", 1, 3);
+            var newAchievement = commandDispatcher.ExecuteCommand(createCommand);
+            var command = new CompleteAchievementCommand(newAchievement);
+            var repository = this._infrastructureSetup.DiContainer.GetInstance<IAchievementCompletionRepository>();
+
+            var timeStampBeforeCompletion = DateTime.Now;
+            var newId = commandDispatcher.ExecuteCommand(command);
+            var projection = await repository.GetAchievementCompletionsAsync(newId);
+            var singleEntry = projection.FirstOrDefault();
+
+            // Assert
+            Assert.That(newId, Is.Not.EqualTo(Guid.Empty));
+            Assert.That(projection, Is.Not.Null);
+            Assert.That(projection.Count, Is.EqualTo(1));
+            Assert.That(singleEntry.Storypoints, Is.EqualTo(createCommand.Storypoints));
+            Assert.That(singleEntry.CounterIncreaseValue, Is.EqualTo(createCommand.CounterIncrease));
+            Assert.That(singleEntry.CompletedOn, Is.GreaterThan(timeStampBeforeCompletion));
+        }
 
         [Test]
         public async Task Creating_Achievement_ShouldCreateProjection()

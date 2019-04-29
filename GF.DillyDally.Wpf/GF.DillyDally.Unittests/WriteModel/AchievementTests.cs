@@ -1,5 +1,4 @@
 ﻿using GF.DillyDally.WriteModel.Domain.Achievements.Commands;
-using GF.DillyDally.WriteModel.Domain.Rewards.Commands;
 using GF.DillyDally.WriteModel.Infrastructure;
 using LightInject;
 using NUnit.Framework;
@@ -30,6 +29,22 @@ namespace GF.DillyDally.Unittests.WriteModel
 
             // Act
             var newAchievement = commandDispatcher.ExecuteCommand(command);
+
+            // Assert
+            Assert.That(newAchievement != null, Is.True);
+        }
+
+        [Test]
+        public void CompletingAchievement_CompletesAchievement()
+        {
+            // Arrange
+            var commandDispatcher = this._infrastructureSetup.DiContainer.GetInstance<ICommandDispatcher>();
+            var createCommand = new CreateAchievementCommand("Test", 1, 3);
+            var newAchievement = commandDispatcher.ExecuteCommand(createCommand);
+            var command = new CompleteAchievementCommand(newAchievement);
+
+            // Act
+            commandDispatcher.ExecuteCommand(command);
 
             // Assert
             Assert.That(newAchievement != null, Is.True);

@@ -6,6 +6,7 @@ using GF.DillyDally.ReadModel.Projection.Lanes;
 using GF.DillyDally.ReadModel.Projection.Rewards;
 using GF.DillyDally.ReadModel.Projection.Tasks;
 using GF.DillyDally.ReadModel.Repository;
+using GF.DillyDally.WriteModel.Domain.Achievements.Events;
 using GF.DillyDally.WriteModel.Infrastructure;
 using LightInject;
 
@@ -27,6 +28,7 @@ namespace GF.DillyDally.ReadModel
             serviceContainer.Register<IAccountRepository, AccountRepository>();
             serviceContainer.Register<ITaskRepository, TaskRepository>();
             serviceContainer.Register<IAchievementRepository, AchievementRepository>();
+            serviceContainer.Register<IAchievementCompletionRepository, AchievementCompletionRepository>();
         }
 
         private void RegisterForDomainEvents(IServiceContainer serviceContainer, IEventDispatcher eventDispatcher)
@@ -44,7 +46,8 @@ namespace GF.DillyDally.ReadModel
             eventDispatcher.RegisterHandler(taskEventHandler);
 
             var achievementEventHandler = serviceContainer.Create<AchievementEventHandler>();
-            eventDispatcher.RegisterHandler(achievementEventHandler);
+            eventDispatcher.RegisterHandler<AchievementCreatedEvent>(achievementEventHandler);
+            eventDispatcher.RegisterHandler<AchievementCompletedEvent>(achievementEventHandler);
         }
     }
 }

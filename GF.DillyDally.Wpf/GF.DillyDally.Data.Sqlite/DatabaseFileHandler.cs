@@ -24,6 +24,8 @@ namespace GF.DillyDally.Data.Sqlite
             this._fullDatabaseFilePath = this.GetFullDatabaseFilePath(databaseName);
         }
 
+        public IGuidGenerator GuidGenerator { get; } = new GuidGenerator();
+
         public bool DatabaseExists()
         {
             return File.Exists(this._fullDatabaseFilePath);

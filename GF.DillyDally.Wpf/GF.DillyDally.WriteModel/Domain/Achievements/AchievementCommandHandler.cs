@@ -1,13 +1,13 @@
 ﻿using System;
 using GF.DillyDally.WriteModel.Domain.Achievements.Commands;
-using GF.DillyDally.WriteModel.Domain.Rewards.Commands;
 using GF.DillyDally.WriteModel.Domain.RunningNumbers;
 using GF.DillyDally.WriteModel.Domain.RunningNumbers.Events;
 using GF.DillyDally.WriteModel.Infrastructure;
 
 namespace GF.DillyDally.WriteModel.Domain.Achievements
 {
-    internal sealed class AchievementCommandHandler : CommandHandlerBase, ICommandHandler<CreateAchievementCommand>
+    internal sealed class AchievementCommandHandler : CommandHandlerBase, ICommandHandler<CreateAchievementCommand>,
+        ICommandHandler<CompleteAchievementCommand>
     {
         private readonly IAggregateRepository _aggregateRepository;
 
@@ -15,6 +15,20 @@ namespace GF.DillyDally.WriteModel.Domain.Achievements
         {
             this._aggregateRepository = aggregateRepository;
         }
+
+        #region ICommandHandler<CompleteAchievementCommand> Members
+
+        public IAggregateRoot Handle(CompleteAchievementCommand command)
+        {
+            var aggregate = this._aggregateRepository.GetById<AchievementAggregateRoot>(command.AggregateId);
+
+            aggregate.Complete();
+            this._aggregateRepository.Save(aggregate);
+
+            return aggregate;
+        }
+
+        #endregion
 
         #region ICommandHandler<CreateAchievementCommand> Members
 

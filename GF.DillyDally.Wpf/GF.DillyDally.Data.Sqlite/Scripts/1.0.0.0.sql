@@ -54,6 +54,19 @@ CREATE TABLE [Achievements]
 CREATE UNIQUE INDEX [IX_Achievements_AchievementId] ON [Achievements]([AchievementId]);
 GO
 
+CREATE TABLE [AchievementCompletions]
+	(
+	[RowID] INTEGER PRIMARY KEY AUTOINCREMENT, 
+	[AchievementCompletionId] GUID NOT NULL UNIQUE,	
+	[AchievementId] GUID NOT NULL REFERENCES [Achievements]([AchievementId]),
+	[CompletedOn] DATETIME NOT NULL,
+	[Storypoints] INTEGER NOT NULL,
+	[CounterIncreaseValue] INTEGER NOT NULL	
+	);
+
+CREATE UNIQUE INDEX [IX_AchievementCompletions_AchievementCompletionId] ON [AchievementCompletions]([AchievementCompletionId]);
+GO
+
 CREATE TABLE [Categories]
 	(
 	[RowID] INTEGER PRIMARY KEY AUTOINCREMENT, 
