@@ -1,5 +1,6 @@
 ﻿using System.Data.SQLite;
 using GF.DillyDally.WriteModel.Deprecated;
+using GF.DillyDally.WriteModel.Domain.Achievements;
 using GF.DillyDally.WriteModel.Domain.Categories;
 using GF.DillyDally.WriteModel.Domain.Lanes;
 using GF.DillyDally.WriteModel.Domain.Rewards;
@@ -57,6 +58,9 @@ namespace GF.DillyDally.WriteModel
 
             var taskCommandHandler = serviceContainer.Create<TaskCommandHandler>();
             commandDispatcher.RegisterHandler(taskCommandHandler);
+
+            var achievementCommandHandler = serviceContainer.Create<AchievementCommandHandler>();
+            commandDispatcher.RegisterHandler(achievementCommandHandler);
         }
 
         internal CommandDispatcher CommandDispatcher { get; private set; }

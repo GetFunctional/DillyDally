@@ -17,6 +17,7 @@ namespace GF.DillyDally.WriteModel.Domain.RunningNumbers
                 { RunningNumberCounterArea.Task, Guid.Parse("{885D3926-FBAB-4EE9-823B-756BA812275D}")},
                 { RunningNumberCounterArea.Category, Guid.Parse("{BE434835-ACAA-4CD6-87E0-F7EA338CD23D}")},
                 { RunningNumberCounterArea.Lane, Guid.Parse("{E8652CB7-2908-48CA-882D-DF989FE4957F}")},
+                { RunningNumberCounterArea.Achievement, Guid.Parse("{C9ECE9A5-1B1D-4B9F-85F1-19A80B892AE3}")},
             };
 
         public RunningNumberCounterCommandHandler(IAggregateRepository aggregateRepository)

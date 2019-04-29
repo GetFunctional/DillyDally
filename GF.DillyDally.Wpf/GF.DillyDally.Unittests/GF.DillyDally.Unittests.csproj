@@ -73,12 +73,14 @@
     <Compile Include="InfrastructureTestSetup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReadModel\Projection\CategoryTests.cs" />
+    <Compile Include="ReadModel\Projection\LaneTests.cs" />
     <Compile Include="ReadModel\Projection\TaskTests.cs" />
     <Compile Include="SqlDbAccess\CreateDatabaseTests.cs" />
     <Compile Include="SqlDbAccess\DatabaseUpdateTests.cs" />
     <Compile Include="SqlDbAccess\SqlScriptSelectorTests.cs" />
     <Compile Include="UnittestsSetup.cs" />
     <Compile Include="DatabaseTestSetup.cs" />
+    <Compile Include="WriteModel\AchievementTests.cs" />
     <Compile Include="WriteModel\TaskTests.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -4,6 +4,7 @@
     {
         Task = 0,
         Category = 1,
-        Lane = 2
+        Lane = 2,
+        Achievement = 3
     }
 }

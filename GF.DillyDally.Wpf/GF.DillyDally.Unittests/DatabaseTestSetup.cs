@@ -39,6 +39,9 @@ namespace GF.DillyDally.Unittests
 
             createCommand = new CreateRunningNumberCounterCommand(RunningNumberCounterArea.Lane, "LN", 0);
             commandDispatcher.ExecuteCommand(createCommand);
+
+            createCommand = new CreateRunningNumberCounterCommand(RunningNumberCounterArea.Achievement, "ACVM", 0);
+            commandDispatcher.ExecuteCommand(createCommand);
         }
 
 
