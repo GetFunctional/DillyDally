@@ -23,7 +23,7 @@ namespace GF.DillyDally.ReadModel.Projection.Lanes
         {
             using (var connection = this._fileHandler.OpenConnection())
             {
-                this._laneRepository.InsertAsync(connection, new Lane
+                this._laneRepository.InsertAsync(connection, new LaneEntity
                                                              {
                                                                  LaneId = @event.AggregateId,
                                                                  Name = @event.Name,

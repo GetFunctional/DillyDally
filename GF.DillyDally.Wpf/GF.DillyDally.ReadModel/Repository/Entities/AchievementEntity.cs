@@ -4,25 +4,16 @@ using Dapper.Contrib.Extensions;
 namespace GF.DillyDally.ReadModel.Repository.Entities
 {
     [Table(TableNameConstant)]
-    public class Task
+    public class AchievementEntity
     {
-        public const string TableNameConstant = "Tasks";
+        public const string TableNameConstant = "Achievements";
 
         [ExplicitKey]
-        public Guid TaskId { get; set; }
-
+        public Guid AchievementId { get; set; }
         public string Name { get; set; }
-
-        public Guid CategoryId { get; set; }
-
-        public Guid LaneId { get; set; }
-
-        public DateTime? DueDate { get; set; }
-
-        public DateTime CreatedOn { get; set; }
-
+        public int StoryPoints { get; set; }
+        public int CounterIncrease { get; set; }
         public string Description { get; set; }
-
         public Guid? PreviewImageId { get; set; }
         public Guid RunningNumberId { get; set; }
     }

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using GF.DillyDally.ReadModel.Repository;
 using GF.DillyDally.WriteModel.Domain.Tasks.Commands;
@@ -20,7 +21,7 @@ namespace GF.DillyDally.Unittests.WriteModel
         }
 
         [Test]
-        public async Task Creating_Task_PersistsTask()
+        public async Task Task_Create()
         {
             // Arrange
             var commandDispatcher = this._infrastructureSetup.DiContainer.GetInstance<ICommandDispatcher>();
@@ -33,6 +34,25 @@ namespace GF.DillyDally.Unittests.WriteModel
             var newTaskId = commandDispatcher.ExecuteCommand(new CreateTaskCommand("Test", exampleCategory.CategoryId, exampleLane.LaneId));
 
             Assert.That(newTaskId != null, Is.True);
+        }
+
+        [Test]
+        public async Task Task_AttachImage()
+        {
+            // Arrange
+            var commandDispatcher = this._infrastructureSetup.DiContainer.GetInstance<ICommandDispatcher>();
+            var categoryRepository = this._infrastructureSetup.DiContainer.GetInstance<ICategoryRepository>();
+            var laneRepository = this._infrastructureSetup.DiContainer.GetInstance<ILaneRepository>();
+            var exampleCategory = (await categoryRepository.GetAllAsync()).FirstOrDefault();
+            var exampleLane = (await laneRepository.GetAllAsync()).FirstOrDefault();
+            var newTaskId = commandDispatcher.ExecuteCommand(new CreateTaskCommand("Test", exampleCategory.CategoryId, exampleLane.LaneId));
+
+            // Act
+            var fileInfo = new FileInfo("asdf");
+            //fileInfo.has
+            //var imageData
+            //var attachImageCommand = new AttachImageToTaskCommand(newTaskId, )
+            Assert.Fail();
         }
     }
 }

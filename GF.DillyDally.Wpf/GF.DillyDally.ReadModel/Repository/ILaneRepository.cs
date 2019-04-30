@@ -3,7 +3,7 @@ using GF.DillyDally.ReadModel.Repository.Entities;
 
 namespace GF.DillyDally.ReadModel.Repository
 {
-    public interface ILaneRepository : IRepository<Lane>
+    public interface ILaneRepository : IRepository<LaneEntity>
     {
 
     }

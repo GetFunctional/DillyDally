@@ -51,7 +51,7 @@ namespace GF.DillyDally.ReadModel.Projection.Achievements
             {
                 var achievementToChange = await this._repository.GetByIdAsync(@event.AggregateId);
                 achievementToChange.CounterIncrease = @event.NewCounterValue;
-                await connection.ExecuteAsync($"UPDATE {Achievement.TableNameConstant} SET {nameof(Achievement.CounterIncrease)} = @counterIncrease;",
+                await connection.ExecuteAsync($"UPDATE {AchievementEntity.TableNameConstant} SET {nameof(AchievementEntity.CounterIncrease)} = @counterIncrease;",
                     new {counterIncrease = @event.NewCounterValue});
             }
         }
@@ -64,7 +64,7 @@ namespace GF.DillyDally.ReadModel.Projection.Achievements
         {
             using (var connection = this._fileHandler.OpenConnection())
             {
-                await this._repository.InsertAsync(connection, new Achievement
+                await this._repository.InsertAsync(connection, new AchievementEntity
                                                                {
                                                                    AchievementId = @event.AggregateId,
                                                                    Name = @event.Name,

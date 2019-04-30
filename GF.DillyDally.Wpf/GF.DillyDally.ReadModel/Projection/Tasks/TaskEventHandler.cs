@@ -23,7 +23,7 @@ namespace GF.DillyDally.ReadModel.Projection.Tasks
         {
             using (var connection = this._fileHandler.OpenConnection())
             {
-                this._taskRepository.InsertAsync(connection, new Task
+                this._taskRepository.InsertAsync(connection, new TaskEntity
                                                              {
                                                                  TaskId = @event.AggregateId,
                                                                  Name = @event.Name,

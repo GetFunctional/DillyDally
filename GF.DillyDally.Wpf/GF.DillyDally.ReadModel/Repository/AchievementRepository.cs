@@ -4,7 +4,7 @@ using GF.DillyDally.ReadModel.Repository.Entities;
 
 namespace GF.DillyDally.ReadModel.Repository
 {
-    internal class AchievementRepository : Repository<Achievement>, IAchievementRepository
+    internal class AchievementRepository : Repository<AchievementEntity>, IAchievementRepository
     {
         public AchievementRepository(DatabaseFileHandler fileHandler) : base(fileHandler)
         {

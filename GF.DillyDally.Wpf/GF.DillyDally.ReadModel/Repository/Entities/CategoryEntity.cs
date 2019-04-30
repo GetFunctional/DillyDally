@@ -6,7 +6,7 @@ using GF.DillyDally.ReadModel.Repository.Base;
 namespace GF.DillyDally.ReadModel.Repository.Entities
 {
     [Dapper.Contrib.Extensions.Table(TableNameConstant)]
-    public class Category
+    public class CategoryEntity
     {
         public const string TableNameConstant = "Categories";
 

@@ -23,7 +23,7 @@ namespace GF.DillyDally.ReadModel.Projection.Categories
         {
             using (var connection = this._fileHandler.OpenConnection())
             {
-                this._categoryRepository.InsertAsync(connection, new Category()
+                this._categoryRepository.InsertAsync(connection, new CategoryEntity()
                                                                  {
                                                                      CategoryId = @event.AggregateId,
                                                                      Name = @event.Name,

@@ -2,7 +2,7 @@
   [RowID] INTEGER PRIMARY KEY AUTOINCREMENT, 
   [FileId] GUID NOT NULL UNIQUE,
   [Binary] BLOB NOT NULL, 
-  [HashCode] TEXT NOT NULL, 
+  [Md5Hash] TEXT NOT NULL, 
   [Size] INTEGER NOT NULL,
   [Name] TEXT(255) NOT NULL, 
   [Extension] TEXT NOT NULL);

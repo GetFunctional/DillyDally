@@ -4,7 +4,7 @@ using Dapper.Contrib.Extensions;
 namespace GF.DillyDally.ReadModel.Repository.Entities
 {
     [Table(TableNameConstant)]
-    public class Lane
+    public class LaneEntity
     {
         public const string TableNameConstant = "Lanes";
 

@@ -68,22 +68,25 @@
     <Compile Include="Deprecated\Common\CommonDataRepository.cs" />
     <Compile Include="Deprecated\Common\ICommonDataRepository.cs" />
     <Compile Include="Repository\CategoryRepository.cs" />
-    <Compile Include="Repository\Entities\Achievement.cs" />
+    <Compile Include="Repository\Entities\AchievementEntity.cs" />
     <Compile Include="Repository\Entities\AchievementCompletion.cs" />
-    <Compile Include="Repository\Entities\Category.cs" />
+    <Compile Include="Repository\Entities\CategoryEntity.cs" />
     <Compile Include="Projection\Categories\CategoryEventHandler.cs" />
     <Compile Include="Projection\Lanes\LaneEventHandler.cs" />
     <Compile Include="Projection\Rewards\RewardEventHandler.cs" />
     <Compile Include="ReadModelInitializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\Entities\Lane.cs" />
+    <Compile Include="Repository\Entities\LaneEntity.cs" />
+    <Compile Include="Repository\Entities\FileEntity.cs" />
+    <Compile Include="Repository\FileRepository.cs" />
     <Compile Include="Repository\IAchievementCompletionRepository.cs" />
     <Compile Include="Repository\IAchievementRepository.cs" />
     <Compile Include="Repository\ICategoryRepository.cs" />
+    <Compile Include="Repository\IFileRepository.cs" />
     <Compile Include="Repository\ILaneRepository.cs" />
     <Compile Include="Repository\ITaskRepository.cs" />
     <Compile Include="Repository\LaneRepository.cs" />
-    <Compile Include="Repository\Entities\Task.cs" />
+    <Compile Include="Repository\Entities\TaskEntity.cs" />
     <Compile Include="Repository\TaskRepository.cs" />
   </ItemGroup>
   <ItemGroup>
