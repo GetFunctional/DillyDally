@@ -63,6 +63,8 @@ namespace GF.DillyDally.WriteModel
             var achievementCommandHandler = serviceContainer.Create<AchievementCommandHandler>();
             commandDispatcher.RegisterHandler<CreateAchievementCommand>(achievementCommandHandler);
             commandDispatcher.RegisterHandler<CompleteAchievementCommand>(achievementCommandHandler);
+            commandDispatcher.RegisterHandler<ChangeAchievementCounterValueCommand>(achievementCommandHandler);
+
         }
 
         internal CommandDispatcher CommandDispatcher { get; private set; }

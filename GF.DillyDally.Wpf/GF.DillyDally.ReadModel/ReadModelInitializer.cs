@@ -48,6 +48,7 @@ namespace GF.DillyDally.ReadModel
             var achievementEventHandler = serviceContainer.Create<AchievementEventHandler>();
             eventDispatcher.RegisterHandler<AchievementCreatedEvent>(achievementEventHandler);
             eventDispatcher.RegisterHandler<AchievementCompletedEvent>(achievementEventHandler);
+            eventDispatcher.RegisterHandler<AchievementCounterValueChangedEvent>(achievementEventHandler);
         }
     }
 }

@@ -10,6 +10,12 @@ namespace GF.DillyDally.WriteModel.Domain.Achievements
         {
             this.RegisterTransition<AchievementCreatedEvent>(this.Apply);
             this.RegisterTransition<AchievementCompletedEvent>(this.Apply);
+            this.RegisterTransition<AchievementCounterValueChangedEvent>(this.Apply);
+        }
+
+        private void Apply(AchievementCounterValueChangedEvent obj)
+        {
+            this.CounterIncrease = obj.NewCounterValue;
         }
 
         private AchievementAggregateRoot(Guid achievementId, Guid runningNumberId, string name, int counterIncrease,
@@ -62,6 +68,21 @@ namespace GF.DillyDally.WriteModel.Domain.Achievements
             var completeEvent = new AchievementCompletedEvent(this.AggregateId, this.CounterIncrease, this.Storypoints,
                 DateTime.Now);
             this.RaiseEvent(completeEvent);
+        }
+
+        internal void ChangeCounterValue(int newCounterValue)
+        {
+            if (newCounterValue < 0)
+            {
+                throw new ArgumentException(nameof(newCounterValue));
+            }
+
+            if (this.CounterIncrease != newCounterValue)
+            {
+                var changeCounterValueEvent = new AchievementCounterValueChangedEvent(this.AggregateId, newCounterValue);
+                this.Apply(changeCounterValueEvent);
+                this.RaiseEvent(changeCounterValueEvent);
+            }
         }
     }
 }

@@ -57,12 +57,14 @@
     <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\Achievements\Commands\ChangeAchievementCounterValueCommand.cs" />
     <Compile Include="Domain\Achievements\Commands\CompleteAchievementCommand.cs" />
     <Compile Include="Domain\Achievements\Commands\CreateAchievementCommand.cs" />
     <Compile Include="Domain\Achievements\Events\AchievementCompletedEvent.cs" />
     <Compile Include="Domain\Achievements\Events\AchievementCreatedEvent.cs" />
     <Compile Include="Domain\Achievements\AchievementAggregateRoot.cs" />
     <Compile Include="Domain\Achievements\AchievementCommandHandler.cs" />
+    <Compile Include="Domain\Achievements\Events\AchievementCounterValueChangedEvent.cs" />
     <Compile Include="Domain\RunningNumbers\Events\AddNextNumberEvent.cs" />
     <Compile Include="Domain\RunningNumbers\Commands\CreateRunningNumberCounterCommand.cs" />
     <Compile Include="Domain\RunningNumbers\Events\RunningNumberCounterArea.cs" />

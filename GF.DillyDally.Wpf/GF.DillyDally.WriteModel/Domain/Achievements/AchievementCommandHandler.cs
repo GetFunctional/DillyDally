@@ -7,7 +7,7 @@ using GF.DillyDally.WriteModel.Infrastructure;
 namespace GF.DillyDally.WriteModel.Domain.Achievements
 {
     internal sealed class AchievementCommandHandler : CommandHandlerBase, ICommandHandler<CreateAchievementCommand>,
-        ICommandHandler<CompleteAchievementCommand>
+        ICommandHandler<CompleteAchievementCommand>, ICommandHandler<ChangeAchievementCounterValueCommand>
     {
         private readonly IAggregateRepository _aggregateRepository;
 
@@ -15,6 +15,20 @@ namespace GF.DillyDally.WriteModel.Domain.Achievements
         {
             this._aggregateRepository = aggregateRepository;
         }
+
+        #region ICommandHandler<ChangeAchievementCounterValueCommand> Members
+
+        public IAggregateRoot Handle(ChangeAchievementCounterValueCommand command)
+        {
+            var aggregate = this._aggregateRepository.GetById<AchievementAggregateRoot>(command.AggregateId);
+
+            aggregate.ChangeCounterValue(command.NewCounterValue);
+            this._aggregateRepository.Save(aggregate);
+
+            return aggregate;
+        }
+
+        #endregion
 
         #region ICommandHandler<CompleteAchievementCommand> Members
 

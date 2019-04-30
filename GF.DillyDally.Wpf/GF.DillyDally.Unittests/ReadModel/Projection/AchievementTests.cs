@@ -33,8 +33,9 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
             var newAchievement = commandDispatcher.ExecuteCommand(createCommand);
             var command = new CompleteAchievementCommand(newAchievement);
             var repository = this._infrastructureSetup.DiContainer.GetInstance<IAchievementCompletionRepository>();
-
             var timeStampBeforeCompletion = DateTime.Now;
+
+            // Act
             var newId = commandDispatcher.ExecuteCommand(command);
             var projection = await repository.GetAchievementCompletionsAsync(newId);
             var singleEntry = projection.FirstOrDefault();
@@ -56,6 +57,7 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
             var repository = this._infrastructureSetup.DiContainer.GetInstance<IAchievementRepository>();
             var command = new CreateAchievementCommand("Test", 1, 5);
 
+            // Act
             var newId = commandDispatcher.ExecuteCommand(command);
             var projection = await repository.GetByIdAsync(newId);
 
@@ -66,6 +68,29 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
             Assert.That(projection.Name, Is.EqualTo(command.Name));
             Assert.That(projection.StoryPoints, Is.EqualTo(command.Storypoints));
             Assert.That(projection.CounterIncrease, Is.EqualTo(command.CounterIncrease));
+        }
+
+        [Test]
+        public async Task Changing_AchievementCounterValue_ShouldChangeProjection()
+        {
+            // Arrange
+            var commandDispatcher = this._infrastructureSetup.DiContainer.GetInstance<ICommandDispatcher>();
+            var repository = this._infrastructureSetup.DiContainer.GetInstance<IAchievementRepository>();
+            var command = new CreateAchievementCommand("Test", 1, 5);
+            var newId = commandDispatcher.ExecuteCommand(command);
+
+            // Act
+            var changeCommand = new ChangeAchievementCounterValueCommand(newId, 5);
+            commandDispatcher.ExecuteCommand(changeCommand);
+            var projection = await repository.GetByIdAsync(newId);
+
+            // Assert
+            Assert.That(newId, Is.Not.EqualTo(Guid.Empty));
+            Assert.That(projection, Is.Not.Null);
+            Assert.That(projection.AchievementId, Is.EqualTo(newId));
+            Assert.That(projection.Name, Is.EqualTo(command.Name));
+            Assert.That(projection.StoryPoints, Is.EqualTo(command.Storypoints));
+            Assert.That(projection.CounterIncrease, Is.EqualTo(changeCommand.NewCounterValue));
         }
     }
 }

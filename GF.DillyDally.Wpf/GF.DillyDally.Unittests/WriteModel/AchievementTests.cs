@@ -49,5 +49,21 @@ namespace GF.DillyDally.Unittests.WriteModel
             // Assert
             Assert.That(newAchievement != null, Is.True);
         }
+
+        [Test]
+        public void ChangeAchievementCounterValue_ChangesValue()
+        {
+            // Arrange
+            var commandDispatcher = this._infrastructureSetup.DiContainer.GetInstance<ICommandDispatcher>();
+            var createCommand = new CreateAchievementCommand("Test", 1, 3);
+            var newAchievement = commandDispatcher.ExecuteCommand(createCommand);
+            var command = new ChangeAchievementCounterValueCommand(newAchievement,6);
+
+            // Act
+            commandDispatcher.ExecuteCommand(command);
+
+            // Assert
+            Assert.That(newAchievement != null, Is.True);
+        }
     }
 }
