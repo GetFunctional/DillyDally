@@ -140,7 +140,6 @@
     <Compile Include="Infrastructure\IAggregateRepository.cs" />
     <Compile Include="Infrastructure\IAggregateEvent.cs" />
     <Compile Include="Infrastructure\Exceptions\InvalidAggregateIdException.cs" />
-    <Compile Include="Infrastructure\Exceptions\MissingCommandHandlerException.cs" />
     <Compile Include="Infrastructure\Exceptions\MissingEventsForAggregateException.cs" />
     <Compile Include="RandomExtensions.cs" />
     <Compile Include="WriteModelInitializer.cs" />
