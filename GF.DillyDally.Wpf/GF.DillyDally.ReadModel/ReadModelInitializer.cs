@@ -1,23 +1,19 @@
-﻿using GF.DillyDally.ReadModel.Deprecated.Account;
+﻿using System.Reflection;
+using GF.DillyDally.ReadModel.Deprecated.Account;
 using GF.DillyDally.ReadModel.Deprecated.Common;
-using GF.DillyDally.ReadModel.Projection.Achievements;
-using GF.DillyDally.ReadModel.Projection.Categories;
-using GF.DillyDally.ReadModel.Projection.Lanes;
-using GF.DillyDally.ReadModel.Projection.Rewards;
-using GF.DillyDally.ReadModel.Projection.Tasks;
 using GF.DillyDally.ReadModel.Repository;
-using GF.DillyDally.WriteModel.Domain.Achievements.Events;
-using GF.DillyDally.WriteModel.Infrastructure;
 using LightInject;
+using MediatR;
+using MediatR.Pipeline;
 
 namespace GF.DillyDally.ReadModel
 {
     public sealed class ReadModelInitializer
     {
-        public void Initialize(IServiceContainer serviceContainer, IEventDispatcher eventDispatcher)
+        public void Initialize(IServiceContainer serviceContainer)
         {
             RegisterTypes(serviceContainer);
-            this.RegisterForDomainEvents(serviceContainer, eventDispatcher);
+            RegisterMediations(serviceContainer);
         }
 
         private static void RegisterTypes(IServiceContainer serviceContainer)
@@ -31,24 +27,24 @@ namespace GF.DillyDally.ReadModel
             serviceContainer.Register<IAchievementCompletionRepository, AchievementCompletionRepository>();
         }
 
-        private void RegisterForDomainEvents(IServiceContainer serviceContainer, IEventDispatcher eventDispatcher)
+        private static void RegisterMediations(IServiceContainer serviceContainer)
         {
-            var laneEventHandler = serviceContainer.Create<LaneEventHandler>();
-            eventDispatcher.RegisterHandler(laneEventHandler);
+            serviceContainer.RegisterAssembly(typeof(ReadModelInitializer).GetTypeInfo().Assembly,
+                (serviceType, implementingType) =>
+                    serviceType.IsConstructedGenericType &&
+                    (
+                        serviceType.GetGenericTypeDefinition() == typeof(IRequestHandler<,>) ||
+                        serviceType.GetGenericTypeDefinition() == typeof(INotificationHandler<>)
+                    ));
 
-            var rewardEventHandler = serviceContainer.Create<RewardEventHandler>();
-            eventDispatcher.RegisterHandler(rewardEventHandler);
+            serviceContainer.RegisterOrdered(typeof(IPipelineBehavior<,>),
+                new[]
+                {
+                    typeof(RequestPreProcessorBehavior<,>),
+                    typeof(RequestPostProcessorBehavior<,>)
+                }, type => new PerContainerLifetime());
 
-            var categoryEventHandler = serviceContainer.Create<CategoryEventHandler>();
-            eventDispatcher.RegisterHandler(categoryEventHandler);
-
-            var taskEventHandler = serviceContainer.Create<TaskEventHandler>();
-            eventDispatcher.RegisterHandler(taskEventHandler);
-
-            var achievementEventHandler = serviceContainer.Create<AchievementEventHandler>();
-            eventDispatcher.RegisterHandler<AchievementCreatedEvent>(achievementEventHandler);
-            eventDispatcher.RegisterHandler<AchievementCompletedEvent>(achievementEventHandler);
-            eventDispatcher.RegisterHandler<AchievementCounterValueChangedEvent>(achievementEventHandler);
+            serviceContainer.Register<ServiceFactory>(fac => fac.GetInstance);
         }
     }
 }

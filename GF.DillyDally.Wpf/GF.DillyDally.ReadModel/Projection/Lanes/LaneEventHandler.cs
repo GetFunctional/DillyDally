@@ -1,12 +1,14 @@
-﻿using GF.DillyDally.Data.Sqlite;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using GF.DillyDally.Data.Sqlite;
 using GF.DillyDally.ReadModel.Repository;
 using GF.DillyDally.ReadModel.Repository.Entities;
 using GF.DillyDally.WriteModel.Domain.Lanes.Events;
-using GF.DillyDally.WriteModel.Infrastructure;
+using MediatR;
 
 namespace GF.DillyDally.ReadModel.Projection.Lanes
 {
-    internal sealed class LaneEventHandler : IEventHandler<LaneCreatedEvent>
+    internal sealed class LaneEventHandler : INotificationHandler<LaneCreatedEvent>
     {
         private readonly DatabaseFileHandler _fileHandler;
         private readonly ILaneRepository _laneRepository;
@@ -17,21 +19,21 @@ namespace GF.DillyDally.ReadModel.Projection.Lanes
             this._laneRepository = laneRepository;
         }
 
-        #region IEventHandler<LaneCreatedEvent> Members
+        #region INotificationHandler<LaneCreatedEvent> Members
 
-        public void Handle(LaneCreatedEvent @event)
+        public async Task Handle(LaneCreatedEvent notification, CancellationToken cancellationToken)
         {
             using (var connection = this._fileHandler.OpenConnection())
             {
-                this._laneRepository.InsertAsync(connection, new LaneEntity
-                                                             {
-                                                                 LaneId = @event.AggregateId,
-                                                                 Name = @event.Name,
-                                                                 IsCompletedLane = @event.IsCompletedLane,
-                                                                 IsRejectedLane = @event.IsRejectedLane,
-                                                                 ColorCode = @event.ColorCode,
-                                                                 RunningNumberId = @event.RunningNumberId
-                                                             });
+                await this._laneRepository.InsertAsync(connection, new LaneEntity
+                {
+                    LaneId = notification.AggregateId,
+                    Name = notification.Name,
+                    IsCompletedLane = notification.IsCompletedLane,
+                    IsRejectedLane = notification.IsRejectedLane,
+                    ColorCode = notification.ColorCode,
+                    RunningNumberId = notification.RunningNumberId
+                });
             }
         }
 

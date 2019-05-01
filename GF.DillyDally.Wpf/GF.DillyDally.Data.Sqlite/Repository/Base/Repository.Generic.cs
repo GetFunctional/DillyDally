@@ -7,9 +7,8 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Dapper;
 using Dapper.Contrib.Extensions;
-using GF.DillyDally.Data.Sqlite;
 
-namespace GF.DillyDally.ReadModel.Repository.Base
+namespace GF.DillyDally.Data.Sqlite.Repository.Base
 {
     public class Repository<T> : IRepository<T> where T : class, new()
     {

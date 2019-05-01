@@ -5,6 +5,7 @@ using GF.DillyDally.ReadModel.Repository;
 using GF.DillyDally.WriteModel.Domain.Tasks.Commands;
 using GF.DillyDally.WriteModel.Infrastructure;
 using LightInject;
+using MediatR;
 using NUnit.Framework;
 
 namespace GF.DillyDally.Unittests.WriteModel
@@ -24,14 +25,14 @@ namespace GF.DillyDally.Unittests.WriteModel
         public async Task Task_Create()
         {
             // Arrange
-            var commandDispatcher = this._infrastructureSetup.DiContainer.GetInstance<ICommandDispatcher>();
+            var commandDispatcher = this._infrastructureSetup.DiContainer.GetInstance<IMediator>();
             var categoryRepository = this._infrastructureSetup.DiContainer.GetInstance<ICategoryRepository>();
             var laneRepository = this._infrastructureSetup.DiContainer.GetInstance<ILaneRepository>();
 
             var exampleCategory = (await categoryRepository.GetAllAsync()).FirstOrDefault();
             var exampleLane = (await laneRepository.GetAllAsync()).FirstOrDefault();
 
-            var newTaskId = commandDispatcher.ExecuteCommand(new CreateTaskCommand("Test", exampleCategory.CategoryId, exampleLane.LaneId));
+            var newTaskId = commandDispatcher.Send(new CreateTaskCommand("Test", exampleCategory.CategoryId, exampleLane.LaneId));
 
             Assert.That(newTaskId != null, Is.True);
         }
@@ -40,12 +41,12 @@ namespace GF.DillyDally.Unittests.WriteModel
         public async Task Task_AttachImage()
         {
             // Arrange
-            var commandDispatcher = this._infrastructureSetup.DiContainer.GetInstance<ICommandDispatcher>();
+            var commandDispatcher = this._infrastructureSetup.DiContainer.GetInstance<IMediator>();
             var categoryRepository = this._infrastructureSetup.DiContainer.GetInstance<ICategoryRepository>();
             var laneRepository = this._infrastructureSetup.DiContainer.GetInstance<ILaneRepository>();
             var exampleCategory = (await categoryRepository.GetAllAsync()).FirstOrDefault();
             var exampleLane = (await laneRepository.GetAllAsync()).FirstOrDefault();
-            var newTaskId = commandDispatcher.ExecuteCommand(new CreateTaskCommand("Test", exampleCategory.CategoryId, exampleLane.LaneId));
+            var newTaskId = commandDispatcher.Send(new CreateTaskCommand("Test", exampleCategory.CategoryId, exampleLane.LaneId));
 
             // Act
             var fileInfo = new FileInfo("asdf");

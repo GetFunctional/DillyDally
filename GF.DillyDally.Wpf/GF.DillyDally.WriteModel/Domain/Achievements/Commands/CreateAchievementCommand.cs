@@ -1,11 +1,12 @@
 ﻿using System;
 using GF.DillyDally.WriteModel.Infrastructure;
+using MediatR;
 
 namespace GF.DillyDally.WriteModel.Domain.Achievements.Commands
 {
-    public sealed class CreateAchievementCommand : AggregateCommandBase
+    public sealed class CreateAchievementCommand : IRequest<CreateAchievementResponse>
     {
-        public CreateAchievementCommand(string name, int counterIncrease, int storypoints) : base(Guid.Empty)
+        public CreateAchievementCommand(string name, int counterIncrease, int storypoints)
         {
             this.Name = name;
             this.CounterIncrease = counterIncrease;

@@ -71,6 +71,8 @@
     <Compile Include="Deprecated\TaskCompletionEntity.cs" />
     <Compile Include="Deprecated\TaskEntity.cs" />
     <Compile Include="Deprecated\TaskRewardEntity.cs" />
+    <Compile Include="Repository\Base\IRepository.Generic.cs" />
+    <Compile Include="Repository\Base\Repository.Generic.cs" />
     <Compile Include="SqlScriptReader.cs" />
     <Compile Include="SqlScriptSelector.cs" />
   </ItemGroup>

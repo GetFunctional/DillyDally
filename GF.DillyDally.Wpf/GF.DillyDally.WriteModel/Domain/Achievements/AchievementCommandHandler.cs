@@ -1,77 +1,82 @@
-﻿using System;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using GF.DillyDally.Data.Sqlite;
 using GF.DillyDally.WriteModel.Domain.Achievements.Commands;
 using GF.DillyDally.WriteModel.Domain.RunningNumbers;
 using GF.DillyDally.WriteModel.Domain.RunningNumbers.Events;
 using GF.DillyDally.WriteModel.Infrastructure;
+using MediatR;
 
 namespace GF.DillyDally.WriteModel.Domain.Achievements
 {
-    internal sealed class AchievementCommandHandler : CommandHandlerBase, ICommandHandler<CreateAchievementCommand>,
-        ICommandHandler<CompleteAchievementCommand>, ICommandHandler<ChangeAchievementCounterValueCommand>
+    internal sealed class AchievementCommandHandler : CommandHandlerBase,
+        IRequestHandler<CreateAchievementCommand, CreateAchievementResponse>,
+        IRequestHandler<CompleteAchievementCommand, CompleteAchievementResponse>,
+        IRequestHandler<ChangeAchievementCounterValueCommand, ChangeAchievementCounterValueResponse>
     {
-        private readonly IAggregateRepository _aggregateRepository;
+        private readonly RunningNumberFactory _runningNumberFactory;
 
-        public AchievementCommandHandler(IAggregateRepository aggregateRepository)
+        public AchievementCommandHandler(IAggregateRepository aggregateRepository) : base(aggregateRepository)
         {
-            this._aggregateRepository = aggregateRepository;
+            this._runningNumberFactory = new RunningNumberFactory(aggregateRepository, new GuidGenerator());
         }
 
-        #region ICommandHandler<ChangeAchievementCounterValueCommand> Members
+        #region IRequestHandler<ChangeAchievementCounterValueCommand,ChangeAchievementCounterValueResponse> Members
 
-        public IAggregateRoot Handle(ChangeAchievementCounterValueCommand command)
+        public async Task<ChangeAchievementCounterValueResponse> Handle(ChangeAchievementCounterValueCommand request,
+            CancellationToken cancellationToken)
         {
-            var aggregate = this._aggregateRepository.GetById<AchievementAggregateRoot>(command.AggregateId);
+            return await Task.Run(() =>
+            {
+                var aggregate = this.AggregateRepository.GetById<AchievementAggregateRoot>(request.AchievementId);
 
-            aggregate.ChangeCounterValue(command.NewCounterValue);
-            this._aggregateRepository.Save(aggregate);
+                aggregate.ChangeCounterValue(request.NewCounterValue);
+                this.AggregateRepository.Save(aggregate);
 
-            return aggregate;
-        }
-
-        #endregion
-
-        #region ICommandHandler<CompleteAchievementCommand> Members
-
-        public IAggregateRoot Handle(CompleteAchievementCommand command)
-        {
-            var aggregate = this._aggregateRepository.GetById<AchievementAggregateRoot>(command.AggregateId);
-
-            aggregate.Complete();
-            this._aggregateRepository.Save(aggregate);
-
-            return aggregate;
+                return new ChangeAchievementCounterValueResponse();
+            }, cancellationToken);
         }
 
         #endregion
 
-        #region ICommandHandler<CreateAchievementCommand> Members
+        #region IRequestHandler<CompleteAchievementCommand,CompleteAchievementResponse> Members
 
-        public IAggregateRoot Handle(CreateAchievementCommand command)
+        public async Task<CompleteAchievementResponse> Handle(CompleteAchievementCommand request,
+            CancellationToken cancellationToken)
         {
-            var achievementId = this.GuidGenerator.GenerateGuid();
-            var newRunningNumberId = this.CreateNewRunningNumberForAchievement();
+            return await Task.Run(() =>
+            {
+                var aggregate = this.AggregateRepository.GetById<AchievementAggregateRoot>(request.AchievementId);
 
-            var aggregate = AchievementAggregateRoot.Create(achievementId, newRunningNumberId, command.Name,
-                command.CounterIncrease, command.Storypoints);
+                aggregate.Complete();
+                this.AggregateRepository.Save(aggregate);
 
-            this._aggregateRepository.Save(aggregate);
-
-            return aggregate;
+                return new CompleteAchievementResponse();
+            }, cancellationToken);
         }
 
         #endregion
 
-        private Guid CreateNewRunningNumberForAchievement()
-        {
-            var runningNumberIdForTasks =
-                RunningNumberCounterCommandHandler.AreaToIdentityMapping[RunningNumberCounterArea.Achievement];
-            var runningNumbers =
-                this._aggregateRepository.GetById<RunningNumberCounterAggregateRoot>(runningNumberIdForTasks);
-            var newRunningNumberId = this.GuidGenerator.GenerateGuid();
-            runningNumbers.AddNextNumber(newRunningNumberId);
-            this._aggregateRepository.Save(runningNumbers);
+        #region IRequestHandler<CreateAchievementCommand,CreateAchievementResponse> Members
 
-            return newRunningNumberId;
+        public async Task<CreateAchievementResponse> Handle(CreateAchievementCommand request,
+            CancellationToken cancellationToken)
+        {
+            return await Task.Run(() =>
+            {
+                var achievementId = this.GuidGenerator.GenerateGuid();
+                var newRunningNumberId =
+                    this._runningNumberFactory.CreateNewRunningNumberFor(RunningNumberCounterArea.Achievement);
+
+                var aggregate = AchievementAggregateRoot.Create(achievementId, newRunningNumberId, request.Name,
+                    request.CounterIncrease, request.Storypoints);
+
+                this.AggregateRepository.Save(aggregate);
+
+                return new CreateAchievementResponse(achievementId);
+            }, cancellationToken);
         }
+
+        #endregion
     }
 }

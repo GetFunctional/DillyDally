@@ -1,4 +1,5 @@
-﻿using GF.DillyDally.Data.Sqlite;
+﻿using System.Threading.Tasks;
+using GF.DillyDally.Data.Sqlite;
 using NUnit.Framework;
 
 namespace GF.DillyDally.Unittests
@@ -10,11 +11,11 @@ namespace GF.DillyDally.Unittests
         private DatabaseTestSetup _databaseTestSetup;
 
         [OneTimeSetUp]
-        public void RunBeforeAnyTests()
+        public async Task RunBeforeAnyTests()
         {
             DeleteUnittestDatabase();
             this._databaseTestSetup = new DatabaseTestSetup();
-            this._databaseTestSetup.Setup(ExampleDatabase);
+            await this._databaseTestSetup.SetupAsync(ExampleDatabase);
         }
 
         private static void DeleteUnittestDatabase()

@@ -2,8 +2,8 @@
 using System.Threading.Tasks;
 using GF.DillyDally.ReadModel.Repository;
 using GF.DillyDally.WriteModel.Domain.Categories.Commands;
-using GF.DillyDally.WriteModel.Infrastructure;
 using LightInject;
+using MediatR;
 using NUnit.Framework;
 
 namespace GF.DillyDally.Unittests.ReadModel.Projection
@@ -27,15 +27,15 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
         public async Task Creating_Category_ShouldCreateProjection()
         {
             // Arrange
-            var commandDispatcher = this._infrastructureSetup.DiContainer.GetInstance<ICommandDispatcher>();
+            var commandDispatcher = this._infrastructureSetup.DiContainer.GetInstance<IMediator>();
             var categoryRepository = this._infrastructureSetup.DiContainer.GetInstance<ICategoryRepository>();
 
             // Act
-            var newCategoryId = commandDispatcher.ExecuteCommand(new CreateCategoryCommand("Test", "#123456"));
-            var categoryFromProjection = await categoryRepository.GetByIdAsync(newCategoryId);
+            var categoryResponse = await commandDispatcher.Send(new CreateCategoryCommand("Test", "#123456"));
+            var categoryFromProjection = await categoryRepository.GetByIdAsync(categoryResponse.CategoryId);
 
             // Assert
-            Assert.That(newCategoryId, Is.Not.EqualTo(Guid.Empty));
+            Assert.That(categoryResponse, Is.Not.EqualTo(Guid.Empty));
             Assert.That(categoryFromProjection, Is.Not.Null);
         }
     }

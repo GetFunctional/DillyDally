@@ -3,20 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using GF.DillyDally.Data.Sqlite;
 using GF.DillyDally.WriteModel.Infrastructure.Exceptions;
+using MediatR;
 using NEventStore;
 
 namespace GF.DillyDally.WriteModel.Infrastructure
 {
     internal sealed class AggregateRepository : IAggregateRepository
     {
-        private readonly EventDispatcher _eventDispatcher;
         private readonly IStoreEvents _eventStore;
         private readonly IGuidGenerator _guidGenerator = new GuidGenerator();
+        private readonly IMediator _mediator;
 
-        public AggregateRepository(IStoreEvents eventStore, EventDispatcher eventDispatcher)
+        public AggregateRepository(IStoreEvents eventStore, IMediator mediator)
         {
             this._eventStore = eventStore;
-            this._eventDispatcher = eventDispatcher;
+            this._mediator = mediator;
         }
 
         #region IAggregateRepository Members
@@ -51,14 +52,6 @@ namespace GF.DillyDally.WriteModel.Infrastructure
             return events;
         }
 
-        private void DispatchEvents(IReadOnlyList<IAggregateEvent> events)
-        {
-            foreach (var uncommitedEvent in events)
-            {
-                this._eventDispatcher.HandleEvent(uncommitedEvent);
-            }
-        }
-
         public TAggregate GetById<TAggregate>(Guid aggregateId) where TAggregate : IAggregateRoot, new()
         {
             using (var stream = this.GetEventStream(aggregateId))
@@ -67,6 +60,7 @@ namespace GF.DillyDally.WriteModel.Infrastructure
                 {
                     throw new AggregateNotFoundException(aggregateId);
                 }
+
                 return this.BuildAggregate<TAggregate>(stream.CommittedEvents);
             }
         }
@@ -81,11 +75,20 @@ namespace GF.DillyDally.WriteModel.Infrastructure
                     aggregate = default(TAggregate);
                     return false;
                 }
+
                 return this.TryBuildAggregate(stream.CommittedEvents, out aggregate);
             }
         }
 
         #endregion
+
+        private void DispatchEvents(IReadOnlyList<IAggregateEvent> events)
+        {
+            foreach (var uncommitedEvent in events)
+            {
+                this._mediator.Publish(uncommitedEvent);
+            }
+        }
 
         private IEventStream GetEventStream(Guid aggregateId)
         {
@@ -118,6 +121,7 @@ namespace GF.DillyDally.WriteModel.Infrastructure
                 aggregateResult = default(TResult);
                 return false;
             }
+
             try
             {
                 aggregateResult = this.BuildAggregate<TResult>(eventMessages);

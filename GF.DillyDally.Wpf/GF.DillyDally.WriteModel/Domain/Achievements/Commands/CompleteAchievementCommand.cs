@@ -1,12 +1,16 @@
 ﻿using System;
 using GF.DillyDally.WriteModel.Infrastructure;
+using MediatR;
 
 namespace GF.DillyDally.WriteModel.Domain.Achievements.Commands
 {
-    public sealed class CompleteAchievementCommand : AggregateCommandBase
+    public sealed class CompleteAchievementCommand : IRequest<CompleteAchievementResponse>
     {
-        public CompleteAchievementCommand(Guid achievementId) : base(achievementId)
+        public Guid AchievementId { get; }
+
+        public CompleteAchievementCommand(Guid achievementId)
         {
+            this.AchievementId = achievementId;
         }
     }
 }

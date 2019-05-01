@@ -1,45 +1,41 @@
-﻿using System;
+﻿using System.Threading;
+using System.Threading.Tasks;
 using GF.DillyDally.WriteModel.Domain.Categories.Commands;
 using GF.DillyDally.WriteModel.Domain.RunningNumbers;
 using GF.DillyDally.WriteModel.Domain.RunningNumbers.Events;
 using GF.DillyDally.WriteModel.Infrastructure;
+using MediatR;
 
 namespace GF.DillyDally.WriteModel.Domain.Categories
 {
-    internal sealed class CategoryCommandHandler : CommandHandlerBase, ICommandHandler<CreateCategoryCommand>
+    internal sealed class CategoryCommandHandler : CommandHandlerBase,
+        IRequestHandler<CreateCategoryCommand, CreateCategoryResponse>
     {
-        private readonly IAggregateRepository _aggregateRepository;
+        private readonly RunningNumberFactory _runningNumberFactory;
 
-        public CategoryCommandHandler(IAggregateRepository aggregateRepository)
+        public CategoryCommandHandler(IAggregateRepository aggregateRepository) : base(aggregateRepository)
         {
-            this._aggregateRepository = aggregateRepository;
+            this._runningNumberFactory = new RunningNumberFactory(this.AggregateRepository, this.GuidGenerator);
         }
 
-        #region ICommandHandler<CreateCategoryCommand> Members
+        #region IRequestHandler<CreateCategoryCommand,CreateCategoryResponse> Members
 
-        public IAggregateRoot Handle(CreateCategoryCommand command)
+        public async Task<CreateCategoryResponse> Handle(CreateCategoryCommand request,
+            CancellationToken cancellationToken)
         {
-            var categoryId = this.GuidGenerator.GenerateGuid();
-            var runningNumberId = this.CreateNewRunningNumberForCategory();
+            return await Task.Run(() =>
+            {
+                var categoryId = this.GuidGenerator.GenerateGuid();
+                var runningNumberId =
+                    this._runningNumberFactory.CreateNewRunningNumberFor(RunningNumberCounterArea.Category);
 
-            var aggregate =  CategoryAggregateRoot.Create(categoryId, runningNumberId, command.Name, command.ColorCode);
-            this._aggregateRepository.Save(aggregate);
-            return aggregate;
+                var aggregate =
+                    CategoryAggregateRoot.Create(categoryId, runningNumberId, request.Name, request.ColorCode);
+                this.AggregateRepository.Save(aggregate);
+                return new CreateCategoryResponse(categoryId);
+            }, cancellationToken);
         }
 
         #endregion
-
-        private Guid CreateNewRunningNumberForCategory()
-        {
-            var runningNumberIdForTasks =
-                RunningNumberCounterCommandHandler.AreaToIdentityMapping[RunningNumberCounterArea.Category];
-            var runningNumbers =
-                this._aggregateRepository.GetById<RunningNumberCounterAggregateRoot>(runningNumberIdForTasks);
-            var newRunningNumberId = this.GuidGenerator.GenerateGuid();
-            runningNumbers.AddNextNumber(newRunningNumberId);
-            this._aggregateRepository.Save(runningNumbers);
-
-            return newRunningNumberId;
-        }
     }
 }

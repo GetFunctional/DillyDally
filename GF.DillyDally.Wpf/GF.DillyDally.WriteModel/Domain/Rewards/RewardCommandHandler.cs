@@ -1,27 +1,31 @@
-﻿using GF.DillyDally.WriteModel.Domain.Rewards.Commands;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using GF.DillyDally.WriteModel.Domain.Rewards.Commands;
 using GF.DillyDally.WriteModel.Infrastructure;
+using MediatR;
 
 namespace GF.DillyDally.WriteModel.Domain.Rewards
 {
-    internal sealed class RewardCommandHandler : CommandHandlerBase, ICommandHandler<CreateRewardCommand>
+    internal sealed class RewardCommandHandler : CommandHandlerBase,
+        IRequestHandler<CreateRewardCommand, CreateRewardResponse>
     {
-        private readonly IAggregateRepository _aggregateRepository;
-
-        public RewardCommandHandler(IAggregateRepository aggregateRepository)
+        public RewardCommandHandler(IAggregateRepository aggregateRepository) : base(aggregateRepository)
         {
-            this._aggregateRepository = aggregateRepository;
         }
 
-        #region ICommandHandler<CreateRewardCommand> Members
+        #region IRequestHandler<CreateRewardCommand,CreateRewardResponse> Members
 
-        public IAggregateRoot Handle(CreateRewardCommand command)
+        public async Task<CreateRewardResponse> Handle(CreateRewardCommand request, CancellationToken cancellationToken)
         {
-            var rewardId = this.GuidGenerator.GenerateGuid();
+            return await Task.Run(() =>
+            {
+                var rewardId = this.GuidGenerator.GenerateGuid();
 
-            var aggregate = RewardAggregateRoot.Create(rewardId, command.Name, command.CurrencyCode);
-            this._aggregateRepository.Save(aggregate);
+                var aggregate = RewardAggregateRoot.Create(rewardId, request.Name, request.CurrencyCode);
+                this.AggregateRepository.Save(aggregate);
 
-            return aggregate;
+                return new CreateRewardResponse(rewardId);
+            }, cancellationToken);
         }
 
         #endregion

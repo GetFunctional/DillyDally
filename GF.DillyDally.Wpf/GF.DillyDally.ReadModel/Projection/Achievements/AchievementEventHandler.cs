@@ -1,14 +1,16 @@
-﻿using Dapper;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using Dapper;
 using GF.DillyDally.Data.Sqlite;
 using GF.DillyDally.ReadModel.Repository;
 using GF.DillyDally.ReadModel.Repository.Entities;
 using GF.DillyDally.WriteModel.Domain.Achievements.Events;
-using GF.DillyDally.WriteModel.Infrastructure;
+using MediatR;
 
 namespace GF.DillyDally.ReadModel.Projection.Achievements
 {
-    internal sealed class AchievementEventHandler : IEventHandler<AchievementCreatedEvent>,
-        IEventHandler<AchievementCompletedEvent>, IEventHandler<AchievementCounterValueChangedEvent>
+    internal sealed class AchievementEventHandler : INotificationHandler<AchievementCreatedEvent>,
+        INotificationHandler<AchievementCompletedEvent>, INotificationHandler<AchievementCounterValueChangedEvent>
     {
         private readonly IAchievementCompletionRepository _achievementCompletionRepository;
         private readonly DatabaseFileHandler _fileHandler;
@@ -22,56 +24,57 @@ namespace GF.DillyDally.ReadModel.Projection.Achievements
             this._achievementCompletionRepository = achievementCompletionRepository;
         }
 
-        #region IEventHandler<AchievementCompletedEvent> Members
+        #region INotificationHandler<AchievementCompletedEvent> Members
 
-        public async void Handle(AchievementCompletedEvent @event)
+        public async Task Handle(AchievementCompletedEvent notification, CancellationToken cancellationToken)
         {
             var guidGenerator = this._fileHandler.GuidGenerator;
 
             using (var connection = this._fileHandler.OpenConnection())
             {
                 await this._achievementCompletionRepository.InsertAsync(connection, new AchievementCompletion
-                                                                                    {
-                                                                                        AchievementCompletionId = guidGenerator.GenerateGuid(),
-                                                                                        AchievementId = @event.AggregateId,
-                                                                                        Storypoints = @event.StoryPointsToAdd,
-                                                                                        CounterIncreaseValue = @event.IncreaseCounterFor,
-                                                                                        CompletedOn = @event.CompletedOn
-                                                                                    }).ConfigureAwait(false);
+                {
+                    AchievementCompletionId = guidGenerator.GenerateGuid(),
+                    AchievementId = notification.AggregateId,
+                    Storypoints = notification.StoryPointsToAdd,
+                    CounterIncreaseValue = notification.IncreaseCounterFor,
+                    CompletedOn = notification.CompletedOn
+                }).ConfigureAwait(false);
             }
         }
 
         #endregion
 
-        #region IEventHandler<AchievementCounterValueChangedEvent> Members
+        #region INotificationHandler<AchievementCounterValueChangedEvent> Members
 
-        public async void Handle(AchievementCounterValueChangedEvent @event)
+        public async Task Handle(AchievementCounterValueChangedEvent notification, CancellationToken cancellationToken)
         {
             using (var connection = this._fileHandler.OpenConnection())
             {
-                var achievementToChange = await this._repository.GetByIdAsync(@event.AggregateId);
-                achievementToChange.CounterIncrease = @event.NewCounterValue;
-                await connection.ExecuteAsync($"UPDATE {AchievementEntity.TableNameConstant} SET {nameof(AchievementEntity.CounterIncrease)} = @counterIncrease;",
-                    new {counterIncrease = @event.NewCounterValue});
+                var achievementToChange = await this._repository.GetByIdAsync(notification.AggregateId);
+                achievementToChange.CounterIncrease = notification.NewCounterValue;
+                await connection.ExecuteAsync(
+                    $"UPDATE {AchievementEntity.TableNameConstant} SET {nameof(AchievementEntity.CounterIncrease)} = @counterIncrease;",
+                    new {counterIncrease = notification.NewCounterValue});
             }
         }
 
         #endregion
 
-        #region IEventHandler<AchievementCreatedEvent> Members
+        #region INotificationHandler<AchievementCreatedEvent> Members
 
-        public async void Handle(AchievementCreatedEvent @event)
+        public async Task Handle(AchievementCreatedEvent notification, CancellationToken cancellationToken)
         {
             using (var connection = this._fileHandler.OpenConnection())
             {
                 await this._repository.InsertAsync(connection, new AchievementEntity
-                                                               {
-                                                                   AchievementId = @event.AggregateId,
-                                                                   Name = @event.Name,
-                                                                   CounterIncrease = @event.CounterIncrease,
-                                                                   StoryPoints = @event.Storypoints,
-                                                                   RunningNumberId = @event.RunningNumberId
-                                                               }).ConfigureAwait(false);
+                {
+                    AchievementId = notification.AggregateId,
+                    Name = notification.Name,
+                    CounterIncrease = notification.CounterIncrease,
+                    StoryPoints = notification.Storypoints,
+                    RunningNumberId = notification.RunningNumberId
+                }).ConfigureAwait(false);
             }
         }
 

@@ -1,11 +1,10 @@
-﻿using System;
-using GF.DillyDally.WriteModel.Infrastructure;
+﻿using MediatR;
 
 namespace GF.DillyDally.WriteModel.Domain.Lanes.Commands
 {
-    public sealed class CreateLaneCommand : AggregateCommandBase
+    public sealed class CreateLaneCommand : IRequest<CreateLaneResponse>
     {
-        public CreateLaneCommand(string name, string colorCode, bool isCompletedLane, bool isRejectedLane) : base(Guid.Empty)
+        public CreateLaneCommand(string name, string colorCode, bool isCompletedLane, bool isRejectedLane)
         {
             this.Name = name;
             this.ColorCode = colorCode;

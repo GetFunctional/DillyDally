@@ -1,9 +1,9 @@
 ﻿using System;
-using GF.DillyDally.WriteModel.Infrastructure;
+using MediatR;
 
 namespace GF.DillyDally.WriteModel.Domain.Tasks.Commands
 {
-    public sealed class CreateTaskCommand : AggregateCommandBase
+    public sealed class CreateTaskCommand : IRequest<CreateTaskResponse>
     {
         public CreateTaskCommand(string name, Guid categoryId, Guid laneId) : this(
             name, categoryId, laneId, null)
@@ -11,7 +11,7 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks.Commands
         }
 
         public CreateTaskCommand(string name, Guid categoryId, Guid laneId,
-            Guid? previewImageId) : base(Guid.Empty)
+            Guid? previewImageId)
         {
             this.Name = name;
             this.CategoryId = categoryId;

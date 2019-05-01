@@ -1,12 +1,11 @@
-﻿using System;
-using GF.DillyDally.WriteModel.Domain.RunningNumbers.Events;
-using GF.DillyDally.WriteModel.Infrastructure;
+﻿using GF.DillyDally.WriteModel.Domain.RunningNumbers.Events;
+using MediatR;
 
 namespace GF.DillyDally.WriteModel.Domain.RunningNumbers.Commands
 {
-    public sealed class CreateRunningNumberCounterCommand : AggregateCommandBase
+    public sealed class CreateRunningNumberCounterCommand : IRequest<CreateRunningNumberCounterResponse>
     {
-        public CreateRunningNumberCounterCommand(RunningNumberCounterArea counterArea, string prefix, int initialNumber) : base(Guid.Empty)
+        public CreateRunningNumberCounterCommand(RunningNumberCounterArea counterArea, string prefix, int initialNumber)
         {
             this.CounterArea = counterArea;
             this.Prefix = prefix;

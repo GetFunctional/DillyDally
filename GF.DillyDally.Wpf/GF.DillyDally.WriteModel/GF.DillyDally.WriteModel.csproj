@@ -33,12 +33,20 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dapper, Version=1.60.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libs\Dapper.dll</HintPath>
+    </Reference>
     <Reference Include="Dapper.Contrib">
       <HintPath>..\..\Libs\Dapper.Contrib.dll</HintPath>
     </Reference>
     <Reference Include="LightInject, Version=5.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libs\LightInject.dll</HintPath>
+    </Reference>
+    <Reference Include="MediatR, Version=6.0.0.0, Culture=neutral, PublicKeyToken=bb9a41a5e8aaa7e2, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libs\MediatR.dll</HintPath>
     </Reference>
     <Reference Include="NEventStore">
       <HintPath>..\..\Libs\NEventStore.dll</HintPath>
@@ -58,13 +66,30 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Domain\Achievements\Commands\ChangeAchievementCounterValueCommand.cs" />
+    <Compile Include="Domain\Achievements\Commands\ChangeAchievementCounterValueResponse.cs" />
     <Compile Include="Domain\Achievements\Commands\CompleteAchievementCommand.cs" />
+    <Compile Include="Domain\Achievements\Commands\CompleteAchievementResponse.cs" />
     <Compile Include="Domain\Achievements\Commands\CreateAchievementCommand.cs" />
+    <Compile Include="Domain\Achievements\Commands\CreateAchievementResponse.cs" />
     <Compile Include="Domain\Achievements\Events\AchievementCompletedEvent.cs" />
     <Compile Include="Domain\Achievements\Events\AchievementCreatedEvent.cs" />
     <Compile Include="Domain\Achievements\AchievementAggregateRoot.cs" />
     <Compile Include="Domain\Achievements\AchievementCommandHandler.cs" />
     <Compile Include="Domain\Achievements\Events\AchievementCounterValueChangedEvent.cs" />
+    <Compile Include="Domain\Categories\Commands\CreateCategoryResponse.cs" />
+    <Compile Include="Domain\Files\Commands\CreateFileResponse.cs" />
+    <Compile Include="Domain\Files\FileAggregateRoot.cs" />
+    <Compile Include="Domain\Files\FileCommandHandler.cs" />
+    <Compile Include="Domain\Files\Commands\CreateFileCommand.cs" />
+    <Compile Include="Domain\Files\Events\FileCreatedEvent.cs" />
+    <Compile Include="Domain\Files\Filedata.cs" />
+    <Compile Include="Domain\Files\FileEntity.cs" />
+    <Compile Include="Domain\Files\FileRepository.cs" />
+    <Compile Include="Domain\Files\ImageFormat.cs" />
+    <Compile Include="Domain\Files\ImageFormatDetector.cs" />
+    <Compile Include="Domain\Lanes\CreateLaneResponse.cs" />
+    <Compile Include="Domain\Rewards\CreateRewardResponse.cs" />
+    <Compile Include="Domain\RunningNumbers\CreateRunningNumberCounterResponse.cs" />
     <Compile Include="Domain\RunningNumbers\Events\AddNextNumberEvent.cs" />
     <Compile Include="Domain\RunningNumbers\Commands\CreateRunningNumberCounterCommand.cs" />
     <Compile Include="Domain\RunningNumbers\Events\RunningNumberCounterArea.cs" />
@@ -73,6 +98,8 @@
     <Compile Include="Domain\RunningNumbers\RunningNumberCounterAggregateRoot.cs" />
     <Compile Include="Domain\RunningNumbers\Exceptions\RunningNumberCounterAlreadyExistException.cs" />
     <Compile Include="Domain\RunningNumbers\RunningNumberCounterCommandHandler.cs" />
+    <Compile Include="Domain\RunningNumbers\RunningNumberFactory.cs" />
+    <Compile Include="Domain\Tasks\CreateTaskResponse.cs" />
     <Compile Include="Domain\Tasks\Exceptions\DuplicateTaskLinkException.cs" />
     <Compile Include="Domain\Tasks\Exceptions\TaskNotLinkFoundException.cs" />
     <Compile Include="Domain\Tasks\TaskAggregateRoot.cs" />
@@ -97,9 +124,8 @@
     <Compile Include="Domain\Rewards\RewardCommandHandler.cs" />
     <Compile Include="Domain\Rewards\Events\RewardCreatedEvent.cs" />
     <Compile Include="Domain\Tasks\TaskLink.cs" />
-    <Compile Include="Infrastructure\AggregateEventBase.cs" />
-    <Compile Include="Infrastructure\AggregateCommandBase.cs" />
     <Compile Include="AuthorizationPipelineHook.cs" />
+    <Compile Include="Infrastructure\AggregateEventBase.cs" />
     <Compile Include="Infrastructure\Exceptions\AggregateNotFoundException.cs" />
     <Compile Include="Infrastructure\CommandHandlerBase.cs" />
     <Compile Include="Deprecated\DillyDallyTask.cs" />
@@ -110,16 +136,9 @@
     <Compile Include="Infrastructure\AggregateRepository.cs" />
     <Compile Include="Infrastructure\Exceptions\MssingEventRouteException.cs" />
     <Compile Include="Infrastructure\Exceptions\AggregateRevisionException.cs" />
-    <Compile Include="Infrastructure\CommandDispatcher.cs" />
-    <Compile Include="Infrastructure\EventDispatcher.cs" />
     <Compile Include="Infrastructure\IAggregateRoot.cs" />
-    <Compile Include="Infrastructure\IAggregateCommand.cs" />
     <Compile Include="Infrastructure\IAggregateRepository.cs" />
-    <Compile Include="Infrastructure\ICommandDispatcher.cs" />
-    <Compile Include="Infrastructure\ICommandHandler.cs" />
     <Compile Include="Infrastructure\IAggregateEvent.cs" />
-    <Compile Include="Infrastructure\IEventDispatcher.cs" />
-    <Compile Include="Infrastructure\IEventHandler.cs" />
     <Compile Include="Infrastructure\Exceptions\InvalidAggregateIdException.cs" />
     <Compile Include="Infrastructure\Exceptions\MissingCommandHandlerException.cs" />
     <Compile Include="Infrastructure\Exceptions\MissingEventsForAggregateException.cs" />

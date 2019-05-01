@@ -1,44 +1,42 @@
-﻿using System;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using GF.DillyDally.Data.Sqlite;
 using GF.DillyDally.WriteModel.Domain.Lanes.Commands;
 using GF.DillyDally.WriteModel.Domain.RunningNumbers;
 using GF.DillyDally.WriteModel.Domain.RunningNumbers.Events;
 using GF.DillyDally.WriteModel.Infrastructure;
+using MediatR;
 
 namespace GF.DillyDally.WriteModel.Domain.Lanes
 {
-    internal sealed class LaneCommandHandler : CommandHandlerBase, ICommandHandler<CreateLaneCommand>
+    internal sealed class LaneCommandHandler : CommandHandlerBase,
+        IRequestHandler<CreateLaneCommand, CreateLaneResponse>
     {
-        private readonly IAggregateRepository _aggregateRepository;
+        private readonly RunningNumberFactory _runningNumberFactory;
 
-        public LaneCommandHandler(IAggregateRepository aggregateRepository) => this._aggregateRepository = aggregateRepository;
-
-        #region ICommandHandler<CreateLaneCommand> Members
-
-        public IAggregateRoot Handle(CreateLaneCommand command)
+        public LaneCommandHandler(IAggregateRepository aggregateRepository) : base(aggregateRepository)
         {
-            var laneId = this.GuidGenerator.GenerateGuid();
+            this._runningNumberFactory = new RunningNumberFactory(aggregateRepository, new GuidGenerator());
+        }
 
-            var runningNumberForCategory = this.CreateNewRunningNumberForLane();
-            var aggregate = LaneAggregateRoot.Create(laneId, runningNumberForCategory, command.Name, command.ColorCode, command.IsCompletedLane, command.IsRejectedLane);
-            this._aggregateRepository.Save(aggregate);
+        #region IRequestHandler<CreateLaneCommand,CreateLaneResponse> Members
 
-            return aggregate;
+        public async Task<CreateLaneResponse> Handle(CreateLaneCommand request, CancellationToken cancellationToken)
+        {
+            return await Task.Run(() =>
+            {
+                var laneId = this.GuidGenerator.GenerateGuid();
+
+                var runningNumberForCategory =
+                    this._runningNumberFactory.CreateNewRunningNumberFor(RunningNumberCounterArea.Lane);
+                var aggregate = LaneAggregateRoot.Create(laneId, runningNumberForCategory, request.Name,
+                    request.ColorCode, request.IsCompletedLane, request.IsRejectedLane);
+                this.AggregateRepository.Save(aggregate);
+
+                return new CreateLaneResponse(laneId);
+            }, cancellationToken);
         }
 
         #endregion
-
-
-        private Guid CreateNewRunningNumberForLane()
-        {
-            var runningNumberIdForTasks =
-                RunningNumberCounterCommandHandler.AreaToIdentityMapping[RunningNumberCounterArea.Lane];
-            var runningNumbers =
-                this._aggregateRepository.GetById<RunningNumberCounterAggregateRoot>(runningNumberIdForTasks);
-            var newRunningNumberId = this.GuidGenerator.GenerateGuid();
-            runningNumbers.AddNextNumber(newRunningNumberId);
-            this._aggregateRepository.Save(runningNumbers);
-
-            return newRunningNumberId;
-        }
     }
 }

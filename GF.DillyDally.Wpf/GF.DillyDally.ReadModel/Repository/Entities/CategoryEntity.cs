@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using Dapper.Contrib.Extensions;
-using GF.DillyDally.ReadModel.Repository.Base;
 
 namespace GF.DillyDally.ReadModel.Repository.Entities
 {

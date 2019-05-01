@@ -1,14 +1,17 @@
-﻿using GF.DillyDally.WriteModel.Domain.Rewards.Events;
-using GF.DillyDally.WriteModel.Infrastructure;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using GF.DillyDally.WriteModel.Domain.Rewards.Events;
+using MediatR;
 
 namespace GF.DillyDally.ReadModel.Projection.Rewards
 {
-    internal sealed class RewardEventHandler : IEventHandler<RewardCreatedEvent>
+    internal sealed class RewardEventHandler : INotificationHandler<RewardCreatedEvent>
     {
-        #region IEventHandler<RunningNumberCounterCreatedEvent> Members
+        #region INotificationHandler<RewardCreatedEvent> Members
 
-        public void Handle(RewardCreatedEvent @event)
+        public async Task Handle(RewardCreatedEvent notification, CancellationToken cancellationToken)
         {
+            await Task.CompletedTask;
         }
 
         #endregion

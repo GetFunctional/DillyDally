@@ -1,14 +1,10 @@
 ﻿using System.Data.SQLite;
+using System.Reflection;
 using GF.DillyDally.WriteModel.Deprecated;
-using GF.DillyDally.WriteModel.Domain.Achievements;
-using GF.DillyDally.WriteModel.Domain.Achievements.Commands;
-using GF.DillyDally.WriteModel.Domain.Categories;
-using GF.DillyDally.WriteModel.Domain.Lanes;
-using GF.DillyDally.WriteModel.Domain.Rewards;
-using GF.DillyDally.WriteModel.Domain.RunningNumbers;
-using GF.DillyDally.WriteModel.Domain.Tasks;
 using GF.DillyDally.WriteModel.Infrastructure;
 using LightInject;
+using MediatR;
+using MediatR.Pipeline;
 using NEventStore;
 using NEventStore.Persistence.Sql.SqlDialects;
 using NEventStore.Serialization.Json;
@@ -25,50 +21,34 @@ namespace GF.DillyDally.WriteModel
             0x0, 0x1, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x8, 0x9, 0xa, 0xb, 0xc, 0xd, 0xe, 0xf
         };
 
-        public IEventDispatcher EventDispatcher { get; private set; }
-
         public void Initialize(IServiceContainer serviceContainer, string dillyDallyStoreConnectionString)
         {
             this.RegisterServices(serviceContainer);
-
             var storeEvents = this.WireupEventStore(dillyDallyStoreConnectionString);
-            this.EventDispatcher = new EventDispatcher();
-            this.CommandDispatcher = new CommandDispatcher();
-
+            RegisterMediations(serviceContainer);
             serviceContainer.RegisterInstance(typeof(IStoreEvents), storeEvents);
-            serviceContainer.RegisterInstance(typeof(IEventDispatcher), this.EventDispatcher);
-            serviceContainer.RegisterInstance(typeof(EventDispatcher), this.EventDispatcher );
-            serviceContainer.RegisterInstance(typeof(ICommandDispatcher), this.CommandDispatcher);
-
-            this.WireupCommandHandler(serviceContainer, this.CommandDispatcher);
         }
 
-        private void WireupCommandHandler(IServiceContainer serviceContainer, CommandDispatcher commandDispatcher)
+        private static void RegisterMediations(IServiceContainer serviceContainer)
         {
-            var runningNumberCounterCommandHandler = serviceContainer.Create<RunningNumberCounterCommandHandler>();
-            commandDispatcher.RegisterHandler(runningNumberCounterCommandHandler);
+            serviceContainer.RegisterAssembly(typeof(WriteModelInitializer).GetTypeInfo().Assembly,
+                (serviceType, implementingType) =>
+                    serviceType.IsConstructedGenericType &&
+                    (
+                        serviceType.GetGenericTypeDefinition() == typeof(IRequestHandler<,>) ||
+                        serviceType.GetGenericTypeDefinition() == typeof(INotificationHandler<>)
+                    ));
 
-            var lanecommandHandler = serviceContainer.Create<LaneCommandHandler>();
-            commandDispatcher.RegisterHandler(lanecommandHandler);
+            serviceContainer.RegisterOrdered(typeof(IPipelineBehavior<,>),
+                new[]
+                {
+                    typeof(RequestPreProcessorBehavior<,>),
+                    typeof(RequestPostProcessorBehavior<,>)
+                }, type => new PerContainerLifetime());
 
-            var rewardCommandHandler = serviceContainer.Create<RewardCommandHandler>();
-            commandDispatcher.RegisterHandler(rewardCommandHandler);
-
-            var categoryCommandHandler = serviceContainer.Create<CategoryCommandHandler>();
-            commandDispatcher.RegisterHandler(categoryCommandHandler);
-
-            var taskCommandHandler = serviceContainer.Create<TaskCommandHandler>();
-            commandDispatcher.RegisterHandler(taskCommandHandler);
-
-            var achievementCommandHandler = serviceContainer.Create<AchievementCommandHandler>();
-            commandDispatcher.RegisterHandler<CreateAchievementCommand>(achievementCommandHandler);
-            commandDispatcher.RegisterHandler<CompleteAchievementCommand>(achievementCommandHandler);
-            commandDispatcher.RegisterHandler<ChangeAchievementCounterValueCommand>(achievementCommandHandler);
-
+            serviceContainer.Register<ServiceFactory>(fac => fac.GetInstance);
         }
 
-        internal CommandDispatcher CommandDispatcher { get; private set; }
-        
         private void RegisterServices(IServiceContainer serviceContainer)
         {
             serviceContainer.Register<IAggregateRepository, AggregateRepository>();

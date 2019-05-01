@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
 
-namespace GF.DillyDally.ReadModel.Repository.Base
+namespace GF.DillyDally.Data.Sqlite.Repository.Base
 {
     public interface IRepository<T> where T : class, new()
     {

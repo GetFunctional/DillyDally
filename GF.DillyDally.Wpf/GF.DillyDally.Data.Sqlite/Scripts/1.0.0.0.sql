@@ -5,7 +5,9 @@
   [Md5Hash] TEXT NOT NULL, 
   [Size] INTEGER NOT NULL,
   [Name] TEXT(255) NOT NULL, 
-  [Extension] TEXT NOT NULL);
+  [Extension] TEXT NOT NULL,
+  [IsImage] BOOL NOT NULL
+  );
 
 CREATE UNIQUE INDEX [IX_Files_FileId] ON [Files]([FileId]);
 GO
