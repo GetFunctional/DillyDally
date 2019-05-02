@@ -78,6 +78,7 @@
     <Compile Include="ReadModel\Projection\AchievementTests.cs" />
     <Compile Include="ReadModel\Projection\CategoryTests.cs" />
     <Compile Include="ReadModel\Projection\LaneTests.cs" />
+    <Compile Include="ReadModel\Projection\TaskImageTests.cs" />
     <Compile Include="ReadModel\Projection\TaskTests.cs" />
     <Compile Include="SqlDbAccess\CreateDatabaseTests.cs" />
     <Compile Include="SqlDbAccess\DatabaseUpdateTests.cs" />
@@ -103,6 +104,10 @@
     <ProjectReference Include="..\GF.DillyDally.ReadModel\GF.DillyDally.ReadModel.csproj">
       <Project>{24f297fb-5d67-4d69-b8fa-b3b7c73675d0}</Project>
       <Name>GF.DillyDally.ReadModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GF.DillyDally.Shared\GF.DillyDally.Shared.csproj">
+      <Project>{cac4358f-f1af-49f5-9054-a6064abe235e}</Project>
+      <Name>GF.DillyDally.Shared</Name>
     </ProjectReference>
     <ProjectReference Include="..\GF.DillyDally.Wpf.Client\GF.DillyDally.Wpf.Client.csproj">
       <Project>{65ab5c0d-009d-4870-baf6-536870f97b74}</Project>

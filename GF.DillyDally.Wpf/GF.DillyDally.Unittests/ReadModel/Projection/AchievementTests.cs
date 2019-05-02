@@ -51,6 +51,31 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
         }
 
         [Test]
+        public async Task Changing_AchievementCounterValue_ShouldNotChangeOtherProjections()
+        {
+            using (var connection = this._infrastructureSetup.OpenDatabaseConnection())
+            {
+                // Arrange
+                var commandDispatcher = this._infrastructureSetup.DiContainer.GetInstance<IMediator>();
+                var repository = this._infrastructureSetup.DiContainer.GetInstance<IAchievementRepository>();
+                var command = new CreateAchievementCommand("Test", 1, 5);
+                var newAchievement = await commandDispatcher.Send(command);
+                var newAchievement2 = await commandDispatcher.Send(command);
+
+                // Act
+                var changeCommand = new ChangeAchievementCounterValueCommand(newAchievement.AchievementId, 5);
+                await commandDispatcher.Send(changeCommand);
+                var projection = await repository.GetByIdAsync(connection, newAchievement.AchievementId);
+                var projection2 = await repository.GetByIdAsync(connection, newAchievement2.AchievementId);
+
+                // Assert
+                Assert.That(projection2.CounterIncrease, Is.EqualTo(command.CounterIncrease));
+                Assert.That(projection.CounterIncrease, Is.EqualTo(5));
+            }
+        }
+
+
+        [Test]
         public async Task Completing_Achievement_ShouldCreateProjection()
         {
             using (var connection = this._infrastructureSetup.OpenDatabaseConnection())

@@ -48,11 +48,7 @@ namespace GF.DillyDally.ReadModel.Projection.Achievements
             using (var connection = this._fileHandler.OpenConnection())
             {
                 var achievementRepository = new AchievementRepository();
-                var achievementToChange = await achievementRepository.GetByIdAsync(connection, notification.AggregateId);
-                achievementToChange.CounterIncrease = notification.NewCounterValue;
-                await connection.ExecuteAsync(
-                    $"UPDATE {AchievementEntity.TableNameConstant} SET {nameof(AchievementEntity.CounterIncrease)} = @counterIncrease;",
-                    new {counterIncrease = notification.NewCounterValue});
+                await achievementRepository.ChangeCounterValueAsync(connection, notification.AggregateId, notification.NewCounterValue);
             }
         }
 

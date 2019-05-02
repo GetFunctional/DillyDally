@@ -14,25 +14,46 @@ using MediatR;
 namespace GF.DillyDally.WriteModel.Domain.Tasks
 {
     internal sealed class TaskCommandHandler : CommandHandlerBase,
-        IRequestHandler<CreateTaskCommand, CreateTaskResponse>, IRequestHandler<AttachFileToTaskCommand, AttachFileToTaskResponse>
+        IRequestHandler<CreateTaskCommand, CreateTaskResponse>,
+        IRequestHandler<AttachFileToTaskCommand, AttachFileToTaskResponse>,
+        IRequestHandler<AssignPreviewImageCommand, AssignPreviewImageResponse>
     {
         private readonly DatabaseFileHandler _databaseFileHandler;
         private readonly RunningNumberFactory _runningNumberFactory;
 
-        public TaskCommandHandler(IAggregateRepository aggregateRepository, DatabaseFileHandler databaseFileHandler) : base(aggregateRepository)
+        public TaskCommandHandler(IAggregateRepository aggregateRepository, DatabaseFileHandler databaseFileHandler) :
+            base(aggregateRepository)
         {
             this._databaseFileHandler = databaseFileHandler;
             this._runningNumberFactory = new RunningNumberFactory(aggregateRepository, new GuidGenerator());
         }
 
+        #region IRequestHandler<AssignPreviewImageCommand,AssignPreviewImageResponse> Members
+
+        public async Task<AssignPreviewImageResponse> Handle(AssignPreviewImageCommand request,
+            CancellationToken cancellationToken)
+        {
+            return await Task.Run(() =>
+            {
+                var aggregate = this.AggregateRepository.GetById<TaskAggregateRoot>(request.TaskId);
+                aggregate.AssignPreviewImage(request.FileId);
+                this.AggregateRepository.Save(aggregate);
+                return new AssignPreviewImageResponse();
+            }, cancellationToken);
+        }
+
+        #endregion
+
         #region IRequestHandler<AttachFileToTaskCommand,AttachFileToTaskResponse> Members
 
-        public async Task<AttachFileToTaskResponse> Handle(AttachFileToTaskCommand request, CancellationToken cancellationToken)
+        public async Task<AttachFileToTaskResponse> Handle(AttachFileToTaskCommand request,
+            CancellationToken cancellationToken)
         {
             using (var connection = this._databaseFileHandler.OpenConnection())
             {
                 var fileCreateCommand = new StoreFileCommand(request.FilePath);
-                var fileInStore = await FileCommandHandler.GetOrCreateFileAsync(fileCreateCommand, this.AggregateRepository, connection, this.GuidGenerator,
+                var fileInStore = await FileCommandHandler.GetOrCreateFileAsync(fileCreateCommand,
+                    this.AggregateRepository, connection, this.GuidGenerator,
                     new FileRepository());
 
                 var task = this.AggregateRepository.GetById<TaskAggregateRoot>(request.TaskId);

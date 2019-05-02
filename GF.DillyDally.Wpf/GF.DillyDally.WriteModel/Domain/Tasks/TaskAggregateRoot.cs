@@ -6,7 +6,7 @@ using GF.DillyDally.WriteModel.Infrastructure;
 
 namespace GF.DillyDally.WriteModel.Domain.Tasks
 {
-    internal class TaskAggregateRoot : AggregateRootBase
+    internal sealed class TaskAggregateRoot : AggregateRootBase
     {
         public TaskAggregateRoot()
         {
@@ -14,9 +14,11 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks
             this.RegisterTransition<UnLinkTasksEvent>(this.Apply);
             this.RegisterTransition<TaskLinkCreatedEvent>(this.Apply);
             this.RegisterTransition<AttachedFileToTaskEvent>(this.Apply);
+            this.RegisterTransition<PreviewImageAssignedEvent>(this.Apply);
         }
 
-        protected TaskAggregateRoot(Guid taskId, string name, Guid runningNumberId,
+        
+        private TaskAggregateRoot(Guid taskId, string name, Guid runningNumberId,
             Guid categoryId, Guid laneId, Guid? previewImageId) : this()
         {
             var creationEvent = new TaskCreatedEvent(taskId, name, runningNumberId, categoryId, laneId,
@@ -25,10 +27,10 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks
         }
 
         private List<TaskLink> Links { get; } = new List<TaskLink>();
-        public string Name { get; protected set; }
-        public Guid CategoryId { get; protected set; }
-        public Guid LaneId { get; protected set; }
-        public Guid? PreviewImageId { get; protected set; }
+        public string Name { get; private set; }
+        public Guid CategoryId { get; private set; }
+        public Guid LaneId { get; private set; }
+        public Guid? PreviewImageId { get; private set; }
         public ISet<Guid> AttachedFiles { get; } = new HashSet<Guid>();
 
         private void Apply(AttachedFileToTaskEvent obj)
@@ -39,6 +41,11 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks
             }
 
             this.AttachedFiles.Add(obj.FileId);
+        }
+
+        private void Apply(PreviewImageAssignedEvent obj)
+        {
+            this.PreviewImageId = obj.FileId;
         }
 
         private void Apply(TaskLinkCreatedEvent obj)
@@ -95,6 +102,12 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks
         internal void AttachFile(Guid fileId)
         {
             var fileAttachedEvent = new AttachedFileToTaskEvent(this.AggregateId, fileId);
+            this.RaiseEvent(fileAttachedEvent);
+        }
+
+        internal void AssignPreviewImage(Guid fileId)
+        {
+            var fileAttachedEvent = new PreviewImageAssignedEvent(this.AggregateId, fileId);
             this.RaiseEvent(fileAttachedEvent);
         }
     }

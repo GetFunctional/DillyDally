@@ -97,9 +97,12 @@
     <Compile Include="Domain\RunningNumbers\Exceptions\RunningNumberCounterAlreadyExistException.cs" />
     <Compile Include="Domain\RunningNumbers\RunningNumberCounterCommandHandler.cs" />
     <Compile Include="Domain\RunningNumbers\RunningNumberFactory.cs" />
+    <Compile Include="Domain\Tasks\Commands\AssignPreviewImageCommand.cs" />
+    <Compile Include="Domain\Tasks\Commands\AssignPreviewImageResponse.cs" />
     <Compile Include="Domain\Tasks\Commands\AttachFileToTaskCommand.cs" />
     <Compile Include="Domain\Tasks\Commands\AttachFileToTaskResponse.cs" />
     <Compile Include="Domain\Tasks\Commands\CreateTaskResponse.cs" />
+    <Compile Include="Domain\Tasks\Events\PreviewImageAssignedEvent.cs" />
     <Compile Include="Domain\Tasks\Exceptions\DuplicateAttachedFileException.cs" />
     <Compile Include="Domain\Tasks\Events\AttachedFileToTaskEvent.cs" />
     <Compile Include="Domain\Tasks\Exceptions\DuplicateTaskLinkException.cs" />

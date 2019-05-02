@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using GF.DillyDally.ReadModel.Repository;
 using GF.DillyDally.WriteModel.Domain.Tasks.Commands;
+using GF.DillyDally.WriteModel.Domain.Tasks.Exceptions;
 using LightInject;
 using MediatR;
 using NUnit.Framework;
@@ -40,32 +41,7 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
                 return task;
             }
         }
-
-        [Test]
-        public async Task AttachingImage_ToTask_ShouldCreateProjection()
-        {
-            // Arrange
-            using (var connection = this._infrastructureSetup.OpenDatabaseConnection())
-            {
-                var commandDispatcher = this._infrastructureSetup.DiContainer.GetInstance<IMediator>();
-                var repository = this._infrastructureSetup.DiContainer.GetInstance<ITaskImageRepository>();
-                var newTask = await this.CreateNewTask();
-                var fileName = "TestImage.jpg";
-                var filePath = Path.Combine(TestContext.CurrentContext.TestDirectory, "TestResources", fileName);
-
-                var attachImageCommand = new AttachFileToTaskCommand(newTask.TaskId, filePath);
-                var result = await commandDispatcher.Send(attachImageCommand);
-
-                // Act
-                var projection = await repository.GetImagesForTaskAsync(connection, newTask.TaskId);
-
-                // Assert
-                Assert.That(newTask.TaskId, Is.Not.EqualTo(Guid.Empty));
-                Assert.That(projection, Is.Not.Null);
-                Assert.That(projection.Count, Is.EqualTo(3));
-            }
-        }
-
+        
         [Test]
         public async Task Creating_Task_ShouldCreateProjection()
         {
@@ -97,4 +73,5 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
             }
         }
     }
+
 }
