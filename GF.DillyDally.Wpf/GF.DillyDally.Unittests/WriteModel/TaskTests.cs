@@ -48,14 +48,22 @@ namespace GF.DillyDally.Unittests.WriteModel
             {
                 // Arrange
                 var commandDispatcher = this._infrastructureSetup.DiContainer.GetInstance<IMediator>();
+                var fileRepository = this._infrastructureSetup.DiContainer.GetInstance<IFileRepository>();
+
                 var newTask = await this.CreateNewTask();
-                var filePath = Path.Combine(TestContext.CurrentContext.TestDirectory, "TestResources", "TestImage.jpg");
+                var fileName = "TestImage.jpg";
+                var filePath = Path.Combine(TestContext.CurrentContext.TestDirectory, "TestResources", fileName);
                 var fileInfo = new FileInfo(filePath);
 
                 // Act
                 var fileAttachResult = await commandDispatcher.Send(new AttachFileToTaskCommand(newTask.TaskId, filePath));
 
+                // Assert
+                var fileInStore = await fileRepository.GetByIdAsync(connection, fileAttachResult.FileId);
+
                 Assert.That(fileInfo.Exists, Is.True);
+                Assert.That(fileInStore.Name, Is.EqualTo(fileName));
+                Assert.That(fileInStore.IsImage, Is.EqualTo(true));
                 Assert.That(fileAttachResult.FileId, Is.Not.EqualTo(Guid.Empty));
             }
         }

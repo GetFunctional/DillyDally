@@ -42,6 +42,11 @@ namespace GF.DillyDally.Data.Sqlite.Repository.Base
             return await connection.InsertAsync(entity);
         }
 
+        public async Task<int> InsertMultipleAsync(IDbConnection connection, IList<T> entities)
+        {
+            return await connection.InsertAsync(entities);
+        }
+
         public async Task<bool> UpdateAsync(IDbConnection connection, T entity)
         {
             return await connection.UpdateAsync(entity);

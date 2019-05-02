@@ -1,11 +1,11 @@
 ﻿using System.Linq;
 using System.Text;
 
-namespace GF.DillyDally.WriteModel.Domain.Files
+namespace GF.DillyDally.Shared.Images
 {
-    internal class ImageFormatDetector
+    public class ImageFormatDetector
     {
-        internal static ImageFormat GetImageFormat(byte[] bytes)
+        public static ImageFormat GetImageFormat(byte[] bytes)
         {
             // see http://www.mikekunz.com/image_file_header.html  
             var bmp    = Encoding.ASCII.GetBytes("BM");     // BMP

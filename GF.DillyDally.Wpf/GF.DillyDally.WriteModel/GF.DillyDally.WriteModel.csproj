@@ -85,8 +85,6 @@
     <Compile Include="Domain\Files\Filedata.cs" />
     <Compile Include="Domain\Files\FileEntity.cs" />
     <Compile Include="Domain\Files\FileRepository.cs" />
-    <Compile Include="Domain\Files\ImageFormat.cs" />
-    <Compile Include="Domain\Files\ImageFormatDetector.cs" />
     <Compile Include="Domain\Lanes\Commands\CreateLaneResponse.cs" />
     <Compile Include="Domain\Rewards\CreateRewardResponse.cs" />
     <Compile Include="Domain\RunningNumbers\CreateRunningNumberCounterResponse.cs" />
@@ -160,6 +158,10 @@
     <ProjectReference Include="..\GF.DillyDally.Data.Sqlite\GF.DillyDally.Data.Sqlite.csproj">
       <Project>{cb0541c1-d36e-4e82-b1f8-d82520b80fd6}</Project>
       <Name>GF.DillyDally.Data.Sqlite</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GF.DillyDally.Shared\GF.DillyDally.Shared.csproj">
+      <Project>{cac4358f-f1af-49f5-9054-a6064abe235e}</Project>
+      <Name>GF.DillyDally.Shared</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

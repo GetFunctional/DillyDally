@@ -3,7 +3,8 @@ using GF.DillyDally.ReadModel.Repository.Entities;
 
 namespace GF.DillyDally.ReadModel.Repository
 {
-    public interface IFileRepository : IRepository<FileEntity>
+    public interface ITaskFileRepository : IRepository<TaskFileEntity>
     {
+
     }
 }

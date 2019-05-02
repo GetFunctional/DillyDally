@@ -10,6 +10,7 @@ namespace GF.DillyDally.Data.Sqlite.Repository.Base
         Task<List<T>> GetAllAsync(IDbConnection connection);
         Task<T> GetByIdAsync(IDbConnection connection, Guid id);
         Task<int> InsertAsync(IDbConnection connection, T entity);
+        Task<int> InsertMultipleAsync(IDbConnection connection, IList<T> entities);
         Task<bool> UpdateAsync(IDbConnection connection, T entity);
         Task<bool> DeleteAsync(IDbConnection connection, T entity);
     }

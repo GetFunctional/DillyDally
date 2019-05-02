@@ -5,6 +5,7 @@ using System.Security.Cryptography;
 using System.Threading;
 using System.Threading.Tasks;
 using GF.DillyDally.Data.Sqlite;
+using GF.DillyDally.Shared.Images;
 using GF.DillyDally.WriteModel.Domain.Files.Commands;
 using GF.DillyDally.WriteModel.Infrastructure;
 using MediatR;

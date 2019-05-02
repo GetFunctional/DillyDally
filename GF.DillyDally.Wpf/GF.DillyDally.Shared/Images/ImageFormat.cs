@@ -1,6 +1,6 @@
-﻿namespace GF.DillyDally.WriteModel.Domain.Files
+﻿namespace GF.DillyDally.Shared.Images
 {
-    internal enum ImageFormat
+    public enum ImageFormat
     {
         Unknown = 0,
         Bmp = 1,
