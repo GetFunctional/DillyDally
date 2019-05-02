@@ -16,7 +16,10 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Rewards
 
         public AccountsViewModel ViewModel
         {
-            get { return (AccountsViewModel) this.DataContext; }
+            get
+            {
+                return (AccountsViewModel)this.DataContext;
+            }
         }
 
         #endregion

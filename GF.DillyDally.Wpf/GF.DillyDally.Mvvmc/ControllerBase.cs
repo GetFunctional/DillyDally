@@ -14,7 +14,10 @@
 
         IViewModel IController.ViewModel
         {
-            get { return this.ViewModel; }
+            get
+            {
+                return this.ViewModel;
+            }
         }
 
         #endregion

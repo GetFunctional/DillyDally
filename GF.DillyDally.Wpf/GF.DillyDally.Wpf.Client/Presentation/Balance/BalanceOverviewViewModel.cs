@@ -9,8 +9,14 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Balance
 
         public ObservableCollection<AccountBalanceViewModel> AccountBalances
         {
-            get { return this._accountBalances; }
-            set { this.SetField(ref this._accountBalances, value); }
+            get
+            {
+                return this._accountBalances;
+            }
+            set
+            {
+                this.SetField(ref this._accountBalances, value);
+            }
         }
     }
 }

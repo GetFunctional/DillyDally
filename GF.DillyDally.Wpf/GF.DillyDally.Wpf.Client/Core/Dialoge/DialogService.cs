@@ -71,7 +71,7 @@ namespace GF.DillyDally.Wpf.Client.Core.Dialoge
             var defaultDialogCommand =
                 new DialogCommandViewModel(defaultDialogResult, dialogWindowResultAssignCommand, true);
             var otherDialogCommands = dialogResults.Except(defaultDialogResult.Yield())
-                .Select(x => new DialogCommandViewModel(x, dialogWindowResultAssignCommand, false)).ToList();
+                .Select(x => new DialogCommandViewModel(x, dialogWindowResultAssignCommand)).ToList();
             dialogCommands.Add(defaultDialogCommand);
             dialogCommands.AddRange(otherDialogCommands);
             return dialogCommands;

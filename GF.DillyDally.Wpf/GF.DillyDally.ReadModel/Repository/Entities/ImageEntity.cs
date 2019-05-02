@@ -1,5 +1,6 @@
 ﻿using System;
 using Dapper.Contrib.Extensions;
+using GF.DillyDally.Shared.Images;
 
 namespace GF.DillyDally.ReadModel.Repository.Entities
 {

@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 
 namespace GF.DillyDally.WriteModel.Domain.Tasks.Exceptions
 {

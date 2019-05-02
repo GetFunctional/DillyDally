@@ -1,10 +1,9 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations.Schema;
 using Dapper.Contrib.Extensions;
 
 namespace GF.DillyDally.ReadModel.Repository.Entities
 {
-    [Dapper.Contrib.Extensions.Table(TableNameConstant)]
+    [Table(TableNameConstant)]
     public class CategoryEntity
     {
         public const string TableNameConstant = "Categories";

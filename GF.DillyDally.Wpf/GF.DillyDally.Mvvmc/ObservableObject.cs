@@ -71,7 +71,8 @@ namespace GF.DillyDally.Mvvmc
             return this.SetField(ref field, value, expression, null);
         }
 
-        protected bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
+        protected bool SetField<T>(ref T field, T value, [CallerMemberName]
+            string propertyName = null)
         {
             return this.SetField(ref field, value, propertyName, null);
         }
@@ -86,7 +87,8 @@ namespace GF.DillyDally.Mvvmc
             return comparer.Equals(field, value);
         }
 
-        protected void RaisePropertyChanging([CallerMemberName] string propertyName = null)
+        protected void RaisePropertyChanging([CallerMemberName]
+            string propertyName = null)
         {
             var handler = PropertyChanging;
             if (handler != null)
@@ -109,7 +111,8 @@ namespace GF.DillyDally.Mvvmc
             }
         }
 
-        protected virtual void RaisePropertyChanged([CallerMemberName] string propertyName = null)
+        protected virtual void RaisePropertyChanged([CallerMemberName]
+            string propertyName = null)
         {
             var handler = PropertyChanged;
             if (handler != null)

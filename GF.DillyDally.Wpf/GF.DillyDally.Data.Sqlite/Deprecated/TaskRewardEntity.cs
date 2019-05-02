@@ -32,13 +32,19 @@ namespace GF.DillyDally.Data.Sqlite.Deprecated
         [Computed]
         public TaskRewardKey TaskRewardKey
         {
-            get { return this._taskRewardKey ?? (this._taskRewardKey = new TaskRewardKey(this.TaskRewardId)); }
+            get
+            {
+                return this._taskRewardKey ?? (this._taskRewardKey = new TaskRewardKey(this.TaskRewardId));
+            }
         }
 
         [Computed]
         public TaskKey TaskKey
         {
-            get { return this._taskKey ?? (this._taskKey = new TaskKey(this.TaskId)); }
+            get
+            {
+                return this._taskKey ?? (this._taskKey = new TaskKey(this.TaskId));
+            }
             set
             {
                 this._taskKey = value;
@@ -49,7 +55,10 @@ namespace GF.DillyDally.Data.Sqlite.Deprecated
         [Computed]
         public RewardKey RewardKey
         {
-            get { return this._rewardKey ?? (this._rewardKey = new RewardKey(this.RewardId)); }
+            get
+            {
+                return this._rewardKey ?? (this._rewardKey = new RewardKey(this.RewardId));
+            }
             set
             {
                 this._rewardKey = value;

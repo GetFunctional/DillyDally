@@ -1,7 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Threading;
 using DevExpress.Xpf.Core;
-using GF.DillyDally.Data.Sqlite;
 using GF.DillyDally.Mvvmc;
 using GF.DillyDally.Wpf.Client.Core;
 using GF.DillyDally.Wpf.Client.Presentation;
@@ -35,7 +34,6 @@ namespace GF.DillyDally.Wpf.Client
             this._dillyDallyApplication.ShowUi();
         }
 
-      
 
         private DillyDallyApplication CreateDillyDallyApplication(ServiceContainer serviceContainer)
         {
@@ -61,7 +59,7 @@ namespace GF.DillyDally.Wpf.Client
         private ServiceContainer CreateDependencyInjectionContainer()
         {
             return new ServiceContainer(new ContainerOptions
-                {EnablePropertyInjection = false, EnableVariance = false});
+                                        {EnablePropertyInjection = false, EnableVariance = false});
         }
     }
 }

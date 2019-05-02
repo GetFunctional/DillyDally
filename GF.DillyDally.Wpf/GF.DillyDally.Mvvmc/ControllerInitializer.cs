@@ -8,7 +8,7 @@ namespace GF.DillyDally.Mvvmc
     {
         public void InitializeController(IController controller)
         {
-            InitializeInternal((InitializationBase) controller);
+            InitializeInternal((InitializationBase)controller);
         }
 
         private static void InitializeInternal(InitializationBase initializeComponent)

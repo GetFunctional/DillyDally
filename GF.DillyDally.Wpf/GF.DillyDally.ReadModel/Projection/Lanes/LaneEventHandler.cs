@@ -25,14 +25,14 @@ namespace GF.DillyDally.ReadModel.Projection.Lanes
             {
                 var laneRepository = new LaneRepository();
                 await laneRepository.InsertAsync(connection, new LaneEntity
-                {
-                    LaneId = notification.AggregateId,
-                    Name = notification.Name,
-                    IsCompletedLane = notification.IsCompletedLane,
-                    IsRejectedLane = notification.IsRejectedLane,
-                    ColorCode = notification.ColorCode,
-                    RunningNumberId = notification.RunningNumberId
-                });
+                                                             {
+                                                                 LaneId = notification.AggregateId,
+                                                                 Name = notification.Name,
+                                                                 IsCompletedLane = notification.IsCompletedLane,
+                                                                 IsRejectedLane = notification.IsRejectedLane,
+                                                                 ColorCode = notification.ColorCode,
+                                                                 RunningNumberId = notification.RunningNumberId
+                                                             });
             }
         }
 

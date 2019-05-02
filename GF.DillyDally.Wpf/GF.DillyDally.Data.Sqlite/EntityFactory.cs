@@ -22,11 +22,11 @@ namespace GF.DillyDally.Data.Sqlite
             }
 
             return new AccountBalanceEntity
-            {
-                CurrencyKey = currencyKey,
-                AccountName = accountName,
-                AccountBalanceId = this._guidGenerator.GenerateGuid()
-            };
+                   {
+                       CurrencyKey = currencyKey,
+                       AccountName = accountName,
+                       AccountBalanceId = this._guidGenerator.GenerateGuid()
+                   };
         }
 
 
@@ -39,12 +39,12 @@ namespace GF.DillyDally.Data.Sqlite
             }
 
             return new AccountBalanceTransactionEntity
-            {
-                AccountBalanceTransactionId = this._guidGenerator.GenerateGuid(),
-                CurrencyKey = currencyKey,
-                Amount = amount,
-                AccountBalanceKey = accountKey
-            };
+                   {
+                       AccountBalanceTransactionId = this._guidGenerator.GenerateGuid(),
+                       CurrencyKey = currencyKey,
+                       Amount = amount,
+                       AccountBalanceKey = accountKey
+                   };
         }
 
         public CurrencyEntity CreateCurrencyEntity(string name, string code)
@@ -55,11 +55,11 @@ namespace GF.DillyDally.Data.Sqlite
             }
 
             return new CurrencyEntity
-            {
-                CurrencyId = this._guidGenerator.GenerateGuid(),
-                Name = name,
-                Code = code
-            };
+                   {
+                       CurrencyId = this._guidGenerator.GenerateGuid(),
+                       Name = name,
+                       Code = code
+                   };
         }
 
         public RewardEntity CreateReward(CurrencyKey currencyKey, Rarity rarity,
@@ -73,16 +73,16 @@ namespace GF.DillyDally.Data.Sqlite
             }
 
             return new RewardEntity
-            {
-                RewardId = this._guidGenerator.GenerateGuid(),
-                CurrencyKey = currencyKey,
-                Rarity = rarity,
-                Name = rewardTemplateName,
-                AmountRangeBegin = randomValueRangeBegin,
-                AmountRangeEnd = randomValueRangeEnd,
-                ExcludeFromRandomization = excludeFromRandomization,
-                ExcludeFromLootboxRandomization = excludeFromLootboxRandomization
-            };
+                   {
+                       RewardId = this._guidGenerator.GenerateGuid(),
+                       CurrencyKey = currencyKey,
+                       Rarity = rarity,
+                       Name = rewardTemplateName,
+                       AmountRangeBegin = randomValueRangeBegin,
+                       AmountRangeEnd = randomValueRangeEnd,
+                       ExcludeFromRandomization = excludeFromRandomization,
+                       ExcludeFromLootboxRandomization = excludeFromLootboxRandomization
+                   };
         }
 
         public TaskEntity CreateTaskEntity(string initialName, TaskType taskType)
@@ -93,37 +93,37 @@ namespace GF.DillyDally.Data.Sqlite
             }
 
             return new TaskEntity
-            {
-                TaskId = this._guidGenerator.GenerateGuid(),
-                Name = initialName,
-                TaskType = taskType,
-                CreatedOn = DateTime.Now
-            };
+                   {
+                       TaskId = this._guidGenerator.GenerateGuid(),
+                       Name = initialName,
+                       TaskType = taskType,
+                       CreatedOn = DateTime.Now
+                   };
         }
 
         public TaskEntity CreateTaskEntityForInsert(TaskKey taskKey, string taskDescription, TaskType taskType,
             DateTime? taskDueDate, string taskName)
         {
             return new TaskEntity
-            {
-                TaskId = taskKey.TaskId,
-                Name = taskName,
-                TaskType = taskType,
-                CreatedOn = DateTime.Now,
-                Description = taskDescription
-            };
+                   {
+                       TaskId = taskKey.TaskId,
+                       Name = taskName,
+                       TaskType = taskType,
+                       CreatedOn = DateTime.Now,
+                       Description = taskDescription
+                   };
         }
 
         public TaskRewardEntity CreateTaskReward(RewardKey rewardKey, TaskRewardKey taskRewardKey, TaskKey taskKey,
             int amount)
         {
             return new TaskRewardEntity
-            {
-                TaskKey = taskKey,
-                Amount = amount,
-                RewardKey = rewardKey,
-                TaskRewardId = taskRewardKey.TaskRewardId
-            };
+                   {
+                       TaskKey = taskKey,
+                       Amount = amount,
+                       RewardKey = rewardKey,
+                       TaskRewardId = taskRewardKey.TaskRewardId
+                   };
         }
     }
 }

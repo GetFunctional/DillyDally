@@ -1,6 +1,5 @@
 ﻿using System;
 using GF.DillyDally.WriteModel.Domain.Categories.Events;
-using GF.DillyDally.WriteModel.Domain.Lanes;
 using GF.DillyDally.WriteModel.Domain.Lanes.Exceptions;
 using GF.DillyDally.WriteModel.Infrastructure;
 
@@ -35,7 +34,7 @@ namespace GF.DillyDally.WriteModel.Domain.Categories
             return colorCode.StartsWith("#") && colorCode.Length == 7 || colorCode.Length == 9;
         }
 
-        internal static IAggregateRoot Create(Guid categoryId,Guid runningNumberId, string name, string colorCode)
+        internal static IAggregateRoot Create(Guid categoryId, Guid runningNumberId, string name, string colorCode)
         {
             if (!ValidateColorCode(colorCode))
             {

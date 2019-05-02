@@ -51,7 +51,7 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks
                 return false;
             }
 
-            return this.Equals((TaskLink) obj);
+            return this.Equals((TaskLink)obj);
         }
 
         public override int GetHashCode()

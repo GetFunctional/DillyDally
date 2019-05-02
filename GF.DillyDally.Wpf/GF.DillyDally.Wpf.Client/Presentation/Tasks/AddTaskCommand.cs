@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using DevExpress.Mvvm;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Tasks

@@ -39,7 +39,10 @@ namespace GF.DillyDally.Data.Sqlite.Deprecated
         [Computed]
         public CurrencyKey CurrencyKey
         {
-            get { return this._currencyKey ?? (this._currencyKey = new CurrencyKey(this.CurrencyId)); }
+            get
+            {
+                return this._currencyKey ?? (this._currencyKey = new CurrencyKey(this.CurrencyId));
+            }
             set
             {
                 this._currencyKey = value;
@@ -63,9 +66,10 @@ namespace GF.DillyDally.Data.Sqlite.Deprecated
         [Column("ExcludeFromRandomization")]
         public bool ExcludeFromRandomization { get; set; }
 
-        
+
         [Column("ExcludeFromLootboxRandomization")]
         public bool ExcludeFromLootboxRandomization { get; set; }
+
         #endregion
     }
 }

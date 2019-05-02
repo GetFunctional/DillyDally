@@ -10,8 +10,14 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Common.Currencies
 
         public AddNewCurrencyCommand AddNewCurrencyCommand
         {
-            get { return this._addNewCurrencyCommand; }
-            set { this.SetField(ref this._addNewCurrencyCommand, value); }
+            get
+            {
+                return this._addNewCurrencyCommand;
+            }
+            set
+            {
+                this.SetField(ref this._addNewCurrencyCommand, value);
+            }
         }
     }
 }

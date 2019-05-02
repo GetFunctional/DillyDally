@@ -24,7 +24,10 @@ namespace GF.DillyDally.Wpf.Client.Handler
                     {
                         return this._dillyDallyApplication.NavigateInCurrentNavigatorTo(request.NavigationTarget);
                     }, cancellationToken)
-                .ContinueWith(t => { return new NavigationResponse(t.Result); }, cancellationToken);
+                .ContinueWith(t =>
+                {
+                    return new NavigationResponse(t.Result);
+                }, cancellationToken);
         }
 
         #endregion

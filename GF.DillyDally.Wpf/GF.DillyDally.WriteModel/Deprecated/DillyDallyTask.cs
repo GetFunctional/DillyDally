@@ -28,7 +28,10 @@ namespace GF.DillyDally.WriteModel.Deprecated
 
         public IReadOnlyList<ITaskReward> Rewards
         {
-            get { return this._rewards; }
+            get
+            {
+                return this._rewards;
+            }
         }
 
         public void AddReward(ITaskReward taskReward)

@@ -102,7 +102,7 @@ namespace GF.DillyDally.WriteModel.Infrastructure
             //}
             //else
             //{
-            stream = this._eventStore.OpenStream(aggregateId, 0, int.MaxValue);
+            stream = this._eventStore.OpenStream(aggregateId, 0);
             //}
             return stream;
         }
@@ -145,7 +145,7 @@ namespace GF.DillyDally.WriteModel.Infrastructure
             var result = new TResult();
             foreach (var eventMessage in eventMessages)
             {
-                result.ApplyEvent((IAggregateEvent) eventMessage.Body);
+                result.ApplyEvent((IAggregateEvent)eventMessage.Body);
             }
 
             return result;

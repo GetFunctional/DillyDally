@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Data;
 using Dapper;
 
 namespace GF.DillyDally.Data.Sqlite
 {
     public class DatabaseUpdater
     {
-        private readonly SqlScriptSelector _sqlScriptSelector;
         private readonly DatabaseFileHandler _databaseFileHandler;
+        private readonly SqlScriptSelector _sqlScriptSelector;
 
         public DatabaseUpdater(SqlScriptSelector sqlScriptSelector, DatabaseFileHandler databaseFileHandler)
         {

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using GF.DillyDally.Data.Sqlite;
 using GF.DillyDally.WriteModel.Domain.Categories;
@@ -33,7 +32,8 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks
             using (var connection = this._databaseFileHandler.OpenConnection())
             {
                 var fileCreateCommand = new StoreFileCommand(request.FilePath);
-                var fileInStore = await FileCommandHandler.GetOrCreateFileAsync(fileCreateCommand, this.AggregateRepository, connection, this.GuidGenerator, new FileRepository());
+                var fileInStore = await FileCommandHandler.GetOrCreateFileAsync(fileCreateCommand, this.AggregateRepository, connection, this.GuidGenerator,
+                    new FileRepository());
 
                 var task = this.AggregateRepository.GetById<TaskAggregateRoot>(request.TaskId);
                 task.AttachFile(fileInStore.FileId);

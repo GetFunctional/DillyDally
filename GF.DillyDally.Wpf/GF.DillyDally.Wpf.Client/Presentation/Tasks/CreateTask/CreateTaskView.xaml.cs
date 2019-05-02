@@ -16,7 +16,10 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Tasks.CreateTask
 
         public CreateTaskViewModel ViewModel
         {
-            get { return (CreateTaskViewModel) this.DataContext; }
+            get
+            {
+                return (CreateTaskViewModel)this.DataContext;
+            }
         }
 
         #endregion

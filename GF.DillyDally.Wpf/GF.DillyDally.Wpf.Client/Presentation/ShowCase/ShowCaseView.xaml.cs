@@ -16,7 +16,10 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ShowCase
 
         public ShowCaseViewModel ViewModel
         {
-            get { return (ShowCaseViewModel) this.DataContext; }
+            get
+            {
+                return (ShowCaseViewModel)this.DataContext;
+            }
         }
 
         #endregion

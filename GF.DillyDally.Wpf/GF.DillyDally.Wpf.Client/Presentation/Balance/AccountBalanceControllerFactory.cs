@@ -1,5 +1,4 @@
-﻿using GF.DillyDally.Data.Contracts.Entities;
-using GF.DillyDally.Mvvmc;
+﻿using GF.DillyDally.Mvvmc;
 using GF.DillyDally.Wpf.Client.Presentation.Common;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Balance

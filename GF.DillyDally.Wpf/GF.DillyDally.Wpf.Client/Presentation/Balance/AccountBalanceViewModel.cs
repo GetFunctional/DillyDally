@@ -5,8 +5,8 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Balance
 {
     public sealed class AccountBalanceViewModel : ViewModelBase
     {
-        private decimal _balance;
         private string _accountName;
+        private decimal _balance;
 
         public AccountBalanceViewModel(CurrencyViewModel currency) : this(currency, 0.0m)
         {
@@ -20,14 +20,26 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Balance
 
         public string AccountName
         {
-            get { return this._accountName; }
-            set { this.SetField(ref this._accountName, value); }
+            get
+            {
+                return this._accountName;
+            }
+            set
+            {
+                this.SetField(ref this._accountName, value);
+            }
         }
 
         public decimal Balance
         {
-            get { return this._balance; }
-            set { this.SetField(ref this._balance, value); }
+            get
+            {
+                return this._balance;
+            }
+            set
+            {
+                this.SetField(ref this._balance, value);
+            }
         }
 
         public CurrencyViewModel Currency { get; }

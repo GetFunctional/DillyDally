@@ -14,7 +14,7 @@ namespace GF.DillyDally.Mvvmc
 
         public IController CreateController(Type controllerType)
         {
-            var controller = (IController) this._mvvmcServiceFactory(controllerType);
+            var controller = (IController)this._mvvmcServiceFactory(controllerType);
             this._controllerInitializer.InitializeController(controller);
 
             return controller;

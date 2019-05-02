@@ -3,7 +3,7 @@ using GF.DillyDally.ReadModel.Repository.Entities;
 
 namespace GF.DillyDally.ReadModel.Repository
 {
-    class TaskFileRepository : Repository<TaskFileEntity>, ITaskFileRepository
+    internal class TaskFileRepository : Repository<TaskFileEntity>, ITaskFileRepository
     {
     }
 }

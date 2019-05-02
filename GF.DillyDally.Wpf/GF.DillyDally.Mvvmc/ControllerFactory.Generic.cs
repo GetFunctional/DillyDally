@@ -11,7 +11,7 @@
 
         public TController CreateController()
         {
-            return (TController) this._nonGenericControllerFactory.CreateController(typeof(TController));
+            return (TController)this._nonGenericControllerFactory.CreateController(typeof(TController));
         }
     }
 }

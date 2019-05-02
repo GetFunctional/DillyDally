@@ -1,8 +1,6 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Drawing;
 using System.IO;
-using GF.DillyDally.ReadModel.Repository.Entities;
 
 namespace GF.DillyDally.Shared.Images
 {

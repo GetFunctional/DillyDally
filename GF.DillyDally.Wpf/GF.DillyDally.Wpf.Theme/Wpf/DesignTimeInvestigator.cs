@@ -16,7 +16,7 @@ namespace GF.DillyDally.Wpf.Theme.Wpf
         {
             get
             {
-                return (bool) DesignerProperties.IsInDesignModeProperty.GetMetadata(typeof(DependencyObject))
+                return (bool)DesignerProperties.IsInDesignModeProperty.GetMetadata(typeof(DependencyObject))
                     .DefaultValue;
             }
         }

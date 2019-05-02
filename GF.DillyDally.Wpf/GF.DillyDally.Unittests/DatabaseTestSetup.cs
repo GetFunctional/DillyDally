@@ -54,18 +54,18 @@ namespace GF.DillyDally.Unittests
             var commandDispatcher = this._diContainer.GetInstance<IMediator>();
 
             var data = new List<Tuple<string, string>>
-            {
-                new Tuple<string, string>("Gaming", "#0C53BD"),
-                new Tuple<string, string>("Fitness", "#0C53BD"),
-                new Tuple<string, string>("Haushalt", "#0C53BD"),
-                new Tuple<string, string>("Essen", "#0C53BD"),
-                new Tuple<string, string>("Do it yourself", "#0C53BD"),
-                new Tuple<string, string>("Beziehung", "#0C53BD"),
-                new Tuple<string, string>("Neuer Horizont", "#0C53BD"),
-                new Tuple<string, string>("Notwendiges", "#0C53BD"),
-                new Tuple<string, string>("Programming", "#0C53BD"),
-                new Tuple<string, string>("Lifestyle", "#0C53BD")
-            };
+                       {
+                           new Tuple<string, string>("Gaming", "#0C53BD"),
+                           new Tuple<string, string>("Fitness", "#0C53BD"),
+                           new Tuple<string, string>("Haushalt", "#0C53BD"),
+                           new Tuple<string, string>("Essen", "#0C53BD"),
+                           new Tuple<string, string>("Do it yourself", "#0C53BD"),
+                           new Tuple<string, string>("Beziehung", "#0C53BD"),
+                           new Tuple<string, string>("Neuer Horizont", "#0C53BD"),
+                           new Tuple<string, string>("Notwendiges", "#0C53BD"),
+                           new Tuple<string, string>("Programming", "#0C53BD"),
+                           new Tuple<string, string>("Lifestyle", "#0C53BD")
+                       };
 
             var createdIds = new List<Guid>();
             foreach (var category in data)
@@ -82,15 +82,15 @@ namespace GF.DillyDally.Unittests
             var commandDispatcher = this._diContainer.GetInstance<IMediator>();
 
             var data = new List<Tuple<string, string, bool, bool>>
-            {
-                new Tuple<string, string, bool, bool>("Backlog Level 3", "#0C53BD", false, false),
-                new Tuple<string, string, bool, bool>("Backlog Level 2", "#0C53BD", false, false),
-                new Tuple<string, string, bool, bool>("Backlog Level 1", "#0C53BD", false, false),
-                new Tuple<string, string, bool, bool>("Pending", "#0C53BD", false, false),
-                new Tuple<string, string, bool, bool>("Rejected", "#0C53BD", false, true),
-                new Tuple<string, string, bool, bool>("Infinite", "#0C53BD", false, false),
-                new Tuple<string, string, bool, bool>("Done", "#0C53BD", true, false)
-            };
+                       {
+                           new Tuple<string, string, bool, bool>("Backlog Level 3", "#0C53BD", false, false),
+                           new Tuple<string, string, bool, bool>("Backlog Level 2", "#0C53BD", false, false),
+                           new Tuple<string, string, bool, bool>("Backlog Level 1", "#0C53BD", false, false),
+                           new Tuple<string, string, bool, bool>("Pending", "#0C53BD", false, false),
+                           new Tuple<string, string, bool, bool>("Rejected", "#0C53BD", false, true),
+                           new Tuple<string, string, bool, bool>("Infinite", "#0C53BD", false, false),
+                           new Tuple<string, string, bool, bool>("Done", "#0C53BD", true, false)
+                       };
 
             var createdIds = new List<Guid>();
             foreach (var lane in data)
@@ -107,12 +107,12 @@ namespace GF.DillyDally.Unittests
             var commandDispatcher = this._diContainer.GetInstance<IMediator>();
 
             var data = new List<Tuple<string, string>>
-            {
-                new Tuple<string, string>("Gaming Time", "min."),
-                new Tuple<string, string>("Gaming Credits", "€"),
-                new Tuple<string, string>("Days off", "Tage"),
-                new Tuple<string, string>("Hearthstone Matches", "Matches")
-            };
+                       {
+                           new Tuple<string, string>("Gaming Time", "min."),
+                           new Tuple<string, string>("Gaming Credits", "€"),
+                           new Tuple<string, string>("Days off", "Tage"),
+                           new Tuple<string, string>("Hearthstone Matches", "Matches")
+                       };
 
             var createdIds = new List<Guid>();
             foreach (var lane in data)

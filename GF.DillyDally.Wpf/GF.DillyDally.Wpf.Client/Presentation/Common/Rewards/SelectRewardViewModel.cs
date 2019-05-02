@@ -13,7 +13,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Common.Rewards
             this.Rarity = rarity;
         }
 
-        public RewardKey RewardKey { get;}
+        public RewardKey RewardKey { get; }
 
         public string Name { get; }
 

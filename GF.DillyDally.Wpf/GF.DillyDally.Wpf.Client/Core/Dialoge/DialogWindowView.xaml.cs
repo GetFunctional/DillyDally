@@ -16,7 +16,10 @@ namespace GF.DillyDally.Wpf.Client.Core.Dialoge
 
         public DialogWindowViewModel ViewModel
         {
-            get { return (DialogWindowViewModel) this.DataContext; }
+            get
+            {
+                return (DialogWindowViewModel)this.DataContext;
+            }
         }
 
         #endregion

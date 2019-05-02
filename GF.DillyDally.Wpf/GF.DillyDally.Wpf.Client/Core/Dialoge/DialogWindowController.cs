@@ -11,14 +11,26 @@ namespace GF.DillyDally.Wpf.Client.Core.Dialoge
 
         public IViewModel Content
         {
-            get { return this.ViewModel.Content; }
-            set { this.ViewModel.Content = value; }
+            get
+            {
+                return this.ViewModel.Content;
+            }
+            set
+            {
+                this.ViewModel.Content = value;
+            }
         }
 
         public IList<DialogCommandViewModel> DialogCommands
         {
-            get { return this.ViewModel.DialogCommands; }
-            set { this.ViewModel.DialogCommands = value; }
+            get
+            {
+                return this.ViewModel.DialogCommands;
+            }
+            set
+            {
+                this.ViewModel.DialogCommands = value;
+            }
         }
 
         public IDialogResult SelectedDialogResult { get; private set; }

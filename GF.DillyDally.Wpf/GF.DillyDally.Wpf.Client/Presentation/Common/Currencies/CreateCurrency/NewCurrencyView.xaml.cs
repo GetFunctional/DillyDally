@@ -16,7 +16,10 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Common.Currencies.CreateCurrency
 
         public NewCurrencyViewModel ViewModel
         {
-            get { return (NewCurrencyViewModel) this.DataContext; }
+            get
+            {
+                return (NewCurrencyViewModel)this.DataContext;
+            }
         }
 
         #endregion

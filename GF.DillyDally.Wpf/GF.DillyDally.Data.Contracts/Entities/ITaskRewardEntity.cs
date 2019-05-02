@@ -14,6 +14,5 @@ namespace GF.DillyDally.Data.Contracts.Entities
         decimal? Amount { get; set; }
 
         DateTime? ClaimedOn { get; set; }
-
     }
 }

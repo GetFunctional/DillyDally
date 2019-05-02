@@ -10,6 +10,7 @@ namespace GF.DillyDally.ReadModel.Repository.Entities
 
         [ExplicitKey]
         public Guid AchievementCompletionId { get; set; }
+
         public Guid AchievementId { get; set; }
         public DateTime CompletedOn { get; set; }
         public int Storypoints { get; set; }

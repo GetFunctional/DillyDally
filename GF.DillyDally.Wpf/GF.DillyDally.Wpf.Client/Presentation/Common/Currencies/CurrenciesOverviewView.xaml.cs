@@ -16,7 +16,10 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Common.Currencies
 
         public CurrenciesOverviewViewModel ViewModel
         {
-            get { return (CurrenciesOverviewViewModel) this.DataContext; }
+            get
+            {
+                return (CurrenciesOverviewViewModel)this.DataContext;
+            }
         }
 
         #endregion

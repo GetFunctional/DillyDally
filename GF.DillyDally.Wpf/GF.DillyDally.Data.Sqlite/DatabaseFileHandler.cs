@@ -73,11 +73,11 @@ namespace GF.DillyDally.Data.Sqlite
         private string BuildConnectionString(string fullDatabaseFilePath)
         {
             var builder = new SQLiteConnectionStringBuilder
-            {
-                DataSource = fullDatabaseFilePath,
-                Version = 3,
-                BinaryGUID = true
-            };
+                          {
+                              DataSource = fullDatabaseFilePath,
+                              Version = 3,
+                              BinaryGUID = true
+                          };
 
             return builder.ConnectionString;
         }

@@ -46,7 +46,7 @@ namespace GF.DillyDally.Data.Contracts.Entities.Keys
                 return false;
             }
 
-            return this.Equals((CurrencyKey) obj);
+            return this.Equals((CurrencyKey)obj);
         }
 
         public override int GetHashCode()

@@ -17,7 +17,10 @@ namespace GF.DillyDally.Wpf.Client.Core.Dialoge
 
         public string Content
         {
-            get { return this.DialogResult.DisplayContent; }
+            get
+            {
+                return this.DialogResult.DisplayContent;
+            }
         }
 
         public bool IsDefault { get; }

@@ -10,7 +10,7 @@
         }
 
         public string DatabaseName { get; }
-        public bool EnforceRecreationOfDatabase { get;  }
+        public bool EnforceRecreationOfDatabase { get; }
         public bool UpdateDatabase { get; }
     }
 }

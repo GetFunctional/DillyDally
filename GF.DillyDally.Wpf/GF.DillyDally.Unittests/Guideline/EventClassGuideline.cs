@@ -36,7 +36,6 @@ namespace GF.DillyDally.Unittests.Guideline
                 if (parameters.First().ParameterType != typeof(Guid))
                 {
                     eventsDisregardingGuidelines.Add(eventImplementation);
-                    continue;
                 }
             }
 

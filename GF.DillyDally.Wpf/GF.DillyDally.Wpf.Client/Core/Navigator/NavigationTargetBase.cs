@@ -12,7 +12,10 @@ namespace GF.DillyDally.Wpf.Client.Core.Navigator
 
         public Type NavigationTargetControllerType
         {
-            get { return typeof(TController); }
+            get
+            {
+                return typeof(TController);
+            }
         }
 
 

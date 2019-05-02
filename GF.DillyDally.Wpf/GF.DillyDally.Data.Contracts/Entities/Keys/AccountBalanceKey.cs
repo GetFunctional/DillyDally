@@ -46,7 +46,7 @@ namespace GF.DillyDally.Data.Contracts.Entities.Keys
                 return false;
             }
 
-            return this.Equals((AccountBalanceKey) obj);
+            return this.Equals((AccountBalanceKey)obj);
         }
 
         public override int GetHashCode()

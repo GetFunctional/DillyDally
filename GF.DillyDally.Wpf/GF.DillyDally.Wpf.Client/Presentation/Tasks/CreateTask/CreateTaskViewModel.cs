@@ -29,7 +29,10 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Tasks.CreateTask
 
         public IList<SelectRewardViewModel> AvailableRewards
         {
-            get { throw new NotImplementedException(); }
+            get
+            {
+                throw new NotImplementedException();
+            }
         }
     }
 }

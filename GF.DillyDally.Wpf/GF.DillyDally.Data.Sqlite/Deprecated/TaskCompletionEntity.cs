@@ -38,7 +38,10 @@ namespace GF.DillyDally.Data.Sqlite.Deprecated
         [Computed]
         public TaskKey TaskKey
         {
-            get { return this._taskKey ?? (this._taskKey = new TaskKey(this.TaskId)); }
+            get
+            {
+                return this._taskKey ?? (this._taskKey = new TaskKey(this.TaskId));
+            }
             set
             {
                 this._taskKey = value;

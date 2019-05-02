@@ -21,7 +21,7 @@ namespace GF.DillyDally.Wpf.Client.Core
         private readonly IServiceContainer _serviceContainer;
 
         public Bootstrapper(Application application) : this(application, new ServiceContainer(new ContainerOptions
-            {EnablePropertyInjection = false, EnableVariance = false}))
+                                                                                              {EnablePropertyInjection = false, EnableVariance = false}))
         {
         }
 
@@ -37,7 +37,7 @@ namespace GF.DillyDally.Wpf.Client.Core
         {
             var serviceContainer = this._serviceContainer;
 
-            this._dataBootstrapper.Run(new InitializationSettings(DefaultDatabaseName, false,true));
+            this._dataBootstrapper.Run(new InitializationSettings(DefaultDatabaseName, false, true));
             this.RegisterMediatRFramework(serviceContainer);
             this.RegisterMvvmcDependencies(serviceContainer);
             this.RegisterControllersAndViewModels(serviceContainer);

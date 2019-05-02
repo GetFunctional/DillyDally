@@ -2,7 +2,6 @@
 using GF.DillyDally.Data.Contracts.Entities;
 using GF.DillyDally.Data.Contracts.Entities.Keys;
 using GF.DillyDally.Mvvmc;
-using GF.DillyDally.WriteModel;
 using GF.DillyDally.WriteModel.Deprecated;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Tasks.CreateTask
@@ -19,7 +18,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Tasks.CreateTask
 
         public void CreateNewTask(string initialName, TaskType requestTaskType)
         {
-            this._newTask = this._taskService.CreateNewTask(initialName,requestTaskType);
+            this._newTask = this._taskService.CreateNewTask(initialName, requestTaskType);
             var newTask = this._newTask;
             this.ViewModel.TaskKey = newTask.TaskKey;
             this.ViewModel.TaskName = newTask.Name;

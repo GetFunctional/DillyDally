@@ -10,6 +10,7 @@ namespace GF.DillyDally.ReadModel.Repository.Entities
 
         [ExplicitKey]
         public Guid AchievementId { get; set; }
+
         public string Name { get; set; }
         public int StoryPoints { get; set; }
         public int CounterIncrease { get; set; }

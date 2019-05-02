@@ -10,14 +10,26 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Tasks
 
         public ObservableCollection<TaskViewModel> Tasks
         {
-            get { return this._tasks; }
-            set { this.SetField(ref this._tasks, value); }
+            get
+            {
+                return this._tasks;
+            }
+            set
+            {
+                this.SetField(ref this._tasks, value);
+            }
         }
 
         public AddTaskCommand AddTaskCommand
         {
-            get { return this._addTaskCommand; }
-            set { this.SetField(ref this._addTaskCommand, value); }
+            get
+            {
+                return this._addTaskCommand;
+            }
+            set
+            {
+                this.SetField(ref this._addTaskCommand, value);
+            }
         }
     }
 }

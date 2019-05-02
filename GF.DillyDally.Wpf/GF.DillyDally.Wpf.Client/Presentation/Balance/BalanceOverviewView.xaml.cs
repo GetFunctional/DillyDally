@@ -16,7 +16,10 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Balance
 
         public BalanceOverviewViewModel ViewModel
         {
-            get { return (BalanceOverviewViewModel) this.DataContext; }
+            get
+            {
+                return (BalanceOverviewViewModel)this.DataContext;
+            }
         }
 
         #endregion

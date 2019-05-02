@@ -6,7 +6,6 @@ namespace GF.DillyDally.WriteModel.Infrastructure.Exceptions
     {
         public AggregateNotFoundException(Guid aggregateId) : base($"Aggregate {aggregateId} not found.")
         {
-            
         }
     }
 }

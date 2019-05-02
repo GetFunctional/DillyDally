@@ -5,6 +5,5 @@ namespace GF.DillyDally.ReadModel.Repository
 {
     public interface ICategoryRepository : IRepository<CategoryEntity>
     {
-
     }
 }

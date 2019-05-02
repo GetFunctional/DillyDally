@@ -20,7 +20,7 @@ namespace GF.DillyDally.Data.Contracts.Entities
 
         bool ExcludeFromRandomization { get; set; }
 
-        
+
         bool ExcludeFromLootboxRandomization { get; set; }
     }
 }

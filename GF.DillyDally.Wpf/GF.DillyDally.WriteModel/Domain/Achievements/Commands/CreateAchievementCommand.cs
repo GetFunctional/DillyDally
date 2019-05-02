@@ -1,6 +1,4 @@
-﻿using System;
-using GF.DillyDally.WriteModel.Infrastructure;
-using MediatR;
+﻿using MediatR;
 
 namespace GF.DillyDally.WriteModel.Domain.Achievements.Commands
 {
