@@ -1,13 +1,12 @@
 ﻿using System;
 using GF.DillyDally.WriteModel.Domain.Lanes.Events;
+using GF.DillyDally.WriteModel.Domain.Lanes.Exceptions;
 using GF.DillyDally.WriteModel.Infrastructure;
 
 namespace GF.DillyDally.WriteModel.Domain.Lanes
 {
     internal sealed class LaneAggregateRoot : AggregateRootBase
     {
-        public Guid RunningNumberId { get; }
-
         public LaneAggregateRoot()
         {
             this.RegisterTransition<LaneCreatedEvent>(this.Apply);
@@ -20,13 +19,11 @@ namespace GF.DillyDally.WriteModel.Domain.Lanes
                 throw new InvalidColorCodeGivenException(colorCode);
             }
 
-            this.RunningNumberId = runningNumberId;
-
             var creationEvent = new LaneCreatedEvent(laneId, runningNumberId, name, colorCode, isCompletedLane, isRejectedLane);
-            this.Apply(creationEvent);
             this.RaiseEvent(creationEvent);
         }
 
+        public Guid RunningNumberId { get; private set; }
         public string Name { get; private set; }
         public string ColorCode { get; private set; }
 
@@ -35,6 +32,7 @@ namespace GF.DillyDally.WriteModel.Domain.Lanes
             this.AggregateId = obj.AggregateId;
             this.Name = obj.Name;
             this.ColorCode = obj.ColorCode;
+            this.RunningNumberId = obj.RunningNumberId;
         }
 
         private bool ValidateColorCode(string colorCode)

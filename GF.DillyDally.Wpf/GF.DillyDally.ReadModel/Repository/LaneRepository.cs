@@ -1,13 +1,9 @@
-﻿using GF.DillyDally.Data.Sqlite;
-using GF.DillyDally.Data.Sqlite.Repository.Base;
+﻿using GF.DillyDally.Data.Sqlite.Repository.Base;
 using GF.DillyDally.ReadModel.Repository.Entities;
 
 namespace GF.DillyDally.ReadModel.Repository
 {
-    internal class LaneRepository : Repository<LaneEntity> , ILaneRepository
+    internal class LaneRepository : Repository<LaneEntity>, ILaneRepository
     {
-        public LaneRepository(DatabaseFileHandler fileHandler) : base(fileHandler)
-        {
-        }
     }
 }

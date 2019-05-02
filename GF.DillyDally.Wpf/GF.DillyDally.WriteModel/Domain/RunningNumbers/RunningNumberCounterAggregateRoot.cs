@@ -11,6 +11,7 @@ namespace GF.DillyDally.WriteModel.Domain.RunningNumbers
         public RunningNumberCounterAggregateRoot()
         {
             this.RegisterTransition<RunningNumberCounterCreatedEvent>(this.Apply);
+            this.RegisterTransition<AddNextNumberEvent>(this.Apply);
         }
 
         private RunningNumberCounterAggregateRoot(Guid runningNumberId, RunningNumberCounterArea counterArea,
@@ -19,7 +20,6 @@ namespace GF.DillyDally.WriteModel.Domain.RunningNumbers
         {
             var creationEvent =
                 new RunningNumberCounterCreatedEvent(runningNumberId, counterArea, prefix, initialNumber);
-            this.Apply(creationEvent);
             this.RaiseEvent(creationEvent);
         }
 
@@ -52,7 +52,7 @@ namespace GF.DillyDally.WriteModel.Domain.RunningNumbers
         {
             var nextNumberInRow = (this.Numbers.Any() ? this.Numbers.Max(x => x.Number) : 0) + 1;
             var nextNumberEvent = new AddNextNumberEvent(this.AggregateId, nextNumberId, this.Prefix, nextNumberInRow);
-            this.Apply(nextNumberEvent);
+            this.RaiseEvent(nextNumberEvent);
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GF.DillyDally.WriteModel.Domain.Tasks
+namespace GF.DillyDally.WriteModel.Domain.Tasks.Commands
 {
     public class CreateTaskResponse
     {

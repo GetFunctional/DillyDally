@@ -26,17 +26,20 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
         [Test]
         public async Task Creating_Category_ShouldCreateProjection()
         {
-            // Arrange
-            var commandDispatcher = this._infrastructureSetup.DiContainer.GetInstance<IMediator>();
-            var categoryRepository = this._infrastructureSetup.DiContainer.GetInstance<ICategoryRepository>();
+            using (var connection = this._infrastructureSetup.OpenDatabaseConnection())
+            {
+                // Arrange
+                var commandDispatcher = this._infrastructureSetup.DiContainer.GetInstance<IMediator>();
+                var categoryRepository = this._infrastructureSetup.DiContainer.GetInstance<ICategoryRepository>();
 
-            // Act
-            var categoryResponse = await commandDispatcher.Send(new CreateCategoryCommand("Test", "#123456"));
-            var categoryFromProjection = await categoryRepository.GetByIdAsync(categoryResponse.CategoryId);
+                // Act
+                var categoryResponse = await commandDispatcher.Send(new CreateCategoryCommand("Test", "#123456"));
+                var categoryFromProjection = await categoryRepository.GetByIdAsync(connection, categoryResponse.CategoryId);
 
-            // Assert
-            Assert.That(categoryResponse, Is.Not.EqualTo(Guid.Empty));
-            Assert.That(categoryFromProjection, Is.Not.Null);
+                // Assert
+                Assert.That(categoryResponse, Is.Not.EqualTo(Guid.Empty));
+                Assert.That(categoryFromProjection, Is.Not.Null);
+            }
         }
     }
 }

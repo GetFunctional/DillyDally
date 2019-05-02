@@ -11,12 +11,10 @@ namespace GF.DillyDally.ReadModel.Projection.Tasks
     internal sealed class TaskEventHandler : INotificationHandler<TaskCreatedEvent>
     {
         private readonly DatabaseFileHandler _fileHandler;
-        private readonly ITaskRepository _taskRepository;
 
-        public TaskEventHandler(DatabaseFileHandler fileHandler, ITaskRepository taskRepository)
+        public TaskEventHandler(DatabaseFileHandler fileHandler)
         {
             this._fileHandler = fileHandler;
-            this._taskRepository = taskRepository;
         }
 
         #region INotificationHandler<TaskCreatedEvent> Members
@@ -25,16 +23,17 @@ namespace GF.DillyDally.ReadModel.Projection.Tasks
         {
             using (var connection = this._fileHandler.OpenConnection())
             {
-                await this._taskRepository.InsertAsync(connection, new TaskEntity
-                {
-                    TaskId = notification.AggregateId,
-                    Name = notification.Name,
-                    CategoryId = notification.CategoryId,
-                    RunningNumberId = notification.RunningNumberId,
-                    CreatedOn = notification.CreatedOn,
-                    LaneId = notification.LaneId,
-                    PreviewImageId = notification.PreviewImageId
-                });
+                var taskRepository = new TaskRepository();
+                await taskRepository.InsertAsync(connection, new TaskEntity
+                                                             {
+                                                                 TaskId = notification.AggregateId,
+                                                                 Name = notification.Name,
+                                                                 CategoryId = notification.CategoryId,
+                                                                 RunningNumberId = notification.RunningNumberId,
+                                                                 CreatedOn = notification.CreatedOn,
+                                                                 LaneId = notification.LaneId,
+                                                                 PreviewImageId = notification.PreviewImageId
+                                                             });
             }
         }
 

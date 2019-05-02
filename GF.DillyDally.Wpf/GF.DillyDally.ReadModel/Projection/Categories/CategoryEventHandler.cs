@@ -10,13 +10,11 @@ namespace GF.DillyDally.ReadModel.Projection.Categories
 {
     internal sealed class CategoryEventHandler : INotificationHandler<CategoryCreatedEvent>
     {
-        private readonly ICategoryRepository _categoryRepository;
         private readonly DatabaseFileHandler _fileHandler;
 
-        public CategoryEventHandler(DatabaseFileHandler fileHandler, ICategoryRepository categoryRepository)
+        public CategoryEventHandler(DatabaseFileHandler fileHandler)
         {
             this._fileHandler = fileHandler;
-            this._categoryRepository = categoryRepository;
         }
 
         #region INotificationHandler<CategoryCreatedEvent> Members
@@ -25,13 +23,14 @@ namespace GF.DillyDally.ReadModel.Projection.Categories
         {
             using (var connection = this._fileHandler.OpenConnection())
             {
-                await this._categoryRepository.InsertAsync(connection, new CategoryEntity
-                {
-                    CategoryId = notification.AggregateId,
-                    Name = notification.Name,
-                    ColorCode = notification.ColorCode,
-                    RunningNumberId = notification.RunningNumberId
-                });
+                var categoryRepository = new CategoryRepository();
+                await categoryRepository.InsertAsync(connection, new CategoryEntity
+                                                                 {
+                                                                     CategoryId = notification.AggregateId,
+                                                                     Name = notification.Name,
+                                                                     ColorCode = notification.ColorCode,
+                                                                     RunningNumberId = notification.RunningNumberId
+                                                                 });
             }
         }
 

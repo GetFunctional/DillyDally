@@ -18,56 +18,13 @@ namespace GF.DillyDally.Data.Sqlite.Repository.Base
         private readonly string _primaryKeyName;
         private readonly string _tableName;
 
-        public Repository(DatabaseFileHandler fileHandler)
+        public Repository()
         {
             this._tableName = this.GetTableName();
             this._primaryKeyName = this.GetPrimaryKeyName();
-            this.FileHandler = fileHandler;
         }
-
-        protected DatabaseFileHandler FileHandler { get; }
 
         #region IRepository<T> Members
-
-        public async Task<List<T>> GetAllAsync()
-        {
-            using (var connection = await this.FileHandler.OpenConnectionAsync())
-            {
-                return await this.GetAllAsync(connection);
-            }
-        }
-
-        public async Task<T> GetByIdAsync(Guid id)
-        {
-            using (var connection = await this.FileHandler.OpenConnectionAsync())
-            {
-                return await this.GetByIdAsync(connection, id);
-            }
-        }
-
-        public async Task<int> InsertAsync(T entity)
-        {
-            using (var connection = await this.FileHandler.OpenConnectionAsync())
-            {
-                return await this.InsertAsync(connection, entity);
-            }
-        }
-
-        public async Task<bool> UpdateAsync(T entity)
-        {
-            using (var connection = await this.FileHandler.OpenConnectionAsync())
-            {
-                return await this.UpdateAsync(connection, entity);
-            }
-        }
-
-        public async Task<bool> DeleteAsync(T entity)
-        {
-            using (var connection = await this.FileHandler.OpenConnectionAsync())
-            {
-                return await this.DeleteAsync(connection, entity);
-            }
-        }
 
         public async Task<List<T>> GetAllAsync(IDbConnection connection)
         {

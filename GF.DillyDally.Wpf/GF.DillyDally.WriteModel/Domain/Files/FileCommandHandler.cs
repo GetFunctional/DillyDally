@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Data;
 using System.IO;
 using System.Security.Cryptography;
 using System.Threading;
 using System.Threading.Tasks;
+using GF.DillyDally.Data.Sqlite;
 using GF.DillyDally.WriteModel.Domain.Files.Commands;
 using GF.DillyDally.WriteModel.Infrastructure;
 using MediatR;
@@ -10,40 +12,61 @@ using MediatR;
 namespace GF.DillyDally.WriteModel.Domain.Files
 {
     internal sealed class FileCommandHandler : CommandHandlerBase,
-        IRequestHandler<CreateFileCommand, CreateFileResponse>
+        IRequestHandler<StoreFileCommand, StoreFileResponse>
     {
-        private readonly FileRepository _fileRepository;
+        private readonly DatabaseFileHandler _databaseFileHandler;
 
-        public FileCommandHandler(IAggregateRepository aggregateRepository, FileRepository fileRepository) : base(
+        public FileCommandHandler(IAggregateRepository aggregateRepository, DatabaseFileHandler databaseFileHandler) : base(
             aggregateRepository)
         {
-            this._fileRepository = fileRepository;
+            this._databaseFileHandler = databaseFileHandler;
         }
 
-        #region IRequestHandler<CreateFileCommand,CreateFileResponse> Members
+        #region IRequestHandler<StoreFileCommand,StoreFileResponse> Members
 
-        public async Task<CreateFileResponse> Handle(CreateFileCommand request, CancellationToken cancellationToken)
+        public async Task<StoreFileResponse> Handle(StoreFileCommand request, CancellationToken cancellationToken)
         {
-            // Load File
-            var fileDataToStore = await this.LoadFileAsync(request.FilePath);
-
-            if (fileDataToStore.IsNew)
+            using (var connection = this._databaseFileHandler.OpenConnection())
             {
-                // Store File first
-                var fileId = this.GuidGenerator.GenerateGuid();
-                //await this._fileRepository.InsertAsync()
+                return await GetOrCreateFileAsync(request, this.AggregateRepository, connection, this.GuidGenerator, new FileRepository());
             }
-
-
-            return new CreateFileResponse();
-            //var aggregate = FileAggregateRoot.Create(fileId, command.Name, command.ColorCode);
-            //this._aggregateRepository.Save(aggregate);
-            //return aggregate;
         }
 
         #endregion
 
-        private async Task<Filedata> LoadFileAsync(string filePath)
+        internal static async Task<StoreFileResponse> GetOrCreateFileAsync(StoreFileCommand request, IAggregateRepository aggregateRepository,
+            IDbConnection connection, IGuidGenerator guidGenerator, FileRepository fileRepository)
+        {
+            // Load File
+            var fileDataToStore = await LoadFileAsync(connection, guidGenerator, fileRepository, request.FilePath);
+
+            if (fileDataToStore.IsNew)
+            {
+                // Store File first
+                await fileRepository.InsertAsync(connection, new FileEntity
+                                                             {
+                                                                 Binary = fileDataToStore.Binary,
+                                                                 Extension = fileDataToStore.Extension,
+                                                                 FileId = fileDataToStore.FileId,
+                                                                 Md5Hash = fileDataToStore.Md5Hash,
+                                                                 Name = fileDataToStore.Name,
+                                                                 Size = fileDataToStore.Size,
+                                                                 IsImage = fileDataToStore.IsImage
+                                                             });
+
+                var aggregate = FileAggregateRoot.Create(fileDataToStore.FileId, fileDataToStore.Name, fileDataToStore.Size, fileDataToStore.Md5Hash,
+                    fileDataToStore.Extension);
+                aggregateRepository.Save(aggregate);
+
+                return new StoreFileResponse(fileDataToStore.FileId, false);
+            }
+
+
+            return new StoreFileResponse(fileDataToStore.FileId, true);
+        }
+
+        private static async Task<Filedata> LoadFileAsync(IDbConnection connection, IGuidGenerator guidGenerator, FileRepository fileRepository,
+            string filePath)
         {
             var file = new FileInfo(filePath);
 
@@ -54,15 +77,16 @@ namespace GF.DillyDally.WriteModel.Domain.Files
 
             var md5HashString = CreateMd5HashFromFile(filePath);
 
-            if (!await this._fileRepository.HasFileWithSameHashAsync(md5HashString))
+            if (!await fileRepository.HasFileWithSameHashAsync(connection, md5HashString))
             {
+                var fileId = guidGenerator.GenerateGuid();
                 var fileBytes = File.ReadAllBytes(filePath);
-                return new Filedata(true, ImageFormatDetector.GetImageFormat(fileBytes) != ImageFormat.Unknown,
+                return new Filedata(fileId, true, ImageFormatDetector.GetImageFormat(fileBytes) != ImageFormat.Unknown,
                     fileBytes, md5HashString, fileBytes.LongLength, file.Name, file.Extension);
             }
 
-            var fileDataFromStore = await this._fileRepository.GetFileByMd5HashAsync(md5HashString);
-            return new Filedata(false,
+            var fileDataFromStore = await fileRepository.GetFileByMd5HashAsync(connection, md5HashString);
+            return new Filedata(fileDataFromStore.FileId, false,
                 ImageFormatDetector.GetImageFormat(fileDataFromStore.Binary) != ImageFormat.Unknown,
                 fileDataFromStore.Binary, fileDataFromStore.Md5Hash, fileDataFromStore.Size, fileDataFromStore.Name,
                 fileDataFromStore.Extension);

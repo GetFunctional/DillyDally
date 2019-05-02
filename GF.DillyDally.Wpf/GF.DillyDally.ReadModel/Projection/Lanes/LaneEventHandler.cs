@@ -11,12 +11,10 @@ namespace GF.DillyDally.ReadModel.Projection.Lanes
     internal sealed class LaneEventHandler : INotificationHandler<LaneCreatedEvent>
     {
         private readonly DatabaseFileHandler _fileHandler;
-        private readonly ILaneRepository _laneRepository;
 
-        public LaneEventHandler(DatabaseFileHandler fileHandler, ILaneRepository laneRepository)
+        public LaneEventHandler(DatabaseFileHandler fileHandler)
         {
             this._fileHandler = fileHandler;
-            this._laneRepository = laneRepository;
         }
 
         #region INotificationHandler<LaneCreatedEvent> Members
@@ -25,7 +23,8 @@ namespace GF.DillyDally.ReadModel.Projection.Lanes
         {
             using (var connection = this._fileHandler.OpenConnection())
             {
-                await this._laneRepository.InsertAsync(connection, new LaneEntity
+                var laneRepository = new LaneRepository();
+                await laneRepository.InsertAsync(connection, new LaneEntity
                 {
                     LaneId = notification.AggregateId,
                     Name = notification.Name,

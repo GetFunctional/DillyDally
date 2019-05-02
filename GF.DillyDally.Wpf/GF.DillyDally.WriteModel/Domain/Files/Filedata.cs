@@ -1,10 +1,13 @@
-﻿namespace GF.DillyDally.WriteModel.Domain.Files
+﻿using System;
+
+namespace GF.DillyDally.WriteModel.Domain.Files
 {
     internal class Filedata
     {
-        public Filedata(bool isNew, bool isImage, byte[] binary, string md5Hash, long size, string name,
+        public Filedata(Guid fileId, bool isNew, bool isImage, byte[] binary, string md5Hash, long size, string name,
             string extension)
         {
+            this.FileId = fileId;
             this.IsNew = isNew;
             this.IsImage = isImage;
             this.Binary = binary;
@@ -14,7 +17,9 @@
             this.Extension = extension;
         }
 
+        public Guid FileId { get; }
         public bool IsNew { get; }
+
         public bool IsImage { get; }
 
         public byte[] Binary { get; }

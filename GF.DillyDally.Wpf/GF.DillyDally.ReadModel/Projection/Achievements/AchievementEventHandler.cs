@@ -12,16 +12,11 @@ namespace GF.DillyDally.ReadModel.Projection.Achievements
     internal sealed class AchievementEventHandler : INotificationHandler<AchievementCreatedEvent>,
         INotificationHandler<AchievementCompletedEvent>, INotificationHandler<AchievementCounterValueChangedEvent>
     {
-        private readonly IAchievementCompletionRepository _achievementCompletionRepository;
         private readonly DatabaseFileHandler _fileHandler;
-        private readonly IAchievementRepository _repository;
 
-        public AchievementEventHandler(DatabaseFileHandler fileHandler, IAchievementRepository repository,
-            IAchievementCompletionRepository achievementCompletionRepository)
+        public AchievementEventHandler(DatabaseFileHandler fileHandler)
         {
             this._fileHandler = fileHandler;
-            this._repository = repository;
-            this._achievementCompletionRepository = achievementCompletionRepository;
         }
 
         #region INotificationHandler<AchievementCompletedEvent> Members
@@ -32,14 +27,15 @@ namespace GF.DillyDally.ReadModel.Projection.Achievements
 
             using (var connection = this._fileHandler.OpenConnection())
             {
-                await this._achievementCompletionRepository.InsertAsync(connection, new AchievementCompletion
-                {
-                    AchievementCompletionId = guidGenerator.GenerateGuid(),
-                    AchievementId = notification.AggregateId,
-                    Storypoints = notification.StoryPointsToAdd,
-                    CounterIncreaseValue = notification.IncreaseCounterFor,
-                    CompletedOn = notification.CompletedOn
-                }).ConfigureAwait(false);
+                var achievementCompletionRepository = new AchievementCompletionRepository();
+                await achievementCompletionRepository.InsertAsync(connection, new AchievementCompletion
+                                                                              {
+                                                                                  AchievementCompletionId = guidGenerator.GenerateGuid(),
+                                                                                  AchievementId = notification.AggregateId,
+                                                                                  Storypoints = notification.StoryPointsToAdd,
+                                                                                  CounterIncreaseValue = notification.IncreaseCounterFor,
+                                                                                  CompletedOn = notification.CompletedOn
+                                                                              }).ConfigureAwait(false);
             }
         }
 
@@ -51,7 +47,8 @@ namespace GF.DillyDally.ReadModel.Projection.Achievements
         {
             using (var connection = this._fileHandler.OpenConnection())
             {
-                var achievementToChange = await this._repository.GetByIdAsync(notification.AggregateId);
+                var achievementRepository = new AchievementRepository();
+                var achievementToChange = await achievementRepository.GetByIdAsync(connection, notification.AggregateId);
                 achievementToChange.CounterIncrease = notification.NewCounterValue;
                 await connection.ExecuteAsync(
                     $"UPDATE {AchievementEntity.TableNameConstant} SET {nameof(AchievementEntity.CounterIncrease)} = @counterIncrease;",
@@ -67,14 +64,15 @@ namespace GF.DillyDally.ReadModel.Projection.Achievements
         {
             using (var connection = this._fileHandler.OpenConnection())
             {
-                await this._repository.InsertAsync(connection, new AchievementEntity
-                {
-                    AchievementId = notification.AggregateId,
-                    Name = notification.Name,
-                    CounterIncrease = notification.CounterIncrease,
-                    StoryPoints = notification.Storypoints,
-                    RunningNumberId = notification.RunningNumberId
-                }).ConfigureAwait(false);
+                var achievementRepository = new AchievementRepository();
+                await achievementRepository.InsertAsync(connection, new AchievementEntity
+                                                                    {
+                                                                        AchievementId = notification.AggregateId,
+                                                                        Name = notification.Name,
+                                                                        CounterIncrease = notification.CounterIncrease,
+                                                                        StoryPoints = notification.Storypoints,
+                                                                        RunningNumberId = notification.RunningNumberId
+                                                                    }).ConfigureAwait(false);
             }
         }
 

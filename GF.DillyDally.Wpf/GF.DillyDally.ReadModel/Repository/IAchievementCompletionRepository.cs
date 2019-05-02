@@ -9,8 +9,6 @@ namespace GF.DillyDally.ReadModel.Repository
 {
     public interface IAchievementCompletionRepository : IRepository<AchievementCompletion>
     {
-        Task<IList<AchievementCompletion>> GetAchievementCompletionsAsync(Guid achievementId);
-
         Task<IList<AchievementCompletion>> GetAchievementCompletionsAsync(IDbConnection connection, Guid achievementId);
     }
 }

@@ -20,5 +20,7 @@ namespace GF.DillyDally.ReadModel.Repository.Entities
         public string Name { get; set; }
 
         public string Extension { get; set; }
+
+        public bool IsImage { get; set; }
     }
 }

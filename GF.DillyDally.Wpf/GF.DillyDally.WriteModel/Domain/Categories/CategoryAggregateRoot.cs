@@ -1,6 +1,7 @@
 ﻿using System;
 using GF.DillyDally.WriteModel.Domain.Categories.Events;
 using GF.DillyDally.WriteModel.Domain.Lanes;
+using GF.DillyDally.WriteModel.Domain.Lanes.Exceptions;
 using GF.DillyDally.WriteModel.Infrastructure;
 
 namespace GF.DillyDally.WriteModel.Domain.Categories
