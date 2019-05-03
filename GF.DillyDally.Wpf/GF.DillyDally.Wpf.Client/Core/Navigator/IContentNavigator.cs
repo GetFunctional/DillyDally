@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using GF.DillyDally.Mvvmc;
 
 namespace GF.DillyDally.Wpf.Client.Core.Navigator
@@ -28,13 +29,13 @@ namespace GF.DillyDally.Wpf.Client.Core.Navigator
         /// </summary>
         /// <param name="target">Target to navigate to</param>
         /// <returns></returns>
-        IController Navigate(INavigationTarget target);
+        Task<IController> NavigateAsync(INavigationTarget target);
 
         /// <summary>
         ///     Resolves the new Target and informs the involving instances of their change in the navigationprocess.
         /// </summary>
         /// <param name="navigationTargetId">Target to navigate to</param>
         /// <returns></returns>
-        IController Navigate(Guid navigationTargetId);
+        Task<IController> NavigateAsync(Guid navigationTargetId);
     }
 }

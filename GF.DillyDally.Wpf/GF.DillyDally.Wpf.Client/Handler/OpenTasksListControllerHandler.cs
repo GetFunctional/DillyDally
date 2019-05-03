@@ -21,7 +21,7 @@ namespace GF.DillyDally.Wpf.Client.Handler
         public async Task<TasksListController> Handle(OpenTasksListControllerRequest request,
             CancellationToken cancellationToken)
         {
-            var controller = this._tasksControllerFactory.CreateController();
+            var controller = await this._tasksControllerFactory.CreateControllerAsync();
             await controller.LoadDataAsync();
             return controller;
         }

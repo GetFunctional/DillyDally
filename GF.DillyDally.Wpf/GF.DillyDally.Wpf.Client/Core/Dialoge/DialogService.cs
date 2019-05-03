@@ -22,18 +22,20 @@ namespace GF.DillyDally.Wpf.Client.Core.Dialoge
 
         #region IDialogService Members
 
-        public Task<IDialogResult> ShowDialogAsync(IController dialogContentController, IDialogSettings settings)
+        public async Task<IDialogResult> ShowDialogAsync(IController dialogContentController, IDialogSettings settings)
         {
             var completion = new TaskCompletionSource<IDialogResult>();
-            Application.Current.Dispatcher.BeginInvoke(new Action(() =>
-                completion.SetResult(this.ShowDialog(dialogContentController, settings))));
-            return completion.Task;
+            var dialogWindowContentController = await this._dialogWindowControllerFactory.CreateControllerAsync();
+            dialogWindowContentController.Content = dialogContentController.ViewModel;
+            await Application.Current.Dispatcher.InvokeAsync(() =>
+                completion.SetResult(this.ShowDialog(dialogWindowContentController, settings)));
+            return await completion.Task;
         }
 
-        public IDialogResult ShowDialog(IController dialogContentController, IDialogSettings settings)
+        #endregion
+
+        public IDialogResult ShowDialog(DialogWindowController dialogWindowContentController, IDialogSettings settings)
         {
-            var dialogWindowContentController = this._dialogWindowControllerFactory.CreateController();
-            dialogWindowContentController.Content = dialogContentController.ViewModel;
             var window =
                 this._dialogWindowFactory.CreateDialogWindow(settings, dialogWindowContentController.ViewModel);
 
@@ -42,12 +44,9 @@ namespace GF.DillyDally.Wpf.Client.Core.Dialoge
             var wrappedDialogCommands = this.CreateDialogCommandsFrom(settings.DefaultDialogResult,
                 settings.AvailableDialogResults, dialogWindowResultAssignCommand);
             dialogWindowContentController.DialogCommands = wrappedDialogCommands;
-
             var result = window.ShowDialog();
             return dialogWindowContentController.SelectedDialogResult;
         }
-
-        #endregion
 
         private ICommand CreateDialogConfirmationCommand(Window window,
             DialogWindowController dialogWindowContentController)

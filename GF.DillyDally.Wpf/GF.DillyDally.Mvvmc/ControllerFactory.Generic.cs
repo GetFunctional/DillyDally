@@ -1,4 +1,6 @@
-﻿namespace GF.DillyDally.Mvvmc
+﻿using System.Threading.Tasks;
+
+namespace GF.DillyDally.Mvvmc
 {
     public sealed class ControllerFactory<TController> where TController : IController
     {
@@ -9,9 +11,9 @@
             this._nonGenericControllerFactory = new ControllerFactory(mvvmcServiceFactory);
         }
 
-        public TController CreateController()
+        public async Task<TController> CreateControllerAsync()
         {
-            return (TController)this._nonGenericControllerFactory.CreateController(typeof(TController));
+            return (TController)await this._nonGenericControllerFactory.CreateControllerAsync(typeof(TController));
         }
     }
 }

@@ -1,9 +1,10 @@
-﻿using GF.DillyDally.Wpf.Client.Core.Navigator;
+﻿using System.Threading.Tasks;
+using GF.DillyDally.Wpf.Client.Core.Navigator;
 
 namespace GF.DillyDally.Wpf.Client
 {
     public interface IDillyDallyApplication
     {
-        bool NavigateInCurrentNavigatorTo(INavigationTarget navigationTarget);
+        Task<bool> NavigateInCurrentNavigatorAsync(INavigationTarget navigationTarget);
     }
 }

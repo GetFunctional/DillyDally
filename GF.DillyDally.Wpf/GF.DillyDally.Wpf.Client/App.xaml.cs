@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Threading;
 using DevExpress.Xpf.Core;
 using GF.DillyDally.Mvvmc;
@@ -16,7 +17,7 @@ namespace GF.DillyDally.Wpf.Client
         private Bootstrapper _bootstrapper;
         private DillyDallyApplication _dillyDallyApplication;
 
-        protected override void OnStartup(StartupEventArgs e)
+        protected override async void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
             ThemeManager.EnableDefaultThemeLoading = false;
@@ -30,14 +31,14 @@ namespace GF.DillyDally.Wpf.Client
             this._bootstrapper = new Bootstrapper(currentApplication, serviceContainer);
             this._bootstrapper.Run();
 
-            this._dillyDallyApplication = this.CreateDillyDallyApplication(serviceContainer);
+            this._dillyDallyApplication = await this.CreateDillyDallyApplicationAsync(serviceContainer);
             this._dillyDallyApplication.ShowUi();
         }
 
 
-        private DillyDallyApplication CreateDillyDallyApplication(ServiceContainer serviceContainer)
+        private async Task<DillyDallyApplication> CreateDillyDallyApplicationAsync(ServiceContainer serviceContainer)
         {
-            var shellController = this.CreateShellController(serviceContainer);
+            var shellController = await this.CreateShellControllerAsync(serviceContainer);
             var shell = new Shell(shellController.ViewModel);
             var dillyDallyApplication = new DillyDallyApplication(shellController, shell);
             serviceContainer.RegisterInstance<IDillyDallyApplication>(dillyDallyApplication);
@@ -49,10 +50,9 @@ namespace GF.DillyDally.Wpf.Client
             MessageBox.Show("Exit");
         }
 
-        private ShellController CreateShellController(ServiceContainer serviceContainer)
+        private async Task<ShellController> CreateShellControllerAsync(ServiceContainer serviceContainer)
         {
-            var shellController = serviceContainer
-                .GetInstance<ControllerFactory<ShellController>>().CreateController();
+            var shellController = await serviceContainer.GetInstance<ControllerFactory<ShellController>>().CreateControllerAsync();
             return shellController;
         }
 

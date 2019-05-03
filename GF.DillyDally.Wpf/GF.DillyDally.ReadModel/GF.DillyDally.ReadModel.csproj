@@ -99,6 +99,7 @@
     <Compile Include="Projection\Tasks\Repository\TaskImageRepository.cs" />
     <Compile Include="Projection\Tasks\Repository\TaskLinksRepository.cs" />
     <Compile Include="Projection\Tasks\Repository\TaskRepository.cs" />
+    <Compile Include="Views\TaskBoard\TaskBoardTaskEntity.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GF.DillyDally.Data.Contracts\GF.DillyDally.Data.Contracts.csproj">

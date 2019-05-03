@@ -21,14 +21,14 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
             this._contentNavigatorControllerFactory = contentNavigatorControllerFactory;
         }
 
-        public bool NavigateInCurrentNavigatorTo(INavigationTarget navigationTarget)
+        public async Task<bool> NavigateInCurrentNavigatorAsync(INavigationTarget navigationTarget)
         {
             var currentActiveNavigator = this.ViewModel.CurrentActiveNavigator;
             if (currentActiveNavigator != null)
             {
                 var controllerForViewModel =
                     this._navigatorControllers.Single(nc => nc.ViewModel == currentActiveNavigator);
-                return controllerForViewModel.NavigateToTarget(navigationTarget);
+                return await controllerForViewModel.NavigateToTargetAsync(navigationTarget);
             }
 
             return false;
@@ -36,7 +36,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
 
         protected override async Task OnInitializeAsync()
         {
-            var newNavigator = this._contentNavigatorControllerFactory.CreateController();
+            var newNavigator = await this._contentNavigatorControllerFactory.CreateControllerAsync();
             this._navigatorControllers.Add(newNavigator);
             this.ViewModel.SelectCurrentNavigator(newNavigator.ViewModel);
 

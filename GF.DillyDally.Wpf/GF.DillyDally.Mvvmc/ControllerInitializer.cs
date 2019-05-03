@@ -1,28 +1,17 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using GF.DillyDally.Mvvmc.Exceptions;
+﻿using System.Threading.Tasks;
 
 namespace GF.DillyDally.Mvvmc
 {
     public sealed class ControllerInitializer
     {
-        public void InitializeController(IController controller)
+        public Task InitializeControllerAsync(IController controller)
         {
-            InitializeInternal((InitializationBase)controller);
+            return this.InitializeInternal((InitializationBase)controller);
         }
 
-        private static void InitializeInternal(InitializationBase initializeComponent)
+        private Task InitializeInternal(InitializationBase initializeComponent)
         {
-            initializeComponent.Initialize();
-            var cancellationToken = new CancellationTokenSource();
-
-            var currentSynchronizationContext = SynchronizationContext.Current;
-            Task.Run(async () => await initializeComponent.InitializeAsync(cancellationToken.Token),
-                cancellationToken.Token).ContinueWith(t =>
-            {
-                currentSynchronizationContext.Send(state =>
-                    throw new InitializationException("Exception was raised during initialization", t.Exception), null);
-            }, TaskContinuationOptions.OnlyOnFaulted).ConfigureAwait(false);
+            return initializeComponent.InitializeAsync();
         }
     }
 }

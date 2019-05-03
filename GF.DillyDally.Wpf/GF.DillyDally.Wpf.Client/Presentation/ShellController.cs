@@ -17,17 +17,15 @@ namespace GF.DillyDally.Wpf.Client.Presentation
             this._browserControllerFactory = browserControllerFactory;
         }
 
-        public bool NavigateInCurrentNavigatorTo(INavigationTarget navigationTarget)
+        public async Task<bool> NavigateInCurrentNavigatorToAsync(INavigationTarget navigationTarget)
         {
-            return this._contentBrowserController.NavigateInCurrentNavigatorTo(navigationTarget);
+            return await this._contentBrowserController.NavigateInCurrentNavigatorAsync(navigationTarget);
         }
 
-        protected override Task OnInitializeAsync()
+        protected override async Task OnInitializeAsync()
         {
-            this._contentBrowserController = this._browserControllerFactory.CreateController();
+            this._contentBrowserController = await this._browserControllerFactory.CreateControllerAsync();
             this.ViewModel.ContentBrowserViewModel = this._contentBrowserController.ViewModel;
-
-            return base.OnInitializeAsync();
         }
     }
 }

@@ -16,18 +16,10 @@ namespace GF.DillyDally.Wpf.Client.Handler
 
         #region IRequestHandler<NavigationRequest,NavigationResponse> Members
 
-        public Task<NavigationResponse> Handle(NavigationRequest request, CancellationToken cancellationToken)
+        public async Task<NavigationResponse> Handle(NavigationRequest request, CancellationToken cancellationToken)
         {
-            return Task
-                .Run(
-                    () =>
-                    {
-                        return this._dillyDallyApplication.NavigateInCurrentNavigatorTo(request.NavigationTarget);
-                    }, cancellationToken)
-                .ContinueWith(t =>
-                {
-                    return new NavigationResponse(t.Result);
-                }, cancellationToken);
+            var navigationResult = await this._dillyDallyApplication.NavigateInCurrentNavigatorAsync(request.NavigationTarget);
+            return new NavigationResponse(navigationResult);
         }
 
         #endregion

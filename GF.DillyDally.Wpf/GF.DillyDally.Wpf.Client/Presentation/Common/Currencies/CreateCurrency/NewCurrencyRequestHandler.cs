@@ -24,7 +24,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Common.Currencies.CreateCurrency
 
         public async Task<NewCurrencyResponse> Handle(NewCurrencyRequest request, CancellationToken cancellationToken)
         {
-            var controller = this._newCurrencyControllerFactory.CreateController();
+            var controller = await this._newCurrencyControllerFactory.CreateControllerAsync();
 
             bool ConfirmationCondition()
             {

@@ -17,9 +17,9 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
             this._contentNavigator.Navigated += this.HandleNavigatorNavigated;
         }
 
-        public bool NavigateToTarget(INavigationTarget navigationTarget)
+        public async Task<bool> NavigateToTargetAsync(INavigationTarget navigationTarget)
         {
-            var controller = this._contentNavigator.Navigate(navigationTarget);
+            var controller = await this._contentNavigator.NavigateAsync(navigationTarget);
             return controller != null;
         }
 
@@ -37,7 +37,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
 
         protected override async Task OnInitializeAsync()
         {
-            this._contentNavigator.Navigate(new SearchContentNavigationTarget());
+            await this._contentNavigator.NavigateAsync(new SearchContentNavigationTarget());
             await base.OnInitializeAsync();
         }
     }

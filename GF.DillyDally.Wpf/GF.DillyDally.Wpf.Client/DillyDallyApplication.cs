@@ -1,4 +1,5 @@
-﻿using GF.DillyDally.Wpf.Client.Core.Navigator;
+﻿using System.Threading.Tasks;
+using GF.DillyDally.Wpf.Client.Core.Navigator;
 using GF.DillyDally.Wpf.Client.Presentation;
 
 namespace GF.DillyDally.Wpf.Client
@@ -16,9 +17,9 @@ namespace GF.DillyDally.Wpf.Client
 
         #region IDillyDallyApplication Members
 
-        public bool NavigateInCurrentNavigatorTo(INavigationTarget navigationTarget)
+        public async Task<bool> NavigateInCurrentNavigatorAsync(INavigationTarget navigationTarget)
         {
-            return this._shellController.NavigateInCurrentNavigatorTo(navigationTarget);
+            return await this._shellController.NavigateInCurrentNavigatorToAsync(navigationTarget);
         }
 
         #endregion

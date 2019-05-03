@@ -1,6 +1,8 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using GF.DillyDally.Data.Sqlite;
 using GF.DillyDally.Mvvmc;
+using GF.DillyDally.ReadModel.Views.TaskBoard;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Tasks
 {
@@ -19,8 +21,17 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Tasks
 
             using (var connection = await this._databaseFileHandler.OpenConnectionAsync())
             {
-                //var lanes = this._laneRepository.GetTaskBoardLanesAsync();
+                var taskBoardRepository = new TaskBoardRepository();
+                var lanes = await taskBoardRepository.GetTaskBoardLanesAsync(connection);
+
+                var laneViewModels = this.CreateLaneViewModels(lanes);
+                this.ViewModel.Lanes = laneViewModels;
             }
+        }
+
+        private IList<TaskBoardLaneViewModel> CreateLaneViewModels(IList<TaskBoardLaneEntity> lanes)
+        {
+            return new List<TaskBoardLaneViewModel>();
         }
     }
 }

@@ -25,7 +25,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Tasks.CreateTask
         public async Task<CreateNewTaskResponse> Handle(CreateNewTaskRequest request,
             CancellationToken cancellationToken)
         {
-            var controller = this._controllerFactory.CreateController();
+            var controller = await this._controllerFactory.CreateControllerAsync();
             controller.CreateNewTask(request.InitialName, request.TaskType);
 
             var createTask =

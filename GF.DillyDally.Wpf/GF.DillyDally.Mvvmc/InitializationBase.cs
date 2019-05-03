@@ -1,38 +1,23 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace GF.DillyDally.Mvvmc
 {
     public abstract class InitializationBase
     {
-        protected virtual void OnInitialize()
+        protected virtual async Task OnInitializeAsync()
         {
+            await Task.CompletedTask;
         }
 
-        internal void Initialize()
+        internal async Task InitializeAsync()
         {
-            this.OnInitialize();
-        }
-
-        protected virtual Task OnInitializeAsync()
-        {
-            return Task.FromResult(0);
-        }
-
-        internal async Task InitializeAsync(CancellationToken cancellationTokenToken)
-        {
-            if (cancellationTokenToken.IsCancellationRequested)
-            {
-                await Task.FromResult(0);
-            }
-
             await this.OnInitializeAsync();
-
-            this.OnInitializeAsyncCompleted();
+            await this.OnInitializeCompletedAsync();
         }
 
-        protected virtual void OnInitializeAsyncCompleted()
+        protected virtual async Task OnInitializeCompletedAsync()
         {
+            await Task.CompletedTask;
         }
     }
 }
