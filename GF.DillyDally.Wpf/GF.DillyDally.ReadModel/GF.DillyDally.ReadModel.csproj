@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Projection\Achievements\AchievementEventHandler.cs" />
+    <Compile Include="Projection\RunningNumbers\RunningNumbersEventHandler.cs" />
     <Compile Include="Projection\Tasks\TaskEventHandler.cs" />
     <Compile Include="Repository\AchievementCompletionRepository.cs" />
     <Compile Include="Repository\AchievementRepository.cs" />
@@ -81,6 +82,8 @@
     <Compile Include="Repository\Entities\ImageEntity.cs" />
     <Compile Include="Repository\Entities\LaneEntity.cs" />
     <Compile Include="Repository\Entities\FileEntity.cs" />
+    <Compile Include="Repository\Entities\RunningNumberCounterEntity.cs" />
+    <Compile Include="Repository\Entities\RunningNumberEntity.cs" />
     <Compile Include="Repository\Entities\TaskFileEntity.cs" />
     <Compile Include="Repository\Entities\TaskImageEntity.cs" />
     <Compile Include="Repository\FileRepository.cs" />
@@ -91,11 +94,15 @@
     <Compile Include="Repository\IImageRepository.cs" />
     <Compile Include="Repository\ILaneRepository.cs" />
     <Compile Include="Repository\ImageRepository.cs" />
+    <Compile Include="Repository\IRunningNumberCounterRepository.cs" />
+    <Compile Include="Repository\IRunningNumberRepository.cs" />
     <Compile Include="Repository\ITaskFileRepository.cs" />
     <Compile Include="Repository\ITaskImageRepository.cs" />
     <Compile Include="Repository\ITaskRepository.cs" />
     <Compile Include="Repository\LaneRepository.cs" />
     <Compile Include="Repository\Entities\TaskEntity.cs" />
+    <Compile Include="Repository\RunningNumberCounterRepository.cs" />
+    <Compile Include="Repository\RunningNumberRepository.cs" />
     <Compile Include="Repository\TaskFileRepository.cs" />
     <Compile Include="Repository\TaskImageRepository.cs" />
     <Compile Include="Repository\TaskRepository.cs" />

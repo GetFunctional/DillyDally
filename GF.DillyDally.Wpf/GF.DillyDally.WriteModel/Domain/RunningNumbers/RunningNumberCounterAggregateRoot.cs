@@ -23,10 +23,10 @@ namespace GF.DillyDally.WriteModel.Domain.RunningNumbers
             this.RaiseEvent(creationEvent);
         }
 
-        private RunningNumberCounterArea CounterArea { get; set; }
-        private string Prefix { get; set; }
-        private int InitialNumber { get; set; }
-        private List<RunningNumber> Numbers { get; } = new List<RunningNumber>();
+        internal RunningNumberCounterArea CounterArea { get; private set; }
+        internal string Prefix { get; private set; }
+        internal int InitialNumber { get; private set; }
+        internal List<RunningNumber> Numbers { get; } = new List<RunningNumber>();
 
         private void Apply(RunningNumberCounterCreatedEvent obj)
         {
@@ -48,10 +48,10 @@ namespace GF.DillyDally.WriteModel.Domain.RunningNumbers
             return new RunningNumberCounterAggregateRoot(runningNumberId, counterArea, prefix, initialNumber);
         }
 
-        public void AddNextNumber(Guid nextNumberId)
+        internal void AddNextNumber(Guid nextNumberId)
         {
-            var nextNumberInRow = (this.Numbers.Any() ? this.Numbers.Max(x => x.Number) : 0) + 1;
-            var nextNumberEvent = new AddNextNumberEvent(this.AggregateId, nextNumberId, this.Prefix, nextNumberInRow);
+            var nextNumberInRow = (this.Numbers.Any() ? this.Numbers.Max(x => x.Number) : this.InitialNumber) + 1;
+            var nextNumberEvent = new AddNextNumberEvent(this.AggregateId, nextNumberId, this.CounterArea, this.Prefix, nextNumberInRow);
             this.RaiseEvent(nextNumberEvent);
         }
     }

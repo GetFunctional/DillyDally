@@ -29,6 +29,8 @@ namespace GF.DillyDally.ReadModel
             serviceContainer.Register<ITaskFileRepository, TaskFileRepository>();
             serviceContainer.Register<ITaskImageRepository, TaskImageRepository>();
             serviceContainer.Register<IImageRepository, ImageRepository>();
+            serviceContainer.Register<IRunningNumberCounterRepository, RunningNumberCounterRepository>();
+            serviceContainer.Register<IRunningNumberRepository, RunningNumberRepository>();
         }
 
         private static void RegisterMediations(IServiceContainer serviceContainer)

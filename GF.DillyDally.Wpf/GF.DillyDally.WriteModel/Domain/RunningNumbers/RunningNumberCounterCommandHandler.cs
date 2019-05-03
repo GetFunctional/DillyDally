@@ -11,7 +11,8 @@ using MediatR;
 namespace GF.DillyDally.WriteModel.Domain.RunningNumbers
 {
     internal sealed class RunningNumberCounterCommandHandler : CommandHandlerBase,
-        IRequestHandler<CreateRunningNumberCounterCommand, CreateRunningNumberCounterResponse>
+        IRequestHandler<CreateRunningNumberCounterCommand, CreateRunningNumberCounterResponse>,
+        IRequestHandler<CreateRunningNumberCommand, CreateRunningNumberResponse>
     {
         internal static IDictionary<RunningNumberCounterArea, Guid> AreaToIdentityMapping =
             new Dictionary<RunningNumberCounterArea, Guid>
@@ -25,6 +26,23 @@ namespace GF.DillyDally.WriteModel.Domain.RunningNumbers
         public RunningNumberCounterCommandHandler(IAggregateRepository aggregateRepository) : base(aggregateRepository)
         {
         }
+
+        #region IRequestHandler<CreateRunningNumberCommand,CreateRunningNumberResponse> Members
+
+        public async Task<CreateRunningNumberResponse> Handle(CreateRunningNumberCommand request, CancellationToken cancellationToken)
+        {
+            return await Task.Run(() =>
+            {
+                var runningNumberCounterId = AreaToIdentityMapping[request.CounterArea];
+                var aggregate = this.AggregateRepository.GetById<RunningNumberCounterAggregateRoot>(runningNumberCounterId);
+                var nextNumberId = this.GuidGenerator.GenerateGuid();
+                aggregate.AddNextNumber(nextNumberId);
+                this.AggregateRepository.Save(aggregate);
+                return new CreateRunningNumberResponse(nextNumberId);
+            }, cancellationToken);
+        }
+
+        #endregion
 
         #region IRequestHandler<CreateRunningNumberCounterCommand,CreateRunningNumberCounterResponse> Members
 
