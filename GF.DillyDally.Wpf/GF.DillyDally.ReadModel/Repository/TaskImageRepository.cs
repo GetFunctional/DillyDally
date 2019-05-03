@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Dapper;
 using GF.DillyDally.Data.Sqlite.Repository.Base;
 using GF.DillyDally.ReadModel.Repository.Entities;
+using GF.DillyDally.Shared.Images;
 
 namespace GF.DillyDally.ReadModel.Repository
 {
@@ -24,5 +25,36 @@ namespace GF.DillyDally.ReadModel.Repository
         }
 
         #endregion
+
+        internal async Task CreateTaskImageLinks(IDbConnection connection, Guid taskId, IList<ImageEntity> storedImages)
+        {
+            var previewImage = storedImages.Single(x => x.SizeType == ImageSizeType.PreviewSize);
+            var smallImage = storedImages.Single(x => x.SizeType == ImageSizeType.Small);
+            var fullImage = storedImages.Single(x => x.SizeType == ImageSizeType.Full);
+
+            var taskImageLinks = this.CreateTaskImageLinks(taskId, previewImage, smallImage, fullImage);
+            await this.InsertMultipleAsync(connection, taskImageLinks);
+        }
+
+        private List<TaskImageEntity> CreateTaskImageLinks(Guid taskId, ImageEntity previewImage,
+            ImageEntity smallImage, ImageEntity fullImage)
+        {
+            return new List<TaskImageEntity>
+                   {
+                       this.CreateTaskImageEntity(taskId, previewImage),
+                       this.CreateTaskImageEntity(taskId, smallImage),
+                       this.CreateTaskImageEntity(taskId, fullImage)
+                   };
+        }
+
+        private TaskImageEntity CreateTaskImageEntity(Guid taskId, ImageEntity imageEntity)
+        {
+            return new TaskImageEntity
+                   {
+                       TaskId = taskId,
+                       ImageId = imageEntity.ImageId,
+                       TaskImageId = this.GuidGenerator.GenerateGuid()
+                   };
+        }
     }
 }

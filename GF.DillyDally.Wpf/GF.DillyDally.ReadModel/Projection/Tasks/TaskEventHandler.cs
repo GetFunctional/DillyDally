@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using GF.DillyDally.Data.Sqlite;
 using GF.DillyDally.ReadModel.Repository;
 using GF.DillyDally.ReadModel.Repository.Entities;
-using GF.DillyDally.Shared.Images;
 using GF.DillyDally.WriteModel.Domain.Tasks.Events;
 using MediatR;
 
@@ -17,12 +12,10 @@ namespace GF.DillyDally.ReadModel.Projection.Tasks
         INotificationHandler<AttachedFileToTaskEvent>, INotificationHandler<PreviewImageAssignedEvent>, INotificationHandler<TaskLinkCreatedEvent>
     {
         private readonly DatabaseFileHandler _fileHandler;
-        private IGuidGenerator _guidGenerator;
 
         public TaskEventHandler(DatabaseFileHandler fileHandler)
         {
             this._fileHandler = fileHandler;
-            this._guidGenerator = new GuidGenerator();
         }
 
         #region INotificationHandler<AttachedFileToTaskEvent> Members
@@ -37,7 +30,11 @@ namespace GF.DillyDally.ReadModel.Projection.Tasks
 
                 if (file.IsImage)
                 {
-                    await this.StoreAndLinkImageAsync(taskId, connection, file);
+                    var imageRepository = new ImageRepository();
+                    var taskImagesRepository = new TaskImageRepository();
+
+                    var storedImages = await imageRepository.StoreImagesAsync(connection, file);
+                    await taskImagesRepository.CreateTaskImageLinks(connection, taskId, storedImages);
                 }
                 else
                 {
@@ -106,67 +103,5 @@ namespace GF.DillyDally.ReadModel.Projection.Tasks
         }
 
         #endregion
-
-        private async Task StoreAndLinkImageAsync(Guid taskId, IDbConnection connection, FileEntity file)
-        {
-            var imageRepository = new ImageRepository();
-            var taskImageRepository = new TaskImageRepository();
-            var guidGenerator = this._fileHandler.GuidGenerator;
-
-            var imagesForFile = await imageRepository.GetByOriginalFileIdAsync(connection, file.FileId);
-
-            // Create image previews for all sizes if necessary
-            var previewImage = imagesForFile.FirstOrDefault(x => x.SizeType == ImageSizeType.PreviewSize) ??
-                               CreateImageEntity(file, guidGenerator, ImageSizeType.PreviewSize);
-            var smallImage = imagesForFile.FirstOrDefault(x => x.SizeType == ImageSizeType.Small) ??
-                             CreateImageEntity(file, guidGenerator, ImageSizeType.Small);
-            var fullImage = imagesForFile.FirstOrDefault(x => x.SizeType == ImageSizeType.Full) ??
-                            CreateImageEntity(file, guidGenerator, ImageSizeType.Full);
-            var taskImageLinks = CreateTaskImageLinks(taskId, guidGenerator, previewImage, smallImage, fullImage);
-
-            var images = new List<ImageEntity> {previewImage, smallImage, fullImage};
-
-            if (!imagesForFile.Any())
-            {
-                await imageRepository.InsertMultipleAsync(connection, images);
-            }
-
-            await taskImageRepository.InsertMultipleAsync(connection, taskImageLinks);
-        }
-
-        private static List<TaskImageEntity> CreateTaskImageLinks(Guid taskId, IGuidGenerator guidGenerator,
-            ImageEntity previewImage,
-            ImageEntity smallImage, ImageEntity fullImage)
-        {
-            return new List<TaskImageEntity>
-                   {
-                       CreateTaskImageEntity(taskId, previewImage, guidGenerator),
-                       CreateTaskImageEntity(taskId, smallImage, guidGenerator),
-                       CreateTaskImageEntity(taskId, fullImage, guidGenerator)
-                   };
-        }
-
-        private static TaskImageEntity CreateTaskImageEntity(Guid taskId, ImageEntity imageEntity,
-            IGuidGenerator guidGenerator)
-        {
-            return new TaskImageEntity
-                   {
-                       TaskId = taskId,
-                       ImageId = imageEntity.ImageId,
-                       TaskImageId = guidGenerator.GenerateGuid()
-                   };
-        }
-
-        private static ImageEntity CreateImageEntity(FileEntity file, IGuidGenerator guidGenerator,
-            ImageSizeType imageSizeType)
-        {
-            return new ImageEntity
-                   {
-                       Binary = ImageResizer.CreateImagePreview(file.Binary, imageSizeType),
-                       ImageId = guidGenerator.GenerateGuid(),
-                       OriginalFileId = file.FileId,
-                       SizeType = imageSizeType
-                   };
-        }
     }
 }
