@@ -7,7 +7,7 @@ namespace GF.DillyDally.ReadModel.Views.TaskBoard
     {
         public Guid LaneId { get; set; }
 
-        public string LaneName { get; set; }
+        public string Name { get; set; }
 
         public IList<TaskBoardTaskEntity> Tasks { get; set; }
     }

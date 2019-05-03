@@ -6,7 +6,7 @@ namespace GF.DillyDally.ReadModel.Views.TaskBoard
     {
         public Guid TaskId { get; set; }
 
-        public string Title { get; set; }
+        public string Name { get; set; }
 
         public Guid CategoryId { get; set; }
 
