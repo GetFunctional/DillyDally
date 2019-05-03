@@ -134,6 +134,17 @@ CREATE TABLE [TaskFiles]
 CREATE UNIQUE INDEX [IX_TaskFiles_TaskFileId] ON [TaskFiles]([TaskFileId]);
 GO
 
+CREATE TABLE [TaskLinks]
+	(
+	[RowID] INTEGER PRIMARY KEY AUTOINCREMENT, 
+	[TaskLinkId] GUID NOT NULL UNIQUE,	
+	[TaskId] GUID NOT NULL REFERENCES [Tasks]([TaskId]),
+	[LinkedTaskId] GUID NOT NULL REFERENCES [Tasks]([TaskId])
+	);
+
+CREATE UNIQUE INDEX [IX_TaskLinks_TaskLinkId] ON [TaskLinks]([TaskLinkId]);
+GO
+
 --CREATE TABLE [Achievement]
 --	(
 --	[RowID] INTEGER PRIMARY KEY AUTOINCREMENT, 

@@ -5,13 +5,11 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks.Events
 {
     public sealed class TaskLinkCreatedEvent : AggregateEventBase
     {
-        public TaskLinkCreatedEvent(Guid aggregateId, Guid leftTaskId, Guid rightTaskId) : base(aggregateId)
+        public TaskLinkCreatedEvent(Guid aggregateId, Guid linkToTaskId) : base(aggregateId)
         {
-            this.LeftTaskId = leftTaskId;
-            this.RightTaskId = rightTaskId;
+            this.LinkToTaskId = linkToTaskId;
         }
 
-        public Guid LeftTaskId { get; }
-        public Guid RightTaskId { get; }
+        public Guid LinkToTaskId { get; }
     }
 }

@@ -22,15 +22,17 @@ namespace GF.DillyDally.ReadModel
             serviceContainer.Register<ILaneRepository, LaneRepository>();
             serviceContainer.Register<ICommonDataRepository, CommonDataRepository>();
             serviceContainer.Register<IAccountRepository, AccountRepository>();
-            serviceContainer.Register<ITaskRepository, TaskRepository>();
             serviceContainer.Register<IAchievementRepository, AchievementRepository>();
             serviceContainer.Register<IAchievementCompletionRepository, AchievementCompletionRepository>();
             serviceContainer.Register<IFileRepository, FileRepository>();
-            serviceContainer.Register<ITaskFileRepository, TaskFileRepository>();
-            serviceContainer.Register<ITaskImageRepository, TaskImageRepository>();
             serviceContainer.Register<IImageRepository, ImageRepository>();
             serviceContainer.Register<IRunningNumberCounterRepository, RunningNumberCounterRepository>();
             serviceContainer.Register<IRunningNumberRepository, RunningNumberRepository>();
+            serviceContainer.Register<ITaskRepository, TaskRepository>();
+            serviceContainer.Register<ITaskFileRepository, TaskFileRepository>();
+            serviceContainer.Register<ITaskImageRepository, TaskImageRepository>();
+            serviceContainer.Register<ITaskLinksRepository, TaskLinksRepository>();
+
         }
 
         private static void RegisterMediations(IServiceContainer serviceContainer)

@@ -22,7 +22,10 @@ namespace GF.DillyDally.Data.Sqlite.Repository.Base
         {
             this._tableName = this.GetTableName();
             this._primaryKeyName = this.GetPrimaryKeyName();
+            this.GuidGenerator = new GuidGenerator();
         }
+
+        protected IGuidGenerator GuidGenerator { get; }
 
         #region IRepository<T> Members
 

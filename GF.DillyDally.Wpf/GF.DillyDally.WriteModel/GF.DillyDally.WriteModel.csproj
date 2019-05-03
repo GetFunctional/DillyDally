@@ -104,13 +104,14 @@
     <Compile Include="Domain\Tasks\Commands\AttachFileToTaskCommand.cs" />
     <Compile Include="Domain\Tasks\Commands\AttachFileToTaskResponse.cs" />
     <Compile Include="Domain\Tasks\Commands\CreateTaskResponse.cs" />
+    <Compile Include="Domain\Tasks\Commands\LinkTaskCommand.cs" />
+    <Compile Include="Domain\Tasks\Commands\LinkTaskResponse.cs" />
     <Compile Include="Domain\Tasks\Events\PreviewImageAssignedEvent.cs" />
     <Compile Include="Domain\Tasks\Exceptions\DuplicateAttachedFileException.cs" />
     <Compile Include="Domain\Tasks\Events\AttachedFileToTaskEvent.cs" />
     <Compile Include="Domain\Tasks\Exceptions\DuplicateTaskLinkException.cs" />
     <Compile Include="Domain\Tasks\Exceptions\TaskNotLinkFoundException.cs" />
     <Compile Include="Domain\Tasks\TaskAggregateRoot.cs" />
-    <Compile Include="Domain\Tasks\Events\UnLinkTasksEvent.cs" />
     <Compile Include="Domain\Tasks\Exceptions\TaskNotFoundException.cs" />
     <Compile Include="Domain\Tasks\Events\TaskLinkCreatedEvent.cs" />
     <Compile Include="Domain\Tasks\Exceptions\DuplicateTaskException.cs" />
@@ -130,7 +131,6 @@
     <Compile Include="Domain\Rewards\RewardAggregateRoot.cs" />
     <Compile Include="Domain\Rewards\RewardCommandHandler.cs" />
     <Compile Include="Domain\Rewards\Events\RewardCreatedEvent.cs" />
-    <Compile Include="Domain\Tasks\TaskLink.cs" />
     <Compile Include="AuthorizationPipelineHook.cs" />
     <Compile Include="Infrastructure\AggregateEventBase.cs" />
     <Compile Include="Infrastructure\Exceptions\AggregateNotFoundException.cs" />

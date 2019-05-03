@@ -14,13 +14,15 @@ using MediatR;
 namespace GF.DillyDally.ReadModel.Projection.Tasks
 {
     internal sealed class TaskEventHandler : INotificationHandler<TaskCreatedEvent>,
-        INotificationHandler<AttachedFileToTaskEvent>, INotificationHandler<PreviewImageAssignedEvent>
+        INotificationHandler<AttachedFileToTaskEvent>, INotificationHandler<PreviewImageAssignedEvent>, INotificationHandler<TaskLinkCreatedEvent>
     {
         private readonly DatabaseFileHandler _fileHandler;
+        private IGuidGenerator _guidGenerator;
 
         public TaskEventHandler(DatabaseFileHandler fileHandler)
         {
             this._fileHandler = fileHandler;
+            this._guidGenerator = new GuidGenerator();
         }
 
         #region INotificationHandler<AttachedFileToTaskEvent> Members
@@ -41,11 +43,11 @@ namespace GF.DillyDally.ReadModel.Projection.Tasks
                 {
                     var taskFileRepository = new TaskFileRepository();
                     await taskFileRepository.InsertAsync(connection, new TaskFileEntity
-                    {
-                        TaskFileId = this._fileHandler.GuidGenerator.GenerateGuid(),
-                        TaskId = taskId,
-                        FileId = notification.FileId
-                    });
+                                                                     {
+                                                                         TaskFileId = this._fileHandler.GuidGenerator.GenerateGuid(),
+                                                                         TaskId = taskId,
+                                                                         FileId = notification.FileId
+                                                                     });
                 }
             }
         }
@@ -78,15 +80,28 @@ namespace GF.DillyDally.ReadModel.Projection.Tasks
             {
                 var taskRepository = new TaskRepository();
                 await taskRepository.InsertAsync(connection, new TaskEntity
-                {
-                    TaskId = notification.AggregateId,
-                    Name = notification.Name,
-                    CategoryId = notification.CategoryId,
-                    RunningNumberId = notification.RunningNumberId,
-                    CreatedOn = notification.CreatedOn,
-                    LaneId = notification.LaneId,
-                    PreviewImageId = notification.PreviewImageId
-                });
+                                                             {
+                                                                 TaskId = notification.AggregateId,
+                                                                 Name = notification.Name,
+                                                                 CategoryId = notification.CategoryId,
+                                                                 RunningNumberId = notification.RunningNumberId,
+                                                                 CreatedOn = notification.CreatedOn,
+                                                                 LaneId = notification.LaneId,
+                                                                 PreviewImageId = notification.PreviewImageId
+                                                             });
+            }
+        }
+
+        #endregion
+
+        #region INotificationHandler<TaskLinkCreatedEvent> Members
+
+        public async Task Handle(TaskLinkCreatedEvent notification, CancellationToken cancellationToken)
+        {
+            using (var connection = this._fileHandler.OpenConnection())
+            {
+                var repository = new TaskLinksRepository();
+                await repository.CreateNewLinkbetweenTasksAsync(connection, notification.AggregateId, notification.LinkToTaskId);
             }
         }
 
@@ -124,34 +139,34 @@ namespace GF.DillyDally.ReadModel.Projection.Tasks
             ImageEntity smallImage, ImageEntity fullImage)
         {
             return new List<TaskImageEntity>
-            {
-                CreateTaskImageEntity(taskId, previewImage, guidGenerator),
-                CreateTaskImageEntity(taskId, smallImage, guidGenerator),
-                CreateTaskImageEntity(taskId, fullImage, guidGenerator)
-            };
+                   {
+                       CreateTaskImageEntity(taskId, previewImage, guidGenerator),
+                       CreateTaskImageEntity(taskId, smallImage, guidGenerator),
+                       CreateTaskImageEntity(taskId, fullImage, guidGenerator)
+                   };
         }
 
         private static TaskImageEntity CreateTaskImageEntity(Guid taskId, ImageEntity imageEntity,
             IGuidGenerator guidGenerator)
         {
             return new TaskImageEntity
-            {
-                TaskId = taskId,
-                ImageId = imageEntity.ImageId,
-                TaskImageId = guidGenerator.GenerateGuid()
-            };
+                   {
+                       TaskId = taskId,
+                       ImageId = imageEntity.ImageId,
+                       TaskImageId = guidGenerator.GenerateGuid()
+                   };
         }
 
         private static ImageEntity CreateImageEntity(FileEntity file, IGuidGenerator guidGenerator,
             ImageSizeType imageSizeType)
         {
             return new ImageEntity
-            {
-                Binary = ImageResizer.CreateImagePreview(file.Binary, imageSizeType),
-                ImageId = guidGenerator.GenerateGuid(),
-                OriginalFileId = file.FileId,
-                SizeType = imageSizeType
-            };
+                   {
+                       Binary = ImageResizer.CreateImagePreview(file.Binary, imageSizeType),
+                       ImageId = guidGenerator.GenerateGuid(),
+                       OriginalFileId = file.FileId,
+                       SizeType = imageSizeType
+                   };
         }
     }
 }

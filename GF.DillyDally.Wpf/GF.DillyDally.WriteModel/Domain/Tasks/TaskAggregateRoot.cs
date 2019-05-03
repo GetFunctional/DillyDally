@@ -11,13 +11,12 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks
         public TaskAggregateRoot()
         {
             this.RegisterTransition<TaskCreatedEvent>(this.Apply);
-            this.RegisterTransition<UnLinkTasksEvent>(this.Apply);
             this.RegisterTransition<TaskLinkCreatedEvent>(this.Apply);
             this.RegisterTransition<AttachedFileToTaskEvent>(this.Apply);
             this.RegisterTransition<PreviewImageAssignedEvent>(this.Apply);
         }
 
-        
+
         private TaskAggregateRoot(Guid taskId, string name, Guid runningNumberId,
             Guid categoryId, Guid laneId, Guid? previewImageId) : this()
         {
@@ -26,21 +25,37 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks
             this.RaiseEvent(creationEvent);
         }
 
-        private List<TaskLink> Links { get; } = new List<TaskLink>();
-        public string Name { get; private set; }
-        public Guid CategoryId { get; private set; }
-        public Guid LaneId { get; private set; }
-        public Guid? PreviewImageId { get; private set; }
-        public ISet<Guid> AttachedFiles { get; } = new HashSet<Guid>();
+        internal IReadOnlyList<Guid> LinkedTasks
+        {
+            get
+            {
+                return this.Links;
+            }
+        }
+
+        private List<Guid> Links { get; } = new List<Guid>();
+        internal string Name { get; private set; }
+        internal Guid CategoryId { get; private set; }
+        internal Guid LaneId { get; private set; }
+        internal Guid? PreviewImageId { get; private set; }
+        private HashSet<Guid> Files { get; } = new HashSet<Guid>();
+
+        internal IReadOnlyCollection<Guid> AttachedFiles
+        {
+            get
+            {
+                return this.Files;
+            }
+        }
 
         private void Apply(AttachedFileToTaskEvent obj)
         {
-            if (this.AttachedFiles.Contains(obj.FileId))
+            if (this.Files.Contains(obj.FileId))
             {
                 throw new DuplicateAttachedFileException(obj.FileId);
             }
 
-            this.AttachedFiles.Add(obj.FileId);
+            this.Files.Add(obj.FileId);
         }
 
         private void Apply(PreviewImageAssignedEvent obj)
@@ -50,36 +65,17 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks
 
         private void Apply(TaskLinkCreatedEvent obj)
         {
-            var taskLink = new TaskLink(obj.LeftTaskId, obj.RightTaskId);
-
-            if (this.Links.Contains(taskLink))
+            if (this.Links.Contains(obj.LinkToTaskId))
             {
-                throw new DuplicateTaskLinkException(taskLink.LeftTaskId, taskLink.RightTaskId);
+                throw new DuplicateTaskLinkException(obj.LinkToTaskId);
             }
 
-            this.Links.Add(taskLink);
+            this.Links.Add(obj.LinkToTaskId);
         }
 
-        private void Apply(UnLinkTasksEvent obj)
+        public void LinkTo(Guid linkedTaskId)
         {
-            var taskLink = new TaskLink(obj.LeftTaskId, obj.RightTaskId);
-            if (this.Links == null || !this.Links.Contains(taskLink))
-            {
-                throw new TaskNotLinkFoundException(taskLink.LeftTaskId, taskLink.RightTaskId);
-            }
-
-            this.Links.Remove(taskLink);
-        }
-
-        public void LinkTasks(Guid leftTaskId, Guid rightTaskId)
-        {
-            var attachedEvent = new TaskLinkCreatedEvent(this.AggregateId, leftTaskId, rightTaskId);
-            this.RaiseEvent(attachedEvent);
-        }
-
-        public void UnLinkTasks(Guid leftTaskId, Guid rightTaskId)
-        {
-            var attachedEvent = new UnLinkTasksEvent(this.AggregateId, leftTaskId, rightTaskId);
+            var attachedEvent = new TaskLinkCreatedEvent(this.AggregateId, linkedTaskId);
             this.RaiseEvent(attachedEvent);
         }
 

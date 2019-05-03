@@ -80,6 +80,7 @@
     <Compile Include="ReadModel\Projection\LaneTests.cs" />
     <Compile Include="ReadModel\Projection\RunningNumberTests.cs" />
     <Compile Include="ReadModel\Projection\TaskImageTests.cs" />
+    <Compile Include="ReadModel\Projection\TaskLinkTests.cs" />
     <Compile Include="ReadModel\Projection\TaskTests.cs" />
     <Compile Include="SqlDbAccess\CreateDatabaseTests.cs" />
     <Compile Include="SqlDbAccess\DatabaseUpdateTests.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="DatabaseTestSetup.cs" />
     <Compile Include="WriteModel\AchievementTests.cs" />
     <Compile Include="WriteModel\RunningNumberTests.cs" />
+    <Compile Include="WriteModel\TaskLinkingTests.cs" />
     <Compile Include="WriteModel\TaskTests.cs" />
   </ItemGroup>
   <ItemGroup>
