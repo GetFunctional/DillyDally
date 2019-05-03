@@ -1,8 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using GF.DillyDally.Data.Sqlite;
-using GF.DillyDally.ReadModel.Repository;
-using GF.DillyDally.ReadModel.Repository.Entities;
+using GF.DillyDally.ReadModel.Projection.Lanes.Repository;
 using GF.DillyDally.WriteModel.Domain.Lanes.Events;
 using MediatR;
 

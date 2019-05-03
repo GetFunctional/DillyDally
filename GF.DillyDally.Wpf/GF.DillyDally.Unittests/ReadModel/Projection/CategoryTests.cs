@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using GF.DillyDally.ReadModel.Repository;
+using GF.DillyDally.ReadModel.Projection.Categories.Repository;
 using GF.DillyDally.WriteModel.Domain.Categories.Commands;
 using LightInject;
 using MediatR;
@@ -30,7 +30,7 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
             {
                 // Arrange
                 var commandDispatcher = this._infrastructureSetup.DiContainer.GetInstance<IMediator>();
-                var categoryRepository = this._infrastructureSetup.DiContainer.GetInstance<ICategoryRepository>();
+                var categoryRepository = new CategoryRepository();
 
                 // Act
                 var categoryResponse = await commandDispatcher.Send(new CreateCategoryCommand("Test", "#123456"));

@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using GF.DillyDally.ReadModel.Repository;
+using GF.DillyDally.ReadModel.Projection.RunningNumbers.Repository;
 using GF.DillyDally.WriteModel.Domain.RunningNumbers;
 using GF.DillyDally.WriteModel.Domain.RunningNumbers.Commands;
 using GF.DillyDally.WriteModel.Domain.RunningNumbers.Events;
@@ -31,8 +31,8 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
             using (var connection = this._infrastructureSetup.OpenDatabaseConnection())
             {
                 // Arrange
-                var runningNumberRepository = this._infrastructureSetup.DiContainer.GetInstance<IRunningNumberRepository>();
-                var runningNumberCounterRepository = this._infrastructureSetup.DiContainer.GetInstance<IRunningNumberCounterRepository>();
+                var runningNumberRepository = new RunningNumberRepository();
+                var runningNumberCounterRepository = new RunningNumberCounterRepository();
 
                 var commandDispatcher = this._infrastructureSetup.DiContainer.GetInstance<IMediator>();
                 var nextNumberCommand = new CreateRunningNumberCommand(RunningNumberCounterArea.Achievement);

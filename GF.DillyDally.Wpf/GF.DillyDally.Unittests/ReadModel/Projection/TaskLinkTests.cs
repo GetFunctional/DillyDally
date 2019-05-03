@@ -1,6 +1,8 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using GF.DillyDally.ReadModel.Repository;
+using GF.DillyDally.ReadModel.Projection.Categories.Repository;
+using GF.DillyDally.ReadModel.Projection.Lanes.Repository;
+using GF.DillyDally.ReadModel.Projection.Tasks.Repository;
 using GF.DillyDally.WriteModel.Domain.Tasks.Commands;
 using LightInject;
 using MediatR;
@@ -28,8 +30,8 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
             using (var connection = this._infrastructureSetup.OpenDatabaseConnection())
             {
                 var commandDispatcher = this._infrastructureSetup.DiContainer.GetInstance<IMediator>();
-                var categoryRepository = this._infrastructureSetup.DiContainer.GetInstance<ICategoryRepository>();
-                var laneRepository = this._infrastructureSetup.DiContainer.GetInstance<ILaneRepository>();
+                var categoryRepository = new CategoryRepository();
+                var laneRepository = new LaneRepository();
 
                 var exampleCategory = (await categoryRepository.GetAllAsync(connection)).FirstOrDefault();
                 var exampleLane = (await laneRepository.GetAllAsync(connection)).FirstOrDefault();
@@ -47,7 +49,7 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
             {
                 // Arrange
                 var commandDispatcher = this._infrastructureSetup.DiContainer.GetInstance<IMediator>();
-                var taskLinksRepository = this._infrastructureSetup.DiContainer.GetInstance<ITaskLinksRepository>();
+                var taskLinksRepository = new TaskLinksRepository();
                 var newTask1 = await this.CreateNewTask();
                 var newTask2 = await this.CreateNewTask();
 

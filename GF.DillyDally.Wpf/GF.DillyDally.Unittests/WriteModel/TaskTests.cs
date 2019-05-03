@@ -2,7 +2,9 @@
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using GF.DillyDally.ReadModel.Repository;
+using GF.DillyDally.ReadModel.Projection.Categories.Repository;
+using GF.DillyDally.ReadModel.Projection.Files.Repository;
+using GF.DillyDally.ReadModel.Projection.Lanes.Repository;
 using GF.DillyDally.WriteModel.Domain.Tasks.Commands;
 using LightInject;
 using MediatR;
@@ -30,8 +32,8 @@ namespace GF.DillyDally.Unittests.WriteModel
             using (var connection = this._infrastructureSetup.OpenDatabaseConnection())
             {
                 var commandDispatcher = this._infrastructureSetup.DiContainer.GetInstance<IMediator>();
-                var categoryRepository = this._infrastructureSetup.DiContainer.GetInstance<ICategoryRepository>();
-                var laneRepository = this._infrastructureSetup.DiContainer.GetInstance<ILaneRepository>();
+                var categoryRepository = new CategoryRepository();
+                var laneRepository = new LaneRepository();
 
                 var exampleCategory = (await categoryRepository.GetAllAsync(connection)).FirstOrDefault();
                 var exampleLane = (await laneRepository.GetAllAsync(connection)).FirstOrDefault();
@@ -85,7 +87,7 @@ namespace GF.DillyDally.Unittests.WriteModel
             {
                 // Arrange
                 var commandDispatcher = this._infrastructureSetup.DiContainer.GetInstance<IMediator>();
-                var fileRepository = this._infrastructureSetup.DiContainer.GetInstance<IFileRepository>();
+                var fileRepository = new FileRepository();
 
                 var newTask = await this.CreateNewTask();
                 var fileName = "TestImage.jpg";

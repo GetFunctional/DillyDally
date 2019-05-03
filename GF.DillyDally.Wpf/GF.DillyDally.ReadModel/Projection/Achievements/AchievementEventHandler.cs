@@ -2,8 +2,7 @@
 using System.Threading.Tasks;
 using Dapper;
 using GF.DillyDally.Data.Sqlite;
-using GF.DillyDally.ReadModel.Repository;
-using GF.DillyDally.ReadModel.Repository.Entities;
+using GF.DillyDally.ReadModel.Projection.Achievements.Repository;
 using GF.DillyDally.WriteModel.Domain.Achievements.Events;
 using MediatR;
 

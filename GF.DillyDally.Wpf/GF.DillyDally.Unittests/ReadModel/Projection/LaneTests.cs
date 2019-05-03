@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using GF.DillyDally.ReadModel.Repository;
+using GF.DillyDally.ReadModel.Projection.Lanes.Repository;
 using GF.DillyDally.WriteModel.Domain.Lanes.Commands;
 using LightInject;
 using MediatR;
@@ -30,7 +30,7 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
             {
                 // Arrange
                 var commandDispatcher = this._infrastructureSetup.DiContainer.GetInstance<IMediator>();
-                var laneRepository = this._infrastructureSetup.DiContainer.GetInstance<ILaneRepository>();
+                var laneRepository = new LaneRepository();
                 var name = "Test";
                 var colorCode = "#123456";
 

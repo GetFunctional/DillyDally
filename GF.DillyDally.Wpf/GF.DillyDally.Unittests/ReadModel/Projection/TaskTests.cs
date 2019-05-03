@@ -1,10 +1,10 @@
 ﻿using System;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using GF.DillyDally.ReadModel.Repository;
+using GF.DillyDally.ReadModel.Projection.Categories.Repository;
+using GF.DillyDally.ReadModel.Projection.Lanes.Repository;
+using GF.DillyDally.ReadModel.Projection.Tasks.Repository;
 using GF.DillyDally.WriteModel.Domain.Tasks.Commands;
-using GF.DillyDally.WriteModel.Domain.Tasks.Exceptions;
 using LightInject;
 using MediatR;
 using NUnit.Framework;
@@ -31,8 +31,8 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
             using (var connection = this._infrastructureSetup.OpenDatabaseConnection())
             {
                 var commandDispatcher = this._infrastructureSetup.DiContainer.GetInstance<IMediator>();
-                var categoryRepository = this._infrastructureSetup.DiContainer.GetInstance<ICategoryRepository>();
-                var laneRepository = this._infrastructureSetup.DiContainer.GetInstance<ILaneRepository>();
+                var categoryRepository = new CategoryRepository();
+                var laneRepository = new LaneRepository();
 
                 var exampleCategory = (await categoryRepository.GetAllAsync(connection)).FirstOrDefault();
                 var exampleLane = (await laneRepository.GetAllAsync(connection)).FirstOrDefault();
@@ -41,7 +41,7 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
                 return task;
             }
         }
-        
+
         [Test]
         public async Task Creating_Task_ShouldCreateProjection()
         {
@@ -49,9 +49,9 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
             using (var connection = this._infrastructureSetup.OpenDatabaseConnection())
             {
                 var commandDispatcher = this._infrastructureSetup.DiContainer.GetInstance<IMediator>();
-                var repository = this._infrastructureSetup.DiContainer.GetInstance<ITaskRepository>();
-                var categoryRepository = this._infrastructureSetup.DiContainer.GetInstance<ICategoryRepository>();
-                var laneRepository = this._infrastructureSetup.DiContainer.GetInstance<ILaneRepository>();
+                var repository = new TaskRepository();
+                var categoryRepository = new CategoryRepository();
+                var laneRepository = new LaneRepository();
                 var exampleCategory = (await categoryRepository.GetAllAsync(connection)).FirstOrDefault();
                 var exampleLane = (await laneRepository.GetAllAsync(connection)).FirstOrDefault();
                 var timeStampBeforeCreation = DateTime.Now;

@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using GF.DillyDally.Data.Sqlite;
-using GF.DillyDally.ReadModel.Repository;
+using GF.DillyDally.ReadModel.Projection.RunningNumbers.Repository;
 using GF.DillyDally.WriteModel.Domain.RunningNumbers.Events;
 using MediatR;
 

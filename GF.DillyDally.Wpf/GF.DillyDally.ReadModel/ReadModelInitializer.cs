@@ -1,7 +1,6 @@
 ﻿using System.Reflection;
 using GF.DillyDally.ReadModel.Deprecated.Account;
 using GF.DillyDally.ReadModel.Deprecated.Common;
-using GF.DillyDally.ReadModel.Repository;
 using LightInject;
 using MediatR;
 using MediatR.Pipeline;
@@ -18,21 +17,8 @@ namespace GF.DillyDally.ReadModel
 
         private static void RegisterTypes(IServiceContainer serviceContainer)
         {
-            serviceContainer.Register<ICategoryRepository, CategoryRepository>();
-            serviceContainer.Register<ILaneRepository, LaneRepository>();
             serviceContainer.Register<ICommonDataRepository, CommonDataRepository>();
             serviceContainer.Register<IAccountRepository, AccountRepository>();
-            serviceContainer.Register<IAchievementRepository, AchievementRepository>();
-            serviceContainer.Register<IAchievementCompletionRepository, AchievementCompletionRepository>();
-            serviceContainer.Register<IFileRepository, FileRepository>();
-            serviceContainer.Register<IImageRepository, ImageRepository>();
-            serviceContainer.Register<IRunningNumberCounterRepository, RunningNumberCounterRepository>();
-            serviceContainer.Register<IRunningNumberRepository, RunningNumberRepository>();
-            serviceContainer.Register<ITaskRepository, TaskRepository>();
-            serviceContainer.Register<ITaskFileRepository, TaskFileRepository>();
-            serviceContainer.Register<ITaskImageRepository, TaskImageRepository>();
-            serviceContainer.Register<ITaskLinksRepository, TaskLinksRepository>();
-
         }
 
         private static void RegisterMediations(IServiceContainer serviceContainer)

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using GF.DillyDally.ReadModel.Repository;
+using GF.DillyDally.ReadModel.Projection.Achievements.Repository;
 using GF.DillyDally.WriteModel.Domain.Achievements.Commands;
 using LightInject;
 using MediatR;
@@ -31,7 +31,7 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
             {
                 // Arrange
                 var commandDispatcher = this._infrastructureSetup.DiContainer.GetInstance<IMediator>();
-                var repository = this._infrastructureSetup.DiContainer.GetInstance<IAchievementRepository>();
+                var repository = new AchievementRepository();
                 var command = new CreateAchievementCommand("Test", 1, 5);
                 var newAchievement = await commandDispatcher.Send(command);
 
@@ -57,7 +57,7 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
             {
                 // Arrange
                 var commandDispatcher = this._infrastructureSetup.DiContainer.GetInstance<IMediator>();
-                var repository = this._infrastructureSetup.DiContainer.GetInstance<IAchievementRepository>();
+                var repository = new AchievementRepository();
                 var command = new CreateAchievementCommand("Test", 1, 5);
                 var newAchievement = await commandDispatcher.Send(command);
                 var newAchievement2 = await commandDispatcher.Send(command);
@@ -85,7 +85,7 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
                 var createCommand = new CreateAchievementCommand("Test", 1, 3);
                 var newAchievement = await commandDispatcher.Send(createCommand);
                 var command = new CompleteAchievementCommand(newAchievement.AchievementId);
-                var repository = this._infrastructureSetup.DiContainer.GetInstance<IAchievementCompletionRepository>();
+                var repository = new AchievementCompletionRepository();
                 var timeStampBeforeCompletion = DateTime.Now;
 
                 // Act
@@ -110,7 +110,7 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
             {
                 // Arrange
                 var commandDispatcher = this._infrastructureSetup.DiContainer.GetInstance<IMediator>();
-                var repository = this._infrastructureSetup.DiContainer.GetInstance<IAchievementRepository>();
+                var repository = new AchievementRepository();
                 var command = new CreateAchievementCommand("Test", 1, 5);
 
                 // Act

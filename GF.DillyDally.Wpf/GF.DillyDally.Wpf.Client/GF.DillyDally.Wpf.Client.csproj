@@ -75,6 +75,7 @@
       <HintPath>..\..\Libs\MediatR.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Data" />
     <Reference Include="System.IO" />
     <Reference Include="System.Linq.Expressions" />
     <Reference Include="System.Runtime" />
@@ -212,6 +213,13 @@
     <Compile Include="Presentation\Common\Rewards\SelectRewardViewModel.cs" />
     <Compile Include="Presentation\Tasks\OpenTasksListControllerRequest.cs" />
     <Compile Include="Presentation\Tasks\RewardViewModel.cs" />
+    <Compile Include="Presentation\Tasks\TaskBoard\TaskBoardLaneViewModel.cs" />
+    <Compile Include="Presentation\Tasks\TaskBoard\TaskBoardView.xaml.cs">
+      <DependentUpon>TaskBoardView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Presentation\Tasks\TaskBoard\TaskBoardController.cs" />
+    <Compile Include="Presentation\Tasks\TaskBoard\TaskBoardNavigationTarget.cs" />
+    <Compile Include="Presentation\Tasks\TaskBoard\TaskBoardViewModel.cs" />
     <Compile Include="Presentation\Tasks\TasksOverviewController.cs" />
     <Compile Include="Presentation\Tasks\TasksOverviewNavigationTarget.cs" />
     <Compile Include="Presentation\Tasks\TasksListController.cs" />
@@ -263,6 +271,10 @@
     <Page Include="Presentation\Tasks\CreateTask\CreateTaskView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Presentation\Tasks\TaskBoard\TaskBoardView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Presentation\Tasks\TasksListTemplates.xaml">
       <SubType>Designer</SubType>
