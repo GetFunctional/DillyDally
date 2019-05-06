@@ -24,6 +24,8 @@
             <SolidColorBrush x:Key="BorderBrush" Color="{StaticResource BorderGrey}" />
             <SolidColorBrush x:Key="TaskItemHightlightBrush" Color="{StaticResource HighlightOrange}" />
             <SolidColorBrush x:Key="TaskItemBackgroundBrush" Color="{StaticResource Layer1Background}" />
+            <SolidColorBrush x:Key="TaskItemBackgroundHoverBrush" Color="{StaticResource Layer3Background}" />
+
             <conv:ColorStringToBrushConverter x:Key="ColorStringToBrushConverter" />
 
             <DataTemplate x:Key="TaskTemplate" DataType="{x:Type tasks:TaskBoardTaskViewModel}">
@@ -31,12 +33,21 @@
                     BorderBrush="{StaticResource BorderBrush}"
                     BorderThickness="1"
                     CornerRadius="4">
+                    <Border.Style>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="Background" Value="{StaticResource TaskItemBackgroundBrush}" />
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="{StaticResource TaskItemBackgroundHoverBrush}" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
                     <dxlc:LayoutGroup
                         Width="340"
                         Height="140"
                         Margin="0"
                         Padding="0"
-                        Background="{StaticResource TaskItemBackgroundBrush}"
                         ItemSpace="7">
                         <Border
                             HorizontalAlignment="Left"
@@ -82,7 +93,10 @@
                     <ItemsControl ItemTemplate="{StaticResource TaskTemplate}" ItemsSource="{Binding Tasks, Mode=OneWay}">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <dxlc:LayoutGroup ItemSpace="3" Orientation="Vertical" />
+                                <dxlc:LayoutGroup
+                                    VerticalAlignment="Top"
+                                    ItemSpace="3"
+                                    Orientation="Vertical" />
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                     </ItemsControl>
@@ -95,7 +109,11 @@
             <ItemsControl ItemTemplate="{StaticResource TaskLaneTemplate}" ItemsSource="{Binding Lanes, Mode=OneWay}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <dxlc:LayoutGroup ItemSpace="10" Orientation="Horizontal" />
+                        <dxlc:LayoutGroup
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            ItemSpace="10"
+                            Orientation="Horizontal" />
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
