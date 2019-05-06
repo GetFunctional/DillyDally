@@ -23,9 +23,9 @@
     <ContentControl FontFamily="{StaticResource SourceSansProBlack}" FontSize="{StaticResource ParagraphFontSize}">
         <dxlc:LayoutGroup Orientation="Vertical">
             <dxlc:LayoutGroup VerticalAlignment="Top" Orientation="Horizontal">
-                <TextBlock FontSize="28" Text="Rewardsytem" />
+                <!--<TextBlock FontSize="28" Text="Rewardsytem" />
                 <TextBlock FontSize="28" Text="Ernährung" />
-                <TextBlock FontSize="28" Text="Sonstiges" />
+                <TextBlock FontSize="28" Text="Sonstiges" />-->
             </dxlc:LayoutGroup>
 
             <ContentControl Content="{Binding ContentBrowserViewModel, Mode=OneWay}" />

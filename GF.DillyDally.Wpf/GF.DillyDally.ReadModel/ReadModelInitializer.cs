@@ -1,6 +1,4 @@
 ﻿using System.Reflection;
-using GF.DillyDally.ReadModel.Deprecated.Account;
-using GF.DillyDally.ReadModel.Deprecated.Common;
 using LightInject;
 using MediatR;
 using MediatR.Pipeline;
@@ -11,14 +9,7 @@ namespace GF.DillyDally.ReadModel
     {
         public void Initialize(IServiceContainer serviceContainer)
         {
-            RegisterTypes(serviceContainer);
             RegisterMediations(serviceContainer);
-        }
-
-        private static void RegisterTypes(IServiceContainer serviceContainer)
-        {
-            serviceContainer.Register<ICommonDataRepository, CommonDataRepository>();
-            serviceContainer.Register<IAccountRepository, AccountRepository>();
         }
 
         private static void RegisterMediations(IServiceContainer serviceContainer)

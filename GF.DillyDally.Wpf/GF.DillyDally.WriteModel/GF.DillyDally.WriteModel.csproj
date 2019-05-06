@@ -135,10 +135,6 @@
     <Compile Include="Infrastructure\AggregateEventBase.cs" />
     <Compile Include="Infrastructure\Exceptions\AggregateNotFoundException.cs" />
     <Compile Include="Infrastructure\CommandHandlerBase.cs" />
-    <Compile Include="Deprecated\DillyDallyTask.cs" />
-    <Compile Include="Deprecated\ITask.cs" />
-    <Compile Include="Deprecated\ITaskReward.cs" />
-    <Compile Include="Deprecated\ITaskService.cs" />
     <Compile Include="Infrastructure\AggregateRootBase.cs" />
     <Compile Include="Infrastructure\AggregateRepository.cs" />
     <Compile Include="Infrastructure\Exceptions\MssingEventRouteException.cs" />
@@ -150,9 +146,6 @@
     <Compile Include="Infrastructure\Exceptions\MissingEventsForAggregateException.cs" />
     <Compile Include="RandomExtensions.cs" />
     <Compile Include="WriteModelInitializer.cs" />
-    <Compile Include="Deprecated\CurrencyService.cs" />
-    <Compile Include="Deprecated\ICurrencyService.cs" />
-    <Compile Include="Deprecated\TaskService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

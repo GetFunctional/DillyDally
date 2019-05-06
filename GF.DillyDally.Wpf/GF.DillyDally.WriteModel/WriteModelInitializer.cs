@@ -1,6 +1,5 @@
 ﻿using System.Data.SQLite;
 using System.Reflection;
-using GF.DillyDally.WriteModel.Deprecated;
 using GF.DillyDally.WriteModel.Infrastructure;
 using LightInject;
 using MediatR;
@@ -52,8 +51,6 @@ namespace GF.DillyDally.WriteModel
         private void RegisterServices(IServiceContainer serviceContainer)
         {
             serviceContainer.Register<IAggregateRepository, AggregateRepository>();
-            serviceContainer.Register<ITaskService, TaskService>();
-            serviceContainer.Register<ICurrencyService, CurrencyService>();
         }
 
         private IStoreEvents WireupEventStore(string dillyDallyStoreConnectionString)

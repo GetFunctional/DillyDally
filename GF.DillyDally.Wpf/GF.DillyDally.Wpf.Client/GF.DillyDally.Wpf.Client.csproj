@@ -127,7 +127,6 @@
     <Compile Include="Core\Dialoge\IDialogSettings.cs" />
     <Compile Include="Core\InitializationSettings.cs" />
     <Compile Include="Core\Navigator\NavigationTargetBase.cs" />
-    <Compile Include="Handler\GetAllCurrenciesHandler.cs" />
     <Compile Include="Handler\NavigationHandler.cs" />
     <Compile Include="Core\Mediation\Navigation\NavigationResponse.cs" />
     <Compile Include="Core\Navigator\NavigationInitializer.cs" />
@@ -143,53 +142,17 @@
     <Compile Include="Core\Navigator\NavigationTargetMap.cs" />
     <Compile Include="Core\Exceptions\NavigationTargetNotFoundException.cs" />
     <Compile Include="DillyDallyApplication.cs" />
-    <Compile Include="Handler\OpenTasksListControllerHandler.cs" />
     <Compile Include="Presentation\ShowCase\ShowCaseController.cs" />
     <Compile Include="Presentation\ShowCase\ShowCaseNavigationTarget.cs" />
     <Compile Include="Presentation\ShowCase\ShowCaseView.xaml.cs">
       <DependentUpon>ShowCaseView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Presentation\ShowCase\ShowCaseViewModel.cs" />
-    <Compile Include="Presentation\Tasks\CreateTask\CreateNewTaskHandler.cs" />
-    <Compile Include="Presentation\Tasks\CreateTask\CreateNewTaskResponse.cs" />
     <Compile Include="IDillyDallyApplication.cs" />
-    <Compile Include="Presentation\Common\Currencies\CreateCurrency\NewCurrencyController.cs" />
-    <Compile Include="Presentation\Common\Currencies\CreateCurrency\NewCurrencyViewModel.cs" />
-    <Compile Include="Presentation\Balance\AccountBalanceController.cs" />
-    <Compile Include="Presentation\Balance\AccountBalanceControllerFactory.cs" />
-    <Compile Include="Presentation\Balance\AccountBalanceViewModel.cs" />
-    <Compile Include="Presentation\Balance\BalanceOverviewController.cs" />
-    <Compile Include="Presentation\Balance\BalanceOverviewNavigationTarget.cs" />
-    <Compile Include="Presentation\Balance\BalanceOverviewView.xaml.cs">
-      <DependentUpon>BalanceOverviewView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Presentation\Balance\BalanceOverviewViewModel.cs" />
-    <Compile Include="Presentation\Common\Currencies\AddNewCurrencyCommand.cs" />
-    <Compile Include="Presentation\Common\Currencies\CurrenciesOverviewNavigationTarget.cs" />
-    <Compile Include="Presentation\Common\Currencies\CurrenciesOverviewController.cs" />
-    <Compile Include="Presentation\Common\Currencies\CurrenciesOverviewView.xaml.cs">
-      <DependentUpon>CurrenciesOverviewView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Presentation\Common\Currencies\CurrenciesOverviewViewModel.cs" />
-    <Compile Include="Presentation\Common\Currencies\CreateCurrency\NewCurrencyRequestHandler.cs" />
-    <Compile Include="Presentation\Common\Currencies\CreateCurrency\NewCurrencyResponse.cs" />
-    <Compile Include="Presentation\Common\Currencies\CreateCurrency\NewCurrencyView.xaml.cs">
-      <DependentUpon>NewCurrencyView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Presentation\Common\Currencies\CreateCurrency\NewCurrencyRequest.cs" />
-    <Compile Include="Presentation\Common\Currencies\SaveNewCurrencyHandler.cs" />
-    <Compile Include="Presentation\Common\Currencies\SaveNewCurrencyRequest.cs" />
-    <Compile Include="Presentation\Common\Currencies\SaveNewCurrencyResponse.cs" />
-    <Compile Include="Presentation\Common\GetAllCurrenciesRequest.cs" />
-    <Compile Include="Presentation\Common\CommonDataViewModelFactory.cs" />
-    <Compile Include="Presentation\Common\CurrencyViewModel.cs" />
     <Compile Include="Presentation\ContentNavigation\NavigateToTargetCommand.cs" />
     <Compile Include="Core\Mediation\Navigation\NavigationRequest.cs" />
     <Compile Include="Core\Mediation\Navigation\NavigationRequestFactory.cs" />
     <Compile Include="Presentation\ContentNavigation\NavigationTargetViewModel.cs" />
-    <Compile Include="Presentation\Rewards\AccountsController.cs" />
-    <Compile Include="Presentation\Rewards\AccountsNavigationTarget.cs" />
-    <Compile Include="Presentation\Rewards\AccountsViewModel.cs" />
     <Compile Include="Presentation\ContentNavigation\AddNewNavigatorCommand.cs" />
     <Compile Include="Presentation\ContentNavigation\CloseNavigatorCommand.cs" />
     <Compile Include="Presentation\ContentNavigation\ContentBrowserController.cs" />
@@ -211,20 +174,7 @@
     <Compile Include="Core\Exceptions\MultipleViewDefinitionException.cs" />
     <Compile Include="Core\DataTemplates\IViewFor.cs" />
     <Compile Include="Core\DataTemplates\ViewDataTemplateAggregator.cs" />
-    <Compile Include="Presentation\Rewards\AccountsView.xaml.cs">
-      <DependentUpon>AccountsView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Presentation\ContentNavigation\SearchContentNavigationTarget.cs" />
-    <Compile Include="Presentation\Tasks\AddTaskCommand.cs" />
-    <Compile Include="Presentation\Tasks\CreateTask\CreateNewTaskRequest.cs" />
-    <Compile Include="Presentation\Tasks\CreateTask\CreateTaskController.cs" />
-    <Compile Include="Presentation\Tasks\CreateTask\CreateTaskView.xaml.cs">
-      <DependentUpon>CreateTaskView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Presentation\Tasks\CreateTask\CreateTaskViewModel.cs" />
-    <Compile Include="Presentation\Common\Rewards\SelectRewardViewModel.cs" />
-    <Compile Include="Presentation\Tasks\OpenTasksListControllerRequest.cs" />
-    <Compile Include="Presentation\Tasks\RewardViewModel.cs" />
     <Compile Include="Presentation\Tasks\TaskBoard\TaskBoardLaneViewModel.cs" />
     <Compile Include="Presentation\Tasks\TaskBoard\TaskBoardTaskViewModel.cs" />
     <Compile Include="Presentation\Tasks\TaskBoard\TaskBoardView.xaml.cs">
@@ -233,31 +183,9 @@
     <Compile Include="Presentation\Tasks\TaskBoard\TaskBoardController.cs" />
     <Compile Include="Presentation\Tasks\TaskBoard\TaskBoardNavigationTarget.cs" />
     <Compile Include="Presentation\Tasks\TaskBoard\TaskBoardViewModel.cs" />
-    <Compile Include="Presentation\Tasks\TasksOverviewController.cs" />
-    <Compile Include="Presentation\Tasks\TasksOverviewNavigationTarget.cs" />
-    <Compile Include="Presentation\Tasks\TasksListController.cs" />
-    <Compile Include="Presentation\Tasks\TasksListViewModel.cs" />
     <Compile Include="Presentation\ShellController.cs" />
     <Compile Include="Presentation\ShellViewModel.cs" />
-    <Compile Include="Presentation\Tasks\TaskViewModel.cs" />
-    <Compile Include="Presentation\Tasks\TaskViewModelFactory.cs" />
     <Page Include="Core\Dialoge\DialogWindowView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Presentation\Balance\BalanceOverviewView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Presentation\Balance\AccountBalanceTemplates.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Presentation\Common\Currencies\CurrenciesOverviewView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Presentation\Common\Currencies\CreateCurrency\NewCurrencyView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -273,25 +201,13 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Presentation\Rewards\AccountsView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Presentation\ShowCase\ShowCaseView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Presentation\Tasks\CreateTask\CreateTaskView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Presentation\Tasks\TaskBoard\TaskBoardView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Presentation\Tasks\TasksListTemplates.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Presentation\Shell.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -306,16 +222,8 @@
       <DependentUpon>Shell.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Presentation\Tasks\TasksOverviewView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Presentation\Tasks\TasksOverviewView.xaml.cs">
-      <DependentUpon>TasksOverviewView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Presentation\Tasks\TasksOverviewViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

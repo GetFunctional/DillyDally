@@ -6,51 +6,89 @@
     xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:tasks="clr-namespace:GF.DillyDally.Wpf.Client.Presentation.Tasks"
+    xmlns:wpf="http://schemas.getfunctional.de/dillydally/wpf"
     d:DataContext="{d:DesignInstance Type={x:Type tasks:TaskBoardViewModel}}"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
 
     <UserControl.Resources>
-        <DataTemplate x:Key="TaskTemplate" DataType="{x:Type tasks:TaskBoardTaskViewModel}">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="3" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <wpf:SharedResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Colors.xaml" />
+                <wpf:SharedResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Typography.xaml" />
+
+            </ResourceDictionary.MergedDictionaries>
+            <SolidColorBrush x:Key="BorderBrush" Color="{StaticResource BorderGrey}" />
+            <SolidColorBrush x:Key="TaskItemHightlightBrush" Color="{StaticResource HighlightOrange}" />
+            <SolidColorBrush x:Key="TaskItemBackgroundBrush" Color="{StaticResource Layer1Background}" />
+
+            <DataTemplate x:Key="TaskTemplate" DataType="{x:Type tasks:TaskBoardTaskViewModel}">
                 <Border
-                    Grid.Column="0"
-                    Width="3"
-                    BorderBrush="Orange" />
-                <dxlc:LayoutGroup Grid.Column="1" Orientation="Vertical">
-                    <TextBlock Text="{Binding Name}" />
+                    BorderBrush="{StaticResource BorderBrush}"
+                    BorderThickness="1"
+                    CornerRadius="4">
+                    <dxlc:LayoutGroup
+                        Width="340"
+                        Height="190"
+                        Margin="0"
+                        Padding="0"
+                        Background="{StaticResource TaskItemBackgroundBrush}"
+                        ItemSpace="7">
+                        <Border
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Stretch"
+                            Background="{StaticResource TaskItemHightlightBrush}"
+                            CornerRadius="4,0,0,4">
+                            <Rectangle Width="3" />
+                        </Border>
+                        <dxlc:LayoutGroup
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            ItemSpace="13"
+                            Orientation="Vertical">
+                            <TextBlock Text="{Binding RunningNumber}" />
+                            <TextBlock Text="{Binding Name}" />
+                            <TextBlock Text="{Binding Category}" />
+                        </dxlc:LayoutGroup>
+                        <dxlc:LayoutGroup
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Stretch"
+                            Orientation="Vertical">
+                            <TextBlock Text="{Binding Storypoints}" />
+                        </dxlc:LayoutGroup>
+                    </dxlc:LayoutGroup>
+                </Border>
+            </DataTemplate>
+
+            <DataTemplate x:Key="TaskLaneTemplate" DataType="{x:Type tasks:TaskBoardLaneViewModel}">
+                <dxlc:LayoutGroup Orientation="Vertical">
+                    <TextBlock
+                        VerticalAlignment="Top"
+                        FontSize="{StaticResource H2FontSize}"
+                        Text="{Binding LaneName}" />
+                    <ItemsControl ItemTemplate="{StaticResource TaskTemplate}" ItemsSource="{Binding Tasks, Mode=OneWay}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <dxlc:LayoutGroup ItemSpace="3" Orientation="Vertical" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
                 </dxlc:LayoutGroup>
-            </Grid>
-        </DataTemplate>
-
-        <DataTemplate x:Key="TaskLaneTemplate" DataType="{x:Type tasks:TaskBoardLaneViewModel}">
-            <dxlc:LayoutGroup Orientation="Vertical">
-                <TextBlock VerticalAlignment="Top" Text="{Binding LaneName}" />
-                <ItemsControl ItemTemplate="{StaticResource TaskTemplate}" ItemsSource="{Binding Tasks, Mode=OneWay}">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <dxlc:LayoutGroup VerticalAlignment="Top" Orientation="Vertical" />
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                </ItemsControl>
-            </dxlc:LayoutGroup>
-        </DataTemplate>
+            </DataTemplate>
+        </ResourceDictionary>
     </UserControl.Resources>
-
-
     <dxlc:LayoutControl>
 
-        <ItemsControl ItemTemplate="{StaticResource TaskLaneTemplate}" ItemsSource="{Binding Lanes, Mode=OneWay}">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <dxlc:LayoutGroup Orientation="Horizontal" />
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-        </ItemsControl>
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+            <ItemsControl ItemTemplate="{StaticResource TaskLaneTemplate}" ItemsSource="{Binding Lanes, Mode=OneWay}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <dxlc:LayoutGroup ItemSpace="10" Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </ScrollViewer>
+
     </dxlc:LayoutControl>
 </UserControl>

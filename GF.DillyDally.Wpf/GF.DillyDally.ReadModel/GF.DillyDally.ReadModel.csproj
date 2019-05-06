@@ -66,10 +66,6 @@
     <Compile Include="Projection\Tasks\TaskEventHandler.cs" />
     <Compile Include="Projection\Achievements\Repository\AchievementCompletionRepository.cs" />
     <Compile Include="Projection\Achievements\Repository\AchievementRepository.cs" />
-    <Compile Include="Deprecated\Account\AccountRepository.cs" />
-    <Compile Include="Deprecated\Account\IAccountRepository.cs" />
-    <Compile Include="Deprecated\Common\CommonDataRepository.cs" />
-    <Compile Include="Deprecated\Common\ICommonDataRepository.cs" />
     <Compile Include="Projection\Categories\Repository\CategoryRepository.cs" />
     <Compile Include="Projection\Achievements\Repository\AchievementEntity.cs" />
     <Compile Include="Projection\Achievements\Repository\AchievementCompletion.cs" />
