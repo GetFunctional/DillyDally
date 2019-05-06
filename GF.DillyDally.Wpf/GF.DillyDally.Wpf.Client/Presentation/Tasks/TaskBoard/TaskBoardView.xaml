@@ -2,6 +2,8 @@
     x:Class="GF.DillyDally.Wpf.Client.Presentation.Tasks.TaskBoard.TaskBoardView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:conv="http://schemas.getfunctional.de/dillydally/converter"
+    xmlns:ctrls="http://schemas.getfunctional.de/dillydally/controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -17,11 +19,12 @@
             <ResourceDictionary.MergedDictionaries>
                 <wpf:SharedResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Colors.xaml" />
                 <wpf:SharedResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Typography.xaml" />
-
             </ResourceDictionary.MergedDictionaries>
+
             <SolidColorBrush x:Key="BorderBrush" Color="{StaticResource BorderGrey}" />
             <SolidColorBrush x:Key="TaskItemHightlightBrush" Color="{StaticResource HighlightOrange}" />
             <SolidColorBrush x:Key="TaskItemBackgroundBrush" Color="{StaticResource Layer1Background}" />
+            <conv:ColorStringToBrushConverter x:Key="ColorStringToBrushConverter" />
 
             <DataTemplate x:Key="TaskTemplate" DataType="{x:Type tasks:TaskBoardTaskViewModel}">
                 <Border
@@ -30,7 +33,7 @@
                     CornerRadius="4">
                     <dxlc:LayoutGroup
                         Width="340"
-                        Height="190"
+                        Height="140"
                         Margin="0"
                         Padding="0"
                         Background="{StaticResource TaskItemBackgroundBrush}"
@@ -43,13 +46,21 @@
                             <Rectangle Width="3" />
                         </Border>
                         <dxlc:LayoutGroup
+                            Margin="0,16"
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch"
                             ItemSpace="13"
                             Orientation="Vertical">
-                            <TextBlock Text="{Binding RunningNumber}" />
-                            <TextBlock Text="{Binding Name}" />
-                            <TextBlock Text="{Binding Category}" />
+                            <ctrls:RunningNumberControl RunningNumber="{Binding RunningNumber}" />
+                            <TextBlock
+                                VerticalAlignment="Top"
+                                Text="{Binding Name}"
+                                TextAlignment="Left" />
+                            <ctrls:LabelControl
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                LabelBrush="{Binding ColorString, Converter={StaticResource ColorStringToBrushConverter}}"
+                                LabelText="{Binding Category}" />
                         </dxlc:LayoutGroup>
                         <dxlc:LayoutGroup
                             HorizontalAlignment="Right"
@@ -65,7 +76,8 @@
                 <dxlc:LayoutGroup Orientation="Vertical">
                     <TextBlock
                         VerticalAlignment="Top"
-                        FontSize="{StaticResource H2FontSize}"
+                        FontSize="{StaticResource H3FontSize}"
+                        Foreground="{StaticResource H3Foreground}"
                         Text="{Binding LaneName}" />
                     <ItemsControl ItemTemplate="{StaticResource TaskTemplate}" ItemsSource="{Binding Tasks, Mode=OneWay}">
                         <ItemsControl.ItemsPanel>
@@ -79,7 +91,6 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <dxlc:LayoutControl>
-
         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
             <ItemsControl ItemTemplate="{StaticResource TaskLaneTemplate}" ItemsSource="{Binding Lanes, Mode=OneWay}">
                 <ItemsControl.ItemsPanel>
@@ -89,6 +100,5 @@
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
         </ScrollViewer>
-
     </dxlc:LayoutControl>
 </UserControl>

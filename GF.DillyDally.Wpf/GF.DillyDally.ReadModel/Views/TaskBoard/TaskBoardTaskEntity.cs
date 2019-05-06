@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace GF.DillyDally.ReadModel.Views.TaskBoard
 {
@@ -7,6 +8,8 @@ namespace GF.DillyDally.ReadModel.Views.TaskBoard
         public Guid TaskId { get; set; }
 
         public string Name { get; set; }
+
+        public TaskBoardCategoryEntity Category { get; set; }
 
         public Guid CategoryId { get; set; }
 

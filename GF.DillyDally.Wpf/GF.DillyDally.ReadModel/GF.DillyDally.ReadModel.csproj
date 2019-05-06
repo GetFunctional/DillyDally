@@ -89,6 +89,7 @@
     <Compile Include="Projection\Tasks\Repository\TaskEntity.cs" />
     <Compile Include="Projection\RunningNumbers\Repository\RunningNumberCounterRepository.cs" />
     <Compile Include="Projection\RunningNumbers\Repository\RunningNumberRepository.cs" />
+    <Compile Include="Views\TaskBoard\TaskBoardCategoryEntity.cs" />
     <Compile Include="Views\TaskBoard\TaskBoardRepository.cs" />
     <Compile Include="Views\TaskBoard\TaskBoardLaneEntity.cs" />
     <Compile Include="Projection\Tasks\Repository\TaskFileRepository.cs" />

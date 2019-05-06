@@ -1,15 +1,25 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:extensions="clr-namespace:GF.DillyDally.Wpf.Theme.Extensions"
-    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    xmlns:extensions="clr-namespace:GF.DillyDally.Wpf.Theme.Extensions">
 
     <FontFamily x:Key="SourceSansProBlack">pack://application:,,,/GF.DillyDally.wpf.Theme;component/StyleGuide/Fonts/#SourceSansPro</FontFamily>
 
     <!--  SourceSansPro  -->
-    <extensions:FontSize x:Key="ParagraphFontSize" Size="12pt" />
-    <extensions:FontSize x:Key="H1FontSize" Size="18pt" />
-    <extensions:FontSize x:Key="H2FontSize" Size="16pt" />
-    <extensions:FontSize x:Key="H3FontSize" Size="14pt" />
+    <extensions:FontSize x:Key="ParagraphFontSize" Size="16px" />
+    <extensions:FontSize x:Key="AdditionalParagraphFontSize" Size="14px" />
+    <extensions:FontSize x:Key="LinkFontSize" Size="16px" />
+    <extensions:FontSize x:Key="H1FontSize" Size="32px" />
+    <extensions:FontSize x:Key="H2FontSize" Size="22px" />
+    <extensions:FontSize x:Key="H3FontSize" Size="20px" />
+
+
+    <SolidColorBrush x:Key="ParagraphForeground" Color="#71787E" />
+    <SolidColorBrush x:Key="AdditionalParagraphForeground" Color="#71787E" />
+    <SolidColorBrush x:Key="LinkForeground" Color="#009AD4" />
+    <SolidColorBrush x:Key="LinkForegroundActive" Color="#00AEEF" />
+    <SolidColorBrush x:Key="H1Foreground" Color="#393C3E" />
+    <SolidColorBrush x:Key="H2Foreground" Color="#393C3E" />
+    <SolidColorBrush x:Key="H3Foreground" Color="#393C3E" />
 
 </ResourceDictionary>

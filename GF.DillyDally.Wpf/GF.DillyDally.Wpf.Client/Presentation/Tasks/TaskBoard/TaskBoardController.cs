@@ -40,7 +40,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Tasks
 
                 laneVm.Tasks = new ObservableCollection<TaskBoardTaskViewModel>(lane.Tasks.Select(task =>
                {
-                   var taskVm = new TaskBoardTaskViewModel();
+                   var taskVm = new TaskBoardTaskViewModel(task.Name, task.RunningNumber, task.Category.ColorCode, task.Category.Name, 3);
                    taskVm.Name = task.Name;
                    return taskVm;
                }));

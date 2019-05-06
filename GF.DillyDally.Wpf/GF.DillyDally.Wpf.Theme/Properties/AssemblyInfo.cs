@@ -22,9 +22,15 @@ using System.Windows.Markup;
 
 [assembly: XmlnsPrefix("http://schemas.getfunctional.de/dillydally/styleguide", "sg")]
 [assembly: XmlnsPrefix("http://schemas.getfunctional.de/dillydally/wpf", "wpf")]
+[assembly: XmlnsPrefix("http://schemas.getfunctional.de/dillydally/controls", "ctrls")]
+[assembly: XmlnsPrefix("http://schemas.getfunctional.de/dillydally/converter", "conv")]
+
 [assembly: XmlnsDefinition("http://schemas.getfunctional.de/dillydally/styleguide", "GF.DillyDally.Wpf.Theme.StyleGuide")]
 [assembly: XmlnsDefinition("http://schemas.getfunctional.de/dillydally/wpf", "GF.DillyDally.Wpf.Theme.Wpf")]
 [assembly: XmlnsDefinition("http://schemas.getfunctional.de/dillydally/wpf", "GF.DillyDally.Wpf.Theme.Extensions")]
+[assembly: XmlnsDefinition("http://schemas.getfunctional.de/dillydally/controls", "GF.DillyDally.Wpf.Theme.Controls")]
+[assembly: XmlnsDefinition("http://schemas.getfunctional.de/dillydally/converter", "GF.DillyDally.Wpf.Theme.Converter")]
+
 
 //Um mit dem Erstellen lokalisierbarer Anwendungen zu beginnen, legen Sie
 //<UICulture>ImCodeVerwendeteKultur</UICulture> in der .csproj-Datei
