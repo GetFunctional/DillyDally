@@ -55,15 +55,15 @@ namespace GF.DillyDally.Unittests
 
             var data = new List<Tuple<string, string>>
                        {
-                           new Tuple<string, string>("Gaming", "#0C53BD"),
-                           new Tuple<string, string>("Fitness", "#0C53BD"),
-                           new Tuple<string, string>("Haushalt", "#0C53BD"),
-                           new Tuple<string, string>("Essen", "#0C53BD"),
-                           new Tuple<string, string>("Do it yourself", "#0C53BD"),
-                           new Tuple<string, string>("Beziehung", "#0C53BD"),
-                           new Tuple<string, string>("Neuer Horizont", "#0C53BD"),
-                           new Tuple<string, string>("Notwendiges", "#0C53BD"),
-                           new Tuple<string, string>("Programming", "#0C53BD"),
+                           new Tuple<string, string>("Gaming", "#00AEEF"),
+                           new Tuple<string, string>("Fitness", "#FECF39"),
+                           new Tuple<string, string>("Haushalt", "#FFDF6D"),
+                           new Tuple<string, string>("Essen", "#74C7A8"),
+                           new Tuple<string, string>("Do it yourself", "#8781BD"),
+                           new Tuple<string, string>("Beziehung", "#81736A"),
+                           new Tuple<string, string>("Neuer Horizont", "#D65B4A"),
+                           new Tuple<string, string>("Notwendiges", "#66B92E"),
+                           new Tuple<string, string>("Programming", "#DA932C"),
                            new Tuple<string, string>("Lifestyle", "#0C53BD")
                        };
 
@@ -83,12 +83,12 @@ namespace GF.DillyDally.Unittests
 
             var data = new List<Tuple<string, string, bool, bool>>
                        {
-                           new Tuple<string, string, bool, bool>("Backlog Level 3", "#0C53BD", false, false),
-                           new Tuple<string, string, bool, bool>("Backlog Level 2", "#0C53BD", false, false),
-                           new Tuple<string, string, bool, bool>("Backlog Level 1", "#0C53BD", false, false),
-                           new Tuple<string, string, bool, bool>("Pending", "#0C53BD", false, false),
+                           new Tuple<string, string, bool, bool>("Undefined", "#0C53BD", false, false),
+                           new Tuple<string, string, bool, bool>("Defined", "#0C53BD", false, false),
+                           new Tuple<string, string, bool, bool>("Stories", "#0C53BD", false, false),
+                           new Tuple<string, string, bool, bool>("Ready", "#0C53BD", false, false),
+                           new Tuple<string, string, bool, bool>("Sprint", "#0C53BD", false, false),
                            new Tuple<string, string, bool, bool>("Rejected", "#0C53BD", false, true),
-                           new Tuple<string, string, bool, bool>("Infinite", "#0C53BD", false, false),
                            new Tuple<string, string, bool, bool>("Done", "#0C53BD", true, false)
                        };
 

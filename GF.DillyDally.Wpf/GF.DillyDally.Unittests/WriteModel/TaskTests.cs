@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using GF.DillyDally.ReadModel.Projection.Categories.Repository;
 using GF.DillyDally.ReadModel.Projection.Files.Repository;
 using GF.DillyDally.ReadModel.Projection.Lanes.Repository;
+using GF.DillyDally.Shared.Extensions;
 using GF.DillyDally.WriteModel.Domain.Tasks.Commands;
 using LightInject;
 using MediatR;
@@ -35,8 +36,8 @@ namespace GF.DillyDally.Unittests.WriteModel
                 var categoryRepository = new CategoryRepository();
                 var laneRepository = new LaneRepository();
 
-                var exampleCategory = (await categoryRepository.GetAllAsync(connection)).FirstOrDefault();
-                var exampleLane = (await laneRepository.GetAllAsync(connection)).FirstOrDefault();
+                var exampleCategory = (await categoryRepository.GetAllAsync(connection)).Shuffle().FirstOrDefault();
+                var exampleLane = (await laneRepository.GetAllAsync(connection)).Shuffle().FirstOrDefault();
 
                 var task = await commandDispatcher.Send(new CreateTaskCommand("Test", exampleCategory.CategoryId, exampleLane.LaneId));
                 return task;
