@@ -27,7 +27,8 @@ namespace GF.DillyDally.Unittests
         [OneTimeTearDown]
         public void RunAfterAnyTests()
         {
-            //DeleteUnittestDatabase();
+            var fileHandler = new DatabaseFileHandler(ExampleDatabase);
+            fileHandler.ArchiveDatabase("Unittests_LastRun.db");
         }
     }
 }

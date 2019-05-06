@@ -226,6 +226,7 @@
     <Compile Include="Presentation\Tasks\OpenTasksListControllerRequest.cs" />
     <Compile Include="Presentation\Tasks\RewardViewModel.cs" />
     <Compile Include="Presentation\Tasks\TaskBoard\TaskBoardLaneViewModel.cs" />
+    <Compile Include="Presentation\Tasks\TaskBoard\TaskBoardTaskViewModel.cs" />
     <Compile Include="Presentation\Tasks\TaskBoard\TaskBoardView.xaml.cs">
       <DependentUpon>TaskBoardView.xaml</DependentUpon>
     </Compile>

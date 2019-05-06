@@ -13,7 +13,9 @@ namespace GF.DillyDally.Wpf.Client.Core
 {
     internal sealed class Bootstrapper
     {
-        private const string DefaultDatabaseName = "DillyDallyData.db";
+        
+        private const string DefaultDatabaseName = "Unittests_LastRun.db";
+        //private const string DefaultDatabaseName = "DillyDallyData.db";
         private readonly Application _application;
         private readonly DataBootstrapper _dataBootstrapper;
         private readonly DataTemplateInitializer _dataTemplateInitializer = new DataTemplateInitializer();

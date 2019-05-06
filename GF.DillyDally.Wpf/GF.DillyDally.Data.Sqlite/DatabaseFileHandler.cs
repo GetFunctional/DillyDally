@@ -105,5 +105,18 @@ namespace GF.DillyDally.Data.Sqlite
         {
             return this.BuildConnectionString(this._fullDatabaseFilePath);
         }
+
+        public void ArchiveDatabase(string archiveName)
+        {
+            var currentDatabase = this.GetFullDatabaseFilePath(this._databaseName);
+            var archiveDatabase = this.GetFullDatabaseFilePath(archiveName);
+
+            if (File.Exists(archiveDatabase))
+            {
+                File.Delete(archiveDatabase);
+            }
+
+            File.Move(currentDatabase, archiveDatabase);
+        }
     }
 }

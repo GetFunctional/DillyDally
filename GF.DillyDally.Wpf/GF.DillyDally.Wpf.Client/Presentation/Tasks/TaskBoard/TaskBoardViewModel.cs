@@ -12,13 +12,13 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Tasks
 
         private IList<TaskBoardLaneViewModel> _lanes;
 
-        internal IList<TaskBoardLaneViewModel> Lanes
+        public IList<TaskBoardLaneViewModel> Lanes
         {
             get
             {
                 return this._lanes;
             }
-            set
+            internal set
             {
                 this.RaiseAndSetIfChanged(ref this._lanes, value);
             }

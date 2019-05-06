@@ -13,8 +13,6 @@ namespace GF.DillyDally.ReadModel.Views.TaskBoard
     {
         public async Task<IList<TaskBoardLaneEntity>> GetTaskBoardLanesAsync(IDbConnection connection)
         {
-            var tasksOnBoard = new List<TaskBoardLaneEntity>();
-
             var sql = $"SELECT {nameof(TaskBoardLaneEntity.LaneId)}, {nameof(TaskBoardLaneEntity.Name)} " +
                       $"FROM {LaneEntity.TableNameConstant} " +
                       $"WHERE {nameof(LaneEntity.IsCompletedLane)} = 0 AND {nameof(LaneEntity.IsRejectedLane)} = 0;" +
@@ -26,16 +24,16 @@ namespace GF.DillyDally.ReadModel.Views.TaskBoard
 
             using (var multiSelect = await connection.QueryMultipleAsync(sql))
             {
-                var lanes = await multiSelect.ReadAsync<TaskBoardLaneEntity>();
+                var lanes= (await multiSelect.ReadAsync<TaskBoardLaneEntity>()).ToList();
                 var tasks = await multiSelect.ReadAsync<TaskBoardTaskEntity>();
 
                 foreach (var taskBoardLaneEntity in lanes)
                 {
                     taskBoardLaneEntity.Tasks = new List<TaskBoardTaskEntity>(tasks.Where(x => x.LaneId == taskBoardLaneEntity.LaneId));
                 }
-            }
 
-            return tasksOnBoard;
+                return lanes;
+            }
         }
     }
 }
