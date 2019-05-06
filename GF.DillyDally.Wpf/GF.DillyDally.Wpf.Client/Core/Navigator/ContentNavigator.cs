@@ -60,6 +60,8 @@ namespace GF.DillyDally.Wpf.Client.Core.Navigator
             this.Journal.RecordNavigation(journalEntry);
 
             this.RaiseNavigated();
+            currentRealTarget?.Close();
+
             return this.CurrentContentController;
         }
 
@@ -68,7 +70,17 @@ namespace GF.DillyDally.Wpf.Client.Core.Navigator
             return await this._controllerFactory.CreateControllerAsync(navigationTarget.NavigationTargetControllerType);
         }
 
-        private bool CurrentTargetDeniesNavigation(IController currentRealTarget)
+        private bool CurrentTargetDeniesNavigation(IController currentTarget)
+        {
+            return currentTarget != null && (IsNavigationDenied(currentTarget) || this.IsCloseDenied(currentTarget));
+        }
+
+        private bool IsCloseDenied(IController currentRealTarget)
+        {
+            return !currentRealTarget.ConfirmClosing(this);
+        }
+
+        private static bool IsNavigationDenied(IController currentRealTarget)
         {
             return currentRealTarget is INavigationAware navigationAware && !navigationAware.ConfirmNavigationAway();
         }

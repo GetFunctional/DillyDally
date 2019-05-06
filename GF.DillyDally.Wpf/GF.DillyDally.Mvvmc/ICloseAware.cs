@@ -1,6 +1,6 @@
 ﻿namespace GF.DillyDally.Mvvmc
 {
-    public interface ICloseAware
+    public interface ICloseAware 
     {
         bool ConfirmClosing(object callSource);
 

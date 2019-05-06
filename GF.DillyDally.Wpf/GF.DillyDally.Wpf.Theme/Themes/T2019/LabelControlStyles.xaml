@@ -35,7 +35,6 @@
         <Setter Property="LabelBrush" Value="{StaticResource DefaultLabelBrush}" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Top" />
-        <Setter Property="Cursor" Value="Hand" />
     </Style>
 
     <Style BasedOn="{StaticResource DefaultStyle}" TargetType="{x:Type controls:LabelControl}" />

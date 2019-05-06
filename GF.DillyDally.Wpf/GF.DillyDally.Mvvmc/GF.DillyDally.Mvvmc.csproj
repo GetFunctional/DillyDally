@@ -52,9 +52,12 @@
     <Compile Include="ControllerFactory.cs" />
     <Compile Include="ControllerFactory.Generic.cs" />
     <Compile Include="ControllerInitializer.cs" />
+    <Compile Include="DialogControllerBase.cs" />
     <Compile Include="ICloseAware.cs" />
     <Compile Include="IController.cs" />
     <Compile Include="IController.Generic.cs" />
+    <Compile Include="IDialogController.cs" />
+    <Compile Include="IDialogResult.cs" />
     <Compile Include="InitializationBase.cs" />
     <Compile Include="Exceptions\InitializationException.cs" />
     <Compile Include="IViewModel.cs" />

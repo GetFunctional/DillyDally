@@ -9,17 +9,17 @@
         <wpf:SharedResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Typography.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <ControlTemplate x:Key="DefaultRunningNumberControlTemplate" TargetType="{x:Type controls:RunningNumberControl}">
+    <ControlTemplate x:Key="DefaultInternalLinkControlTemplate" TargetType="{x:Type controls:InternalLinkControl}">
         <TextBlock>
             <Hyperlink x:Name="PART_Link">
                 <Hyperlink.Inlines>
-                    <Run Text="{TemplateBinding RunningNumber}" />
+                    <Run Text="{TemplateBinding DisplayLink}" />
                 </Hyperlink.Inlines>
             </Hyperlink>
         </TextBlock>
     </ControlTemplate>
 
-    <Style x:Key="DefaultStyle" TargetType="{x:Type controls:RunningNumberControl}">
+    <Style x:Key="DefaultStyle" TargetType="{x:Type controls:InternalLinkControl}">
         <Style.Resources>
             <Style BasedOn="{StaticResource {x:Type Hyperlink}}" TargetType="{x:Type Hyperlink}">
                 <Setter Property="Foreground" Value="{StaticResource LinkForeground}" />
@@ -30,7 +30,7 @@
                 </Style.Triggers>
             </Style>
         </Style.Resources>
-        <Setter Property="Template" Value="{StaticResource DefaultRunningNumberControlTemplate}" />
+        <Setter Property="Template" Value="{StaticResource DefaultInternalLinkControlTemplate}" />
         <Setter Property="Foreground" Value="{StaticResource LinkForeground}" />
         <Setter Property="FontSize" Value="{StaticResource LinkFontSize}" />
         <Setter Property="FontFamily" Value="{StaticResource SourceSansProBlack}" />
@@ -44,6 +44,6 @@
         </Style.Triggers>
     </Style>
 
-    <Style BasedOn="{StaticResource DefaultStyle}" TargetType="{x:Type controls:RunningNumberControl}" />
+    <Style BasedOn="{StaticResource DefaultStyle}" TargetType="{x:Type controls:InternalLinkControl}" />
 
 </ResourceDictionary>

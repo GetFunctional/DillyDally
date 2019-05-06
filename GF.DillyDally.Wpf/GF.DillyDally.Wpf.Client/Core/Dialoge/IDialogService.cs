@@ -5,6 +5,6 @@ namespace GF.DillyDally.Wpf.Client.Core.Dialoge
 {
     public interface IDialogService
     {
-        Task<IDialogResult> ShowDialogAsync(IController dialogContentController, IDialogSettings settings);
+        Task<IDialogResult> ShowDialogAsync(IDialogController dialogContentController);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using GF.DillyDally.Mvvmc;
 using GF.DillyDally.Wpf.Client.Core.Navigator;
 using GF.DillyDally.Wpf.Client.Presentation;
 
@@ -23,6 +24,16 @@ namespace GF.DillyDally.Wpf.Client
         }
 
         #endregion
+
+        public void ShowOverlayDialog(IViewModel overlayContent)
+        {
+            this._shellController.ShowOverlayDialogAsync(overlayContent);
+        }
+
+        public void ConfirmOverlayWith(IDialogResult result)
+        {
+            this._shellController.ConfirmOverlayWith(result);
+        }
 
         public void ShowUi()
         {

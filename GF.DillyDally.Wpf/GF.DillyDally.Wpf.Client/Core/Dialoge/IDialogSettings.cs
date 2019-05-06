@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Windows;
+using GF.DillyDally.Mvvmc;
 
 namespace GF.DillyDally.Wpf.Client.Core.Dialoge
 {
@@ -8,7 +8,5 @@ namespace GF.DillyDally.Wpf.Client.Core.Dialoge
         IReadOnlyList<IDialogResult> AvailableDialogResults { get; }
 
         IDialogResult DefaultDialogResult { get; }
-
-        Size InitialDialogSize { get; }
     }
 }

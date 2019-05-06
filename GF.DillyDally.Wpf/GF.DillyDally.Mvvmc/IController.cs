@@ -1,6 +1,8 @@
-﻿namespace GF.DillyDally.Mvvmc
+﻿using System;
+
+namespace GF.DillyDally.Mvvmc
 {
-    public interface IController
+    public interface IController : IDisposable, ICloseAware
     {
         IViewModel ViewModel { get; }
     }

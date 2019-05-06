@@ -10,30 +10,30 @@ namespace GF.DillyDally.Wpf.Theme.Controls
 {
     [TemplatePart(Name = PARTLinkControl, Type = typeof(TextBlock))]
     [DesignTimeVisible(true)]
-    public class RunningNumberControl : Control
+    public class InternalLinkControl : Control
     {
         public const string PARTLinkControl = "PART_Link";
-        public static readonly DependencyProperty RunningNumberProperty = DependencyProperty.Register(
-            "RunningNumber", typeof(string), typeof(RunningNumberControl), new PropertyMetadata(default(string)));
+        public static readonly DependencyProperty DisplayLinkProperty = DependencyProperty.Register(
+            "DisplayLink", typeof(string), typeof(InternalLinkControl), new PropertyMetadata(default(string)));
 
         private Hyperlink _linkControl;
         public IObservable<string> RunningNumberClicked;
 
-        static RunningNumberControl()
+        static InternalLinkControl()
         {
             DefaultStyleKeyProperty.OverrideMetadata(
-                typeof(RunningNumberControl), new FrameworkPropertyMetadata(typeof(RunningNumberControl)));
+                typeof(InternalLinkControl), new FrameworkPropertyMetadata(typeof(InternalLinkControl)));
         }
 
-        public string RunningNumber
+        public string DisplayLink
         {
             get
             {
-                return (string)this.GetValue(RunningNumberProperty);
+                return (string)this.GetValue(DisplayLinkProperty);
             }
             set
             {
-                this.SetValue(RunningNumberProperty, value);
+                this.SetValue(DisplayLinkProperty, value);
             }
         }
 

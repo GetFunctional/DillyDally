@@ -27,5 +27,15 @@ namespace GF.DillyDally.Wpf.Client.Presentation
             this._contentBrowserController = await this._browserControllerFactory.CreateControllerAsync();
             this.ViewModel.ContentBrowserViewModel = this._contentBrowserController.ViewModel;
         }
+
+        public void ShowOverlayDialogAsync(IViewModel overlayContent)
+        {
+            this.ViewModel.OverlayContent = overlayContent;
+        }
+
+        public void ConfirmOverlayWith(IDialogResult result)
+        {
+            this.ViewModel.OverlayContent = null;
+        }
     }
 }
