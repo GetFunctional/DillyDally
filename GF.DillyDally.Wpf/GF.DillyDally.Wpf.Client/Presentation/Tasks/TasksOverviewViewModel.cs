@@ -1,4 +1,5 @@
 ﻿using GF.DillyDally.Mvvmc;
+using ReactiveUI;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Tasks
 {
@@ -16,7 +17,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Tasks
             }
             set
             {
-                this.SetField(ref this._openTasksListViewModel, value);
+                this.RaiseAndSetIfChanged(ref this._openTasksListViewModel, value);
             }
         }
 
@@ -28,7 +29,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Tasks
             }
             set
             {
-                this.SetField(ref this._repeatableTasksListViewModel, value);
+                this.RaiseAndSetIfChanged(ref this._repeatableTasksListViewModel, value);
             }
         }
 
@@ -40,7 +41,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Tasks
             }
             set
             {
-                this.SetField(ref this._recentlyCompletedTasksListViewModel, value);
+                this.RaiseAndSetIfChanged(ref this._recentlyCompletedTasksListViewModel, value);
             }
         }
     }

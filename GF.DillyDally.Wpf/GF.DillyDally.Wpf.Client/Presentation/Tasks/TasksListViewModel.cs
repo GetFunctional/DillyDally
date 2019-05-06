@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using GF.DillyDally.Mvvmc;
+using ReactiveUI;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Tasks
 {
@@ -16,7 +17,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Tasks
             }
             set
             {
-                this.SetField(ref this._tasks, value);
+                this.RaiseAndSetIfChanged(ref this._tasks, value);
             }
         }
 
@@ -28,7 +29,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Tasks
             }
             set
             {
-                this.SetField(ref this._addTaskCommand, value);
+                this.RaiseAndSetIfChanged(ref this._addTaskCommand, value);
             }
         }
     }

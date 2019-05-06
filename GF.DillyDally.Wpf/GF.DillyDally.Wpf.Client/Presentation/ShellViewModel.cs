@@ -1,5 +1,6 @@
 ﻿using GF.DillyDally.Mvvmc;
 using GF.DillyDally.Wpf.Client.Presentation.ContentNavigation;
+using ReactiveUI;
 
 namespace GF.DillyDally.Wpf.Client.Presentation
 {
@@ -15,7 +16,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation
             }
             set
             {
-                this.SetField(ref this._contentBrowserViewModel, value);
+                this.RaiseAndSetIfChanged(ref this._contentBrowserViewModel, value);
             }
         }
     }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using GF.DillyDally.Mvvmc;
+using ReactiveUI;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
 {
@@ -26,7 +27,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
             }
             set
             {
-                this.SetField(ref this._availableNavigationTargets, value);
+                this.RaiseAndSetIfChanged(ref this._availableNavigationTargets, value);
             }
         }
 
@@ -38,7 +39,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
             }
             set
             {
-                this.SetField(ref this._selectedTarget, value);
+                this.RaiseAndSetIfChanged(ref this._selectedTarget, value);
             }
         }
 
@@ -58,7 +59,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
             }
             internal set
             {
-                this.SetField(ref this._navigateToTargetCommand, value);
+                this.RaiseAndSetIfChanged(ref this._navigateToTargetCommand, value);
             }
         }
     }

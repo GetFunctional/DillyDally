@@ -1,4 +1,5 @@
 using GF.DillyDally.Mvvmc;
+using ReactiveUI;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Common.Currencies.CreateCurrency
 {
@@ -15,7 +16,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Common.Currencies.CreateCurrency
             }
             set
             {
-                this.SetField(ref this._currencyCode, value);
+                this.RaiseAndSetIfChanged(ref this._currencyCode, value);
             }
         }
 
@@ -27,7 +28,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Common.Currencies.CreateCurrency
             }
             set
             {
-                this.SetField(ref this._currencyName, value);
+                this.RaiseAndSetIfChanged(ref this._currencyName, value);
             }
         }
     }

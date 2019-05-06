@@ -1,4 +1,5 @@
 ﻿using GF.DillyDally.Mvvmc;
+using ReactiveUI;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
 {
@@ -16,7 +17,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
             }
             private set
             {
-                this.SetField(ref this._displayTarget, value);
+                this.RaiseAndSetIfChanged(ref this._displayTarget, value);
             }
         }
 
@@ -28,7 +29,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
             }
             private set
             {
-                this.SetField(ref this._contentTitle, value);
+                this.RaiseAndSetIfChanged(ref this._contentTitle, value);
             }
         }
 

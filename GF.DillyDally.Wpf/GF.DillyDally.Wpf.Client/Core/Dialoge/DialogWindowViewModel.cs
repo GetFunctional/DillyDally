@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using GF.DillyDally.Mvvmc;
+using ReactiveUI;
 
 namespace GF.DillyDally.Wpf.Client.Core.Dialoge
 {
@@ -16,7 +17,7 @@ namespace GF.DillyDally.Wpf.Client.Core.Dialoge
             }
             set
             {
-                this.SetField(ref this._content, value);
+                this.RaiseAndSetIfChanged(ref this._content, value);
             }
         }
 
@@ -28,7 +29,7 @@ namespace GF.DillyDally.Wpf.Client.Core.Dialoge
             }
             set
             {
-                this.SetField(ref this._dialogCommands, value);
+                this.RaiseAndSetIfChanged(ref this._dialogCommands, value);
             }
         }
     }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using GF.DillyDally.Mvvmc;
+using ReactiveUI;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
 {
@@ -22,7 +23,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
             }
             set
             {
-                this.SetField(ref this._currentActiveNavigator, value);
+                this.RaiseAndSetIfChanged(ref this._currentActiveNavigator, value);
             }
         }
 

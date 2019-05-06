@@ -2,7 +2,7 @@
 
 namespace GF.DillyDally.Mvvmc
 {
-    public interface IViewModel : INotifyPropertyChanged, INotifyPropertyChanging
+    public interface IViewModel : INotifyPropertyChanged
     {
     }
 }

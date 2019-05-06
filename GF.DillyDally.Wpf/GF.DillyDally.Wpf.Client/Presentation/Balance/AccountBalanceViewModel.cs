@@ -1,5 +1,6 @@
 ﻿using GF.DillyDally.Mvvmc;
 using GF.DillyDally.Wpf.Client.Presentation.Common;
+using ReactiveUI;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Balance
 {
@@ -26,7 +27,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Balance
             }
             set
             {
-                this.SetField(ref this._accountName, value);
+                this.RaiseAndSetIfChanged(ref this._accountName, value);
             }
         }
 
@@ -38,7 +39,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Balance
             }
             set
             {
-                this.SetField(ref this._balance, value);
+                this.RaiseAndSetIfChanged(ref this._balance, value);
             }
         }
 

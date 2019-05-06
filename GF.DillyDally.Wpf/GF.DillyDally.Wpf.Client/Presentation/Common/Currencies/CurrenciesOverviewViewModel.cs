@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using GF.DillyDally.Mvvmc;
+using ReactiveUI;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Common.Currencies
 {
@@ -16,7 +17,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Common.Currencies
             }
             set
             {
-                this.SetField(ref this._addNewCurrencyCommand, value);
+                this.RaiseAndSetIfChanged(ref this._addNewCurrencyCommand, value);
             }
         }
     }

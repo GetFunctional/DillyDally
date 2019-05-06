@@ -74,10 +74,22 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libs\MediatR.dll</HintPath>
     </Reference>
+    <Reference Include="ReactiveUI">
+      <HintPath>..\..\Libs\ReactiveUI.dll</HintPath>
+    </Reference>
+    <Reference Include="ReactiveUI.WPF">
+      <HintPath>..\..\Libs\ReactiveUI.WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="Splat">
+      <HintPath>..\..\Libs\Splat.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.IO" />
     <Reference Include="System.Linq.Expressions" />
+    <Reference Include="System.Reactive">
+      <HintPath>..\..\Libs\System.Reactive.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime" />
     <Reference Include="System.Threading.Tasks" />
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
