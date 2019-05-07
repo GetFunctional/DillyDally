@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using GF.DillyDally.ReadModel.Projection.Categories.Repository;
 using GF.DillyDally.ReadModel.Projection.Lanes.Repository;
 using GF.DillyDally.ReadModel.Projection.Tasks.Repository;
+using GF.DillyDally.Shared.Extensions;
 using GF.DillyDally.WriteModel.Domain.Tasks.Commands;
 using LightInject;
 using MediatR;
@@ -34,11 +35,35 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
                 var categoryRepository = new CategoryRepository();
                 var laneRepository = new LaneRepository();
 
-                var exampleCategory = (await categoryRepository.GetAllAsync(connection)).FirstOrDefault();
-                var exampleLane = (await laneRepository.GetAllAsync(connection)).FirstOrDefault();
+                var exampleCategory = (await categoryRepository.GetAllAsync(connection)).Shuffle().FirstOrDefault();
+                var exampleLane = (await laneRepository.GetAllAsync(connection)).Shuffle().FirstOrDefault();
 
                 var task = await commandDispatcher.Send(new CreateTaskCommand("Test", exampleCategory.CategoryId, exampleLane.LaneId));
                 return task;
+            }
+        }
+
+        [TestCase("Do the fuckin job")]
+        public async Task Setting_DefinitionOfDone_ShouldCreateProjection(string definitionOfDone)
+        {
+            // Arrange
+            using (var connection = this._infrastructureSetup.OpenDatabaseConnection())
+            {
+                // Arrange
+                var commandDispatcher = this._infrastructureSetup.DiContainer.GetInstance<IMediator>();
+                var repository = new TaskRepository();
+                var newTask = await this.CreateNewTask();
+
+                // Act
+                var definitionOfDoneCommand = new AssignDefinitionOfDoneCommand(newTask.TaskId, definitionOfDone);
+                await commandDispatcher.Send(definitionOfDoneCommand);
+
+                // Assert
+                var projection = await repository.GetByIdAsync(connection, newTask.TaskId);
+
+                // Assert
+                Assert.That(projection.DefinitionOfDone, Is.Not.Null);
+                Assert.That(projection.DefinitionOfDone, Is.EqualTo(definitionOfDone));
             }
         }
 
@@ -52,8 +77,8 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
                 var repository = new TaskRepository();
                 var categoryRepository = new CategoryRepository();
                 var laneRepository = new LaneRepository();
-                var exampleCategory = (await categoryRepository.GetAllAsync(connection)).FirstOrDefault();
-                var exampleLane = (await laneRepository.GetAllAsync(connection)).FirstOrDefault();
+                var exampleCategory = (await categoryRepository.GetAllAsync(connection)).Shuffle().FirstOrDefault();
+                var exampleLane = (await laneRepository.GetAllAsync(connection)).Shuffle().FirstOrDefault();
                 var timeStampBeforeCreation = DateTime.Now;
                 var command = new CreateTaskCommand("Test", exampleCategory.CategoryId, exampleLane.LaneId);
 

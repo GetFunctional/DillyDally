@@ -72,11 +72,13 @@ namespace GF.DillyDally.Unittests.WriteModel
             var newTask = await this.CreateNewTask();
 
             var definitionOfDoneCommand = new AssignDefinitionOfDoneCommand(newTask.TaskId, definitionOfDone);
-            var result = await commandDispatcher.Send(definitionOfDoneCommand);
 
+            // Act
+            var result = await commandDispatcher.Send(definitionOfDoneCommand);
             var aggregateRepository = this._infrastructureSetup.DiContainer.GetInstance<IAggregateRepository>();
             var afterChanges = aggregateRepository.GetById<TaskAggregateRoot>(newTask.TaskId);
 
+            // Assert
             Assert.That(afterChanges.DefinitionOfDone, Is.EqualTo(definitionOfDone));
         }
 
@@ -88,7 +90,10 @@ namespace GF.DillyDally.Unittests.WriteModel
             var commandDispatcher = this._infrastructureSetup.DiContainer.GetInstance<IMediator>();
             var newTask = await this.CreateNewTask();
 
+            // Act
             var definitionOfDoneCommand = new AssignDefinitionOfDoneCommand(newTask.TaskId, definitionOfDone);
+
+            // Assert & Act
             Assert.ThrowsAsync<InvalidDefinitionOfDoneException>(async () => await commandDispatcher.Send(definitionOfDoneCommand));
         }
 
