@@ -37,6 +37,10 @@
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
         </ScrollViewer>-->
-        <Button Content="Confirm" Width="150" Height="20" Command="{Binding CreateTaskCommand}"></Button>
+        <Button
+            Width="150"
+            Height="20"
+            Command="{Binding CreateTaskCommand}"
+            Content="Confirm" />
     </dxlc:LayoutControl>
 </UserControl>

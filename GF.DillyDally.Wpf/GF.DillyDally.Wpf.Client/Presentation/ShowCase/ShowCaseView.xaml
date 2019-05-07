@@ -25,7 +25,7 @@
 
                 <ctrls:InternalLinkControl DisplayLink="TSK-44444" />
 
-                <Button Command="{Binding TestDialogCommand}" Content="TestDialog" />
+                <ctrls:ColoredButtonControl Command="{Binding TestDialogCommand}" Content="TestDialog" />
             </dxlc:LayoutGroup>
         </dx:DXTabItem>
     </dx:DXTabControl>

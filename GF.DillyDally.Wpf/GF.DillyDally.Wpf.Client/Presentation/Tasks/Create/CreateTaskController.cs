@@ -12,13 +12,19 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Tasks
 {
     public class CreateTaskController : DialogControllerBase<CreateTaskViewModel>
     {
+        public IDialogResult CreateTaskDialogResult { get; } = new DialogCommandResult();
+        public IDialogResult CancelDialogResult { get; } = new DialogCommandResult();
+
         private readonly DatabaseFileHandler _databaseFileHandler;
 
         public CreateTaskController(CreateTaskViewModel viewModel, DatabaseFileHandler databaseFileHandler) : base(viewModel)
         {
             this._databaseFileHandler = databaseFileHandler;
-            viewModel.CreateTaskCommand = ReactiveCommand.Create(() => this.ConfirmDialogWith(new DialogCommandResult()));
+            viewModel.CreateTaskCommand = ReactiveCommand.Create(() => this.ConfirmDialogWith(this.CreateTaskDialogResult));
+            viewModel.CancelProcessCommand = ReactiveCommand.Create(() => this.ConfirmDialogWith(this.CancelDialogResult));
         }
+
+        
 
         protected override async Task OnInitializeAsync()
         {
