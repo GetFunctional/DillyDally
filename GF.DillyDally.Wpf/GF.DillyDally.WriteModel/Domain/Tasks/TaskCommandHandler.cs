@@ -16,7 +16,8 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks
     internal sealed class TaskCommandHandler : CommandHandlerBase,
         IRequestHandler<CreateTaskCommand, CreateTaskResponse>,
         IRequestHandler<AttachFileToTaskCommand, AttachFileToTaskResponse>,
-        IRequestHandler<AssignPreviewImageCommand, AssignPreviewImageResponse>, IRequestHandler<LinkTaskCommand, LinkTaskResponse>
+        IRequestHandler<AssignPreviewImageCommand, AssignPreviewImageResponse>, IRequestHandler<LinkTaskCommand, LinkTaskResponse>,
+        IRequestHandler<AssignDefinitionOfDoneCommand, AssignDefinitionOfDoneResponse>
     {
         private readonly DatabaseFileHandler _databaseFileHandler;
         private readonly RunningNumberFactory _runningNumberFactory;
@@ -27,6 +28,23 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks
             this._databaseFileHandler = databaseFileHandler;
             this._runningNumberFactory = new RunningNumberFactory(aggregateRepository, new GuidGenerator());
         }
+
+        #region IRequestHandler<AssignDefinitionOfDoneCommand,AssignDefinitionOfDoneResponse> Members
+
+        public async Task<AssignDefinitionOfDoneResponse> Handle(AssignDefinitionOfDoneCommand request, CancellationToken cancellationToken)
+        {
+            return await Task.Run(() =>
+            {
+                var task = this.AggregateRepository.GetById<TaskAggregateRoot>(request.TaskId);
+
+                task.AssignDefinitionOfDone(request.DefinitionOfDone);
+                this.AggregateRepository.Save(task);
+
+                return new AssignDefinitionOfDoneResponse();
+            }, cancellationToken);
+        }
+
+        #endregion
 
         #region IRequestHandler<AssignPreviewImageCommand,AssignPreviewImageResponse> Members
 

@@ -25,5 +25,6 @@ namespace GF.DillyDally.ReadModel.Projection.Tasks.Repository
 
         public Guid? PreviewImageId { get; set; }
         public Guid RunningNumberId { get; set; }
+        public string DefinitionOfDone { get; set; }
     }
 }

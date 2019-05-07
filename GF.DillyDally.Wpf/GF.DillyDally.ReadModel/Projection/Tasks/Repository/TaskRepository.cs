@@ -16,5 +16,14 @@ namespace GF.DillyDally.ReadModel.Projection.Tasks.Repository
                 $"WHERE {nameof(TaskEntity.TaskId)} = @taskId;",
                 new {taskId, previewImageId});
         }
+
+        public async Task UpdateDefinitionOfDoneAsync(IDbConnection connection, Guid taskId, string definitionOfDone)
+        {
+            await connection.ExecuteAsync(
+                $"UPDATE {TaskEntity.TableNameConstant} " +
+                $"SET {nameof(TaskEntity.DefinitionOfDone)} = @definitionOfDone " +
+                $"WHERE {nameof(TaskEntity.TaskId)} = @taskId;",
+                new {taskId, definitionOfDone});
+        }
     }
 }

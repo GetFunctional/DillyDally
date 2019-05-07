@@ -10,7 +10,7 @@ using MediatR;
 namespace GF.DillyDally.ReadModel.Projection.Tasks
 {
     internal sealed class TaskEventHandler : INotificationHandler<TaskCreatedEvent>,
-        INotificationHandler<AttachedFileToTaskEvent>, INotificationHandler<PreviewImageAssignedEvent>, INotificationHandler<TaskLinkCreatedEvent>
+        INotificationHandler<AttachedFileToTaskEvent>, INotificationHandler<PreviewImageAssignedEvent>, INotificationHandler<TaskLinkCreatedEvent>, INotificationHandler<DefinitionOfDoneChangedEvent>
     {
         private readonly DatabaseFileHandler _fileHandler;
 
@@ -104,5 +104,14 @@ namespace GF.DillyDally.ReadModel.Projection.Tasks
         }
 
         #endregion
+
+        public async Task Handle(DefinitionOfDoneChangedEvent notification, CancellationToken cancellationToken)
+        {
+            using (var connection = this._fileHandler.OpenConnection())
+            {
+                var repository = new TaskRepository();
+                await repository.UpdateDefinitionOfDoneAsync(connection, notification.AggregateId, notification.DefinitionOfDone);
+            }
+        }
     }
 }

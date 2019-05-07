@@ -14,6 +14,7 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks
             this.RegisterTransition<TaskLinkCreatedEvent>(this.Apply);
             this.RegisterTransition<AttachedFileToTaskEvent>(this.Apply);
             this.RegisterTransition<PreviewImageAssignedEvent>(this.Apply);
+            this.RegisterTransition<DefinitionOfDoneChangedEvent>(this.Apply);
         }
 
 
@@ -39,6 +40,7 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks
         internal Guid LaneId { get; private set; }
         internal Guid? PreviewImageId { get; private set; }
         private HashSet<Guid> Files { get; } = new HashSet<Guid>();
+        internal string DefinitionOfDone { get; private set; }
 
         internal IReadOnlyCollection<Guid> AttachedFiles
         {
@@ -48,13 +50,13 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks
             }
         }
 
+        private void Apply(DefinitionOfDoneChangedEvent obj)
+        {
+            this.DefinitionOfDone = obj.DefinitionOfDone;
+        }
+
         private void Apply(AttachedFileToTaskEvent obj)
         {
-            if (this.Files.Contains(obj.FileId))
-            {
-                throw new DuplicateAttachedFileException(obj.FileId);
-            }
-
             this.Files.Add(obj.FileId);
         }
 
@@ -65,16 +67,16 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks
 
         private void Apply(TaskLinkCreatedEvent obj)
         {
-            if (this.Links.Contains(obj.LinkToTaskId))
-            {
-                throw new DuplicateTaskLinkException(obj.LinkToTaskId);
-            }
-
             this.Links.Add(obj.LinkToTaskId);
         }
 
         public void LinkTo(Guid linkedTaskId)
         {
+            if (this.Links.Contains(linkedTaskId))
+            {
+                throw new DuplicateTaskLinkException(linkedTaskId);
+            }
+
             var attachedEvent = new TaskLinkCreatedEvent(this.AggregateId, linkedTaskId);
             this.RaiseEvent(attachedEvent);
         }
@@ -95,8 +97,24 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks
             this.PreviewImageId = obj.PreviewImageId;
         }
 
+        internal void AssignDefinitionOfDone(string definitionOfDone)
+        {
+            if (definitionOfDone != null && (definitionOfDone.Length == 0 || definitionOfDone.Trim(' ').Length == 0))
+            {
+                throw new InvalidDefinitionOfDoneException(definitionOfDone);
+            }
+
+            var definitionOfDoneChangedEvent = new DefinitionOfDoneChangedEvent(this.AggregateId, definitionOfDone);
+            this.RaiseEvent(definitionOfDoneChangedEvent);
+        }
+
         internal void AttachFile(Guid fileId)
         {
+            if (this.Files.Contains(fileId))
+            {
+                throw new DuplicateAttachedFileException(fileId);
+            }
+
             var fileAttachedEvent = new AttachedFileToTaskEvent(this.AggregateId, fileId);
             this.RaiseEvent(fileAttachedEvent);
         }

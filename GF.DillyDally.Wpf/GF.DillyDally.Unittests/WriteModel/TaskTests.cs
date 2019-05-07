@@ -6,7 +6,10 @@ using GF.DillyDally.ReadModel.Projection.Categories.Repository;
 using GF.DillyDally.ReadModel.Projection.Files.Repository;
 using GF.DillyDally.ReadModel.Projection.Lanes.Repository;
 using GF.DillyDally.Shared.Extensions;
+using GF.DillyDally.WriteModel.Domain.Tasks;
 using GF.DillyDally.WriteModel.Domain.Tasks.Commands;
+using GF.DillyDally.WriteModel.Domain.Tasks.Exceptions;
+using GF.DillyDally.WriteModel.Infrastructure;
 using LightInject;
 using MediatR;
 using NUnit.Framework;
@@ -58,6 +61,35 @@ namespace GF.DillyDally.Unittests.WriteModel
 
             var replacePrimaryImageCommand = new AssignPreviewImageCommand(newTask.TaskId, attachResult.FileId);
             await commandDispatcher.Send(replacePrimaryImageCommand);
+        }
+
+        [TestCase("Do your Job")]
+        [TestCase(null)]
+        public async Task Task_AssignDefinitionOfDone_ShouldSuccess(string definitionOfDone)
+        {
+            // Arrange
+            var commandDispatcher = this._infrastructureSetup.DiContainer.GetInstance<IMediator>();
+            var newTask = await this.CreateNewTask();
+
+            var definitionOfDoneCommand = new AssignDefinitionOfDoneCommand(newTask.TaskId, definitionOfDone);
+            var result = await commandDispatcher.Send(definitionOfDoneCommand);
+
+            var aggregateRepository = this._infrastructureSetup.DiContainer.GetInstance<IAggregateRepository>();
+            var afterChanges = aggregateRepository.GetById<TaskAggregateRoot>(newTask.TaskId);
+
+            Assert.That(afterChanges.DefinitionOfDone, Is.EqualTo(definitionOfDone));
+        }
+
+        [TestCase(" ")]
+        [TestCase("")]
+        public async Task Task_AssignDefinitionOfDone_ShouldFail(string definitionOfDone)
+        {
+            // Arrange
+            var commandDispatcher = this._infrastructureSetup.DiContainer.GetInstance<IMediator>();
+            var newTask = await this.CreateNewTask();
+
+            var definitionOfDoneCommand = new AssignDefinitionOfDoneCommand(newTask.TaskId, definitionOfDone);
+            Assert.ThrowsAsync<InvalidDefinitionOfDoneException>(async () => await commandDispatcher.Send(definitionOfDoneCommand));
         }
 
         [Test]

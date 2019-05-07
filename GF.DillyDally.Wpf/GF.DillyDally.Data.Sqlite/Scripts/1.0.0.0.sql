@@ -106,6 +106,7 @@ CREATE TABLE [Tasks]
 	[DueDate] DATETIME NULL,
 	[CreatedOn] DATETIME NOT NULL,
 	[Description] VARCHAR2 NULL,
+	[DefinitionOfDone] VARCHAR2 NULL,
 	[PreviewImageId] GUID NULL REFERENCES [Images]([ImageId])
 	);
 
