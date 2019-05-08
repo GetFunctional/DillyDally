@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Threading;
 using DevExpress.Xpf.Core;
 using GF.DillyDally.Mvvmc;
+using GF.DillyDally.Wpf.Client.ApplicationState;
 using GF.DillyDally.Wpf.Client.Core;
 using GF.DillyDally.Wpf.Client.Presentation;
 using LightInject;
@@ -52,7 +53,7 @@ namespace GF.DillyDally.Wpf.Client
 
         private async Task<ShellController> CreateShellControllerAsync(ServiceContainer serviceContainer)
         {
-            var shellController = await serviceContainer.GetInstance<ControllerFactory<ShellController>>().CreateControllerAsync();
+            var shellController = await serviceContainer.GetInstance<ControllerFactory>().CreateControllerAsync<ShellController>();
             return shellController;
         }
 

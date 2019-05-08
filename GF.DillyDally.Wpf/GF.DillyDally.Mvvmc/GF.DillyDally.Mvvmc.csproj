@@ -50,7 +50,6 @@
   <ItemGroup>
     <Compile Include="ControllerBase.cs" />
     <Compile Include="ControllerFactory.cs" />
-    <Compile Include="ControllerFactory.Generic.cs" />
     <Compile Include="ControllerInitializer.cs" />
     <Compile Include="DialogControllerBase.cs" />
     <Compile Include="ICloseAware.cs" />

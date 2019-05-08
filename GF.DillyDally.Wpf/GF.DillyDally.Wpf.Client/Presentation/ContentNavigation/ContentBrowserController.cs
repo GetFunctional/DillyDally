@@ -8,17 +8,17 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
 {
     public sealed class ContentBrowserController : ControllerBase<ContentBrowserViewModel>
     {
-        private readonly ControllerFactory<ContentNavigatorController>
-            _contentNavigatorControllerFactory;
+        private readonly ControllerFactory
+            _controllerFactory;
 
         private readonly IList<ContentNavigatorController> _navigatorControllers =
             new List<ContentNavigatorController>();
 
         public ContentBrowserController(ContentBrowserViewModel viewModel,
-            ControllerFactory<ContentNavigatorController> contentNavigatorControllerFactory)
+            ControllerFactory controllerFactory)
             : base(viewModel)
         {
-            this._contentNavigatorControllerFactory = contentNavigatorControllerFactory;
+            this._controllerFactory = controllerFactory;
         }
 
         public async Task<bool> NavigateInCurrentNavigatorAsync(INavigationTarget navigationTarget)
@@ -36,7 +36,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
 
         protected override async Task OnInitializeAsync()
         {
-            var newNavigator = await this._contentNavigatorControllerFactory.CreateControllerAsync();
+            var newNavigator = await this._controllerFactory.CreateControllerAsync<ContentNavigatorController>();
             this._navigatorControllers.Add(newNavigator);
             this.ViewModel.SelectCurrentNavigator(newNavigator.ViewModel);
 

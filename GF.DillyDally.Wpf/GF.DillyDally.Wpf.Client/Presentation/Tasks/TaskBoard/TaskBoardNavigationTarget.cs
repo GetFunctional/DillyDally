@@ -1,7 +1,7 @@
 using System;
 using GF.DillyDally.Wpf.Client.Core.Navigator;
 
-namespace GF.DillyDally.Wpf.Client.Presentation.Tasks
+namespace GF.DillyDally.Wpf.Client.Presentation.Tasks.TaskBoard
 {
     public sealed class TaskBoardNavigationTarget : NavigationTargetBase<TaskBoardController>
     {

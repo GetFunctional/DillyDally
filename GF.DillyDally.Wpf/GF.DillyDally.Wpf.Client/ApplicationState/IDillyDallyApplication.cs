@@ -2,7 +2,7 @@
 using GF.DillyDally.Mvvmc;
 using GF.DillyDally.Wpf.Client.Core.Navigator;
 
-namespace GF.DillyDally.Wpf.Client
+namespace GF.DillyDally.Wpf.Client.ApplicationState
 {
     public interface IDillyDallyApplication
     {

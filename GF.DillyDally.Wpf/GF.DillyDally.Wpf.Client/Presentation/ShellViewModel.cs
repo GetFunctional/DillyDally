@@ -1,5 +1,6 @@
 ﻿using GF.DillyDally.Mvvmc;
 using GF.DillyDally.Wpf.Client.Presentation.ContentNavigation;
+using GF.DillyDally.Wpf.Client.Presentation.HeaderMenu;
 using ReactiveUI;
 
 namespace GF.DillyDally.Wpf.Client.Presentation
@@ -8,6 +9,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation
     {
         private ContentBrowserViewModel _contentBrowserViewModel;
         private IViewModel _overlayContent;
+        private HeaderMenuViewModel _headerMenuViewModel;
 
         public ContentBrowserViewModel ContentBrowserViewModel
         {
@@ -19,6 +21,12 @@ namespace GF.DillyDally.Wpf.Client.Presentation
         {
             get { return this._overlayContent; }
             set { this.RaiseAndSetIfChanged(ref this._overlayContent, value); }
+        }
+
+        public HeaderMenuViewModel HeaderMenuViewModel
+        {
+            get { return this._headerMenuViewModel; }
+            set { this.RaiseAndSetIfChanged(ref this._headerMenuViewModel, value); }
         }
     }
 }

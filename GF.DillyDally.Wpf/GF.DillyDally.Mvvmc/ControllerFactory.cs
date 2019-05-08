@@ -35,5 +35,10 @@ namespace GF.DillyDally.Mvvmc
 #endif
             return controller;
         }
+
+        public async Task<TController> CreateControllerAsync<TController>() where TController : IController
+        {
+            return (TController)await this.CreateControllerAsync(typeof(TController));
+        }
     }
 }

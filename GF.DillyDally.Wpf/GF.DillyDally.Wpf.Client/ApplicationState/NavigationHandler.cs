@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using GF.DillyDally.Wpf.Client.Core.Mediation.Navigation;
 using MediatR;
 
-namespace GF.DillyDally.Wpf.Client.Handler
+namespace GF.DillyDally.Wpf.Client.ApplicationState
 {
     internal sealed class NavigationHandler : IRequestHandler<NavigationRequest, NavigationResponse>
     {

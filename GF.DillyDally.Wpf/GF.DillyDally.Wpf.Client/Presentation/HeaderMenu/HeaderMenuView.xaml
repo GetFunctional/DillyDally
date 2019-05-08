@@ -6,8 +6,11 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
     xmlns:fa5="http://schemas.fontawesome.com/icons/"
+    xmlns:headerMenu="clr-namespace:GF.DillyDally.Wpf.Client.Presentation.HeaderMenu"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:presentation="clr-namespace:GF.DillyDally.Wpf.Client.Presentation"
     xmlns:wpf="http://schemas.getfunctional.de/dillydally/wpf"
+    d:DataContext="{d:DesignInstance Type={x:Type headerMenu:HeaderMenuViewModel}}"
     d:DesignHeight="450"
     d:DesignWidth="800"
     Background="White"
@@ -25,7 +28,10 @@
     <Border BorderBrush="{StaticResource MenuBorderBrush}" BorderThickness="0,0,0,1">
         <dxlc:LayoutControl Orientation="Horizontal">
 
-            <ctrls:ColoredButtonControl Height="36" HorizontalAlignment="Right">
+            <ctrls:ColoredButtonControl
+                Height="36"
+                HorizontalAlignment="Right"
+                Command="{Binding CreateNewTaskCommand}">
                 <dxlc:LayoutGroup Margin="0" Padding="0">
                     <fa5:FontAwesome Icon="Solid_Plus" Opacity="0.7" />
                     <TextBlock Text="New Task" />

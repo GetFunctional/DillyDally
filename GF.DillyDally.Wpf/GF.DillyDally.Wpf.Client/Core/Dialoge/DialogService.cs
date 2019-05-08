@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Threading.Tasks;
 using GF.DillyDally.Mvvmc;
+using GF.DillyDally.Wpf.Client.Core.Mediation.Dialog;
+using MediatR;
 
 namespace GF.DillyDally.Wpf.Client.Core.Dialoge
 {
     internal sealed class DialogService : IDialogService
     {
-        private readonly IDillyDallyApplication _dillyDallyApplication;
+        private readonly IMediator _mediator;
 
-        public DialogService(IDillyDallyApplication dillyDallyApplication)
+        public DialogService(IMediator mediator)
         {
-            this._dillyDallyApplication = dillyDallyApplication;
+            this._mediator = mediator;
         }
 
         #region IDialogService Members
@@ -18,7 +20,8 @@ namespace GF.DillyDally.Wpf.Client.Core.Dialoge
         public async Task<IDialogResult> ShowDialogAsync(IDialogController dialogController)
         {
             var completion = new TaskCompletionSource<IDialogResult>();
-            this._dillyDallyApplication.ShowOverlayDialog(dialogController.ViewModel);
+            var overlayViewModel = dialogController.ViewModel;
+            await this._mediator.Publish(new DialogRequest(overlayViewModel));
             dialogController.WhenConfirmedResult.Subscribe(result =>
             {
                 if (!dialogController.ConfirmClosing(this))
@@ -26,7 +29,7 @@ namespace GF.DillyDally.Wpf.Client.Core.Dialoge
                     return;
                 }
 
-                this._dillyDallyApplication.ConfirmOverlayWith(result);
+                this._mediator.Publish(new DialogConfirmed(result));
                 completion.SetResult(result);
                 dialogController.Close();
             });

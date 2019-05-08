@@ -3,7 +3,7 @@ using GF.DillyDally.Mvvmc;
 using GF.DillyDally.Wpf.Client.Core.Navigator;
 using GF.DillyDally.Wpf.Client.Presentation;
 
-namespace GF.DillyDally.Wpf.Client
+namespace GF.DillyDally.Wpf.Client.ApplicationState
 {
     internal sealed class DillyDallyApplication : IDillyDallyApplication
     {
@@ -23,17 +23,17 @@ namespace GF.DillyDally.Wpf.Client
             return await this._shellController.NavigateInCurrentNavigatorToAsync(navigationTarget);
         }
 
-        #endregion
-
         public void ShowOverlayDialog(IViewModel overlayContent)
         {
-            this._shellController.ShowOverlayDialogAsync(overlayContent);
+            this._shellController.ShowOverlayDialog(overlayContent);
         }
 
         public void ConfirmOverlayWith(IDialogResult result)
         {
-            this._shellController.ConfirmOverlayWith(result);
+            this._shellController.ConfirmOverlayWith();
         }
+
+        #endregion
 
         public void ShowUi()
         {

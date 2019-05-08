@@ -1,14 +1,10 @@
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
 using System.Threading.Tasks;
 using GF.DillyDally.Data.Sqlite;
 using GF.DillyDally.Mvvmc;
-using GF.DillyDally.ReadModel.Views.TaskBoard;
 using GF.DillyDally.Wpf.Client.Core.Dialoge;
 using ReactiveUI;
 
-namespace GF.DillyDally.Wpf.Client.Presentation.Tasks
+namespace GF.DillyDally.Wpf.Client.Presentation.Tasks.Create
 {
     public class CreateTaskController : DialogControllerBase<CreateTaskViewModel>
     {

@@ -1,7 +1,7 @@
 using GF.DillyDally.Mvvmc;
 using ReactiveUI;
 
-namespace GF.DillyDally.Wpf.Client.Presentation.Tasks
+namespace GF.DillyDally.Wpf.Client.Presentation.Tasks.TaskBoard
 {
     public class TaskBoardTaskViewModel : ViewModelBase
     {

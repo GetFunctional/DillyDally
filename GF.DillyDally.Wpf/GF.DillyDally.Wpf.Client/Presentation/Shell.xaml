@@ -41,7 +41,8 @@
             <headerMenu:HeaderMenuView
                 Height="70"
                 HorizontalAlignment="Stretch"
-                VerticalAlignment="Top" />
+                VerticalAlignment="Top"
+                DataContext="{Binding HeaderMenuViewModel}" />
             <ContentControl Content="{Binding ContentBrowserViewModel, Mode=OneWay}" />
         </dxlc:LayoutGroup>
     </Grid>

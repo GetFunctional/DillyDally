@@ -115,6 +115,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ApplicationState\DialogHandler.cs" />
     <Compile Include="Core\DataBootstrapper.cs" />
     <Compile Include="Core\DataStoreInitializer.cs" />
     <Compile Include="Core\DataTemplates\DataTemplateInitializer.cs" />
@@ -123,8 +124,10 @@
     <Compile Include="Core\Dialoge\IDialogService.cs" />
     <Compile Include="Core\Dialoge\IDialogSettings.cs" />
     <Compile Include="Core\InitializationSettings.cs" />
+    <Compile Include="Core\Mediation\Dialog\DialogConfirmed.cs" />
+    <Compile Include="Core\Mediation\Dialog\DialogRequest.cs" />
     <Compile Include="Core\Navigator\NavigationTargetBase.cs" />
-    <Compile Include="Handler\NavigationHandler.cs" />
+    <Compile Include="ApplicationState\NavigationHandler.cs" />
     <Compile Include="Core\Mediation\Navigation\NavigationResponse.cs" />
     <Compile Include="Core\Navigator\NavigationInitializer.cs" />
     <Compile Include="Core\Navigator\ContentNavigator.cs" />
@@ -138,17 +141,19 @@
     <Compile Include="Core\Navigator\NavigationJournalEntry.cs" />
     <Compile Include="Core\Navigator\NavigationTargetMap.cs" />
     <Compile Include="Core\Exceptions\NavigationTargetNotFoundException.cs" />
-    <Compile Include="DillyDallyApplication.cs" />
+    <Compile Include="ApplicationState\DillyDallyApplication.cs" />
     <Compile Include="Presentation\HeaderMenu\HeaderMenuView.xaml.cs">
       <DependentUpon>HeaderMenuView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Presentation\HeaderMenu\HeaderMenuController.cs" />
+    <Compile Include="Presentation\HeaderMenu\HeaderMenuViewModel.cs" />
     <Compile Include="Presentation\ShowCase\ShowCaseController.cs" />
     <Compile Include="Presentation\ShowCase\ShowCaseNavigationTarget.cs" />
     <Compile Include="Presentation\ShowCase\ShowCaseView.xaml.cs">
       <DependentUpon>ShowCaseView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Presentation\ShowCase\ShowCaseViewModel.cs" />
-    <Compile Include="IDillyDallyApplication.cs" />
+    <Compile Include="ApplicationState\IDillyDallyApplication.cs" />
     <Compile Include="Presentation\ContentNavigation\NavigateToTargetCommand.cs" />
     <Compile Include="Core\Mediation\Navigation\NavigationRequest.cs" />
     <Compile Include="Core\Mediation\Navigation\NavigationRequestFactory.cs" />
@@ -288,6 +293,7 @@
       <Name>GF.DillyDally.WriteModel</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>xcopy /i /e /s /y /f "$(SolutionDir)..\Libs\*" "$(TargetDir)"</PreBuildEvent>

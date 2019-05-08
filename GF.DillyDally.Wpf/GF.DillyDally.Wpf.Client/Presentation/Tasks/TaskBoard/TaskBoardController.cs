@@ -6,7 +6,7 @@ using GF.DillyDally.Data.Sqlite;
 using GF.DillyDally.Mvvmc;
 using GF.DillyDally.ReadModel.Views.TaskBoard;
 
-namespace GF.DillyDally.Wpf.Client.Presentation.Tasks
+namespace GF.DillyDally.Wpf.Client.Presentation.Tasks.TaskBoard
 {
     public class TaskBoardController : ControllerBase<TaskBoardViewModel>
     {

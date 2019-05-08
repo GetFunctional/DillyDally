@@ -2,7 +2,7 @@ using System;
 using System.Collections.ObjectModel;
 using GF.DillyDally.Mvvmc;
 
-namespace GF.DillyDally.Wpf.Client.Presentation.Tasks
+namespace GF.DillyDally.Wpf.Client.Presentation.Tasks.TaskBoard
 {
     public class TaskBoardLaneViewModel : ViewModelBase
     {

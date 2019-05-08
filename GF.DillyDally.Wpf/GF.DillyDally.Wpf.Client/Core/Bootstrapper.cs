@@ -93,7 +93,6 @@ namespace GF.DillyDally.Wpf.Client.Core
         {
             serviceContainer.Register<MvvmcServiceFactory>(fac => fac.GetInstance);
             serviceContainer.Register<ControllerFactory>();
-            serviceContainer.Register(typeof(ControllerFactory<>));
         }
     }
 }

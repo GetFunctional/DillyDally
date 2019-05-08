@@ -20,7 +20,7 @@
 
     <conv:ColorStringToBrushConverter x:Key="ColorStringToBrushConverter" />
 
-    <DataTemplate x:Key="TaskTemplate" DataType="{x:Type tasks:TaskBoardTaskViewModel}">
+    <DataTemplate x:Key="TaskTemplate" DataType="{x:Type local:TaskBoardTaskViewModel}">
         <Border
             BorderBrush="{StaticResource BorderBrush}"
             BorderThickness="1"
@@ -75,7 +75,7 @@
         </Border>
     </DataTemplate>
 
-    <DataTemplate x:Key="TaskLaneTemplate" DataType="{x:Type tasks:TaskBoardLaneViewModel}">
+    <DataTemplate x:Key="TaskLaneTemplate" DataType="{x:Type local:TaskBoardLaneViewModel}">
         <dxlc:LayoutGroup
             MinWidth="280"
             HorizontalAlignment="Left"
