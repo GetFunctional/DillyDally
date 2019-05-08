@@ -66,6 +66,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libs\DevExpress.Xpf.LayoutControl.v18.2.dll</HintPath>
     </Reference>
+    <Reference Include="FontAwesome5">
+      <HintPath>..\..\Libs\FontAwesome5.dll</HintPath>
+    </Reference>
+    <Reference Include="FontAwesome5.WPF">
+      <HintPath>..\..\Libs\FontAwesome5.WPF.dll</HintPath>
+    </Reference>
     <Reference Include="LightInject, Version=5.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libs\LightInject.dll</HintPath>
@@ -133,6 +139,9 @@
     <Compile Include="Core\Navigator\NavigationTargetMap.cs" />
     <Compile Include="Core\Exceptions\NavigationTargetNotFoundException.cs" />
     <Compile Include="DillyDallyApplication.cs" />
+    <Compile Include="Presentation\HeaderMenu\HeaderMenuView.xaml.cs">
+      <DependentUpon>HeaderMenuView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Presentation\ShowCase\ShowCaseController.cs" />
     <Compile Include="Presentation\ShowCase\ShowCaseNavigationTarget.cs" />
     <Compile Include="Presentation\ShowCase\ShowCaseView.xaml.cs">
@@ -190,6 +199,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Presentation\ContentNavigation\SearchContentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Presentation\HeaderMenu\HeaderMenuView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -12,6 +12,7 @@
     <extensions:FontSize x:Key="H1FontSize" Size="32px" />
     <extensions:FontSize x:Key="H2FontSize" Size="22px" />
     <extensions:FontSize x:Key="H3FontSize" Size="20px" />
+    <extensions:FontSize x:Key="FontIconSize" Size="14px" />
 
 
     <SolidColorBrush x:Key="ParagraphForeground" Color="#71787E" />
@@ -21,5 +22,6 @@
     <SolidColorBrush x:Key="H1Foreground" Color="#393C3E" />
     <SolidColorBrush x:Key="H2Foreground" Color="#393C3E" />
     <SolidColorBrush x:Key="H3Foreground" Color="#393C3E" />
+    <SolidColorBrush x:Key="FontIconForeground" Color="White" />
 
 </ResourceDictionary>

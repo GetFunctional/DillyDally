@@ -5,6 +5,7 @@
     xmlns:conv="http://schemas.getfunctional.de/dillydally/converter"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+    xmlns:headerMenu="clr-namespace:GF.DillyDally.Wpf.Client.Presentation.HeaderMenu"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:presentation="clr-namespace:GF.DillyDally.Wpf.Client.Presentation"
     xmlns:wpf="http://schemas.getfunctional.de/dillydally/wpf"
@@ -37,12 +38,10 @@
         </Grid>
 
         <dxlc:LayoutGroup Orientation="Vertical">
-            <dxlc:LayoutGroup VerticalAlignment="Top" Orientation="Horizontal">
-                <!--<TextBlock FontSize="28" Text="Rewardsytem" />
-                <TextBlock FontSize="28" Text="Ernährung" />
-                <TextBlock FontSize="28" Text="Sonstiges" />-->
-            </dxlc:LayoutGroup>
-
+            <headerMenu:HeaderMenuView
+                Height="70"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Top" />
             <ContentControl Content="{Binding ContentBrowserViewModel, Mode=OneWay}" />
         </dxlc:LayoutGroup>
     </Grid>
