@@ -38,10 +38,20 @@
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
         </ScrollViewer>-->
-        <Button
-            Width="150"
-            Height="20"
-            Command="{Binding CreateTaskCommand}"
-            Content="Confirm" />
+
+        <dxlc:LayoutGroup VerticalAlignment="Bottom" Orientation="Horizontal">
+            <ctrls:ColoredButtonControl
+                Width="150"
+                Height="20"
+                HorizontalAlignment="Right"
+                Command="{Binding CreateTaskCommand}"
+                Content="Create Task" />
+            <ctrls:ColoredButtonControl
+                Width="150"
+                Height="20"
+                HorizontalAlignment="Right"
+                Command="{Binding CreateTaskCommand}"
+                Content="Create Task" />
+        </dxlc:LayoutGroup>
     </dxlc:LayoutControl>
 </UserControl>
