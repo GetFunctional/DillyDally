@@ -121,11 +121,14 @@
     <Compile Include="Core\DataTemplates\DataTemplateInitializer.cs" />
     <Compile Include="Core\Dialoge\DialogCommandResult.cs" />
     <Compile Include="Core\Dialoge\DialogService.cs" />
+    <Compile Include="Core\Dialoge\DialogSettings.cs" />
     <Compile Include="Core\Dialoge\IDialogService.cs" />
     <Compile Include="Core\Dialoge\IDialogSettings.cs" />
+    <Compile Include="Presentation\OverlaySizeToGridLengthConverter.cs" />
     <Compile Include="Core\InitializationSettings.cs" />
     <Compile Include="Core\Mediation\Dialog\DialogConfirmed.cs" />
     <Compile Include="Core\Mediation\Dialog\DialogRequest.cs" />
+    <Compile Include="Core\Dialoge\DialogSize.cs" />
     <Compile Include="Core\Navigator\NavigationTargetBase.cs" />
     <Compile Include="ApplicationState\NavigationHandler.cs" />
     <Compile Include="Core\Mediation\Navigation\NavigationResponse.cs" />

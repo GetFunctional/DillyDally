@@ -29,7 +29,7 @@ namespace GF.DillyDally.Wpf.Client.ApplicationState
         public async Task Handle(DialogRequest request, CancellationToken cancellationToken)
         {
             await Task.Yield();
-            this._dillyDallyApplication.ShowOverlayDialog(request.DialogContent);
+            this._dillyDallyApplication.ShowOverlayDialog(request.DialogContent, request.DialogSettings);
         }
 
         #endregion

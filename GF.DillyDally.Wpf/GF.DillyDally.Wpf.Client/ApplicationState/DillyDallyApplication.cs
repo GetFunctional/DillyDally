@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using GF.DillyDally.Mvvmc;
+using GF.DillyDally.Wpf.Client.Core.Dialoge;
 using GF.DillyDally.Wpf.Client.Core.Navigator;
 using GF.DillyDally.Wpf.Client.Presentation;
 
@@ -23,9 +24,9 @@ namespace GF.DillyDally.Wpf.Client.ApplicationState
             return await this._shellController.NavigateInCurrentNavigatorToAsync(navigationTarget);
         }
 
-        public void ShowOverlayDialog(IViewModel overlayContent)
+        public void ShowOverlayDialog(IViewModel overlayContent, DialogSettings dialogSettings)
         {
-            this._shellController.ShowOverlayDialog(overlayContent);
+            this._shellController.ShowOverlayDialog(overlayContent,dialogSettings);
         }
 
         public void ConfirmOverlayWith(IDialogResult result)
