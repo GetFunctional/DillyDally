@@ -1,0 +1,34 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:GF.DillyDally.Wpf.Theme.Controls"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:theme="clr-namespace:GF.DillyDally.Wpf.Theme">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Colors.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Typography.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <ControlTemplate x:Key="ImageEditorControlTemplate" TargetType="{x:Type controls:ImageEditorControl}">
+        <Border Padding="6,4" CornerRadius="3">
+            <dxe:ImageEdit
+                dx:ThemeManager.ThemeName="{x:Static theme:ThemeConstants.DevExpressThemeName}"
+                AllowNullInput="True"
+                ShowMenu="False" />
+        </Border>
+    </ControlTemplate>
+
+    <Style x:Key="DefaultStyle" TargetType="{x:Type controls:ImageEditorControl}">
+        <Setter Property="Template" Value="{StaticResource ImageEditorControlTemplate}" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="FontSize" Value="{StaticResource ParagraphFontSize}" />
+        <Setter Property="FontFamily" Value="{StaticResource SourceSansProBlack}" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+    </Style>
+
+    <Style BasedOn="{StaticResource DefaultStyle}" TargetType="{x:Type controls:ImageEditorControl}" />
+
+</ResourceDictionary>

@@ -1,18 +1,19 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:extensions="clr-namespace:GF.DillyDally.Wpf.Theme.Extensions">
+    xmlns:extensions="clr-namespace:GF.DillyDally.Wpf.Theme.Extensions"
+    xmlns:system="clr-namespace:System;assembly=mscorlib">
 
     <FontFamily x:Key="SourceSansProBlack">pack://application:,,,/GF.DillyDally.wpf.Theme;component/StyleGuide/Fonts/#SourceSansPro</FontFamily>
 
     <!--  SourceSansPro  -->
-    <extensions:FontSize x:Key="ParagraphFontSize" Size="16px" />
-    <extensions:FontSize x:Key="AdditionalParagraphFontSize" Size="14px" />
-    <extensions:FontSize x:Key="LinkFontSize" Size="16px" />
-    <extensions:FontSize x:Key="H1FontSize" Size="32px" />
-    <extensions:FontSize x:Key="H2FontSize" Size="22px" />
-    <extensions:FontSize x:Key="H3FontSize" Size="20px" />
-    <extensions:FontSize x:Key="FontIconSize" Size="14px" />
+    <system:Double x:Key="ParagraphFontSize">16</system:Double>
+    <system:Double x:Key="AdditionalParagraphFontSize">14</system:Double>
+    <system:Double x:Key="LinkFontSize">16</system:Double>
+    <system:Double x:Key="H1FontSize">32</system:Double>
+    <system:Double x:Key="H2FontSize">22</system:Double>
+    <system:Double x:Key="H3FontSize">20</system:Double>
+    <system:Double x:Key="FontIconSize">14</system:Double>
 
 
     <SolidColorBrush x:Key="ParagraphForeground" Color="#71787E" />

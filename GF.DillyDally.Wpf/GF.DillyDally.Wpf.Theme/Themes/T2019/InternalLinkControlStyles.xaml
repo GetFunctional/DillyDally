@@ -5,8 +5,8 @@
     xmlns:wpf="clr-namespace:GF.DillyDally.Wpf.Theme.Wpf">
 
     <ResourceDictionary.MergedDictionaries>
-        <wpf:SharedResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Colors.xaml" />
-        <wpf:SharedResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Typography.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Colors.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Typography.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <ControlTemplate x:Key="DefaultInternalLinkControlTemplate" TargetType="{x:Type controls:InternalLinkControl}">

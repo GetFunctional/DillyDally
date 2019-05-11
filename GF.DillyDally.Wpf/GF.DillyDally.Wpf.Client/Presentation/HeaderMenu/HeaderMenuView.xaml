@@ -18,7 +18,7 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <wpf:SharedResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Colors.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Colors.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <SolidColorBrush x:Key="MenuBorderBrush" Color="{StaticResource BorderGrey}" />
 
@@ -32,9 +32,15 @@
                 Height="36"
                 HorizontalAlignment="Right"
                 Command="{Binding CreateNewTaskCommand}">
-                <dxlc:LayoutGroup Margin="0" Padding="0">
-                    <fa5:FontAwesome Icon="Solid_Plus" Opacity="0.7" />
-                    <TextBlock Text="New Task" />
+                <dxlc:LayoutGroup
+                    Margin="0"
+                    Padding="0"
+                    HorizontalAlignment="Center">
+                    <fa5:FontAwesome
+                        HorizontalAlignment="Left"
+                        Icon="Solid_Plus"
+                        Opacity="0.7" />
+                    <TextBlock HorizontalAlignment="Left" Text="New Task" />
                 </dxlc:LayoutGroup>
             </ctrls:ColoredButtonControl>
         </dxlc:LayoutControl>

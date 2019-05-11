@@ -11,6 +11,10 @@
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/LabelControlStyles.xaml" />
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/InternalLinkControlStyles.xaml" />
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/ColoredButtonControlStyles.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/ImageEditorControlStyles.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/ElementGroupControlStyles.xaml" />
+
+
 
     </ResourceDictionary.MergedDictionaries>
 

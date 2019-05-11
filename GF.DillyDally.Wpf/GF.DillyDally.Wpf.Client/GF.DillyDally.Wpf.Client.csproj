@@ -124,11 +124,12 @@
     <Compile Include="Core\Dialoge\DialogSettings.cs" />
     <Compile Include="Core\Dialoge\IDialogService.cs" />
     <Compile Include="Core\Dialoge\IDialogSettings.cs" />
-    <Compile Include="Presentation\OverlaySizeToGridLengthConverter.cs" />
+    <Compile Include="Presentation\Achievements\AchievementContainerView.xaml.cs">
+      <DependentUpon>AchievementContainerView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Core\InitializationSettings.cs" />
     <Compile Include="Core\Mediation\Dialog\DialogConfirmed.cs" />
     <Compile Include="Core\Mediation\Dialog\DialogRequest.cs" />
-    <Compile Include="Core\Dialoge\DialogSize.cs" />
     <Compile Include="Core\Navigator\NavigationTargetBase.cs" />
     <Compile Include="ApplicationState\NavigationHandler.cs" />
     <Compile Include="Core\Mediation\Navigation\NavigationResponse.cs" />
@@ -188,6 +189,7 @@
       <DependentUpon>CreateTaskView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Presentation\Tasks\Create\CreateTaskViewModel.cs" />
+    <Compile Include="Presentation\Tasks\Create\TaskAchievementsViewModel.cs" />
     <Compile Include="Presentation\Tasks\TaskBoard\TaskBoardLaneViewModel.cs" />
     <Compile Include="Presentation\Tasks\TaskBoard\TaskBoardTaskViewModel.cs" />
     <Compile Include="Presentation\Tasks\TaskBoard\TaskBoardView.xaml.cs">
@@ -198,6 +200,10 @@
     <Compile Include="Presentation\Tasks\TaskBoard\TaskBoardViewModel.cs" />
     <Compile Include="Presentation\ShellController.cs" />
     <Compile Include="Presentation\ShellViewModel.cs" />
+    <Page Include="Presentation\Achievements\AchievementContainerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Presentation\ContentNavigation\ContentBrowserView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

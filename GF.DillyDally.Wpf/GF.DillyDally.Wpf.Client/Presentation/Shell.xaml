@@ -8,7 +8,6 @@
     xmlns:headerMenu="clr-namespace:GF.DillyDally.Wpf.Client.Presentation.HeaderMenu"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:presentation="clr-namespace:GF.DillyDally.Wpf.Client.Presentation"
-    xmlns:wpf="http://schemas.getfunctional.de/dillydally/wpf"
     Title="Dilly Dally"
     Width="1280"
     Height="800"
@@ -18,11 +17,10 @@
     mc:Ignorable="d">
     <Window.Resources>
         <ResourceDictionary>
-            <conv:ContentToVisiblityConverter x:Key="ContentToVisiblityConverter" />
-            <presentation:OverlaySizeToGridLengthConverter x:Key="OverlaySizeToGridLengthConverter" />
             <ResourceDictionary.MergedDictionaries>
-                <wpf:SharedResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Typography.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Typography.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <conv:ContentToVisiblityConverter x:Key="ContentToVisiblityConverter" />
         </ResourceDictionary>
     </Window.Resources>
 
@@ -36,9 +34,9 @@
                 <SolidColorBrush Opacity=".5" Color="Black" />
             </Grid.Background>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="{Binding OverlaySize, Converter={StaticResource OverlaySizeToGridLengthConverter}}" />
-                <ColumnDefinition Width="100*" />
-                <ColumnDefinition Width="{Binding OverlaySize, Converter={StaticResource OverlaySizeToGridLengthConverter}}" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>

@@ -38,7 +38,6 @@ namespace GF.DillyDally.Wpf.Client.Presentation
         public void ShowOverlayDialog(IViewModel overlayContent, DialogSettings dialogSettings)
         {
             this.ViewModel.OverlayContent = overlayContent;
-            this.ViewModel.OverlaySize = dialogSettings.DialogSize;
         }
 
         public void ConfirmOverlayWith()

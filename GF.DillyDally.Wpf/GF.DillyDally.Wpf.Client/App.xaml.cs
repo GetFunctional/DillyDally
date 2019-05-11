@@ -6,6 +6,7 @@ using GF.DillyDally.Mvvmc;
 using GF.DillyDally.Wpf.Client.ApplicationState;
 using GF.DillyDally.Wpf.Client.Core;
 using GF.DillyDally.Wpf.Client.Presentation;
+using GF.DillyDally.Wpf.Theme;
 using LightInject;
 
 namespace GF.DillyDally.Wpf.Client
@@ -23,7 +24,7 @@ namespace GF.DillyDally.Wpf.Client
             base.OnStartup(e);
             ThemeManager.EnableDefaultThemeLoading = false;
             ThemeManager.EnableDPICorrection = true;
-            ApplicationThemeHelper.ApplicationThemeName = "VS2017Light";
+            ApplicationThemeHelper.ApplicationThemeName = ThemeConstants.DevExpressThemeName;
 
             DispatcherUnhandledException += this.HandleUnhandledException;
             var currentApplication = Current;

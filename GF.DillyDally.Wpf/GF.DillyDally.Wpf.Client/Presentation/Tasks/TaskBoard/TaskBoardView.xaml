@@ -16,9 +16,9 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <wpf:SharedResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Colors.xaml" />
-                <wpf:SharedResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Typography.xaml" />
-                <wpf:SharedResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Client;component/Presentation/Tasks/TaskBoard/TaskBoardTemplates.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Colors.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Typography.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Client;component/Presentation/Tasks/TaskBoard/TaskBoardTemplates.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>

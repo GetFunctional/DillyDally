@@ -4,13 +4,11 @@
     xmlns:conv="http://schemas.getfunctional.de/dillydally/converter"
     xmlns:ctrls="http://schemas.getfunctional.de/dillydally/controls"
     xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
-    xmlns:local="clr-namespace:GF.DillyDally.Wpf.Client.Presentation.Tasks.TaskBoard"
-    xmlns:tasks="clr-namespace:GF.DillyDally.Wpf.Client.Presentation.Tasks"
-    xmlns:wpf="http://schemas.getfunctional.de/dillydally/wpf">
+    xmlns:local="clr-namespace:GF.DillyDally.Wpf.Client.Presentation.Tasks.TaskBoard">
 
     <ResourceDictionary.MergedDictionaries>
-        <wpf:SharedResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Colors.xaml" />
-        <wpf:SharedResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Typography.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Colors.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Typography.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <SolidColorBrush x:Key="BorderBrush" Color="{StaticResource BorderGrey}" />

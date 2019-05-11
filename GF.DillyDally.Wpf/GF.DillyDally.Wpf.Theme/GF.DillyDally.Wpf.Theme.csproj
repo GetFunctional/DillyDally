@@ -118,6 +118,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Themes\T2019\ElementGroupControlStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\T2019\ImageEditorControlStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\T2019\LabelControlStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -133,6 +141,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\ColoredButtonControl.cs" />
+    <Compile Include="Controls\ElementGroupControl.cs" />
+    <Compile Include="Controls\ImageEditorControl.cs" />
     <Compile Include="Controls\LabelControl.cs" />
     <Compile Include="Controls\InternalLinkControl.cs" />
     <Compile Include="Converter\ColorStringToBrushConverter.cs" />
@@ -151,6 +161,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="ThemeConstants.cs" />
     <Compile Include="Wpf\DesignTimeInvestigator.cs" />
     <Compile Include="Wpf\SharedResourceDictionary.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
