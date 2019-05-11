@@ -124,6 +124,7 @@
     <Compile Include="Core\Dialoge\DialogSettings.cs" />
     <Compile Include="Core\Dialoge\IDialogService.cs" />
     <Compile Include="Core\Dialoge\IDialogSettings.cs" />
+    <Compile Include="Presentation\OverlayViewModel.cs" />
     <Compile Include="Presentation\Achievements\AchievementContainerView.xaml.cs">
       <DependentUpon>AchievementContainerView.xaml</DependentUpon>
     </Compile>
@@ -227,6 +228,10 @@
     <Page Include="Presentation\Tasks\Create\CreateTaskView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Presentation\OverlayTemplates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Presentation\Tasks\TaskBoard\TaskBoardTemplates.xaml">
       <SubType>Designer</SubType>

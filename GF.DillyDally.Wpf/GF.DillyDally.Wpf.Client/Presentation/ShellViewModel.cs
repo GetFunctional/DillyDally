@@ -9,7 +9,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation
     {
         private ContentBrowserViewModel _contentBrowserViewModel;
         private HeaderMenuViewModel _headerMenuViewModel;
-        private IViewModel _overlayContent;
+        private OverlayViewModel _overlayViewModel;
 
         public ContentBrowserViewModel ContentBrowserViewModel
         {
@@ -17,16 +17,16 @@ namespace GF.DillyDally.Wpf.Client.Presentation
             set { this.RaiseAndSetIfChanged(ref this._contentBrowserViewModel, value); }
         }
 
-        public IViewModel OverlayContent
-        {
-            get { return this._overlayContent; }
-            set { this.RaiseAndSetIfChanged(ref this._overlayContent, value); }
-        }
-
         public HeaderMenuViewModel HeaderMenuViewModel
         {
             get { return this._headerMenuViewModel; }
             set { this.RaiseAndSetIfChanged(ref this._headerMenuViewModel, value); }
+        }
+
+        public OverlayViewModel OverlayViewModel
+        {
+            get { return this._overlayViewModel; }
+            set { this.RaiseAndSetIfChanged(ref this._overlayViewModel, value); }
         }
     }
 }
