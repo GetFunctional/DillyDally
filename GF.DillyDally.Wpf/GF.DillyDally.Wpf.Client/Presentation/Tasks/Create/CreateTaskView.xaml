@@ -22,79 +22,83 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <dxlc:LayoutControl Orientation="Vertical">
-        <ctrls:ElementGroupControl Header="Task Infos">
-            <ctrls:ElementGroupControl.Content>
-                <dxlc:LayoutGroup Orientation="Horizontal">
-                    <ctrls:ImageEditorControl
-                        Width="120"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Stretch" />
-                    <dxlc:LayoutGroup
-                        Width="550"
-                        HorizontalAlignment="Left"
-                        Orientation="Vertical">
-                        <dxlc:LayoutItem Label="Name" LabelPosition="Top">
-                            <dxe:TextEdit />
-                        </dxlc:LayoutItem>
-                        <dxlc:LayoutItem Label="Category" LabelPosition="Top">
-                            <dxe:ComboBoxEdit />
-                        </dxlc:LayoutItem>
-                    </dxlc:LayoutGroup>
-                </dxlc:LayoutGroup>
+    <ctrls:Form Background="White"  HeaderSubtitle="Do it" HeaderTitle="Create Task">
+        <ctrls:Form.Content>
+            <dxlc:LayoutGroup Orientation="Vertical">
+                <ctrls:ElementGroupControl Header="Task Infos">
+                    <ctrls:ElementGroupControl.Content>
+                        <dxlc:LayoutGroup Orientation="Horizontal">
+                            <ctrls:ImageEditorControl
+                                Width="120"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Stretch" />
+                            <dxlc:LayoutGroup
+                                Width="550"
+                                HorizontalAlignment="Left"
+                                Orientation="Vertical">
+                                <dxlc:LayoutItem Label="Name" LabelPosition="Top">
+                                    <dxe:TextEdit />
+                                </dxlc:LayoutItem>
+                                <dxlc:LayoutItem Label="Category" LabelPosition="Top">
+                                    <dxe:ComboBoxEdit />
+                                </dxlc:LayoutItem>
+                            </dxlc:LayoutGroup>
+                        </dxlc:LayoutGroup>
 
-            </ctrls:ElementGroupControl.Content>
-        </ctrls:ElementGroupControl>
+                    </ctrls:ElementGroupControl.Content>
+                </ctrls:ElementGroupControl>
 
-        <ctrls:ElementGroupControl Header="Additional Infos">
-            <ctrls:ElementGroupControl.Content>
-                <dxlc:LayoutGroup Orientation="Vertical">
-                    <dxlc:LayoutItem
-                        Width="200"
-                        HorizontalAlignment="Left"
-                        Label="Due Date"
-                        LabelPosition="Top">
-                        <dxe:DateEdit />
-                    </dxlc:LayoutItem>
-                    <dxlc:LayoutItem
-                        HorizontalAlignment="Left"
-                        Label="Definiton of Done"
-                        LabelPosition="Top">
-                        <dxe:TextEdit Width="500" />
-                    </dxlc:LayoutItem>
-                    <dxlc:LayoutItem
-                        HorizontalAlignment="Stretch"
-                        Label="Description"
-                        LabelPosition="Top">
-                        <dxe:TextEdit Height="170" AcceptsReturn="True" />
-                    </dxlc:LayoutItem>
-                </dxlc:LayoutGroup>
-            </ctrls:ElementGroupControl.Content>
-        </ctrls:ElementGroupControl>
+                <ctrls:ElementGroupControl Header="Additional Infos">
+                    <ctrls:ElementGroupControl.Content>
+                        <dxlc:LayoutGroup Orientation="Vertical">
+                            <dxlc:LayoutItem
+                                Width="200"
+                                HorizontalAlignment="Left"
+                                Label="Due Date"
+                                LabelPosition="Top">
+                                <dxe:DateEdit />
+                            </dxlc:LayoutItem>
+                            <dxlc:LayoutItem
+                                HorizontalAlignment="Left"
+                                Label="Definiton of Done"
+                                LabelPosition="Top">
+                                <dxe:TextEdit Width="500" />
+                            </dxlc:LayoutItem>
+                            <dxlc:LayoutItem
+                                HorizontalAlignment="Stretch"
+                                Label="Description"
+                                LabelPosition="Top">
+                                <dxe:TextEdit Height="170" AcceptsReturn="True" />
+                            </dxlc:LayoutItem>
+                        </dxlc:LayoutGroup>
+                    </ctrls:ElementGroupControl.Content>
+                </ctrls:ElementGroupControl>
 
-        <ctrls:ElementGroupControl Header="Achievements on completion">
-            <ctrls:ElementGroupControl.Content>
-                <achievements:AchievementContainerView Height="180" DataContext="{Binding TaskAchievementsViewModel}" />
-            </ctrls:ElementGroupControl.Content>
-        </ctrls:ElementGroupControl>
-
-        <dxlc:LayoutGroup
-            Margin="0,25,0,0"
-            VerticalAlignment="Bottom"
-            Orientation="Horizontal">
-            <ctrls:ColoredButtonControl
-                Width="150"
-                HorizontalAlignment="Right"
-                Command="{Binding CreateTaskCommand}"
-                Content="Create Task"
-                Foreground="White" />
-            <ctrls:ColoredButtonControl
-                Width="150"
-                HorizontalAlignment="Right"
-                Background="White"
-                Command="{Binding CreateTaskCommand}"
-                Content="Cancel"
-                Foreground="Black" />
-        </dxlc:LayoutGroup>
-    </dxlc:LayoutControl>
+                <ctrls:ElementGroupControl Header="Achievements on completion">
+                    <ctrls:ElementGroupControl.Content>
+                        <achievements:AchievementContainerView Height="180" DataContext="{Binding TaskAchievementsViewModel}" />
+                    </ctrls:ElementGroupControl.Content>
+                </ctrls:ElementGroupControl>
+            </dxlc:LayoutGroup>
+        </ctrls:Form.Content>
+        <ctrls:Form.FooterContent>
+            <dxlc:LayoutGroup Orientation="Horizontal">
+                <ctrls:ColoredButtonControl
+                    Width="150"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Command="{Binding CreateTaskCommand}"
+                    Content="Create Task"
+                    Foreground="White" />
+                <ctrls:ColoredButtonControl
+                    Width="150"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Background="White"
+                    Command="{Binding CreateTaskCommand}"
+                    Content="Cancel"
+                    Foreground="Black" />
+            </dxlc:LayoutGroup>
+        </ctrls:Form.FooterContent>
+    </ctrls:Form>
 </UserControl>

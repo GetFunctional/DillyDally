@@ -49,7 +49,10 @@ namespace GF.DillyDally.Wpf.Client
 
         private void HandleUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
-            MessageBox.Show("Exit");
+            if (!e.Handled)
+            {
+                MessageBox.Show("Exit");
+            }
         }
 
         private async Task<ShellController> CreateShellControllerAsync(ServiceContainer serviceContainer)

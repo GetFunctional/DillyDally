@@ -122,6 +122,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Themes\T2019\FormStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\T2019\ImageEditorControlStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -142,6 +146,9 @@
   <ItemGroup>
     <Compile Include="Controls\ColoredButtonControl.cs" />
     <Compile Include="Controls\ElementGroupControl.cs" />
+    <Compile Include="Controls\Form.cs" />
+    <Compile Include="Controls\FormFooter.cs" />
+    <Compile Include="Controls\FormHeader.cs" />
     <Compile Include="Controls\ImageEditorControl.cs" />
     <Compile Include="Controls\LabelControl.cs" />
     <Compile Include="Controls\InternalLinkControl.cs" />

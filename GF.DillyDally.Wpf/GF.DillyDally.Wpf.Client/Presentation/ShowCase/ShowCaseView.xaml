@@ -23,7 +23,7 @@
                     LabelBrush="#435214"
                     LabelText="Test Test 1234" />
 
-                <ctrls:InternalLinkControl DisplayLink="TSK-44444" />
+                <ctrls:InternalLinkControl DisplayLink="TTitleK-44444" />
 
                 <ctrls:ColoredButtonControl Command="{Binding TestDialogCommand}" Content="TestDialog" />
             </dxlc:LayoutGroup>

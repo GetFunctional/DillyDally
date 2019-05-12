@@ -1,7 +1,7 @@
 using GF.DillyDally.Mvvmc;
 using ReactiveUI;
 
-namespace GF.DillyDally.Wpf.Client
+namespace GF.DillyDally.Wpf.Client.Presentation
 {
     public class OverlayViewModel : ViewModelBase
     {
