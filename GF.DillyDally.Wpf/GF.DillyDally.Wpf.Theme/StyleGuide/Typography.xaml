@@ -7,12 +7,12 @@
     <FontFamily x:Key="SourceSansProBlack">pack://application:,,,/GF.DillyDally.wpf.Theme;component/StyleGuide/Fonts/#SourceSansPro</FontFamily>
 
     <!--  SourceSansPro  -->
-    <system:Double x:Key="ParagraphFontSize">16</system:Double>
-    <system:Double x:Key="AdditionalParagraphFontSize">14</system:Double>
+    <system:Double x:Key="ParagraphFontSize">14</system:Double>
+    <system:Double x:Key="AdditionalParagraphFontSize">12</system:Double>
     <system:Double x:Key="LinkFontSize">16</system:Double>
     <system:Double x:Key="H1FontSize">32</system:Double>
-    <system:Double x:Key="H2FontSize">22</system:Double>
-    <system:Double x:Key="H3FontSize">20</system:Double>
+    <system:Double x:Key="H2FontSize">24</system:Double>
+    <system:Double x:Key="H3FontSize">18</system:Double>
     <system:Double x:Key="FontIconSize">14</system:Double>
 
 

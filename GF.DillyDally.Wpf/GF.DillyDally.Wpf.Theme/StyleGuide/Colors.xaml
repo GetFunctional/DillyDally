@@ -3,9 +3,7 @@
     <Color x:Key="Layer3Background">#eff3f6</Color>
     <Color x:Key="Layer2Background">#f7f9fb</Color>
     <Color x:Key="Layer1Background">#ffffff</Color>
-
-    <Color x:Key="BorderGrey">#e6eaee</Color>
-
+    <Color x:Key="BorderGrey">#E7E9ED</Color>
 
     <Color x:Key="HighlightBlue">#00aaff</Color>
     <Color x:Key="HighlightOrange">#ff7800</Color>

@@ -22,7 +22,7 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <ctrls:Form Background="White"  HeaderSubtitle="Do it" HeaderTitle="Create Task">
+    <ctrls:Form HeaderSubtitle="Do it" HeaderTitle="Create Task">
         <ctrls:Form.Content>
             <dxlc:LayoutGroup Orientation="Vertical">
                 <ctrls:ElementGroupControl Header="Task Infos">
