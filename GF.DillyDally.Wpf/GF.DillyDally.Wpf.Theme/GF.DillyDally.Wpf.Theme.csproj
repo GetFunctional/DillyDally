@@ -118,7 +118,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\T2019\ElementGroupControlStyles.xaml">
+    <Page Include="Themes\T2019\FormElementGroupControlStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -126,7 +126,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Themes\T2019\ImageEditorControlStyles.xaml">
+    <Page Include="Themes\T2019\InputControls\DateInputControlStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\T2019\InputControls\ImageInputControlStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\T2019\InputControls\ComboInputControlStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\T2019\InputControls\LabelStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\T2019\InputControls\TextInputControlStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -145,13 +161,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\ColoredButtonControl.cs" />
-    <Compile Include="Controls\ElementGroupControl.cs" />
+    <Compile Include="Controls\ComboInputControl.cs" />
+    <Compile Include="Controls\DateInputControl.cs" />
+    <Compile Include="Controls\FormElementGroupControl.cs" />
     <Compile Include="Controls\Form.cs" />
     <Compile Include="Controls\FormFooter.cs" />
     <Compile Include="Controls\FormHeader.cs" />
-    <Compile Include="Controls\ImageEditorControl.cs" />
+    <Compile Include="Controls\ImageInputControl.cs" />
     <Compile Include="Controls\LabelControl.cs" />
     <Compile Include="Controls\InternalLinkControl.cs" />
+    <Compile Include="Controls\TextInputControl.cs" />
     <Compile Include="Converter\ColorStringToBrushConverter.cs" />
     <Compile Include="Converter\ContentToVisiblityConverter.cs" />
     <Compile Include="Extensions\FontSizeExtension.cs" />

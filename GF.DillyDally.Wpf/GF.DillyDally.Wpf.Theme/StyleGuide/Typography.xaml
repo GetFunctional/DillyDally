@@ -13,7 +13,6 @@
     <system:Double x:Key="H1FontSize">32</system:Double>
     <system:Double x:Key="H2FontSize">24</system:Double>
     <system:Double x:Key="H3FontSize">18</system:Double>
-    <system:Double x:Key="FontIconSize">14</system:Double>
 
 
     <SolidColorBrush x:Key="ParagraphForeground" Color="#71787E" />
@@ -23,6 +22,15 @@
     <SolidColorBrush x:Key="H1Foreground" Color="#393C3E" />
     <SolidColorBrush x:Key="H2Foreground" Color="#393C3E" />
     <SolidColorBrush x:Key="H3Foreground" Color="#393C3E" />
+
+    <!--  Font Icons  -->
+    <system:Double x:Key="FontIconSize">14</system:Double>
     <SolidColorBrush x:Key="FontIconForeground" Color="White" />
+
+    <!--  Input Controls  -->
+    <system:Double x:Key="InputControlsFontSize">14</system:Double>
+    <system:Double x:Key="InputControlsLabelFontSize">14</system:Double>
+    <SolidColorBrush x:Key="InputControlsForeground" Color="#333C48" />
+    <SolidColorBrush x:Key="InputControlsLabelForeground" Color="#7F8FA4" />
 
 </ResourceDictionary>

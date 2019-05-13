@@ -5,13 +5,12 @@ using System.Windows.Controls;
 namespace GF.DillyDally.Wpf.Theme.Controls
 {
     [DesignTimeVisible(true)]
-    public class ImageEditorControl : Control
+    public class ImageInputControl : Control
     {
-       
-        static ImageEditorControl()
+        static ImageInputControl()
         {
             DefaultStyleKeyProperty.OverrideMetadata(
-                typeof(ImageEditorControl), new FrameworkPropertyMetadata(typeof(ImageEditorControl)));
+                typeof(ImageInputControl), new FrameworkPropertyMetadata(typeof(ImageInputControl)));
         }
     }
 }

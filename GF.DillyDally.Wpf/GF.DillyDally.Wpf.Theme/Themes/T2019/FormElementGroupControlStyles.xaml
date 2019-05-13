@@ -16,14 +16,16 @@
     <system:Double x:Key="ElementGroupHeaderFontSize">18</system:Double>
     <SolidColorBrush x:Key="ElementGroupBorderBrush" Color="{StaticResource BorderGrey}" />
 
-    <ControlTemplate x:Key="DefaultElementGroupControlTemplate" TargetType="{x:Type controls:ElementGroupControl}">
+    <ControlTemplate x:Key="DefaultElementGroupControlTemplate" TargetType="{x:Type controls:FormElementGroupControl}">
         <Border
             Margin="{TemplateBinding Margin}"
             Padding="{TemplateBinding Padding}"
             Background="{TemplateBinding Background}"
             BorderBrush="{StaticResource ElementGroupBorderBrush}"
             BorderThickness="1"
-            CornerRadius="3">
+            CornerRadius="5"
+            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+            UseLayoutRounding="{TemplateBinding UseLayoutRounding}">
             <dxlc:LayoutGroup
                 Margin="0"
                 Padding="0"
@@ -37,7 +39,7 @@
                     FontSize="{StaticResource ElementGroupHeaderFontSize}"
                     FontWeight="Regular"
                     Foreground="{StaticResource ElementGroupHeaderBrush}" />
-                <ContentPresenter
+                <ContentControl
                     Content="{TemplateBinding Content}"
                     ContentStringFormat="{TemplateBinding ContentStringFormat}"
                     ContentTemplate="{TemplateBinding ContentTemplate}" />
@@ -45,18 +47,18 @@
         </Border>
     </ControlTemplate>
 
-    <Style x:Key="DefaultStyle" TargetType="{x:Type controls:ElementGroupControl}">
+    <Style x:Key="DefaultStyle" TargetType="{x:Type controls:FormElementGroupControl}">
         <Setter Property="Template" Value="{StaticResource DefaultElementGroupControlTemplate}" />
-        <Setter Property="Foreground" Value="{StaticResource LinkForeground}" />
         <Setter Property="FontSize" Value="{StaticResource LinkFontSize}" />
         <Setter Property="FontFamily" Value="{StaticResource SourceSansProBlack}" />
         <Setter Property="Background" Value="{StaticResource ElementGroupBackgroundBrush}" />
         <Setter Property="VerticalAlignment" Value="Top" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-        <Setter Property="Padding" Value="28" />
+        <Setter Property="Padding" Value="25" />
+        <Setter Property="Margin" Value="0" />
     </Style>
 
-    <Style BasedOn="{StaticResource DefaultStyle}" TargetType="{x:Type controls:ElementGroupControl}" />
+    <Style BasedOn="{StaticResource DefaultStyle}" TargetType="{x:Type controls:FormElementGroupControl}" />
 
 </ResourceDictionary>

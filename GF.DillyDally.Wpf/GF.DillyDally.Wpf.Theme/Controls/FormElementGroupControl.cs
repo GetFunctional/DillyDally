@@ -4,7 +4,7 @@ using System.Windows.Controls;
 namespace GF.DillyDally.Wpf.Theme.Controls
 {
     [DesignTimeVisible(true)]
-    public class ElementGroupControl : HeaderedContentControl
+    public class FormElementGroupControl : HeaderedContentControl
     {
     }
 }

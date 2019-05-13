@@ -6,79 +6,51 @@
     xmlns:create="clr-namespace:GF.DillyDally.Wpf.Client.Presentation.Tasks.Create"
     xmlns:ctrls="http://schemas.getfunctional.de/dillydally/controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
     xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:theme="clr-namespace:GF.DillyDally.Wpf.Theme;assembly=GF.DillyDally.Wpf.Theme"
     d:DataContext="{d:DesignInstance Type={x:Type create:CreateTaskViewModel}}"
     d:DesignHeight="900"
     d:DesignWidth="800"
+    dx:ThemeManager.ThemeName="{x:Static theme:ThemeConstants.DevExpressThemeName}"
     mc:Ignorable="d">
-
-    <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Colors.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </UserControl.Resources>
 
     <ctrls:Form HeaderSubtitle="Do it" HeaderTitle="Create Task">
         <ctrls:Form.Content>
             <dxlc:LayoutGroup Orientation="Vertical">
-                <ctrls:ElementGroupControl Header="Task Infos">
-                    <ctrls:ElementGroupControl.Content>
-                        <dxlc:LayoutGroup Orientation="Horizontal">
-                            <ctrls:ImageEditorControl
-                                Width="120"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Stretch" />
+                <ctrls:FormElementGroupControl Header="Task Infos">
+                    <ctrls:FormElementGroupControl.Content>
+                        <dxlc:LayoutGroup ItemSpace="14" Orientation="Horizontal">
+                            <ctrls:ImageInputControl HorizontalAlignment="Left" VerticalAlignment="Stretch" />
+
                             <dxlc:LayoutGroup
-                                Width="550"
+                                Padding="2"
                                 HorizontalAlignment="Left"
+                                ItemSpace="14"
                                 Orientation="Vertical">
-                                <dxlc:LayoutItem Label="Name" LabelPosition="Top">
-                                    <dxe:TextEdit />
-                                </dxlc:LayoutItem>
-                                <dxlc:LayoutItem Label="Category" LabelPosition="Top">
-                                    <dxe:ComboBoxEdit />
-                                </dxlc:LayoutItem>
+                                <ctrls:TextInputControl Label="Name" WatermarkText="A self explanatory name ..." />
+                                <ctrls:ComboInputControl Label="Category" WatermarkText="A self explanatory name ..." />
                             </dxlc:LayoutGroup>
                         </dxlc:LayoutGroup>
+                    </ctrls:FormElementGroupControl.Content>
+                </ctrls:FormElementGroupControl>
 
-                    </ctrls:ElementGroupControl.Content>
-                </ctrls:ElementGroupControl>
-
-                <ctrls:ElementGroupControl Header="Additional Infos">
-                    <ctrls:ElementGroupControl.Content>
+                <ctrls:FormElementGroupControl Header="Additional Infos">
+                    <ctrls:FormElementGroupControl.Content>
                         <dxlc:LayoutGroup Orientation="Vertical">
-                            <dxlc:LayoutItem
-                                Width="200"
-                                HorizontalAlignment="Left"
-                                Label="Due Date"
-                                LabelPosition="Top">
-                                <dxe:DateEdit />
-                            </dxlc:LayoutItem>
-                            <dxlc:LayoutItem
-                                HorizontalAlignment="Left"
-                                Label="Definiton of Done"
-                                LabelPosition="Top">
-                                <dxe:TextEdit Width="500" />
-                            </dxlc:LayoutItem>
-                            <dxlc:LayoutItem
-                                HorizontalAlignment="Stretch"
-                                Label="Description"
-                                LabelPosition="Top">
-                                <dxe:TextEdit Height="170" AcceptsReturn="True" />
-                            </dxlc:LayoutItem>
+                            <ctrls:DateInputControl Label="Due Date" WatermarkText="When do you want to finish this task?" />
+                            <ctrls:TextInputControl Label="Definiton of Done" WatermarkText="Describe when your task is done." />
+                            <ctrls:TextInputControl IsMultiline="True" Label="Description" />
                         </dxlc:LayoutGroup>
-                    </ctrls:ElementGroupControl.Content>
-                </ctrls:ElementGroupControl>
+                    </ctrls:FormElementGroupControl.Content>
+                </ctrls:FormElementGroupControl>
 
-                <ctrls:ElementGroupControl Header="Achievements on completion">
-                    <ctrls:ElementGroupControl.Content>
+                <ctrls:FormElementGroupControl Header="Achievements on completion">
+                    <ctrls:FormElementGroupControl.Content>
                         <achievements:AchievementContainerView Height="180" DataContext="{Binding TaskAchievementsViewModel}" />
-                    </ctrls:ElementGroupControl.Content>
-                </ctrls:ElementGroupControl>
+                    </ctrls:FormElementGroupControl.Content>
+                </ctrls:FormElementGroupControl>
             </dxlc:LayoutGroup>
         </ctrls:Form.Content>
         <ctrls:Form.FooterContent>

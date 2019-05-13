@@ -11,24 +11,30 @@
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Typography.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <ControlTemplate x:Key="ImageEditorControlTemplate" TargetType="{x:Type controls:ImageEditorControl}">
-        <Border Padding="6,4" CornerRadius="3">
+    <SolidColorBrush x:Key="ImageBorderBrush" Color="#707070" />
+    <ControlTemplate x:Key="ImageEditorControlTemplate" TargetType="{x:Type controls:ImageInputControl}">
+        <Border
+            BorderBrush="{StaticResource ImageBorderBrush}"
+            BorderThickness="1"
+            CornerRadius="5">
             <dxe:ImageEdit
                 dx:ThemeManager.ThemeName="{x:Static theme:ThemeConstants.DevExpressThemeName}"
                 AllowNullInput="True"
+                BorderThickness="0"
                 ShowMenu="False" />
         </Border>
     </ControlTemplate>
 
-    <Style x:Key="DefaultStyle" TargetType="{x:Type controls:ImageEditorControl}">
+    <Style x:Key="DefaultStyle" TargetType="{x:Type controls:ImageInputControl}">
         <Setter Property="Template" Value="{StaticResource ImageEditorControlTemplate}" />
         <Setter Property="Foreground" Value="White" />
         <Setter Property="FontSize" Value="{StaticResource ParagraphFontSize}" />
         <Setter Property="FontFamily" Value="{StaticResource SourceSansProBlack}" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="Width" Value="156" />
     </Style>
 
-    <Style BasedOn="{StaticResource DefaultStyle}" TargetType="{x:Type controls:ImageEditorControl}" />
+    <Style BasedOn="{StaticResource DefaultStyle}" TargetType="{x:Type controls:ImageInputControl}" />
 
 </ResourceDictionary>
