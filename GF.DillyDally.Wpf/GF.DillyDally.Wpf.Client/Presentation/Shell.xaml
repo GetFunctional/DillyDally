@@ -21,31 +21,59 @@
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Colors.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Typography.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Client;component/Presentation/OverlayTemplates.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <conv:ContentToVisiblityConverter x:Key="ContentToVisiblityConverter" />
+            <SolidColorBrush x:Key="ApplicationBackgroundBrush" Color="{StaticResource ApplicationBackgroundColor}" />
+            <SolidColorBrush x:Key="ContentSeparatorBrush" Color="{StaticResource ContentSeparatorColor}" />
         </ResourceDictionary>
     </Window.Resources>
 
-    <Grid Margin="0">
-        <ContentControl
-            x:Name="Overlay"
-            Panel.ZIndex="1000"
-            Content="{Binding}"
-            ContentTemplate="{StaticResource OverlayTemplate}"
-            DataContext="{Binding OverlayViewModel, Mode=OneWay}"
-            Visibility="{Binding OverlayContent, Converter={StaticResource ContentToVisiblityConverter}}" />
-        <dxlc:LayoutControl
-            Margin="0"
-            Padding="0"
-            Orientation="Vertical">
-            <headerMenu:HeaderMenuView
-                Height="70"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Top"
-                DataContext="{Binding HeaderMenuViewModel}" />
-            <ContentControl Content="{Binding ContentBrowserViewModel, Mode=OneWay}" />
-        </dxlc:LayoutControl>
-    </Grid>
+    <Border BorderBrush="{StaticResource ContentSeparatorBrush}" BorderThickness="1">
+        <Grid Margin="0" Background="{StaticResource ApplicationBackgroundBrush}">
+            <ContentControl
+                x:Name="Overlay"
+                Panel.ZIndex="1000"
+                Content="{Binding}"
+                ContentTemplate="{StaticResource OverlayTemplate}"
+                DataContext="{Binding OverlayViewModel, Mode=OneWay}"
+                Visibility="{Binding OverlayContent, Converter={StaticResource ContentToVisiblityConverter}}" />
+            <dxlc:LayoutControl
+                Margin="0"
+                Padding="0"
+                ItemSpace="0"
+                Orientation="Horizontal">
+                <Border
+                    Width="250"
+                    HorizontalAlignment="Left"
+                    BorderBrush="{StaticResource ContentSeparatorBrush}"
+                    BorderThickness="0,0,1,0">
+                    <dxlc:LayoutGroup Orientation="Vertical">
+                        <Border
+                            Height="70"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Top"
+                            BorderBrush="{StaticResource ContentSeparatorBrush}"
+                            BorderThickness="0,0,0,1">
+                            <TextBlock HorizontalAlignment="Center" Text="Logo" />
+                        </Border>
+                        <TextBlock Text="Menu" />
+                    </dxlc:LayoutGroup>
+                </Border>
+                <dxlc:LayoutGroup Orientation="Vertical">
+                    <Border
+                        Height="70"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top"
+                        BorderBrush="{StaticResource ContentSeparatorBrush}"
+                        BorderThickness="0,0,0,1">
+                        <headerMenu:HeaderMenuView DataContext="{Binding HeaderMenuViewModel}" />
+                    </Border>
+                    <ContentControl Margin="30" Content="{Binding ContentBrowserViewModel, Mode=OneWay}" />
+                </dxlc:LayoutGroup>
+            </dxlc:LayoutControl>
+        </Grid>
+    </Border>
 </Window>
