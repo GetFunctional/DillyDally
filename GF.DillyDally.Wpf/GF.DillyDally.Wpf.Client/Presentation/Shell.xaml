@@ -71,7 +71,7 @@
                         BorderThickness="0,0,0,1">
                         <headerMenu:HeaderMenuView DataContext="{Binding HeaderMenuViewModel}" />
                     </Border>
-                    <ContentControl Margin="30" Content="{Binding ContentBrowserViewModel, Mode=OneWay}" />
+                    <ContentControl Content="{Binding ContentBrowserViewModel, Mode=OneWay}" />
                 </dxlc:LayoutGroup>
             </dxlc:LayoutControl>
         </Grid>
