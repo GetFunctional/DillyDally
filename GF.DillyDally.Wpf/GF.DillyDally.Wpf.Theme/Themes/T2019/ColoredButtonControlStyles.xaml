@@ -1,70 +1,314 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="clr-namespace:GF.DillyDally.Wpf.Theme.Controls">
+    xmlns:controls="clr-namespace:GF.DillyDally.Wpf.Theme.Controls"
+    xmlns:utils="clr-namespace:DevExpress.Xpf.Utils;assembly=DevExpress.Xpf.Core.v18.2">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Colors.xaml" />
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Typography.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
+    <Color x:Key="DisabledBackgroundColor">#E9EDF1</Color>
+    <SolidColorBrush x:Key="DisabledBackgroundBrush" Color="{StaticResource DisabledBackgroundColor}" />
+    <SolidColorBrush x:Key="DarkForegroundBrush" Color="#354052" />
+    <SolidColorBrush x:Key="LightForegroundBrush" Color="#FFFFFF" />
+
+
+    <!--  Gray  -->
+    <Color x:Key="GrayButtonBorder1">#CED0DA</Color>
+    <Color x:Key="GrayButtonBackgroundTop1">#FEFEFE</Color>
+    <Color x:Key="GrayButtonBackgroundBottom1">#ECEFF4</Color>
+    <SolidColorBrush x:Key="GrayButtonBorderBrush1" Color="{StaticResource GrayButtonBorder1}" />
+    <LinearGradientBrush x:Key="GrayButtonBackgroundBrush1" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Offset="0" Color="{StaticResource GrayButtonBackgroundTop1}" />
+        <GradientStop Offset="1" Color="{StaticResource GrayButtonBackgroundBottom1}" />
+    </LinearGradientBrush>
+
+    <Color x:Key="GrayButtonBorder2">#CED0DA</Color>
+    <Color x:Key="GrayButtonBackgroundTop2">#F1F5F8</Color>
+    <Color x:Key="GrayButtonBackgroundBottom2">#E1E5EA</Color>
+    <SolidColorBrush x:Key="GrayButtonBorderBrush2" Color="{StaticResource GrayButtonBorder2}" />
+    <LinearGradientBrush x:Key="GrayButtonBackgroundBrush2" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Offset="0" Color="{StaticResource GrayButtonBackgroundTop2}" />
+        <GradientStop Offset="1" Color="{StaticResource GrayButtonBackgroundBottom2}" />
+    </LinearGradientBrush>
+
+    <!--  Blue  -->
     <Color x:Key="BlueButtonBorder1">#1585D8</Color>
     <Color x:Key="BlueButtonBackgroundTop1">#2B9FF6</Color>
     <Color x:Key="BlueButtonBackgroundBottom1">#1991EB</Color>
+    <SolidColorBrush x:Key="BlueButtonBorderBrush1" Color="{StaticResource BlueButtonBorder1}" />
+    <LinearGradientBrush x:Key="BlueButtonBackgroundBrush1" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Offset="0" Color="{StaticResource BlueButtonBackgroundTop1}" />
+        <GradientStop Offset="1" Color="{StaticResource BlueButtonBackgroundBottom1}" />
+    </LinearGradientBrush>
 
-    <Color x:Key="BlueButtonBorder3">#1468A7</Color>
-    <Color x:Key="BlueButtonBackgroundTop3">#0C72BF</Color>
-    <Color x:Key="BlueButtonBackgroundBottom3">#186CAB</Color>
+    <Color x:Key="BlueButtonBorder2">#1468A7</Color>
+    <Color x:Key="BlueButtonBackgroundTop2">#0C72BF</Color>
+    <Color x:Key="BlueButtonBackgroundBottom2">#186CAB</Color>
+    <SolidColorBrush x:Key="BlueButtonBorderBrush2" Color="{StaticResource BlueButtonBorder2}" />
+    <LinearGradientBrush x:Key="BlueButtonBackgroundBrush2" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Offset="0" Color="{StaticResource BlueButtonBackgroundTop2}" />
+        <GradientStop Offset="1" Color="{StaticResource BlueButtonBackgroundBottom2}" />
+    </LinearGradientBrush>
+
+    <!--  Green  -->
+    <Color x:Key="GreenButtonBorder1">#249533</Color>
+    <Color x:Key="GreenButtonBackgroundTop1">#38B449</Color>
+    <Color x:Key="GreenButtonBackgroundBottom1">#34AA44</Color>
+    <SolidColorBrush x:Key="GreenButtonBorderBrush1" Color="{StaticResource GreenButtonBorder1}" />
+    <LinearGradientBrush x:Key="GreenButtonBackgroundBrush1" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Offset="0" Color="{StaticResource GreenButtonBackgroundTop1}" />
+        <GradientStop Offset="1" Color="{StaticResource GreenButtonBackgroundBottom1}" />
+    </LinearGradientBrush>
+
+    <Color x:Key="GreenButtonBorder2">#13661E</Color>
+    <Color x:Key="GreenButtonBackgroundTop2">#187908</Color>
+    <Color x:Key="GreenButtonBackgroundBottom2">#19740A</Color>
+    <SolidColorBrush x:Key="GreenButtonBorderBrush2" Color="{StaticResource GreenButtonBorder2}" />
+    <LinearGradientBrush x:Key="GreenButtonBackgroundBrush2" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Offset="0" Color="{StaticResource GreenButtonBackgroundTop2}" />
+        <GradientStop Offset="1" Color="{StaticResource GreenButtonBackgroundBottom2}" />
+    </LinearGradientBrush>
+
+    <!--  Red  -->
+    <Color x:Key="RedButtonBorder1">#DB161E</Color>
+    <Color x:Key="RedButtonBackgroundTop1">#F64F55</Color>
+    <Color x:Key="RedButtonBackgroundBottom1">#DE1920</Color>
+    <SolidColorBrush x:Key="RedButtonBorderBrush1" Color="{StaticResource RedButtonBorder1}" />
+    <LinearGradientBrush x:Key="RedButtonBackgroundBrush1" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Offset="0" Color="{StaticResource RedButtonBackgroundTop1}" />
+        <GradientStop Offset="1" Color="{StaticResource RedButtonBackgroundBottom1}" />
+    </LinearGradientBrush>
+
+    <Color x:Key="RedButtonBorder2">#D01119</Color>
+    <Color x:Key="RedButtonBackgroundTop2">#EA4047</Color>
+    <Color x:Key="RedButtonBackgroundBottom2">#BF0F16</Color>
+    <SolidColorBrush x:Key="RedButtonBorderBrush2" Color="{StaticResource RedButtonBorder2}" />
+    <LinearGradientBrush x:Key="RedButtonBackgroundBrush2" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Offset="0" Color="{StaticResource RedButtonBackgroundTop2}" />
+        <GradientStop Offset="1" Color="{StaticResource RedButtonBackgroundBottom2}" />
+    </LinearGradientBrush>
+
+    <!--  Orange  -->
+    <Color x:Key="OrangeButtonBorder1">#F36A19</Color>
+    <Color x:Key="OrangeButtonBackgroundTop1">#F7951C</Color>
+    <Color x:Key="OrangeButtonBackgroundBottom1">#F76E1C</Color>
+    <SolidColorBrush x:Key="OrangeButtonBorderBrush1" Color="{StaticResource OrangeButtonBorder1}" />
+    <LinearGradientBrush x:Key="OrangeButtonBackgroundBrush1" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Offset="0" Color="{StaticResource OrangeButtonBackgroundTop1}" />
+        <GradientStop Offset="1" Color="{StaticResource OrangeButtonBackgroundBottom1}" />
+    </LinearGradientBrush>
+
+    <Color x:Key="OrangeButtonBorder2">#E25D0E</Color>
+    <Color x:Key="OrangeButtonBackgroundTop2">#E88811</Color>
+    <Color x:Key="OrangeButtonBackgroundBottom2">#E35B0B</Color>
+    <SolidColorBrush x:Key="OrangeButtonBorderBrush2" Color="{StaticResource OrangeButtonBorder2}" />
+    <LinearGradientBrush x:Key="OrangeButtonBackgroundBrush2" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Offset="0" Color="{StaticResource OrangeButtonBackgroundTop2}" />
+        <GradientStop Offset="1" Color="{StaticResource OrangeButtonBackgroundBottom2}" />
+    </LinearGradientBrush>
+
+    <!--  Purple  -->
+    <Color x:Key="PurpleButtonBorder1">#5F40C1</Color>
+    <Color x:Key="PurpleButtonBackgroundTop1">#815FE5</Color>
+    <Color x:Key="PurpleButtonBackgroundBottom1">#6B47DA</Color>
+    <SolidColorBrush x:Key="PurpleButtonBorderBrush1" Color="{StaticResource PurpleButtonBorder1}" />
+    <LinearGradientBrush x:Key="PurpleButtonBackgroundBrush1" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Offset="0" Color="{StaticResource PurpleButtonBackgroundTop1}" />
+        <GradientStop Offset="1" Color="{StaticResource PurpleButtonBackgroundBottom1}" />
+    </LinearGradientBrush>
+
+    <Color x:Key="PurpleButtonBorder2">#5536B6</Color>
+    <Color x:Key="PurpleButtonBackgroundTop2">#6F4CDB</Color>
+    <Color x:Key="PurpleButtonBackgroundBottom2">#5534BC</Color>
+    <SolidColorBrush x:Key="PurpleButtonBorderBrush2" Color="{StaticResource PurpleButtonBorder2}" />
+    <LinearGradientBrush x:Key="PurpleButtonBackgroundBrush2" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Offset="0" Color="{StaticResource PurpleButtonBackgroundTop2}" />
+        <GradientStop Offset="1" Color="{StaticResource PurpleButtonBackgroundBottom2}" />
+    </LinearGradientBrush>
+
+    <!--  Black  -->
+    <Color x:Key="BlackButtonBorder1">#3B4958</Color>
+    <Color x:Key="BlackButtonBackgroundTop1">#505F70</Color>
+    <Color x:Key="BlackButtonBackgroundBottom1">#3B4957</Color>
+    <SolidColorBrush x:Key="BlackButtonBorderBrush1" Color="{StaticResource BlackButtonBorder1}" />
+    <LinearGradientBrush x:Key="BlackButtonBackgroundBrush1" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Offset="0" Color="{StaticResource BlackButtonBackgroundTop1}" />
+        <GradientStop Offset="1" Color="{StaticResource BlackButtonBackgroundBottom1}" />
+    </LinearGradientBrush>
+
+    <Color x:Key="BlackButtonBorder2">#303C4B</Color>
+    <Color x:Key="BlackButtonBackgroundTop2">#344252</Color>
+    <Color x:Key="BlackButtonBackgroundBottom2">#242F3B</Color>
+    <SolidColorBrush x:Key="BlackButtonBorderBrush2" Color="{StaticResource BlackButtonBorder2}" />
+    <LinearGradientBrush x:Key="BlackButtonBackgroundBrush2" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Offset="0" Color="{StaticResource BlackButtonBackgroundTop2}" />
+        <GradientStop Offset="1" Color="{StaticResource BlackButtonBackgroundBottom2}" />
+    </LinearGradientBrush>
 
     <ControlTemplate x:Key="BlueButtonControlTemplate" TargetType="{x:Type controls:ColoredButtonControl}">
-        <Border
-            Padding="{TemplateBinding Padding}"
-            BorderThickness="1"
-            CornerRadius="5">
-            <Border.BorderBrush>
-                <SolidColorBrush x:Name="BorderBrush" Color="{StaticResource BlueButtonBorder1}" />
-            </Border.BorderBrush>
-            <Border.Background>
-                <LinearGradientBrush>
-                    <GradientStop x:Name="GradientStopTop" Offset="0.0" Color="{StaticResource BlueButtonBackgroundTop1}" />
-                    <GradientStop x:Name="GradientStopBottom" Offset="1.1" Color="{StaticResource BlueButtonBackgroundBottom1}" />
-                </LinearGradientBrush>
-            </Border.Background>
-            <ContentPresenter
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                RecognizesAccessKey="True" />
+        <Grid
+            Width="{TemplateBinding Width}"
+            Height="{TemplateBinding Height}"
+            MinWidth="{TemplateBinding MinWidth}"
+            MinHeight="{TemplateBinding MinHeight}">
+            <Border
+                x:Name="NormalButtonBackground"
+                Padding="{TemplateBinding Padding}"
+                utils:FocusHelper.Focusable="False"
+                Background="{StaticResource BlueButtonBackgroundBrush1}"
+                BorderBrush="{StaticResource BlueButtonBorderBrush1}"
+                BorderThickness="1"
+                CornerRadius="5"
+                Opacity="1" />
+            <Border
+                x:Name="ButtonPressedBackground"
+                utils:FocusHelper.Focusable="False"
+                Background="{StaticResource BlueButtonBackgroundBrush2}"
+                BorderBrush="{StaticResource BlueButtonBorderBrush2}"
+                BorderThickness="1"
+                CornerRadius="5"
+                Opacity="0" />
+            <Border
+                x:Name="ButtonMouseOverBackground"
+                utils:FocusHelper.Focusable="False"
+                Background="{StaticResource BlueButtonBackgroundBrush2}"
+                BorderBrush="{StaticResource BlueButtonBorderBrush2}"
+                BorderThickness="1"
+                CornerRadius="5"
+                Opacity="0" />
+            <ContentControl
+                x:Name="ContentControl"
+                Margin="{TemplateBinding Padding}"
+                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                utils:FocusHelper.Focusable="False"
+                Content="{TemplateBinding Content}"
+                Foreground="{TemplateBinding Foreground}" />
+            <Rectangle
+                x:Name="FocusedVisualElement"
+                utils:FocusHelper.Focusable="False"
+                Opacity="0"
+                Stroke="Gray"
+                StrokeThickness="1" />
+            <Rectangle
+                x:Name="DisabledVisualElement"
+                utils:FocusHelper.Focusable="False"
+                Fill="{StaticResource DisabledBackgroundBrush}"
+                Opacity="0" />
             <VisualStateManager.VisualStateGroups>
                 <VisualStateGroup x:Name="CommonStates">
                     <VisualStateGroup.Transitions>
-                        <VisualTransition GeneratedDuration="0:0:0.5" />
-                        <VisualTransition GeneratedDuration="0" To="Pressed" />
+                        <VisualTransition GeneratedDuration="0:0:0.3" />
                     </VisualStateGroup.Transitions>
                     <VisualState x:Name="Normal" />
                     <VisualState x:Name="MouseOver">
-                        <Storyboard Duration="0:0:0.5">
-                            <ColorAnimationUsingKeyFrames Storyboard.TargetName="GradientStopTop" Storyboard.TargetProperty="Color">
-                                <EasingColorKeyFrame Value="{StaticResource BlueButtonBackgroundTop3}" />
-                            </ColorAnimationUsingKeyFrames>
-                            <ColorAnimationUsingKeyFrames Storyboard.TargetName="GradientStopBottom" Storyboard.TargetProperty="Color">
-                                <EasingColorKeyFrame Value="{StaticResource BlueButtonBackgroundBottom3}" />
-                            </ColorAnimationUsingKeyFrames>
-                            <ColorAnimationUsingKeyFrames Storyboard.TargetName="BorderBrush" Storyboard.TargetProperty="Color">
-                                <EasingColorKeyFrame Value="{StaticResource BlueButtonBorder3}" />
-                            </ColorAnimationUsingKeyFrames>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetName="ButtonMouseOverBackground"
+                                Storyboard.TargetProperty="Opacity"
+                                To="1" />
                         </Storyboard>
                     </VisualState>
-                    <VisualState x:Name="Pressed" />
-                    <VisualState x:Name="Disabled" />
+                    <VisualState x:Name="Pressed">
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetName="ButtonPressedBackground"
+                                Storyboard.TargetProperty="Opacity"
+                                To="1" />
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Disabled">
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetName="DisabledVisualElement"
+                                Storyboard.TargetProperty="Opacity"
+                                To="0.5" />
+                        </Storyboard>
+                    </VisualState>
+                </VisualStateGroup>
+                <VisualStateGroup x:Name="FocusStates">
+                    <VisualStateGroup.Transitions>
+                        <VisualTransition GeneratedDuration="0:0:0.3" />
+                    </VisualStateGroup.Transitions>
+                    <VisualState x:Name="Focused">
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetName="FocusedVisualElement"
+                                Storyboard.TargetProperty="Opacity"
+                                To="1" />
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Unfocused" />
                 </VisualStateGroup>
             </VisualStateManager.VisualStateGroups>
-        </Border>
-
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="ButtonColor" Value="{x:Static controls:ButtonColor.Blue}">
+                <Setter TargetName="NormalButtonBackground" Property="Background" Value="{StaticResource BlueButtonBackgroundBrush1}" />
+                <Setter TargetName="ButtonPressedBackground" Property="Background" Value="{StaticResource BlueButtonBackgroundBrush2}" />
+                <Setter TargetName="ButtonMouseOverBackground" Property="Background" Value="{StaticResource BlueButtonBackgroundBrush2}" />
+                <Setter TargetName="NormalButtonBackground" Property="BorderBrush" Value="{StaticResource BlueButtonBorderBrush1}" />
+                <Setter TargetName="ButtonPressedBackground" Property="BorderBrush" Value="{StaticResource BlueButtonBorderBrush2}" />
+                <Setter TargetName="ButtonMouseOverBackground" Property="BorderBrush" Value="{StaticResource BlueButtonBorderBrush2}" />
+            </Trigger>
+            <Trigger Property="ButtonColor" Value="{x:Static controls:ButtonColor.Green}">
+                <Setter TargetName="NormalButtonBackground" Property="Background" Value="{StaticResource GreenButtonBackgroundBrush1}" />
+                <Setter TargetName="ButtonPressedBackground" Property="Background" Value="{StaticResource GreenButtonBackgroundBrush2}" />
+                <Setter TargetName="ButtonMouseOverBackground" Property="Background" Value="{StaticResource GreenButtonBackgroundBrush2}" />
+                <Setter TargetName="NormalButtonBackground" Property="BorderBrush" Value="{StaticResource GreenButtonBorderBrush1}" />
+                <Setter TargetName="ButtonPressedBackground" Property="BorderBrush" Value="{StaticResource GreenButtonBorderBrush2}" />
+                <Setter TargetName="ButtonMouseOverBackground" Property="BorderBrush" Value="{StaticResource GreenButtonBorderBrush2}" />
+            </Trigger>
+            <Trigger Property="ButtonColor" Value="{x:Static controls:ButtonColor.Red}">
+                <Setter TargetName="NormalButtonBackground" Property="Background" Value="{StaticResource RedButtonBackgroundBrush1}" />
+                <Setter TargetName="ButtonPressedBackground" Property="Background" Value="{StaticResource RedButtonBackgroundBrush2}" />
+                <Setter TargetName="ButtonMouseOverBackground" Property="Background" Value="{StaticResource RedButtonBackgroundBrush2}" />
+                <Setter TargetName="NormalButtonBackground" Property="BorderBrush" Value="{StaticResource RedButtonBorderBrush1}" />
+                <Setter TargetName="ButtonPressedBackground" Property="BorderBrush" Value="{StaticResource RedButtonBorderBrush2}" />
+                <Setter TargetName="ButtonMouseOverBackground" Property="BorderBrush" Value="{StaticResource RedButtonBorderBrush2}" />
+            </Trigger>
+            <Trigger Property="ButtonColor" Value="{x:Static controls:ButtonColor.Orange}">
+                <Setter TargetName="NormalButtonBackground" Property="Background" Value="{StaticResource OrangeButtonBackgroundBrush1}" />
+                <Setter TargetName="ButtonPressedBackground" Property="Background" Value="{StaticResource OrangeButtonBackgroundBrush2}" />
+                <Setter TargetName="ButtonMouseOverBackground" Property="Background" Value="{StaticResource OrangeButtonBackgroundBrush2}" />
+                <Setter TargetName="NormalButtonBackground" Property="BorderBrush" Value="{StaticResource OrangeButtonBorderBrush1}" />
+                <Setter TargetName="ButtonPressedBackground" Property="BorderBrush" Value="{StaticResource OrangeButtonBorderBrush2}" />
+                <Setter TargetName="ButtonMouseOverBackground" Property="BorderBrush" Value="{StaticResource OrangeButtonBorderBrush2}" />
+            </Trigger>
+            <Trigger Property="ButtonColor" Value="{x:Static controls:ButtonColor.Black}">
+                <Setter TargetName="NormalButtonBackground" Property="Background" Value="{StaticResource BlackButtonBackgroundBrush1}" />
+                <Setter TargetName="ButtonPressedBackground" Property="Background" Value="{StaticResource BlackButtonBackgroundBrush2}" />
+                <Setter TargetName="ButtonMouseOverBackground" Property="Background" Value="{StaticResource BlackButtonBackgroundBrush2}" />
+                <Setter TargetName="NormalButtonBackground" Property="BorderBrush" Value="{StaticResource BlackButtonBorderBrush1}" />
+                <Setter TargetName="ButtonPressedBackground" Property="BorderBrush" Value="{StaticResource BlackButtonBorderBrush2}" />
+                <Setter TargetName="ButtonMouseOverBackground" Property="BorderBrush" Value="{StaticResource BlackButtonBorderBrush2}" />
+            </Trigger>
+            <Trigger Property="ButtonColor" Value="{x:Static controls:ButtonColor.Purple}">
+                <Setter TargetName="NormalButtonBackground" Property="Background" Value="{StaticResource PurpleButtonBackgroundBrush1}" />
+                <Setter TargetName="ButtonPressedBackground" Property="Background" Value="{StaticResource PurpleButtonBackgroundBrush2}" />
+                <Setter TargetName="ButtonMouseOverBackground" Property="Background" Value="{StaticResource PurpleButtonBackgroundBrush2}" />
+                <Setter TargetName="NormalButtonBackground" Property="BorderBrush" Value="{StaticResource PurpleButtonBorderBrush1}" />
+                <Setter TargetName="ButtonPressedBackground" Property="BorderBrush" Value="{StaticResource PurpleButtonBorderBrush2}" />
+                <Setter TargetName="ButtonMouseOverBackground" Property="BorderBrush" Value="{StaticResource PurpleButtonBorderBrush2}" />
+            </Trigger>
+            <Trigger Property="ButtonColor" Value="{x:Static controls:ButtonColor.Gray}">
+                <Setter TargetName="NormalButtonBackground" Property="Background" Value="{StaticResource GrayButtonBackgroundBrush1}" />
+                <Setter TargetName="ButtonPressedBackground" Property="Background" Value="{StaticResource GrayButtonBackgroundBrush2}" />
+                <Setter TargetName="ButtonMouseOverBackground" Property="Background" Value="{StaticResource GrayButtonBackgroundBrush2}" />
+                <Setter TargetName="NormalButtonBackground" Property="BorderBrush" Value="{StaticResource GrayButtonBorderBrush1}" />
+                <Setter TargetName="ButtonPressedBackground" Property="BorderBrush" Value="{StaticResource GrayButtonBorderBrush2}" />
+                <Setter TargetName="ButtonMouseOverBackground" Property="BorderBrush" Value="{StaticResource GrayButtonBorderBrush2}" />
+                <Setter Property="Foreground" Value="{StaticResource DarkForegroundBrush}" />
+            </Trigger>
+        </ControlTemplate.Triggers>
     </ControlTemplate>
 
     <Style x:Key="DefaultStyle" TargetType="{x:Type controls:ColoredButtonControl}">
         <Setter Property="Template" Value="{StaticResource BlueButtonControlTemplate}" />
-        <Setter Property="Foreground" Value="White" />
+        <Setter Property="Foreground" Value="{StaticResource LightForegroundBrush}" />
         <Setter Property="FontSize" Value="{StaticResource ParagraphFontSize}" />
         <Setter Property="FontFamily" Value="{StaticResource SourceSansProBlack}" />
         <Setter Property="HorizontalAlignment" Value="Left" />
@@ -72,9 +316,7 @@
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Height" Value="36" />
         <Setter Property="Width" Value="Auto" />
-        <!--<Style.Triggers>
-
-        </Style.Triggers>-->
+        <Setter Property="ButtonColor" Value="Gray" />
     </Style>
 
     <Style BasedOn="{StaticResource DefaultStyle}" TargetType="{x:Type controls:ColoredButtonControl}" />

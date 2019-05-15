@@ -160,6 +160,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\ButtonColor.cs" />
     <Compile Include="Controls\ColoredButtonControl.cs" />
     <Compile Include="Controls\ComboInputControl.cs" />
     <Compile Include="Controls\DateInputControl.cs" />
