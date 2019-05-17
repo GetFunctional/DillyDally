@@ -16,7 +16,8 @@
     d:DataContext="{d:DesignInstance Type={x:Type presentation:ShellViewModel}}"
     dx:ThemeManager.ThemeName="{x:Static theme:ThemeConstants.DevExpressThemeName}"
     FontFamily="{StaticResource SourceSansProBlack}"
-    FontSize="{StaticResource ParagraphFontSize}"
+    FontSize="{StaticResource BodyFontSize}"
+    FontWeight="{StaticResource BodyFontWeight}"
     mc:Ignorable="d">
     <Window.Resources>
         <ResourceDictionary>
@@ -28,11 +29,15 @@
             <conv:ContentToVisiblityConverter x:Key="ContentToVisiblityConverter" />
             <SolidColorBrush x:Key="ApplicationBackgroundBrush" Color="{StaticResource ApplicationBackgroundColor}" />
             <SolidColorBrush x:Key="ContentSeparatorBrush" Color="{StaticResource ContentSeparatorColor}" />
+            <SolidColorBrush x:Key="MenuBackgroundBrush" Color="{StaticResource TopLayerBackgroundColor}" />
         </ResourceDictionary>
     </Window.Resources>
 
-    <Border BorderBrush="{StaticResource ContentSeparatorBrush}" BorderThickness="1">
-        <Grid Margin="0" Background="{StaticResource ApplicationBackgroundBrush}">
+    <Border
+        Background="{StaticResource ApplicationBackgroundBrush}"
+        BorderBrush="{StaticResource ContentSeparatorBrush}"
+        BorderThickness="1">
+        <Grid Margin="0">
             <ContentControl
                 x:Name="Overlay"
                 Panel.ZIndex="1000"
@@ -48,6 +53,7 @@
                 <Border
                     Width="250"
                     HorizontalAlignment="Left"
+                    Background="{StaticResource MenuBackgroundBrush}"
                     BorderBrush="{StaticResource ContentSeparatorBrush}"
                     BorderThickness="0,0,1,0">
                     <dxlc:LayoutGroup Orientation="Vertical">
@@ -67,11 +73,12 @@
                         Height="70"
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Top"
+                        Background="{StaticResource MenuBackgroundBrush}"
                         BorderBrush="{StaticResource ContentSeparatorBrush}"
                         BorderThickness="0,0,0,1">
                         <headerMenu:HeaderMenuView DataContext="{Binding HeaderMenuViewModel}" />
                     </Border>
-                    <ContentControl Content="{Binding ContentBrowserViewModel, Mode=OneWay}" />
+                    <ContentControl Content="{Binding ContentNavigatorViewModel, Mode=OneWay}" />
                 </dxlc:LayoutGroup>
             </dxlc:LayoutControl>
         </Grid>

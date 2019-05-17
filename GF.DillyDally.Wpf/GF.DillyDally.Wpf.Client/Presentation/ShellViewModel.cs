@@ -13,20 +13,49 @@ namespace GF.DillyDally.Wpf.Client.Presentation
 
         public ContentBrowserViewModel ContentBrowserViewModel
         {
-            get { return this._contentBrowserViewModel; }
-            set { this.RaiseAndSetIfChanged(ref this._contentBrowserViewModel, value); }
+            get
+            {
+                return this._contentBrowserViewModel;
+            }
+            set
+            {
+                if (this.RaiseAndSetIfChanged(ref this._contentBrowserViewModel, value) == value)
+                {
+                    this.RaisePropertyChanged(nameof(ContentNavigation.ContentNavigatorViewModel));
+                }
+            }
+        }
+
+        public ContentNavigatorViewModel ContentNavigatorViewModel
+        {
+            get
+            {
+                return this._contentBrowserViewModel.CurrentActiveNavigator;
+            }
         }
 
         public HeaderMenuViewModel HeaderMenuViewModel
         {
-            get { return this._headerMenuViewModel; }
-            set { this.RaiseAndSetIfChanged(ref this._headerMenuViewModel, value); }
+            get
+            {
+                return this._headerMenuViewModel;
+            }
+            set
+            {
+                this.RaiseAndSetIfChanged(ref this._headerMenuViewModel, value);
+            }
         }
 
         public OverlayViewModel OverlayViewModel
         {
-            get { return this._overlayViewModel; }
-            set { this.RaiseAndSetIfChanged(ref this._overlayViewModel, value); }
+            get
+            {
+                return this._overlayViewModel;
+            }
+            set
+            {
+                this.RaiseAndSetIfChanged(ref this._overlayViewModel, value);
+            }
         }
     }
 }

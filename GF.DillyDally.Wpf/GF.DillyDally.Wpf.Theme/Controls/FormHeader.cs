@@ -1,34 +1,47 @@
 ﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
+using GF.DillyDally.Wpf.Theme.Controls.Shared;
 
 namespace GF.DillyDally.Wpf.Theme.Controls
 {
     [DesignTimeVisible(true)]
     public class FormHeader : Control
     {
+        public static readonly DependencyProperty HeaderTitleContentProperty = DependencyProperty.Register(
+            "HeaderTitleContent", typeof(HeaderTitleContent), typeof(FormHeader), new PropertyMetadata(default(HeaderTitleContent)));
+
+        public static readonly DependencyProperty HeaderTitleContentTemplateProperty = DependencyProperty.Register(
+            "HeaderTitleContentTemplate", typeof(DataTemplate), typeof(FormHeader), new PropertyMetadata(default(DataTemplate)));
+
         static FormHeader()
         {
             DefaultStyleKeyProperty.OverrideMetadata(
                 typeof(FormHeader), new FrameworkPropertyMetadata(typeof(FormHeader)));
         }
 
-        public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(
-            "Title", typeof(string), typeof(FormHeader), new PropertyMetadata(default(string)));
-
-        public static readonly DependencyProperty SubtitleProperty = DependencyProperty.Register(
-            "Subtitle", typeof(string), typeof(FormHeader), new PropertyMetadata(default(string)));
-
-        public string Title
+        public HeaderTitleContent HeaderTitleContent
         {
-            get { return (string) this.GetValue(TitleProperty); }
-            set { this.SetValue(TitleProperty, value); }
+            get
+            {
+                return (HeaderTitleContent)this.GetValue(HeaderTitleContentProperty);
+            }
+            set
+            {
+                this.SetValue(HeaderTitleContentProperty, value);
+            }
         }
 
-        public string Subtitle
+        public DataTemplate HeaderTitleContentTemplate
         {
-            get { return (string) this.GetValue(SubtitleProperty); }
-            set { this.SetValue(SubtitleProperty, value); }
+            get
+            {
+                return (DataTemplate)this.GetValue(HeaderTitleContentTemplateProperty);
+            }
+            set
+            {
+                this.SetValue(HeaderTitleContentTemplateProperty, value);
+            }
         }
     }
 }

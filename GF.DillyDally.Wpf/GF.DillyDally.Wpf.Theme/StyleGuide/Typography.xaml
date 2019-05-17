@@ -1,27 +1,40 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:extensions="clr-namespace:GF.DillyDally.Wpf.Theme.Extensions"
+    xmlns:shared="clr-namespace:GF.DillyDally.Wpf.Theme.Controls.Shared"
     xmlns:system="clr-namespace:System;assembly=mscorlib">
 
     <FontFamily x:Key="SourceSansProBlack">pack://application:,,,/GF.DillyDally.wpf.Theme;component/StyleGuide/Fonts/#SourceSansPro</FontFamily>
 
     <!--  SourceSansPro  -->
-    <system:Double x:Key="ParagraphFontSize">14</system:Double>
-    <system:Double x:Key="AdditionalParagraphFontSize">12</system:Double>
-    <system:Double x:Key="LinkFontSize">16</system:Double>
-    <system:Double x:Key="H1FontSize">32</system:Double>
-    <system:Double x:Key="H2FontSize">24</system:Double>
-    <system:Double x:Key="H3FontSize">18</system:Double>
+    <system:Double x:Key="H1FontSize">20</system:Double>
+    <system:Double x:Key="H2FontSize">18</system:Double>
+    <system:Double x:Key="H3FontSize">16</system:Double>
+    <system:Double x:Key="LinkFontSize">14</system:Double>
+    <system:Double x:Key="BodyFontSize">14</system:Double>
+    <system:Double x:Key="DescriptionFontSize">12</system:Double>
 
+    <SolidColorBrush x:Key="H1Foreground">#354052</SolidColorBrush>
+    <SolidColorBrush x:Key="H2Foreground">#354052</SolidColorBrush>
+    <SolidColorBrush x:Key="H3Foreground">#354052</SolidColorBrush>
+    <SolidColorBrush x:Key="LinkForeground">#2EA2F8</SolidColorBrush>
+    <SolidColorBrush x:Key="LinkForegroundActive">#00AEEF</SolidColorBrush>
+    <SolidColorBrush x:Key="BodyForeground">#354052</SolidColorBrush>
+    <SolidColorBrush x:Key="DescriptionForeground">#7F8FA4</SolidColorBrush>
 
-    <SolidColorBrush x:Key="ParagraphForeground" Color="#71787E" />
-    <SolidColorBrush x:Key="AdditionalParagraphForeground" Color="#71787E" />
-    <SolidColorBrush x:Key="LinkForeground" Color="#009AD4" />
-    <SolidColorBrush x:Key="LinkForegroundActive" Color="#00AEEF" />
-    <SolidColorBrush x:Key="H1Foreground" Color="#393C3E" />
-    <SolidColorBrush x:Key="H2Foreground" Color="#393C3E" />
-    <SolidColorBrush x:Key="H3Foreground" Color="#393C3E" />
+    <FontWeight x:Key="H1FontWeight">Regular</FontWeight>
+    <FontWeight x:Key="H2FontWeight">Regular</FontWeight>
+    <FontWeight x:Key="H3FontWeight">Regular</FontWeight>
+    <FontWeight x:Key="LinkFontWeight">Regular</FontWeight>
+    <FontWeight x:Key="BodyFontWeight">Regular</FontWeight>
+    <FontWeight x:Key="DescriptionFontWeight">Regular</FontWeight>
+
+    <system:Double x:Key="H1LineHeight">24</system:Double>
+    <system:Double x:Key="H2LineHeight">21.6</system:Double>
+    <system:Double x:Key="H3LineHeight">19.2</system:Double>
+    <system:Double x:Key="LinkLineHeight">16.8</system:Double>
+    <system:Double x:Key="BodyLineHeight">16.8</system:Double>
+    <system:Double x:Key="DescriptionLineHeight">14.4</system:Double>
 
     <!--  Font Icons  -->
     <system:Double x:Key="FontIconSize">14</system:Double>
@@ -33,4 +46,61 @@
     <SolidColorBrush x:Key="InputControlsForeground" Color="#333C48" />
     <SolidColorBrush x:Key="InputControlsLabelForeground" Color="#7F8FA4" />
 
+
+    <DataTemplate x:Key="H1HeaderTemplate" DataType="{x:Type shared:HeaderTitleContent}">
+        <WrapPanel VerticalAlignment="Center" Orientation="Vertical">
+            <TextBlock
+                FontFamily="{StaticResource SourceSansProBlack}"
+                FontSize="{StaticResource H1FontSize}"
+                FontWeight="{StaticResource H1FontWeight}"
+                Foreground="{StaticResource H1Foreground}"
+                LineHeight="{StaticResource H1LineHeight}"
+                Text="{Binding Title}" />
+            <TextBlock
+                FontFamily="{StaticResource SourceSansProBlack}"
+                FontSize="{StaticResource DescriptionFontSize}"
+                FontWeight="{StaticResource DescriptionFontWeight}"
+                Foreground="{StaticResource DescriptionForeground}"
+                LineHeight="{StaticResource DescriptionLineHeight}"
+                Text="{Binding Description}" />
+        </WrapPanel>
+    </DataTemplate>
+
+    <DataTemplate x:Key="H2HeaderTemplate" DataType="{x:Type shared:HeaderTitleContent}">
+        <WrapPanel VerticalAlignment="Center" Orientation="Vertical">
+            <TextBlock
+                FontFamily="{StaticResource SourceSansProBlack}"
+                FontSize="{StaticResource H2FontSize}"
+                FontWeight="{StaticResource H2FontWeight}"
+                Foreground="{StaticResource H2Foreground}"
+                LineHeight="{StaticResource H2LineHeight}"
+                Text="{Binding Title}" />
+            <TextBlock
+                FontFamily="{StaticResource SourceSansProBlack}"
+                FontSize="{StaticResource DescriptionFontSize}"
+                FontWeight="{StaticResource DescriptionFontWeight}"
+                Foreground="{StaticResource DescriptionForeground}"
+                LineHeight="{StaticResource DescriptionLineHeight}"
+                Text="{Binding Description}" />
+        </WrapPanel>
+    </DataTemplate>
+
+    <DataTemplate x:Key="H3HeaderTemplate" DataType="{x:Type shared:HeaderTitleContent}">
+        <WrapPanel VerticalAlignment="Center" Orientation="Vertical">
+            <TextBlock
+                FontFamily="{StaticResource SourceSansProBlack}"
+                FontSize="{StaticResource H3FontSize}"
+                FontWeight="{StaticResource H3FontWeight}"
+                Foreground="{StaticResource H3Foreground}"
+                LineHeight="{StaticResource H3LineHeight}"
+                Text="{Binding Title}" />
+            <TextBlock
+                FontFamily="{StaticResource SourceSansProBlack}"
+                FontSize="{StaticResource DescriptionFontSize}"
+                FontWeight="{StaticResource DescriptionFontWeight}"
+                Foreground="{StaticResource DescriptionForeground}"
+                LineHeight="{StaticResource DescriptionLineHeight}"
+                Text="{Binding Description}" />
+        </WrapPanel>
+    </DataTemplate>
 </ResourceDictionary>

@@ -13,55 +13,51 @@
     </ResourceDictionary.MergedDictionaries>
 
     <!--  H2  -->
-    <system:Double x:Key="FormTitleFontSize">24</system:Double>
     <system:Double x:Key="FormSubTitleFontSize">14</system:Double>
     <SolidColorBrush x:Key="FormTitleBrush" Color="#354052" />
     <SolidColorBrush x:Key="FormSubtitleBrush" Color="#B5B5B5" />
 
-    <Thickness x:Key="ContentPadding">30,0,30,0</Thickness>
+    <Thickness x:Key="ContentPadding">25,0</Thickness>
 
     <!--  Form Header  -->
-    <SolidColorBrush x:Key="FormHeaderBackgroundBrush" Color="{StaticResource Layer1Background}" />
-    <SolidColorBrush x:Key="FormHeaderBorderBrush" Color="{StaticResource BorderGrey}" />
+    <SolidColorBrush x:Key="FormHeaderBackgroundBrush" Color="{StaticResource TopLayerBackgroundColor}" />
+    <SolidColorBrush x:Key="FormHeaderBorderBrush" Color="{StaticResource ContentInnerSeparatorColor}" />
 
+    <!--<Border
+        Height="80"
+        Padding="29,0"
+        Background="{StaticResource FormFooterBackgroundBrush}"
+        BorderBrush="{StaticResource FormInnerBorderBrush}"
+        BorderThickness="0,1,0,0"
+        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+        UseLayoutRounding="{TemplateBinding UseLayoutRounding}">
+        <ContentControl Content="{TemplateBinding HeaderTitleContent}" ContentTemplate="{TemplateBinding HeaderContentTemplate}" />
+    </Border>-->
     <ControlTemplate x:Key="FormHeaderControlTemplate" TargetType="{x:Type controls:FormHeader}">
         <Border
+            Height="{TemplateBinding Height}"
             Padding="{TemplateBinding Padding}"
             Background="{TemplateBinding Background}"
             BorderBrush="{StaticResource FormHeaderBorderBrush}"
             BorderThickness="0,0,0,1"
             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
             UseLayoutRounding="{TemplateBinding UseLayoutRounding}">
-            <dxlc:LayoutGroup
-                Height="{TemplateBinding Height}"
-                ItemSpace="0"
-                Orientation="Vertical">
-                <TextBlock
-                    VerticalAlignment="Center"
-                    FontSize="{StaticResource FormTitleFontSize}"
-                    FontWeight="Regular"
-                    Foreground="{StaticResource FormTitleBrush}"
-                    LineHeight="28"
-                    Text="{TemplateBinding Title}" />
-                <TextBlock
-                    VerticalAlignment="Center"
-                    FontSize="{StaticResource FormSubTitleFontSize}"
-                    FontWeight="SemiBold"
-                    Foreground="{StaticResource FormSubtitleBrush}"
-                    LineHeight="16.8"
-                    Text="{TemplateBinding Subtitle}" />
+            <dxlc:LayoutGroup ItemSpace="0" Orientation="Horizontal">
+                <ContentControl Content="{TemplateBinding HeaderTitleContent}" ContentTemplate="{TemplateBinding HeaderTitleContentTemplate}" />
             </dxlc:LayoutGroup>
         </Border>
     </ControlTemplate>
 
     <Style x:Key="FormHeaderDefaultStyle" TargetType="{x:Type controls:FormHeader}">
+        <Setter Property="HeaderTitleContentTemplate" Value="{StaticResource H1HeaderTemplate}" />
         <Setter Property="Template" Value="{StaticResource FormHeaderControlTemplate}" />
-        <Setter Property="Height" Value="55" />
-        <Setter Property="FontSize" Value="{StaticResource ParagraphFontSize}" />
+        <Setter Property="Height" Value="80" />
+        <Setter Property="FontSize" Value="{StaticResource BodyFontSize}" />
+        <Setter Property="FontWeight" Value="{StaticResource BodyFontWeight}" />
         <Setter Property="FontFamily" Value="{StaticResource SourceSansProBlack}" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="VerticalAlignment" Value="Top" />
-        <Setter Property="Padding" Value="24,0" />
+        <Setter Property="Padding" Value="29,0" />
         <Setter Property="Background" Value="{StaticResource FormHeaderBackgroundBrush}" />
     </Style>
 
@@ -69,31 +65,32 @@
 
 
     <!--  Form Footer  -->
-    <SolidColorBrush x:Key="FormFooterBorderBrush" Color="{StaticResource BorderGrey}" />
-
+    <SolidColorBrush x:Key="FormInnerBorderBrush" Color="{StaticResource ContentInnerSeparatorColor}" />
+    <SolidColorBrush x:Key="FormFooterBackgroundBrush" Color="{StaticResource FormBackgroundColor}" />
 
     <ControlTemplate x:Key="FormFooterControlTemplate" TargetType="{x:Type controls:FormFooter}">
         <Border
+            Height="{TemplateBinding Height}"
             Padding="{TemplateBinding Padding}"
             Background="{TemplateBinding Background}"
-            BorderBrush="{StaticResource FormFooterBorderBrush}"
+            BorderBrush="{StaticResource FormInnerBorderBrush}"
             BorderThickness="0,1,0,0"
             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
             UseLayoutRounding="{TemplateBinding UseLayoutRounding}">
-            <dxlc:LayoutGroup Height="{TemplateBinding Height}" ItemSpace="0">
-                <ContentPresenter
-                    Margin="{TemplateBinding Padding}"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Center" />
-            </dxlc:LayoutGroup>
+            <ContentPresenter
+                Margin="{TemplateBinding Padding}"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center" />
         </Border>
     </ControlTemplate>
 
     <Style x:Key="FormFooterDefaultStyle" TargetType="{x:Type controls:FormFooter}">
         <Setter Property="Template" Value="{StaticResource FormFooterControlTemplate}" />
-        <Setter Property="Height" Value="50" />
-        <Setter Property="Padding" Value="18,0" />
-        <Setter Property="FontSize" Value="{StaticResource ParagraphFontSize}" />
+        <Setter Property="Background" Value="{StaticResource FormFooterBackgroundBrush}" />
+        <Setter Property="Height" Value="70" />
+        <Setter Property="Padding" Value="29,0" />
+        <Setter Property="FontSize" Value="{StaticResource BodyFontSize}" />
+        <Setter Property="FontWeight" Value="{StaticResource BodyFontWeight}" />
         <Setter Property="FontFamily" Value="{StaticResource SourceSansProBlack}" />
     </Style>
 
@@ -101,45 +98,46 @@
 
 
     <!--  Form  -->
-    <SolidColorBrush x:Key="FormDefaultBackgroundBrush" Color="{StaticResource Layer2Background}" />
-    <SolidColorBrush x:Key="FormElementBackgroundBrush" Color="{StaticResource Layer1Background}" />
-
+    <SolidColorBrush x:Key="FormDefaultBackgroundBrush" Color="{StaticResource FormBackgroundColor}" />
+    <SolidColorBrush x:Key="FormElementBackgroundBrush" Color="{StaticResource TopLayerBackgroundColor}" />
+    <SolidColorBrush x:Key="FormBorderBrush" Color="{StaticResource ContentSeparatorColor}" />
 
     <ControlTemplate x:Key="FormControlTemplate" TargetType="{x:Type controls:Form}">
-        <dxlc:LayoutControl
-            Margin="0"
-            Padding="0"
-            dx:ThemeManager.ThemeName="{x:Static theme:ThemeConstants.DevExpressThemeName}"
+        <Border
             Background="{TemplateBinding Background}"
-            ItemSpace="8"
-            Orientation="Vertical">
-            <controls:FormHeader
-                Title="{TemplateBinding HeaderTitle}"
-                Height="80"
-                Background="{StaticResource FormElementBackgroundBrush}"
-                Style="{StaticResource FormHeaderDefaultStyle}"
-                Subtitle="{TemplateBinding HeaderSubtitle}" />
+            BorderBrush="{StaticResource FormBorderBrush}"
+            BorderThickness="1"
+            CornerRadius="3">
+            <dxlc:LayoutControl
+                Margin="0"
+                Padding="0"
+                dx:ThemeManager.ThemeName="{x:Static theme:ThemeConstants.DevExpressThemeName}"
+                Background="{TemplateBinding Background}"
+                ItemSpace="0"
+                Orientation="Vertical">
+                <controls:FormHeader HeaderTitleContent="{TemplateBinding HeaderTitleContent}" HeaderTitleContentTemplate="{StaticResource H1HeaderTemplate}" />
 
-            <ScrollViewer HorizontalScrollBarVisibility="Hidden">
-                <ContentPresenter Margin="{StaticResource ContentPadding}" />
-            </ScrollViewer>
+                <ScrollViewer HorizontalScrollBarVisibility="Hidden">
+                    <ContentPresenter />
+                </ScrollViewer>
 
-            <controls:FormFooter
-                VerticalAlignment="Bottom"
-                Background="{StaticResource FormElementBackgroundBrush}"
-                Content="{TemplateBinding FooterContent}"
-                Style="{StaticResource FormFooterDefaultStyle}" />
-        </dxlc:LayoutControl>
+                <controls:FormFooter
+                    VerticalAlignment="Bottom"
+                    Background="{StaticResource FormDefaultBackgroundBrush}"
+                    Content="{TemplateBinding FooterContent}"
+                    Style="{StaticResource FormFooterDefaultStyle}" />
+            </dxlc:LayoutControl>
+        </Border>
+
     </ControlTemplate>
 
 
     <Style x:Key="FormDefaultStyle" TargetType="{x:Type controls:Form}">
         <Setter Property="Template" Value="{StaticResource FormControlTemplate}" />
-        <Setter Property="FontSize" Value="{StaticResource ParagraphFontSize}" />
+        <Setter Property="FontSize" Value="{StaticResource BodyFontSize}" />
+        <Setter Property="FontWeight" Value="{StaticResource BodyFontWeight}" />
         <Setter Property="FontFamily" Value="{StaticResource SourceSansProBlack}" />
         <Setter Property="Background" Value="{StaticResource FormDefaultBackgroundBrush}" />
-        <Setter Property="HeaderTitle" Value="Title" />
-        <Setter Property="HeaderSubtitle" Value="Subtitle" />
         <Setter Property="UseLayoutRounding" Value="True" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
     </Style>
