@@ -16,6 +16,15 @@
     dx:ThemeManager.ThemeName="{x:Static theme:ThemeConstants.DevExpressThemeName}"
     mc:Ignorable="d">
 
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Client;component/Presentation/Selectors/SelectorTemplates.xaml" />
+
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
     <ctrls:Form>
         <ctrls:Form.HeaderTitleContent>
             <ctrls:HeaderTitleContent Title="Create Task" Description="Bla bla bla bla bla bla bla bla" />
@@ -35,7 +44,8 @@
                                 ItemSpace="14"
                                 Orientation="Vertical">
                                 <ctrls:TextInputControl Label="Name" WatermarkText="A self explanatory name ..." />
-                                <ctrls:ComboInputControl Label="Category" WatermarkText="A self explanatory name ..." />
+                                <ContentControl Content="{Binding CategorySelectorViewModel, Mode=OneWay}" ContentTemplate="{StaticResource CategorySelectorTemplate}" />
+                                <!--<ctrls:ComboInputControl Label="Category" WatermarkText="A self explanatory name ..." />-->
                             </dxlc:LayoutGroup>
                         </dxlc:LayoutGroup>
                     </ctrls:FormElementGroupControl.Content>

@@ -7,10 +7,10 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Tasks.Create
     public class CreateTaskViewModel : ViewModelBase
     {
         private IReactiveCommand _cancelProcessCommand;
+        private CategorySelectorViewModel _categorySelectorViewModel;
         private IReactiveCommand _createTaskCommand;
         private TaskAchievementsViewModel _taskAchievementsViewModel;
         private string _taskName;
-        private CategoryViewModel _selectedCategory;
 
         public IReactiveCommand CreateTaskCommand
         {
@@ -64,11 +64,19 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Tasks.Create
         {
             get
             {
-                return this._selectedCategory;
+                return this._categorySelectorViewModel.SelectedCategory;
+            }
+        }
+
+        public CategorySelectorViewModel CategorySelectorViewModel
+        {
+            get
+            {
+                return this._categorySelectorViewModel;
             }
             set
             {
-                this.RaiseAndSetIfChanged(ref this._selectedCategory, value);
+                this.RaiseAndSetIfChanged(ref this._categorySelectorViewModel, value);
             }
         }
     }

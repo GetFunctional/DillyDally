@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using GF.DillyDally.Data.Sqlite;
 using GF.DillyDally.Mvvmc;
 using GF.DillyDally.Wpf.Client.Core.Dialoge;
+using GF.DillyDally.Wpf.Client.Presentation.Selectors.Category;
 using GF.DillyDally.WriteModel.Domain.Tasks.Commands;
 using MediatR;
 using ReactiveUI;
@@ -12,18 +13,21 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Tasks.Create
     {
         private readonly DatabaseFileHandler _databaseFileHandler;
         private readonly IMediator _mediator;
+        private readonly CategorySelectorController _categorySelectorController;
 
-        public CreateTaskController(CreateTaskViewModel viewModel, DatabaseFileHandler databaseFileHandler, IMediator mediator) :
+        public CreateTaskController(CreateTaskViewModel viewModel, DatabaseFileHandler databaseFileHandler, IMediator mediator,CategorySelectorController categorySelectorController) :
             base(viewModel)
         {
             this._databaseFileHandler = databaseFileHandler;
             this._mediator = mediator;
+            this._categorySelectorController = categorySelectorController;
             viewModel.CreateTaskCommand =
                 ReactiveCommand.CreateFromTask(async () => await this.CompleteProcess()); 
             viewModel.CancelProcessCommand =
                 ReactiveCommand.Create(this.CancelProcess);
 
             viewModel.TaskAchievementsViewModel = new TaskAchievementsViewModel();
+            viewModel.CategorySelectorViewModel = categorySelectorController.ViewModel;
         }
 
         private void CancelProcess()
@@ -43,7 +47,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Tasks.Create
 
                 var commandDispatcher = this._mediator;
               
-                var task = await commandDispatcher.Send(new CreateTaskCommand("Test", category.CategoryId));
+                var task = await commandDispatcher.Send(new CreateTaskCommand(taskName, category.CategoryId));
 
                 this.ConfirmDialogWith(this.CreateTaskDialogResult);
             }
@@ -63,6 +67,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Tasks.Create
 
         protected override async Task OnInitializeAsync()
         {
+            await this._categorySelectorController.InitializeAsync();
             await base.OnInitializeAsync();
 
             //using (var connection = await this._databaseFileHandler.OpenConnectionAsync())

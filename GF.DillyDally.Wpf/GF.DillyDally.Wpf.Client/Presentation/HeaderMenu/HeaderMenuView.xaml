@@ -25,7 +25,10 @@
 
     <dxlc:LayoutControl Orientation="Horizontal">
 
-        <ctrls:ColoredButtonControl HorizontalAlignment="Right" Command="{Binding CreateNewTaskCommand}">
+        <ctrls:ColoredButtonControl
+            HorizontalAlignment="Right"
+            ButtonColor="Blue"
+            Command="{Binding CreateNewTaskCommand}">
             <dxlc:LayoutGroup
                 Margin="0"
                 Padding="0"

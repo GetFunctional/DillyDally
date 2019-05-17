@@ -152,6 +152,8 @@
     </Compile>
     <Compile Include="Presentation\HeaderMenu\HeaderMenuController.cs" />
     <Compile Include="Presentation\HeaderMenu\HeaderMenuViewModel.cs" />
+    <Compile Include="Presentation\Selectors\Category\CategorySelectorController.cs" />
+    <Compile Include="Presentation\Selectors\Category\CategorySelectorViewModel.cs" />
     <Compile Include="Presentation\ShowCase\ShowCaseController.cs" />
     <Compile Include="Presentation\ShowCase\ShowCaseNavigationTarget.cs" />
     <Compile Include="Presentation\ShowCase\ShowCaseView.xaml.cs">
@@ -219,6 +221,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Presentation\HeaderMenu\HeaderMenuView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Presentation\Selectors\SelectorTemplates.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

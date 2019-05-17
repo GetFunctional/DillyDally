@@ -16,7 +16,10 @@ namespace GF.DillyDally.Mvvmc
 
         IViewModel IController.ViewModel
         {
-            get { return this.ViewModel; }
+            get
+            {
+                return this.ViewModel;
+            }
         }
 
         public void Dispose()
