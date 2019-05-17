@@ -27,7 +27,7 @@ namespace GF.DillyDally.WriteModel.Domain.Rewards
             this.CurrencyCode = obj.CurrencyCode;
         }
 
-        internal static IAggregateRoot Create(Guid rewardId, string name, string colorCode)
+        internal static RewardAggregateRoot Create(Guid rewardId, string name, string colorCode)
         {
             return new RewardAggregateRoot(rewardId, name, colorCode);
         }

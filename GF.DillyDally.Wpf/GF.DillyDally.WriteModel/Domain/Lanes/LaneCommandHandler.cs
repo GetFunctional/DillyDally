@@ -31,7 +31,15 @@ namespace GF.DillyDally.WriteModel.Domain.Lanes
                     this._runningNumberFactory.CreateNewRunningNumberFor(RunningNumberCounterArea.Lane);
                 var aggregate = LaneAggregateRoot.Create(laneId, runningNumberForCategory, request.Name,
                     request.ColorCode, request.IsCompletedLane, request.IsRejectedLane);
+
+                if (!this.AggregateRepository.TryGetById(LaneListAggregateRoot.LaneListAggregateId, out LaneListAggregateRoot laneList))
+                {
+                    laneList = LaneListAggregateRoot.Create();
+                }
+
+                laneList.AddLast(laneId, request.IsCompletedLane, request.IsRejectedLane);
                 this.AggregateRepository.Save(aggregate);
+                this.AggregateRepository.Save(laneList);
 
                 return new CreateLaneResponse(laneId);
             }, cancellationToken);

@@ -90,13 +90,14 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks
             return await Task.Run(() =>
             {
                 var category = this.AggregateRepository.GetById<CategoryAggregateRoot>(request.CategoryId);
-                var lane = this.AggregateRepository.GetById<LaneAggregateRoot>(request.LaneId);
+                var laneList = this.AggregateRepository.GetById<LaneListAggregateRoot>(LaneListAggregateRoot.LaneListAggregateId);
+                var laneId = request.LaneId != null ? laneList.GetLane(request.LaneId.Value) : laneList.GetFirstLane();
                 var newRunningNumberId =
                     this._runningNumberFactory.CreateNewRunningNumberFor(RunningNumberCounterArea.Task);
                 var taskId = this.GuidGenerator.GenerateGuid();
 
                 var aggregate = TaskAggregateRoot.CreateTask(taskId, request.Name, newRunningNumberId,
-                    category.AggregateId, lane.AggregateId, request.PreviewImageId);
+                    category.AggregateId, laneId, request.PreviewImageId);
                 this.AggregateRepository.Save(aggregate);
 
                 return new CreateTaskResponse(taskId);

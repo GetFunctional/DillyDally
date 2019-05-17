@@ -86,6 +86,9 @@
     <Compile Include="Domain\Files\FileEntity.cs" />
     <Compile Include="Domain\Files\FileRepository.cs" />
     <Compile Include="Domain\Lanes\Commands\CreateLaneResponse.cs" />
+    <Compile Include="Domain\Lanes\Events\LaneAddedEvent.cs" />
+    <Compile Include="Domain\Lanes\Exceptions\LaneAlreadyExistsException.cs" />
+    <Compile Include="Domain\Lanes\LaneListAggregateRoot.cs" />
     <Compile Include="Domain\Rewards\CreateRewardResponse.cs" />
     <Compile Include="Domain\RunningNumbers\Commands\CreateRunningNumberCommand.cs" />
     <Compile Include="Domain\RunningNumbers\Commands\CreateRunningNumberResponse.cs" />

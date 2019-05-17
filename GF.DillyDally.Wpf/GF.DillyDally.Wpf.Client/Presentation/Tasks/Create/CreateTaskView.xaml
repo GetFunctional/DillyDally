@@ -75,7 +75,7 @@
                 <ctrls:ColoredButtonControl
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center"
-                    Command="{Binding CreateTaskCommand}"
+                    Command="{Binding CancelProcessCommand}"
                     Content="Cancel" />
             </dxlc:LayoutGroup>
         </ctrls:Form.FooterContent>

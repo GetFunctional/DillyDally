@@ -185,6 +185,7 @@
     <Compile Include="Core\DataTemplates\IViewFor.cs" />
     <Compile Include="Core\DataTemplates\ViewDataTemplateAggregator.cs" />
     <Compile Include="Presentation\ContentNavigation\SearchContentNavigationTarget.cs" />
+    <Compile Include="Presentation\Selectors\Category\CategoryViewModel.cs" />
     <Compile Include="Presentation\Tasks\Create\CreateTaskController.cs" />
     <Compile Include="Presentation\Tasks\Create\CreateTaskView.xaml.cs">
       <DependentUpon>CreateTaskView.xaml</DependentUpon>

@@ -34,7 +34,7 @@ namespace GF.DillyDally.WriteModel.Domain.Files
             this.Extension = obj.Extension;
         }
 
-        internal static IAggregateRoot Create(Guid fileId, string name, long size, string md5Hash, string extension)
+        internal static FileAggregateRoot Create(Guid fileId, string name, long size, string md5Hash, string extension)
         {
             return new FileAggregateRoot(fileId, name, size, md5Hash, extension);
         }

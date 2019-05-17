@@ -17,7 +17,7 @@ namespace GF.DillyDally.Data.Sqlite
             if (string.IsNullOrEmpty(databaseName) || string.IsNullOrWhiteSpace(databaseName) ||
                 databaseName.Length > 255)
             {
-                throw new ArgumentException("Please provider a database name with Length > 0 and Length < 256");
+                throw new ArgumentException("Please provide a database name with Length > 0 and Length < 256");
             }
 
             this._databaseName = databaseName;

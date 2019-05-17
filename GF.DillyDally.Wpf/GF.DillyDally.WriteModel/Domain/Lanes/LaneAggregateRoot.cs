@@ -40,7 +40,7 @@ namespace GF.DillyDally.WriteModel.Domain.Lanes
             return colorCode.StartsWith("#") && colorCode.Length == 7 || colorCode.Length == 9;
         }
 
-        internal static IAggregateRoot Create(Guid laneId, Guid runningNumberId, string name, string colorCode, bool isCompletedLane, bool isRejectedLane)
+        internal static LaneAggregateRoot Create(Guid laneId, Guid runningNumberId, string name, string colorCode, bool isCompletedLane, bool isRejectedLane)
         {
             return new LaneAggregateRoot(laneId, runningNumberId, name, colorCode, isCompletedLane, isRejectedLane);
         }

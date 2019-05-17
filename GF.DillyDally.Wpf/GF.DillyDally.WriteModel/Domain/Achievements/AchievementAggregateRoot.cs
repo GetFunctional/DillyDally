@@ -56,7 +56,7 @@ namespace GF.DillyDally.WriteModel.Domain.Achievements
             this.Storypoints = obj.Storypoints;
         }
 
-        internal static IAggregateRoot Create(Guid achievementId, Guid runningNumberId, string name,
+        internal static AchievementAggregateRoot Create(Guid achievementId, Guid runningNumberId, string name,
             int counterIncrease, int storypoints)
         {
             return new AchievementAggregateRoot(achievementId, runningNumberId, name, counterIncrease, storypoints);

@@ -42,7 +42,7 @@ namespace GF.DillyDally.WriteModel.Domain.RunningNumbers
             this.Numbers.Add(nextNumber);
         }
 
-        internal static IAggregateRoot Create(Guid runningNumberId, RunningNumberCounterArea counterArea, string prefix,
+        internal static RunningNumberCounterAggregateRoot Create(Guid runningNumberId, RunningNumberCounterArea counterArea, string prefix,
             int initialNumber)
         {
             return new RunningNumberCounterAggregateRoot(runningNumberId, counterArea, prefix, initialNumber);
