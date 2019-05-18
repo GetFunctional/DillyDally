@@ -2,12 +2,11 @@
     x:Class="GF.DillyDally.Wpf.Client.Presentation.Tasks.TaskBoard.TaskBoardView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ctrls="http://schemas.getfunctional.de/dillydally/controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:taskBoard="clr-namespace:GF.DillyDally.Wpf.Client.Presentation.Tasks.TaskBoard"
-    xmlns:tasks="clr-namespace:GF.DillyDally.Wpf.Client.Presentation.Tasks"
-    xmlns:wpf="http://schemas.getfunctional.de/dillydally/wpf"
     d:DataContext="{d:DesignInstance Type={x:Type taskBoard:TaskBoardViewModel}}"
     d:DesignHeight="450"
     d:DesignWidth="800"
@@ -16,26 +15,21 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Colors.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Typography.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Client;component/Presentation/Tasks/TaskBoard/TaskBoardTemplates.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <dxlc:LayoutControl>
-        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-            <ItemsControl ItemTemplate="{StaticResource TaskLaneTemplate}" ItemsSource="{Binding Lanes, Mode=OneWay}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <dxlc:LayoutGroup
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Top"
-                            ItemSpace="10"
-                            Orientation="Horizontal" />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-            </ItemsControl>
-        </ScrollViewer>
-    </dxlc:LayoutControl>
+    <ScrollViewer
+        Margin="29"
+        HorizontalScrollBarVisibility="Auto"
+        VerticalScrollBarVisibility="Auto">
+        <ItemsControl ItemTemplate="{StaticResource TaskLaneTemplate}" ItemsSource="{Binding Lanes, Mode=OneWay}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <dxlc:LayoutGroup ItemSpace="10" Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
+    </ScrollViewer>
 </UserControl>

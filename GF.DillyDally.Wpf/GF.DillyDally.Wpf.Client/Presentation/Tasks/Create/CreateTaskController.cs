@@ -38,7 +38,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Tasks.Create
 
         private async Task CompleteProcess()
         {
-            this.IsBusy();
+            this.ViewModel.IsBusy = true;
 
             if (this.IsInputValid(this.ViewModel))
             {
@@ -52,7 +52,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Tasks.Create
                 this.ConfirmDialogWith(this.CreateTaskDialogResult);
             }
 
-            this.IsReady();
+            this.ViewModel.IsBusy = false;
         }
 
         private bool IsInputValid(CreateTaskViewModel viewModel)

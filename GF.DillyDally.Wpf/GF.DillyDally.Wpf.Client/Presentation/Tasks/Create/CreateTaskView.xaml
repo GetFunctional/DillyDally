@@ -38,12 +38,12 @@
                     <ctrls:FormElementGroupControl.Content>
                         <dxlc:LayoutGroup ItemSpace="14" Orientation="Horizontal">
                             <ctrls:ImageInputControl HorizontalAlignment="Left" VerticalAlignment="Stretch" />
-                            <dxlc:LayoutGroup
-                                Padding="2"
-                                HorizontalAlignment="Left"
-                                ItemSpace="14"
-                                Orientation="Vertical">
-                                <ctrls:TextInputControl Label="Name" WatermarkText="A self explanatory name ..." />
+                            <dxlc:LayoutGroup HorizontalAlignment="Left" Orientation="Vertical">
+                                <ctrls:TextInputControl
+                                    InputValue="{Binding TaskName, Mode=TwoWay}"
+                                    IsRequired="True"
+                                    Label="Title"
+                                    WatermarkText="Give your Task a self explanatory title" />
                                 <ContentControl Content="{Binding CategorySelectorViewModel, Mode=OneWay}" ContentTemplate="{StaticResource CategorySelectorTemplate}" />
                                 <!--<ctrls:ComboInputControl Label="Category" WatermarkText="A self explanatory name ..." />-->
                             </dxlc:LayoutGroup>

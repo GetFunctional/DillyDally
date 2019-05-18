@@ -16,7 +16,8 @@
 
     <ControlTemplate x:Key="DefaultTextInputControlTemplate" TargetType="{x:Type controls:TextInputControl}">
         <dxlc:LayoutItem
-            Label="{TemplateBinding Label}"
+            IsRequired="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsRequired, Mode=TwoWay}"
+            Label="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Label, Mode=TwoWay}"
             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
             Style="{StaticResource InputControlLabelStyle}"
             UseLayoutRounding="{TemplateBinding UseLayoutRounding}">
@@ -25,12 +26,12 @@
                 Width="{TemplateBinding Width}"
                 Height="36"
                 dx:ThemeManager.ThemeName="{x:Static theme:ThemeConstants.DevExpressThemeName}"
-                AcceptsReturn="{TemplateBinding IsMultiline}"
-                EditValue="{TemplateBinding InputValue}"
+                AcceptsReturn="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsMultiline, Mode=TwoWay}"
+                EditValue="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=InputValue, Mode=TwoWay}"
                 FontSize="{StaticResource InputControlsFontSize}"
                 FontWeight="SemiBold"
                 Foreground="{StaticResource InputControlsForeground}"
-                NullText="{TemplateBinding WatermarkText}"
+                NullText="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=WatermarkText, Mode=TwoWay}"
                 ShowNullText="True"
                 SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                 UseLayoutRounding="{TemplateBinding UseLayoutRounding}" />

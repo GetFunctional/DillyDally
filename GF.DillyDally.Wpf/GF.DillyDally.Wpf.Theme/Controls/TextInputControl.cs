@@ -19,10 +19,19 @@ namespace GF.DillyDally.Wpf.Theme.Controls
         public static readonly DependencyProperty IsMultilineProperty = DependencyProperty.Register(
             "IsMultiline", typeof(bool), typeof(TextInputControl), new PropertyMetadata(default(bool)));
 
+        public static readonly DependencyProperty IsRequiredProperty = DependencyProperty.Register(
+            "IsRequired", typeof(bool), typeof(TextInputControl), new PropertyMetadata(default(bool)));
+
         static TextInputControl()
         {
             DefaultStyleKeyProperty.OverrideMetadata(
                 typeof(TextInputControl), new FrameworkPropertyMetadata(typeof(TextInputControl)));
+        }
+
+        public bool IsRequired
+        {
+            get { return (bool) this.GetValue(IsRequiredProperty); }
+            set { this.SetValue(IsRequiredProperty, value); }
         }
 
         public bool IsMultiline
