@@ -47,59 +47,67 @@
     <SolidColorBrush x:Key="InputControlsLabelForeground" Color="#7F8FA4" />
 
 
+    <Style x:Key="BodyTextBlockStyle" TargetType="{x:Type TextBlock}">
+        <Setter Property="FontFamily" Value="{StaticResource SourceSansProBlack}" />
+        <Setter Property="FontSize" Value="{StaticResource BodyFontSize}" />
+        <Setter Property="FontWeight" Value="{StaticResource BodyFontWeight}" />
+        <Setter Property="Foreground" Value="{StaticResource BodyForeground}" />
+        <Setter Property="LineHeight" Value="{StaticResource BodyLineHeight}" />
+    </Style>
+
+    <Style x:Key="H1TextBlockStyle" TargetType="{x:Type TextBlock}">
+        <Setter Property="FontFamily" Value="{StaticResource SourceSansProBlack}" />
+        <Setter Property="FontSize" Value="{StaticResource H1FontSize}" />
+        <Setter Property="FontWeight" Value="{StaticResource H1FontWeight}" />
+        <Setter Property="Foreground" Value="{StaticResource H1Foreground}" />
+        <Setter Property="LineHeight" Value="{StaticResource H1LineHeight}" />
+    </Style>
+
+    <Style x:Key="H2TextBlockStyle" TargetType="{x:Type TextBlock}">
+        <Setter Property="FontFamily" Value="{StaticResource SourceSansProBlack}" />
+        <Setter Property="FontSize" Value="{StaticResource H2FontSize}" />
+        <Setter Property="FontWeight" Value="{StaticResource H2FontWeight}" />
+        <Setter Property="Foreground" Value="{StaticResource H2Foreground}" />
+        <Setter Property="LineHeight" Value="{StaticResource H2LineHeight}" />
+    </Style>
+
+    <Style x:Key="H3TextBlockStyle" TargetType="{x:Type TextBlock}">
+        <Setter Property="FontFamily" Value="{StaticResource SourceSansProBlack}" />
+        <Setter Property="FontSize" Value="{StaticResource H3FontSize}" />
+        <Setter Property="FontWeight" Value="{StaticResource H3FontWeight}" />
+        <Setter Property="Foreground" Value="{StaticResource H3Foreground}" />
+        <Setter Property="LineHeight" Value="{StaticResource H3LineHeight}" />
+    </Style>
+
+    <Style x:Key="DescriptionTextBlockStyle" TargetType="{x:Type TextBlock}">
+        <Setter Property="FontFamily" Value="{StaticResource SourceSansProBlack}" />
+        <Setter Property="FontSize" Value="{StaticResource DescriptionFontSize}" />
+        <Setter Property="FontWeight" Value="{StaticResource DescriptionFontWeight}" />
+        <Setter Property="Foreground" Value="{StaticResource DescriptionForeground}" />
+        <Setter Property="LineHeight" Value="{StaticResource DescriptionLineHeight}" />
+    </Style>
+
     <DataTemplate x:Key="H1HeaderTemplate" DataType="{x:Type shared:HeaderTitleContent}">
         <WrapPanel VerticalAlignment="Center" Orientation="Vertical">
-            <TextBlock
-                FontFamily="{StaticResource SourceSansProBlack}"
-                FontSize="{StaticResource H1FontSize}"
-                FontWeight="{StaticResource H1FontWeight}"
-                Foreground="{StaticResource H1Foreground}"
-                LineHeight="{StaticResource H1LineHeight}"
-                Text="{Binding Title}" />
-            <TextBlock
-                FontFamily="{StaticResource SourceSansProBlack}"
-                FontSize="{StaticResource DescriptionFontSize}"
-                FontWeight="{StaticResource DescriptionFontWeight}"
-                Foreground="{StaticResource DescriptionForeground}"
-                LineHeight="{StaticResource DescriptionLineHeight}"
-                Text="{Binding Description}" />
+            <TextBlock Style="{StaticResource H1TextBlockStyle}" Text="{Binding Title}" />
+            <TextBlock Style="{StaticResource DescriptionTextBlockStyle}" Text="{Binding Description}" />
         </WrapPanel>
     </DataTemplate>
 
     <DataTemplate x:Key="H2HeaderTemplate" DataType="{x:Type shared:HeaderTitleContent}">
         <WrapPanel VerticalAlignment="Center" Orientation="Vertical">
-            <TextBlock
-                FontFamily="{StaticResource SourceSansProBlack}"
-                FontSize="{StaticResource H2FontSize}"
-                FontWeight="{StaticResource H2FontWeight}"
-                Foreground="{StaticResource H2Foreground}"
-                LineHeight="{StaticResource H2LineHeight}"
+            <TextBlock Style="{StaticResource H2TextBlockStyle}"
                 Text="{Binding Title}" />
-            <TextBlock
-                FontFamily="{StaticResource SourceSansProBlack}"
-                FontSize="{StaticResource DescriptionFontSize}"
-                FontWeight="{StaticResource DescriptionFontWeight}"
-                Foreground="{StaticResource DescriptionForeground}"
-                LineHeight="{StaticResource DescriptionLineHeight}"
+            <TextBlock Style="{StaticResource DescriptionTextBlockStyle}"
                 Text="{Binding Description}" />
         </WrapPanel>
     </DataTemplate>
 
     <DataTemplate x:Key="H3HeaderTemplate" DataType="{x:Type shared:HeaderTitleContent}">
         <WrapPanel VerticalAlignment="Center" Orientation="Vertical">
-            <TextBlock
-                FontFamily="{StaticResource SourceSansProBlack}"
-                FontSize="{StaticResource H3FontSize}"
-                FontWeight="{StaticResource H3FontWeight}"
-                Foreground="{StaticResource H3Foreground}"
-                LineHeight="{StaticResource H3LineHeight}"
+            <TextBlock Style="{StaticResource H3TextBlockStyle}" 
                 Text="{Binding Title}" />
-            <TextBlock
-                FontFamily="{StaticResource SourceSansProBlack}"
-                FontSize="{StaticResource DescriptionFontSize}"
-                FontWeight="{StaticResource DescriptionFontWeight}"
-                Foreground="{StaticResource DescriptionForeground}"
-                LineHeight="{StaticResource DescriptionLineHeight}"
+            <TextBlock Style="{StaticResource DescriptionTextBlockStyle}"
                 Text="{Binding Description}" />
         </WrapPanel>
     </DataTemplate>

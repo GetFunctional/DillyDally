@@ -10,6 +10,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:presentation="clr-namespace:GF.DillyDally.Wpf.Client.Presentation"
     xmlns:theme="clr-namespace:GF.DillyDally.Wpf.Theme;assembly=GF.DillyDally.Wpf.Theme"
+    xmlns:contentNavigation="clr-namespace:GF.DillyDally.Wpf.Client.Presentation.ContentNavigation"
     Title="Dilly Dally"
     Width="1280"
     Height="800"
@@ -27,9 +28,9 @@
                 <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Client;component/Presentation/OverlayTemplates.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <conv:ContentToVisiblityConverter x:Key="ContentToVisiblityConverter" />
-            <SolidColorBrush x:Key="ApplicationBackgroundBrush" Color="{StaticResource ApplicationBackgroundColor}" />
-            <SolidColorBrush x:Key="ContentSeparatorBrush" Color="{StaticResource ContentSeparatorColor}" />
-            <SolidColorBrush x:Key="MenuBackgroundBrush" Color="{StaticResource TopLayerBackgroundColor}" />
+            <SolidColorBrush x:Key="ApplicationBackgroundBrush" Color="{StaticResource Layer4BackgroundColor}" />
+            <SolidColorBrush x:Key="ContentSeparatorBrush" Color="{StaticResource Layer4BorderColor}" />
+            <SolidColorBrush x:Key="MenuBackgroundBrush" Color="{StaticResource Layer1BackgroundColor}" />
         </ResourceDictionary>
     </Window.Resources>
 
@@ -68,7 +69,7 @@
                         <TextBlock Text="Menu" />
                     </dxlc:LayoutGroup>
                 </Border>
-                <dxlc:LayoutGroup Orientation="Vertical">
+                <dxlc:LayoutGroup ItemSpace="0" Orientation="Vertical">
                     <Border
                         Height="70"
                         HorizontalAlignment="Stretch"
@@ -78,7 +79,7 @@
                         BorderThickness="0,0,0,1">
                         <headerMenu:HeaderMenuView DataContext="{Binding HeaderMenuViewModel}" />
                     </Border>
-                    <ContentControl Content="{Binding ContentNavigatorViewModel, Mode=OneWay}" />
+                    <contentNavigation:ContentNavigatorView DataContext="{Binding ContentNavigatorViewModel, Mode=OneWay}" />
                 </dxlc:LayoutGroup>
             </dxlc:LayoutControl>
         </Grid>

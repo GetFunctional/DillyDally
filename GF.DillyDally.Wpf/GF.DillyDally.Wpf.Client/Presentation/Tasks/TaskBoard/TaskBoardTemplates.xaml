@@ -11,16 +11,18 @@
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Typography.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <SolidColorBrush x:Key="BorderBrush" Color="{StaticResource ContentInnerSeparatorColor}" />
+    <SolidColorBrush x:Key="TaskItemBorderBrush" Color="{StaticResource Layer1BorderColor}" />
     <SolidColorBrush x:Key="TaskItemHightlightBrush" Color="{StaticResource HighlightOrange}" />
-    <SolidColorBrush x:Key="TaskItemBackgroundBrush" Color="{StaticResource TopLayerBackgroundColor}" />
-    <SolidColorBrush x:Key="TaskItemBackgroundHoverBrush" Color="{StaticResource FormBackgroundColor}" />
+    <SolidColorBrush x:Key="TaskItemBackgroundBrush" Color="{StaticResource Layer1BackgroundColor}" />
+    <SolidColorBrush x:Key="TaskItemBackgroundHoverBrush" Color="{StaticResource Layer2BackgroundColor}" />
+    <SolidColorBrush x:Key="TasklaneBackgroundBrush" Color="{StaticResource Layer3BackgroundColor}" />
+    <SolidColorBrush x:Key="TasklaneBorderBrush" Color="{StaticResource Layer1BorderColor}" />
 
     <conv:ColorStringToBrushConverter x:Key="ColorStringToBrushConverter" />
 
     <DataTemplate x:Key="TaskTemplate" DataType="{x:Type local:TaskBoardTaskViewModel}">
-        <Border
-            BorderBrush="{StaticResource BorderBrush}"
+        <Border Margin="0,0,0,10" VerticalAlignment="Top" Background="{StaticResource TaskItemBackgroundBrush}"
+            BorderBrush="{StaticResource TaskItemBorderBrush}"
             BorderThickness="1"
             CornerRadius="4">
             <Border.Style>
@@ -34,11 +36,11 @@
                 </Style>
             </Border.Style>
             <dxlc:LayoutGroup
-                Height="140"
+                MinHeight="85"
+                VerticalAlignment="Top"
                 Margin="0"
                 Padding="0"
-                HorizontalAlignment="Stretch"
-                ItemSpace="7">
+                ItemSpace="0">
                 <Border
                     HorizontalAlignment="Left"
                     VerticalAlignment="Stretch"
@@ -47,13 +49,11 @@
                     <Rectangle Width="3" />
                 </Border>
                 <dxlc:LayoutGroup
-                    Margin="0,16"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Stretch"
-                    ItemSpace="13"
+                    Padding="11,14,14,14"
+                    ItemSpace="18"
                     Orientation="Vertical">
-                    <ctrls:InternalLinkControl DisplayLink="{Binding RunningNumber}" />
-                    <TextBlock
+                    <!--<ctrls:InternalLinkControl DisplayLink="{Binding RunningNumber}" />-->
+                    <TextBlock Style="{StaticResource BodyTextBlockStyle}"
                         VerticalAlignment="Top"
                         Text="{Binding Name}"
                         TextAlignment="Left" />
@@ -62,31 +62,39 @@
                         VerticalAlignment="Top"
                         LabelBrush="{Binding ColorString, Converter={StaticResource ColorStringToBrushConverter}}"
                         LabelText="{Binding Category}" />
+                    <dxlc:LayoutGroup Margin="0,20,0,0"
+                        VerticalAlignment="Bottom"
+                        Orientation="Horizontal">
+                        <TextBlock HorizontalAlignment="Left" Text="Icons" />
+                        <TextBlock HorizontalAlignment="Right" Text="{Binding Storypoints}" />
+                    </dxlc:LayoutGroup>
                 </dxlc:LayoutGroup>
-                <dxlc:LayoutGroup
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Stretch"
-                    Orientation="Vertical">
-                    <TextBlock Text="{Binding Storypoints}" />
-                </dxlc:LayoutGroup>
+               
             </dxlc:LayoutGroup>
         </Border>
     </DataTemplate>
 
     <DataTemplate x:Key="TaskLaneTemplate" DataType="{x:Type local:TaskBoardLaneViewModel}">
-        <ctrls:FormElementGroupControl VerticalAlignment="Stretch" VerticalContentAlignment="Top">
-            <ctrls:FormElementGroupControl.HeaderTitleContent>
-                <ctrls:HeaderTitleContent Title="{Binding LaneName}" />
-            </ctrls:FormElementGroupControl.HeaderTitleContent>
-            <ctrls:FormElementGroupControl.Content>
-                <ItemsControl ItemTemplate="{StaticResource TaskTemplate}" ItemsSource="{Binding Tasks, Mode=OneWay}">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <dxlc:LayoutGroup ItemSpace="3" Orientation="Vertical" />
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                </ItemsControl>
-            </ctrls:FormElementGroupControl.Content>
-        </ctrls:FormElementGroupControl>
+        <dxlc:LayoutGroup ItemSpace="10" Orientation="Vertical">
+            <dxlc:LayoutGroup VerticalAlignment="Top" Orientation="Horizontal">
+                <TextBlock HorizontalAlignment="Left" Text="{Binding LaneName}" Style="{StaticResource H3TextBlockStyle}" />
+                <TextBlock HorizontalAlignment="Left" Text="{Binding TaskCount}" Style="{StaticResource DescriptionTextBlockStyle}" />
+                <TextBlock Text="..." HorizontalAlignment="Right" />
+            </dxlc:LayoutGroup>
+
+            <dxlc:LayoutGroup ItemSpace="0" Orientation="Vertical">
+                <Border Height="3" Background="{StaticResource TaskItemHightlightBrush}" VerticalAlignment="Top" />
+                <Border BorderThickness="1,0,1,1" BorderBrush="{StaticResource TasklaneBorderBrush}">
+                    <ItemsControl Padding="10" Background="{StaticResource TasklaneBackgroundBrush}" ItemTemplate="{StaticResource TaskTemplate}" ItemsSource="{Binding Tasks, Mode=OneWay}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel HorizontalAlignment="Stretch" Orientation="Vertical" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                </Border>
+            </dxlc:LayoutGroup>
+
+        </dxlc:LayoutGroup>
     </DataTemplate>
 </ResourceDictionary>

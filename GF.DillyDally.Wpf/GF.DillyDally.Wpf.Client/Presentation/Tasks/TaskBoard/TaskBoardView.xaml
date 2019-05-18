@@ -16,20 +16,30 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Client;component/Presentation/Tasks/TaskBoard/TaskBoardTemplates.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Colors.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+            <SolidColorBrush x:Key="ContentHeaderBorderBrush" Color="{StaticResource Layer4BorderColor}" />
+            <SolidColorBrush x:Key="ContentHeaderBackgroundBrush" Color="{StaticResource Layer1BackgroundColor}" />
+
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <ScrollViewer
-        Margin="29"
-        HorizontalScrollBarVisibility="Auto"
-        VerticalScrollBarVisibility="Auto">
-        <ItemsControl ItemTemplate="{StaticResource TaskLaneTemplate}" ItemsSource="{Binding Lanes, Mode=OneWay}">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <dxlc:LayoutGroup ItemSpace="10" Orientation="Horizontal" />
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-        </ItemsControl>
-    </ScrollViewer>
+    <dxlc:LayoutControl Orientation="Vertical" Margin="0" Padding="0">
+        <Border VerticalAlignment="Top" Height="60" BorderThickness="0,0,0,1" Background="{StaticResource ContentHeaderBackgroundBrush}" BorderBrush="{StaticResource ContentHeaderBorderBrush}">
+            <TextBlock Text="Taskboard"></TextBlock>
+        </Border>
+        <ScrollViewer Padding="29,29,0,0"
+            HorizontalScrollBarVisibility="Hidden"
+            VerticalScrollBarVisibility="Auto">
+            <ItemsControl ItemTemplate="{StaticResource TaskLaneTemplate}" ItemsSource="{Binding Lanes, Mode=OneWay}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <dxlc:LayoutGroup ItemSpace="50" Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </ScrollViewer>
+    </dxlc:LayoutControl>
+
 </UserControl>

@@ -29,6 +29,7 @@
     </UserControl.Resources>
 
     <dx:DXTabControl
+        Padding="0"
         Margin="0"
         IsSynchronizedWithCurrentItem="True"
         ItemContainerStyle="{StaticResource ViewModelBrowserTabItemStyle}"

@@ -9,8 +9,8 @@
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Typography.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <SolidColorBrush x:Key="ElementGroupBackgroundBrush" Color="{StaticResource TopLayerBackgroundColor}" />
-    <SolidColorBrush x:Key="ElementGroupBorderBrush" Color="{StaticResource ContentInnerSeparatorColor}" />
+    <SolidColorBrush x:Key="ElementGroupBackgroundBrush" Color="{StaticResource Layer1BackgroundColor}" />
+    <SolidColorBrush x:Key="ElementGroupBorderBrush" Color="{StaticResource Layer1BorderColor}" />
 
     <ControlTemplate x:Key="DefaultElementGroupControlTemplate" TargetType="{x:Type controls:FormElementGroupControl}">
         <Border

@@ -20,8 +20,8 @@
     <Thickness x:Key="ContentPadding">25,0</Thickness>
 
     <!--  Form Header  -->
-    <SolidColorBrush x:Key="FormHeaderBackgroundBrush" Color="{StaticResource TopLayerBackgroundColor}" />
-    <SolidColorBrush x:Key="FormHeaderBorderBrush" Color="{StaticResource ContentInnerSeparatorColor}" />
+    <SolidColorBrush x:Key="FormHeaderBackgroundBrush" Color="{StaticResource Layer1BackgroundColor}" />
+    <SolidColorBrush x:Key="FormHeaderBorderBrush" Color="{StaticResource Layer1BorderColor}" />
 
     <!--<Border
         Height="80"
@@ -65,8 +65,8 @@
 
 
     <!--  Form Footer  -->
-    <SolidColorBrush x:Key="FormInnerBorderBrush" Color="{StaticResource ContentInnerSeparatorColor}" />
-    <SolidColorBrush x:Key="FormFooterBackgroundBrush" Color="{StaticResource FormBackgroundColor}" />
+    <SolidColorBrush x:Key="FormInnerBorderBrush" Color="{StaticResource Layer1BorderColor}" />
+    <SolidColorBrush x:Key="FormFooterBackgroundBrush" Color="{StaticResource Layer2BackgroundColor}" />
 
     <ControlTemplate x:Key="FormFooterControlTemplate" TargetType="{x:Type controls:FormFooter}">
         <Border
@@ -98,9 +98,9 @@
 
 
     <!--  Form  -->
-    <SolidColorBrush x:Key="FormDefaultBackgroundBrush" Color="{StaticResource FormBackgroundColor}" />
-    <SolidColorBrush x:Key="FormElementBackgroundBrush" Color="{StaticResource TopLayerBackgroundColor}" />
-    <SolidColorBrush x:Key="FormBorderBrush" Color="{StaticResource ContentSeparatorColor}" />
+    <SolidColorBrush x:Key="FormDefaultBackgroundBrush" Color="{StaticResource Layer2BackgroundColor}" />
+    <SolidColorBrush x:Key="FormElementBackgroundBrush" Color="{StaticResource Layer1BackgroundColor}" />
+    <SolidColorBrush x:Key="FormBorderBrush" Color="{StaticResource Layer4BorderColor}" />
 
     <ControlTemplate x:Key="FormControlTemplate" TargetType="{x:Type controls:Form}">
         <Border

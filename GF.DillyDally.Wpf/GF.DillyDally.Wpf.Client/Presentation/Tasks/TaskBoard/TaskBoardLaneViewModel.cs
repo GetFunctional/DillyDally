@@ -11,5 +11,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Tasks.TaskBoard
         public Guid LaneId { get; set; }
 
         public ObservableCollection<TaskBoardTaskViewModel> Tasks { get; set; }
+
+        public int TaskCount { get; set; }
     }
 }

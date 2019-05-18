@@ -1,14 +1,16 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <!--  Backgrounds  -->
-    <Color x:Key="ApplicationBackgroundColor">#EFF3F6</Color>
-    <Color x:Key="ContentBackgroundColor">#FAFBFC</Color>
-    <Color x:Key="FormBackgroundColor">#F0F3F8</Color>
-    <Color x:Key="TopLayerBackgroundColor">#FFFFFF</Color>
+    <Color x:Key="Layer4BackgroundColor">#EFF3F6</Color>
+    <Color x:Key="Layer3BackgroundColor">#FAFBFC</Color>
+    <Color x:Key="Layer2BackgroundColor">#F0F3F8</Color>
+    <Color x:Key="Layer1BackgroundColor">#FFFFFF</Color>
 
     <!--  Borders  -->
-    <Color x:Key="ContentSeparatorColor">#DFE2E5</Color>
-    <Color x:Key="ContentInnerSeparatorColor">#E6EAEE</Color>
+    <Color x:Key="Layer4BorderColor">#DFE2E5</Color>
+    <Color x:Key="Layer3BorderColor">#E6EAEE</Color>
+    <Color x:Key="Layer2BorderColor">#E6EAEE</Color>
+    <Color x:Key="Layer1BorderColor">#E6EAEE</Color>
 
     <!--  Highlights  -->
     <Color x:Key="HighlightBlue">#00aaff</Color>
