@@ -35,26 +35,29 @@
                     </Style.Triggers>
                 </Style>
             </Border.Style>
-            <dxlc:LayoutGroup
-                MinHeight="85"
-                VerticalAlignment="Top"
-                Margin="0"
-                Padding="0"
-                ItemSpace="0">
-                <Border
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Stretch"
+            <Grid Width="250">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="55" />
+                </Grid.RowDefinitions>
+                <Border Grid.Column="0" Grid.RowSpan="2"
                     Background="{StaticResource TaskItemHightlightBrush}"
                     CornerRadius="4,0,0,4">
                     <Rectangle Width="3" />
                 </Border>
-                <dxlc:LayoutGroup
+                <dxlc:LayoutGroup MaxWidth="247" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left"
                     Padding="11,14,14,14"
-                    ItemSpace="18"
+                    ItemSpace="13"
                     Orientation="Vertical">
-                    <!--<ctrls:InternalLinkControl DisplayLink="{Binding RunningNumber}" />-->
+                    <ctrls:InternalLinkControl MaxWidth="200" DisplayLink="{Binding RunningNumber}" />
                     <TextBlock Style="{StaticResource BodyTextBlockStyle}"
-                        VerticalAlignment="Top"
+                               FontWeight="SemiBold" MaxWidth="200"
+                        VerticalAlignment="Top" HorizontalAlignment="Left" TextWrapping="Wrap" 
+                               FontSize="13"
                         Text="{Binding Name}"
                         TextAlignment="Left" />
                     <ctrls:LabelControl
@@ -62,20 +65,18 @@
                         VerticalAlignment="Top"
                         LabelBrush="{Binding ColorString, Converter={StaticResource ColorStringToBrushConverter}}"
                         LabelText="{Binding Category}" />
-                    <dxlc:LayoutGroup Margin="0,20,0,0"
-                        VerticalAlignment="Bottom"
-                        Orientation="Horizontal">
-                        <TextBlock HorizontalAlignment="Left" Text="Icons" />
-                        <TextBlock HorizontalAlignment="Right" Text="{Binding Storypoints}" />
-                    </dxlc:LayoutGroup>
+                 
                 </dxlc:LayoutGroup>
-               
-            </dxlc:LayoutGroup>
+                <dxlc:LayoutGroup Padding="11,0,14,14" Grid.Column="1" Grid.Row="1" Orientation="Horizontal">
+                    <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Left" Text="Icons" />
+                    <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Right" Text="{Binding Storypoints}" />
+                </dxlc:LayoutGroup>
+            </Grid>
         </Border>
     </DataTemplate>
 
     <DataTemplate x:Key="TaskLaneTemplate" DataType="{x:Type local:TaskBoardLaneViewModel}">
-        <dxlc:LayoutGroup ItemSpace="10" Orientation="Vertical">
+        <dxlc:LayoutGroup Width="270" ItemSpace="10" Orientation="Vertical">
             <dxlc:LayoutGroup VerticalAlignment="Top" Orientation="Horizontal">
                 <TextBlock HorizontalAlignment="Left" Text="{Binding LaneName}" Style="{StaticResource H3TextBlockStyle}" />
                 <TextBlock HorizontalAlignment="Left" Text="{Binding TaskCount}" Style="{StaticResource DescriptionTextBlockStyle}" />

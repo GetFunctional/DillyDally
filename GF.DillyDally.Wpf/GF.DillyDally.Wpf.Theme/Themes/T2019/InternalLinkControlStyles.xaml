@@ -10,7 +10,7 @@
     </ResourceDictionary.MergedDictionaries>
 
     <ControlTemplate x:Key="DefaultInternalLinkControlTemplate" TargetType="{x:Type controls:InternalLinkControl}">
-        <TextBlock>
+        <TextBlock Foreground="{TemplateBinding Foreground}" Style="{StaticResource LinkTextBlockStyle}" FontWeight="{TemplateBinding FontWeight}">
             <Hyperlink x:Name="PART_Link">
                 <Hyperlink.Inlines>
                     <Run Text="{TemplateBinding DisplayLink}" />
@@ -31,11 +31,8 @@
             </Style>
         </Style.Resources>
         <Setter Property="Template" Value="{StaticResource DefaultInternalLinkControlTemplate}" />
+        <Setter Property="FontWeight" Value="{StaticResource LinkFontWeight}" />
         <Setter Property="Foreground" Value="{StaticResource LinkForeground}" />
-        <Setter Property="FontSize" Value="{StaticResource LinkFontSize}" />
-        <Setter Property="FontFamily" Value="{StaticResource SourceSansProBlack}" />
-        <Setter Property="HorizontalAlignment" Value="Left" />
-        <Setter Property="VerticalAlignment" Value="Top" />
         <Setter Property="Cursor" Value="Hand" />
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">

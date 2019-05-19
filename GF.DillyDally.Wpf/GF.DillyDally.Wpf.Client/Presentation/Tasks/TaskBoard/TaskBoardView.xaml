@@ -30,7 +30,7 @@
             <TextBlock Text="Taskboard"></TextBlock>
         </Border>
         <ScrollViewer Padding="29,29,0,0"
-            HorizontalScrollBarVisibility="Hidden"
+            HorizontalScrollBarVisibility="Auto"
             VerticalScrollBarVisibility="Auto">
             <ItemsControl ItemTemplate="{StaticResource TaskLaneTemplate}" ItemsSource="{Binding Lanes, Mode=OneWay}">
                 <ItemsControl.ItemsPanel>

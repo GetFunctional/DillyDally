@@ -42,7 +42,7 @@ namespace GF.DillyDally.Unittests.WriteModel
                 var exampleCategory = (await categoryRepository.GetAllAsync(connection)).Shuffle().FirstOrDefault();
                 var exampleLane = (await laneRepository.GetAllAsync(connection)).Shuffle().FirstOrDefault();
 
-                var task = await commandDispatcher.Send(new CreateTaskCommand("Test", exampleCategory.CategoryId, exampleLane.LaneId));
+                var task = await commandDispatcher.Send(new CreateTaskCommand("Prepare Q2 Overview of Mixpanel Statistics (Keynote required)", exampleCategory.CategoryId, exampleLane.LaneId));
                 return task;
             }
         }
