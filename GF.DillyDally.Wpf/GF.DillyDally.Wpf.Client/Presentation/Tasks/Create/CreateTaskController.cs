@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using GF.DillyDally.Data.Sqlite;
 using GF.DillyDally.Mvvmc;
@@ -14,6 +15,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Tasks.Create
         private readonly DatabaseFileHandler _databaseFileHandler;
         private readonly IMediator _mediator;
         private readonly CategorySelectorController _categorySelectorController;
+        private Guid? _presetLane;
 
         public CreateTaskController(CreateTaskViewModel viewModel, DatabaseFileHandler databaseFileHandler, IMediator mediator,CategorySelectorController categorySelectorController) :
             base(viewModel)
@@ -47,7 +49,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Tasks.Create
 
                 var commandDispatcher = this._mediator;
               
-                var task = await commandDispatcher.Send(new CreateTaskCommand(taskName, category.CategoryId));
+                var task = await commandDispatcher.Send(new CreateTaskCommand(taskName, category.CategoryId, this._presetLane));
 
                 this.ConfirmDialogWith(this.CreateTaskDialogResult);
             }
@@ -97,5 +99,9 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Tasks.Create
         //        return laneVm;
         //    }).ToList();
         //}
+        public void PresetLane(Guid laneId)
+        {
+            this._presetLane = laneId;
+        }
     }
 }
