@@ -115,19 +115,15 @@
 
     <DataTemplate x:Key="H2HeaderTemplate" DataType="{x:Type shared:HeaderTitleContent}">
         <WrapPanel VerticalAlignment="Center" Orientation="Vertical">
-            <TextBlock Style="{StaticResource H2TextBlockStyle}"
-                Text="{Binding Title}" />
-            <TextBlock Style="{StaticResource DescriptionTextBlockStyle}"
-                Text="{Binding Description}" />
+            <TextBlock Style="{StaticResource H2TextBlockStyle}" Text="{Binding Title}" />
+            <TextBlock Style="{StaticResource DescriptionTextBlockStyle}" Text="{Binding Description}" />
         </WrapPanel>
     </DataTemplate>
 
     <DataTemplate x:Key="H3HeaderTemplate" DataType="{x:Type shared:HeaderTitleContent}">
         <WrapPanel VerticalAlignment="Center" Orientation="Vertical">
-            <TextBlock Style="{StaticResource H3TextBlockStyle}" 
-                Text="{Binding Title}" />
-            <TextBlock Style="{StaticResource DescriptionTextBlockStyle}"
-                Text="{Binding Description}" />
+            <TextBlock Style="{StaticResource H3TextBlockStyle}" Text="{Binding Title}" />
+            <TextBlock Style="{StaticResource DescriptionTextBlockStyle}" Text="{Binding Description}" />
         </WrapPanel>
     </DataTemplate>
 </ResourceDictionary>

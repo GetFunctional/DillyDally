@@ -16,10 +16,10 @@
             <TextBlock
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                Style="{StaticResource LabelTextBlockStyle}"
                 FontFamily="{TemplateBinding FontFamily}"
                 FontSize="{TemplateBinding FontSize}"
                 Foreground="{TemplateBinding Foreground}"
+                Style="{StaticResource LabelTextBlockStyle}"
                 Text="{TemplateBinding LabelText}"
                 TextAlignment="Center" />
         </Border>

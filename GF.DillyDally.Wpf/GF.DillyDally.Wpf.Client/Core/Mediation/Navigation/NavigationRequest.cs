@@ -1,4 +1,5 @@
-﻿using GF.DillyDally.Wpf.Client.Core.Navigator;
+﻿using System;
+using GF.DillyDally.Wpf.Client.Core.Navigator;
 using MediatR;
 
 namespace GF.DillyDally.Wpf.Client.Core.Mediation.Navigation
@@ -10,6 +11,12 @@ namespace GF.DillyDally.Wpf.Client.Core.Mediation.Navigation
             this.NavigationTarget = navigationTarget;
         }
 
+        public NavigationRequest(Guid navigationTargetId)
+        {
+            this.NavigationTargetId = navigationTargetId;
+        }
+
+        public Guid? NavigationTargetId { get; }
         public INavigationTarget NavigationTarget { get; }
     }
 }

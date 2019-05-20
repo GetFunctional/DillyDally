@@ -7,7 +7,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
     public sealed class SearchContentViewModel : ViewModelBase
     {
         private IList<NavigationTargetViewModel> _availableNavigationTargets;
-        private NavigateToTargetCommand _navigateToTargetCommand;
+        private IReactiveCommand _navigateToTargetCommand;
         private NavigationTargetViewModel _selectedTarget;
 
         public SearchContentViewModel() : this(new List<NavigationTargetViewModel>())
@@ -51,7 +51,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
             }
         }
 
-        public NavigateToTargetCommand NavigateToTargetCommand
+        public IReactiveCommand NavigateToTargetCommand
         {
             get
             {

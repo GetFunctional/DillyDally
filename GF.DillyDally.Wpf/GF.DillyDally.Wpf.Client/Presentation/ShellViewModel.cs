@@ -1,4 +1,5 @@
-﻿using GF.DillyDally.Mvvmc;
+﻿using System;
+using GF.DillyDally.Mvvmc;
 using GF.DillyDally.Wpf.Client.Presentation.ContentNavigation;
 using GF.DillyDally.Wpf.Client.Presentation.HeaderMenu;
 using ReactiveUI;
@@ -10,6 +11,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation
         private ContentBrowserViewModel _contentBrowserViewModel;
         private HeaderMenuViewModel _headerMenuViewModel;
         private OverlayViewModel _overlayViewModel;
+        private IReactiveCommand _openTaskboardCommand;
 
         public ContentBrowserViewModel ContentBrowserViewModel
         {
@@ -55,6 +57,26 @@ namespace GF.DillyDally.Wpf.Client.Presentation
             set
             {
                 this.RaiseAndSetIfChanged(ref this._overlayViewModel, value);
+            }
+        }
+
+        public Guid TaskBoardNavigationTarget
+        {
+            get
+            {
+                return Tasks.TaskBoard.TaskBoardNavigationTarget.TargetId;
+            }
+        }
+
+        public IReactiveCommand OpenTaskboardCommand
+        {
+            get
+            {
+                return this._openTaskboardCommand;
+            }
+            set
+            {
+                this.RaiseAndSetIfChanged(ref this._openTaskboardCommand, value);
             }
         }
     }

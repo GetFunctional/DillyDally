@@ -2,15 +2,17 @@
     x:Class="GF.DillyDally.Wpf.Client.Presentation.Shell"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:contentNavigation="clr-namespace:GF.DillyDally.Wpf.Client.Presentation.ContentNavigation"
     xmlns:conv="http://schemas.getfunctional.de/dillydally/converter"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
     xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+    xmlns:dxn="http://schemas.devexpress.com/winfx/2008/xaml/navbar"
+    xmlns:dxwui="http://schemas.devexpress.com/winfx/2008/xaml/windowsui"
     xmlns:headerMenu="clr-namespace:GF.DillyDally.Wpf.Client.Presentation.HeaderMenu"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:presentation="clr-namespace:GF.DillyDally.Wpf.Client.Presentation"
     xmlns:theme="clr-namespace:GF.DillyDally.Wpf.Theme;assembly=GF.DillyDally.Wpf.Theme"
-    xmlns:contentNavigation="clr-namespace:GF.DillyDally.Wpf.Client.Presentation.ContentNavigation"
     Title="Dilly Dally"
     Width="1280"
     Height="800"
@@ -46,30 +48,69 @@
                 ContentTemplate="{StaticResource OverlayTemplate}"
                 DataContext="{Binding OverlayViewModel, Mode=OneWay}"
                 Visibility="{Binding OverlayContent, Converter={StaticResource ContentToVisiblityConverter}}" />
+
+
             <dxlc:LayoutControl
                 Margin="0"
                 Padding="0"
-                ItemSpace="0"
-                Orientation="Horizontal">
-                <Border
+                ItemSpace="0">
+
+                <!--  Left Side  -->
+                <dxlc:LayoutGroup
                     Width="250"
                     HorizontalAlignment="Left"
                     Background="{StaticResource MenuBackgroundBrush}"
-                    BorderBrush="{StaticResource ContentSeparatorBrush}"
-                    BorderThickness="0,0,1,0">
-                    <dxlc:LayoutGroup Orientation="Vertical">
-                        <Border
-                            Height="70"
-                            HorizontalAlignment="Stretch"
-                            VerticalAlignment="Top"
-                            BorderBrush="{StaticResource ContentSeparatorBrush}"
-                            BorderThickness="0,0,0,1">
-                            <TextBlock HorizontalAlignment="Center" Text="Logo" />
-                        </Border>
-                        <TextBlock Text="Menu" />
-                    </dxlc:LayoutGroup>
-                </Border>
-                <dxlc:LayoutGroup ItemSpace="0" Orientation="Vertical">
+                    ItemSpace="0"
+                    Orientation="Vertical">
+                    <Border
+                        Height="70"
+                        BorderBrush="{StaticResource ContentSeparatorBrush}"
+                        BorderThickness="0,0,1,1">
+                        <TextBlock
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontWeight="SemiBold"
+                            Style="{StaticResource H3TextBlockStyle}"
+                            Text="Logo"
+                            TextAlignment="Center" />
+                    </Border>
+                    <Border BorderBrush="{StaticResource ContentSeparatorBrush}" BorderThickness="0,0,1,0">
+                        <dxn:NavBarControl
+                            Name="Menu"
+                            Background="{StaticResource MenuBackgroundBrush}"
+                            FontSize="{StaticResource H3FontSize}"
+                            Foreground="{StaticResource H3Foreground}">
+                            <dxn:NavBarControl.Groups>
+                                <dxn:NavBarGroup Header="Dashboard">
+                                    <dxn:NavBarGroup.Items>
+                                        <dxn:NavBarItem Content="Search" />
+                                    </dxn:NavBarGroup.Items>
+                                </dxn:NavBarGroup>
+                                <dxn:NavBarGroup Header="Tasks">
+                                    <dxn:NavBarGroup.Items>
+                                        <dxn:NavBarItem
+                                            Command="{Binding OpenTaskboardCommand, Mode=OneWay}"
+                                            CommandParameter="{Binding TaskBoardNavigationTarget}"
+                                            Content="Taskboard" />
+                                    </dxn:NavBarGroup.Items>
+                                </dxn:NavBarGroup>
+                                <dxn:NavBarGroup Header="Achievements">
+                                    <dxn:NavBarGroup.Items>
+                                        <dxn:NavBarItem />
+                                    </dxn:NavBarGroup.Items>
+                                </dxn:NavBarGroup>
+                                <dxn:NavBarGroup Header="Games">
+                                    <dxn:NavBarGroup.Items>
+                                        <dxn:NavBarItem />
+                                    </dxn:NavBarGroup.Items>
+                                </dxn:NavBarGroup>
+                            </dxn:NavBarControl.Groups>
+                        </dxn:NavBarControl>
+                    </Border>
+                </dxlc:LayoutGroup>
+
+                <!--  Right Side  -->
+                <dxlc:LayoutGroup Orientation="Vertical">
                     <Border
                         Height="70"
                         HorizontalAlignment="Stretch"
@@ -79,9 +120,64 @@
                         BorderThickness="0,0,0,1">
                         <headerMenu:HeaderMenuView DataContext="{Binding HeaderMenuViewModel}" />
                     </Border>
+
                     <contentNavigation:ContentNavigatorView DataContext="{Binding ContentNavigatorViewModel, Mode=OneWay}" />
                 </dxlc:LayoutGroup>
             </dxlc:LayoutControl>
+
+            <!--<dxwui:HamburgerMenu
+                Background="{StaticResource MenuBackgroundBrush}"
+                HeaderFontSize="{StaticResource H3FontSize}"
+                HeaderForeground="{StaticResource H3Foreground}"
+                HeaderHeight="70"
+                IsMenuVisible="True"
+                OpenPaneWidth="250"
+                PaneBackground="{StaticResource MenuBackgroundBrush}"
+                ViewState="Inline">
+                <dxwui:HamburgerMenu.HeaderTemplate>
+                    <DataTemplate>
+                        <Border
+                            Height="70"
+                            BorderBrush="{StaticResource ContentSeparatorBrush}"
+                            BorderThickness="0,0,0,1">
+                            <TextBlock
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                FontWeight="SemiBold"
+                                Style="{StaticResource H3TextBlockStyle}"
+                                Text="Logo"
+                                TextAlignment="Center" />
+                        </Border>
+                    </DataTemplate>
+                </dxwui:HamburgerMenu.HeaderTemplate>
+                <dxwui:HamburgerMenu.Content>
+                    <Border BorderBrush="{StaticResource ContentSeparatorBrush}" BorderThickness="1,0,0,0">
+                        <dxlc:LayoutControl
+                            Margin="0"
+                            Padding="0"
+                            ItemSpace="0"
+                            Orientation="Vertical">
+
+                        </dxlc:LayoutControl>
+                    </Border>
+                </dxwui:HamburgerMenu.Content>
+
+            </dxwui:HamburgerMenu>-->
+
+
+            <!--<Border Width="250" HorizontalAlignment="Left">
+                <dxlc:LayoutGroup Orientation="Vertical">
+                    <Border
+                        Height="70"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top"
+                        BorderBrush="{StaticResource ContentSeparatorBrush}"
+                        BorderThickness="0,0,0,1">
+                        <TextBlock HorizontalAlignment="Center" Text="Logo" />
+                    </Border>
+                    <TextBlock Text="Menu" />
+                </dxlc:LayoutGroup>
+            </Border>-->
         </Grid>
     </Border>
 </Window>

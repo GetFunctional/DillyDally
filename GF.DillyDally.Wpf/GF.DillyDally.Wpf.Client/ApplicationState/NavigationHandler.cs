@@ -1,6 +1,8 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using GF.DillyDally.Wpf.Client.Core.Mediation.Navigation;
+using GF.DillyDally.Wpf.Client.Core.Navigator;
 using MediatR;
 
 namespace GF.DillyDally.Wpf.Client.ApplicationState
@@ -8,17 +10,30 @@ namespace GF.DillyDally.Wpf.Client.ApplicationState
     internal sealed class NavigationHandler : IRequestHandler<NavigationRequest, NavigationResponse>
     {
         private readonly IDillyDallyApplication _dillyDallyApplication;
+        private readonly INavigationTargetProvider _navigationTargetProvider;
 
-        public NavigationHandler(IDillyDallyApplication dillyDallyApplication)
+        public NavigationHandler(IDillyDallyApplication dillyDallyApplication, INavigationTargetProvider navigationTargetProvider)
         {
             this._dillyDallyApplication = dillyDallyApplication;
+            this._navigationTargetProvider = navigationTargetProvider;
         }
 
         #region IRequestHandler<NavigationRequest,NavigationResponse> Members
 
         public async Task<NavigationResponse> Handle(NavigationRequest request, CancellationToken cancellationToken)
         {
-            var navigationResult = await this._dillyDallyApplication.NavigateInCurrentNavigatorAsync(request.NavigationTarget);
+            var navigationTarget = request.NavigationTarget;
+            if (navigationTarget == null)
+            {
+                if (request.NavigationTargetId == null)
+                {
+                    throw new ArgumentException(nameof(request.NavigationTargetId));
+                }
+
+                navigationTarget = this._navigationTargetProvider.FindNavigationTargetWithKey(request.NavigationTargetId.Value);
+            }
+
+            var navigationResult = await this._dillyDallyApplication.NavigateInCurrentNavigatorAsync(navigationTarget);
             return new NavigationResponse(navigationResult);
         }
 

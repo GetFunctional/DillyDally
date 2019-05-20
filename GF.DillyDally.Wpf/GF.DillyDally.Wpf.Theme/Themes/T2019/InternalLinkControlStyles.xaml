@@ -10,7 +10,10 @@
     </ResourceDictionary.MergedDictionaries>
 
     <ControlTemplate x:Key="DefaultInternalLinkControlTemplate" TargetType="{x:Type controls:InternalLinkControl}">
-        <TextBlock Foreground="{TemplateBinding Foreground}" Style="{StaticResource LinkTextBlockStyle}" FontWeight="{TemplateBinding FontWeight}">
+        <TextBlock
+            FontWeight="{TemplateBinding FontWeight}"
+            Foreground="{TemplateBinding Foreground}"
+            Style="{StaticResource LinkTextBlockStyle}">
             <Hyperlink x:Name="PART_Link">
                 <Hyperlink.Inlines>
                     <Run Text="{TemplateBinding DisplayLink}" />

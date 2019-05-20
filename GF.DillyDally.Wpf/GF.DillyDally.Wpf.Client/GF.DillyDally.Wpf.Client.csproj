@@ -50,6 +50,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libs\DevExpress.Printing.v18.2.Core.dll</HintPath>
     </Reference>
+    <Reference Include="DevExpress.Xpf.Controls.v18.2, Version=18.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libs\DevExpress.Xpf.Controls.v18.2.dll</HintPath>
+    </Reference>
     <Reference Include="DevExpress.Xpf.Core.v18.2, Version=18.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libs\DevExpress.Xpf.Core.v18.2.dll</HintPath>
@@ -65,6 +69,9 @@
     <Reference Include="DevExpress.Xpf.LayoutControl.v18.2, Version=18.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libs\DevExpress.Xpf.LayoutControl.v18.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.NavBar.v18.2">
+      <HintPath>..\..\Libs\DevExpress.Xpf.NavBar.v18.2.dll</HintPath>
     </Reference>
     <Reference Include="FontAwesome5">
       <HintPath>..\..\Libs\FontAwesome5.dll</HintPath>
@@ -161,9 +168,7 @@
     </Compile>
     <Compile Include="Presentation\ShowCase\ShowCaseViewModel.cs" />
     <Compile Include="ApplicationState\IDillyDallyApplication.cs" />
-    <Compile Include="Presentation\ContentNavigation\NavigateToTargetCommand.cs" />
     <Compile Include="Core\Mediation\Navigation\NavigationRequest.cs" />
-    <Compile Include="Core\Mediation\Navigation\NavigationRequestFactory.cs" />
     <Compile Include="Presentation\ContentNavigation\NavigationTargetViewModel.cs" />
     <Compile Include="Presentation\ContentNavigation\AddNewNavigatorCommand.cs" />
     <Compile Include="Presentation\ContentNavigation\CloseNavigatorCommand.cs" />
