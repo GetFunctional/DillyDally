@@ -41,6 +41,21 @@ CREATE TABLE [RunningNumbers](
 CREATE UNIQUE INDEX [IX_RunningNumbers_RunningNumberId] ON [RunningNumbers]([RunningNumberId]);
 GO
 
+CREATE TABLE [Activities]
+	(
+	[RowID] INTEGER PRIMARY KEY AUTOINCREMENT, 
+	[ActivityId] GUID NOT NULL UNIQUE,	
+	[Name] VARCHAR2(255) UNIQUE NOT NULL,
+	[Description] VARCHAR2 NULL,
+	[ActivityType] int NOT NULL,
+	[ActivityValue] int NOT NULL,
+	[CurrentLevel] int NOT NULL,
+	[PreviewImageId] GUID NULL REFERENCES [Images]([ImageId])
+	);
+
+CREATE UNIQUE INDEX [IX_Activities_ActivityId] ON [Activities]([ActivityId]);
+GO
+
 CREATE TABLE [Achievements]
 	(
 	[RowID] INTEGER PRIMARY KEY AUTOINCREMENT, 

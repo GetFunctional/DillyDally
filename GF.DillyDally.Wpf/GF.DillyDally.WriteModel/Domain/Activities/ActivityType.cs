@@ -2,7 +2,7 @@
 {
     internal enum ActivityType
     {
-        Percentage,
-        Leveling
+        Percentage = 0,
+        Leveling = 1
     }
 }

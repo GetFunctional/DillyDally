@@ -88,6 +88,7 @@
     <Compile Include="InfrastructureTestSetup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReadModel\Projection\AchievementTests.cs" />
+    <Compile Include="ReadModel\Projection\ActivityTests.cs" />
     <Compile Include="ReadModel\Projection\CategoryTests.cs" />
     <Compile Include="ReadModel\Projection\LaneTests.cs" />
     <Compile Include="ReadModel\Projection\RunningNumberTests.cs" />
