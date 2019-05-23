@@ -6,10 +6,10 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:activities="clr-namespace:GF.DillyDally.Wpf.Client.Presentation.Activities"
     d:DataContext="{d:DesignInstance Type={x:Type activities:ActivityContainerViewModel}}"
-
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
+
     <Grid>
         <ItemsControl ItemsSource="{Binding Activities,Mode=OneWay}" />
     </Grid>

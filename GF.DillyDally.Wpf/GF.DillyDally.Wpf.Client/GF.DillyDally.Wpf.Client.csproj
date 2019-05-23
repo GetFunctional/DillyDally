@@ -131,6 +131,12 @@
     <Compile Include="Core\Dialoge\DialogSettings.cs" />
     <Compile Include="Core\Dialoge\IDialogService.cs" />
     <Compile Include="Core\Dialoge\IDialogSettings.cs" />
+    <Compile Include="Presentation\Activities\ActivityContainerController.cs" />
+    <Compile Include="Presentation\Activities\ActivityContainerView.xaml.cs">
+      <DependentUpon>ActivityContainerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Presentation\Activities\ActivityContainerViewModel.cs" />
+    <Compile Include="Presentation\Activities\ActivityItemViewModel.cs" />
     <Compile Include="Presentation\OverlayViewModel.cs" />
     <Compile Include="Presentation\Achievements\AchievementContainerView.xaml.cs">
       <DependentUpon>AchievementContainerView.xaml</DependentUpon>
@@ -212,6 +218,10 @@
     <Page Include="Presentation\Achievements\AchievementContainerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Presentation\Activities\ActivityContainerView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Presentation\ContentNavigation\ContentBrowserView.xaml">
       <SubType>Designer</SubType>

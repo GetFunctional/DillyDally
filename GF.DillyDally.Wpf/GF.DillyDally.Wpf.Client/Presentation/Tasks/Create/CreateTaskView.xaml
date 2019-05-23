@@ -10,6 +10,7 @@
     xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:theme="clr-namespace:GF.DillyDally.Wpf.Theme;assembly=GF.DillyDally.Wpf.Theme"
+    xmlns:activities="clr-namespace:GF.DillyDally.Wpf.Client.Presentation.Activities"
     d:DataContext="{d:DesignInstance Type={x:Type create:CreateTaskViewModel}}"
     d:DesignHeight="900"
     d:DesignWidth="800"
@@ -69,7 +70,7 @@
                         <ctrls:HeaderTitleContent Title="Relating Activities/Projects" Description="Bla bla bla bla bla bla bla bla" />
                     </ctrls:FormElementGroupControl.HeaderTitleContent>
                     <ctrls:FormElementGroupControl.Content>
-                        <achievements:AchievementContainerView Height="180" DataContext="{Binding TaskAchievementsViewModel}" />
+                        <activities:ActivityContainerView Height="180" DataContext="{Binding ActivityContainerViewModel, Mode=OneWay}" />
                     </ctrls:FormElementGroupControl.Content>
                 </ctrls:FormElementGroupControl>
 
