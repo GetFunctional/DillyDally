@@ -97,7 +97,7 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks
                 var taskId = this.GuidGenerator.GenerateGuid();
 
                 var aggregate = TaskAggregateRoot.CreateTask(taskId, request.Name, newRunningNumberId,
-                    category.AggregateId, laneId, request.PreviewImageId);
+                    category.AggregateId, laneId, request.PreviewImageId, request.StoryPoints);
                 this.AggregateRepository.Save(aggregate);
 
                 return new CreateTaskResponse(taskId);

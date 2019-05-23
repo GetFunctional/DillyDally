@@ -47,26 +47,12 @@ CREATE TABLE [Achievements]
 	[AchievementId] GUID NOT NULL UNIQUE,	
 	[RunningNumberId] GUID NOT NULL REFERENCES [RunningNumbers]([RunningNumberId]),
 	[Name] VARCHAR2(255) NOT NULL,
-	[StoryPoints] INTEGER NOT NULL,
-	[CounterIncrease] INTEGER NOT NULL,
 	[Description] VARCHAR2 NULL,
+	[CompletedOn] DATETIME NULL,
 	[PreviewImageId] GUID NULL REFERENCES [Images]([ImageId])
 	);
 
 CREATE UNIQUE INDEX [IX_Achievements_AchievementId] ON [Achievements]([AchievementId]);
-GO
-
-CREATE TABLE [AchievementCompletions]
-	(
-	[RowID] INTEGER PRIMARY KEY AUTOINCREMENT, 
-	[AchievementCompletionId] GUID NOT NULL UNIQUE,	
-	[AchievementId] GUID NOT NULL REFERENCES [Achievements]([AchievementId]),
-	[CompletedOn] DATETIME NOT NULL,
-	[Storypoints] INTEGER NOT NULL,
-	[CounterIncreaseValue] INTEGER NOT NULL	
-	);
-
-CREATE UNIQUE INDEX [IX_AchievementCompletions_AchievementCompletionId] ON [AchievementCompletions]([AchievementCompletionId]);
 GO
 
 CREATE TABLE [Categories]

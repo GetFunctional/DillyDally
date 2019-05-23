@@ -19,10 +19,10 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks
 
 
         private TaskAggregateRoot(Guid taskId, string name, Guid runningNumberId,
-            Guid categoryId, Guid laneId, Guid? previewImageId) : this()
+            Guid categoryId, Guid laneId, Guid? previewImageId, int storypoints = 0) : this()
         {
             var creationEvent = new TaskCreatedEvent(taskId, name, runningNumberId, categoryId, laneId,
-                previewImageId, DateTime.Now);
+                previewImageId, DateTime.Now, storypoints);
             this.RaiseEvent(creationEvent);
         }
 
@@ -41,6 +41,7 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks
         internal Guid? PreviewImageId { get; private set; }
         private HashSet<Guid> Files { get; } = new HashSet<Guid>();
         internal string DefinitionOfDone { get; private set; }
+        internal int Storypoints { get; private set; }
 
         internal IReadOnlyCollection<Guid> AttachedFiles
         {
@@ -82,10 +83,10 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks
         }
 
         internal static TaskAggregateRoot CreateTask(Guid taskId, string name, Guid runningNumberId,
-            Guid categoryId, Guid laneId, Guid? previewImageId)
+            Guid categoryId, Guid laneId, Guid? previewImageId, int storypoints)
         {
             return new TaskAggregateRoot(taskId, name, runningNumberId, categoryId, laneId,
-                previewImageId);
+                previewImageId, storypoints);
         }
 
         private void Apply(TaskCreatedEvent obj)
@@ -95,6 +96,7 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks
             this.CategoryId = obj.CategoryId;
             this.LaneId = obj.LaneId;
             this.PreviewImageId = obj.PreviewImageId;
+            this.Storypoints = obj.StoryPoints;
         }
 
         internal void AssignDefinitionOfDone(string definitionOfDone)

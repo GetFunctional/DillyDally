@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Data.SQLite;
+using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 using GF.DillyDally.Data.Contracts;
@@ -88,16 +89,23 @@ namespace GF.DillyDally.Data.Sqlite
             return connection;
         }
 
+        private void HandleTrace(object sender, TraceEventArgs e)
+        {
+            Trace.Write(e.Statement);
+        }
+
         public IDbConnection OpenConnection()
         {
-            var connection = this.CreateConnection(this._fullDatabaseFilePath);
-            return connection.OpenAndReturn();
+            var connection = this.CreateConnection(this._fullDatabaseFilePath).OpenAndReturn();
+            connection.Trace += this.HandleTrace;
+            return connection;
         }
 
         public async Task<IDbConnection> OpenConnectionAsync()
         {
             var connection = this.CreateConnection(this._fullDatabaseFilePath);
             await connection.OpenAsync();
+            connection.Trace += this.HandleTrace;
             return connection;
         }
 

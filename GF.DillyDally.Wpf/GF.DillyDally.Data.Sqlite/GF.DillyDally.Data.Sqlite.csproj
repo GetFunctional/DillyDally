@@ -75,8 +75,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Scripts\1.0.0.0.sql" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Entities\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

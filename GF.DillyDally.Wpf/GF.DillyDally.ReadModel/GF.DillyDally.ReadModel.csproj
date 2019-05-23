@@ -64,11 +64,9 @@
     <Compile Include="Projection\Achievements\AchievementEventHandler.cs" />
     <Compile Include="Projection\RunningNumbers\RunningNumbersEventHandler.cs" />
     <Compile Include="Projection\Tasks\TaskEventHandler.cs" />
-    <Compile Include="Projection\Achievements\Repository\AchievementCompletionRepository.cs" />
     <Compile Include="Projection\Achievements\Repository\AchievementRepository.cs" />
     <Compile Include="Projection\Categories\Repository\CategoryRepository.cs" />
     <Compile Include="Projection\Achievements\Repository\AchievementEntity.cs" />
-    <Compile Include="Projection\Achievements\Repository\AchievementCompletion.cs" />
     <Compile Include="Projection\Categories\Repository\CategoryEntity.cs" />
     <Compile Include="Projection\Categories\CategoryEventHandler.cs" />
     <Compile Include="Projection\Lanes\LaneEventHandler.cs" />

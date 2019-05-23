@@ -65,8 +65,6 @@
     <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Domain\Achievements\Commands\ChangeAchievementCounterValueCommand.cs" />
-    <Compile Include="Domain\Achievements\Commands\ChangeAchievementCounterValueResponse.cs" />
     <Compile Include="Domain\Achievements\Commands\CompleteAchievementCommand.cs" />
     <Compile Include="Domain\Achievements\Commands\CompleteAchievementResponse.cs" />
     <Compile Include="Domain\Achievements\Commands\CreateAchievementCommand.cs" />
@@ -75,7 +73,14 @@
     <Compile Include="Domain\Achievements\Events\AchievementCreatedEvent.cs" />
     <Compile Include="Domain\Achievements\AchievementAggregateRoot.cs" />
     <Compile Include="Domain\Achievements\AchievementCommandHandler.cs" />
-    <Compile Include="Domain\Achievements\Events\AchievementCounterValueChangedEvent.cs" />
+    <Compile Include="Domain\Activities\ActivityAggregateRoot.cs" />
+    <Compile Include="Domain\Activities\ActivityCommandHandler.cs" />
+    <Compile Include="Domain\Activities\ActivityType.cs" />
+    <Compile Include="Domain\Activities\Commands\CreatePercentageActivityCommand.cs" />
+    <Compile Include="Domain\Activities\Commands\CreatePercentageActivityResponse.cs" />
+    <Compile Include="Domain\Activities\Events\LevelingActivityCreatedEvent.cs" />
+    <Compile Include="Domain\Activities\Events\PercentageActivityCreatedEvent.cs" />
+    <Compile Include="Domain\Activities\Events\TaskLinkedToActivityEvent.cs" />
     <Compile Include="Domain\Categories\Commands\CreateCategoryResponse.cs" />
     <Compile Include="Domain\Files\Commands\StoreFileResponse.cs" />
     <Compile Include="Domain\Files\FileAggregateRoot.cs" />

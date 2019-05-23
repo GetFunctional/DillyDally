@@ -11,8 +11,7 @@ namespace GF.DillyDally.WriteModel.Domain.Achievements
 {
     internal sealed class AchievementCommandHandler : CommandHandlerBase,
         IRequestHandler<CreateAchievementCommand, CreateAchievementResponse>,
-        IRequestHandler<CompleteAchievementCommand, CompleteAchievementResponse>,
-        IRequestHandler<ChangeAchievementCounterValueCommand, ChangeAchievementCounterValueResponse>
+        IRequestHandler<CompleteAchievementCommand, CompleteAchievementResponse>
     {
         private readonly RunningNumberFactory _runningNumberFactory;
 
@@ -20,24 +19,6 @@ namespace GF.DillyDally.WriteModel.Domain.Achievements
         {
             this._runningNumberFactory = new RunningNumberFactory(aggregateRepository, new GuidGenerator());
         }
-
-        #region IRequestHandler<ChangeAchievementCounterValueCommand,ChangeAchievementCounterValueResponse> Members
-
-        public async Task<ChangeAchievementCounterValueResponse> Handle(ChangeAchievementCounterValueCommand request,
-            CancellationToken cancellationToken)
-        {
-            return await Task.Run(() =>
-            {
-                var aggregate = this.AggregateRepository.GetById<AchievementAggregateRoot>(request.AchievementId);
-
-                aggregate.ChangeCounterValue(request.NewCounterValue);
-                this.AggregateRepository.Save(aggregate);
-
-                return new ChangeAchievementCounterValueResponse();
-            }, cancellationToken);
-        }
-
-        #endregion
 
         #region IRequestHandler<CompleteAchievementCommand,CompleteAchievementResponse> Members
 

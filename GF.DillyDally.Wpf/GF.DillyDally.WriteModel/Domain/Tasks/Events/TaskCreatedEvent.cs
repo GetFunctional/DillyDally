@@ -6,7 +6,7 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks.Events
     public sealed class TaskCreatedEvent : AggregateEventBase
     {
         public TaskCreatedEvent(Guid aggregateId, string name, Guid runningNumberId, Guid categoryId, Guid laneId,
-            Guid? previewImageId, DateTime createdOn) : base(aggregateId)
+            Guid? previewImageId, DateTime createdOn, int storyPoints = 0) : base(aggregateId)
         {
             this.Name = name;
             this.RunningNumberId = runningNumberId;
@@ -14,6 +14,7 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks.Events
             this.LaneId = laneId;
             this.PreviewImageId = previewImageId;
             this.CreatedOn = createdOn;
+            this.StoryPoints = storyPoints;
         }
 
         public string Name { get; }
@@ -22,5 +23,6 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks.Events
         public Guid LaneId { get; }
         public Guid? PreviewImageId { get; }
         public DateTime CreatedOn { get; }
+        public int StoryPoints { get; }
     }
 }

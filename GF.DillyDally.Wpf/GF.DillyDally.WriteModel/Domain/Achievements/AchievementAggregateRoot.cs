@@ -10,7 +10,6 @@ namespace GF.DillyDally.WriteModel.Domain.Achievements
         {
             this.RegisterTransition<AchievementCreatedEvent>(this.Apply);
             this.RegisterTransition<AchievementCompletedEvent>(this.Apply);
-            this.RegisterTransition<AchievementCounterValueChangedEvent>(this.Apply);
         }
 
         private AchievementAggregateRoot(Guid achievementId, Guid runningNumberId, string name, int counterIncrease,
@@ -21,29 +20,14 @@ namespace GF.DillyDally.WriteModel.Domain.Achievements
             this.RaiseEvent(creationEvent);
         }
 
-        public int OverallStorypoints { get; set; }
-
-        public int OverallCounterValue { get; private set; }
-
         public Guid RunningNumberId { get; private set; }
 
         public string Name { get; private set; }
 
-        public int Storypoints { get; private set; }
-
-        public int CounterIncrease { get; private set; }
-
         public DateTime? LastCompletedAt { get; set; }
-
-        private void Apply(AchievementCounterValueChangedEvent obj)
-        {
-            this.CounterIncrease = obj.NewCounterValue;
-        }
 
         private void Apply(AchievementCompletedEvent obj)
         {
-            this.OverallCounterValue += obj.IncreaseCounterFor;
-            this.OverallStorypoints += obj.StoryPointsToAdd;
             this.LastCompletedAt = obj.CompletedOn;
         }
 
@@ -52,8 +36,6 @@ namespace GF.DillyDally.WriteModel.Domain.Achievements
             this.AggregateId = obj.AggregateId;
             this.RunningNumberId = obj.RunningNumberId;
             this.Name = obj.Name;
-            this.CounterIncrease = obj.CounterIncrease;
-            this.Storypoints = obj.Storypoints;
         }
 
         internal static AchievementAggregateRoot Create(Guid achievementId, Guid runningNumberId, string name,
@@ -64,23 +46,8 @@ namespace GF.DillyDally.WriteModel.Domain.Achievements
 
         internal void Complete()
         {
-            var completeEvent = new AchievementCompletedEvent(this.AggregateId, this.CounterIncrease, this.Storypoints,
-                DateTime.Now);
+            var completeEvent = new AchievementCompletedEvent(this.AggregateId, DateTime.Now);
             this.RaiseEvent(completeEvent);
-        }
-
-        internal void ChangeCounterValue(int newCounterValue)
-        {
-            if (newCounterValue < 0)
-            {
-                throw new ArgumentException(nameof(newCounterValue));
-            }
-
-            if (this.CounterIncrease != newCounterValue)
-            {
-                var changeCounterValueEvent = new AchievementCounterValueChangedEvent(this.AggregateId, newCounterValue);
-                this.RaiseEvent(changeCounterValueEvent);
-            }
         }
     }
 }

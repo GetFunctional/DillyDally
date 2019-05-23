@@ -12,10 +12,9 @@ namespace GF.DillyDally.ReadModel.Projection.Achievements.Repository
         public Guid AchievementId { get; set; }
 
         public string Name { get; set; }
-        public int StoryPoints { get; set; }
-        public int CounterIncrease { get; set; }
         public string Description { get; set; }
         public Guid? PreviewImageId { get; set; }
         public Guid RunningNumberId { get; set; }
+        public DateTime? CompletedOn { get; set; }
     }
 }
