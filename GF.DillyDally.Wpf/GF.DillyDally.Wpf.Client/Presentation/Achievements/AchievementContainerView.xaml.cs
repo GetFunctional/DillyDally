@@ -18,7 +18,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Achievements
     /// <summary>
     /// Interaktionslogik für AchievementContainerView.xaml
     /// </summary>
-    public partial class AchievementContainerView : UserControl
+    public partial class AchievementContainerView
     {
         public AchievementContainerView()
         {

@@ -1,4 +1,5 @@
 using GF.DillyDally.Mvvmc;
+using GF.DillyDally.Wpf.Client.Presentation.Activities;
 using GF.DillyDally.Wpf.Client.Presentation.Selectors.Category;
 using ReactiveUI;
 
@@ -11,6 +12,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Tasks.Create
         private IReactiveCommand _createTaskCommand;
         private TaskAchievementsViewModel _taskAchievementsViewModel;
         private string _taskName;
+        private ActivityContainerViewModel _activityContainerViewModel;
 
         public IReactiveCommand CreateTaskCommand
         {
@@ -77,6 +79,18 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Tasks.Create
             set
             {
                 this.RaiseAndSetIfChanged(ref this._categorySelectorViewModel, value);
+            }
+        }
+
+        public ActivityContainerViewModel ActivityContainerViewModel
+        {
+            get
+            {
+                return this._activityContainerViewModel;
+            }
+            set
+            {
+                this.RaiseAndSetIfChanged(ref this._activityContainerViewModel, value);
             }
         }
     }

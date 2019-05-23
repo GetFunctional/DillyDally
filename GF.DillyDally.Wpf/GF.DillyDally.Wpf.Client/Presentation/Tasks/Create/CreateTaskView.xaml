@@ -66,6 +66,15 @@
 
                 <ctrls:FormElementGroupControl>
                     <ctrls:FormElementGroupControl.HeaderTitleContent>
+                        <ctrls:HeaderTitleContent Title="Relating Activities/Projects" Description="Bla bla bla bla bla bla bla bla" />
+                    </ctrls:FormElementGroupControl.HeaderTitleContent>
+                    <ctrls:FormElementGroupControl.Content>
+                        <achievements:AchievementContainerView Height="180" DataContext="{Binding TaskAchievementsViewModel}" />
+                    </ctrls:FormElementGroupControl.Content>
+                </ctrls:FormElementGroupControl>
+
+                <ctrls:FormElementGroupControl>
+                    <ctrls:FormElementGroupControl.HeaderTitleContent>
                         <ctrls:HeaderTitleContent Title="Achievements on completion" Description="Bla bla bla bla bla bla bla bla" />
                     </ctrls:FormElementGroupControl.HeaderTitleContent>
                     <ctrls:FormElementGroupControl.Content>
