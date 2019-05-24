@@ -16,7 +16,7 @@
 
     <ControlTemplate x:Key="DefaultComboInputControlTemplate" TargetType="{x:Type controls:ComboInputControl}">
         <dxlc:LayoutItem
-            Label="{TemplateBinding Label}"
+            Label="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Label, Mode=TwoWay}"
             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
             Style="{StaticResource InputControlLabelStyle}"
             UseLayoutRounding="{TemplateBinding UseLayoutRounding}">
@@ -30,9 +30,13 @@
                 Foreground="{StaticResource InputControlsForeground}"
                 NullText="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=WatermarkText, Mode=TwoWay}"
                 ShowNullText="True"
-                SelectedItem="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SelectedItem, Mode=TwoWay}"
+                IsTextEditable="False"
+                ApplyItemTemplateToSelectedItem="True"
+                ShowCustomItems="False"
+                ShowPopupIfItemsSourceEmpty="False"
                 ItemsSource="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ItemsSource, Mode=TwoWay}"
                 SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                ItemTemplate="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ItemTemplate, Mode=TwoWay}"
                 UseLayoutRounding="{TemplateBinding UseLayoutRounding}" />
         </dxlc:LayoutItem>
     </ControlTemplate>

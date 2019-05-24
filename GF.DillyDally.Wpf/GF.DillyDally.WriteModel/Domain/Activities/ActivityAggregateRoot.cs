@@ -13,7 +13,40 @@ namespace GF.DillyDally.WriteModel.Domain.Activities
             this.RegisterTransition<PercentageActivityCreatedEvent>(this.Apply);
             this.RegisterTransition<LevelingActivityCreatedEvent>(this.Apply);
             this.RegisterTransition<TaskLinkedToActivityEvent>(this.Apply);
+            this.RegisterTransition<ActivityPreviewImageAssigned>(this.Apply);
+        }
 
+        private ActivityAggregateRoot(Guid activityId, string name, ActivityType activityType) : this()
+        {
+            switch (activityType)
+            {
+                case ActivityType.Percentage:
+                    var progressingActivityCreatedEvent = new PercentageActivityCreatedEvent(activityId, name);
+                    this.Apply(progressingActivityCreatedEvent);
+                    this.RaiseEvent(progressingActivityCreatedEvent);
+                    break;
+                case ActivityType.Leveling:
+                    var levelingActivityCreationEvent = new LevelingActivityCreatedEvent(activityId, name);
+                    this.Apply(levelingActivityCreationEvent);
+                    this.RaiseEvent(levelingActivityCreationEvent);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(activityType), activityType, null);
+            }
+        }
+
+        public Guid? PreviewImageId { get; private set; }
+
+        public string Name { get; private set; }
+        public ActivityType ActivityType { get; private set; }
+        public int ActivityValue { get; private set; }
+        public int CurrentLevel { get; private set; }
+        public IDictionary<Guid, int> LinkedTasks { get; } = new Dictionary<Guid, int>();
+        public ISet<Guid> CompletedLinkedTasks { get; } = new HashSet<Guid>();
+
+        private void Apply(ActivityPreviewImageAssigned obj)
+        {
+            this.PreviewImageId = obj.PreviewImageId;
         }
 
         private void Apply(TaskLinkedToActivityEvent obj)
@@ -41,32 +74,6 @@ namespace GF.DillyDally.WriteModel.Domain.Activities
             return storypointsCompleted * 100 / totalStorypoints;
         }
 
-        private ActivityAggregateRoot(Guid activityId, string name, ActivityType activityType) : this()
-        {
-            switch (activityType)
-            {
-                case ActivityType.Percentage:
-                    var progressingActivityCreatedEvent = new PercentageActivityCreatedEvent(activityId, name);
-                    this.Apply(progressingActivityCreatedEvent);
-                    this.RaiseEvent(progressingActivityCreatedEvent);
-                    break;
-                case ActivityType.Leveling:
-                    var levelingActivityCreationEvent = new LevelingActivityCreatedEvent(activityId, name);
-                    this.Apply(levelingActivityCreationEvent);
-                    this.RaiseEvent(levelingActivityCreationEvent);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(activityType), activityType, null);
-            }
-        }
-
-        public string Name { get; private set; }
-        public ActivityType ActivityType { get; private set; }
-        public int ActivityValue { get; private set; }
-        public int CurrentLevel { get; private set; }
-        public IDictionary<Guid,int> LinkedTasks { get; } = new Dictionary<Guid,int>();
-        public ISet<Guid> CompletedLinkedTasks { get; } = new HashSet<Guid>();
-
         private void Apply(LevelingActivityCreatedEvent obj)
         {
             this.AggregateId = obj.AggregateId;
@@ -87,9 +94,9 @@ namespace GF.DillyDally.WriteModel.Domain.Activities
 
         internal void LinkToTask(Guid linkedTaskId, int storypoints)
         {
-            var linkedTasks = new Dictionary<Guid,int>(this.LinkedTasks);
+            var linkedTasks = new Dictionary<Guid, int>(this.LinkedTasks);
             linkedTasks.Add(linkedTaskId, storypoints);
-            int newActivityValue = 0;
+            var newActivityValue = 0;
             switch (this.ActivityType)
             {
                 case ActivityType.Percentage:
@@ -110,6 +117,12 @@ namespace GF.DillyDally.WriteModel.Domain.Activities
         internal static ActivityAggregateRoot Create(Guid activityId, string name, ActivityType activityType)
         {
             return new ActivityAggregateRoot(activityId, name, activityType);
+        }
+
+        internal void AssignPreviewImage(Guid previewImageId)
+        {
+            var previewImageAssigned = new ActivityPreviewImageAssigned(this.AggregateId, previewImageId);
+            this.RaiseEvent(previewImageAssigned);
         }
     }
 }

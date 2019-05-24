@@ -9,6 +9,12 @@ namespace GF.DillyDally.WriteModel.Domain.Files.Commands
             this.FilePath = filePath;
         }
 
+        public StoreFileCommand(byte[] binary)
+        {
+            this.Binary = binary;
+        }
+
+        public byte[] Binary { get; }
         public string FilePath { get; }
     }
 }

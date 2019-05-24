@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Drawing.Imaging;
+using System.Linq;
 using System.Text;
 
 namespace GF.DillyDally.Shared.Images
@@ -52,6 +54,35 @@ namespace GF.DillyDally.Shared.Images
             }
 
             return ImageFormat.Unknown;
+        }
+
+        private static System.Drawing.Imaging.ImageFormat GetNetImageFormat(ImageFormat imageFormat)
+        {
+            switch (imageFormat)
+            {
+                case ImageFormat.Unknown:
+                    throw new NotSupportedException();
+                case ImageFormat.Bmp:
+                    return System.Drawing.Imaging.ImageFormat.Bmp;
+                case ImageFormat.Jpeg:
+                    return System.Drawing.Imaging.ImageFormat.Jpeg;
+                case ImageFormat.Gif:
+                    return System.Drawing.Imaging.ImageFormat.Gif;
+                case ImageFormat.Tiff:
+                    return System.Drawing.Imaging.ImageFormat.Tiff;
+                case ImageFormat.Png:
+                    return System.Drawing.Imaging.ImageFormat.Png;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(imageFormat), imageFormat, null);
+            }
+        }
+
+        public static string GetFileExtensionForImageFormat(ImageFormat format)
+        {
+            var netFormat = GetNetImageFormat(format);
+            var extensions = ImageCodecInfo.GetImageEncoders().FirstOrDefault(x => x.FormatID == netFormat.Guid).FilenameExtension;
+            var firstAvailableExtension = extensions.Split(';').First();
+            return firstAvailableExtension;
         }
     }
 }

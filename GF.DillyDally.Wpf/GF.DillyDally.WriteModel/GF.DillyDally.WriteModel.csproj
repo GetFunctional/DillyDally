@@ -78,6 +78,7 @@
     <Compile Include="Domain\Activities\ActivityType.cs" />
     <Compile Include="Domain\Activities\Commands\CreatePercentageActivityCommand.cs" />
     <Compile Include="Domain\Activities\Commands\CreatePercentageActivityResponse.cs" />
+    <Compile Include="Domain\Activities\Events\ActivityPreviewImageAssigned.cs" />
     <Compile Include="Domain\Activities\Events\LevelingActivityCreatedEvent.cs" />
     <Compile Include="Domain\Activities\Events\PercentageActivityCreatedEvent.cs" />
     <Compile Include="Domain\Activities\Events\TaskLinkedToActivityEvent.cs" />
@@ -88,8 +89,11 @@
     <Compile Include="Domain\Files\Commands\StoreFileCommand.cs" />
     <Compile Include="Domain\Files\Events\FileCreatedEvent.cs" />
     <Compile Include="Domain\Files\Filedata.cs" />
+    <Compile Include="Domain\Files\FileDataRepository.cs" />
     <Compile Include="Domain\Files\FileEntity.cs" />
+    <Compile Include="Domain\Files\FileParameterData.cs" />
     <Compile Include="Domain\Files\FileRepository.cs" />
+    <Compile Include="Domain\Files\Md5HashGenerator.cs" />
     <Compile Include="Domain\Lanes\Commands\CreateLaneResponse.cs" />
     <Compile Include="Domain\Lanes\Events\LaneAddedEvent.cs" />
     <Compile Include="Domain\Lanes\Exceptions\LaneAlreadyExistsException.cs" />

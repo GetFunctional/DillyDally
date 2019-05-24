@@ -9,16 +9,7 @@ namespace GF.DillyDally.ReadModel.Projection.Activities.Repository
 {
     internal sealed class ActivityRepository : Repository<ActivityEntity>
     {
-        //public async Task CompletedAsync(IDbConnection connection, Guid activityId, DateTime? completedOn)
-        //{
-        //    var sql = $"UPDATE {ActivityEntity.TableNameConstant} " +
-        //              $"SET {nameof(ActivityEntity.CompletedOn)} = @{nameof(completedOn)} " +
-        //              $"WHERE {nameof(ActivityEntity.ActivityId)} = @{nameof(activityId)};";
-
-        //    await connection.ExecuteAsync(sql, new {activityId, completedOn});
-        //}
-
-        public async Task CreateNewAsync(IDbConnection connection, Guid activityId, string activityName, ActivityType activityType )
+        public async Task CreateNewAsync(IDbConnection connection, Guid activityId, string activityName, ActivityType activityType)
         {
             await connection.InsertAsync(new ActivityEntity
                                          {
@@ -28,6 +19,15 @@ namespace GF.DillyDally.ReadModel.Projection.Activities.Repository
                                              CurrentLevel = 1,
                                              ActivityType = activityType
                                          });
+        }
+
+        public async Task AssignPreviewImageAsync(IDbConnection connection, Guid activityId, Guid? previewImageId)
+        {
+            var sql = $"UPDATE {ActivityEntity.TableNameConstant} " +
+                      $"SET {nameof(ActivityEntity.PreviewImageId)} = @{nameof(previewImageId)} " +
+                      $"WHERE {nameof(ActivityEntity.ActivityId)} = @{nameof(activityId)};";
+
+            await connection.ExecuteAsync(sql, new {activityId, previewImageId});
         }
     }
 }

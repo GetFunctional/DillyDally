@@ -71,8 +71,7 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks
             {
                 var fileCreateCommand = new StoreFileCommand(request.FilePath);
                 var fileInStore = await FileCommandHandler.GetOrCreateFileAsync(fileCreateCommand,
-                    this.AggregateRepository, connection, this.GuidGenerator,
-                    new FileRepository());
+                    this.AggregateRepository, connection, this.GuidGenerator);
 
                 var task = this.AggregateRepository.GetById<TaskAggregateRoot>(request.TaskId);
                 task.AttachFile(fileInStore.FileId);

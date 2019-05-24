@@ -19,6 +19,7 @@
             CornerRadius="5">
             <dxe:ImageEdit
                 dx:ThemeManager.ThemeName="{x:Static theme:ThemeConstants.DevExpressThemeName}"
+                EditValue="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ImageBytes,Mode=TwoWay}"
                 AllowNullInput="True"
                 BorderThickness="0"
                 ShowMenu="False" />
@@ -27,11 +28,6 @@
 
     <Style x:Key="DefaultStyle" TargetType="{x:Type controls:ImageInputControl}">
         <Setter Property="Template" Value="{StaticResource ImageEditorControlTemplate}" />
-        <Setter Property="Foreground" Value="White" />
-        <Setter Property="FontSize" Value="{StaticResource ParagraphFontSize}" />
-        <Setter Property="FontFamily" Value="{StaticResource SourceSansProBlack}" />
-        <Setter Property="HorizontalAlignment" Value="Left" />
-        <Setter Property="VerticalAlignment" Value="Top" />
         <Setter Property="Width" Value="156" />
     </Style>
 

@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using GF.DillyDally.Mvvmc;
 using ReactiveUI;
 
@@ -7,10 +8,11 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create
     public class CreateActivityViewModel : ViewModelBase
     {
         private string _activityName;
-        private ActivityTypeViewModel _selectedActivityTypeViewModel;
         private ObservableCollection<ActivityTypeViewModel> _availableActivityTypes;
         private IReactiveCommand _cancelProcessCommand;
         private IReactiveCommand _createActivityCommand;
+        private byte[] _previewImageBytes;
+        private ActivityTypeViewModel _selectedActivityTypeViewModel;
 
         public IReactiveCommand CreateActivityCommand
         {
@@ -69,6 +71,18 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create
             set
             {
                 this.RaiseAndSetIfChanged(ref this._availableActivityTypes, value);
+            }
+        }
+
+        public byte[] PreviewImageBytes
+        {
+            get
+            {
+                return this._previewImageBytes;
+            }
+            set
+            {
+                this.RaiseAndSetIfChanged(ref this._previewImageBytes, value);
             }
         }
     }

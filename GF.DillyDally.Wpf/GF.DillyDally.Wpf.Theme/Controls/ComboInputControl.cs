@@ -19,13 +19,25 @@ namespace GF.DillyDally.Wpf.Theme.Controls
         public static readonly DependencyProperty ItemsSourceProperty = DependencyProperty.Register(
             "ItemsSource", typeof(object), typeof(ComboInputControl), new PropertyMetadata(default(object)));
 
-        public static readonly DependencyProperty SelectedItemProperty = DependencyProperty.Register(
-            "SelectedItem", typeof(object), typeof(ComboInputControl), new PropertyMetadata(default(object)));
+        public static readonly DependencyProperty ItemTemplateProperty = DependencyProperty.Register(
+            "ItemTemplate", typeof(DataTemplate), typeof(ComboInputControl), new PropertyMetadata(default(DataTemplate)));
 
         static ComboInputControl()
         {
             DefaultStyleKeyProperty.OverrideMetadata(
                 typeof(ComboInputControl), new FrameworkPropertyMetadata(typeof(ComboInputControl)));
+        }
+        
+        public DataTemplate ItemTemplate
+        {
+            get
+            {
+                return (DataTemplate)this.GetValue(ItemTemplateProperty);
+            }
+            set
+            {
+                this.SetValue(ItemTemplateProperty, value);
+            }
         }
 
         [Bindable(true)]
@@ -38,19 +50,6 @@ namespace GF.DillyDally.Wpf.Theme.Controls
             set
             {
                 this.SetValue(InputValueProperty, value);
-            }
-        }
-
-        [Bindable(true)]
-        public object SelectedItem
-        {
-            get
-            {
-                return this.GetValue(SelectedItemProperty);
-            }
-            set
-            {
-                this.SetValue(SelectedItemProperty, value);
             }
         }
 

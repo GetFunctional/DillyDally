@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Data;
-using System.IO;
-using System.Security.Cryptography;
 using System.Threading;
 using System.Threading.Tasks;
 using GF.DillyDally.Data.Sqlite;
-using GF.DillyDally.Shared.Images;
 using GF.DillyDally.WriteModel.Domain.Files.Commands;
 using GF.DillyDally.WriteModel.Infrastructure;
 using MediatR;
@@ -29,17 +26,31 @@ namespace GF.DillyDally.WriteModel.Domain.Files
         {
             using (var connection = this._databaseFileHandler.OpenConnection())
             {
-                return await GetOrCreateFileAsync(request, this.AggregateRepository, connection, this.GuidGenerator, new FileRepository());
+                return await GetOrCreateFileAsync(request, this.AggregateRepository, connection, this.GuidGenerator);
             }
         }
 
         #endregion
 
         internal static async Task<StoreFileResponse> GetOrCreateFileAsync(StoreFileCommand request, IAggregateRepository aggregateRepository,
-            IDbConnection connection, IGuidGenerator guidGenerator, FileRepository fileRepository)
+            IDbConnection connection, IGuidGenerator guidGenerator)
         {
             // Load File
-            var fileDataToStore = await LoadFileAsync(connection, guidGenerator, fileRepository, request.FilePath);
+            var fileRepository = new FileRepository();
+            var fileDataRepository = new FileDataRepository();
+            Filedata fileDataToStore;
+            if (request.FilePath != null)
+            {
+                fileDataToStore = await fileDataRepository.LoadFileAsync(connection, guidGenerator, fileRepository, request.FilePath);
+            }
+            else if (request.Binary != null)
+            {
+                fileDataToStore = await fileDataRepository.LoadFileAsync(connection, guidGenerator, fileRepository, request.Binary);
+            }
+            else
+            {
+                throw new ArgumentException(nameof(request));
+            }
 
             if (fileDataToStore.IsNew)
             {
@@ -64,48 +75,6 @@ namespace GF.DillyDally.WriteModel.Domain.Files
 
 
             return new StoreFileResponse(fileDataToStore.FileId, true);
-        }
-
-        private static async Task<Filedata> LoadFileAsync(IDbConnection connection, IGuidGenerator guidGenerator, FileRepository fileRepository,
-            string filePath)
-        {
-            var file = new FileInfo(filePath);
-
-            if (!file.Exists)
-            {
-                throw new FileNotFoundException(filePath);
-            }
-
-            var md5HashString = CreateMd5HashFromFile(filePath);
-
-            if (!await fileRepository.HasFileWithSameHashAsync(connection, md5HashString))
-            {
-                var fileId = guidGenerator.GenerateGuid();
-                var fileBytes = File.ReadAllBytes(filePath);
-                return new Filedata(fileId, true, ImageFormatDetector.GetImageFormat(fileBytes) != ImageFormat.Unknown,
-                    fileBytes, md5HashString, fileBytes.LongLength, file.Name, file.Extension);
-            }
-
-            var fileDataFromStore = await fileRepository.GetFileByMd5HashAsync(connection, md5HashString);
-            return new Filedata(fileDataFromStore.FileId, false,
-                ImageFormatDetector.GetImageFormat(fileDataFromStore.Binary) != ImageFormat.Unknown,
-                fileDataFromStore.Binary, fileDataFromStore.Md5Hash, fileDataFromStore.Size, fileDataFromStore.Name,
-                fileDataFromStore.Extension);
-        }
-
-        private static string CreateMd5HashFromFile(string filePath)
-        {
-            string md5HashString;
-            using (var md5 = MD5.Create())
-            {
-                using (var stream = File.OpenRead(filePath))
-                {
-                    var md5Hash = md5.ComputeHash(stream);
-                    md5HashString = BitConverter.ToString(md5Hash).Replace("-", "").ToLowerInvariant();
-                }
-            }
-
-            return md5HashString;
         }
     }
 }

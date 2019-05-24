@@ -47,13 +47,22 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create
             {
                 var activityName = this.ViewModel.ActivityName;
                 var activityType = this.ViewModel.SelectedActivityTypeViewModel.ActivityType;
+                var previewImageForActivity = this.ViewModel.PreviewImageBytes;
 
                 var commandDispatcher = this._mediator;
 
                 switch (activityType)
                 {
                     case ActivityType.Percentage:
-                        var activity = await commandDispatcher.Send(new CreatePercentageActivityCommand(activityName));
+                        if (previewImageForActivity != null)
+                        {
+                            var activity = await commandDispatcher.Send(new CreatePercentageActivityCommand(activityName, previewImageForActivity));
+                        }
+                        else
+                        {
+                            var activity = await commandDispatcher.Send(new CreatePercentageActivityCommand(activityName));
+                        }
+
                         this.ConfirmDialogWith(this.CreateActivityDialogResult);
                         break;
                     case ActivityType.Leveling:

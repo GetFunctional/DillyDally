@@ -7,7 +7,7 @@ using MediatR;
 
 namespace GF.DillyDally.ReadModel.Projection.Activities
 {
-    internal sealed class ActivityEventHandler : INotificationHandler<PercentageActivityCreatedEvent>
+    internal sealed class ActivityEventHandler : INotificationHandler<PercentageActivityCreatedEvent>, INotificationHandler<ActivityPreviewImageAssigned>
     {
         private readonly DatabaseFileHandler _fileHandler;
 
@@ -15,6 +15,19 @@ namespace GF.DillyDally.ReadModel.Projection.Activities
         {
             this._fileHandler = fileHandler;
         }
+
+        #region INotificationHandler<ActivityPreviewImageAssigned> Members
+
+        public async Task Handle(ActivityPreviewImageAssigned notification, CancellationToken cancellationToken)
+        {
+            using (var connection = this._fileHandler.OpenConnection())
+            {
+                var activityRepository = new ActivityRepository();
+                await activityRepository.AssignPreviewImageAsync(connection, notification.AggregateId, notification.PreviewImageId);
+            }
+        }
+
+        #endregion
 
         #region INotificationHandler<PercentageActivityCreatedEvent> Members
 

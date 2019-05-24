@@ -1,6 +1,9 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
+using GF.DillyDally.Data.Sqlite;
 using GF.DillyDally.WriteModel.Domain.Activities.Commands;
+using GF.DillyDally.WriteModel.Domain.Files;
+using GF.DillyDally.WriteModel.Domain.Files.Commands;
 using GF.DillyDally.WriteModel.Infrastructure;
 using MediatR;
 
@@ -9,8 +12,11 @@ namespace GF.DillyDally.WriteModel.Domain.Activities
     internal sealed class ActivityCommandHandler : CommandHandlerBase,
         IRequestHandler<CreatePercentageActivityCommand, CreatePercentageActivityResponse>
     {
-        public ActivityCommandHandler(IAggregateRepository aggregateRepository) : base(aggregateRepository)
+        private readonly DatabaseFileHandler _databaseFileHandler;
+
+        public ActivityCommandHandler(IAggregateRepository aggregateRepository, DatabaseFileHandler databaseFileHandler) : base(aggregateRepository)
         {
+            this._databaseFileHandler = databaseFileHandler;
         }
 
         #region IRequestHandler<CreatePercentageActivityCommand,CreatePercentageActivityResponse> Members
@@ -18,15 +24,22 @@ namespace GF.DillyDally.WriteModel.Domain.Activities
         public async Task<CreatePercentageActivityResponse> Handle(CreatePercentageActivityCommand request,
             CancellationToken cancellationToken)
         {
-            return await Task.Run(() =>
-            {
-                var activityId = this.GuidGenerator.GenerateGuid();
+            var activityId = this.GuidGenerator.GenerateGuid();
+            var aggregate = ActivityAggregateRoot.Create(activityId, request.Name, ActivityType.Percentage);
 
-                var aggregate =
-                    ActivityAggregateRoot.Create(activityId, request.Name, ActivityType.Percentage);
-                this.AggregateRepository.Save(aggregate);
-                return new CreatePercentageActivityResponse(activityId);
-            }, cancellationToken);
+            if (request.PreviewImageBytes != null)
+            {
+                using (var connection = this._databaseFileHandler.OpenConnection())
+                {
+                    var fileCreateCommand = new StoreFileCommand(request.PreviewImageBytes);
+                    var response = await FileCommandHandler.GetOrCreateFileAsync(fileCreateCommand, this.AggregateRepository, connection,
+                        this.GuidGenerator);
+                    aggregate.AssignPreviewImage(response.FileId);
+                }
+            }
+
+            this.AggregateRepository.Save(aggregate);
+            return new CreatePercentageActivityResponse(activityId);
         }
 
         #endregion
