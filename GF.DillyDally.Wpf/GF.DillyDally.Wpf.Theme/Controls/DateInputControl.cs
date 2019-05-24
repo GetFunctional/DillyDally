@@ -23,18 +23,21 @@ namespace GF.DillyDally.Wpf.Theme.Controls
                 typeof(DateInputControl), new FrameworkPropertyMetadata(typeof(DateInputControl)));
         }
 
+        [Bindable(true)]
         public string WatermarkText
         {
             get { return (string) this.GetValue(WatermarkTextProperty); }
             set { this.SetValue(WatermarkTextProperty, value); }
         }
 
+        [Bindable(true)]
         public DateTime? InputValue
         {
             get { return (DateTime?) this.GetValue(InputValueProperty); }
             set { this.SetValue(InputValueProperty, value); }
         }
 
+        [Bindable(true)]
         public object Label
         {
             get { return this.GetValue(LabelProperty); }

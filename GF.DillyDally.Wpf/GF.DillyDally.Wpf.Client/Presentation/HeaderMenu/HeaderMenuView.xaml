@@ -25,20 +25,6 @@
 
     <dxlc:LayoutControl Orientation="Horizontal">
 
-        <ctrls:ColoredButtonControl
-            HorizontalAlignment="Right"
-            ButtonColor="Blue"
-            Command="{Binding CreateNewTaskCommand}">
-            <dxlc:LayoutGroup
-                Margin="0"
-                Padding="0"
-                HorizontalAlignment="Center">
-                <fa5:FontAwesome
-                    HorizontalAlignment="Left"
-                    Icon="Solid_Plus"
-                    Opacity="0.7" />
-                <TextBlock HorizontalAlignment="Left" Text="New Task" />
-            </dxlc:LayoutGroup>
-        </ctrls:ColoredButtonControl>
+        
     </dxlc:LayoutControl>
 </UserControl>

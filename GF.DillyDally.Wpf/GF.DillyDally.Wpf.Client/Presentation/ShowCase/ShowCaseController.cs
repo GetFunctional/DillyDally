@@ -1,8 +1,7 @@
 ﻿using System.Threading.Tasks;
 using GF.DillyDally.Mvvmc;
 using GF.DillyDally.Wpf.Client.Core.Dialoge;
-using GF.DillyDally.Wpf.Client.Presentation.Tasks;
-using GF.DillyDally.Wpf.Client.Presentation.Tasks.Create;
+using GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Create;
 using ReactiveUI;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.ShowCase

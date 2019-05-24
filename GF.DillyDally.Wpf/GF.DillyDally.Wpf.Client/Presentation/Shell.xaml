@@ -36,11 +36,9 @@
         </ResourceDictionary>
     </Window.Resources>
 
-    <Border
-        Background="{StaticResource ApplicationBackgroundBrush}"
-        BorderBrush="{StaticResource ContentSeparatorBrush}"
-        BorderThickness="1">
-        <Grid Margin="0">
+    <Border BorderThickness="1" BorderBrush="{StaticResource ContentSeparatorBrush}" Background="{StaticResource ApplicationBackgroundBrush}">
+        <Grid Margin="0" >
+            <!-- Overlay -->
             <ContentControl
                 x:Name="Overlay"
                 Panel.ZIndex="1000"
@@ -49,7 +47,7 @@
                 DataContext="{Binding OverlayViewModel, Mode=OneWay}"
                 Visibility="{Binding OverlayContent, Converter={StaticResource ContentToVisiblityConverter}}" />
 
-
+            <!-- Content -->
             <dxlc:LayoutControl
                 Margin="0"
                 Padding="0"
@@ -92,11 +90,21 @@
                                             Command="{Binding OpenTaskboardCommand, Mode=OneWay}"
                                             CommandParameter="{Binding TaskBoardNavigationTarget}"
                                             Content="Taskboard" />
+                                        <dxn:NavBarItem
+                                            Command="{Binding CreateNewTaskCommand, Mode=OneWay}"
+                                            CommandParameter="{x:Null}"
+                                            Content="Create Task" />
                                     </dxn:NavBarGroup.Items>
                                 </dxn:NavBarGroup>
                                 <dxn:NavBarGroup Header="Achievements">
                                     <dxn:NavBarGroup.Items>
                                         <dxn:NavBarItem />
+                                    </dxn:NavBarGroup.Items>
+                                </dxn:NavBarGroup>
+                                <dxn:NavBarGroup Header="Activities">
+                                    <dxn:NavBarGroup.Items>
+                                        <dxn:NavBarItem  Command="{Binding CreateNewActivityCommand, Mode=OneWay}"
+                                                         Content="Create Activity"/>
                                     </dxn:NavBarGroup.Items>
                                 </dxn:NavBarGroup>
                                 <dxn:NavBarGroup Header="Games">
@@ -124,60 +132,6 @@
                     <contentNavigation:ContentNavigatorView DataContext="{Binding ContentNavigatorViewModel, Mode=OneWay}" />
                 </dxlc:LayoutGroup>
             </dxlc:LayoutControl>
-
-            <!--<dxwui:HamburgerMenu
-                Background="{StaticResource MenuBackgroundBrush}"
-                HeaderFontSize="{StaticResource H3FontSize}"
-                HeaderForeground="{StaticResource H3Foreground}"
-                HeaderHeight="70"
-                IsMenuVisible="True"
-                OpenPaneWidth="250"
-                PaneBackground="{StaticResource MenuBackgroundBrush}"
-                ViewState="Inline">
-                <dxwui:HamburgerMenu.HeaderTemplate>
-                    <DataTemplate>
-                        <Border
-                            Height="70"
-                            BorderBrush="{StaticResource ContentSeparatorBrush}"
-                            BorderThickness="0,0,0,1">
-                            <TextBlock
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                FontWeight="SemiBold"
-                                Style="{StaticResource H3TextBlockStyle}"
-                                Text="Logo"
-                                TextAlignment="Center" />
-                        </Border>
-                    </DataTemplate>
-                </dxwui:HamburgerMenu.HeaderTemplate>
-                <dxwui:HamburgerMenu.Content>
-                    <Border BorderBrush="{StaticResource ContentSeparatorBrush}" BorderThickness="1,0,0,0">
-                        <dxlc:LayoutControl
-                            Margin="0"
-                            Padding="0"
-                            ItemSpace="0"
-                            Orientation="Vertical">
-
-                        </dxlc:LayoutControl>
-                    </Border>
-                </dxwui:HamburgerMenu.Content>
-
-            </dxwui:HamburgerMenu>-->
-
-
-            <!--<Border Width="250" HorizontalAlignment="Left">
-                <dxlc:LayoutGroup Orientation="Vertical">
-                    <Border
-                        Height="70"
-                        HorizontalAlignment="Stretch"
-                        VerticalAlignment="Top"
-                        BorderBrush="{StaticResource ContentSeparatorBrush}"
-                        BorderThickness="0,0,0,1">
-                        <TextBlock HorizontalAlignment="Center" Text="Logo" />
-                    </Border>
-                    <TextBlock Text="Menu" />
-                </dxlc:LayoutGroup>
-            </Border>-->
         </Grid>
     </Border>
 </Window>

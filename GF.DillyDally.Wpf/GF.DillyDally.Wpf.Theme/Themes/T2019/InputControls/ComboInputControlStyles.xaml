@@ -24,12 +24,14 @@
                 Width="{TemplateBinding Width}"
                 Height="36"
                 dx:ThemeManager.ThemeName="{x:Static theme:ThemeConstants.DevExpressThemeName}"
-                EditValue="{TemplateBinding InputValue}"
+                EditValue="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=InputValue, Mode=TwoWay}"
                 FontSize="{StaticResource InputControlsFontSize}"
                 FontWeight="SemiBold"
                 Foreground="{StaticResource InputControlsForeground}"
-                NullText="{TemplateBinding WatermarkText}"
+                NullText="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=WatermarkText, Mode=TwoWay}"
                 ShowNullText="True"
+                SelectedItem="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SelectedItem, Mode=TwoWay}"
+                ItemsSource="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ItemsSource, Mode=TwoWay}"
                 SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                 UseLayoutRounding="{TemplateBinding UseLayoutRounding}" />
         </dxlc:LayoutItem>

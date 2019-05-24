@@ -1,0 +1,122 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:conv="http://schemas.getfunctional.de/dillydally/converter"
+    xmlns:ctrls="http://schemas.getfunctional.de/dillydally/controls"
+    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+    xmlns:fa5="http://schemas.fontawesome.com/icons/"
+    xmlns:local="clr-namespace:GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.TaskBoard">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Colors.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Typography.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <SolidColorBrush x:Key="TaskItemBorderBrush" Color="{StaticResource Layer1BorderColor}" />
+    <SolidColorBrush x:Key="TaskItemHightlightBrush" Color="{StaticResource HighlightOrange}" />
+    <SolidColorBrush x:Key="TaskItemBackgroundBrush" Color="{StaticResource Layer1BackgroundColor}" />
+    <SolidColorBrush x:Key="TaskItemBackgroundHoverBrush" Color="{StaticResource Layer2BackgroundColor}" />
+    <SolidColorBrush x:Key="TasklaneBackgroundBrush" Color="{StaticResource Layer3BackgroundColor}" />
+    <SolidColorBrush x:Key="TasklaneBorderBrush" Color="{StaticResource Layer1BorderColor}" />
+
+    <conv:ColorStringToBrushConverter x:Key="ColorStringToBrushConverter" />
+
+    <DataTemplate x:Key="TaskTemplate" DataType="{x:Type local:TaskBoardTaskViewModel}">
+        <Border Margin="0,0,0,10" VerticalAlignment="Top" Background="{StaticResource TaskItemBackgroundBrush}"
+            BorderBrush="{StaticResource TaskItemBorderBrush}"
+            BorderThickness="1"
+            CornerRadius="4">
+            <Border.Style>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="Background" Value="{StaticResource TaskItemBackgroundBrush}" />
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{StaticResource TaskItemBackgroundHoverBrush}" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+            <Grid Width="250">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="55" />
+                </Grid.RowDefinitions>
+                <Border Grid.Column="0" Grid.RowSpan="2"
+                    Background="{StaticResource TaskItemHightlightBrush}"
+                    CornerRadius="4,0,0,4">
+                    <Rectangle Width="3" />
+                </Border>
+                <dxlc:LayoutGroup MaxWidth="247" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left"
+                    Padding="11,14,14,14"
+                    ItemSpace="13"
+                    Orientation="Vertical">
+                    <ctrls:InternalLinkControl MaxWidth="200" DisplayLink="{Binding RunningNumber}" />
+                    <TextBlock Style="{StaticResource BodyTextBlockStyle}"
+                               FontWeight="SemiBold" MaxWidth="200"
+                        VerticalAlignment="Top" HorizontalAlignment="Left" TextWrapping="Wrap" 
+                               FontSize="13"
+                        Text="{Binding Name}"
+                        TextAlignment="Left" />
+                    <ctrls:LabelControl
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        LabelBrush="{Binding ColorString, Converter={StaticResource ColorStringToBrushConverter}}"
+                        LabelText="{Binding Category}" />
+
+                </dxlc:LayoutGroup>
+                <dxlc:LayoutGroup Padding="11,0,14,14" Grid.Column="1" Grid.Row="1" Orientation="Horizontal">
+                    <TextBlock Style="{StaticResource DescriptionTextBlockStyle}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Text="1/4 Done" />
+                    <ctrls:LabelControl
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Bottom"
+                        LabelBrush="{StaticResource TaskItemHightlightBrush}"
+                        LabelText="{Binding Storypoints}" />
+                </dxlc:LayoutGroup>
+            </Grid>
+        </Border>
+    </DataTemplate>
+
+    <DataTemplate x:Key="TaskLaneTemplate" DataType="{x:Type local:TaskBoardLaneViewModel}">
+        <Grid Canvas.ZIndex="0" VerticalAlignment="Top" MinHeight="45" Width="270">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="13" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="40" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <dxlc:LayoutGroup Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Orientation="Horizontal">
+                <TextBlock HorizontalAlignment="Left" Text="{Binding LaneName}" Style="{StaticResource H3TextBlockStyle}" />
+                <TextBlock HorizontalAlignment="Left" Text="{Binding TaskCount}" Style="{StaticResource DescriptionTextBlockStyle}" />
+                <TextBlock Text="..." HorizontalAlignment="Right" />
+            </dxlc:LayoutGroup>
+
+            <Border Grid.Column="0" Grid.ColumnSpan="2" Height="3" Margin="0,10,0,0" Grid.Row="1" Background="{StaticResource TaskItemHightlightBrush}">
+                <Rectangle Height="3" />
+            </Border>
+
+            <Border Margin="0,0,0,10" Canvas.ZIndex="0" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" BorderThickness="1,0,1,1" BorderBrush="{StaticResource TasklaneBorderBrush}">
+                <ItemsControl Canvas.ZIndex="0" Padding="10" Background="{StaticResource TasklaneBackgroundBrush}" ItemTemplate="{StaticResource TaskTemplate}" ItemsSource="{Binding Tasks, Mode=OneWay}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel HorizontalAlignment="Stretch" Orientation="Vertical" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+            </Border>
+
+            <ctrls:ColoredButtonControl CommandParameter="{Binding LaneId, Mode=OneWay}" Padding="0" Command="{Binding CreateNewTaskCommand, Mode=OneWay}" Grid.Row="2" Height="24" Width="24" HorizontalAlignment="Right" Grid.Column="0" ButtonColor="Blue" VerticalAlignment="Bottom">
+                <ctrls:ColoredButtonControl.Content>
+                    <fa5:FontAwesome Icon="Solid_Plus" FontSize="{StaticResource FontIconSize}" Foreground="{StaticResource FontIconForeground}" />
+                </ctrls:ColoredButtonControl.Content>
+            </ctrls:ColoredButtonControl>
+        </Grid>
+    </DataTemplate>
+</ResourceDictionary>

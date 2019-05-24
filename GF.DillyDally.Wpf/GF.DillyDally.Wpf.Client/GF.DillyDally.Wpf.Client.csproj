@@ -131,14 +131,22 @@
     <Compile Include="Core\Dialoge\DialogSettings.cs" />
     <Compile Include="Core\Dialoge\IDialogService.cs" />
     <Compile Include="Core\Dialoge\IDialogSettings.cs" />
-    <Compile Include="Presentation\Activities\ActivityContainerController.cs" />
-    <Compile Include="Presentation\Activities\ActivityContainerView.xaml.cs">
+    <Compile Include="Presentation\Content\Activities\Container\ActivityContainerController.cs" />
+    <Compile Include="Presentation\Content\Activities\Container\ActivityContainerView.xaml.cs">
       <DependentUpon>ActivityContainerView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Presentation\Activities\ActivityContainerViewModel.cs" />
-    <Compile Include="Presentation\Activities\ActivityItemViewModel.cs" />
+    <Compile Include="Presentation\Content\Activities\Container\ActivityContainerViewModel.cs" />
+    <Compile Include="Presentation\Content\Activities\Container\ActivityItemViewModel.cs" />
+    <Compile Include="Presentation\Content\Activities\Create\ActivityTypeViewModel.cs" />
+    <Compile Include="Presentation\Content\Activities\Create\CreateActivityController.cs" />
+    <Compile Include="Presentation\Content\Activities\Create\CreateActivityView.xaml.cs">
+      <DependentUpon>CreateActivityView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Presentation\Content\Activities\Create\CreateActivityViewModel.cs" />
+    <Compile Include="Presentation\Content\Commands\ActivityCommands.cs" />
+    <Compile Include="Presentation\Content\Commands\TaskCommands.cs" />
     <Compile Include="Presentation\OverlayViewModel.cs" />
-    <Compile Include="Presentation\Achievements\AchievementContainerView.xaml.cs">
+    <Compile Include="Presentation\Content\Achievements\AchievementContainerView.xaml.cs">
       <DependentUpon>AchievementContainerView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Core\InitializationSettings.cs" />
@@ -165,8 +173,8 @@
     </Compile>
     <Compile Include="Presentation\HeaderMenu\HeaderMenuController.cs" />
     <Compile Include="Presentation\HeaderMenu\HeaderMenuViewModel.cs" />
-    <Compile Include="Presentation\Selectors\Category\CategorySelectorController.cs" />
-    <Compile Include="Presentation\Selectors\Category\CategorySelectorViewModel.cs" />
+    <Compile Include="Presentation\Content\Category\CategorySelectorController.cs" />
+    <Compile Include="Presentation\Content\Category\CategorySelectorViewModel.cs" />
     <Compile Include="Presentation\ShowCase\ShowCaseController.cs" />
     <Compile Include="Presentation\ShowCase\ShowCaseNavigationTarget.cs" />
     <Compile Include="Presentation\ShowCase\ShowCaseView.xaml.cs">
@@ -198,28 +206,32 @@
     <Compile Include="Core\DataTemplates\IViewFor.cs" />
     <Compile Include="Core\DataTemplates\ViewDataTemplateAggregator.cs" />
     <Compile Include="Presentation\ContentNavigation\SearchContentNavigationTarget.cs" />
-    <Compile Include="Presentation\Selectors\Category\CategoryViewModel.cs" />
-    <Compile Include="Presentation\Tasks\Create\CreateTaskController.cs" />
-    <Compile Include="Presentation\Tasks\Create\CreateTaskView.xaml.cs">
+    <Compile Include="Presentation\Content\Category\CategoryViewModel.cs" />
+    <Compile Include="Presentation\Content\Tasks\Create\CreateTaskController.cs" />
+    <Compile Include="Presentation\Content\Tasks\Create\CreateTaskView.xaml.cs">
       <DependentUpon>CreateTaskView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Presentation\Tasks\Create\CreateTaskViewModel.cs" />
-    <Compile Include="Presentation\Tasks\Create\TaskAchievementsViewModel.cs" />
-    <Compile Include="Presentation\Tasks\TaskBoard\TaskBoardLaneViewModel.cs" />
-    <Compile Include="Presentation\Tasks\TaskBoard\TaskBoardTaskViewModel.cs" />
-    <Compile Include="Presentation\Tasks\TaskBoard\TaskBoardView.xaml.cs">
+    <Compile Include="Presentation\Content\Tasks\Create\CreateTaskViewModel.cs" />
+    <Compile Include="Presentation\Content\Tasks\Create\TaskAchievementsViewModel.cs" />
+    <Compile Include="Presentation\Content\Tasks\TaskBoard\TaskBoardLaneViewModel.cs" />
+    <Compile Include="Presentation\Content\Tasks\TaskBoard\TaskBoardTaskViewModel.cs" />
+    <Compile Include="Presentation\Content\Tasks\TaskBoard\TaskBoardView.xaml.cs">
       <DependentUpon>TaskBoardView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Presentation\Tasks\TaskBoard\TaskBoardController.cs" />
-    <Compile Include="Presentation\Tasks\TaskBoard\TaskBoardNavigationTarget.cs" />
-    <Compile Include="Presentation\Tasks\TaskBoard\TaskBoardViewModel.cs" />
+    <Compile Include="Presentation\Content\Tasks\TaskBoard\TaskBoardController.cs" />
+    <Compile Include="Presentation\Content\Tasks\TaskBoard\TaskBoardNavigationTarget.cs" />
+    <Compile Include="Presentation\Content\Tasks\TaskBoard\TaskBoardViewModel.cs" />
     <Compile Include="Presentation\ShellController.cs" />
     <Compile Include="Presentation\ShellViewModel.cs" />
-    <Page Include="Presentation\Achievements\AchievementContainerView.xaml">
+    <Page Include="Presentation\Content\Achievements\AchievementContainerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Presentation\Activities\ActivityContainerView.xaml">
+    <Page Include="Presentation\Content\Activities\Container\ActivityContainerView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Presentation\Content\Activities\Create\CreateActivityView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -239,7 +251,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Presentation\Selectors\SelectorTemplates.xaml">
+    <Page Include="Presentation\Content\Category\SelectorTemplates.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -247,7 +259,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Presentation\Tasks\Create\CreateTaskView.xaml">
+    <Page Include="Presentation\Content\Tasks\Create\CreateTaskView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -255,11 +267,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Presentation\Tasks\TaskBoard\TaskBoardTemplates.xaml">
+    <Page Include="Presentation\Content\Tasks\TaskBoard\TaskBoardTemplates.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Presentation\Tasks\TaskBoard\TaskBoardView.xaml">
+    <Page Include="Presentation\Content\Tasks\TaskBoard\TaskBoardView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

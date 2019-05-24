@@ -12,6 +12,8 @@ namespace GF.DillyDally.Wpf.Client.Presentation
         private HeaderMenuViewModel _headerMenuViewModel;
         private OverlayViewModel _overlayViewModel;
         private IReactiveCommand _openTaskboardCommand;
+        private IReactiveCommand _createNewActivityCommand;
+        private IReactiveCommand _createNewTaskCommand;
 
         public ContentBrowserViewModel ContentBrowserViewModel
         {
@@ -64,7 +66,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation
         {
             get
             {
-                return Tasks.TaskBoard.TaskBoardNavigationTarget.TargetId;
+                return Content.Tasks.TaskBoard.TaskBoardNavigationTarget.TargetId;
             }
         }
 
@@ -77,6 +79,30 @@ namespace GF.DillyDally.Wpf.Client.Presentation
             set
             {
                 this.RaiseAndSetIfChanged(ref this._openTaskboardCommand, value);
+            }
+        }
+
+        public IReactiveCommand CreateNewActivityCommand
+        {
+            get
+            {
+                return this._createNewActivityCommand;
+            }
+            set
+            {
+                this.RaiseAndSetIfChanged(ref this._createNewActivityCommand, value);
+            }
+        }
+
+        public IReactiveCommand CreateNewTaskCommand
+        {
+            get
+            {
+                return this._createNewTaskCommand;
+            }
+            set
+            {
+                this.RaiseAndSetIfChanged(ref this._createNewTaskCommand, value);
             }
         }
     }
