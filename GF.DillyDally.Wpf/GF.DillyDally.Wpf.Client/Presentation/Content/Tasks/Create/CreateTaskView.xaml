@@ -9,11 +9,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:theme="clr-namespace:GF.DillyDally.Wpf.Theme;assembly=GF.DillyDally.Wpf.Theme"
     xmlns:create="clr-namespace:GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Create"
-    xmlns:container="clr-namespace:GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Container"
-    xmlns:achievements="clr-namespace:GF.DillyDally.Wpf.Client.Presentation.Content.Achievements"
     d:DataContext="{d:DesignInstance Type={x:Type create:CreateTaskViewModel}}"
-    d:DesignHeight="900"
-    d:DesignWidth="800"
+    Width="560"
     dx:ThemeManager.ThemeName="{x:Static theme:ThemeConstants.DevExpressThemeName}"
     mc:Ignorable="d">
 
@@ -23,15 +20,44 @@
                 <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Client;component/Presentation/Content/Category/SelectorTemplates.xaml" />
 
             </ResourceDictionary.MergedDictionaries>
+
+            <DataTemplate DataType="{x:Type create:CreateTaskStep1ViewModel}">
+                <dxlc:LayoutGroup ItemSpace="25"  Orientation="Vertical">
+                    <ctrls:HeaderTitleContent HeaderType="H2" VerticalAlignment="Top" Title="Task Infos" Description="It's best to keep the name short and then add the details in the task Body. Also select a category that Matches the Topic best. " />
+                    <dxlc:LayoutGroup VerticalAlignment="Top" Orientation="Horizontal">
+                        <ctrls:ImageInputControl HorizontalAlignment="Left" VerticalAlignment="Stretch" />
+                        <dxlc:LayoutGroup HorizontalAlignment="Left" Orientation="Vertical">
+                            <ctrls:TextInputControl
+                                InputValue="{Binding TaskName, Mode=TwoWay}"
+                                IsRequired="True"
+                                Label="Title"
+                                WatermarkText="Give your Task a self explanatory title" />
+                            <ContentControl Content="{Binding CategorySelectorViewModel, Mode=OneWay}" ContentTemplate="{StaticResource CategorySelectorTemplate}" />
+                        </dxlc:LayoutGroup>
+                    </dxlc:LayoutGroup>
+                </dxlc:LayoutGroup>
+            </DataTemplate>
         </ResourceDictionary>
     </UserControl.Resources>
 
     <ctrls:Form>
         <ctrls:Form.HeaderTitleContent>
-            <ctrls:HeaderTitleContent Title="Create Task" Description="Bla bla bla bla bla bla bla bla" />
+            <ctrls:HeaderTitleContent Title="Create Task" Description="Many people keep a list of things to do — on paper, in a spreadsheet,
+or by using a combination of paper and electronic methods." />
         </ctrls:Form.HeaderTitleContent>
         <ctrls:Form.Content>
-            <dxlc:LayoutGroup ItemSpace="0" Orientation="Vertical">
+            <ctrls:PagedContentControl x:Name="PagedContent" ItemsSource="{Binding CreateTaskSteps, Mode=OneWay}" />
+
+
+            <!--<dxwui:SlideView ItemsSource="{Binding CreateTaskSteps}" ItemTemplate="{StaticResource ItemContentTemplate}" ItemHeaderTemplate="{StaticResource ItemHeaderTemplate}">
+                <dxwui:SlideView.ItemContainerStyle>
+                    <Style TargetType="dxwui:SlideViewItem">
+                        <Setter Property="IsHeaderInteractive" Value="False"/>
+                    </Style>
+                </dxwui:SlideView.ItemContainerStyle>
+            </dxwui:SlideView>-->
+
+            <!--<dxlc:LayoutGroup ItemSpace="0" Orientation="Vertical">
                 <ctrls:FormElementGroupControl>
                     <ctrls:FormElementGroupControl.HeaderTitleContent>
                         <ctrls:HeaderTitleContent Title="Task Details" Description="Bla bla bla bla bla bla bla bla" />
@@ -81,7 +107,7 @@
                         <achievements:AchievementContainerView Height="180" DataContext="{Binding TaskAchievementsViewModel}" />
                     </ctrls:FormElementGroupControl.Content>
                 </ctrls:FormElementGroupControl>
-            </dxlc:LayoutGroup>
+            </dxlc:LayoutGroup>-->
         </ctrls:Form.Content>
         <ctrls:Form.FooterContent>
             <dxlc:LayoutGroup Orientation="Horizontal">
@@ -89,8 +115,13 @@
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center"
                     ButtonColor="Blue"
-                    Command="{Binding CreateTaskCommand}"
-                    Content="Create Task" />
+                    Command="{Binding ElementName=PagedContent, Path=NextPageCommand}"
+                    Content="Next" />
+                <ctrls:ColoredButtonControl
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Command="{Binding ElementName=PagedContent, Path=PreviousPageCommand}"
+                    Content="Previous" />
                 <ctrls:ColoredButtonControl
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center"

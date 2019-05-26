@@ -118,31 +118,35 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\T2019\FormElementGroupControlStyles.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\T2019\FormStyles.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\T2019\InputControls\DateInputControlStyles.xaml">
+    <Page Include="Themes\T2019\HeaderTitleContentStyles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\T2019\InputControls\ImageInputControlStyles.xaml">
+    <Page Include="Themes\T2019\Layout\FormElementGroupControlStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Themes\T2019\InputControls\ComboInputControlStyles.xaml">
+    <Page Include="Themes\T2019\Layout\FormStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Themes\T2019\InputControls\LabelStyles.xaml">
+    <Page Include="Themes\T2019\Input\DateInputControlStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\T2019\Input\ImageInputControlStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Themes\T2019\InputControls\TextInputControlStyles.xaml">
+    <Page Include="Themes\T2019\Input\ComboInputControlStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\T2019\Input\LabelStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\T2019\Input\TextInputControlStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -158,20 +162,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Themes\T2019\Layout\PagedContentControlStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\ButtonColor.cs" />
     <Compile Include="Controls\ColoredButtonControl.cs" />
-    <Compile Include="Controls\ComboInputControl.cs" />
-    <Compile Include="Controls\DateInputControl.cs" />
-    <Compile Include="Controls\FormElementGroupControl.cs" />
-    <Compile Include="Controls\Form.cs" />
+    <Compile Include="Controls\Input\ComboInputControl.cs" />
+    <Compile Include="Controls\Input\DateInputControl.cs" />
+    <Compile Include="Controls\Layout\FormElementGroupControl.cs" />
+    <Compile Include="Controls\Layout\Form.cs" />
     <Compile Include="Controls\FormFooter.cs" />
     <Compile Include="Controls\FormHeader.cs" />
-    <Compile Include="Controls\ImageInputControl.cs" />
+    <Compile Include="Controls\Input\ImageInputControl.cs" />
     <Compile Include="Controls\LabelControl.cs" />
     <Compile Include="Controls\InternalLinkControl.cs" />
-    <Compile Include="Controls\TextInputControl.cs" />
+    <Compile Include="Controls\Layout\IDisplayPage.cs" />
+    <Compile Include="Controls\Layout\PagedContentControl.cs" />
+    <Compile Include="Controls\Input\TextInputControl.cs" />
+    <Compile Include="Controls\Shared\HeaderType.cs" />
     <Compile Include="Converter\ColorStringToBrushConverter.cs" />
     <Compile Include="Converter\ContentToVisiblityConverter.cs" />
     <Compile Include="Extensions\FontSizeExtension.cs" />
@@ -212,6 +223,12 @@
     <Resource Include="StyleGuide\Fonts\SourceSansPro-Regular.ttf" />
     <Resource Include="StyleGuide\Fonts\SourceSansPro-Semibold.ttf" />
     <Resource Include="StyleGuide\Fonts\SourceSansPro-SemiboldItalic.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GF.DillyDally.Mvvmc\GF.DillyDally.Mvvmc.csproj">
+      <Project>{2991a81d-e0e1-4143-ac99-395b5191adbd}</Project>
+      <Name>GF.DillyDally.Mvvmc</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

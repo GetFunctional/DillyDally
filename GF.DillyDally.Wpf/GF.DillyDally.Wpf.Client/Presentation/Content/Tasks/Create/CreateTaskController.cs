@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using GF.DillyDally.Data.Sqlite;
 using GF.DillyDally.Mvvmc;
@@ -29,7 +30,8 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Create
                 ReactiveCommand.Create(this.CancelProcess);
 
             viewModel.TaskAchievementsViewModel = new TaskAchievementsViewModel();
-            viewModel.CategorySelectorViewModel = categorySelectorController.ViewModel;
+            viewModel.CreateTaskSteps.Add(new CreateTaskStep1ViewModel(categorySelectorController.ViewModel));
+            viewModel.CreateTaskSteps.Add(new CreateTaskStep1ViewModel(categorySelectorController.ViewModel));
         }
 
         private void CancelProcess()
@@ -44,8 +46,9 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Create
 
             if (this.IsInputValid(this.ViewModel))
             {
-                var taskName = this.ViewModel.TaskName;
-                var category = this.ViewModel.SelectedCategory;
+                var step1 = this.ViewModel.CreateTaskSteps.OfType<CreateTaskStep1ViewModel>().Single();
+                var taskName = step1.TaskName;
+                var category = step1.SelectedCategory;
 
                 var commandDispatcher = this._mediator;
               

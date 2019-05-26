@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace GF.DillyDally.Wpf.Theme.Controls
+namespace GF.DillyDally.Wpf.Theme.Controls.Input
 {
     [DesignTimeVisible(true)]
     public class DateInputControl : Control

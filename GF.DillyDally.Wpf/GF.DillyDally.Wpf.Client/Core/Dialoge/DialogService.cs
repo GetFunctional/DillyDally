@@ -21,6 +21,7 @@ namespace GF.DillyDally.Wpf.Client.Core.Dialoge
         {
             var completion = new TaskCompletionSource<IDialogResult>();
             var overlayViewModel = dialogController.ViewModel;
+
             await this._mediator.Publish(new DialogRequest(overlayViewModel));
             dialogController.WhenConfirmedResult.Subscribe(result =>
             {

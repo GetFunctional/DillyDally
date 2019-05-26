@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using GF.DillyDally.Wpf.Client.Core.Mediation.Dialog;
 using MediatR;
@@ -16,20 +17,20 @@ namespace GF.DillyDally.Wpf.Client.ApplicationState
 
         #region INotificationHandler<DialogConfirmed> Members
 
-        public async Task Handle(DialogConfirmed notification, CancellationToken cancellationToken)
+        public Task Handle(DialogConfirmed notification, CancellationToken cancellationToken)
         {
-            await Task.Yield();
             this._dillyDallyApplication.ConfirmOverlayWith(notification.DialogResult);
+            return Task.CompletedTask;
         }
 
         #endregion
 
         #region INotificationHandler<DialogRequest> Members
 
-        public async Task Handle(DialogRequest request, CancellationToken cancellationToken)
+        public Task Handle(DialogRequest request, CancellationToken cancellationToken)
         {
-            await Task.Yield();
             this._dillyDallyApplication.ShowOverlayDialog(request.DialogContent, request.DialogSettings);
+            return Task.CompletedTask;
         }
 
         #endregion

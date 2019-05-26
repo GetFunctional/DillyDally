@@ -50,6 +50,13 @@
     <SolidColorBrush x:Key="InputControlsForeground" Color="#333C48" />
     <SolidColorBrush x:Key="InputControlsLabelForeground" Color="#7F8FA4" />
 
+    <Style x:Key="BodyContentControlTypoStyle" TargetType="{x:Type ContentControl}">
+        <Setter Property="FontFamily" Value="{StaticResource SourceSansProBlack}" />
+        <Setter Property="FontSize" Value="{StaticResource BodyFontSize}" />
+        <Setter Property="FontWeight" Value="{StaticResource BodyFontWeight}" />
+        <Setter Property="Foreground" Value="{StaticResource BodyForeground}" />
+    </Style>
+
     <Style x:Key="LinkTextBlockStyle" TargetType="{x:Type TextBlock}">
         <Setter Property="FontFamily" Value="{StaticResource SourceSansProBlack}" />
         <Setter Property="FontSize" Value="{StaticResource LinkFontSize}" />
@@ -108,22 +115,24 @@
 
     <DataTemplate x:Key="H1HeaderTemplate" DataType="{x:Type shared:HeaderTitleContent}">
         <WrapPanel VerticalAlignment="Center" Orientation="Vertical">
-            <TextBlock Style="{StaticResource H1TextBlockStyle}" Text="{Binding Title}" />
-            <TextBlock Style="{StaticResource DescriptionTextBlockStyle}" Text="{Binding Description}" />
+            <TextBlock Style="{StaticResource H1TextBlockStyle}" Text="{Binding Title}" TextWrapping="Wrap" />
+            <TextBlock Style="{StaticResource DescriptionTextBlockStyle}" Text="{Binding Description}" TextWrapping="Wrap" />
         </WrapPanel>
     </DataTemplate>
 
     <DataTemplate x:Key="H2HeaderTemplate" DataType="{x:Type shared:HeaderTitleContent}">
         <WrapPanel VerticalAlignment="Center" Orientation="Vertical">
-            <TextBlock Style="{StaticResource H2TextBlockStyle}" Text="{Binding Title}" />
-            <TextBlock Style="{StaticResource DescriptionTextBlockStyle}" Text="{Binding Description}" />
+            <TextBlock Style="{StaticResource H2TextBlockStyle}" Text="{Binding Title}" TextWrapping="Wrap" />
+            <TextBlock Style="{StaticResource DescriptionTextBlockStyle}" Text="{Binding Description}" TextWrapping="Wrap" />
         </WrapPanel>
     </DataTemplate>
 
     <DataTemplate x:Key="H3HeaderTemplate" DataType="{x:Type shared:HeaderTitleContent}">
         <WrapPanel VerticalAlignment="Center" Orientation="Vertical">
-            <TextBlock Style="{StaticResource H3TextBlockStyle}" Text="{Binding Title}" />
-            <TextBlock Style="{StaticResource DescriptionTextBlockStyle}" Text="{Binding Description}" />
+            <TextBlock Style="{StaticResource H3TextBlockStyle}" Text="{Binding Title}" TextWrapping="Wrap" />
+            <TextBlock Style="{StaticResource DescriptionTextBlockStyle}" Text="{Binding Description}" TextWrapping="Wrap" />
         </WrapPanel>
     </DataTemplate>
+
+
 </ResourceDictionary>

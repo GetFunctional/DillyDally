@@ -4,7 +4,8 @@
     xmlns:controls="clr-namespace:GF.DillyDally.Wpf.Theme.Controls"
     xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
     xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
-    xmlns:theme="clr-namespace:GF.DillyDally.Wpf.Theme">
+    xmlns:theme="clr-namespace:GF.DillyDally.Wpf.Theme"
+    xmlns:input="clr-namespace:GF.DillyDally.Wpf.Theme.Controls.Input">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Colors.xaml" />
@@ -12,7 +13,7 @@
     </ResourceDictionary.MergedDictionaries>
 
     <SolidColorBrush x:Key="ImageBorderBrush" Color="#707070" />
-    <ControlTemplate x:Key="ImageEditorControlTemplate" TargetType="{x:Type controls:ImageInputControl}">
+    <ControlTemplate x:Key="ImageEditorControlTemplate" TargetType="{x:Type input:ImageInputControl}">
         <Border
             BorderBrush="{StaticResource ImageBorderBrush}"
             BorderThickness="1"
@@ -26,11 +27,12 @@
         </Border>
     </ControlTemplate>
 
-    <Style x:Key="DefaultStyle" TargetType="{x:Type controls:ImageInputControl}">
+    <Style x:Key="DefaultStyle" TargetType="{x:Type input:ImageInputControl}">
         <Setter Property="Template" Value="{StaticResource ImageEditorControlTemplate}" />
-        <Setter Property="Width" Value="156" />
+        <Setter Property="Width" Value="162" />
+        <Setter Property="Height" Value="134" />
     </Style>
 
-    <Style BasedOn="{StaticResource DefaultStyle}" TargetType="{x:Type controls:ImageInputControl}" />
+    <Style BasedOn="{StaticResource DefaultStyle}" TargetType="{x:Type input:ImageInputControl}" />
 
 </ResourceDictionary>

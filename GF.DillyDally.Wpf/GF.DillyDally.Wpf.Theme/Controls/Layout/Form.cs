@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using GF.DillyDally.Wpf.Theme.Controls.Shared;
 
-namespace GF.DillyDally.Wpf.Theme.Controls
+namespace GF.DillyDally.Wpf.Theme.Controls.Layout
 {
     [DesignTimeVisible(true)]
     public class Form : ContentControl

@@ -5,7 +5,8 @@
     xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
     xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
     xmlns:system="clr-namespace:System;assembly=mscorlib"
-    xmlns:theme="clr-namespace:GF.DillyDally.Wpf.Theme">
+    xmlns:theme="clr-namespace:GF.DillyDally.Wpf.Theme"
+    xmlns:layout="clr-namespace:GF.DillyDally.Wpf.Theme.Controls.Layout">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Colors.xaml" />
@@ -23,16 +24,6 @@
     <SolidColorBrush x:Key="FormHeaderBackgroundBrush" Color="{StaticResource Layer1BackgroundColor}" />
     <SolidColorBrush x:Key="FormHeaderBorderBrush" Color="{StaticResource Layer1BorderColor}" />
 
-    <!--<Border
-        Height="80"
-        Padding="29,0"
-        Background="{StaticResource FormFooterBackgroundBrush}"
-        BorderBrush="{StaticResource FormInnerBorderBrush}"
-        BorderThickness="0,1,0,0"
-        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-        UseLayoutRounding="{TemplateBinding UseLayoutRounding}">
-        <ContentControl Content="{TemplateBinding HeaderTitleContent}" ContentTemplate="{TemplateBinding HeaderContentTemplate}" />
-    </Border>-->
     <ControlTemplate x:Key="FormHeaderControlTemplate" TargetType="{x:Type controls:FormHeader}">
         <Border
             Height="{TemplateBinding Height}"
@@ -102,7 +93,7 @@
     <SolidColorBrush x:Key="FormElementBackgroundBrush" Color="{StaticResource Layer1BackgroundColor}" />
     <SolidColorBrush x:Key="FormBorderBrush" Color="{StaticResource Layer4BorderColor}" />
 
-    <ControlTemplate x:Key="FormControlTemplate" TargetType="{x:Type controls:Form}">
+    <ControlTemplate x:Key="FormControlTemplate" TargetType="{x:Type layout:Form}">
         <Border
             Background="{TemplateBinding Background}"
             BorderBrush="{StaticResource FormBorderBrush}"
@@ -117,9 +108,7 @@
                 Orientation="Vertical">
                 <controls:FormHeader HeaderTitleContent="{TemplateBinding HeaderTitleContent}" HeaderTitleContentTemplate="{StaticResource H1HeaderTemplate}" />
 
-                <ScrollViewer HorizontalScrollBarVisibility="Hidden">
-                    <ContentPresenter />
-                </ScrollViewer>
+                <ContentPresenter />
 
                 <controls:FormFooter
                     VerticalAlignment="Bottom"
@@ -132,7 +121,7 @@
     </ControlTemplate>
 
 
-    <Style x:Key="FormDefaultStyle" TargetType="{x:Type controls:Form}">
+    <Style x:Key="FormDefaultStyle" TargetType="{x:Type layout:Form}">
         <Setter Property="Template" Value="{StaticResource FormControlTemplate}" />
         <Setter Property="FontSize" Value="{StaticResource BodyFontSize}" />
         <Setter Property="FontWeight" Value="{StaticResource BodyFontWeight}" />
@@ -142,7 +131,7 @@
         <Setter Property="SnapsToDevicePixels" Value="True" />
     </Style>
 
-    <Style BasedOn="{StaticResource FormDefaultStyle}" TargetType="{x:Type controls:Form}" />
+    <Style BasedOn="{StaticResource FormDefaultStyle}" TargetType="{x:Type layout:Form}" />
 
 
 </ResourceDictionary>

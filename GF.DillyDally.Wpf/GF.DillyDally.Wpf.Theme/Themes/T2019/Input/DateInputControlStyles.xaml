@@ -5,16 +5,17 @@
     xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
     xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
     xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
-    xmlns:theme="clr-namespace:GF.DillyDally.Wpf.Theme">
+    xmlns:theme="clr-namespace:GF.DillyDally.Wpf.Theme"
+    xmlns:input="clr-namespace:GF.DillyDally.Wpf.Theme.Controls.Input">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Colors.xaml" />
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Typography.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/InputControls/LabelStyles.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/Input/LabelStyles.xaml" />
 
     </ResourceDictionary.MergedDictionaries>
 
-    <ControlTemplate x:Key="DefaultDateInputControlTemplate" TargetType="{x:Type controls:DateInputControl}">
+    <ControlTemplate x:Key="DefaultDateInputControlTemplate" TargetType="{x:Type input:DateInputControl}">
         <dxlc:LayoutItem
             Label="{TemplateBinding Label}"
             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
@@ -35,16 +36,16 @@
         </dxlc:LayoutItem>
     </ControlTemplate>
 
-    <Style x:Key="DefaultDateInputControlStyle" TargetType="{x:Type controls:DateInputControl}">
+    <Style x:Key="DefaultDateInputControlStyle" TargetType="{x:Type input:DateInputControl}">
         <Setter Property="Template" Value="{StaticResource DefaultDateInputControlTemplate}" />
         <Setter Property="FontWeight" Value="SemiBold" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Top" />
-        <Setter Property="Width" Value="420" />
+        <Setter Property="Width" Value="245" />
         <Setter Property="UseLayoutRounding" Value="True" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
     </Style>
 
-    <Style BasedOn="{StaticResource DefaultDateInputControlStyle}" TargetType="{x:Type controls:DateInputControl}" />
+    <Style BasedOn="{StaticResource DefaultDateInputControlStyle}" TargetType="{x:Type input:DateInputControl}" />
 
 </ResourceDictionary>

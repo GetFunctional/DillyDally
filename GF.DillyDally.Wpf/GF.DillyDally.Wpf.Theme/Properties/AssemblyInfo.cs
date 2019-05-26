@@ -31,6 +31,8 @@ using System.Windows.Markup;
 [assembly: XmlnsDefinition("http://schemas.getfunctional.de/dillydally/wpf", "GF.DillyDally.Wpf.Theme.Extensions")]
 [assembly: XmlnsDefinition("http://schemas.getfunctional.de/dillydally/controls", "GF.DillyDally.Wpf.Theme.Controls")]
 [assembly: XmlnsDefinition("http://schemas.getfunctional.de/dillydally/controls", "GF.DillyDally.Wpf.Theme.Controls.Shared")]
+[assembly: XmlnsDefinition("http://schemas.getfunctional.de/dillydally/controls", "GF.DillyDally.Wpf.Theme.Controls.Input")]
+[assembly: XmlnsDefinition("http://schemas.getfunctional.de/dillydally/controls", "GF.DillyDally.Wpf.Theme.Controls.Layout")]
 
 [assembly: XmlnsDefinition("http://schemas.getfunctional.de/dillydally/converter", "GF.DillyDally.Wpf.Theme.Converter")]
 
