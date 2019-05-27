@@ -5,16 +5,21 @@
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Colors.xaml" />
-        <ResourceDictionary
-            Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Typography.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Typography.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <ControlTemplate x:Key="DefaultHeaderTitleContentControlTemplate" TargetType="{x:Type shared:HeaderTitleContent}">
         <WrapPanel VerticalAlignment="Center" Orientation="Vertical">
-            <TextBlock x:Name="TitleBlock" Style="{StaticResource H1TextBlockStyle}" Text="{TemplateBinding Title}"
-                       TextWrapping="Wrap" />
-            <TextBlock x:Name="DescriptionBlock" Style="{StaticResource DescriptionTextBlockStyle}"
-                       Text="{TemplateBinding Description}" TextWrapping="Wrap" />
+            <TextBlock
+                x:Name="TitleBlock"
+                Style="{StaticResource H1TextBlockStyle}"
+                Text="{TemplateBinding Title}"
+                TextWrapping="Wrap" />
+            <TextBlock
+                x:Name="DescriptionBlock"
+                Style="{StaticResource DescriptionTextBlockStyle}"
+                Text="{TemplateBinding Description}"
+                TextWrapping="Wrap" />
         </WrapPanel>
         <ControlTemplate.Triggers>
             <Trigger Property="HeaderType" Value="H1">

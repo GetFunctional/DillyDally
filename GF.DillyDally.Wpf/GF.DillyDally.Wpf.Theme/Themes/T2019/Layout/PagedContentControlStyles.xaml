@@ -1,23 +1,65 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:layout="clr-namespace:GF.DillyDally.Wpf.Theme.Controls.Layout"
-                    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol">
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+    xmlns:layout="clr-namespace:GF.DillyDally.Wpf.Theme.Controls.Layout">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Colors.xaml" />
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Typography.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
+    <SolidColorBrush x:Key="SelectedPageBadgeBackgroundBrush" Color="{StaticResource HighlightBlue}" />
+    <SolidColorBrush x:Key="UnselectedPageBadgeBackgroundBrush" Color="{StaticResource Layer1BackgroundColor}" />
+    <SolidColorBrush x:Key="SelectedPageBadgeForegroundBrush" Color="{StaticResource Layer1BackgroundColor}" />
+    <SolidColorBrush x:Key="UnselectedPageBadgeForegroundBrush" Color="{StaticResource BodyForegroundColor}" />
+    <SolidColorBrush x:Key="PageBadgeBorderBrush" Color="{StaticResource Layer1BorderColor}" />
 
     <DataTemplate x:Key="PageDisplayTemplate" DataType="{x:Type layout:IDisplayPage}">
-        <WrapPanel VerticalAlignment="Center" HorizontalAlignment="Left">
-            <TextBlock Text="{Binding PageNumber}" />
-            <TextBlock Text="{Binding Title}" />
-        </WrapPanel>
+        <dxlc:LayoutGroup
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            ItemSpace="12">
+            <Border
+                x:Name="Badge"
+                Width="28"
+                Height="28"
+                Padding="0,0,1,0"
+                Background="{StaticResource UnselectedPageBadgeBackgroundBrush}"
+                BorderBrush="{StaticResource PageBadgeBorderBrush}"
+                BorderThickness="1"
+                CornerRadius="14"
+                Opacity="1"
+                SnapsToDevicePixels="True">
+                <TextBlock
+                    x:Name="BadgeContent"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="14"
+                    Foreground="{StaticResource UnselectedPageBadgeForegroundBrush}"
+                    Text="{Binding PageNumber}"
+                    TextAlignment="Center" />
+            </Border>
+            <TextBlock
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="{Binding Title}"
+                TextAlignment="Left" />
+        </dxlc:LayoutGroup>
+        <DataTemplate.Triggers>
+            <DataTrigger Binding="{Binding IsCurrent}" Value="False">
+                <Setter TargetName="Badge" Property="Background" Value="{StaticResource UnselectedPageBadgeBackgroundBrush}" />
+                <Setter TargetName="BadgeContent" Property="Foreground" Value="{StaticResource UnselectedPageBadgeForegroundBrush}" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding IsCurrent}" Value="true">
+                <Setter TargetName="Badge" Property="Background" Value="{StaticResource SelectedPageBadgeBackgroundBrush}" />
+                <Setter TargetName="BadgeContent" Property="Foreground" Value="{StaticResource SelectedPageBadgeForegroundBrush}" />
+            </DataTrigger>
+        </DataTemplate.Triggers>
     </DataTemplate>
 
-    <SolidColorBrush Color="{StaticResource Layer1BackgroundColor}" x:Key="PageContentBackgroundBrush" />
-    <SolidColorBrush Color="{StaticResource Layer1BorderColor}" x:Key="PageContentBorderBrush" />
+    <SolidColorBrush x:Key="PageContentBackgroundBrush" Color="{StaticResource Layer1BackgroundColor}" />
+    <SolidColorBrush x:Key="PageContentBorderBrush" Color="{StaticResource Layer1BorderColor}" />
 
     <ControlTemplate x:Key="PageContentControlTemplate" TargetType="{x:Type layout:PagedContentControl}">
         <Grid>
@@ -26,7 +68,10 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <ItemsControl Grid.Row="0" ItemsSource="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ItemsSource}" ItemTemplate="{StaticResource PageDisplayTemplate}">
+            <ItemsControl
+                Grid.Row="0"
+                ItemTemplate="{StaticResource PageDisplayTemplate}"
+                ItemsSource="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ItemsSource}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <dxlc:LayoutGroup Padding="30,0,30,0" Orientation="Horizontal" />
@@ -34,10 +79,13 @@
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
 
-            <Border BorderThickness="0,1,0,0" BorderBrush="{StaticResource PageContentBorderBrush}" Padding="30,24,30,24" Background="{StaticResource PageContentBackgroundBrush}" Grid.Row="1" >
-                <ContentControl   
-                                Style="{StaticResource BodyContentControlTypoStyle}" 
-                                Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=CurrentPage, Mode=OneWay}" />
+            <Border
+                Grid.Row="1"
+                Padding="30,24,30,24"
+                Background="{StaticResource PageContentBackgroundBrush}"
+                BorderBrush="{StaticResource PageContentBorderBrush}"
+                BorderThickness="0,1,0,0">
+                <ContentControl Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=CurrentPage, Mode=OneWay}" Style="{StaticResource BodyContentControlTypoStyle}" />
             </Border>
 
         </Grid>

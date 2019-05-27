@@ -25,11 +25,20 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <dxlc:LayoutControl Orientation="Vertical" Margin="0" Padding="0">
-        <Border VerticalAlignment="Top" Height="60" BorderThickness="0,0,0,1" Background="{StaticResource ContentHeaderBackgroundBrush}" BorderBrush="{StaticResource ContentHeaderBorderBrush}">
-            <TextBlock Text="Taskboard"></TextBlock>
+    <dxlc:LayoutControl
+        Margin="0"
+        Padding="0"
+        Orientation="Vertical">
+        <Border
+            Height="60"
+            VerticalAlignment="Top"
+            Background="{StaticResource ContentHeaderBackgroundBrush}"
+            BorderBrush="{StaticResource ContentHeaderBorderBrush}"
+            BorderThickness="0,0,0,1">
+            <TextBlock Text="Taskboard" />
         </Border>
-        <ScrollViewer Padding="29,29,0,0"
+        <ScrollViewer
+            Padding="29,29,0,0"
             HorizontalScrollBarVisibility="Auto"
             VerticalScrollBarVisibility="Auto">
             <ItemsControl ItemTemplate="{StaticResource TaskLaneTemplate}" ItemsSource="{Binding Lanes, Mode=OneWay}">

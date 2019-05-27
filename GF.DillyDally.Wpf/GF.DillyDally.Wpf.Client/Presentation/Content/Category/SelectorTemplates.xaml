@@ -1,9 +1,9 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:category="clr-namespace:GF.DillyDally.Wpf.Client.Presentation.Content.Category"
     xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
-    xmlns:local="clr-namespace:GF.DillyDally.Wpf.Client.Presentation.Selectors"
-    xmlns:category="clr-namespace:GF.DillyDally.Wpf.Client.Presentation.Content.Category">
+    xmlns:local="clr-namespace:GF.DillyDally.Wpf.Client.Presentation.Selectors">
 
     <DataTemplate x:Key="CategorySelectorTemplate" DataType="{x:Type category:CategorySelectorViewModel}">
         <dxe:ComboBoxEdit

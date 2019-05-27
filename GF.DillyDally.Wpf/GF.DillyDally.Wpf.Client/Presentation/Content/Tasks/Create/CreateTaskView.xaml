@@ -2,15 +2,15 @@
     x:Class="GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Create.CreateTaskView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:create="clr-namespace:GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Create"
     xmlns:ctrls="http://schemas.getfunctional.de/dillydally/controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
     xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:theme="clr-namespace:GF.DillyDally.Wpf.Theme;assembly=GF.DillyDally.Wpf.Theme"
-    xmlns:create="clr-namespace:GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Create"
-    d:DataContext="{d:DesignInstance Type={x:Type create:CreateTaskViewModel}}"
     Width="560"
+    d:DataContext="{d:DesignInstance Type={x:Type create:CreateTaskViewModel}}"
     dx:ThemeManager.ThemeName="{x:Static theme:ThemeConstants.DevExpressThemeName}"
     mc:Ignorable="d">
 
@@ -22,8 +22,12 @@
             </ResourceDictionary.MergedDictionaries>
 
             <DataTemplate DataType="{x:Type create:CreateTaskStep1ViewModel}">
-                <dxlc:LayoutGroup ItemSpace="25"  Orientation="Vertical">
-                    <ctrls:HeaderTitleContent HeaderType="H2" VerticalAlignment="Top" Title="Task Infos" Description="It's best to keep the name short and then add the details in the task Body. Also select a category that Matches the Topic best. " />
+                <dxlc:LayoutGroup ItemSpace="25" Orientation="Vertical">
+                    <ctrls:HeaderTitleContent
+                        Title="Task Infos"
+                        VerticalAlignment="Top"
+                        Description="It's best to keep the name short and then add the details in the task Body. Also select a category that Matches the Topic best. "
+                        HeaderType="H2" />
                     <dxlc:LayoutGroup VerticalAlignment="Top" Orientation="Horizontal">
                         <ctrls:ImageInputControl HorizontalAlignment="Left" VerticalAlignment="Stretch" />
                         <dxlc:LayoutGroup HorizontalAlignment="Left" Orientation="Vertical">
@@ -42,8 +46,7 @@
 
     <ctrls:Form>
         <ctrls:Form.HeaderTitleContent>
-            <ctrls:HeaderTitleContent Title="Create Task" Description="Many people keep a list of things to do — on paper, in a spreadsheet,
-or by using a combination of paper and electronic methods." />
+            <ctrls:HeaderTitleContent Title="Create Task" Description="Many people keep a list of things to do — on paper, in a spreadsheet, or by using a combination of paper and electronic methods." />
         </ctrls:Form.HeaderTitleContent>
         <ctrls:Form.Content>
             <ctrls:PagedContentControl x:Name="PagedContent" ItemsSource="{Binding CreateTaskSteps, Mode=OneWay}" />

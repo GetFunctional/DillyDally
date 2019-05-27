@@ -13,7 +13,7 @@
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/ColoredButtonControlStyles.xaml" />
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/HeaderTitleContentStyles.xaml" />
 
-        <!-- Layout Controls -->
+        <!--  Layout Controls  -->
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/Layout/FormElementGroupControlStyles.xaml" />
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/Layout/FormStyles.xaml" />
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/Layout/PagedContentControlStyles.xaml" />
@@ -35,7 +35,6 @@
         <Setter Property="Foreground" Value="{StaticResource FontIconForeground}" />
     </Style>
 
-    <Style TargetType="{x:Type ContentControl}" BasedOn="{StaticResource BodyContentControlTypoStyle}">
-    </Style>
+    <Style BasedOn="{StaticResource BodyContentControlTypoStyle}" TargetType="{x:Type ContentControl}" />
 
 </ResourceDictionary>

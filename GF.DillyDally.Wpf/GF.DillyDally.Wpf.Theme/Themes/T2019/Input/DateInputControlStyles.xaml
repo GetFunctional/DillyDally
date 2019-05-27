@@ -5,8 +5,8 @@
     xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
     xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
     xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
-    xmlns:theme="clr-namespace:GF.DillyDally.Wpf.Theme"
-    xmlns:input="clr-namespace:GF.DillyDally.Wpf.Theme.Controls.Input">
+    xmlns:input="clr-namespace:GF.DillyDally.Wpf.Theme.Controls.Input"
+    xmlns:theme="clr-namespace:GF.DillyDally.Wpf.Theme">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Colors.xaml" />

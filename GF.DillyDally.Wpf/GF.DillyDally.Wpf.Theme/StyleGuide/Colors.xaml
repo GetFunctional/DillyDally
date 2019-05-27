@@ -6,6 +6,18 @@
     <Color x:Key="Layer2BackgroundColor">#F0F3F8</Color>
     <Color x:Key="Layer1BackgroundColor">#FFFFFF</Color>
 
+    <!--  Foregrounds  -->
+    <Color x:Key="H1ForegroundColor">#354052</Color>
+    <Color x:Key="H2ForegroundColor">#354052</Color>
+    <Color x:Key="H3ForegroundColor">#354052</Color>
+    <Color x:Key="LinkForegroundColor">#00AAFF</Color>
+    <Color x:Key="LinkForegroundColorActive">#00AEEF</Color>
+    <Color x:Key="BodyForegroundColor">#354052</Color>
+    <Color x:Key="DescriptionForegroundColor">#7F8FA4</Color>
+    <Color x:Key="LabelForegroundColor">#FFFFFF</Color>
+    <Color x:Key="InputControlsForegroundColor">#333C48</Color>
+    <Color x:Key="InputControlsLabelForegroundColor">#7F8FA4</Color>
+
     <!--  Borders  -->
     <Color x:Key="Layer4BorderColor">#DFE2E5</Color>
     <Color x:Key="Layer3BorderColor">#E6EAEE</Color>

@@ -4,6 +4,10 @@
     xmlns:shared="clr-namespace:GF.DillyDally.Wpf.Theme.Controls.Shared"
     xmlns:system="clr-namespace:System;assembly=mscorlib">
 
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Colors.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
     <FontFamily x:Key="SourceSansProBlack">pack://application:,,,/GF.DillyDally.wpf.Theme;component/StyleGuide/Fonts/#SourceSansPro</FontFamily>
 
     <!--  SourceSansPro  -->
@@ -15,14 +19,14 @@
     <system:Double x:Key="DescriptionFontSize">12</system:Double>
     <system:Double x:Key="LabelFontSize">10</system:Double>
 
-    <SolidColorBrush x:Key="H1Foreground">#354052</SolidColorBrush>
-    <SolidColorBrush x:Key="H2Foreground">#354052</SolidColorBrush>
-    <SolidColorBrush x:Key="H3Foreground">#354052</SolidColorBrush>
-    <SolidColorBrush x:Key="LinkForeground">#00AAFF</SolidColorBrush>
-    <SolidColorBrush x:Key="LinkForegroundActive">#00AEEF</SolidColorBrush>
-    <SolidColorBrush x:Key="BodyForeground">#354052</SolidColorBrush>
-    <SolidColorBrush x:Key="DescriptionForeground">#7F8FA4</SolidColorBrush>
-    <SolidColorBrush x:Key="LabelForeground">#FFFFFF</SolidColorBrush>
+    <SolidColorBrush x:Key="H1Foreground" Color="{StaticResource H1ForegroundColor}" />
+    <SolidColorBrush x:Key="H2Foreground" Color="{StaticResource H2ForegroundColor}" />
+    <SolidColorBrush x:Key="H3Foreground" Color="{StaticResource H3ForegroundColor}" />
+    <SolidColorBrush x:Key="LinkForeground" Color="{StaticResource LinkForegroundColor}" />
+    <SolidColorBrush x:Key="LinkForegroundActive" Color="{StaticResource LinkForegroundColorActive}" />
+    <SolidColorBrush x:Key="BodyForeground" Color="{StaticResource BodyForegroundColor}" />
+    <SolidColorBrush x:Key="DescriptionForeground" Color="{StaticResource DescriptionForegroundColor}" />
+    <SolidColorBrush x:Key="LabelForeground" Color="{StaticResource LabelForegroundColor}" />
 
     <FontWeight x:Key="H1FontWeight">Regular</FontWeight>
     <FontWeight x:Key="H2FontWeight">Regular</FontWeight>
@@ -47,8 +51,8 @@
     <!--  Input Controls  -->
     <system:Double x:Key="InputControlsFontSize">14</system:Double>
     <system:Double x:Key="InputControlsLabelFontSize">14</system:Double>
-    <SolidColorBrush x:Key="InputControlsForeground" Color="#333C48" />
-    <SolidColorBrush x:Key="InputControlsLabelForeground" Color="#7F8FA4" />
+    <SolidColorBrush x:Key="InputControlsForeground" Color="{StaticResource InputControlsForegroundColor}" />
+    <SolidColorBrush x:Key="InputControlsLabelForeground" Color="{StaticResource InputControlsLabelForegroundColor}" />
 
     <Style x:Key="BodyContentControlTypoStyle" TargetType="{x:Type ContentControl}">
         <Setter Property="FontFamily" Value="{StaticResource SourceSansProBlack}" />
@@ -115,22 +119,40 @@
 
     <DataTemplate x:Key="H1HeaderTemplate" DataType="{x:Type shared:HeaderTitleContent}">
         <WrapPanel VerticalAlignment="Center" Orientation="Vertical">
-            <TextBlock Style="{StaticResource H1TextBlockStyle}" Text="{Binding Title}" TextWrapping="Wrap" />
-            <TextBlock Style="{StaticResource DescriptionTextBlockStyle}" Text="{Binding Description}" TextWrapping="Wrap" />
+            <TextBlock
+                Style="{StaticResource H1TextBlockStyle}"
+                Text="{Binding Title}"
+                TextWrapping="Wrap" />
+            <TextBlock
+                Style="{StaticResource DescriptionTextBlockStyle}"
+                Text="{Binding Description}"
+                TextWrapping="Wrap" />
         </WrapPanel>
     </DataTemplate>
 
     <DataTemplate x:Key="H2HeaderTemplate" DataType="{x:Type shared:HeaderTitleContent}">
         <WrapPanel VerticalAlignment="Center" Orientation="Vertical">
-            <TextBlock Style="{StaticResource H2TextBlockStyle}" Text="{Binding Title}" TextWrapping="Wrap" />
-            <TextBlock Style="{StaticResource DescriptionTextBlockStyle}" Text="{Binding Description}" TextWrapping="Wrap" />
+            <TextBlock
+                Style="{StaticResource H2TextBlockStyle}"
+                Text="{Binding Title}"
+                TextWrapping="Wrap" />
+            <TextBlock
+                Style="{StaticResource DescriptionTextBlockStyle}"
+                Text="{Binding Description}"
+                TextWrapping="Wrap" />
         </WrapPanel>
     </DataTemplate>
 
     <DataTemplate x:Key="H3HeaderTemplate" DataType="{x:Type shared:HeaderTitleContent}">
         <WrapPanel VerticalAlignment="Center" Orientation="Vertical">
-            <TextBlock Style="{StaticResource H3TextBlockStyle}" Text="{Binding Title}" TextWrapping="Wrap" />
-            <TextBlock Style="{StaticResource DescriptionTextBlockStyle}" Text="{Binding Description}" TextWrapping="Wrap" />
+            <TextBlock
+                Style="{StaticResource H3TextBlockStyle}"
+                Text="{Binding Title}"
+                TextWrapping="Wrap" />
+            <TextBlock
+                Style="{StaticResource DescriptionTextBlockStyle}"
+                Text="{Binding Description}"
+                TextWrapping="Wrap" />
         </WrapPanel>
     </DataTemplate>
 

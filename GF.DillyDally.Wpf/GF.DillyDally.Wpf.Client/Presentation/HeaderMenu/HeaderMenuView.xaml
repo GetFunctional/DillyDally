@@ -23,8 +23,5 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <dxlc:LayoutControl Orientation="Horizontal">
-
-        
-    </dxlc:LayoutControl>
+    <dxlc:LayoutControl Orientation="Horizontal" />
 </UserControl>

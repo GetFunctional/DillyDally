@@ -6,9 +6,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
     xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+    xmlns:local="clr-namespace:GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:theme="clr-namespace:GF.DillyDally.Wpf.Theme;assembly=GF.DillyDally.Wpf.Theme"
-    xmlns:local="clr-namespace:GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create"
     d:DataContext="{d:DesignInstance Type={x:Type local:CreateActivityViewModel}}"
     d:DesignHeight="900"
     d:DesignWidth="800"
@@ -17,8 +17,7 @@
 
     <UserControl.Resources>
         <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-            </ResourceDictionary.MergedDictionaries>
+            <ResourceDictionary.MergedDictionaries />
             <DataTemplate x:Key="ActivityTypeTemplate" DataType="{x:Type local:ActivityTypeViewModel}">
                 <TextBlock Text="{Binding ActivityName, Mode=OneWay}" />
             </DataTemplate>
@@ -37,15 +36,21 @@
                     </ctrls:FormElementGroupControl.HeaderTitleContent>
                     <ctrls:FormElementGroupControl.Content>
                         <dxlc:LayoutGroup ItemSpace="14" Orientation="Horizontal">
-                            <ctrls:ImageInputControl ImageBytes="{Binding PreviewImageBytes, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Left" VerticalAlignment="Stretch" />
+                            <ctrls:ImageInputControl
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Stretch"
+                                ImageBytes="{Binding PreviewImageBytes, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                             <dxlc:LayoutGroup HorizontalAlignment="Left" Orientation="Vertical">
                                 <ctrls:TextInputControl
                                     InputValue="{Binding ActivityName, Mode=TwoWay}"
                                     IsRequired="True"
                                     Label="Title"
                                     WatermarkText="Give your Activity a self explanatory title" />
-                                <ctrls:ComboInputControl ItemTemplate="{StaticResource ActivityTypeTemplate}" Label="Type" InputValue="{Binding SelectedActivityTypeViewModel, Mode=TwoWay}" ItemsSource="{Binding AvailableActivityTypes, Mode=OneWay}">
-                                </ctrls:ComboInputControl>
+                                <ctrls:ComboInputControl
+                                    InputValue="{Binding SelectedActivityTypeViewModel, Mode=TwoWay}"
+                                    ItemTemplate="{StaticResource ActivityTypeTemplate}"
+                                    ItemsSource="{Binding AvailableActivityTypes, Mode=OneWay}"
+                                    Label="Type" />
                             </dxlc:LayoutGroup>
                         </dxlc:LayoutGroup>
                     </ctrls:FormElementGroupControl.Content>

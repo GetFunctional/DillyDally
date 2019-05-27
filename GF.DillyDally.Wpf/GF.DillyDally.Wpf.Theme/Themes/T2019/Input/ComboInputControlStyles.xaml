@@ -5,8 +5,8 @@
     xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
     xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
     xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
-    xmlns:theme="clr-namespace:GF.DillyDally.Wpf.Theme"
-    xmlns:input="clr-namespace:GF.DillyDally.Wpf.Theme.Controls.Input">
+    xmlns:input="clr-namespace:GF.DillyDally.Wpf.Theme.Controls.Input"
+    xmlns:theme="clr-namespace:GF.DillyDally.Wpf.Theme">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Colors.xaml" />
@@ -25,19 +25,19 @@
                 Width="{TemplateBinding Width}"
                 Height="36"
                 dx:ThemeManager.ThemeName="{x:Static theme:ThemeConstants.DevExpressThemeName}"
+                ApplyItemTemplateToSelectedItem="True"
                 EditValue="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=InputValue, Mode=TwoWay}"
                 FontSize="{StaticResource InputControlsFontSize}"
                 FontWeight="SemiBold"
                 Foreground="{StaticResource InputControlsForeground}"
-                NullText="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=WatermarkText, Mode=TwoWay}"
-                ShowNullText="True"
                 IsTextEditable="False"
-                ApplyItemTemplateToSelectedItem="True"
-                ShowCustomItems="False"
-                ShowPopupIfItemsSourceEmpty="False"
-                ItemsSource="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ItemsSource, Mode=TwoWay}"
-                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                 ItemTemplate="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ItemTemplate, Mode=TwoWay}"
+                ItemsSource="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ItemsSource, Mode=TwoWay}"
+                NullText="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=WatermarkText, Mode=TwoWay}"
+                ShowCustomItems="False"
+                ShowNullText="True"
+                ShowPopupIfItemsSourceEmpty="False"
+                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                 UseLayoutRounding="{TemplateBinding UseLayoutRounding}" />
         </dxlc:LayoutItem>
     </ControlTemplate>
