@@ -117,44 +117,4 @@
         <Setter Property="LineHeight" Value="{StaticResource DescriptionLineHeight}" />
     </Style>
 
-    <DataTemplate x:Key="H1HeaderTemplate" DataType="{x:Type shared:HeaderTitleContent}">
-        <WrapPanel VerticalAlignment="Center" Orientation="Vertical">
-            <TextBlock
-                Style="{StaticResource H1TextBlockStyle}"
-                Text="{Binding Title}"
-                TextWrapping="Wrap" />
-            <TextBlock
-                Style="{StaticResource DescriptionTextBlockStyle}"
-                Text="{Binding Description}"
-                TextWrapping="Wrap" />
-        </WrapPanel>
-    </DataTemplate>
-
-    <DataTemplate x:Key="H2HeaderTemplate" DataType="{x:Type shared:HeaderTitleContent}">
-        <WrapPanel VerticalAlignment="Center" Orientation="Vertical">
-            <TextBlock
-                Style="{StaticResource H2TextBlockStyle}"
-                Text="{Binding Title}"
-                TextWrapping="Wrap" />
-            <TextBlock
-                Style="{StaticResource DescriptionTextBlockStyle}"
-                Text="{Binding Description}"
-                TextWrapping="Wrap" />
-        </WrapPanel>
-    </DataTemplate>
-
-    <DataTemplate x:Key="H3HeaderTemplate" DataType="{x:Type shared:HeaderTitleContent}">
-        <WrapPanel VerticalAlignment="Center" Orientation="Vertical">
-            <TextBlock
-                Style="{StaticResource H3TextBlockStyle}"
-                Text="{Binding Title}"
-                TextWrapping="Wrap" />
-            <TextBlock
-                Style="{StaticResource DescriptionTextBlockStyle}"
-                Text="{Binding Description}"
-                TextWrapping="Wrap" />
-        </WrapPanel>
-    </DataTemplate>
-
-
 </ResourceDictionary>

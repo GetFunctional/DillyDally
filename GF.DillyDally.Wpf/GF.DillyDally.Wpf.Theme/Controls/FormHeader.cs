@@ -1,46 +1,39 @@
 ﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
-using GF.DillyDally.Wpf.Theme.Controls.Shared;
 
 namespace GF.DillyDally.Wpf.Theme.Controls
 {
     [DesignTimeVisible(true)]
     public class FormHeader : Control
     {
-        public static readonly DependencyProperty HeaderTitleContentProperty = DependencyProperty.Register(
-            "HeaderTitleContent", typeof(HeaderTitleContent), typeof(FormHeader), new PropertyMetadata(default(HeaderTitleContent)));
+        public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(
+            "Title", typeof(string), typeof(FormHeader), new PropertyMetadata(default(string)));
 
-        public static readonly DependencyProperty HeaderTitleContentTemplateProperty = DependencyProperty.Register(
-            "HeaderTitleContentTemplate", typeof(DataTemplate), typeof(FormHeader), new PropertyMetadata(default(DataTemplate)));
+        public static readonly DependencyProperty DescriptionProperty = DependencyProperty.Register(
+            "Description", typeof(string), typeof(FormHeader), new PropertyMetadata(default(string)));
 
-        static FormHeader()
-        {
-            DefaultStyleKeyProperty.OverrideMetadata(
-                typeof(FormHeader), new FrameworkPropertyMetadata(typeof(FormHeader)));
-        }
-
-        public HeaderTitleContent HeaderTitleContent
+        public string Title
         {
             get
             {
-                return (HeaderTitleContent)this.GetValue(HeaderTitleContentProperty);
+                return (string)this.GetValue(TitleProperty);
             }
             set
             {
-                this.SetValue(HeaderTitleContentProperty, value);
+                this.SetValue(TitleProperty, value);
             }
         }
 
-        public DataTemplate HeaderTitleContentTemplate
+        public string Description
         {
             get
             {
-                return (DataTemplate)this.GetValue(HeaderTitleContentTemplateProperty);
+                return (string)this.GetValue(DescriptionProperty);
             }
             set
             {
-                this.SetValue(HeaderTitleContentTemplateProperty, value);
+                this.SetValue(DescriptionProperty, value);
             }
         }
     }

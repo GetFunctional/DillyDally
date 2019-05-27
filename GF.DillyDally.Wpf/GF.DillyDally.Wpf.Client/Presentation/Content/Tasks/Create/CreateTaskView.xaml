@@ -44,10 +44,7 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <ctrls:Form>
-        <ctrls:Form.HeaderTitleContent>
-            <ctrls:HeaderTitleContent Title="Create Task" Description="Many people keep a list of things to do — on paper, in a spreadsheet, or by using a combination of paper and electronic methods." />
-        </ctrls:Form.HeaderTitleContent>
+    <ctrls:Form Title="Create Task" Description="Many people keep a list of things to do — on paper, in a spreadsheet, or by using a combination of paper and electronic methods.">
         <ctrls:Form.Content>
             <ctrls:PagedContentControl x:Name="PagedContent" ItemsSource="{Binding CreateTaskSteps, Mode=OneWay}" />
 

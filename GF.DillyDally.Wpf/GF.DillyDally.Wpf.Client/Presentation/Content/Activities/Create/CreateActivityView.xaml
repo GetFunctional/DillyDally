@@ -24,10 +24,7 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <ctrls:Form>
-        <ctrls:Form.HeaderTitleContent>
-            <ctrls:HeaderTitleContent Title="Create Activity" Description="Bla bla bla bla bla bla bla bla" />
-        </ctrls:Form.HeaderTitleContent>
+    <ctrls:Form Title="Create Activity" Description="Bla bla bla bla bla bla bla bla">
         <ctrls:Form.Content>
             <dxlc:LayoutGroup ItemSpace="0" Orientation="Vertical">
                 <ctrls:FormElementGroupControl>

@@ -5,6 +5,7 @@
     xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
     xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
     xmlns:layout="clr-namespace:GF.DillyDally.Wpf.Theme.Controls.Layout"
+    xmlns:shared="clr-namespace:GF.DillyDally.Wpf.Theme.Controls.Shared"
     xmlns:system="clr-namespace:System;assembly=mscorlib"
     xmlns:theme="clr-namespace:GF.DillyDally.Wpf.Theme">
 
@@ -33,14 +34,21 @@
             BorderThickness="0,0,0,1"
             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
             UseLayoutRounding="{TemplateBinding UseLayoutRounding}">
-            <dxlc:LayoutGroup ItemSpace="0" Orientation="Horizontal">
-                <ContentControl Content="{TemplateBinding HeaderTitleContent}" ContentTemplate="{TemplateBinding HeaderTitleContentTemplate}" />
-            </dxlc:LayoutGroup>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <shared:HeaderTitleContent
+                    Title="{TemplateBinding Title}"
+                    Grid.Column="0"
+                    HorizontalAlignment="Left"
+                    Description="{TemplateBinding Description}"
+                    HeaderType="H1" />
+            </Grid>
         </Border>
     </ControlTemplate>
 
     <Style x:Key="FormHeaderDefaultStyle" TargetType="{x:Type controls:FormHeader}">
-        <Setter Property="HeaderTitleContentTemplate" Value="{StaticResource H1HeaderTemplate}" />
         <Setter Property="Template" Value="{StaticResource FormHeaderControlTemplate}" />
         <Setter Property="Height" Value="80" />
         <Setter Property="FontSize" Value="{StaticResource BodyFontSize}" />
@@ -99,23 +107,26 @@
             BorderBrush="{StaticResource FormBorderBrush}"
             BorderThickness="1"
             CornerRadius="3">
-            <dxlc:LayoutControl
-                Margin="0"
-                Padding="0"
-                dx:ThemeManager.ThemeName="{x:Static theme:ThemeConstants.DevExpressThemeName}"
-                Background="{TemplateBinding Background}"
-                ItemSpace="0"
-                Orientation="Vertical">
-                <controls:FormHeader HeaderTitleContent="{TemplateBinding HeaderTitleContent}" HeaderTitleContentTemplate="{StaticResource H1HeaderTemplate}" />
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <controls:FormHeader
+                    Title="{TemplateBinding Title}"
+                    Grid.Row="0"
+                    Description="{TemplateBinding Description}" />
 
-                <ContentPresenter />
+                <ContentPresenter Grid.Row="1" />
 
                 <controls:FormFooter
+                    Grid.Row="2"
                     VerticalAlignment="Bottom"
                     Background="{StaticResource FormDefaultBackgroundBrush}"
                     Content="{TemplateBinding FooterContent}"
                     Style="{StaticResource FormFooterDefaultStyle}" />
-            </dxlc:LayoutControl>
+            </Grid>
         </Border>
 
     </ControlTemplate>

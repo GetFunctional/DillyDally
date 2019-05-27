@@ -1,18 +1,20 @@
 ﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
-using GF.DillyDally.Wpf.Theme.Controls.Shared;
 
 namespace GF.DillyDally.Wpf.Theme.Controls.Layout
 {
     [DesignTimeVisible(true)]
     public class Form : ContentControl
     {
-        public static readonly DependencyProperty HeaderTitleContentProperty = DependencyProperty.Register(
-            "HeaderTitleContent", typeof(HeaderTitleContent), typeof(Form), new PropertyMetadata(default(HeaderTitleContent)));
-
         public static readonly DependencyProperty FooterContentProperty = DependencyProperty.Register(
             "FooterContent", typeof(object), typeof(Form), new PropertyMetadata(default(object)));
+
+        public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(
+            "Title", typeof(string), typeof(Form), new PropertyMetadata(default(string)));
+
+        public static readonly DependencyProperty DescriptionProperty = DependencyProperty.Register(
+            "Description", typeof(string), typeof(Form), new PropertyMetadata(default(string)));
 
         static Form()
         {
@@ -20,18 +22,30 @@ namespace GF.DillyDally.Wpf.Theme.Controls.Layout
                 typeof(Form), new FrameworkPropertyMetadata(typeof(Form)));
         }
 
-        public HeaderTitleContent HeaderTitleContent
+        public string Title
         {
             get
             {
-                return (HeaderTitleContent)this.GetValue(HeaderTitleContentProperty);
+                return (string)this.GetValue(TitleProperty);
             }
             set
             {
-                this.SetValue(HeaderTitleContentProperty, value);
+                this.SetValue(TitleProperty, value);
             }
         }
-        
+
+        public string Description
+        {
+            get
+            {
+                return (string)this.GetValue(DescriptionProperty);
+            }
+            set
+            {
+                this.SetValue(DescriptionProperty, value);
+            }
+        }
+
         public object FooterContent
         {
             get
