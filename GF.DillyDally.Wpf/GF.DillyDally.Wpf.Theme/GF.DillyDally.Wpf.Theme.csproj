@@ -184,7 +184,6 @@
     <Compile Include="Controls\Input\ImageInputControl.cs" />
     <Compile Include="Controls\LabelControl.cs" />
     <Compile Include="Controls\InternalLinkControl.cs" />
-    <Compile Include="Controls\Layout\IDisplayPage.cs" />
     <Compile Include="Controls\Layout\PagedContentControl.cs" />
     <Compile Include="Controls\Input\TextInputControl.cs" />
     <Compile Include="Controls\Shared\HeaderType.cs" />

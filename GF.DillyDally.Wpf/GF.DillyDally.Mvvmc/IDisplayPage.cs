@@ -1,6 +1,4 @@
-﻿using GF.DillyDally.Mvvmc;
-
-namespace GF.DillyDally.Wpf.Theme.Controls.Layout
+﻿namespace GF.DillyDally.Mvvmc
 {
     public interface IDisplayPage : IViewModel
     {

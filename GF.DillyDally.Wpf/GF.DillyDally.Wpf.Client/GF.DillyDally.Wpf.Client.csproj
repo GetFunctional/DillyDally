@@ -127,6 +127,7 @@
     <Compile Include="Core\Dialoge\DialogSettings.cs" />
     <Compile Include="Core\Dialoge\IDialogService.cs" />
     <Compile Include="Core\Dialoge\IDialogSettings.cs" />
+    <Compile Include="Presentation\Content\Activities\Create\CreateActvityStep1ViewModel.cs" />
     <Compile Include="Presentation\Content\Activities\Container\ActivityContainerController.cs" />
     <Compile Include="Presentation\Content\Activities\Container\ActivityContainerView.xaml.cs">
       <DependentUpon>ActivityContainerView.xaml</DependentUpon>

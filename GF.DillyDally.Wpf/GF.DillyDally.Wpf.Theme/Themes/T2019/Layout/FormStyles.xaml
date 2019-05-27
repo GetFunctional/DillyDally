@@ -18,7 +18,7 @@
     <SolidColorBrush x:Key="FormTitleBrush" Color="#354052" />
     <SolidColorBrush x:Key="FormSubtitleBrush" Color="#B5B5B5" />
 
-    <Thickness x:Key="ContentPadding">25,0</Thickness>
+    <Thickness x:Key="ContentPadding">28,0</Thickness>
 
     <!--  Form Header  -->
     <SolidColorBrush x:Key="FormHeaderBackgroundBrush" Color="{StaticResource Layer1BackgroundColor}" />
@@ -41,7 +41,7 @@
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="24" />
+                    <ColumnDefinition Width="28" />
                 </Grid.ColumnDefinitions>
                 <shared:HeaderTitleContent
                     Title="{TemplateBinding Title}"
@@ -71,7 +71,7 @@
         <Setter Property="FontFamily" Value="{StaticResource SourceSansProBlack}" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="VerticalAlignment" Value="Top" />
-        <Setter Property="Padding" Value="29,0" />
+        <Setter Property="Padding" Value="{StaticResource ContentPadding}" />
         <Setter Property="Background" Value="{StaticResource FormHeaderBackgroundBrush}" />
     </Style>
 
@@ -102,7 +102,7 @@
         <Setter Property="Template" Value="{StaticResource FormFooterControlTemplate}" />
         <Setter Property="Background" Value="{StaticResource FormFooterBackgroundBrush}" />
         <Setter Property="Height" Value="70" />
-        <Setter Property="Padding" Value="29,0" />
+        <Setter Property="Padding" Value="{StaticResource ContentPadding}" />
         <Setter Property="FontSize" Value="{StaticResource BodyFontSize}" />
         <Setter Property="FontWeight" Value="{StaticResource BodyFontWeight}" />
         <Setter Property="FontFamily" Value="{StaticResource SourceSansProBlack}" />

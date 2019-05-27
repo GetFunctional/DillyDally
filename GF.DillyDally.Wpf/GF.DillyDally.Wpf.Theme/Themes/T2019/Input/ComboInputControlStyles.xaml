@@ -45,9 +45,7 @@
     <Style x:Key="DefaultComboInputControlStyle" TargetType="{x:Type input:ComboInputControl}">
         <Setter Property="Template" Value="{StaticResource DefaultComboInputControlTemplate}" />
         <Setter Property="FontWeight" Value="SemiBold" />
-        <Setter Property="HorizontalAlignment" Value="Left" />
-        <Setter Property="VerticalAlignment" Value="Top" />
-        <Setter Property="Width" Value="245" />
+        <Setter Property="MinWidth" Value="245" />
         <Setter Property="UseLayoutRounding" Value="True" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
     </Style>

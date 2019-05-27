@@ -17,6 +17,7 @@
                 TextWrapping="Wrap" />
             <TextBlock
                 x:Name="DescriptionBlock"
+                Padding="1,0,0,0"
                 Style="{StaticResource DescriptionTextBlockStyle}"
                 Text="{TemplateBinding Description}"
                 TextWrapping="Wrap" />

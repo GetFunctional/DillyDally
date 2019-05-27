@@ -2,7 +2,8 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
-    xmlns:layout="clr-namespace:GF.DillyDally.Wpf.Theme.Controls.Layout">
+    xmlns:layout="clr-namespace:GF.DillyDally.Wpf.Theme.Controls.Layout"
+    xmlns:mvvmc="http://schemas.getfunctional.de/dillydally/mvvmc">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Colors.xaml" />
@@ -15,7 +16,7 @@
     <SolidColorBrush x:Key="UnselectedPageBadgeForegroundBrush" Color="{StaticResource BodyForegroundColor}" />
     <SolidColorBrush x:Key="PageBadgeBorderBrush" Color="{StaticResource Layer1BorderColor}" />
 
-    <DataTemplate x:Key="PageDisplayTemplate" DataType="{x:Type layout:IDisplayPage}">
+    <DataTemplate x:Key="PageDisplayTemplate" DataType="{x:Type mvvmc:IDisplayPage}">
         <dxlc:LayoutGroup
             HorizontalAlignment="Left"
             VerticalAlignment="Center"

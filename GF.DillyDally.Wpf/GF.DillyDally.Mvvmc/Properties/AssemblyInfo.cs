@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Windows.Markup;
 
 // Allgemeine Informationen über eine Assembly werden über die folgenden
 // Attribute gesteuert. Ändern Sie diese Attributwerte, um die Informationen zu ändern,
@@ -20,6 +21,9 @@ using System.Runtime.InteropServices;
 
 // Die folgende GUID bestimmt die ID der Typbibliothek, wenn dieses Projekt für COM verfügbar gemacht wird
 [assembly: Guid("2991a81d-e0e1-4143-ac99-395b5191adbd")]
+
+[assembly: XmlnsPrefix("http://schemas.getfunctional.de/dillydally/mvvmc", "mvvmc")]
+[assembly: XmlnsDefinition("http://schemas.getfunctional.de/dillydally/mvvmc", "GF.DillyDally.Mvvmc")]
 
 // Versionsinformationen für eine Assembly bestehen aus den folgenden vier Werten:
 //

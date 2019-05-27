@@ -44,6 +44,7 @@
     <Reference Include="System.Reactive">
       <HintPath>..\..\Libs\System.Reactive.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -56,17 +57,20 @@
     <Compile Include="ControllerFactory.cs" />
     <Compile Include="ControllerInitializer.cs" />
     <Compile Include="DialogControllerBase.cs" />
+    <Compile Include="DisplayPageViewModelBase.cs" />
     <Compile Include="ICloseAware.cs" />
     <Compile Include="IController.cs" />
     <Compile Include="IController.Generic.cs" />
     <Compile Include="IDialogController.cs" />
     <Compile Include="IDialogResult.cs" />
+    <Compile Include="IDisplayPage.cs" />
     <Compile Include="InitializationBase.cs" />
     <Compile Include="Exceptions\InitializationException.cs" />
     <Compile Include="IViewModel.cs" />
     <Compile Include="MvvmcServiceFactory.cs" />
     <Compile Include="ObservableObject.cs" />
     <Compile Include="ObservableObjectExtensions.cs" />
+    <Compile Include="PagedContentViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModelBase.cs" />
   </ItemGroup>

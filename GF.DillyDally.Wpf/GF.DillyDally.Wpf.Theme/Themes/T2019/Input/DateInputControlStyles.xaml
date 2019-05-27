@@ -22,7 +22,6 @@
             Style="{StaticResource InputControlLabelStyle}"
             UseLayoutRounding="{TemplateBinding UseLayoutRounding}">
             <dxe:DateEdit
-                Width="{TemplateBinding Width}"
                 Height="36"
                 dx:ThemeManager.ThemeName="{x:Static theme:ThemeConstants.DevExpressThemeName}"
                 EditValue="{TemplateBinding InputValue}"
@@ -39,9 +38,7 @@
     <Style x:Key="DefaultDateInputControlStyle" TargetType="{x:Type input:DateInputControl}">
         <Setter Property="Template" Value="{StaticResource DefaultDateInputControlTemplate}" />
         <Setter Property="FontWeight" Value="SemiBold" />
-        <Setter Property="HorizontalAlignment" Value="Left" />
-        <Setter Property="VerticalAlignment" Value="Top" />
-        <Setter Property="Width" Value="245" />
+        <Setter Property="MinWidth" Value="245" />
         <Setter Property="UseLayoutRounding" Value="True" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
     </Style>

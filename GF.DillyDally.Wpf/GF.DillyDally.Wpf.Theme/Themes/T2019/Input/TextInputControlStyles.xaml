@@ -24,7 +24,6 @@
             UseLayoutRounding="{TemplateBinding UseLayoutRounding}">
             <dxe:TextEdit
                 x:Name="TextInput"
-                Width="{TemplateBinding Width}"
                 Height="36"
                 dx:ThemeManager.ThemeName="{x:Static theme:ThemeConstants.DevExpressThemeName}"
                 AcceptsReturn="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsMultiline, Mode=TwoWay}"
@@ -51,9 +50,6 @@
     <Style x:Key="DefaultTextInputControlStyle" TargetType="{x:Type input:TextInputControl}">
         <Setter Property="Template" Value="{StaticResource DefaultTextInputControlTemplate}" />
         <Setter Property="FontWeight" Value="SemiBold" />
-        <Setter Property="HorizontalAlignment" Value="Left" />
-        <Setter Property="VerticalAlignment" Value="Top" />
-        <Setter Property="Width" Value="245" />
         <Setter Property="UseLayoutRounding" Value="True" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="IsMultiline" Value="False" />

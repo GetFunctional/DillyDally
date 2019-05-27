@@ -24,11 +24,14 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create
             viewModel.CancelProcessCommand =
                 ReactiveCommand.Create(this.CancelProcess);
 
-            viewModel.AvailableActivityTypes = new ObservableCollection<ActivityTypeViewModel>
-                                               {
-                                                   new ActivityTypeViewModel(ActivityType.Percentage),
-                                                   new ActivityTypeViewModel(ActivityType.Leveling)
-                                               };
+            var step1 = new CreateActvityStep1ViewModel();
+            step1.AvailableActivityTypes = new ObservableCollection<ActivityTypeViewModel>
+                                           {
+                                               new ActivityTypeViewModel(ActivityType.Percentage),
+                                               new ActivityTypeViewModel(ActivityType.Leveling)
+                                           };
+
+            viewModel.AddPage(step1);
         }
 
         public IDialogResult CreateActivityDialogResult { get; } = new DialogCommandResult();
@@ -45,9 +48,10 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create
 
             if (this.IsInputValid(this.ViewModel))
             {
-                var activityName = this.ViewModel.ActivityName;
-                var activityType = this.ViewModel.SelectedActivityTypeViewModel.ActivityType;
-                var previewImageForActivity = this.ViewModel.PreviewImageBytes;
+                var step1 = this.ViewModel.GetPage<CreateActvityStep1ViewModel>();
+                var activityName = step1.ActivityName;
+                var activityType = step1.SelectedActivityTypeViewModel?.ActivityType;
+                var previewImageForActivity = step1.PreviewImageBytes;
 
                 var commandDispatcher = this._mediator;
 
@@ -77,7 +81,10 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create
 
         private bool IsInputValid(CreateActivityViewModel viewModel)
         {
-            return viewModel.ActivityName != string.Empty && viewModel.SelectedActivityTypeViewModel != null;
+            var step1 = viewModel.GetPage<CreateActvityStep1ViewModel>();
+            var activityName = step1.ActivityName;
+            var activityType = step1.SelectedActivityTypeViewModel?.ActivityType;
+            return activityName != string.Empty && activityType != null;
         }
     }
 }
