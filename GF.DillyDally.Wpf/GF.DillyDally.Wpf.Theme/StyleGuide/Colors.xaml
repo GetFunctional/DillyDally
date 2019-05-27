@@ -18,6 +18,12 @@
     <Color x:Key="InputControlsForegroundColor">#333C48</Color>
     <Color x:Key="InputControlsLabelForegroundColor">#7F8FA4</Color>
 
+    <Color x:Key="LightForegroundColor">#FFFFFF</Color>
+    <Color x:Key="DarkForegroundColor">#354052</Color>
+    <Color x:Key="FontIconLightForegroundColor">#FFFFFF</Color>
+    <Color x:Key="FontIconDarkForegroundColor">#354052</Color>
+
+
     <!--  Borders  -->
     <Color x:Key="Layer4BorderColor">#DFE2E5</Color>
     <Color x:Key="Layer3BorderColor">#E6EAEE</Color>

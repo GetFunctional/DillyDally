@@ -5,7 +5,8 @@
     xmlns:ctrls="http://schemas.getfunctional.de/dillydally/controls"
     xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
     xmlns:fa5="http://schemas.fontawesome.com/icons/"
-    xmlns:local="clr-namespace:GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.TaskBoard">
+    xmlns:local="clr-namespace:GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.TaskBoard"
+    xmlns:buttons="clr-namespace:GF.DillyDally.Wpf.Theme.Controls.Buttons;assembly=GF.DillyDally.Wpf.Theme">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Colors.xaml" />
@@ -165,7 +166,7 @@
                 </ItemsControl>
             </Border>
 
-            <ctrls:ColoredButtonControl
+            <buttons:ColoredButtonControl
                 Grid.Row="2"
                 Grid.Column="0"
                 Width="24"
@@ -176,13 +177,13 @@
                 ButtonColor="Blue"
                 Command="{Binding CreateNewTaskCommand, Mode=OneWay}"
                 CommandParameter="{Binding LaneId, Mode=OneWay}">
-                <ctrls:ColoredButtonControl.Content>
+                <buttons:ColoredButtonControl.Content>
                     <fa5:FontAwesome
                         FontSize="{StaticResource FontIconSize}"
                         Foreground="{StaticResource FontIconForeground}"
                         Icon="Solid_Plus" />
-                </ctrls:ColoredButtonControl.Content>
-            </ctrls:ColoredButtonControl>
+                </buttons:ColoredButtonControl.Content>
+            </buttons:ColoredButtonControl>
         </Grid>
     </DataTemplate>
 </ResourceDictionary>

@@ -9,6 +9,7 @@
     xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:theme="clr-namespace:GF.DillyDally.Wpf.Theme;assembly=GF.DillyDally.Wpf.Theme"
+    xmlns:buttons="clr-namespace:GF.DillyDally.Wpf.Theme.Controls.Buttons;assembly=GF.DillyDally.Wpf.Theme"
     Width="560"
     d:DataContext="{d:DesignInstance Type={x:Type create:CreateTaskViewModel}}"
     dx:ThemeManager.ThemeName="{x:Static theme:ThemeConstants.DevExpressThemeName}"
@@ -111,18 +112,18 @@
         </ctrls:Form.Content>
         <ctrls:Form.FooterContent>
             <dxlc:LayoutGroup Orientation="Horizontal">
-                <ctrls:ColoredButtonControl
+                <buttons:ColoredButtonControl
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center"
                     ButtonColor="Blue"
                     Command="{Binding ElementName=PagedContent, Path=NextPageCommand}"
                     Content="Next" />
-                <ctrls:ColoredButtonControl
+                <buttons:ColoredButtonControl
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center"
                     Command="{Binding ElementName=PagedContent, Path=PreviousPageCommand}"
                     Content="Previous" />
-                <ctrls:ColoredButtonControl
+                <buttons:ColoredButtonControl
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center"
                     Command="{Binding CancelProcessCommand}"

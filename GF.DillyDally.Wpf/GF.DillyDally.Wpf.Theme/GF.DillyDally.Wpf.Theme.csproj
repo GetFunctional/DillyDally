@@ -114,7 +114,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Themes\T2019\ColoredButtonControlStyles.xaml">
+    <Page Include="Themes\T2019\Buttons\ChromelessButtonControlStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\T2019\Buttons\ColoredButtonControlStyles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -168,8 +172,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\ButtonColor.cs" />
-    <Compile Include="Controls\ColoredButtonControl.cs" />
+    <Compile Include="Controls\Buttons\ButtonColor.cs" />
+    <Compile Include="Controls\Buttons\ChromelessButtonControl.cs" />
+    <Compile Include="Controls\Buttons\ColoredButtonControl.cs" />
     <Compile Include="Controls\Input\ComboInputControl.cs" />
     <Compile Include="Controls\Input\DateInputControl.cs" />
     <Compile Include="Controls\Layout\FormElementGroupControl.cs" />

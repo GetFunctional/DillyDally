@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="clr-namespace:GF.DillyDally.Wpf.Theme.Controls"
+    xmlns:buttons="clr-namespace:GF.DillyDally.Wpf.Theme.Controls.Buttons"
     xmlns:utils="clr-namespace:DevExpress.Xpf.Utils;assembly=DevExpress.Xpf.Core.v18.2">
 
     <ResourceDictionary.MergedDictionaries>
@@ -11,9 +11,6 @@
 
     <Color x:Key="DisabledBackgroundColor">#E9EDF1</Color>
     <SolidColorBrush x:Key="DisabledBackgroundBrush" Color="{StaticResource DisabledBackgroundColor}" />
-    <SolidColorBrush x:Key="DarkForegroundBrush" Color="#354052" />
-    <SolidColorBrush x:Key="LightForegroundBrush" Color="#FFFFFF" />
-
 
     <!--  Gray  -->
     <Color x:Key="GrayButtonBorder1">#CED0DA</Color>
@@ -148,12 +145,8 @@
         <GradientStop Offset="1" Color="{StaticResource BlackButtonBackgroundBottom2}" />
     </LinearGradientBrush>
 
-    <ControlTemplate x:Key="BlueButtonControlTemplate" TargetType="{x:Type controls:ColoredButtonControl}">
-        <Grid
-            Width="{TemplateBinding Width}"
-            Height="{TemplateBinding Height}"
-            MinWidth="{TemplateBinding MinWidth}"
-            MinHeight="{TemplateBinding MinHeight}">
+    <ControlTemplate x:Key="BlueButtonControlTemplate" TargetType="{x:Type buttons:ColoredButtonControl}">
+        <Grid>
             <Border
                 x:Name="NormalButtonBackground"
                 Padding="{TemplateBinding Padding}"
@@ -246,7 +239,7 @@
             </VisualStateManager.VisualStateGroups>
         </Grid>
         <ControlTemplate.Triggers>
-            <Trigger Property="ButtonColor" Value="{x:Static controls:ButtonColor.Blue}">
+            <Trigger Property="ButtonColor" Value="{x:Static buttons:ButtonColor.Blue}">
                 <Setter TargetName="NormalButtonBackground" Property="Background" Value="{StaticResource BlueButtonBackgroundBrush1}" />
                 <Setter TargetName="ButtonPressedBackground" Property="Background" Value="{StaticResource BlueButtonBackgroundBrush2}" />
                 <Setter TargetName="ButtonMouseOverBackground" Property="Background" Value="{StaticResource BlueButtonBackgroundBrush2}" />
@@ -254,7 +247,7 @@
                 <Setter TargetName="ButtonPressedBackground" Property="BorderBrush" Value="{StaticResource BlueButtonBorderBrush2}" />
                 <Setter TargetName="ButtonMouseOverBackground" Property="BorderBrush" Value="{StaticResource BlueButtonBorderBrush2}" />
             </Trigger>
-            <Trigger Property="ButtonColor" Value="{x:Static controls:ButtonColor.Green}">
+            <Trigger Property="ButtonColor" Value="{x:Static buttons:ButtonColor.Green}">
                 <Setter TargetName="NormalButtonBackground" Property="Background" Value="{StaticResource GreenButtonBackgroundBrush1}" />
                 <Setter TargetName="ButtonPressedBackground" Property="Background" Value="{StaticResource GreenButtonBackgroundBrush2}" />
                 <Setter TargetName="ButtonMouseOverBackground" Property="Background" Value="{StaticResource GreenButtonBackgroundBrush2}" />
@@ -262,7 +255,7 @@
                 <Setter TargetName="ButtonPressedBackground" Property="BorderBrush" Value="{StaticResource GreenButtonBorderBrush2}" />
                 <Setter TargetName="ButtonMouseOverBackground" Property="BorderBrush" Value="{StaticResource GreenButtonBorderBrush2}" />
             </Trigger>
-            <Trigger Property="ButtonColor" Value="{x:Static controls:ButtonColor.Red}">
+            <Trigger Property="ButtonColor" Value="{x:Static buttons:ButtonColor.Red}">
                 <Setter TargetName="NormalButtonBackground" Property="Background" Value="{StaticResource RedButtonBackgroundBrush1}" />
                 <Setter TargetName="ButtonPressedBackground" Property="Background" Value="{StaticResource RedButtonBackgroundBrush2}" />
                 <Setter TargetName="ButtonMouseOverBackground" Property="Background" Value="{StaticResource RedButtonBackgroundBrush2}" />
@@ -270,7 +263,7 @@
                 <Setter TargetName="ButtonPressedBackground" Property="BorderBrush" Value="{StaticResource RedButtonBorderBrush2}" />
                 <Setter TargetName="ButtonMouseOverBackground" Property="BorderBrush" Value="{StaticResource RedButtonBorderBrush2}" />
             </Trigger>
-            <Trigger Property="ButtonColor" Value="{x:Static controls:ButtonColor.Orange}">
+            <Trigger Property="ButtonColor" Value="{x:Static buttons:ButtonColor.Orange}">
                 <Setter TargetName="NormalButtonBackground" Property="Background" Value="{StaticResource OrangeButtonBackgroundBrush1}" />
                 <Setter TargetName="ButtonPressedBackground" Property="Background" Value="{StaticResource OrangeButtonBackgroundBrush2}" />
                 <Setter TargetName="ButtonMouseOverBackground" Property="Background" Value="{StaticResource OrangeButtonBackgroundBrush2}" />
@@ -278,7 +271,7 @@
                 <Setter TargetName="ButtonPressedBackground" Property="BorderBrush" Value="{StaticResource OrangeButtonBorderBrush2}" />
                 <Setter TargetName="ButtonMouseOverBackground" Property="BorderBrush" Value="{StaticResource OrangeButtonBorderBrush2}" />
             </Trigger>
-            <Trigger Property="ButtonColor" Value="{x:Static controls:ButtonColor.Black}">
+            <Trigger Property="ButtonColor" Value="{x:Static buttons:ButtonColor.Black}">
                 <Setter TargetName="NormalButtonBackground" Property="Background" Value="{StaticResource BlackButtonBackgroundBrush1}" />
                 <Setter TargetName="ButtonPressedBackground" Property="Background" Value="{StaticResource BlackButtonBackgroundBrush2}" />
                 <Setter TargetName="ButtonMouseOverBackground" Property="Background" Value="{StaticResource BlackButtonBackgroundBrush2}" />
@@ -286,7 +279,7 @@
                 <Setter TargetName="ButtonPressedBackground" Property="BorderBrush" Value="{StaticResource BlackButtonBorderBrush2}" />
                 <Setter TargetName="ButtonMouseOverBackground" Property="BorderBrush" Value="{StaticResource BlackButtonBorderBrush2}" />
             </Trigger>
-            <Trigger Property="ButtonColor" Value="{x:Static controls:ButtonColor.Purple}">
+            <Trigger Property="ButtonColor" Value="{x:Static buttons:ButtonColor.Purple}">
                 <Setter TargetName="NormalButtonBackground" Property="Background" Value="{StaticResource PurpleButtonBackgroundBrush1}" />
                 <Setter TargetName="ButtonPressedBackground" Property="Background" Value="{StaticResource PurpleButtonBackgroundBrush2}" />
                 <Setter TargetName="ButtonMouseOverBackground" Property="Background" Value="{StaticResource PurpleButtonBackgroundBrush2}" />
@@ -294,7 +287,7 @@
                 <Setter TargetName="ButtonPressedBackground" Property="BorderBrush" Value="{StaticResource PurpleButtonBorderBrush2}" />
                 <Setter TargetName="ButtonMouseOverBackground" Property="BorderBrush" Value="{StaticResource PurpleButtonBorderBrush2}" />
             </Trigger>
-            <Trigger Property="ButtonColor" Value="{x:Static controls:ButtonColor.Gray}">
+            <Trigger Property="ButtonColor" Value="{x:Static buttons:ButtonColor.Gray}">
                 <Setter TargetName="NormalButtonBackground" Property="Background" Value="{StaticResource GrayButtonBackgroundBrush1}" />
                 <Setter TargetName="ButtonPressedBackground" Property="Background" Value="{StaticResource GrayButtonBackgroundBrush2}" />
                 <Setter TargetName="ButtonMouseOverBackground" Property="Background" Value="{StaticResource GrayButtonBackgroundBrush2}" />
@@ -306,19 +299,19 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-    <Style x:Key="DefaultStyle" TargetType="{x:Type controls:ColoredButtonControl}">
+    <Style x:Key="DefaultStyle" TargetType="{x:Type buttons:ColoredButtonControl}">
         <Setter Property="Template" Value="{StaticResource BlueButtonControlTemplate}" />
         <Setter Property="Foreground" Value="{StaticResource LightForegroundBrush}" />
-        <Setter Property="FontSize" Value="{StaticResource ParagraphFontSize}" />
-        <Setter Property="FontFamily" Value="{StaticResource SourceSansProBlack}" />
-        <Setter Property="HorizontalAlignment" Value="Left" />
-        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="FontSize" Value="{StaticResource BodyFontSize}" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Padding" Value="22,11" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Height" Value="36" />
         <Setter Property="Width" Value="Auto" />
         <Setter Property="ButtonColor" Value="Gray" />
     </Style>
 
-    <Style BasedOn="{StaticResource DefaultStyle}" TargetType="{x:Type controls:ColoredButtonControl}" />
+    <Style BasedOn="{StaticResource DefaultStyle}" TargetType="{x:Type buttons:ColoredButtonControl}" />
 
 </ResourceDictionary>

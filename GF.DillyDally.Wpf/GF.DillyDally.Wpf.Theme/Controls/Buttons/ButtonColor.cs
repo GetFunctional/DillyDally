@@ -1,4 +1,4 @@
-﻿namespace GF.DillyDally.Wpf.Theme.Controls
+﻿namespace GF.DillyDally.Wpf.Theme.Controls.Buttons
 {
     public enum ButtonColor
     {

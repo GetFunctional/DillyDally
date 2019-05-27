@@ -10,8 +10,12 @@
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/InternalLinkControlStyles.xaml" />
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/LabelControlStyles.xaml" />
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/InternalLinkControlStyles.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/ColoredButtonControlStyles.xaml" />
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/HeaderTitleContentStyles.xaml" />
+
+        <!--  Buttons  -->
+        <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/Buttons/ColoredButtonControlStyles.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/Buttons/ChromelessButtonControlStyles.xaml" />
+
 
         <!--  Layout Controls  -->
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/Layout/FormElementGroupControlStyles.xaml" />
@@ -32,7 +36,6 @@
 
     <Style TargetType="{x:Type fa5:FontAwesome}">
         <Setter Property="FontSize" Value="{StaticResource FontIconSize}" />
-        <Setter Property="Foreground" Value="{StaticResource FontIconForeground}" />
     </Style>
 
     <Style BasedOn="{StaticResource BodyContentControlTypoStyle}" TargetType="{x:Type ContentControl}" />

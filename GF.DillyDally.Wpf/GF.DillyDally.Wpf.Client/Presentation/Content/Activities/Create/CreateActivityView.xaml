@@ -9,6 +9,7 @@
     xmlns:local="clr-namespace:GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:theme="clr-namespace:GF.DillyDally.Wpf.Theme;assembly=GF.DillyDally.Wpf.Theme"
+    xmlns:buttons="clr-namespace:GF.DillyDally.Wpf.Theme.Controls.Buttons;assembly=GF.DillyDally.Wpf.Theme"
     d:DataContext="{d:DesignInstance Type={x:Type local:CreateActivityViewModel}}"
     d:DesignHeight="900"
     d:DesignWidth="800"
@@ -56,13 +57,13 @@
         </ctrls:Form.Content>
         <ctrls:Form.FooterContent>
             <dxlc:LayoutGroup Orientation="Horizontal">
-                <ctrls:ColoredButtonControl
+                <buttons:ColoredButtonControl
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center"
                     ButtonColor="Blue"
                     Command="{Binding CreateActivityCommand}"
                     Content="Create Activity" />
-                <ctrls:ColoredButtonControl
+                <buttons:ColoredButtonControl
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center"
                     Command="{Binding CancelProcessCommand}"

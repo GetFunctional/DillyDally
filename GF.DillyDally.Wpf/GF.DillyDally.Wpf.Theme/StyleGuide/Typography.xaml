@@ -27,6 +27,8 @@
     <SolidColorBrush x:Key="BodyForeground" Color="{StaticResource BodyForegroundColor}" />
     <SolidColorBrush x:Key="DescriptionForeground" Color="{StaticResource DescriptionForegroundColor}" />
     <SolidColorBrush x:Key="LabelForeground" Color="{StaticResource LabelForegroundColor}" />
+    <SolidColorBrush x:Key="LightForegroundBrush" Color="{StaticResource LightForegroundColor}" />
+    <SolidColorBrush x:Key="DarkForegroundBrush" Color="{StaticResource DarkForegroundColor}" />
 
     <FontWeight x:Key="H1FontWeight">Regular</FontWeight>
     <FontWeight x:Key="H2FontWeight">Regular</FontWeight>
@@ -46,7 +48,8 @@
 
     <!--  Font Icons  -->
     <system:Double x:Key="FontIconSize">14</system:Double>
-    <SolidColorBrush x:Key="FontIconForeground" Color="White" />
+    <SolidColorBrush x:Key="FontIconLightForegroundBrush" Color="{StaticResource FontIconLightForegroundColor}" />
+    <SolidColorBrush x:Key="FontIconDarkForegroundBrush" Color="{StaticResource FontIconDarkForegroundColor}" />
 
     <!--  Input Controls  -->
     <system:Double x:Key="InputControlsFontSize">14</system:Double>

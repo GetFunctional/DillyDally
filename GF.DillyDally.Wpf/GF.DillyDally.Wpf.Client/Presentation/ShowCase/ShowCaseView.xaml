@@ -9,6 +9,7 @@
     xmlns:local="clr-namespace:GF.DillyDally.Wpf.Client.Presentation.ShowCase"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:theme="http://schemas.getfunctional.de/dillydally/wpf"
+    xmlns:buttons="clr-namespace:GF.DillyDally.Wpf.Theme.Controls.Buttons;assembly=GF.DillyDally.Wpf.Theme"
     d:DataContext="{d:DesignInstance Type={x:Type local:ShowCaseViewModel}}"
     d:DesignHeight="450"
     d:DesignWidth="800"
@@ -27,37 +28,37 @@
 
                 <ctrls:InternalLinkControl DisplayLink="TTitleK-44444" />
 
-                <ctrls:ColoredButtonControl
+                <buttons:ColoredButtonControl
                     VerticalAlignment="Top"
                     ButtonColor="Blue"
                     Command="{Binding TestDialogCommand}"
                     Content="TestDialog" />
-                <ctrls:ColoredButtonControl
+                <buttons:ColoredButtonControl
                     VerticalAlignment="Top"
                     ButtonColor="Gray"
                     Command="{Binding TestDialogCommand}"
                     Content="TestDialog" />
-                <ctrls:ColoredButtonControl
+                <buttons:ColoredButtonControl
                     VerticalAlignment="Top"
                     ButtonColor="Black"
                     Command="{Binding TestDialogCommand}"
                     Content="TestDialog" />
-                <ctrls:ColoredButtonControl
+                <buttons:ColoredButtonControl
                     VerticalAlignment="Top"
                     ButtonColor="Green"
                     Command="{Binding TestDialogCommand}"
                     Content="TestDialog" />
-                <ctrls:ColoredButtonControl
+                <buttons:ColoredButtonControl
                     VerticalAlignment="Top"
                     ButtonColor="Orange"
                     Command="{Binding TestDialogCommand}"
                     Content="TestDialog" />
-                <ctrls:ColoredButtonControl
+                <buttons:ColoredButtonControl
                     VerticalAlignment="Top"
                     ButtonColor="Purple"
                     Command="{Binding TestDialogCommand}"
                     Content="TestDialog" />
-                <ctrls:ColoredButtonControl
+                <buttons:ColoredButtonControl
                     VerticalAlignment="Top"
                     ButtonColor="Red"
                     Command="{Binding TestDialogCommand}"

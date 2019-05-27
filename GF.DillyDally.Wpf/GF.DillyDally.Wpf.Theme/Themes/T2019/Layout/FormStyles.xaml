@@ -1,13 +1,12 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:buttons="clr-namespace:GF.DillyDally.Wpf.Theme.Controls.Buttons"
     xmlns:controls="clr-namespace:GF.DillyDally.Wpf.Theme.Controls"
-    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
-    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+    xmlns:fa5="http://schemas.fontawesome.com/icons/"
     xmlns:layout="clr-namespace:GF.DillyDally.Wpf.Theme.Controls.Layout"
     xmlns:shared="clr-namespace:GF.DillyDally.Wpf.Theme.Controls.Shared"
-    xmlns:system="clr-namespace:System;assembly=mscorlib"
-    xmlns:theme="clr-namespace:GF.DillyDally.Wpf.Theme">
+    xmlns:system="clr-namespace:System;assembly=mscorlib">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Colors.xaml" />
@@ -35,15 +34,31 @@
             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
             UseLayoutRounding="{TemplateBinding UseLayoutRounding}">
             <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="24" />
                 </Grid.ColumnDefinitions>
                 <shared:HeaderTitleContent
                     Title="{TemplateBinding Title}"
+                    Grid.Row="1"
                     Grid.Column="0"
                     HorizontalAlignment="Left"
                     Description="{TemplateBinding Description}"
                     HeaderType="H1" />
+                <buttons:ChromelessButtonControl
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Width="20"
+                    Height="20"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top">
+                    <fa5:FontAwesome FontSize="14" Icon="Solid_Times" />
+                </buttons:ChromelessButtonControl>
             </Grid>
         </Border>
     </ControlTemplate>
