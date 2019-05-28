@@ -4,26 +4,79 @@
     xmlns:controls="clr-namespace:GF.DillyDally.Wpf.Theme.Controls"
     xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
     xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:fa5="http://schemas.fontawesome.com/icons/"
     xmlns:input="clr-namespace:GF.DillyDally.Wpf.Theme.Controls.Input"
-    xmlns:theme="clr-namespace:GF.DillyDally.Wpf.Theme">
+    xmlns:shared="clr-namespace:GF.DillyDally.Wpf.Theme.Controls.Shared"
+    xmlns:theme="clr-namespace:GF.DillyDally.Wpf.Theme"
+    xmlns:themes="http://schemas.devexpress.com/winfx/2008/xaml/editors/themekeys">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Colors.xaml" />
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Typography.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <SolidColorBrush x:Key="ImageBorderBrush" Color="#707070" />
+    <SolidColorBrush x:Key="ImageContentForegroundBrush" Color="{StaticResource DarkForegroundColor}" />
+    <SolidColorBrush x:Key="ImageBorderBrush" Color="{StaticResource DarkForegroundColor}" />
+
+    <ControlTemplate x:Key="EmptyImageControlTemplate">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.15*" />
+                <RowDefinition Height="0.5*" />
+                <RowDefinition Height="0.35*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.25*" />
+                <ColumnDefinition Width="0.5*" />
+                <ColumnDefinition Width="0.25*" />
+            </Grid.ColumnDefinitions>
+            <fa5:FontAwesome
+                Grid.Row="1"
+                Grid.Column="1"
+                FontSize="52"
+                Foreground="{StaticResource ImageContentForegroundBrush}"
+                Icon="Regular_Image" />
+            <WrapPanel
+                Grid.Row="2"
+                Grid.Column="0"
+                Grid.ColumnSpan="3"
+                HorizontalAlignment="Center"
+                Orientation="Vertical">
+                <TextBlock
+                    Style="{StaticResource H3TextBlockStyle}"
+                    Text="Add Image"
+                    TextAlignment="Center" />
+                <TextBlock
+                    Style="{StaticResource DescriptionTextBlockStyle}"
+                    Text="(Minimal Size 1600x900px)"
+                    TextAlignment="Center" />
+            </WrapPanel>
+        </Grid>
+    </ControlTemplate>
+
     <ControlTemplate x:Key="ImageEditorControlTemplate" TargetType="{x:Type input:ImageInputControl}">
-        <Border
-            BorderBrush="{StaticResource ImageBorderBrush}"
-            BorderThickness="1"
-            CornerRadius="5">
+        <Border BorderThickness="1" CornerRadius="3">
+            <Border.BorderBrush>
+                <VisualBrush>
+                    <VisualBrush.Visual>
+                        <Rectangle
+                            Width="{Binding RelativeSource={RelativeSource AncestorType={x:Type Border}}, Path=ActualWidth}"
+                            Height="{Binding RelativeSource={RelativeSource AncestorType={x:Type Border}}, Path=ActualHeight}"
+                            Stroke="{StaticResource ImageBorderBrush}"
+                            StrokeDashArray="4 2"
+                            StrokeThickness="1" />
+                    </VisualBrush.Visual>
+                </VisualBrush>
+            </Border.BorderBrush>
             <dxe:ImageEdit
                 dx:ThemeManager.ThemeName="{x:Static theme:ThemeConstants.DevExpressThemeName}"
                 AllowNullInput="True"
                 BorderThickness="0"
                 EditValue="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ImageBytes, Mode=TwoWay}"
-                ShowMenu="False" />
+                EmptyContentTemplate="{StaticResource EmptyImageControlTemplate}"
+                ShowBorder="False"
+                ShowMenu="False"
+                Stretch="UniformToFill" />
         </Border>
     </ControlTemplate>
 

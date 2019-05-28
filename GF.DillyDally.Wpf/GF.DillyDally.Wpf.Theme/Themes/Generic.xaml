@@ -33,11 +33,6 @@
     </ResourceDictionary.MergedDictionaries>
 
     <SolidColorBrush x:Key="LayoutItemForeground" Color="#7F8FA4" />
-
-    <Style TargetType="{x:Type fa5:FontAwesome}">
-        <Setter Property="FontSize" Value="{StaticResource FontIconSize}" />
-    </Style>
-
     <Style BasedOn="{StaticResource BodyContentControlTypoStyle}" TargetType="{x:Type ContentControl}" />
 
 </ResourceDictionary>

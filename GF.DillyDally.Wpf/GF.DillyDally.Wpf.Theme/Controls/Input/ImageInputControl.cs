@@ -28,5 +28,7 @@ namespace GF.DillyDally.Wpf.Theme.Controls.Input
                 this.SetValue(ImageBytesProperty, value);
             }
         }
+
+
     }
 }
