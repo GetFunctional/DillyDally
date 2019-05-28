@@ -23,7 +23,7 @@
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type local:CreateActvityStep1ViewModel}">
-                <dxlc:LayoutGroup ItemSpace="25" Orientation="Vertical">
+                <dxlc:LayoutGroup ItemSpace="19" Orientation="Vertical">
                     <ctrls:HeaderTitleContent
                         Title="Activity infos"
                         VerticalAlignment="Top"

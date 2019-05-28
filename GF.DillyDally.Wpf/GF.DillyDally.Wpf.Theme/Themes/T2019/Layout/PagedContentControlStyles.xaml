@@ -15,6 +15,7 @@
     <SolidColorBrush x:Key="SelectedPageBadgeForegroundBrush" Color="{StaticResource Layer1BackgroundColor}" />
     <SolidColorBrush x:Key="UnselectedPageBadgeForegroundBrush" Color="{StaticResource BodyForegroundColor}" />
     <SolidColorBrush x:Key="PageBadgeBorderBrush" Color="{StaticResource Layer1BorderColor}" />
+    <SolidColorBrush x:Key="PageTitleForegroundBrush" Color="{StaticResource BodyForegroundColor}" />
 
     <DataTemplate x:Key="PageDisplayTemplate" DataType="{x:Type mvvmc:IDisplayPage}">
         <dxlc:LayoutGroup
@@ -42,17 +43,25 @@
                     TextAlignment="Center" />
             </Border>
             <TextBlock
+                x:Name="PageTitle"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
+                FontFamily="{StaticResource Arial}"
+                FontSize="14"
+                FontWeight="Regular"
+                Foreground="{StaticResource PageTitleForegroundBrush}"
+                Opacity="1"
                 Text="{Binding Title}"
                 TextAlignment="Left" />
         </dxlc:LayoutGroup>
         <DataTemplate.Triggers>
             <DataTrigger Binding="{Binding IsCurrent}" Value="False">
+                <Setter TargetName="PageTitle" Property="Opacity" Value="0.5" />
                 <Setter TargetName="Badge" Property="Background" Value="{StaticResource UnselectedPageBadgeBackgroundBrush}" />
                 <Setter TargetName="BadgeContent" Property="Foreground" Value="{StaticResource UnselectedPageBadgeForegroundBrush}" />
             </DataTrigger>
             <DataTrigger Binding="{Binding IsCurrent}" Value="true">
+                <Setter TargetName="PageTitle" Property="Opacity" Value="1" />
                 <Setter TargetName="Badge" Property="Background" Value="{StaticResource SelectedPageBadgeBackgroundBrush}" />
                 <Setter TargetName="BadgeContent" Property="Foreground" Value="{StaticResource SelectedPageBadgeForegroundBrush}" />
             </DataTrigger>
@@ -71,18 +80,19 @@
 
             <ItemsControl
                 Grid.Row="0"
+                Padding="30,0"
                 ItemTemplate="{StaticResource PageDisplayTemplate}"
                 ItemsSource="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ItemsSource}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <dxlc:LayoutGroup Padding="30,0,30,0" Orientation="Horizontal" />
+                        <dxlc:LayoutGroup Orientation="Horizontal" />
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
 
             <Border
                 Grid.Row="1"
-                Padding="30,24,30,24"
+                Padding="30,20,30,20"
                 Background="{StaticResource PageContentBackgroundBrush}"
                 BorderBrush="{StaticResource PageContentBorderBrush}"
                 BorderThickness="0,1,0,0">

@@ -91,10 +91,7 @@
             BorderThickness="0,1,0,0"
             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
             UseLayoutRounding="{TemplateBinding UseLayoutRounding}">
-            <ContentPresenter
-                Margin="{TemplateBinding Padding}"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Center" />
+            <ContentPresenter />
         </Border>
     </ControlTemplate>
 
