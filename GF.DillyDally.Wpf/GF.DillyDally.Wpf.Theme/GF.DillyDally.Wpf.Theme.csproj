@@ -172,6 +172,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converter\BooleanToThicknessConverter.cs" />
     <Compile Include="Controls\Buttons\ButtonColor.cs" />
     <Compile Include="Controls\Buttons\ChromelessButtonControl.cs" />
     <Compile Include="Controls\Buttons\ColoredButtonControl.cs" />
