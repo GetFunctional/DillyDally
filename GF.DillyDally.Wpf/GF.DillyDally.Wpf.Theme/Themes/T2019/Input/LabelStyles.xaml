@@ -10,10 +10,14 @@
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Typography.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
+    <SolidColorBrush x:Key="InputControlsLabelForeground" Color="{StaticResource InputControlsLabelForegroundColor}" />
+
     <Style x:Key="InputControlLabelStyle" TargetType="{x:Type dxlc:LayoutItem}">
         <Setter Property="dx:ThemeManager.ThemeName" Value="{x:Static theme:ThemeConstants.DevExpressThemeName}" />
         <Setter Property="FontSize" Value="{StaticResource InputControlsLabelFontSize}" />
         <Setter Property="Foreground" Value="{StaticResource InputControlsLabelForeground}" />
+        <Setter Property="FontFamily" Value="{StaticResource Arial}" />
+        <Setter Property="FontWeight" Value="Regular" />
         <Setter Property="LabelHorizontalAlignment" Value="Left" />
         <Setter Property="LabelPosition" Value="Top" />
         <Setter Property="LabelVerticalAlignment" Value="Bottom" />

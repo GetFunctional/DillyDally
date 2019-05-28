@@ -190,6 +190,7 @@
     <Compile Include="Controls\Shared\HeaderType.cs" />
     <Compile Include="Converter\ColorStringToBrushConverter.cs" />
     <Compile Include="Converter\ContentToVisiblityConverter.cs" />
+    <Compile Include="Converter\IsNullToBooleanConverter.cs" />
     <Compile Include="Extensions\FontSizeExtension.cs" />
     <Compile Include="Controls\Shared\HeaderTitleContent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">

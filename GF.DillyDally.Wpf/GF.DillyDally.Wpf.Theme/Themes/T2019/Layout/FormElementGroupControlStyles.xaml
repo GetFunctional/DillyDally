@@ -43,7 +43,7 @@
         <Setter Property="FontSize" Value="{StaticResource BodyFontSize}" />
         <Setter Property="FontFamily" Value="{StaticResource SourceSansProBlack}" />
         <Setter Property="Background" Value="{StaticResource ElementGroupBackgroundBrush}" />
-        <Setter Property="HeaderContentTemplate" Value="{StaticResource H2HeaderTemplate}" />
+        <!--<Setter Property="HeaderContentTemplate" Value="{StaticResource H2HeaderTemplate}" />-->
         <Setter Property="VerticalAlignment" Value="Top" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />

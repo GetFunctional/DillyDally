@@ -1,7 +1,6 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="clr-namespace:GF.DillyDally.Wpf.Theme.Controls"
     xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
     xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
     xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
@@ -15,19 +14,20 @@
 
     </ResourceDictionary.MergedDictionaries>
 
+    <SolidColorBrush x:Key="InputControlsValueForegroundBrush" Color="{StaticResource InputControlsValueForegroundColor}" />
+
     <ControlTemplate x:Key="DefaultDateInputControlTemplate" TargetType="{x:Type input:DateInputControl}">
         <dxlc:LayoutItem
+            dx:FocusHelper2.Focusable="False"
             Label="{TemplateBinding Label}"
-            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-            Style="{StaticResource InputControlLabelStyle}"
-            UseLayoutRounding="{TemplateBinding UseLayoutRounding}">
+            Style="{StaticResource InputControlLabelStyle}">
             <dxe:DateEdit
                 Height="36"
                 dx:ThemeManager.ThemeName="{x:Static theme:ThemeConstants.DevExpressThemeName}"
                 EditValue="{TemplateBinding InputValue}"
                 FontSize="{StaticResource InputControlsFontSize}"
                 FontWeight="SemiBold"
-                Foreground="{StaticResource InputControlsForeground}"
+                Foreground="{StaticResource InputControlsValueForegroundBrush}"
                 NullText="{TemplateBinding WatermarkText}"
                 ShowNullText="True"
                 SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"

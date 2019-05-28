@@ -25,7 +25,7 @@
                 x:Name="Badge"
                 Width="28"
                 Height="28"
-                Padding="0,0,1,0"
+                Padding="0,1,1,0"
                 Background="{StaticResource UnselectedPageBadgeBackgroundBrush}"
                 BorderBrush="{StaticResource PageBadgeBorderBrush}"
                 BorderThickness="1"

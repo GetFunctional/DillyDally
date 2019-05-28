@@ -8,7 +8,6 @@
     xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
     xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
     xmlns:dxn="http://schemas.devexpress.com/winfx/2008/xaml/navbar"
-    xmlns:dxwui="http://schemas.devexpress.com/winfx/2008/xaml/windowsui"
     xmlns:headerMenu="clr-namespace:GF.DillyDally.Wpf.Client.Presentation.HeaderMenu"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:presentation="clr-namespace:GF.DillyDally.Wpf.Client.Presentation"
@@ -21,6 +20,8 @@
     FontFamily="{StaticResource SourceSansProBlack}"
     FontSize="{StaticResource BodyFontSize}"
     FontWeight="{StaticResource BodyFontWeight}"
+    SnapsToDevicePixels="True"
+    UseLayoutRounding="True"
     mc:Ignorable="d">
     <Window.Resources>
         <ResourceDictionary>
@@ -33,24 +34,32 @@
             <SolidColorBrush x:Key="ApplicationBackgroundBrush" Color="{StaticResource Layer4BackgroundColor}" />
             <SolidColorBrush x:Key="ContentSeparatorBrush" Color="{StaticResource Layer4BorderColor}" />
             <SolidColorBrush x:Key="MenuBackgroundBrush" Color="{StaticResource Layer1BackgroundColor}" />
+            <conv:IsNullToBooleanConverter x:Key="IsNullToBooleanConverter" />
+            <conv:IsNullToBooleanConverter x:Key="IsNotNullToBooleanConverter" IsInverted="True" />
+
         </ResourceDictionary>
     </Window.Resources>
 
-    <Border BorderThickness="1" BorderBrush="{StaticResource ContentSeparatorBrush}" Background="{StaticResource ApplicationBackgroundBrush}">
-        <Grid Margin="0" >
-            <!-- Overlay -->
+    <Border
+        Background="{StaticResource ApplicationBackgroundBrush}"
+        BorderBrush="{StaticResource ContentSeparatorBrush}"
+        BorderThickness="1">
+        <Grid Margin="0">
+            <!--  Overlay  -->
             <ContentControl
                 x:Name="Overlay"
                 Panel.ZIndex="1000"
                 Content="{Binding}"
                 ContentTemplate="{StaticResource OverlayTemplate}"
                 DataContext="{Binding OverlayViewModel, Mode=OneWay}"
+                IsEnabled="{Binding OverlayContent, Converter={StaticResource IsNotNullToBooleanConverter}}"
                 Visibility="{Binding OverlayContent, Converter={StaticResource ContentToVisiblityConverter}}" />
 
-            <!-- Content -->
+            <!--  Content  -->
             <dxlc:LayoutControl
                 Margin="0"
                 Padding="0"
+                IsEnabled="{Binding OverlayViewModel.OverlayContent, Converter={StaticResource IsNullToBooleanConverter}}"
                 ItemSpace="0">
 
                 <!--  Left Side  -->
@@ -103,8 +112,7 @@
                                 </dxn:NavBarGroup>
                                 <dxn:NavBarGroup Header="Activities">
                                     <dxn:NavBarGroup.Items>
-                                        <dxn:NavBarItem  Command="{Binding CreateNewActivityCommand, Mode=OneWay}"
-                                                         Content="Create Activity"/>
+                                        <dxn:NavBarItem Command="{Binding CreateNewActivityCommand, Mode=OneWay}" Content="Create Activity" />
                                     </dxn:NavBarGroup.Items>
                                 </dxn:NavBarGroup>
                                 <dxn:NavBarGroup Header="Games">

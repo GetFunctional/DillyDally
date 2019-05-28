@@ -17,6 +17,7 @@
     <Color x:Key="LabelForegroundColor">#FFFFFF</Color>
     <Color x:Key="InputControlsForegroundColor">#333C48</Color>
     <Color x:Key="InputControlsLabelForegroundColor">#7F8FA4</Color>
+    <Color x:Key="InputControlsValueForegroundColor">#354052</Color>
 
     <Color x:Key="LightForegroundColor">#FFFFFF</Color>
     <Color x:Key="DarkForegroundColor">#354052</Color>
@@ -29,6 +30,9 @@
     <Color x:Key="Layer3BorderColor">#E6EAEE</Color>
     <Color x:Key="Layer2BorderColor">#E6EAEE</Color>
     <Color x:Key="Layer1BorderColor">#E6EAEE</Color>
+    <Color x:Key="InputControlsBorderColor">#DFE3E9</Color>
+    <Color x:Key="InputControlsSelectedBorderColor">#2EA2F8</Color>
+    <Color x:Key="InputControlsHoverBorderColor">#CED0DA</Color>
 
     <!--  Highlights  -->
     <Color x:Key="HighlightBlue">#00aaff</Color>

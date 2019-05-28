@@ -9,6 +9,7 @@
     </ResourceDictionary.MergedDictionaries>
 
     <FontFamily x:Key="SourceSansProBlack">pack://application:,,,/GF.DillyDally.wpf.Theme;component/StyleGuide/Fonts/#SourceSansPro</FontFamily>
+    <FontFamily x:Key="Arial">Arial</FontFamily>
 
     <!--  SourceSansPro  -->
     <system:Double x:Key="H1FontSize">20</system:Double>
@@ -54,11 +55,12 @@
     <!--  Input Controls  -->
     <system:Double x:Key="InputControlsFontSize">14</system:Double>
     <system:Double x:Key="InputControlsLabelFontSize">14</system:Double>
-    <SolidColorBrush x:Key="InputControlsForeground" Color="{StaticResource InputControlsForegroundColor}" />
-    <SolidColorBrush x:Key="InputControlsLabelForeground" Color="{StaticResource InputControlsLabelForegroundColor}" />
 
+
+
+    <!--  Usage Template Styles  -->
     <Style x:Key="BodyContentControlTypoStyle" TargetType="{x:Type ContentControl}">
-        <Setter Property="FontFamily" Value="{StaticResource SourceSansProBlack}" />
+        <Setter Property="FontFamily" Value="{StaticResource Arial}" />
         <Setter Property="FontSize" Value="{StaticResource BodyFontSize}" />
         <Setter Property="FontWeight" Value="{StaticResource BodyFontWeight}" />
         <Setter Property="Foreground" Value="{StaticResource BodyForeground}" />
@@ -89,7 +91,7 @@
     </Style>
 
     <Style x:Key="H1TextBlockStyle" TargetType="{x:Type TextBlock}">
-        <Setter Property="FontFamily" Value="{StaticResource SourceSansProBlack}" />
+        <Setter Property="FontFamily" Value="{StaticResource Arial}" />
         <Setter Property="FontSize" Value="{StaticResource H1FontSize}" />
         <Setter Property="FontWeight" Value="{StaticResource H1FontWeight}" />
         <Setter Property="Foreground" Value="{StaticResource H1Foreground}" />
