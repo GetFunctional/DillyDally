@@ -4,12 +4,12 @@ using ReactiveUI;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Create
 {
-    internal sealed class CreateTaskStep1ViewModel : DisplayPageViewModelBase
+    internal sealed class CreateTaskBasicInfosViewModel : DisplayPageViewModelBase
     {
         private CategorySelectorViewModel _categorySelectorViewModel;
         private string _taskName;
 
-        public CreateTaskStep1ViewModel(CategorySelectorViewModel categorySelectorViewModel)
+        public CreateTaskBasicInfosViewModel(CategorySelectorViewModel categorySelectorViewModel)
         {
             this._categorySelectorViewModel = categorySelectorViewModel;
         }

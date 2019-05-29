@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:buttons="clr-namespace:GF.DillyDally.Wpf.Theme.Controls.Buttons;assembly=GF.DillyDally.Wpf.Theme"
+    xmlns:container="clr-namespace:GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Container"
     xmlns:create="clr-namespace:GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Create"
     xmlns:ctrls="http://schemas.getfunctional.de/dillydally/controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -22,7 +23,7 @@
 
             </ResourceDictionary.MergedDictionaries>
 
-            <DataTemplate DataType="{x:Type create:CreateTaskStep1ViewModel}">
+            <DataTemplate DataType="{x:Type create:CreateTaskBasicInfosViewModel}">
                 <dxlc:LayoutGroup ItemSpace="25" Orientation="Vertical">
                     <ctrls:HeaderTitleContent
                         Title="Task Infos"
@@ -42,73 +43,39 @@
                     </dxlc:LayoutGroup>
                 </dxlc:LayoutGroup>
             </DataTemplate>
+
+            <DataTemplate DataType="{x:Type create:CreateTaskActivitiesViewModel}">
+                <container:ActivityContainerView DataContext="{Binding ActivityContainerViewModel, Mode=OneWay}" />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type create:CreateTaskAdditionalInfosViewModel}">
+                <dxlc:LayoutGroup Orientation="Vertical">
+                    <ctrls:DateInputControl
+                        VerticalAlignment="Top"
+                        InputValue="{Binding DueDate, Mode=TwoWay}"
+                        Label="Due Date"
+                        WatermarkText="When do you want to finish this task?" />
+                    <ctrls:TextInputControl
+                        VerticalAlignment="Top"
+                        InputValue="{Binding DefinitionOfDone, Mode=TwoWay}"
+                        Label="Definiton of Done"
+                        WatermarkText="Describe when your task is done." />
+                    <ctrls:TextInputControl
+                        InputValue="{Binding Description, Mode=TwoWay}"
+                        IsMultiline="True"
+                        Label="Description" />
+                </dxlc:LayoutGroup>
+            </DataTemplate>
+
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <ctrls:Form Title="Create Task" Description="Many people keep a list of things to do — on paper, in a spreadsheet, or by using a combination of paper and electronic methods.">
+    <ctrls:Form
+        Title="Create Task"
+        CloseCommand="{Binding CancelProcessCommand, Mode=OneWay}"
+        Description="Many people keep a list of things to do — on paper, in a spreadsheet, or by using a combination of paper and electronic methods.">
         <ctrls:Form.Content>
-            <ctrls:PagedContentControl x:Name="PagedContent" ItemsSource="{Binding CreateTaskSteps, Mode=OneWay}" />
-
-
-            <!--<dxwui:SlideView ItemsSource="{Binding CreateTaskSteps}" ItemTemplate="{StaticResource ItemContentTemplate}" ItemHeaderTemplate="{StaticResource ItemHeaderTemplate}">
-                <dxwui:SlideView.ItemContainerStyle>
-                    <Style TargetType="dxwui:SlideViewItem">
-                        <Setter Property="IsHeaderInteractive" Value="False"/>
-                    </Style>
-                </dxwui:SlideView.ItemContainerStyle>
-            </dxwui:SlideView>-->
-
-            <!--<dxlc:LayoutGroup ItemSpace="0" Orientation="Vertical">
-                <ctrls:FormElementGroupControl>
-                    <ctrls:FormElementGroupControl.HeaderTitleContent>
-                        <ctrls:HeaderTitleContent Title="Task Details" Description="Bla bla bla bla bla bla bla bla" />
-                    </ctrls:FormElementGroupControl.HeaderTitleContent>
-                    <ctrls:FormElementGroupControl.Content>
-                        <dxlc:LayoutGroup ItemSpace="14" Orientation="Horizontal">
-                            <ctrls:ImageInputControl HorizontalAlignment="Left" VerticalAlignment="Stretch" />
-                            <dxlc:LayoutGroup HorizontalAlignment="Left" Orientation="Vertical">
-                                <ctrls:TextInputControl
-                                    InputValue="{Binding TaskName, Mode=TwoWay}"
-                                    IsRequired="True"
-                                    Label="Title"
-                                    WatermarkText="Give your Task a self explanatory title" />
-                                <ContentControl Content="{Binding CategorySelectorViewModel, Mode=OneWay}" ContentTemplate="{StaticResource CategorySelectorTemplate}" />
-                            </dxlc:LayoutGroup>
-                        </dxlc:LayoutGroup>
-                    </ctrls:FormElementGroupControl.Content>
-                </ctrls:FormElementGroupControl>
-
-                <ctrls:FormElementGroupControl>
-                    <ctrls:FormElementGroupControl.HeaderTitleContent>
-                        <ctrls:HeaderTitleContent Title="Additional Infos" Description="Bla bla bla bla bla bla bla bla" />
-                    </ctrls:FormElementGroupControl.HeaderTitleContent>
-                    <ctrls:FormElementGroupControl.Content>
-                        <dxlc:LayoutGroup Orientation="Vertical">
-                            <ctrls:DateInputControl Label="Due Date" WatermarkText="When do you want to finish this task?" />
-                            <ctrls:TextInputControl Label="Definiton of Done" WatermarkText="Describe when your task is done." />
-                            <ctrls:TextInputControl IsMultiline="True" Label="Description" />
-                        </dxlc:LayoutGroup>
-                    </ctrls:FormElementGroupControl.Content>
-                </ctrls:FormElementGroupControl>
-
-                <ctrls:FormElementGroupControl>
-                    <ctrls:FormElementGroupControl.HeaderTitleContent>
-                        <ctrls:HeaderTitleContent Title="Relating Activities/Projects" Description="Bla bla bla bla bla bla bla bla" />
-                    </ctrls:FormElementGroupControl.HeaderTitleContent>
-                    <ctrls:FormElementGroupControl.Content>
-                        <container:ActivityContainerView Height="180" DataContext="{Binding ActivityContainerViewModel, Mode=OneWay}" />
-                    </ctrls:FormElementGroupControl.Content>
-                </ctrls:FormElementGroupControl>
-
-                <ctrls:FormElementGroupControl>
-                    <ctrls:FormElementGroupControl.HeaderTitleContent>
-                        <ctrls:HeaderTitleContent Title="Achievements on completion" Description="Bla bla bla bla bla bla bla bla" />
-                    </ctrls:FormElementGroupControl.HeaderTitleContent>
-                    <ctrls:FormElementGroupControl.Content>
-                        <achievements:AchievementContainerView Height="180" DataContext="{Binding TaskAchievementsViewModel}" />
-                    </ctrls:FormElementGroupControl.Content>
-                </ctrls:FormElementGroupControl>
-            </dxlc:LayoutGroup>-->
+            <ctrls:PagedContentControl x:Name="PagedContent" ItemsSource="{Binding Pages, Mode=OneWay}" />
         </ctrls:Form.Content>
         <ctrls:Form.FooterContent>
             <dxlc:LayoutGroup Orientation="Horizontal">

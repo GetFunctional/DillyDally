@@ -142,7 +142,9 @@
     <Compile Include="Presentation\Content\Activities\Create\CreateActivityViewModel.cs" />
     <Compile Include="Presentation\Content\Commands\ActivityCommands.cs" />
     <Compile Include="Presentation\Content\Commands\TaskCommands.cs" />
-    <Compile Include="Presentation\Content\Tasks\Create\CreateTaskStep1ViewModel.cs" />
+    <Compile Include="Presentation\Content\Tasks\Create\CreateTaskAdditionalInfosViewModel.cs" />
+    <Compile Include="Presentation\Content\Tasks\Create\CreateTaskBasicInfosViewModel.cs" />
+    <Compile Include="Presentation\Content\Tasks\Create\CreateTaskActivitiesViewModel.cs" />
     <Compile Include="Presentation\OverlayViewModel.cs" />
     <Compile Include="Presentation\Content\Achievements\AchievementContainerView.xaml.cs">
       <DependentUpon>AchievementContainerView.xaml</DependentUpon>

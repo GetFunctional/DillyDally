@@ -1,9 +1,9 @@
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 using GF.DillyDally.Data.Sqlite;
 using GF.DillyDally.Mvvmc;
 using GF.DillyDally.Wpf.Client.Core.Dialoge;
+using GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Container;
 using GF.DillyDally.Wpf.Client.Presentation.Content.Category;
 using GF.DillyDally.WriteModel.Domain.Tasks.Commands;
 using MediatR;
@@ -13,31 +13,38 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Create
 {
     public class CreateTaskController : DialogControllerBase<CreateTaskViewModel>
     {
+        private readonly ActivityContainerController _activityContainerController;
+        private readonly CategorySelectorController _categorySelectorController;
         private readonly DatabaseFileHandler _databaseFileHandler;
         private readonly IMediator _mediator;
-        private readonly CategorySelectorController _categorySelectorController;
         private Guid? _presetLane;
 
-        public CreateTaskController(CreateTaskViewModel viewModel, DatabaseFileHandler databaseFileHandler, IMediator mediator,CategorySelectorController categorySelectorController) :
+        public CreateTaskController(CreateTaskViewModel viewModel, DatabaseFileHandler databaseFileHandler, IMediator mediator,
+            CategorySelectorController categorySelectorController, ActivityContainerController activityContainerController) :
             base(viewModel)
         {
             this._databaseFileHandler = databaseFileHandler;
             this._mediator = mediator;
             this._categorySelectorController = categorySelectorController;
+            this._activityContainerController = activityContainerController;
+
             viewModel.CreateTaskCommand =
-                ReactiveCommand.CreateFromTask(async () => await this.CompleteProcess()); 
+                ReactiveCommand.CreateFromTask(async () => await this.CompleteProcess());
             viewModel.CancelProcessCommand =
                 ReactiveCommand.Create(this.CancelProcess);
 
             viewModel.TaskAchievementsViewModel = new TaskAchievementsViewModel();
-            viewModel.CreateTaskSteps.Add(new CreateTaskStep1ViewModel(categorySelectorController.ViewModel));
-            viewModel.CreateTaskSteps.Add(new CreateTaskStep1ViewModel(categorySelectorController.ViewModel));
+            viewModel.AddPage(new CreateTaskBasicInfosViewModel(categorySelectorController.ViewModel));
+            viewModel.AddPage(new CreateTaskAdditionalInfosViewModel());
+            viewModel.AddPage(new CreateTaskActivitiesViewModel(this._activityContainerController.ViewModel));
         }
+
+        public IDialogResult CreateTaskDialogResult { get; } = new DialogCommandResult();
+        public IDialogResult CancelDialogResult { get; } = new DialogCommandResult();
 
         private void CancelProcess()
         {
             this.ConfirmDialogWith(this.CancelDialogResult);
-
         }
 
         private async Task CompleteProcess()
@@ -46,14 +53,12 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Create
 
             if (this.IsInputValid(this.ViewModel))
             {
-                var step1 = this.ViewModel.CreateTaskSteps.OfType<CreateTaskStep1ViewModel>().Single();
-                var taskName = step1.TaskName;
-                var category = step1.SelectedCategory;
+                var basicInfos = this.ViewModel.GetPage<CreateTaskBasicInfosViewModel>();
+                var taskName = basicInfos.TaskName;
+                var category = basicInfos.SelectedCategory;
 
                 var commandDispatcher = this._mediator;
-              
                 var task = await commandDispatcher.Send(new CreateTaskCommand(taskName, category.CategoryId, this._presetLane));
-
                 this.ConfirmDialogWith(this.CreateTaskDialogResult);
             }
 
@@ -63,45 +68,16 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Create
         private bool IsInputValid(CreateTaskViewModel viewModel)
         {
             return true;
-
         }
-
-        public IDialogResult CreateTaskDialogResult { get; } = new DialogCommandResult();
-        public IDialogResult CancelDialogResult { get; } = new DialogCommandResult();
 
 
         protected override async Task OnInitializeAsync()
         {
+            await this._activityContainerController.InitializeAsync();
             await this._categorySelectorController.InitializeAsync();
             await base.OnInitializeAsync();
-
-            //using (var connection = await this._databaseFileHandler.OpenConnectionAsync())
-            //{
-            //    var taskBoardRepository = new TaskBoardRepository();
-            //    var lanes = await taskBoardRepository.GetTaskBoardLanesAsync(connection);
-
-            //    var laneViewModels = this.CreateLaneViewModels(lanes);
-            //    this.ViewModel.Lanes = laneViewModels;
-            //}
         }
 
-        //private IList<TaskBoardLaneViewModel> CreateLaneViewModels(IList<TaskBoardLaneEntity> lanes)
-        //{
-        //    return lanes.Select(lane =>
-        //    {
-        //        var laneVm = new TaskBoardLaneViewModel();
-        //        laneVm.LaneName = lane.Name;
-
-        //        laneVm.Tasks = new ObservableCollection<TaskBoardTaskViewModel>(lane.Tasks.Select(task =>
-        //       {
-        //           var taskVm = new TaskBoardTaskViewModel(task.Name, task.DisplayLink, task.Category.ColorCode, task.Category.Name, 3);
-        //           taskVm.Name = task.Name;
-        //           return taskVm;
-        //       }));
-
-        //        return laneVm;
-        //    }).ToList();
-        //}
         public void PresetLane(Guid laneId)
         {
             this._presetLane = laneId;
