@@ -5,12 +5,16 @@
     xmlns:container="clr-namespace:GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Container"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
     d:DataContext="{d:DesignInstance Type={x:Type container:ActivityContainerViewModel}}"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
 
-    <Grid>
+    <dxlc:LayoutGroup Orientation="Vertical">
+
+
+
         <ItemsControl ItemsSource="{Binding Activities, Mode=OneWay}" />
-    </Grid>
+    </dxlc:LayoutGroup>
 </UserControl>

@@ -28,6 +28,9 @@
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/Input/ComboInputControlStyles.xaml" />
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/Input/DateInputControlStyles.xaml" />
 
+        <!--  Shared Controls  -->
+        <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/Shared/SearchTextControlStyles.xaml" />
+
 
 
     </ResourceDictionary.MergedDictionaries>

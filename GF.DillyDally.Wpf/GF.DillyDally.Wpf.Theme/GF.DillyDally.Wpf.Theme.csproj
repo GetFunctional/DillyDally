@@ -170,8 +170,13 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Themes\T2019\Shared\SearchTextControlStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\Shared\SearchTextControl.cs" />
     <Compile Include="Converter\BooleanToThicknessConverter.cs" />
     <Compile Include="Controls\Buttons\ButtonColor.cs" />
     <Compile Include="Controls\Buttons\ChromelessButtonControl.cs" />

@@ -18,6 +18,7 @@
     <Color x:Key="InputControlsForegroundColor">#333C48</Color>
     <Color x:Key="InputControlsLabelForegroundColor">#7F8FA4</Color>
     <Color x:Key="InputControlsValueForegroundColor">#354052</Color>
+    <Color x:Key="InputControlsBackgroundColor">#FFFFFF</Color>
 
     <Color x:Key="LightForegroundColor">#FFFFFF</Color>
     <Color x:Key="DarkForegroundColor">#354052</Color>
