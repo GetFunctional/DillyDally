@@ -3,7 +3,6 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:buttons="clr-namespace:GF.DillyDally.Wpf.Theme.Controls.Buttons;assembly=GF.DillyDally.Wpf.Theme"
-    xmlns:create="clr-namespace:GF.DillyDally.Wpf.Client"
     xmlns:ctrls="http://schemas.getfunctional.de/dillydally/controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
@@ -53,7 +52,10 @@
 
     </UserControl.Resources>
 
-    <ctrls:Form Title="Create Activity" Description="Create a new activity to view the progress of a larger whole across multiple tasks.">
+    <ctrls:Form
+        Title="Create Activity"
+        CloseCommand="{Binding CancelProcessCommand, Mode=OneWay}"
+        Description="Create a new activity to view the progress of a larger whole across multiple tasks.">
         <ctrls:Form.Content>
             <ctrls:PagedContentControl x:Name="PagedContent" ItemsSource="{Binding Pages, Mode=OneWay}" />
 

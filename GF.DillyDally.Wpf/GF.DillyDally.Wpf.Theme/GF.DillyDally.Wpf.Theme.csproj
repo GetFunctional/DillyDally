@@ -180,8 +180,8 @@
     <Compile Include="Controls\Input\DateInputControl.cs" />
     <Compile Include="Controls\Layout\FormElementGroupControl.cs" />
     <Compile Include="Controls\Layout\Form.cs" />
-    <Compile Include="Controls\FormFooter.cs" />
-    <Compile Include="Controls\FormHeader.cs" />
+    <Compile Include="Controls\Layout\FormFooter.cs" />
+    <Compile Include="Controls\Layout\FormHeader.cs" />
     <Compile Include="Controls\Input\ImageInputControl.cs" />
     <Compile Include="Controls\LabelControl.cs" />
     <Compile Include="Controls\InternalLinkControl.cs" />

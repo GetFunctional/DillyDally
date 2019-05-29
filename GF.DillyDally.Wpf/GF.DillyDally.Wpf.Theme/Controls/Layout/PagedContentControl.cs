@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -10,6 +11,7 @@ using GF.DillyDally.Mvvmc;
 
 namespace GF.DillyDally.Wpf.Theme.Controls.Layout
 {
+    [DesignTimeVisible(true)]
     public class PagedContentControl : ItemsControl
     {
         public static readonly DependencyProperty CurrentPageProperty = DependencyProperty.Register(
@@ -41,28 +43,33 @@ namespace GF.DillyDally.Wpf.Theme.Controls.Layout
             this.CommandBindings.Add(new CommandBinding(this.PreviousPageCommand));
         }
 
+        [Bindable(true, BindingDirection.OneWay)]
         public ICommand PreviousPageCommand
         {
             get { return this._previousPageCommand; }
         }
 
+        [Bindable(true, BindingDirection.OneWay)]
         public ICommand NextPageCommand
         {
             get { return this._nextPageCommand; }
         }
 
+        [Bindable(true)]
         public object CurrentPage
         {
             get { return this.GetValue(CurrentPageProperty); }
             set { this.SetValue(CurrentPageProperty, value); }
         }
 
+        [Bindable(true)]
         public bool HasNextPage
         {
             get { return (bool) this.GetValue(HasNextPageProperty); }
             set { this.SetValue(HasNextPageProperty, value); }
         }
 
+        [Bindable(true)]
         public bool HasPreviousPage
         {
             get { return (bool) this.GetValue(HasPreviousPageProperty); }

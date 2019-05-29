@@ -1,8 +1,10 @@
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 
 namespace GF.DillyDally.Wpf.Theme.Controls.Shared
 {
+    [DesignTimeVisible(true)]
     public sealed class HeaderTitleContent : Control
     {
         public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(
@@ -20,18 +22,21 @@ namespace GF.DillyDally.Wpf.Theme.Controls.Shared
                 typeof(HeaderTitleContent), new FrameworkPropertyMetadata(typeof(HeaderTitleContent)));
         }
 
+        [Bindable(true)]
         public HeaderType HeaderType
         {
             get { return (HeaderType) this.GetValue(HeaderTypeProperty); }
             set { this.SetValue(HeaderTypeProperty, value); }
         }
 
+        [Bindable(true)]
         public string Title
         {
             get { return (string) this.GetValue(TitleProperty); }
             set { this.SetValue(TitleProperty, value); }
         }
 
+        [Bindable(true)]
         public string Description
         {
             get { return (string) this.GetValue(DescriptionProperty); }

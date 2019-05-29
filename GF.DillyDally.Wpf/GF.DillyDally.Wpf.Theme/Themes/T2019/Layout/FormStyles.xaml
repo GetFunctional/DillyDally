@@ -24,7 +24,7 @@
     <SolidColorBrush x:Key="FormHeaderBackgroundBrush" Color="{StaticResource Layer1BackgroundColor}" />
     <SolidColorBrush x:Key="FormHeaderBorderBrush" Color="{StaticResource Layer1BorderColor}" />
 
-    <ControlTemplate x:Key="FormHeaderControlTemplate" TargetType="{x:Type controls:FormHeader}">
+    <ControlTemplate x:Key="FormHeaderControlTemplate" TargetType="{x:Type layout:FormHeader}">
         <Border
             Height="{TemplateBinding Height}"
             Padding="{TemplateBinding Padding}"
@@ -56,14 +56,15 @@
                     Width="20"
                     Height="20"
                     HorizontalAlignment="Right"
-                    VerticalAlignment="Top">
+                    VerticalAlignment="Top"
+                    Command="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=CloseCommand}">
                     <fa5:FontAwesome FontSize="14" Icon="Solid_Times" />
                 </buttons:ChromelessButtonControl>
             </Grid>
         </Border>
     </ControlTemplate>
 
-    <Style x:Key="FormHeaderDefaultStyle" TargetType="{x:Type controls:FormHeader}">
+    <Style x:Key="FormHeaderDefaultStyle" TargetType="{x:Type layout:FormHeader}">
         <Setter Property="Template" Value="{StaticResource FormHeaderControlTemplate}" />
         <Setter Property="Height" Value="80" />
         <Setter Property="FontSize" Value="{StaticResource BodyFontSize}" />
@@ -75,14 +76,14 @@
         <Setter Property="Background" Value="{StaticResource FormHeaderBackgroundBrush}" />
     </Style>
 
-    <Style BasedOn="{StaticResource FormHeaderDefaultStyle}" TargetType="{x:Type controls:FormHeader}" />
+    <Style BasedOn="{StaticResource FormHeaderDefaultStyle}" TargetType="{x:Type layout:FormHeader}" />
 
 
     <!--  Form Footer  -->
     <SolidColorBrush x:Key="FormInnerBorderBrush" Color="{StaticResource Layer1BorderColor}" />
     <SolidColorBrush x:Key="FormFooterBackgroundBrush" Color="{StaticResource Layer2BackgroundColor}" />
 
-    <ControlTemplate x:Key="FormFooterControlTemplate" TargetType="{x:Type controls:FormFooter}">
+    <ControlTemplate x:Key="FormFooterControlTemplate" TargetType="{x:Type layout:FormFooter}">
         <Border
             Height="{TemplateBinding Height}"
             Padding="{TemplateBinding Padding}"
@@ -95,7 +96,7 @@
         </Border>
     </ControlTemplate>
 
-    <Style x:Key="FormFooterDefaultStyle" TargetType="{x:Type controls:FormFooter}">
+    <Style x:Key="FormFooterDefaultStyle" TargetType="{x:Type layout:FormFooter}">
         <Setter Property="Template" Value="{StaticResource FormFooterControlTemplate}" />
         <Setter Property="Background" Value="{StaticResource FormFooterBackgroundBrush}" />
         <Setter Property="Height" Value="70" />
@@ -105,7 +106,7 @@
         <Setter Property="FontFamily" Value="{StaticResource SourceSansProBlack}" />
     </Style>
 
-    <Style BasedOn="{StaticResource FormFooterDefaultStyle}" TargetType="{x:Type controls:FormFooter}" />
+    <Style BasedOn="{StaticResource FormFooterDefaultStyle}" TargetType="{x:Type layout:FormFooter}" />
 
 
     <!--  Form  -->
@@ -125,14 +126,16 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <controls:FormHeader
+                <layout:FormHeader
+                    x:Name="PART_Header"
                     Title="{TemplateBinding Title}"
                     Grid.Row="0"
                     Description="{TemplateBinding Description}" />
 
                 <ContentPresenter Grid.Row="1" />
 
-                <controls:FormFooter
+                <layout:FormFooter
+                    x:Name="PART_Footer"
                     Grid.Row="2"
                     VerticalAlignment="Bottom"
                     Background="{StaticResource FormDefaultBackgroundBrush}"
