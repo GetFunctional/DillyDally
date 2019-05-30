@@ -23,6 +23,9 @@
 
             </ResourceDictionary.MergedDictionaries>
 
+            <dx:BooleanToVisibilityConverter x:Key="InvertedBooleanToVisibilityConverter" Invert="True" />
+
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
             <DataTemplate DataType="{x:Type create:CreateTaskBasicInfosViewModel}">
                 <dxlc:LayoutGroup ItemSpace="25" Orientation="Vertical">
                     <ctrls:HeaderTitleContent
@@ -31,8 +34,8 @@
                         Description="It's best to keep the name short and then add the details in the task Body. Also select a category that Matches the Topic best. "
                         HeaderType="H2" />
                     <dxlc:LayoutGroup VerticalAlignment="Top" Orientation="Horizontal">
-                        <ctrls:ImageInputControl HorizontalAlignment="Left" VerticalAlignment="Stretch" />
-                        <dxlc:LayoutGroup HorizontalAlignment="Left" Orientation="Vertical">
+                        <ctrls:ImageInputControl Width="162" Height="134" />
+                        <dxlc:LayoutGroup Orientation="Vertical">
                             <ctrls:TextInputControl
                                 InputValue="{Binding TaskName, Mode=TwoWay}"
                                 IsRequired="True"
@@ -45,7 +48,15 @@
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type create:CreateTaskActivitiesViewModel}">
-                <container:ActivityContainerView DataContext="{Binding ActivityContainerViewModel, Mode=OneWay}" />
+                <dxlc:LayoutGroup ItemSpace="25" Orientation="Vertical">
+                    <ctrls:HeaderTitleContent
+                        Title="Activities Infos"
+                        VerticalAlignment="Top"
+                        Description="Does this Task realate to existing activities?"
+                        HeaderType="H2" />
+
+                    <container:ActivityContainerView DataContext="{Binding ActivityContainerViewModel, Mode=OneWay}" />
+                </dxlc:LayoutGroup>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type create:CreateTaskAdditionalInfosViewModel}">
@@ -82,19 +93,23 @@
                 <buttons:ColoredButtonControl
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center"
+                    Command="{Binding ElementName=PagedContent, Path=PreviousPageCommand}"
+                    Content="Previous"
+                    Visibility="{Binding ElementName=PagedContent, Path=HasMultiplePages, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                <buttons:ColoredButtonControl
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
                     ButtonColor="Blue"
                     Command="{Binding ElementName=PagedContent, Path=NextPageCommand}"
-                    Content="Next" />
+                    Content="Next"
+                    Visibility="{Binding ElementName=PagedContent, Path=HasMultiplePages, Converter={StaticResource BooleanToVisibilityConverter}}" />
                 <buttons:ColoredButtonControl
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center"
-                    Command="{Binding ElementName=PagedContent, Path=PreviousPageCommand}"
-                    Content="Previous" />
-                <buttons:ColoredButtonControl
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Center"
-                    Command="{Binding CancelProcessCommand}"
-                    Content="Cancel" />
+                    ButtonColor="Blue"
+                    Command="{Binding Path=CreateTaskCommand}"
+                    Content="Finish"
+                    Visibility="{Binding ElementName=PagedContent, Path=HasNextPage, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" />
             </dxlc:LayoutGroup>
         </ctrls:Form.FooterContent>
     </ctrls:Form>

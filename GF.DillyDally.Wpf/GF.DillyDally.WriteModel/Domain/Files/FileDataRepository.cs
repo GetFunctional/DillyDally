@@ -65,7 +65,7 @@ namespace GF.DillyDally.WriteModel.Domain.Files
                 throw new NotImplementedException();
             }
 
-            return ImageFormatDetector.GetFileExtensionForImageFormat(imageFormat);
+            return ImageFormatDetector.GetFileExtensionForImageFormat(imageFormat).Replace("*", string.Empty);
         }
     }
 }

@@ -1,7 +1,12 @@
-﻿using System.Threading;
+﻿using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using GF.DillyDally.Data.Sqlite;
 using GF.DillyDally.ReadModel.Projection.Activities.Repository;
+using GF.DillyDally.ReadModel.Projection.Files.Repository;
+using GF.DillyDally.ReadModel.Projection.Images.Repository;
+using GF.DillyDally.ReadModel.Projection.Tasks.Repository;
+using GF.DillyDally.Shared.Images;
 using GF.DillyDally.WriteModel.Domain.Activities.Events;
 using MediatR;
 
@@ -23,7 +28,15 @@ namespace GF.DillyDally.ReadModel.Projection.Activities
             using (var connection = this._fileHandler.OpenConnection())
             {
                 var activityRepository = new ActivityRepository();
-                await activityRepository.AssignPreviewImageAsync(connection, notification.AggregateId, notification.PreviewImageId);
+                var imageRepository = new ImageRepository();
+                var fileRepository = new FileRepository();
+
+                var file = await fileRepository.GetByIdAsync(connection, notification.FileId);
+                var activityId = notification.AggregateId;
+
+                var storedImages = await imageRepository.StoreImagesAsync(connection, file);
+                var previewImage = storedImages.Single(x => x.SizeType == ImageSizeType.PreviewSize);
+                await activityRepository.AssignPreviewImageAsync(connection, activityId, previewImage.ImageId);
             }
         }
 

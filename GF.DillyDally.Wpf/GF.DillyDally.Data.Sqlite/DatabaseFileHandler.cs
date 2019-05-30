@@ -3,6 +3,7 @@ using System.Data;
 using System.Data.SQLite;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using GF.DillyDally.Data.Contracts;
 
@@ -91,7 +92,7 @@ namespace GF.DillyDally.Data.Sqlite
 
         private void HandleTrace(object sender, TraceEventArgs e)
         {
-            Trace.Write(e.Statement);
+            Trace.WriteLine(string.Concat(e.Statement.Take(500)));
         }
 
         public IDbConnection OpenConnection()

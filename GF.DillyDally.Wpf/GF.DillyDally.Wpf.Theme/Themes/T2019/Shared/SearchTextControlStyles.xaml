@@ -52,16 +52,21 @@
                             Foreground="{StaticResource SearchTextValueForegroundBrush}"
                             Icon="Solid_Search"
                             Opacity="0.5" />
-                        <dxe:TextEdit
-                            x:Name="TextInput"
+                        <dxe:ComboBoxEdit
+                            x:Name="PART_TextEdit"
                             dx:ThemeManager.ThemeName="{x:Static theme:ThemeConstants.DevExpressThemeName}"
-                            EditValue="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=InputValue, Mode=TwoWay}"
+                            ApplyItemTemplateToSelectedItem="False"
+                            EditValue="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=InputValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                             FontSize="{StaticResource InputControlsFontSize}"
                             FontWeight="Regular"
                             Foreground="{StaticResource SearchTextValueForegroundBrush}"
-                            NullText="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=WatermarkText, Mode=TwoWay}"
+                            ImmediatePopup="True"
+                            IncrementalFiltering="True"
+                            ItemTemplate="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SearchResultItemTemplate}"
+                            ItemsSource="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SearchResultItemsSource, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                            NullText="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=WatermarkText}"
                             ShowBorder="False"
-                            ShowNullText="True" />
+                            ShowSizeGrip="True" />
                     </dxlc:LayoutGroup>
                 </Border>
                 <ItemsControl ItemTemplate="{StaticResource LastSearchItemTemplate}" ItemsSource="{TemplateBinding LastSearchItemsSource}">

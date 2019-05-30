@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 
 namespace GF.DillyDally.Shared.Images
@@ -28,9 +29,10 @@ namespace GF.DillyDally.Shared.Images
             maxWidth = enlarge ? maxWidth : Math.Min(maxWidth, src.Width);
             maxHeight = enlarge ? maxHeight : Math.Min(maxHeight, src.Height);
 
-            var rnd = Math.Min(maxWidth / (decimal)src.Width, maxHeight / (decimal)src.Height);
-            return new Size((int)Math.Round(src.Width * rnd), (int)Math.Round(src.Height * rnd));
+            var rnd = Math.Min(maxWidth / (decimal) src.Width, maxHeight / (decimal) src.Height);
+            return new Size((int) Math.Round(src.Width * rnd), (int) Math.Round(src.Height * rnd));
         }
+
 
         public static byte[] CreateImagePreview(byte[] sourceBytes, ImageSizeType imageSizeType)
         {
@@ -45,28 +47,11 @@ namespace GF.DillyDally.Shared.Images
                     {
                         using (var resize = new MemoryStream())
                         {
-                            var destinationImageFormat = ImageFormatDetector.GetImageFormat(sourceBytes);
-                            switch (destinationImageFormat)
+                            using (var imageEncodeParameters = CreateImageEncoderParameters())
                             {
-                                case ImageFormat.Unknown:
-                                    throw new NotImplementedException();
-                                case ImageFormat.Bmp:
-                                    newImage.Save(resize, System.Drawing.Imaging.ImageFormat.Bmp);
-                                    break;
-                                case ImageFormat.Jpeg:
-                                    newImage.Save(resize, System.Drawing.Imaging.ImageFormat.Jpeg);
-                                    break;
-                                case ImageFormat.Gif:
-                                    newImage.Save(resize, System.Drawing.Imaging.ImageFormat.Gif);
-                                    break;
-                                case ImageFormat.Tiff:
-                                    newImage.Save(resize, System.Drawing.Imaging.ImageFormat.Tiff);
-                                    break;
-                                case ImageFormat.Png:
-                                    newImage.Save(resize, System.Drawing.Imaging.ImageFormat.Png);
-                                    break;
-                                default:
-                                    throw new ArgumentOutOfRangeException(nameof(destinationImageFormat), destinationImageFormat, null);
+                                var destinationImageFormat = ImageFormat.Jpeg;
+                                var imageEncoder = destinationImageFormat.GetEncoder();
+                                newImage.Save(resize, imageEncoder, imageEncodeParameters);
                             }
 
                             return resize.ToArray();
@@ -74,6 +59,13 @@ namespace GF.DillyDally.Shared.Images
                     }
                 }
             }
+        }
+
+        private static EncoderParameters CreateImageEncoderParameters()
+        {
+            var imageEncoderParameters = new EncoderParameters(1);
+            imageEncoderParameters.Param[0] = new EncoderParameter(Encoder.Quality, 75L);
+            return imageEncoderParameters;
         }
     }
 }

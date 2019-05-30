@@ -104,6 +104,7 @@
       <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xaml">
@@ -127,6 +128,8 @@
     <Compile Include="Core\Dialoge\DialogSettings.cs" />
     <Compile Include="Core\Dialoge\IDialogService.cs" />
     <Compile Include="Core\Dialoge\IDialogSettings.cs" />
+    <Compile Include="Presentation\Content\Activities\Container\ActivityItemViewModelFactory.cs" />
+    <Compile Include="Presentation\Content\Activities\Container\SearchRequestEventArgs.cs" />
     <Compile Include="Presentation\Content\Activities\Create\CreateActvityStep1ViewModel.cs" />
     <Compile Include="Presentation\Content\Activities\Container\ActivityContainerController.cs" />
     <Compile Include="Presentation\Content\Activities\Container\ActivityContainerView.xaml.cs">

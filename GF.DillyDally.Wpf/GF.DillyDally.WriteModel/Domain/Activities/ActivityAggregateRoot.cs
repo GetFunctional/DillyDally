@@ -46,7 +46,7 @@ namespace GF.DillyDally.WriteModel.Domain.Activities
 
         private void Apply(ActivityPreviewImageAssigned obj)
         {
-            this.PreviewImageId = obj.PreviewImageId;
+            this.PreviewImageId = obj.FileId;
         }
 
         private void Apply(TaskLinkedToActivityEvent obj)
@@ -121,6 +121,11 @@ namespace GF.DillyDally.WriteModel.Domain.Activities
 
         internal void AssignPreviewImage(Guid previewImageId)
         {
+            if (Guid.Empty == previewImageId)
+            {
+                throw new ArgumentException();
+            }
+
             var previewImageAssigned = new ActivityPreviewImageAssigned(this.AggregateId, previewImageId);
             this.RaiseEvent(previewImageAssigned);
         }

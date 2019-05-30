@@ -1,13 +1,70 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Net.Mime;
+using System.Reactive.Concurrency;
+using System.Reactive.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Threading;
+using GF.DillyDally.Data.Sqlite;
 using GF.DillyDally.Mvvmc;
+using GF.DillyDally.ReadModel.Projection.Activities.Repository;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Container
 {
     public class ActivityContainerController : ControllerBase<ActivityContainerViewModel>
     {
-        public ActivityContainerController(ActivityContainerViewModel viewModel) : base(viewModel)
+        private readonly DatabaseFileHandler _fileHandler;
+        private SynchronizationContext _uiSyncContext = new DispatcherSynchronizationContext(Application.Current.Dispatcher);
+        private readonly IDisposable _disposableObserver;
+
+        public ActivityContainerController(ActivityContainerViewModel viewModel, DatabaseFileHandler fileHandler) :
+            base(viewModel)
         {
+            this._fileHandler = fileHandler;
+
+            var query = Observable.FromEventPattern<SearchRequestEventArgs>(
+                    s => this.ViewModel.RequestSearchResults += s,
+                    s => this.ViewModel.RequestSearchResults -= s)
+                .Throttle(TimeSpan.FromMilliseconds(250))
+                .ObserveOnDispatcher()
+                .Select(evt => evt.EventArgs.SearchText) // better to select on the UI thread
+                .DistinctUntilChanged()
+                .ObserveOn(Scheduler.Default)
+                .Select(this.SearchResultsAsync)
+                .Switch()
+                .ObserveOnDispatcher();
+
+            this._disposableObserver = query.Subscribe(result => this.ViewModel.SearchResults = result);
+        }
+
+        private async Task<ObservableCollection<ActivityItemViewModel>> SearchResultsAsync(string searchText)
+        {
+            if (searchText.Length > 2)
+            {
+                using (var connection = this._fileHandler.OpenConnection())
+                {
+                    var factory = new ActivityItemViewModelFactory();
+                    var repository = new ActivityRepository();
+                    var results = await repository.SearchActivitiesByTextAsync(connection, searchText);
+                    var resultViewModels = results.Select(res => factory.CreateViewModelFrom(res)).ToList();
+                    return new ObservableCollection<ActivityItemViewModel>(resultViewModels);
+                }
+            }
+
+            return new ObservableCollection<ActivityItemViewModel>();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+            if (disposing)
+            {
+                this._disposableObserver?.Dispose();
+            }
         }
 
         internal IReadOnlyList<ActivityItemViewModel> GetActivities()

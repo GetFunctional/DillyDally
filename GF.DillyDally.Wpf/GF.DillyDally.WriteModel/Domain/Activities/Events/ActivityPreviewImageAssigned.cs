@@ -5,11 +5,11 @@ namespace GF.DillyDally.WriteModel.Domain.Activities.Events
 {
     public sealed class ActivityPreviewImageAssigned : AggregateEventBase
     {
-        public ActivityPreviewImageAssigned(Guid aggregateId, Guid? previewImageId) : base(aggregateId)
+        public ActivityPreviewImageAssigned(Guid aggregateId, Guid fileId) : base(aggregateId)
         {
-            this.PreviewImageId = previewImageId;
+            this.FileId = fileId;
         }
 
-        public Guid? PreviewImageId { get; }
+        public Guid FileId { get; }
     }
 }

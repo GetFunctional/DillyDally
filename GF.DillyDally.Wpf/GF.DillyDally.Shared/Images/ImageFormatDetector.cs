@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GF.DillyDally.Shared.Images
 {
-    public class ImageFormatDetector
+    public static class ImageFormatDetector
     {
         public static ImageFormat GetImageFormat(byte[] bytes)
         {
@@ -56,7 +56,21 @@ namespace GF.DillyDally.Shared.Images
             return ImageFormat.Unknown;
         }
 
-        private static System.Drawing.Imaging.ImageFormat GetNetImageFormat(ImageFormat imageFormat)
+        public static ImageCodecInfo GetEncoder(this ImageFormat format)
+        {
+            var codecs = ImageCodecInfo.GetImageDecoders();
+            foreach (var codec in codecs)
+            {
+                if (codec.FormatID == GetNetImageFormat(format).Guid)
+                {
+                    return codec;
+                }
+            }
+
+            return null;
+        }
+
+        public static System.Drawing.Imaging.ImageFormat GetNetImageFormat(this ImageFormat imageFormat)
         {
             switch (imageFormat)
             {
@@ -77,10 +91,11 @@ namespace GF.DillyDally.Shared.Images
             }
         }
 
-        public static string GetFileExtensionForImageFormat(ImageFormat format)
+        public static string GetFileExtensionForImageFormat(this ImageFormat format)
         {
             var netFormat = GetNetImageFormat(format);
-            var extensions = ImageCodecInfo.GetImageEncoders().FirstOrDefault(x => x.FormatID == netFormat.Guid).FilenameExtension;
+            var extensions = ImageCodecInfo.GetImageEncoders().FirstOrDefault(x => x.FormatID == netFormat.Guid)
+                .FilenameExtension;
             var firstAvailableExtension = extensions.Split(';').First();
             return firstAvailableExtension;
         }

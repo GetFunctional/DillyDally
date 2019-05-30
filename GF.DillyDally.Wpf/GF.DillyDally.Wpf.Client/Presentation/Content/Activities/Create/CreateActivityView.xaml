@@ -32,7 +32,10 @@
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Top"
                         Orientation="Horizontal">
-                        <ctrls:ImageInputControl HorizontalAlignment="Left" VerticalAlignment="Stretch" />
+                        <ctrls:ImageInputControl
+                            Width="162"
+                            Height="134"
+                            ImageBytes="{Binding PreviewImageBytes, Mode=TwoWay}" />
                         <dxlc:LayoutGroup Orientation="Vertical">
                             <ctrls:TextInputControl
                                 InputValue="{Binding ActivityName, Mode=TwoWay}"

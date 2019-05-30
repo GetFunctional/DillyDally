@@ -1,33 +1,57 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
 using Dapper;
 using Dapper.Contrib.Extensions;
 using GF.DillyDally.Data.Sqlite.Repository.Base;
+using GF.DillyDally.ReadModel.Projection.Images.Repository;
 
 namespace GF.DillyDally.ReadModel.Projection.Activities.Repository
 {
-    internal sealed class ActivityRepository : Repository<ActivityEntity>
+    public sealed class ActivityRepository : Repository<ActivityEntity>
     {
-        public async Task CreateNewAsync(IDbConnection connection, Guid activityId, string activityName, ActivityType activityType)
+        internal async Task CreateNewAsync(IDbConnection connection, Guid activityId, string activityName,
+            ActivityType activityType)
         {
             await connection.InsertAsync(new ActivityEntity
-                                         {
-                                             ActivityId = activityId,
-                                             Name = activityName,
-                                             ActivityValue = 0,
-                                             CurrentLevel = 1,
-                                             ActivityType = activityType
-                                         });
+            {
+                ActivityId = activityId,
+                Name = activityName,
+                ActivityValue = 0,
+                CurrentLevel = 1,
+                ActivityType = activityType
+            });
         }
 
-        public async Task AssignPreviewImageAsync(IDbConnection connection, Guid activityId, Guid? previewImageId)
+        internal async Task AssignPreviewImageAsync(IDbConnection connection, Guid activityId, Guid? previewImageId)
         {
             var sql = $"UPDATE {ActivityEntity.TableNameConstant} " +
                       $"SET {nameof(ActivityEntity.PreviewImageId)} = @{nameof(previewImageId)} " +
                       $"WHERE {nameof(ActivityEntity.ActivityId)} = @{nameof(activityId)};";
 
             await connection.ExecuteAsync(sql, new {activityId, previewImageId});
+        }
+
+        public async Task<IEnumerable<ActivitySearchResultEntity>> SearchActivitiesByTextAsync(IDbConnection connection,
+            string searchText)
+        {
+            var searchParameter = $"%{searchText}%";
+
+            var sql =
+                $"SELECT {nameof(ActivitySearchResultEntity.ActivityId)}, " +
+                $"{nameof(ActivitySearchResultEntity.Name)}, " +
+                $"{nameof(ActivitySearchResultEntity.ActivityType)}, " +
+                $"{nameof(ActivitySearchResultEntity.ActivityValue)}, " +
+                $"{nameof(ActivitySearchResultEntity.CurrentLevel)}, " +
+                $"{nameof(ImageEntity.Binary)} AS {nameof(ActivitySearchResultEntity.PreviewImageBinary)}, " +
+                $"1 AS {nameof(ActivitySearchResultEntity.Usages)} " +
+                $"FROM {ActivityEntity.TableNameConstant} " +
+                $"LEFT JOIN {ImageEntity.TableNameConstant} ON {ActivityEntity.TableNameConstant}.{nameof(ActivityEntity.PreviewImageId)} = {ImageEntity.TableNameConstant}.{nameof(ImageEntity.ImageId)} " +
+                $"WHERE {nameof(ActivitySearchResultEntity.Name)} LIKE @{nameof(searchParameter)};";
+
+
+            return await connection.QueryAsync<ActivitySearchResultEntity>(sql, new {searchParameter});
         }
     }
 }

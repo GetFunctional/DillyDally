@@ -76,6 +76,13 @@ namespace GF.DillyDally.Wpf.Theme.Controls.Layout
             set { this.SetValue(HasPreviousPageProperty, value); }
         }
 
+        [Bindable(true)]
+        public bool HasMultiplePages
+        {
+            get { return (bool) this.GetValue(HasPreviousPageProperty); }
+            set { this.SetValue(HasPreviousPageProperty, value); }
+        }
+
         private static void HandleCurrentPageChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (e.OldValue is IDisplayPage oldPage)
@@ -155,6 +162,7 @@ namespace GF.DillyDally.Wpf.Theme.Controls.Layout
             this.CurrentPage = this.GetPreviousPage();
             this.HasNextPage = this.GetNextPage() != null;
             this.HasPreviousPage = this.GetPreviousPage() != null;
+            this.HasMultiplePages = this.HasNextPage || this.HasPreviousPage;
         }
 
         private void ExecuteSelectNextPage()
@@ -170,6 +178,7 @@ namespace GF.DillyDally.Wpf.Theme.Controls.Layout
             this.CurrentPage = this.GetNextPage();
             this.HasNextPage = this.GetNextPage() != null;
             this.HasPreviousPage = this.GetPreviousPage() != null;
+            this.HasMultiplePages = this.HasNextPage || this.HasPreviousPage;
         }
 
         private object GetNextPage()
