@@ -18,6 +18,9 @@ namespace GF.DillyDally.Wpf.Theme.Controls.Layout
             "CurrentPage", typeof(object), typeof(PagedContentControl),
             new PropertyMetadata(default, HandleCurrentPageChanged));
 
+        public static readonly DependencyProperty HasMultiplePagesProperty = DependencyProperty.Register(
+            "HasMultiplePages", typeof(bool), typeof(PagedContentControl), new PropertyMetadata(default(bool)));
+
         public static readonly DependencyProperty HasNextPageProperty = DependencyProperty.Register(
             "HasNextPage", typeof(bool), typeof(PagedContentControl), new PropertyMetadata(default(bool)));
 
@@ -43,44 +46,74 @@ namespace GF.DillyDally.Wpf.Theme.Controls.Layout
             this.CommandBindings.Add(new CommandBinding(this.PreviousPageCommand));
         }
 
-        [Bindable(true, BindingDirection.OneWay)]
-        public ICommand PreviousPageCommand
-        {
-            get { return this._previousPageCommand; }
-        }
-
-        [Bindable(true, BindingDirection.OneWay)]
-        public ICommand NextPageCommand
-        {
-            get { return this._nextPageCommand; }
-        }
-
-        [Bindable(true)]
-        public object CurrentPage
-        {
-            get { return this.GetValue(CurrentPageProperty); }
-            set { this.SetValue(CurrentPageProperty, value); }
-        }
-
         [Bindable(true)]
         public bool HasNextPage
         {
-            get { return (bool) this.GetValue(HasNextPageProperty); }
-            set { this.SetValue(HasNextPageProperty, value); }
+            get
+            {
+                return (bool)this.GetValue(HasNextPageProperty);
+            }
+            set
+            {
+                this.SetValue(HasNextPageProperty, value);
+            }
         }
 
         [Bindable(true)]
         public bool HasPreviousPage
         {
-            get { return (bool) this.GetValue(HasPreviousPageProperty); }
-            set { this.SetValue(HasPreviousPageProperty, value); }
+            get
+            {
+                return (bool)this.GetValue(HasPreviousPageProperty);
+            }
+            set
+            {
+                this.SetValue(HasPreviousPageProperty, value);
+            }
+        }
+
+        [Bindable(true, BindingDirection.OneWay)]
+        public ICommand PreviousPageCommand
+        {
+            get
+            {
+                return this._previousPageCommand;
+            }
+        }
+
+        [Bindable(true, BindingDirection.OneWay)]
+        public ICommand NextPageCommand
+        {
+            get
+            {
+                return this._nextPageCommand;
+            }
+        }
+
+        [Bindable(true)]
+        public object CurrentPage
+        {
+            get
+            {
+                return this.GetValue(CurrentPageProperty);
+            }
+            set
+            {
+                this.SetValue(CurrentPageProperty, value);
+            }
         }
 
         [Bindable(true)]
         public bool HasMultiplePages
         {
-            get { return (bool) this.GetValue(HasPreviousPageProperty); }
-            set { this.SetValue(HasPreviousPageProperty, value); }
+            get
+            {
+                return (bool)this.GetValue(HasMultiplePagesProperty);
+            }
+            set
+            {
+                this.SetValue(HasMultiplePagesProperty, value);
+            }
         }
 
         private static void HandleCurrentPageChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -95,8 +128,8 @@ namespace GF.DillyDally.Wpf.Theme.Controls.Layout
                 newPage.IsCurrent = true;
             }
 
-            ((PagedContentControl) d)._previousPageCommand.RaiseCanExecuteChanged();
-            ((PagedContentControl) d)._nextPageCommand.RaiseCanExecuteChanged();
+            ((PagedContentControl)d)._previousPageCommand.RaiseCanExecuteChanged();
+            ((PagedContentControl)d)._nextPageCommand.RaiseCanExecuteChanged();
         }
 
         protected override void OnItemsSourceChanged(IEnumerable oldValue, IEnumerable newValue)
@@ -127,7 +160,7 @@ namespace GF.DillyDally.Wpf.Theme.Controls.Layout
                 ? this.ItemsSource.OfType<IDisplayPage>()
                 : Enumerable.Empty<IDisplayPage>()).ToList();
 
-            this.DistributePageNumbers( itemsFromSource);
+            this.DistributePageNumbers(itemsFromSource);
         }
 
         private void DistributePageNumbers(IList<IDisplayPage> displayPages)
@@ -160,6 +193,11 @@ namespace GF.DillyDally.Wpf.Theme.Controls.Layout
         private void SwitchToPreviousPage()
         {
             this.CurrentPage = this.GetPreviousPage();
+            this.RefreshPageIndicators();
+        }
+
+        private void RefreshPageIndicators()
+        {
             this.HasNextPage = this.GetNextPage() != null;
             this.HasPreviousPage = this.GetPreviousPage() != null;
             this.HasMultiplePages = this.HasNextPage || this.HasPreviousPage;
@@ -176,9 +214,7 @@ namespace GF.DillyDally.Wpf.Theme.Controls.Layout
         private void SwitchToNextPage()
         {
             this.CurrentPage = this.GetNextPage();
-            this.HasNextPage = this.GetNextPage() != null;
-            this.HasPreviousPage = this.GetPreviousPage() != null;
-            this.HasMultiplePages = this.HasNextPage || this.HasPreviousPage;
+            this.RefreshPageIndicators();
         }
 
         private object GetNextPage()
