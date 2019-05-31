@@ -310,6 +310,7 @@
         <Setter Property="Height" Value="36" />
         <Setter Property="Width" Value="Auto" />
         <Setter Property="ButtonColor" Value="Gray" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
     </Style>
 
     <Style BasedOn="{StaticResource DefaultStyle}" TargetType="{x:Type buttons:ColoredButtonControl}" />

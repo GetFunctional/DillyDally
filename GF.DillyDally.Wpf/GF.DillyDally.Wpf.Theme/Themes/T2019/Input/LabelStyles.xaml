@@ -21,6 +21,7 @@
         <Setter Property="LabelHorizontalAlignment" Value="Left" />
         <Setter Property="LabelPosition" Value="Top" />
         <Setter Property="LabelVerticalAlignment" Value="Bottom" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
     </Style>
 
 </ResourceDictionary>

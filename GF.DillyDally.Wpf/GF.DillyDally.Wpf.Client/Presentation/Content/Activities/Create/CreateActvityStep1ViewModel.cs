@@ -11,6 +11,10 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create
         private byte[] _previewImageBytes;
         private ActivityTypeViewModel _selectedActivityTypeViewModel;
 
+        public CreateActvityStep1ViewModel()
+        {
+            this.Validator.AddValidationRule(new CreateActivityValidationRule());
+        }
 
         public ObservableCollection<ActivityTypeViewModel> AvailableActivityTypes
         {

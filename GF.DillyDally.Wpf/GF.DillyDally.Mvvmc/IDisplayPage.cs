@@ -1,6 +1,8 @@
-﻿namespace GF.DillyDally.Mvvmc
+﻿using GF.DillyDally.Mvvmc.Validation;
+
+namespace GF.DillyDally.Mvvmc
 {
-    public interface IDisplayPage : IViewModel
+    public interface IDisplayPage : IViewModel, IValidateable
     {
         string Title { get; }
 

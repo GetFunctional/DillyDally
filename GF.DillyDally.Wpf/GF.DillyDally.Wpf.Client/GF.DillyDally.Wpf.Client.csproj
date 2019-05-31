@@ -130,6 +130,7 @@
     <Compile Include="Core\Dialoge\IDialogSettings.cs" />
     <Compile Include="Presentation\Content\Activities\Container\ActivityItemViewModelFactory.cs" />
     <Compile Include="Presentation\Content\Activities\Container\SearchRequestEventArgs.cs" />
+    <Compile Include="Presentation\Content\Activities\Create\CreateActivityValidationRule.cs" />
     <Compile Include="Presentation\Content\Activities\Create\CreateActvityStep1ViewModel.cs" />
     <Compile Include="Presentation\Content\Activities\Container\ActivityContainerController.cs" />
     <Compile Include="Presentation\Content\Activities\Container\ActivityContainerView.xaml.cs">

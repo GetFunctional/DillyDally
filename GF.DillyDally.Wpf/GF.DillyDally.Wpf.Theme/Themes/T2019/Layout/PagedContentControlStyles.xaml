@@ -106,6 +106,7 @@
         <Setter Property="Template" Value="{StaticResource PageContentControlTemplate}" />
         <Setter Property="UseLayoutRounding" Value="True" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
     </Style>
 
     <Style BasedOn="{StaticResource PageContentControlDefaultStyle}" TargetType="{x:Type layout:PagedContentControl}" />

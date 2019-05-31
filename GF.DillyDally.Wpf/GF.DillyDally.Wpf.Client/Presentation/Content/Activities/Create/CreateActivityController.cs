@@ -75,6 +75,13 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create
                         throw new ArgumentOutOfRangeException();
                 }
             }
+            else
+            {
+                foreach (var viewModelPage in this.ViewModel.Pages)
+                {
+                    viewModelPage.Validate();
+                }
+            }
 
             this.ViewModel.IsBusy = false;
         }

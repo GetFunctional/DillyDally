@@ -64,6 +64,7 @@
         <Setter Property="FontSize" Value="{StaticResource BodyFontSize}" />
         <Setter Property="FontWeight" Value="{StaticResource BodyFontWeight}" />
         <Setter Property="Foreground" Value="{StaticResource BodyForeground}" />
+        <Setter Property="Validation.ErrorTemplate" Value="{x:Null}" />
     </Style>
 
     <Style x:Key="LinkTextBlockStyle" TargetType="{x:Type TextBlock}">
