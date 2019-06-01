@@ -61,11 +61,12 @@
                             FontWeight="Regular"
                             Foreground="{StaticResource SearchTextValueForegroundBrush}"
                             ImmediatePopup="True"
-                            IncrementalFiltering="True"
+                            IncrementalFiltering="False"
                             ItemTemplate="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SearchResultItemTemplate}"
                             ItemsSource="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SearchResultItemsSource, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                             NullText="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=WatermarkText}"
                             ShowBorder="False"
+                            ShowPopupIfItemsSourceEmpty="False"
                             ShowSizeGrip="True" />
                     </dxlc:LayoutGroup>
                 </Border>

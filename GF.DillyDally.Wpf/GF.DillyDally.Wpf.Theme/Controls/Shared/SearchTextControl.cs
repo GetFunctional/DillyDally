@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Collections;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using DevExpress.Xpf.Editors;
@@ -25,7 +26,18 @@ namespace GF.DillyDally.Wpf.Theme.Controls.Shared
 
         public static readonly DependencyProperty SearchResultItemsSourceProperty = DependencyProperty.Register(
             "SearchResultItemsSource", typeof(object), typeof(SearchTextControl),
-            new PropertyMetadata(default(object)));
+            new PropertyMetadata(default(object), HandleItemsSourceChanged));
+
+        private static void HandleItemsSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var newSource = e.NewValue as IEnumerable;
+            
+            if (newSource.GetEnumerator().MoveNext())
+            {
+                //this._textEdit.ShowPopup();
+            }
+
+        }
 
         public static readonly DependencyProperty SearchResultItemTemplateProperty = DependencyProperty.Register(
             "SearchResultItemTemplate", typeof(DataTemplate), typeof(SearchTextControl),

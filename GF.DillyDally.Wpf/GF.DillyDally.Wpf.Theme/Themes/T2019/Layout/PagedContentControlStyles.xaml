@@ -98,18 +98,26 @@
                 Background="{StaticResource PageContentBackgroundBrush}"
                 BorderBrush="{StaticResource PageContentBorderBrush}"
                 BorderThickness="0,1,0,0">
-                <dxwui:SlideView ItemsSource="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ItemsSource}">
-                    <dxwui:SlideView.ItemTemplate>
+                <dxwui:PageView
+                    Margin="0"
+                    Padding="0"
+                    AnimationSpeedRatio="0.7"
+                    AnimationType="Fade"
+                    ItemCacheMode="CacheOnSelecting"
+                    ItemsSource="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ItemsSource}"
+                    SelectedItem="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=CurrentPage}">
+                    <dxwui:PageView.ContentTemplate>
                         <DataTemplate>
-                            <dxwui:NavigationPage NavigationCacheMode="Enabled">
-                                <ContentControl Content="{Binding}" Style="{StaticResource BodyContentControlTypoStyle}" />
-                            </dxwui:NavigationPage>
+                            <ContentControl Content="{Binding}" Style="{StaticResource BodyContentControlTypoStyle}" />
                         </DataTemplate>
-                    </dxwui:SlideView.ItemTemplate>
-                </dxwui:SlideView>
-
+                    </dxwui:PageView.ContentTemplate>
+                    <dxwui:PageView.Resources>
+                        <Style TargetType="{x:Type dxwui:PageViewItem}">
+                            <Setter Property="Template" Value="{x:Null}" />
+                        </Style>
+                    </dxwui:PageView.Resources>
+                </dxwui:PageView>
             </Border>
-
         </Grid>
     </ControlTemplate>
 

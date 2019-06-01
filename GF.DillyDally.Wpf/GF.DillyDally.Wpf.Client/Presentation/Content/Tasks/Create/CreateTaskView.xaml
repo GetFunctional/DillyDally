@@ -102,7 +102,7 @@
                     ButtonColor="Blue"
                     Command="{Binding ElementName=PagedContent, Path=NextPageCommand}"
                     Content="Next"
-                    Visibility="{Binding ElementName=PagedContent, Path=HasMultiplePages, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                    Visibility="{Binding ElementName=PagedContent, Path=HasNextPage, Converter={StaticResource BooleanToVisibilityConverter}}" />
                 <buttons:ColoredButtonControl
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center"
