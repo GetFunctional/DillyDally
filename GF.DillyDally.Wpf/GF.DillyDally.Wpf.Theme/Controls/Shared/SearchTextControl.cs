@@ -26,18 +26,7 @@ namespace GF.DillyDally.Wpf.Theme.Controls.Shared
 
         public static readonly DependencyProperty SearchResultItemsSourceProperty = DependencyProperty.Register(
             "SearchResultItemsSource", typeof(object), typeof(SearchTextControl),
-            new PropertyMetadata(default(object), HandleItemsSourceChanged));
-
-        private static void HandleItemsSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            var newSource = e.NewValue as IEnumerable;
-            
-            if (newSource.GetEnumerator().MoveNext())
-            {
-                //this._textEdit.ShowPopup();
-            }
-
-        }
+            new PropertyMetadata(default, HandleItemsSourceChanged));
 
         public static readonly DependencyProperty SearchResultItemTemplateProperty = DependencyProperty.Register(
             "SearchResultItemTemplate", typeof(DataTemplate), typeof(SearchTextControl),
@@ -97,6 +86,16 @@ namespace GF.DillyDally.Wpf.Theme.Controls.Shared
         {
             get { return this.GetValue(LabelProperty); }
             set { this.SetValue(LabelProperty, value); }
+        }
+
+        private static void HandleItemsSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var newSource = e.NewValue as IEnumerable;
+            var searchControl = (SearchTextControl) d;
+            if (newSource.GetEnumerator().MoveNext())
+            {
+                searchControl._textEdit.ShowPopup();
+            }
         }
 
         public override void OnApplyTemplate()

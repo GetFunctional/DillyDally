@@ -55,18 +55,14 @@
                         <dxe:ComboBoxEdit
                             x:Name="PART_TextEdit"
                             dx:ThemeManager.ThemeName="{x:Static theme:ThemeConstants.DevExpressThemeName}"
-                            ApplyItemTemplateToSelectedItem="False"
                             EditValue="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=InputValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                             FontSize="{StaticResource InputControlsFontSize}"
                             FontWeight="Regular"
                             Foreground="{StaticResource SearchTextValueForegroundBrush}"
-                            ImmediatePopup="True"
-                            IncrementalFiltering="False"
                             ItemTemplate="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SearchResultItemTemplate}"
                             ItemsSource="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SearchResultItemsSource, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                             NullText="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=WatermarkText}"
                             ShowBorder="False"
-                            ShowPopupIfItemsSourceEmpty="False"
                             ShowSizeGrip="True" />
                     </dxlc:LayoutGroup>
                 </Border>

@@ -36,7 +36,7 @@ namespace GF.DillyDally.ReadModel.Projection.Activities.Repository
         public async Task<IEnumerable<ActivitySearchResultEntity>> SearchActivitiesByTextAsync(IDbConnection connection,
             string searchText)
         {
-            var searchParameter = $"%{searchText}%";
+            var searchParameter = $"%{searchText ?? string.Empty}%";
 
             var sql =
                 $"SELECT {nameof(ActivitySearchResultEntity.ActivityId)}, " +
