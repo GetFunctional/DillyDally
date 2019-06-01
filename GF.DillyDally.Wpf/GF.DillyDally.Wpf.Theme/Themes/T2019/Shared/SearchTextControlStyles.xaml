@@ -4,6 +4,7 @@
     xmlns:controls="clr-namespace:GF.DillyDally.Wpf.Theme.Controls"
     xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
     xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
     xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
     xmlns:fa5="http://schemas.fontawesome.com/icons/"
     xmlns:input="clr-namespace:GF.DillyDally.Wpf.Theme.Controls.Input"
@@ -43,7 +44,10 @@
                     BorderBrush="{StaticResource SearchTextBorderBrush}"
                     BorderThickness="1"
                     CornerRadius="3">
-                    <dxlc:LayoutGroup HorizontalAlignment="Stretch" Orientation="Horizontal">
+                    <dxlc:LayoutGroup
+                        HorizontalAlignment="Stretch"
+                        Orientation="Horizontal"
+                        Validation.ValidationAdornerSiteFor="{Binding RelativeSource={RelativeSource TemplatedParent}}">
                         <fa5:FontAwesome
                             Width="36"
                             HorizontalAlignment="Left"
@@ -52,18 +56,42 @@
                             Foreground="{StaticResource SearchTextValueForegroundBrush}"
                             Icon="Solid_Search"
                             Opacity="0.5" />
-                        <dxe:ComboBoxEdit
-                            x:Name="PART_TextEdit"
-                            dx:ThemeManager.ThemeName="{x:Static theme:ThemeConstants.DevExpressThemeName}"
-                            EditValue="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=InputValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        <dxe:TextEdit
+                            x:Name="PART_SearchBox"
+                            MinWidth="200"
+                            HorizontalAlignment="Left"
+                            EditValue="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                             FontSize="{StaticResource InputControlsFontSize}"
                             FontWeight="Regular"
                             Foreground="{StaticResource SearchTextValueForegroundBrush}"
+                            NullText="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=WatermarkText}"
+                            SelectAllOnGotFocus="True"
+                            ShowBorder="False" />
+                        <dxe:ComboBoxEdit
+                            x:Name="PART_ItemsDisplay"
+                            dx:ThemeManager.ThemeName="{x:Static theme:ThemeConstants.DevExpressThemeName}"
+                            DisplayTemplate="{x:Null}"
+                            EditNonEditableTemplate="{x:Null}"
+                            EditTemplate="{x:Null}"
+                            IgnorePopupSizeConstraints="True"
+                            IsTextEditable="False"
                             ItemTemplate="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SearchResultItemTemplate}"
                             ItemsSource="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SearchResultItemsSource, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                            NullText="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=WatermarkText}"
                             ShowBorder="False"
-                            ShowSizeGrip="True" />
+                            ShowPopupWaitIndicator="True"
+                            ShowSizeGrip="True"
+                            ValidateOnTextInput="False" />
+                        <Validation.ErrorTemplate>
+                            <ControlTemplate>
+                                <Border
+                                    dx:FocusHelper2.Focusable="False"
+                                    BorderBrush="Red"
+                                    BorderThickness="1"
+                                    CornerRadius="3">
+                                    <AdornedElementPlaceholder />
+                                </Border>
+                            </ControlTemplate>
+                        </Validation.ErrorTemplate>
                     </dxlc:LayoutGroup>
                 </Border>
                 <ItemsControl ItemTemplate="{StaticResource LastSearchItemTemplate}" ItemsSource="{TemplateBinding LastSearchItemsSource}">

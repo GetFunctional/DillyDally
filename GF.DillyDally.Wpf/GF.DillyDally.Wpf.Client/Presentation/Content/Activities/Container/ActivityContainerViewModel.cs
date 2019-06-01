@@ -50,6 +50,11 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Container
             set { this.RaiseAndSetIfChanged(ref this._selectedResult, value); }
         }
 
+        public string ActivityDisplayMemberName
+        {
+            get { return nameof(ActivityItemViewModel.ActivityName); }
+        }
+
         private void RaiseRequestSearchResults(string value)
         {
             RequestSearchResults?.Invoke(this, new SearchRequestEventArgs(value));

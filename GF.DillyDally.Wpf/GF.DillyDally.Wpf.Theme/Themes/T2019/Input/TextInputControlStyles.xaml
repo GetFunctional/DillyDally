@@ -30,27 +30,6 @@
                 BorderBrush="{StaticResource TextInputBorderBrush}"
                 BorderThickness="1"
                 CornerRadius="3">
-                <!--<TextBox  x:Name="TextInput"
-                          Height="34"
-                          dx:ThemeManager.ThemeName="{x:Static theme:ThemeConstants.DevExpressThemeName}"
-                          AcceptsReturn="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsMultiline, Mode=TwoWay}"
-                          Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=InputValue, ValidatesOnNotifyDataErrors=True, Mode=TwoWay}"
-                          FontSize="{StaticResource InputControlsFontSize}"
-                          FontWeight="Regular"
-                          Foreground="{StaticResource InputControlsValueForegroundBrush}"
-                          Validation.ValidationAdornerSiteFor="{Binding RelativeSource={RelativeSource TemplatedParent}}">
-                    <Validation.ErrorTemplate>
-                        <ControlTemplate>
-                            <Border
-                                dx:FocusHelper2.Focusable="False"
-                                BorderBrush="Red"
-                                BorderThickness="1"
-                                CornerRadius="3">
-                                <AdornedElementPlaceholder />
-                            </Border>
-                        </ControlTemplate>
-                    </Validation.ErrorTemplate>
-                </TextBox>-->
                 <dxe:TextEdit
                     x:Name="TextInput"
                     Height="34"

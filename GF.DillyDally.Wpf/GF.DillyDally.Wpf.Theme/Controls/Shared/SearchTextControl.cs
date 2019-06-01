@@ -6,14 +6,16 @@ using DevExpress.Xpf.Editors;
 
 namespace GF.DillyDally.Wpf.Theme.Controls.Shared
 {
-    [TemplatePart(Name = PARTTextEdit, Type = typeof(TextEdit))]
+    [TemplatePart(Name = PARTItemsDisplay, Type = typeof(ComboBoxEdit))]
+    [TemplatePart(Name = PARTSearchBox, Type = typeof(TextEdit))]
     [DesignTimeVisible(true)]
     public class SearchTextControl : Control
     {
-        public const string PARTTextEdit = "PART_TextEdit";
+        public const string PARTSearchBox = "PART_SearchBox";
+        public const string PARTItemsDisplay = "PART_ItemsDisplay";
 
         public static readonly DependencyProperty InputValueProperty = DependencyProperty.Register(
-            "InputValue", typeof(string), typeof(SearchTextControl), new PropertyMetadata(default(string)));
+            "InputValue", typeof(object), typeof(SearchTextControl), new PropertyMetadata(default(object)));
 
         public static readonly DependencyProperty LabelProperty = DependencyProperty.Register(
             "Label", typeof(object), typeof(SearchTextControl), new PropertyMetadata(default(object)));
@@ -32,10 +34,15 @@ namespace GF.DillyDally.Wpf.Theme.Controls.Shared
             "SearchResultItemTemplate", typeof(DataTemplate), typeof(SearchTextControl),
             new PropertyMetadata(default(DataTemplate)));
 
-        public static readonly DependencyProperty SelectedResultProperty = DependencyProperty.Register(
-            "SelectedResult", typeof(object), typeof(SearchTextControl), new PropertyMetadata(default(object)));
+        public static readonly DependencyProperty SearchTextProperty = DependencyProperty.Register(
+            "SearchText", typeof(string), typeof(SearchTextControl), new PropertyMetadata(default(string)));
 
-        private ComboBoxEdit _textEdit;
+        public static readonly DependencyProperty DisplayMemberProperty = DependencyProperty.Register(
+            "DisplayMember", typeof(string), typeof(SearchTextControl), new PropertyMetadata(default(string)));
+
+        private ComboBoxEdit _itemsDisplay;
+
+        private TextEdit _searchBox;
 
         static SearchTextControl()
         {
@@ -43,10 +50,11 @@ namespace GF.DillyDally.Wpf.Theme.Controls.Shared
                 typeof(SearchTextControl), new FrameworkPropertyMetadata(typeof(SearchTextControl)));
         }
 
-        public object SelectedResult
+        [Bindable(true)]
+        public string SearchText
         {
-            get { return this.GetValue(SelectedResultProperty); }
-            set { this.SetValue(SelectedResultProperty, value); }
+            get { return (string) this.GetValue(SearchTextProperty); }
+            set { this.SetValue(SearchTextProperty, value); }
         }
 
         public object LastSearchItemsSource
@@ -75,9 +83,9 @@ namespace GF.DillyDally.Wpf.Theme.Controls.Shared
         }
 
         [Bindable(true)]
-        public string InputValue
+        public object InputValue
         {
-            get { return (string) this.GetValue(InputValueProperty); }
+            get { return this.GetValue(InputValueProperty); }
             set { this.SetValue(InputValueProperty, value); }
         }
 
@@ -88,20 +96,39 @@ namespace GF.DillyDally.Wpf.Theme.Controls.Shared
             set { this.SetValue(LabelProperty, value); }
         }
 
+        public string DisplayMember
+        {
+            get { return (string) this.GetValue(DisplayMemberProperty); }
+            set { this.SetValue(DisplayMemberProperty, value); }
+        }
+
         private static void HandleItemsSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var newSource = e.NewValue as IEnumerable;
             var searchControl = (SearchTextControl) d;
             if (newSource.GetEnumerator().MoveNext())
             {
-                searchControl._textEdit.ShowPopup();
+                searchControl._itemsDisplay.ShowPopup();
             }
         }
 
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            this._textEdit = this.GetTemplateChild(PARTTextEdit) as ComboBoxEdit;
+            this._searchBox = this.GetTemplateChild(PARTSearchBox) as TextEdit;
+            this._itemsDisplay = this.GetTemplateChild(PARTItemsDisplay) as ComboBoxEdit;
+
+            this._itemsDisplay.EditValueChanged += this.SearchBoxOnEditValueChanged;
+        }
+
+        private void SearchBoxOnEditValueChanged(object sender, EditValueChangedEventArgs e)
+        {
+            this.InputValue = e.NewValue;
+            if (!string.IsNullOrEmpty(this.DisplayMember))
+            {
+                this.SearchText = this.InputValue.GetType().GetProperty(this.DisplayMember).GetValue(this.InputValue)
+                    .ToString();
+            }
         }
     }
 }

@@ -51,10 +51,11 @@
 
     <dxlc:LayoutGroup Orientation="Vertical">
         <ctrls:SearchTextControl
-            InputValue="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            DisplayMember="{Binding ActivityDisplayMemberName, Mode=OneWay}"
+            InputValue="{Binding SelectedResult, Mode=TwoWay}"
             SearchResultItemTemplate="{StaticResource SearchTextControlItemTemplate}"
             SearchResultItemsSource="{Binding SearchResults, Mode=OneWay}"
-            SelectedResult="{Binding SelectedResult, Mode=TwoWay}" />
+            SearchText="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
 
         <ItemsControl ItemsSource="{Binding Activities, Mode=OneWay}" />
