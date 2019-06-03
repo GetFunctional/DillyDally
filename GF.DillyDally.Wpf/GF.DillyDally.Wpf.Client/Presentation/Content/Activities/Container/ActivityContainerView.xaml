@@ -46,11 +46,32 @@
                     </dxlc:LayoutGroup>
                 </dxlc:LayoutGroup>
             </DataTemplate>
+
+            <DataTemplate x:Key="ActivityItemTemplate" DataType="{x:Type container:ActivityItemViewModel}">
+                <dxlc:LayoutGroup
+                    Width="140"
+                    Height="150"
+                    Orientation="Vertical">
+                    <ctrls:ImageInputControl
+                        Height="90"
+                        ImageBytes="{Binding ActivityPreviewImage, Mode=OneWay}"
+                        IsReadOnly="True"
+                        NoImageControlTemplate="{StaticResource NoImageControlTemplate}" />
+                    <dxlc:LayoutGroup Orientation="Vertical">
+                        <TextBlock Style="{StaticResource BodyTextBlockStyle}" Text="{Binding ActivityName}" />
+                        <TextBlock
+                            Foreground="{StaticResource OrangeButtonBackgroundBrush1}"
+                            Style="{StaticResource DescriptionTextBlockStyle}"
+                            Text="Used 24 times ( 74% )" />
+                    </dxlc:LayoutGroup>
+                </dxlc:LayoutGroup>
+            </DataTemplate>
         </ResourceDictionary>
     </UserControl.Resources>
 
     <dxlc:LayoutGroup Orientation="Vertical">
         <ctrls:SearchTextControl
+            VerticalAlignment="Top"
             DisplayMember="{Binding ActivityDisplayMemberName, Mode=OneWay}"
             InputValue="{Binding SelectedResult, Mode=TwoWay}"
             SearchResultItemTemplate="{StaticResource SearchTextControlItemTemplate}"
@@ -58,6 +79,12 @@
             SearchText="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
 
-        <ItemsControl ItemsSource="{Binding Activities, Mode=OneWay}" />
+        <ItemsControl ItemTemplate="{StaticResource ActivityItemTemplate}" ItemsSource="{Binding Activities, Mode=OneWay}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
     </dxlc:LayoutGroup>
 </UserControl>

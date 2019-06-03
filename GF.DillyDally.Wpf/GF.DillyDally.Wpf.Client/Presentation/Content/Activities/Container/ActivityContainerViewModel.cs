@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using GF.DillyDally.Mvvmc;
 using ReactiveUI;
 
@@ -39,15 +40,27 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Container
             get { return this._searchText; }
             set
             {
-                this.RaiseAndSetIfChanged(ref this._searchText, value);
-                this.RaiseRequestSearchResults(value);
+                if (this.RaiseAndSetIfChanged(ref this._searchText, value) == value && !string.IsNullOrWhiteSpace(value) &&
+                    value != this.SelectedResult?.ActivityName)
+                {
+                    this.RaiseRequestSearchResults(value);
+                }
             }
         }
 
         public ActivityItemViewModel SelectedResult
         {
             get { return this._selectedResult; }
-            set { this.RaiseAndSetIfChanged(ref this._selectedResult, value); }
+            set
+            {
+                if (this.RaiseAndSetIfChanged(ref this._selectedResult, value) == this._selectedResult && value != null)
+                {
+                    if (this.Activities.All(act => act.ActivityId != value.ActivityId))
+                    {
+                        this.Activities.Add(value);
+                    }
+                }
+            }
         }
 
         public string ActivityDisplayMemberName
