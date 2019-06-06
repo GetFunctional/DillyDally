@@ -17,55 +17,8 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Colors.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Typography.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Client;component/Presentation/Content/Activities/Container/ActivityContainerViewTemplates.xaml" />
             </ResourceDictionary.MergedDictionaries>
-
-            <SolidColorBrush x:Key="ImageContentForegroundBrush" Color="{StaticResource InputControlsValueForegroundColor}" />
-
-            <ControlTemplate x:Key="NoImageControlTemplate">
-                <fa5:FontAwesome
-                    FontSize="26"
-                    Foreground="{StaticResource ImageContentForegroundBrush}"
-                    Icon="Regular_Image" />
-            </ControlTemplate>
-
-            <DataTemplate x:Key="SearchTextControlItemTemplate" DataType="{x:Type container:ActivityItemViewModel}">
-                <dxlc:LayoutGroup Orientation="Horizontal">
-                    <ctrls:ImageInputControl
-                        Width="50"
-                        Height="32"
-                        HorizontalAlignment="Left"
-                        ImageBytes="{Binding ActivityPreviewImage, Mode=OneWay}"
-                        IsReadOnly="True"
-                        NoImageControlTemplate="{StaticResource NoImageControlTemplate}" />
-                    <dxlc:LayoutGroup Orientation="Vertical">
-                        <TextBlock Style="{StaticResource BodyTextBlockStyle}" Text="{Binding ActivityName}" />
-                        <TextBlock
-                            Foreground="{StaticResource OrangeButtonBackgroundBrush1}"
-                            Style="{StaticResource DescriptionTextBlockStyle}"
-                            Text="Used 24 times ( 74% )" />
-                    </dxlc:LayoutGroup>
-                </dxlc:LayoutGroup>
-            </DataTemplate>
-
-            <DataTemplate x:Key="ActivityItemTemplate" DataType="{x:Type container:ActivityItemViewModel}">
-                <dxlc:LayoutGroup
-                    Width="140"
-                    Height="150"
-                    Orientation="Vertical">
-                    <ctrls:ImageInputControl
-                        Height="90"
-                        ImageBytes="{Binding ActivityPreviewImage, Mode=OneWay}"
-                        IsReadOnly="True"
-                        NoImageControlTemplate="{StaticResource NoImageControlTemplate}" />
-                    <dxlc:LayoutGroup Orientation="Vertical">
-                        <TextBlock Style="{StaticResource BodyTextBlockStyle}" Text="{Binding ActivityName}" />
-                        <TextBlock
-                            Foreground="{StaticResource OrangeButtonBackgroundBrush1}"
-                            Style="{StaticResource DescriptionTextBlockStyle}"
-                            Text="Used 24 times ( 74% )" />
-                    </dxlc:LayoutGroup>
-                </dxlc:LayoutGroup>
-            </DataTemplate>
         </ResourceDictionary>
     </UserControl.Resources>
 
@@ -75,8 +28,9 @@
             DisplayMember="{Binding ActivityDisplayMemberName, Mode=OneWay}"
             InputValue="{Binding SelectedResult, Mode=TwoWay}"
             SearchResultItemTemplate="{StaticResource SearchTextControlItemTemplate}"
-            SearchResultItemsSource="{Binding SearchResults, Mode=OneWay}"
-            SearchText="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            SearchResultItemsSource="{Binding SearchResults, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+            SearchText="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            WatermarkText="Search for existing activities..." />
 
 
         <ItemsControl ItemTemplate="{StaticResource ActivityItemTemplate}" ItemsSource="{Binding Activities, Mode=OneWay}">

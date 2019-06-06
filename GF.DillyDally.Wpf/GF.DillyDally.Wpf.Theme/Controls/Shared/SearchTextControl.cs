@@ -1,8 +1,13 @@
-﻿using System.Collections;
+﻿using System;
 using System.ComponentModel;
+using System.Reactive.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Threading;
 using DevExpress.Xpf.Editors;
+using DevExpress.Xpf.Editors.Helpers;
+using GF.DillyDally.Wpf.Theme.Extensions;
 
 namespace GF.DillyDally.Wpf.Theme.Controls.Shared
 {
@@ -28,7 +33,7 @@ namespace GF.DillyDally.Wpf.Theme.Controls.Shared
 
         public static readonly DependencyProperty SearchResultItemsSourceProperty = DependencyProperty.Register(
             "SearchResultItemsSource", typeof(object), typeof(SearchTextControl),
-            new PropertyMetadata(default, HandleItemsSourceChanged));
+            new PropertyMetadata(default));
 
         public static readonly DependencyProperty SearchResultItemTemplateProperty = DependencyProperty.Register(
             "SearchResultItemTemplate", typeof(DataTemplate), typeof(SearchTextControl),
@@ -40,8 +45,9 @@ namespace GF.DillyDally.Wpf.Theme.Controls.Shared
         public static readonly DependencyProperty DisplayMemberProperty = DependencyProperty.Register(
             "DisplayMember", typeof(string), typeof(SearchTextControl), new PropertyMetadata(default(string)));
 
-        private ComboBoxEdit _itemsDisplay;
+        private IObservable<EventArgs> _searchItemsSourceObservable;
 
+        private ComboBoxEdit _itemsDisplay;
         private TextEdit _searchBox;
 
         static SearchTextControl()
@@ -49,6 +55,7 @@ namespace GF.DillyDally.Wpf.Theme.Controls.Shared
             DefaultStyleKeyProperty.OverrideMetadata(
                 typeof(SearchTextControl), new FrameworkPropertyMetadata(typeof(SearchTextControl)));
         }
+
 
         [Bindable(true)]
         public string SearchText
@@ -150,14 +157,16 @@ namespace GF.DillyDally.Wpf.Theme.Controls.Shared
             }
         }
 
-        private static void HandleItemsSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        public void HandleWhenPopupOpened(RoutedEventArgs e)
         {
-            var newSource = e.NewValue as IEnumerable;
-            var searchControl = (SearchTextControl)d;
-            if (newSource.GetEnumerator().MoveNext())
-            {
-                searchControl._itemsDisplay.ShowPopup();
-            }
+            var popup = this._itemsDisplay.GetPopup();
+            popup.PlacementTarget = this._searchBox;
+            popup.Placement = PlacementMode.Bottom;
+        }
+
+        public void SearchResultItemsSourceChanged(EventArgs eventArgs)
+        {
+            this._itemsDisplay.ShowPopup();
         }
 
         public override void OnApplyTemplate()
@@ -165,10 +174,31 @@ namespace GF.DillyDally.Wpf.Theme.Controls.Shared
             base.OnApplyTemplate();
             this._searchBox = (TextEdit)this.GetTemplateChild(PARTSearchBox);
             this._itemsDisplay = (ComboBoxEdit)this.GetTemplateChild(PARTItemsDisplay);
-            this._itemsDisplay.EditValueChanged += this.SearchBoxOnEditValueChanged;
+
+            this.EventRegistrations();
         }
 
-        private void SearchBoxOnEditValueChanged(object sender, EditValueChangedEventArgs e)
+        private void EventRegistrations()
+        {
+            var whenEditValueChanged = Observable
+                .FromEventPattern<EditValueChangedEventHandler, EditValueChangedEventArgs>(s => this._itemsDisplay.EditValueChanged += s,
+                    s => this._itemsDisplay.EditValueChanged -= s)
+                .Select(x => x.EventArgs);
+            whenEditValueChanged.ObserveOnDispatcher()
+                .Subscribe(this.SearchBoxOnEditValueChanged);
+
+            var whenPopupOpened = Observable
+                .FromEventPattern<RoutedEventHandler, RoutedEventArgs>(s => this._itemsDisplay.PopupOpened += s, s => this._itemsDisplay.PopupOpened -= s)
+                .Select(x => x.EventArgs);
+            whenPopupOpened.ObserveOnDispatcher()
+                .Subscribe(this.HandleWhenPopupOpened);
+
+            this._searchItemsSourceObservable = this.Observe(SearchResultItemsSourceProperty);
+            this._searchItemsSourceObservable.Throttle(TimeSpan.FromMilliseconds(25)).ObserveOnDispatcher(DispatcherPriority.Background)
+                .Subscribe(this.SearchResultItemsSourceChanged);
+        }
+
+        private void SearchBoxOnEditValueChanged(EditValueChangedEventArgs e)
         {
             this.InputValue = e.NewValue;
             if (this.InputValue != null && !string.IsNullOrEmpty(this.DisplayMember))

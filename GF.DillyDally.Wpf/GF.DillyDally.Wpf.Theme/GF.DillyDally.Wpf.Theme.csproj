@@ -176,6 +176,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\DependencyObjectExtensions.cs" />
     <Compile Include="Controls\Shared\SearchTextControl.cs" />
     <Compile Include="Converter\BooleanToThicknessConverter.cs" />
     <Compile Include="Controls\Buttons\ButtonColor.cs" />
