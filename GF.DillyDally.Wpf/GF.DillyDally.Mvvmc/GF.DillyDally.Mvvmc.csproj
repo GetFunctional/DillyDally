@@ -72,6 +72,7 @@
     <Compile Include="ObservableObjectExtensions.cs" />
     <Compile Include="PagedContentViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ValidateableObject.cs" />
     <Compile Include="Validation\IValidateable.cs" />
     <Compile Include="Validation\IValidationRule.cs" />
     <Compile Include="Validation\IValidationRule.Generic.cs" />

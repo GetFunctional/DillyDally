@@ -9,6 +9,7 @@ namespace GF.DillyDally.Mvvmc.Validation
                                                                                                 nameof(ViewModelBase.Changed),
                                                                                                 nameof(ViewModelBase.Changing),
                                                                                                 nameof(ViewModelBase.Error),
+                                                                                                nameof(ViewModelBase.HasErrors),
                                                                                                 nameof(ViewModelBase.IsBusy),
                                                                                                 nameof(ViewModelBase.ThrownExceptions)
                                                                                             };

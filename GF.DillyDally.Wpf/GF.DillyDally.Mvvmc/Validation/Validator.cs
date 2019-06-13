@@ -60,6 +60,11 @@ namespace GF.DillyDally.Mvvmc.Validation
             return new ValidationSummary(errors);
         }
 
+        public void ClearValidationRules()
+        {
+            this.ValidationRules.Clear();
+        }
+
         public void AddValidationRule(IValidationRule validationRule)
         {
             this.ValidationRules.Add(validationRule);

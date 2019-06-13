@@ -38,12 +38,12 @@
                             ImageBytes="{Binding PreviewImageBytes, Mode=TwoWay}" />
                         <dxlc:LayoutGroup Orientation="Vertical">
                             <ctrls:TextInputControl
-                                InputValue="{Binding ActivityName, Mode=TwoWay, ValidatesOnNotifyDataErrors=True}"
+                                InputValue="{Binding ActivityName, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True}"
                                 IsRequired="True"
                                 Label="Title"
                                 WatermarkText="Give your activity a self explanatory title" />
                             <ctrls:ComboInputControl
-                                InputValue="{Binding SelectedActivityTypeViewModel, Mode=TwoWay, ValidatesOnNotifyDataErrors=True}"
+                                InputValue="{Binding SelectedActivityTypeViewModel, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True}"
                                 ItemTemplate="{StaticResource ActivityTypeTemplate}"
                                 ItemsSource="{Binding AvailableActivityTypes, Mode=OneWay}"
                                 Label="Type" />

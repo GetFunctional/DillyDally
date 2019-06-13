@@ -4,15 +4,15 @@ namespace GF.DillyDally.Mvvmc.Validation
 {
     public interface IValidator
     {
-        #region Methoden (oeffentlich)
-
         string ValidateProperty(IValidateable validationObject, string propertyName);
 
-        ValidationResult ValidateObject(IValidateable validationObject, ValidationCompleteness validationCompleteness = ValidationCompleteness.ReturnOnFirstError);
+        ValidationResult ValidateObject(IValidateable validationObject,
+            ValidationCompleteness validationCompleteness = ValidationCompleteness.ReturnOnFirstError);
 
-        ValidationSummary ValidateObjects(IEnumerable<IValidateable> validationObjects, ValidationCompleteness validationCompleteness = ValidationCompleteness.ReturnOnFirstError);
+        ValidationSummary ValidateObjects(IEnumerable<IValidateable> validationObjects,
+            ValidationCompleteness validationCompleteness = ValidationCompleteness.ReturnOnFirstError);
 
-        #endregion
+        void ClearValidationRules();
 
         void AddValidationRule(IValidationRule validationRule);
     }

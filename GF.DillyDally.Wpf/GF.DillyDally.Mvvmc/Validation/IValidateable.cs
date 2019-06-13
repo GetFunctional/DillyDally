@@ -4,12 +4,8 @@ namespace GF.DillyDally.Mvvmc.Validation
 {
     public interface IValidateable : INotifyPropertyChanged, INotifyDataErrorInfo, IDataErrorInfo
     {
-        #region Methoden (oeffentlich)
+        bool Validate(IValidator validator);
 
-        string ClearError();
-
-        void Validate();
-
-        #endregion
+        bool Validate();
     }
 }
