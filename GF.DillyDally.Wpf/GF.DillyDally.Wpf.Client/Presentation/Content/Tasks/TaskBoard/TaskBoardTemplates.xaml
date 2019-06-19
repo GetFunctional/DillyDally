@@ -4,6 +4,7 @@
     xmlns:buttons="clr-namespace:GF.DillyDally.Wpf.Theme.Controls.Buttons;assembly=GF.DillyDally.Wpf.Theme"
     xmlns:conv="http://schemas.getfunctional.de/dillydally/converter"
     xmlns:ctrls="http://schemas.getfunctional.de/dillydally/controls"
+    xmlns:dd="urn:gong-wpf-dragdrop"
     xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
     xmlns:fa5="http://schemas.fontawesome.com/icons/"
     xmlns:local="clr-namespace:GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.TaskBoard">
@@ -21,6 +22,10 @@
     <SolidColorBrush x:Key="TasklaneBorderBrush" Color="{StaticResource Layer1BorderColor}" />
 
     <conv:ColorStringToBrushConverter x:Key="ColorStringToBrushConverter" />
+
+    <DataTemplate x:Key="DragTaskTemplate" DataType="{x:Type local:TaskBoardTaskViewModel}">
+        <TextBlock Text="{Binding Name}" />
+    </DataTemplate>
 
     <DataTemplate x:Key="TaskTemplate" DataType="{x:Type local:TaskBoardTaskViewModel}">
         <Border
@@ -154,6 +159,11 @@
                 Canvas.ZIndex="0">
                 <ItemsControl
                     Padding="10"
+                    dd:DragDrop.IsDragSource="True"
+                    dd:DragDrop.IsDropTarget="True"
+                    dd:DragDrop.ShowAlwaysDropTargetAdorner="True"
+                    dd:DragDrop.UseDefaultDragAdorner="True"
+                    dd:DragDrop.UseDefaultEffectDataTemplate="True"
                     Background="{StaticResource TasklaneBackgroundBrush}"
                     Canvas.ZIndex="0"
                     ItemTemplate="{StaticResource TaskTemplate}"

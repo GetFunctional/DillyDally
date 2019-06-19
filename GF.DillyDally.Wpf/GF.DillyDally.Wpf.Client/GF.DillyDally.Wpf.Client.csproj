@@ -58,6 +58,26 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libs\DevExpress.Xpf.Core.v18.2.dll</HintPath>
     </Reference>
+    <Reference Include="DevExpress.Xpf.Core.v18.2.Extensions, Version=18.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libs\DevExpress.Xpf.Core.v18.2.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Grid.v18.2, Version=18.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libs\DevExpress.Xpf.Grid.v18.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Grid.v18.2.Core, Version=18.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libs\DevExpress.Xpf.Grid.v18.2.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Grid.v18.2.Extensions, Version=18.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libs\DevExpress.Xpf.Grid.v18.2.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Layout.v18.2.Core, Version=18.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libs\DevExpress.Xpf.Layout.v18.2.Core.dll</HintPath>
+    </Reference>
     <Reference Include="DevExpress.Xpf.LayoutControl.v18.2, Version=18.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libs\DevExpress.Xpf.LayoutControl.v18.2.dll</HintPath>
@@ -65,11 +85,18 @@
     <Reference Include="DevExpress.Xpf.NavBar.v18.2">
       <HintPath>..\..\Libs\DevExpress.Xpf.NavBar.v18.2.dll</HintPath>
     </Reference>
+    <Reference Include="DevExpress.Xpf.Themes.VS2017Light.v18.2, Version=18.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libs\DevExpress.Xpf.Themes.VS2017Light.v18.2.dll</HintPath>
+    </Reference>
     <Reference Include="FontAwesome5">
       <HintPath>..\..\Libs\FontAwesome5.dll</HintPath>
     </Reference>
     <Reference Include="FontAwesome5.WPF">
       <HintPath>..\..\Libs\FontAwesome5.WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="GongSolutions.WPF.DragDrop">
+      <HintPath>..\..\Libs\GongSolutions.WPF.DragDrop.dll</HintPath>
     </Reference>
     <Reference Include="LightInject, Version=5.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
