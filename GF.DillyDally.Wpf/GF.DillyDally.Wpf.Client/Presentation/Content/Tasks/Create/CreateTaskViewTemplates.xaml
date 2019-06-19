@@ -18,14 +18,18 @@
                 Description="It's best to keep the name short and then add the details in the task Body. Also select a category that Matches the Topic best. "
                 HeaderType="H2" />
             <dxlc:LayoutGroup VerticalAlignment="Top" Orientation="Horizontal">
-                <ctrls:ImageInputControl Width="162" Height="134" />
+                <ctrls:ImageInputControl ImageBytes="{Binding PreviewImageBytes, Mode=TwoWay}" />
                 <dxlc:LayoutGroup Orientation="Vertical">
                     <ctrls:TextInputControl
+                        VerticalAlignment="Top"
                         InputValue="{Binding TaskName, Mode=TwoWay}"
                         IsRequired="True"
                         Label="Title"
                         WatermarkText="Give your Task a self explanatory title" />
-                    <ContentControl Content="{Binding CategorySelectorViewModel, Mode=OneWay}" ContentTemplate="{StaticResource CategorySelectorTemplate}" />
+                    <ContentControl
+                        VerticalAlignment="Top"
+                        Content="{Binding CategorySelectorViewModel, Mode=OneWay}"
+                        ContentTemplate="{StaticResource CategorySelectorTemplate}" />
                 </dxlc:LayoutGroup>
             </dxlc:LayoutGroup>
         </dxlc:LayoutGroup>

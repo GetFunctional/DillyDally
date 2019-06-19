@@ -32,17 +32,16 @@
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Top"
                         Orientation="Horizontal">
-                        <ctrls:ImageInputControl
-                            Width="162"
-                            Height="134"
-                            ImageBytes="{Binding PreviewImageBytes, Mode=TwoWay}" />
+                        <ctrls:ImageInputControl ImageBytes="{Binding PreviewImageBytes, Mode=TwoWay}" />
                         <dxlc:LayoutGroup Orientation="Vertical">
                             <ctrls:TextInputControl
+                                VerticalAlignment="Top"
                                 InputValue="{Binding ActivityName, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True}"
                                 IsRequired="True"
                                 Label="Title"
                                 WatermarkText="Give your activity a self explanatory title" />
                             <ctrls:ComboInputControl
+                                VerticalAlignment="Top"
                                 InputValue="{Binding SelectedActivityTypeViewModel, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True}"
                                 ItemTemplate="{StaticResource ActivityTypeTemplate}"
                                 ItemsSource="{Binding AvailableActivityTypes, Mode=OneWay}"

@@ -8,6 +8,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Create
     {
         private CategorySelectorViewModel _categorySelectorViewModel;
         private string _taskName;
+        private byte[] _previewImageBytes;
 
         public CreateTaskBasicInfosViewModel(CategorySelectorViewModel categorySelectorViewModel)
         {
@@ -48,5 +49,17 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Create
         }
 
         public override string Title { get; } = "Task Infos";
+
+        public byte[] PreviewImageBytes
+        {
+            get
+            {
+                return this._previewImageBytes;
+            }
+            set
+            {
+                this.RaiseAndSetIfChanged(ref this._previewImageBytes, value);
+            }
+        }
     }
 }

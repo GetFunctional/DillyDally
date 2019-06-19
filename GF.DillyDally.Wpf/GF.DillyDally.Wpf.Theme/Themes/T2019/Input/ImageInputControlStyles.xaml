@@ -109,6 +109,8 @@
         <Setter Property="IsReadOnly" Value="False" />
         <Setter Property="NoImageControlTemplate" Value="{StaticResource EmptyImageControlTemplate}" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Width" Value="162" />
+        <Setter Property="Height" Value="134" />
     </Style>
 
     <Style BasedOn="{StaticResource DefaultStyle}" TargetType="{x:Type input:ImageInputControl}" />
