@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Threading;
+using GF.DillyDally.Mvvmc.Exceptions;
 
 namespace GF.DillyDally.Mvvmc
 {
     public sealed class ControllerFactory
     {
+        private static readonly SynchronizationContext ApplicationSyncronizationContext = new DispatcherSynchronizationContext(Application.Current.Dispatcher);
         private readonly ControllerInitializer _controllerInitializer = new ControllerInitializer();
         private readonly MvvmcServiceFactory _mvvmcServiceFactory;
 
@@ -14,31 +18,22 @@ namespace GF.DillyDally.Mvvmc
             this._mvvmcServiceFactory = mvvmcServiceFactory;
         }
 
-        public async Task<IController> CreateControllerAsync(Type controllerType)
+        public IController CreateController(Type controllerType)
         {
-            var currentSynchronizationContext = SynchronizationContext.Current;
+            var currentSynchronizationContext = SynchronizationContext.Current ?? ApplicationSyncronizationContext;
             var controller = (IController)this._mvvmcServiceFactory(controllerType);
-            await Task.CompletedTask;
-
-#if DEBUG
-            await this._controllerInitializer.InitializeControllerAsync(controller);
-#else
-#pragma warning disable 4014
             this._controllerInitializer.InitializeControllerAsync(controller)
                 .ContinueWith(t =>
                 {
                     currentSynchronizationContext.Send(state =>
                         throw new InitializationException("Exception was raised during initialization", t.Exception), null);
                 }, TaskContinuationOptions.OnlyOnFaulted).ConfigureAwait(false);
-#pragma warning restore 4014
-
-#endif
             return controller;
         }
 
-        public async Task<TController> CreateControllerAsync<TController>() where TController : IController
+        public TController CreateController<TController>() where TController : IController
         {
-            return (TController)await this.CreateControllerAsync(typeof(TController));
+            return (TController)this.CreateController(typeof(TController));
         }
     }
 }

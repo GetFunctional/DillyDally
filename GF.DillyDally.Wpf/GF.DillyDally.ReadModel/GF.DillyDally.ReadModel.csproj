@@ -67,6 +67,8 @@
     <Compile Include="Projection\Activities\Repository\ActivityRepository.cs" />
     <Compile Include="Projection\Activities\Repository\ActivitySearchResultEntity.cs" />
     <Compile Include="Projection\Activities\Repository\ActivityType.cs" />
+    <Compile Include="Projection\Lanes\Repository\LaneTaskEntity.cs" />
+    <Compile Include="Projection\Lanes\Repository\LaneTaskRepository.cs" />
     <Compile Include="Projection\RunningNumbers\RunningNumbersEventHandler.cs" />
     <Compile Include="Projection\Tasks\TaskEventHandler.cs" />
     <Compile Include="Projection\Achievements\Repository\AchievementRepository.cs" />

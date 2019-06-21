@@ -1,6 +1,4 @@
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
+using System;
 using System.Threading.Tasks;
 using GF.DillyDally.Data.Sqlite;
 using GF.DillyDally.Mvvmc;
@@ -17,49 +15,51 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.TaskBoard
         private readonly TaskCommands _commands;
         private readonly IReactiveCommand _createNewTaskCommand;
         private readonly DatabaseFileHandler _databaseFileHandler;
+        private readonly TaskBoardDragDropHandler _taskboardDragDropHandler = new TaskBoardDragDropHandler();
+        private readonly TaskBoardLaneViewModelFactory _taskBoardLaneViewModelFactory = new TaskBoardLaneViewModelFactory();
+        private readonly IDisposable _whenTaskChangedObservable;
 
         public TaskBoardController(TaskBoardViewModel viewModel, DatabaseFileHandler databaseFileHandler,
             ControllerFactory controllerFactory, IDialogService dialogService, IMediator mediator) : base(viewModel)
         {
             this._databaseFileHandler = databaseFileHandler;
-            this._commands = new TaskCommands(controllerFactory, dialogService,mediator);
+            this._commands = new TaskCommands(controllerFactory, dialogService, mediator);
             this._createNewTaskCommand = this._commands.CreateNewTaskCommand;
+            this._whenTaskChangedObservable = this._taskboardDragDropHandler.WhenTaskChangedLane.Subscribe(this.HandleTaskLaneChange);
+
+        }
+
+        private void HandleTaskLaneChange(TaskChangedLanePayload e)
+        {
+            this._commands.MoveTaskToOtherLaneCommand.Execute(e);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+
+            this._whenTaskChangedObservable?.Dispose();
         }
 
         protected override async Task OnInitializeAsync()
         {
             await base.OnInitializeAsync();
 
+            await this.ComposeTaskboardLanesAsync();
+        }
+
+        private async Task ComposeTaskboardLanesAsync()
+        {
             using (var connection = await this._databaseFileHandler.OpenConnectionAsync())
             {
                 var taskBoardRepository = new TaskBoardRepository();
                 var lanes = await taskBoardRepository.GetTaskBoardLanesAsync(connection);
 
-                var laneViewModels = this.CreateLaneViewModels(lanes);
+                var laneViewModels =
+                    this._taskBoardLaneViewModelFactory.CreateLaneViewModels(lanes, this._taskboardDragDropHandler, this._createNewTaskCommand);
+                this._taskboardDragDropHandler.IntroduceTaskLanes(laneViewModels);
                 this.ViewModel.Lanes = laneViewModels;
             }
-        }
-
-        private IList<TaskBoardLaneViewModel> CreateLaneViewModels(IList<TaskBoardLaneEntity> lanes)
-        {
-            return lanes.Select(lane =>
-            {
-                var laneVm = new TaskBoardLaneViewModel(lane.LaneId);
-                laneVm.LaneName = lane.Name;
-                laneVm.Tasks =
-                    new ObservableCollection<TaskBoardTaskViewModel>(lane.Tasks.Select(this.CreateTaskViewModel));
-                laneVm.CreateNewTaskCommand = this._createNewTaskCommand;
-                return laneVm;
-            }).ToList();
-        }
-
-        private TaskBoardTaskViewModel CreateTaskViewModel(TaskBoardTaskEntity task)
-        {
-            var taskVm =
-                new TaskBoardTaskViewModel(task.Name, task.RunningNumber, task.Category.ColorCode, task.Category.Name,
-                    3);
-            taskVm.Name = task.Name;
-            return taskVm;
         }
     }
 }

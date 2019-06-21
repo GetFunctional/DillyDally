@@ -23,26 +23,23 @@ namespace GF.DillyDally.WriteModel.Domain.Lanes
 
         public async Task<CreateLaneResponse> Handle(CreateLaneCommand request, CancellationToken cancellationToken)
         {
-            return await Task.Run(() =>
+            var laneId = this.GuidGenerator.GenerateGuid();
+
+            var runningNumberForCategory = await 
+                this._runningNumberFactory.CreateNewRunningNumberForAsync(RunningNumberCounterArea.Lane);
+            var aggregate = LaneAggregateRoot.Create(laneId, runningNumberForCategory, request.Name,
+                request.ColorCode, request.IsCompletedLane, request.IsRejectedLane);
+
+            if (!this.AggregateRepository.TryGetById(LaneListAggregateRoot.LaneListAggregateId, out LaneListAggregateRoot laneList))
             {
-                var laneId = this.GuidGenerator.GenerateGuid();
+                laneList = LaneListAggregateRoot.Create();
+            }
 
-                var runningNumberForCategory =
-                    this._runningNumberFactory.CreateNewRunningNumberFor(RunningNumberCounterArea.Lane);
-                var aggregate = LaneAggregateRoot.Create(laneId, runningNumberForCategory, request.Name,
-                    request.ColorCode, request.IsCompletedLane, request.IsRejectedLane);
+            laneList.AddLast(laneId, request.IsCompletedLane, request.IsRejectedLane);
+            await this.AggregateRepository.SaveAsync(aggregate);
+            await this.AggregateRepository.SaveAsync(laneList);
 
-                if (!this.AggregateRepository.TryGetById(LaneListAggregateRoot.LaneListAggregateId, out LaneListAggregateRoot laneList))
-                {
-                    laneList = LaneListAggregateRoot.Create();
-                }
-
-                laneList.AddLast(laneId, request.IsCompletedLane, request.IsRejectedLane);
-                this.AggregateRepository.Save(aggregate);
-                this.AggregateRepository.Save(laneList);
-
-                return new CreateLaneResponse(laneId);
-            }, cancellationToken);
+            return new CreateLaneResponse(laneId);
         }
 
         #endregion

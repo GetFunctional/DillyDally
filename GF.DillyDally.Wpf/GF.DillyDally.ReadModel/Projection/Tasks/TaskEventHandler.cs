@@ -84,7 +84,6 @@ namespace GF.DillyDally.ReadModel.Projection.Tasks
                                                                  CategoryId = notification.CategoryId,
                                                                  RunningNumberId = notification.RunningNumberId,
                                                                  CreatedOn = notification.CreatedOn,
-                                                                 LaneId = notification.LaneId,
                                                                  PreviewImageId = notification.PreviewImageId
                                                              });
             }

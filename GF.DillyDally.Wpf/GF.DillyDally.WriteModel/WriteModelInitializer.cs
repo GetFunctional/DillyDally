@@ -1,5 +1,6 @@
 ﻿using System.Data.SQLite;
 using System.Reflection;
+using GF.DillyDally.WriteModel.Domain.Tasks;
 using GF.DillyDally.WriteModel.Infrastructure;
 using LightInject;
 using MediatR;
@@ -26,6 +27,13 @@ namespace GF.DillyDally.WriteModel
             var storeEvents = this.WireupEventStore(dillyDallyStoreConnectionString);
             RegisterMediations(serviceContainer);
             serviceContainer.RegisterInstance(typeof(IStoreEvents), storeEvents);
+
+            this.RegisterCommandServices(serviceContainer);
+        }
+
+        private void RegisterCommandServices(IServiceContainer serviceContainer)
+        {
+            serviceContainer.Register<TaskService>();
         }
 
         private static void RegisterMediations(IServiceContainer serviceContainer)

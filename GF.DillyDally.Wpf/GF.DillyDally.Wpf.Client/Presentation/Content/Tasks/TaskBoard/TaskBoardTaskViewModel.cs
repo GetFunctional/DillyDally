@@ -1,3 +1,4 @@
+using System;
 using GF.DillyDally.Mvvmc;
 using ReactiveUI;
 
@@ -11,14 +12,17 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.TaskBoard
         private string _runningNumber;
         private int _storypoints;
 
-        public TaskBoardTaskViewModel(string name, string runningNumber, string colorString, string category, int storypoints)
+        public TaskBoardTaskViewModel(Guid taskId, string name, string runningNumber, string colorString, string category, int storypoints)
         {
+            this.TaskId = taskId;
             this.Name = name;
             this.RunningNumber = runningNumber;
             this.ColorString = colorString;
             this.Category = category;
             this.Storypoints = storypoints;
         }
+
+        public Guid TaskId { get; }
 
         public string Name
         {

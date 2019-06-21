@@ -17,7 +17,7 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks
         IRequestHandler<CreateTaskCommand, CreateTaskResponse>,
         IRequestHandler<AttachFileToTaskCommand, AttachFileToTaskResponse>,
         IRequestHandler<AssignPreviewImageCommand, AssignPreviewImageResponse>, IRequestHandler<LinkTaskCommand, LinkTaskResponse>,
-        IRequestHandler<AssignDefinitionOfDoneCommand, AssignDefinitionOfDoneResponse>
+        IRequestHandler<AssignDefinitionOfDoneCommand, AssignDefinitionOfDoneResponse>, IRequestHandler<ChangeTaskLaneCommand, ChangeTaskLaneResponse>
     {
         private readonly DatabaseFileHandler _databaseFileHandler;
         private readonly RunningNumberFactory _runningNumberFactory;
@@ -33,15 +33,12 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks
 
         public async Task<AssignDefinitionOfDoneResponse> Handle(AssignDefinitionOfDoneCommand request, CancellationToken cancellationToken)
         {
-            return await Task.Run(() =>
-            {
-                var task = this.AggregateRepository.GetById<TaskAggregateRoot>(request.TaskId);
+            var task = this.AggregateRepository.GetById<TaskAggregateRoot>(request.TaskId);
 
-                task.AssignDefinitionOfDone(request.DefinitionOfDone);
-                this.AggregateRepository.Save(task);
+            task.AssignDefinitionOfDone(request.DefinitionOfDone);
+            await this.AggregateRepository.SaveAsync(task);
 
-                return new AssignDefinitionOfDoneResponse();
-            }, cancellationToken);
+            return new AssignDefinitionOfDoneResponse();
         }
 
         #endregion
@@ -51,13 +48,11 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks
         public async Task<AssignPreviewImageResponse> Handle(AssignPreviewImageCommand request,
             CancellationToken cancellationToken)
         {
-            return await Task.Run(() =>
-            {
-                var aggregate = this.AggregateRepository.GetById<TaskAggregateRoot>(request.TaskId);
-                aggregate.AssignPreviewImage(request.FileId);
-                this.AggregateRepository.Save(aggregate);
-                return new AssignPreviewImageResponse();
-            }, cancellationToken);
+            var aggregate = this.AggregateRepository.GetById<TaskAggregateRoot>(request.TaskId);
+            aggregate.AssignPreviewImage(request.FileId);
+            await this.AggregateRepository.SaveAsync(aggregate);
+
+            return new AssignPreviewImageResponse();
         }
 
         #endregion
@@ -75,7 +70,7 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks
 
                 var task = this.AggregateRepository.GetById<TaskAggregateRoot>(request.TaskId);
                 task.AttachFile(fileInStore.FileId);
-                this.AggregateRepository.Save(task);
+                await this.AggregateRepository.SaveAsync(task);
                 return new AttachFileToTaskResponse(fileInStore.FileId);
             }
         }
@@ -86,21 +81,24 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks
 
         public async Task<CreateTaskResponse> Handle(CreateTaskCommand request, CancellationToken cancellationToken)
         {
-            return await Task.Run(() =>
-            {
-                var category = this.AggregateRepository.GetById<CategoryAggregateRoot>(request.CategoryId);
-                var laneList = this.AggregateRepository.GetById<LaneListAggregateRoot>(LaneListAggregateRoot.LaneListAggregateId);
-                var laneId = request.LaneId != null ? laneList.GetLane(request.LaneId.Value) : laneList.GetFirstLane();
-                var newRunningNumberId =
-                    this._runningNumberFactory.CreateNewRunningNumberFor(RunningNumberCounterArea.Task);
-                var taskId = this.GuidGenerator.GenerateGuid();
+            var category = this.AggregateRepository.GetById<CategoryAggregateRoot>(request.CategoryId);
+            var laneList = this.AggregateRepository.GetById<LaneListAggregateRoot>(LaneListAggregateRoot.LaneListAggregateId);
+            var laneId = request.LaneId != null ? laneList.GetLane(request.LaneId.Value) : laneList.GetFirstLane();
+            var laneAggregate = this.AggregateRepository.GetById<LaneAggregateRoot>(laneId);
+            var newRunningNumberId = await
+                this._runningNumberFactory.CreateNewRunningNumberForAsync(RunningNumberCounterArea.Task);
+            var taskId = this.GuidGenerator.GenerateGuid();
 
-                var aggregate = TaskAggregateRoot.CreateTask(taskId, request.Name, newRunningNumberId,
-                    category.AggregateId, laneId, request.PreviewImageId, request.StoryPoints);
-                this.AggregateRepository.Save(aggregate);
+            // Create Task
+            var aggregate = TaskAggregateRoot.CreateTask(taskId, request.Name, newRunningNumberId,
+                category.AggregateId, request.PreviewImageId, request.StoryPoints);
 
-                return new CreateTaskResponse(taskId);
-            }, cancellationToken);
+            // Add Task to lane
+            laneAggregate.AddTask(taskId);
+
+            await this.AggregateRepository.SaveAsync(aggregate);
+            await this.AggregateRepository.SaveAsync(laneAggregate);
+            return new CreateTaskResponse(taskId);
         }
 
         #endregion
@@ -109,21 +107,32 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks
 
         public async Task<LinkTaskResponse> Handle(LinkTaskCommand request, CancellationToken cancellationToken)
         {
-            return await Task.Run(() =>
-            {
-                var sourceTask = this.AggregateRepository.GetById<TaskAggregateRoot>(request.TaskId);
-                var taskToLink = this.AggregateRepository.GetById<TaskAggregateRoot>(request.LinkToTaskId);
+            var sourceTask = this.AggregateRepository.GetById<TaskAggregateRoot>(request.TaskId);
+            var taskToLink = this.AggregateRepository.GetById<TaskAggregateRoot>(request.LinkToTaskId);
 
-                sourceTask.LinkTo(taskToLink.AggregateId);
-                taskToLink.LinkTo(sourceTask.AggregateId);
+            sourceTask.LinkTo(taskToLink.AggregateId);
+            taskToLink.LinkTo(sourceTask.AggregateId);
 
-                this.AggregateRepository.Save(sourceTask);
-                this.AggregateRepository.Save(taskToLink);
+            await this.AggregateRepository.SaveAsync(sourceTask);
+            await this.AggregateRepository.SaveAsync(taskToLink);
 
-                return new LinkTaskResponse();
-            }, cancellationToken);
+            return new LinkTaskResponse();
         }
 
         #endregion
+
+        public async Task<ChangeTaskLaneResponse> Handle(ChangeTaskLaneCommand request, CancellationToken cancellationToken)
+        {
+            var taskId = request.TaskId;
+            var sourceLane = this.AggregateRepository.GetById<LaneAggregateRoot>(request.SourceLaneId);
+            var targetLane = this.AggregateRepository.GetById<LaneAggregateRoot>(request.DestinationLaneId);
+
+            sourceLane.RemoveTask(taskId);
+            targetLane.AddTask(taskId);
+
+            await this.AggregateRepository.SaveAsync(sourceLane);
+            await this.AggregateRepository.SaveAsync(targetLane);
+            return new ChangeTaskLaneResponse();
+        }
     }
 }

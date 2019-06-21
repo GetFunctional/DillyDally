@@ -102,6 +102,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libs\LightInject.dll</HintPath>
     </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libs\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="MediatR, Version=6.0.0.0, Culture=neutral, PublicKeyToken=bb9a41a5e8aaa7e2, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libs\MediatR.dll</HintPath>
@@ -176,6 +180,11 @@
     <Compile Include="Presentation\Content\Tasks\Create\CreateTaskAdditionalInfosViewModel.cs" />
     <Compile Include="Presentation\Content\Tasks\Create\CreateTaskBasicInfosViewModel.cs" />
     <Compile Include="Presentation\Content\Tasks\Create\CreateTaskActivitiesViewModel.cs" />
+    <Compile Include="Presentation\Content\Tasks\TaskBoard\DragDrop\ITaskLaneDropHandler.cs" />
+    <Compile Include="Presentation\Content\Tasks\TaskBoard\DragDrop\TaskBoardDragDropHandler.cs" />
+    <Compile Include="Presentation\Content\Tasks\TaskBoard\DragDrop\TaskChangedLanePayload.cs" />
+    <Compile Include="Presentation\Content\Tasks\TaskBoard\DragDrop\TaskChangedPositionPayload.cs" />
+    <Compile Include="Presentation\Content\Tasks\TaskBoard\TaskBoardLaneViewModelFactory.cs" />
     <Compile Include="Presentation\OverlayViewModel.cs" />
     <Compile Include="Presentation\Content\Achievements\AchievementContainerView.xaml.cs">
       <DependentUpon>AchievementContainerView.xaml</DependentUpon>
@@ -346,6 +355,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="log4net.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -367,6 +379,10 @@
     <ProjectReference Include="..\GF.DillyDally.ReadModel\GF.DillyDally.ReadModel.csproj">
       <Project>{24f297fb-5d67-4d69-b8fa-b3b7c73675d0}</Project>
       <Name>GF.DillyDally.ReadModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GF.DillyDally.Shared\GF.DillyDally.Shared.csproj">
+      <Project>{cac4358f-f1af-49f5-9054-a6064abe235e}</Project>
+      <Name>GF.DillyDally.Shared</Name>
     </ProjectReference>
     <ProjectReference Include="..\GF.DillyDally.Wpf.Theme\GF.DillyDally.Wpf.Theme.csproj">
       <Project>{3149aaa7-f9dd-4191-924c-e5c0347486dc}</Project>

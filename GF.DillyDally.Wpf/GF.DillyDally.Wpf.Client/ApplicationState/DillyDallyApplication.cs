@@ -19,9 +19,9 @@ namespace GF.DillyDally.Wpf.Client.ApplicationState
 
         #region IDillyDallyApplication Members
 
-        public async Task<bool> NavigateInCurrentNavigatorAsync(INavigationTarget navigationTarget)
+        public bool NavigateInCurrentNavigator(INavigationTarget navigationTarget)
         {
-            return await this._shellController.NavigateInCurrentNavigatorToAsync(navigationTarget);
+            return this._shellController.NavigateInCurrentNavigatorTo(navigationTarget);
         }
 
         public void ShowOverlayDialog(IViewModel overlayContent, DialogSettings dialogSettings)

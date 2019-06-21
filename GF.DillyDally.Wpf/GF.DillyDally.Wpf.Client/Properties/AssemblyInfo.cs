@@ -54,3 +54,4 @@ using System.Windows;
 [assembly: AssemblyFileVersion("1.0.0.0")]
 [assembly: InternalsVisibleTo("GF.DillyDally.Unittests")]
 [assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
+[assembly: log4net.Config.XmlConfigurator(ConfigFile = "log4net.config")]

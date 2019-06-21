@@ -15,8 +15,6 @@ namespace GF.DillyDally.ReadModel.Projection.Tasks.Repository
 
         public Guid CategoryId { get; set; }
 
-        public Guid LaneId { get; set; }
-
         public DateTime? DueDate { get; set; }
 
         public DateTime CreatedOn { get; set; }

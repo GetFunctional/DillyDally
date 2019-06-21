@@ -29,19 +29,19 @@ namespace GF.DillyDally.Wpf.Client.Presentation
             this.ViewModel.CreateNewTaskCommand = this._taskCommands.CreateNewTaskCommand;
         }
 
-        public async Task<bool> NavigateInCurrentNavigatorToAsync(INavigationTarget navigationTarget)
+        public bool NavigateInCurrentNavigatorTo(INavigationTarget navigationTarget)
         {
-            return await this._contentBrowserController.NavigateInCurrentNavigatorAsync(navigationTarget);
+            return this._contentBrowserController.NavigateInCurrentNavigator(navigationTarget);
         }
 
-        protected override async Task OnInitializeAsync()
+        protected override Task OnInitializeAsync()
         {
-            this._headerMenuController = await this._controllerFactory.CreateControllerAsync<HeaderMenuController>();
+            this._headerMenuController = this._controllerFactory.CreateController<HeaderMenuController>();
             this.ViewModel.HeaderMenuViewModel = this._headerMenuController.ViewModel;
 
-            this._contentBrowserController =
-                await this._controllerFactory.CreateControllerAsync<ContentBrowserController>();
+            this._contentBrowserController = this._controllerFactory.CreateController<ContentBrowserController>();
             this.ViewModel.ContentBrowserViewModel = this._contentBrowserController.ViewModel;
+            return Task.CompletedTask;
         }
 
         public void ShowOverlayDialog(IViewModel overlayContent, DialogSettings dialogSettings)

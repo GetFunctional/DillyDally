@@ -3,19 +3,19 @@ using MediatR;
 
 namespace GF.DillyDally.WriteModel.Domain.Tasks.Commands
 {
-    public sealed class CreateTaskCommand : IRequest<CreateTaskResponse>
+    internal sealed class CreateTaskCommand : IRequest<CreateTaskResponse>
     {
-        public CreateTaskCommand(string name, Guid categoryId) : this(
+        internal CreateTaskCommand(string name, Guid categoryId) : this(
             name, categoryId, null, null)
         {
         }
 
-        public CreateTaskCommand(string name, Guid categoryId, Guid? laneId) : this(
+        internal CreateTaskCommand(string name, Guid categoryId, Guid? laneId) : this(
             name, categoryId, laneId, null)
         {
         }
 
-        public CreateTaskCommand(string name, Guid categoryId, Guid? laneId,
+        internal CreateTaskCommand(string name, Guid categoryId, Guid? laneId,
             Guid? previewImageId, int storyPoints = 0)
         {
             this.Name = name;

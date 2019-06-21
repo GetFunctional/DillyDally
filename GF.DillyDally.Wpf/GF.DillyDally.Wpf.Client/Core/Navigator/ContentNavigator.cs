@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using GF.DillyDally.Mvvmc;
 using GF.DillyDally.Wpf.Client.Core.Exceptions;
 
@@ -26,20 +25,20 @@ namespace GF.DillyDally.Wpf.Client.Core.Navigator
 
         public event EventHandler Navigated;
 
-        public async Task<IController> NavigateAsync(Guid navigationTargetId)
+        #endregion
+
+        public IController Navigate(Guid navigationTargetId)
         {
-            return await this.InternalNavigateAsync(this.CurrentContentController,
+            return this.InternalNavigate(this.CurrentContentController,
                 this._navigationTargetProvider.FindNavigationTargetWithKey(navigationTargetId));
         }
 
-        public async Task<IController> NavigateAsync(INavigationTarget target)
+        public IController Navigate(INavigationTarget target)
         {
-            return await this.InternalNavigateAsync(this.CurrentContentController, target);
+            return this.InternalNavigate(this.CurrentContentController, target);
         }
 
-        #endregion
-
-        private async Task<IController> InternalNavigateAsync(IController currentRealTarget, INavigationTarget navigationTarget)
+        private IController InternalNavigate(IController currentRealTarget, INavigationTarget navigationTarget)
         {
             if (this.CurrentTargetDeniesNavigation(currentRealTarget))
             {
@@ -47,7 +46,7 @@ namespace GF.DillyDally.Wpf.Client.Core.Navigator
             }
 
             // Resolve the next Target
-            var nextContent = await this.ResolveNextNavigationTargetAsync(navigationTarget);
+            var nextContent = this.ResolveNextNavigationTargetAsync(navigationTarget);
             if (nextContent == null)
             {
                 throw new NavigationTargetNotFoundException();
@@ -65,9 +64,9 @@ namespace GF.DillyDally.Wpf.Client.Core.Navigator
             return this.CurrentContentController;
         }
 
-        private async Task<IController> ResolveNextNavigationTargetAsync(INavigationTarget navigationTarget)
+        private IController ResolveNextNavigationTargetAsync(INavigationTarget navigationTarget)
         {
-            return await this._controllerFactory.CreateControllerAsync(navigationTarget.NavigationTargetControllerType);
+            return this._controllerFactory.CreateController(navigationTarget.NavigationTargetControllerType);
         }
 
         private bool CurrentTargetDeniesNavigation(IController currentTarget)

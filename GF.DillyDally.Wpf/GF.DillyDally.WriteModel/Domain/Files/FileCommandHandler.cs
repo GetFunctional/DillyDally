@@ -68,7 +68,7 @@ namespace GF.DillyDally.WriteModel.Domain.Files
 
                 var aggregate = FileAggregateRoot.Create(fileDataToStore.FileId, fileDataToStore.Name, fileDataToStore.Size, fileDataToStore.Md5Hash,
                     fileDataToStore.Extension);
-                aggregateRepository.Save(aggregate);
+                await aggregateRepository.SaveAsync(aggregate);
 
                 return new StoreFileResponse(fileDataToStore.FileId, false);
             }

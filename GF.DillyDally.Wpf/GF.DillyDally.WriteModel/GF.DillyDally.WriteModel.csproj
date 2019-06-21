@@ -96,6 +96,8 @@
     <Compile Include="Domain\Files\Md5HashGenerator.cs" />
     <Compile Include="Domain\Lanes\Commands\CreateLaneResponse.cs" />
     <Compile Include="Domain\Lanes\Events\LaneAddedEvent.cs" />
+    <Compile Include="Domain\Lanes\Events\TaskAddedEvent.cs" />
+    <Compile Include="Domain\Lanes\Events\TaskRemovedEvent.cs" />
     <Compile Include="Domain\Lanes\Exceptions\LaneAlreadyExistsException.cs" />
     <Compile Include="Domain\Lanes\LaneListAggregateRoot.cs" />
     <Compile Include="Domain\Rewards\CreateRewardResponse.cs" />
@@ -117,6 +119,8 @@
     <Compile Include="Domain\Tasks\Commands\AssignPreviewImageResponse.cs" />
     <Compile Include="Domain\Tasks\Commands\AttachFileToTaskCommand.cs" />
     <Compile Include="Domain\Tasks\Commands\AttachFileToTaskResponse.cs" />
+    <Compile Include="Domain\Tasks\Commands\ChangeTaskLaneCommand.cs" />
+    <Compile Include="Domain\Tasks\Commands\ChangeTaskLaneResponse.cs" />
     <Compile Include="Domain\Tasks\Commands\CreateTaskResponse.cs" />
     <Compile Include="Domain\Tasks\Commands\LinkTaskCommand.cs" />
     <Compile Include="Domain\Tasks\Commands\LinkTaskResponse.cs" />
@@ -148,6 +152,7 @@
     <Compile Include="Domain\Rewards\RewardCommandHandler.cs" />
     <Compile Include="Domain\Rewards\Events\RewardCreatedEvent.cs" />
     <Compile Include="AuthorizationPipelineHook.cs" />
+    <Compile Include="Domain\Tasks\TaskService.cs" />
     <Compile Include="Infrastructure\AggregateEventBase.cs" />
     <Compile Include="Infrastructure\Exceptions\AggregateNotFoundException.cs" />
     <Compile Include="Infrastructure\CommandHandlerBase.cs" />

@@ -38,7 +38,7 @@ namespace GF.DillyDally.WriteModel.Domain.Activities
                 }
             }
 
-            this.AggregateRepository.Save(aggregate);
+            await this.AggregateRepository.SaveAsync(aggregate);
             return new CreatePercentageActivityResponse(activityId);
         }
 

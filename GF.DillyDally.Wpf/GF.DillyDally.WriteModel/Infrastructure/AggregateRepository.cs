@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using GF.DillyDally.Data.Sqlite;
 using GF.DillyDally.WriteModel.Infrastructure.Exceptions;
 using MediatR;
@@ -22,7 +23,7 @@ namespace GF.DillyDally.WriteModel.Infrastructure
 
         #region IAggregateRepository Members
 
-        public IReadOnlyList<IAggregateEvent> Save<TAggregate>(TAggregate aggregate) where TAggregate : IAggregateRoot
+        public async Task<IReadOnlyList<IAggregateEvent>> SaveAsync<TAggregate>(TAggregate aggregate) where TAggregate : IAggregateRoot
         {
             var events = aggregate.GetUncommitedEvents();
             if (!events.Any())
@@ -47,7 +48,7 @@ namespace GF.DillyDally.WriteModel.Infrastructure
             }
 
             // Dispatch Event to all Handlers. This could also be done somewhere else.
-            this.DispatchEvents(events);
+            await this.DispatchEventsAsync(events);
 
             return events;
         }
@@ -82,11 +83,11 @@ namespace GF.DillyDally.WriteModel.Infrastructure
 
         #endregion
 
-        private void DispatchEvents(IReadOnlyList<IAggregateEvent> events)
+        private async Task DispatchEventsAsync(IReadOnlyList<IAggregateEvent> events)
         {
             foreach (var uncommitedEvent in events)
             {
-                this._mediator.Publish(uncommitedEvent);
+                await this._mediator.Publish(uncommitedEvent);
             }
         }
 

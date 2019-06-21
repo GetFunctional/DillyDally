@@ -29,13 +29,13 @@ namespace GF.DillyDally.Wpf.Client.Core.Navigator
         /// </summary>
         /// <param name="target">Target to navigate to</param>
         /// <returns></returns>
-        Task<IController> NavigateAsync(INavigationTarget target);
+        IController Navigate(INavigationTarget target);
 
         /// <summary>
         ///     Resolves the new Target and informs the involving instances of their change in the navigationprocess.
         /// </summary>
         /// <param name="navigationTargetId">Target to navigate to</param>
         /// <returns></returns>
-        Task<IController> NavigateAsync(Guid navigationTargetId);
+        IController Navigate(Guid navigationTargetId);
     }
 }

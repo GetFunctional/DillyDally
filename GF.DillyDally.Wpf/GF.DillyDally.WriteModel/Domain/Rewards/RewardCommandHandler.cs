@@ -17,15 +17,12 @@ namespace GF.DillyDally.WriteModel.Domain.Rewards
 
         public async Task<CreateRewardResponse> Handle(CreateRewardCommand request, CancellationToken cancellationToken)
         {
-            return await Task.Run(() =>
-            {
-                var rewardId = this.GuidGenerator.GenerateGuid();
+            var rewardId = this.GuidGenerator.GenerateGuid();
 
-                var aggregate = RewardAggregateRoot.Create(rewardId, request.Name, request.CurrencyCode);
-                this.AggregateRepository.Save(aggregate);
+            var aggregate = RewardAggregateRoot.Create(rewardId, request.Name, request.CurrencyCode);
+            await this.AggregateRepository.SaveAsync(aggregate);
 
-                return new CreateRewardResponse(rewardId);
-            }, cancellationToken);
+            return new CreateRewardResponse(rewardId);
         }
 
         #endregion

@@ -159,6 +159,7 @@
                 Canvas.ZIndex="0">
                 <ItemsControl
                     Padding="10"
+                    dd:DragDrop.DropHandler="{Binding LaneDropHandler}"
                     dd:DragDrop.IsDragSource="True"
                     dd:DragDrop.IsDropTarget="True"
                     dd:DragDrop.ShowAlwaysDropTargetAdorner="True"

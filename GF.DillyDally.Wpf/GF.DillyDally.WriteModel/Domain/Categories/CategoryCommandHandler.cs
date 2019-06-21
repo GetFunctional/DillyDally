@@ -23,17 +23,14 @@ namespace GF.DillyDally.WriteModel.Domain.Categories
         public async Task<CreateCategoryResponse> Handle(CreateCategoryCommand request,
             CancellationToken cancellationToken)
         {
-            return await Task.Run(() =>
-            {
-                var categoryId = this.GuidGenerator.GenerateGuid();
-                var runningNumberId =
-                    this._runningNumberFactory.CreateNewRunningNumberFor(RunningNumberCounterArea.Category);
+            var categoryId = this.GuidGenerator.GenerateGuid();
+            var runningNumberId = await 
+                this._runningNumberFactory.CreateNewRunningNumberForAsync(RunningNumberCounterArea.Category);
 
-                var aggregate =
-                    CategoryAggregateRoot.Create(categoryId, runningNumberId, request.Name, request.ColorCode);
-                this.AggregateRepository.Save(aggregate);
-                return new CreateCategoryResponse(categoryId);
-            }, cancellationToken);
+            var aggregate =
+                CategoryAggregateRoot.Create(categoryId, runningNumberId, request.Name, request.ColorCode);
+            await this.AggregateRepository.SaveAsync(aggregate);
+            return new CreateCategoryResponse(categoryId);
         }
 
         #endregion

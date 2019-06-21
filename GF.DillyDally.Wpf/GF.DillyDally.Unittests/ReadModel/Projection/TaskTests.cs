@@ -5,6 +5,7 @@ using GF.DillyDally.ReadModel.Projection.Categories.Repository;
 using GF.DillyDally.ReadModel.Projection.Lanes.Repository;
 using GF.DillyDally.ReadModel.Projection.Tasks.Repository;
 using GF.DillyDally.Shared.Extensions;
+using GF.DillyDally.WriteModel.Domain.Tasks;
 using GF.DillyDally.WriteModel.Domain.Tasks.Commands;
 using LightInject;
 using MediatR;
@@ -68,6 +69,41 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
         }
 
         [Test]
+        public async Task Creating_Task_ShouldCreate_TaskLaneProjection()
+        {
+            // Arrange
+            using (var connection = this._infrastructureSetup.OpenDatabaseConnection())
+            {
+                var commandDispatcher = this._infrastructureSetup.DiContainer.GetInstance<IMediator>();
+                var repository = new TaskRepository();
+                var categoryRepository = new CategoryRepository();
+                var laneRepository = new LaneRepository();
+                var laneTaskRepository = new LaneTaskRepository();
+                var exampleCategory = (await categoryRepository.GetAllAsync(connection)).Shuffle().FirstOrDefault();
+                var exampleLane = (await laneRepository.GetAllAsync(connection)).Shuffle().FirstOrDefault();
+                var timeStampBeforeCreation = DateTime.Now;
+                var taskName = "Test";
+                var taskService = new TaskService(commandDispatcher);
+
+                // Act
+                var newTask = await taskService.CreateNewTaskAsync(taskName,exampleCategory.CategoryId, exampleLane.LaneId);
+                var projection = await repository.GetByIdAsync(connection, newTask.TaskId);
+                var createdLink = await laneTaskRepository.GetLaneTaskByTaskId(connection, newTask.TaskId);
+
+                // Assert
+                Assert.That(newTask.TaskId, Is.Not.EqualTo(Guid.Empty));
+                Assert.That(createdLink, Is.Not.Null);
+                Assert.That(createdLink.TaskId, Is.EqualTo(newTask.TaskId));
+                Assert.That(projection, Is.Not.Null);
+                Assert.That(projection.TaskId, Is.EqualTo(newTask.TaskId));
+                Assert.That(projection.Name, Is.EqualTo(taskName));
+                Assert.That(projection.CategoryId, Is.EqualTo(exampleCategory.CategoryId));
+                Assert.That(projection.CreatedOn, Is.GreaterThan(timeStampBeforeCreation));
+                Assert.That(projection.DueDate, Is.Null);
+            }
+        }
+
+        [Test]
         public async Task Creating_Task_ShouldCreateProjection()
         {
             // Arrange
@@ -80,21 +116,39 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
                 var exampleCategory = (await categoryRepository.GetAllAsync(connection)).Shuffle().FirstOrDefault();
                 var exampleLane = (await laneRepository.GetAllAsync(connection)).Shuffle().FirstOrDefault();
                 var timeStampBeforeCreation = DateTime.Now;
-                var command = new CreateTaskCommand("Test", exampleCategory.CategoryId, exampleLane.LaneId);
+                var taskService = new TaskService(commandDispatcher);
+                var taskName = "Test";
 
                 // Act
-                var newTask = await commandDispatcher.Send(command);
+                var newTask = await taskService.CreateNewTaskAsync(taskName,exampleCategory.CategoryId, exampleLane.LaneId);
                 var projection = await repository.GetByIdAsync(connection, newTask.TaskId);
 
                 // Assert
                 Assert.That(newTask.TaskId, Is.Not.EqualTo(Guid.Empty));
                 Assert.That(projection, Is.Not.Null);
                 Assert.That(projection.TaskId, Is.EqualTo(newTask.TaskId));
-                Assert.That(projection.Name, Is.EqualTo(command.Name));
+                Assert.That(projection.Name, Is.EqualTo(taskName));
                 Assert.That(projection.CategoryId, Is.EqualTo(exampleCategory.CategoryId));
-                Assert.That(projection.LaneId, Is.EqualTo(exampleLane.LaneId));
                 Assert.That(projection.CreatedOn, Is.GreaterThan(timeStampBeforeCreation));
                 Assert.That(projection.DueDate, Is.Null);
+            }
+        }
+
+        [Test]
+        public async Task Creating_Task_ShouldNotThrowException()
+        {
+            // Arrange
+            using (var connection = this._infrastructureSetup.OpenDatabaseConnection())
+            {
+                var commandDispatcher = this._infrastructureSetup.DiContainer.GetInstance<IMediator>();
+                var categoryRepository = new CategoryRepository();
+                var laneRepository = new LaneRepository();
+                var exampleCategory = (await categoryRepository.GetAllAsync(connection)).Shuffle().FirstOrDefault();
+                var exampleLane = (await laneRepository.GetAllAsync(connection)).Shuffle().FirstOrDefault();
+                var taskService = new TaskService(commandDispatcher);
+
+                // Act
+                Assert.DoesNotThrowAsync(async () => await taskService.CreateNewTaskAsync("Test",exampleCategory.CategoryId, exampleLane.LaneId));
             }
         }
     }

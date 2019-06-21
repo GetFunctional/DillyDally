@@ -5,8 +5,7 @@ using GF.DillyDally.Mvvmc;
 using GF.DillyDally.Wpf.Client.Core.Dialoge;
 using GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Container;
 using GF.DillyDally.Wpf.Client.Presentation.Content.Category;
-using GF.DillyDally.WriteModel.Domain.Tasks.Commands;
-using MediatR;
+using GF.DillyDally.WriteModel.Domain.Tasks;
 using ReactiveUI;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Create
@@ -16,15 +15,15 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Create
         private readonly ActivityContainerController _activityContainerController;
         private readonly CategorySelectorController _categorySelectorController;
         private readonly DatabaseFileHandler _databaseFileHandler;
-        private readonly IMediator _mediator;
+        private readonly TaskService _taskService;
         private Guid? _presetLane;
 
-        public CreateTaskController(CreateTaskViewModel viewModel, DatabaseFileHandler databaseFileHandler, IMediator mediator,
+        public CreateTaskController(CreateTaskViewModel viewModel, DatabaseFileHandler databaseFileHandler, TaskService taskService,
             CategorySelectorController categorySelectorController, ActivityContainerController activityContainerController) :
             base(viewModel)
         {
             this._databaseFileHandler = databaseFileHandler;
-            this._mediator = mediator;
+            this._taskService = taskService;
             this._categorySelectorController = categorySelectorController;
             this._activityContainerController = activityContainerController;
 
@@ -57,8 +56,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Create
                 var taskName = basicInfos.TaskName;
                 var category = basicInfos.SelectedCategory;
 
-                var commandDispatcher = this._mediator;
-                var task = await commandDispatcher.Send(new CreateTaskCommand(taskName, category.CategoryId, this._presetLane));
+                var task = await this._taskService.CreateNewTaskAsync(taskName, category.CategoryId, this._presetLane);
                 this.ConfirmDialogWith(this.CreateTaskDialogResult);
             }
 

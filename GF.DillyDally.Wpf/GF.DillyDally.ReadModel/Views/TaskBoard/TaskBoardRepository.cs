@@ -14,13 +14,14 @@ namespace GF.DillyDally.ReadModel.Views.TaskBoard
     {
         public async Task<IList<TaskBoardLaneEntity>> GetTaskBoardLanesAsync(IDbConnection connection)
         {
-            var sql = $"SELECT {nameof(TaskBoardLaneEntity.LaneId)}, {nameof(TaskBoardLaneEntity.Name)} " +
+            var sql = $"SELECT {nameof(LaneEntity.LaneId)}, {nameof(LaneEntity.Name)} " +
                       $"FROM {LaneEntity.TableNameConstant} " +
                       $"WHERE {nameof(LaneEntity.IsCompletedLane)} = 0 AND {nameof(LaneEntity.IsRejectedLane)} = 0;" +
-                      $"SELECT {nameof(TaskBoardTaskEntity.TaskId)}, {TaskEntity.TableNameConstant}.{nameof(TaskBoardTaskEntity.LaneId)}, {nameof(TaskBoardTaskEntity.CategoryId)}, {nameof(TaskBoardTaskEntity.RunningNumber)}, {TaskEntity.TableNameConstant}.{nameof(TaskBoardTaskEntity.RunningNumberId)}, {TaskEntity.TableNameConstant}.{nameof(TaskBoardTaskEntity.Name)} " +
+                      $"SELECT {TaskEntity.TableNameConstant}.{nameof(TaskEntity.TaskId)}, {LaneTaskEntity.TableNameConstant}.{nameof(LaneTaskEntity.LaneId)}, {nameof(TaskEntity.CategoryId)}, {nameof(RunningNumberEntity.RunningNumber)}, {TaskEntity.TableNameConstant}.{nameof(TaskEntity.RunningNumberId)}, {TaskEntity.TableNameConstant}.{nameof(TaskEntity.Name)} " +
                       $"FROM {TaskEntity.TableNameConstant} " +
                       $"JOIN {RunningNumberEntity.TableNameConstant} ON {RunningNumberEntity.TableNameConstant}.{nameof(RunningNumberEntity.RunningNumberId)} = {TaskEntity.TableNameConstant}.{nameof(TaskEntity.RunningNumberId)} " +
-                      $"JOIN {LaneEntity.TableNameConstant} ON {LaneEntity.TableNameConstant}.{nameof(LaneEntity.LaneId)} = {TaskEntity.TableNameConstant}.{nameof(TaskEntity.LaneId)} " +
+                      $"JOIN {LaneTaskEntity.TableNameConstant} ON {LaneTaskEntity.TableNameConstant}.{nameof(LaneTaskEntity.TaskId)} = {TaskEntity.TableNameConstant}.{nameof(TaskEntity.TaskId)} " +
+                      $"JOIN {LaneEntity.TableNameConstant} ON {LaneEntity.TableNameConstant}.{nameof(LaneEntity.LaneId)} = {LaneTaskEntity.TableNameConstant}.{nameof(LaneTaskEntity.LaneId)} " +
                       $"WHERE {nameof(LaneEntity.IsCompletedLane)} = 0 AND {nameof(LaneEntity.IsRejectedLane)} = 0;" +
                       $"SELECT {nameof(TaskBoardCategoryEntity.CategoryId)}, {nameof(TaskBoardCategoryEntity.Name)}, {nameof(TaskBoardCategoryEntity.ColorCode)} " +
                       $"FROM {CategoryEntity.TableNameConstant};";

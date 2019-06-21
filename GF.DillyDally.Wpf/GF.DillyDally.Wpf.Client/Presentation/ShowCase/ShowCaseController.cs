@@ -20,7 +20,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ShowCase
 
         private async Task ShowTestDialog()
         {
-            var createTaskController = await this._controllerFactory.CreateControllerAsync<CreateTaskController>();
+            var createTaskController = this._controllerFactory.CreateController<CreateTaskController>();
             using (createTaskController)
             {
                 await this._dialogService.ShowDialogAsync(createTaskController);

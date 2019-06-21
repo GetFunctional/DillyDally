@@ -3,9 +3,9 @@ using System.Data;
 using System.Data.SQLite;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using GF.DillyDally.Data.Contracts;
+using log4net;
 
 namespace GF.DillyDally.Data.Sqlite
 {
@@ -78,7 +78,14 @@ namespace GF.DillyDally.Data.Sqlite
                           {
                               DataSource = fullDatabaseFilePath,
                               Version = 3,
-                              BinaryGUID = true
+                              BinaryGUID = true,
+                              DefaultTimeout = 5000,
+                              SyncMode = SynchronizationModes.Off,
+                              JournalMode = SQLiteJournalModeEnum.Memory,
+                              PageSize = 65536,
+                              CacheSize = 16777216,
+                              FailIfMissing = false,
+                              ReadOnly = false
                           };
 
             return builder.ConnectionString;
@@ -90,9 +97,11 @@ namespace GF.DillyDally.Data.Sqlite
             return connection;
         }
 
+        private static readonly ILog DatabaseFileLogger = LogManager.GetLogger(typeof(DatabaseFileHandler));
+
         private void HandleTrace(object sender, TraceEventArgs e)
         {
-            Trace.WriteLine(string.Concat(e.Statement.Take(500)));
+            DatabaseFileLogger.Info(e.Statement);
         }
 
         public IDbConnection OpenConnection()

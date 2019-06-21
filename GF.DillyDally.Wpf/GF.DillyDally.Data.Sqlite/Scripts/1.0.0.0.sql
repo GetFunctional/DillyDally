@@ -101,7 +101,6 @@ CREATE TABLE [Tasks]
 	[RowID] INTEGER PRIMARY KEY AUTOINCREMENT, 
 	[TaskId] GUID NOT NULL UNIQUE,	
 	[CategoryId] GUID NOT NULL REFERENCES [Categories]([CategoryId]),
-	[LaneId] GUID NOT NULL REFERENCES [Lanes]([LaneId]),
 	[RunningNumberId] GUID NOT NULL REFERENCES [RunningNumbers]([RunningNumberId]),
 	[Name] VARCHAR2(255) NOT NULL,
 	[DueDate] DATETIME NULL,
@@ -112,6 +111,19 @@ CREATE TABLE [Tasks]
 	);
 
 CREATE UNIQUE INDEX [IX_Tasks_TaskId] ON [Tasks]([TaskId]);
+GO
+
+CREATE TABLE [LaneTasks]
+	(
+	[RowID] INTEGER PRIMARY KEY AUTOINCREMENT, 
+	[LaneTaskId] GUID NOT NULL UNIQUE,	
+	[LaneId] GUID NOT NULL REFERENCES [Lanes]([LaneId]),
+	[TaskId] GUID NOT NULL REFERENCES [Tasks]([TaskId]),
+	[OrderNumber] INT NOT NULL,
+	UNIQUE ([LaneId],[TaskId])
+	);
+
+CREATE UNIQUE INDEX [IX_LaneTasks_LaneTaskId] ON [LaneTasks]([LaneTaskId]);
 GO
 
 CREATE TABLE [TaskImages]

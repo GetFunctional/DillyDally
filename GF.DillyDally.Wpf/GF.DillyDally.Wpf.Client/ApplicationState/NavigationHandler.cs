@@ -22,19 +22,22 @@ namespace GF.DillyDally.Wpf.Client.ApplicationState
 
         public async Task<NavigationResponse> Handle(NavigationRequest request, CancellationToken cancellationToken)
         {
-            var navigationTarget = request.NavigationTarget;
-            if (navigationTarget == null)
+            return await Task.Run(() =>
             {
-                if (request.NavigationTargetId == null)
+                var navigationTarget = request.NavigationTarget;
+                if (navigationTarget == null)
                 {
-                    throw new ArgumentException(nameof(request.NavigationTargetId));
+                    if (request.NavigationTargetId == null)
+                    {
+                        throw new ArgumentException(nameof(request.NavigationTargetId));
+                    }
+
+                    navigationTarget = this._navigationTargetProvider.FindNavigationTargetWithKey(request.NavigationTargetId.Value);
                 }
 
-                navigationTarget = this._navigationTargetProvider.FindNavigationTargetWithKey(request.NavigationTargetId.Value);
-            }
-
-            var navigationResult = await this._dillyDallyApplication.NavigateInCurrentNavigatorAsync(navigationTarget);
-            return new NavigationResponse(navigationResult);
+                var navigationResult = this._dillyDallyApplication.NavigateInCurrentNavigator(navigationTarget);
+                return new NavigationResponse(navigationResult);
+            }, cancellationToken);
         }
 
         #endregion

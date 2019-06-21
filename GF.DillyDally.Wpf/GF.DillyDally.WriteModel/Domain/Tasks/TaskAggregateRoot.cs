@@ -19,9 +19,9 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks
 
 
         private TaskAggregateRoot(Guid taskId, string name, Guid runningNumberId,
-            Guid categoryId, Guid laneId, Guid? previewImageId, int storypoints = 0) : this()
+            Guid categoryId, Guid? previewImageId, int storypoints = 0) : this()
         {
-            var creationEvent = new TaskCreatedEvent(taskId, name, runningNumberId, categoryId, laneId,
+            var creationEvent = new TaskCreatedEvent(taskId, name, runningNumberId, categoryId,
                 previewImageId, DateTime.Now, storypoints);
             this.RaiseEvent(creationEvent);
         }
@@ -37,7 +37,6 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks
         private List<Guid> Links { get; } = new List<Guid>();
         internal string Name { get; private set; }
         internal Guid CategoryId { get; private set; }
-        internal Guid LaneId { get; private set; }
         internal Guid? PreviewImageId { get; private set; }
         private HashSet<Guid> Files { get; } = new HashSet<Guid>();
         internal string DefinitionOfDone { get; private set; }
@@ -83,9 +82,9 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks
         }
 
         internal static TaskAggregateRoot CreateTask(Guid taskId, string name, Guid runningNumberId,
-            Guid categoryId, Guid laneId, Guid? previewImageId, int storypoints)
+            Guid categoryId, Guid? previewImageId, int storypoints)
         {
-            return new TaskAggregateRoot(taskId, name, runningNumberId, categoryId, laneId,
+            return new TaskAggregateRoot(taskId, name, runningNumberId, categoryId,
                 previewImageId, storypoints);
         }
 
@@ -94,7 +93,6 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks
             this.AggregateId = obj.AggregateId;
             this.Name = obj.Name;
             this.CategoryId = obj.CategoryId;
-            this.LaneId = obj.LaneId;
             this.PreviewImageId = obj.PreviewImageId;
             this.Storypoints = obj.StoryPoints;
         }

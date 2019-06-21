@@ -25,15 +25,12 @@ namespace GF.DillyDally.WriteModel.Domain.Achievements
         public async Task<CompleteAchievementResponse> Handle(CompleteAchievementCommand request,
             CancellationToken cancellationToken)
         {
-            return await Task.Run(() =>
-            {
-                var aggregate = this.AggregateRepository.GetById<AchievementAggregateRoot>(request.AchievementId);
+            var aggregate = this.AggregateRepository.GetById<AchievementAggregateRoot>(request.AchievementId);
 
-                aggregate.Complete();
-                this.AggregateRepository.Save(aggregate);
+            aggregate.Complete();
+            await this.AggregateRepository.SaveAsync(aggregate);
 
-                return new CompleteAchievementResponse();
-            }, cancellationToken);
+            return new CompleteAchievementResponse();
         }
 
         #endregion
@@ -43,19 +40,16 @@ namespace GF.DillyDally.WriteModel.Domain.Achievements
         public async Task<CreateAchievementResponse> Handle(CreateAchievementCommand request,
             CancellationToken cancellationToken)
         {
-            return await Task.Run(() =>
-            {
-                var achievementId = this.GuidGenerator.GenerateGuid();
-                var newRunningNumberId =
-                    this._runningNumberFactory.CreateNewRunningNumberFor(RunningNumberCounterArea.Achievement);
+            var achievementId = this.GuidGenerator.GenerateGuid();
+            var newRunningNumberId = await 
+                this._runningNumberFactory.CreateNewRunningNumberForAsync(RunningNumberCounterArea.Achievement);
 
-                var aggregate = AchievementAggregateRoot.Create(achievementId, newRunningNumberId, request.Name,
-                    request.CounterIncrease, request.Storypoints);
+            var aggregate = AchievementAggregateRoot.Create(achievementId, newRunningNumberId, request.Name,
+                request.CounterIncrease, request.Storypoints);
 
-                this.AggregateRepository.Save(aggregate);
+            await this.AggregateRepository.SaveAsync(aggregate);
 
-                return new CreateAchievementResponse(achievementId);
-            }, cancellationToken);
+            return new CreateAchievementResponse(achievementId);
         }
 
         #endregion

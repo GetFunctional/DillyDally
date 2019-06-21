@@ -7,7 +7,8 @@ using MediatR;
 
 namespace GF.DillyDally.ReadModel.Projection.Lanes
 {
-    internal sealed class LaneEventHandler : INotificationHandler<LaneCreatedEvent>
+    internal sealed class LaneEventHandler : INotificationHandler<LaneCreatedEvent>, INotificationHandler<TaskAddedEvent>,
+        INotificationHandler<TaskRemovedEvent>
     {
         private readonly DatabaseFileHandler _fileHandler;
 
@@ -32,6 +33,32 @@ namespace GF.DillyDally.ReadModel.Projection.Lanes
                                                                  ColorCode = notification.ColorCode,
                                                                  RunningNumberId = notification.RunningNumberId
                                                              });
+            }
+        }
+
+        #endregion
+
+        #region INotificationHandler<TaskAddedEvent> Members
+
+        public async Task Handle(TaskAddedEvent notification, CancellationToken cancellationToken)
+        {
+            using (var connection = this._fileHandler.OpenConnection())
+            {
+                var laneRepository = new LaneTaskRepository();
+                await laneRepository.AddTaskToLaneAsync(connection, notification.TaskId, notification.AggregateId, notification.OrderNumber);
+            }
+        }
+
+        #endregion
+
+        #region INotificationHandler<TaskRemovedEvent> Members
+
+        public async Task Handle(TaskRemovedEvent notification, CancellationToken cancellationToken)
+        {
+            using (var connection = this._fileHandler.OpenConnection())
+            {
+                var laneRepository = new LaneTaskRepository();
+                await laneRepository.RemoveTaskFromLaneAsync(connection, notification.TaskId, notification.AggregateId);
             }
         }
 

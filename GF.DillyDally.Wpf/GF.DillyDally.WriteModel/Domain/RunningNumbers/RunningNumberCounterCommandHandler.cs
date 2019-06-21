@@ -31,15 +31,12 @@ namespace GF.DillyDally.WriteModel.Domain.RunningNumbers
 
         public async Task<CreateRunningNumberResponse> Handle(CreateRunningNumberCommand request, CancellationToken cancellationToken)
         {
-            return await Task.Run(() =>
-            {
-                var runningNumberCounterId = AreaToIdentityMapping[request.CounterArea];
-                var aggregate = this.AggregateRepository.GetById<RunningNumberCounterAggregateRoot>(runningNumberCounterId);
-                var nextNumberId = this.GuidGenerator.GenerateGuid();
-                aggregate.AddNextNumber(nextNumberId);
-                this.AggregateRepository.Save(aggregate);
-                return new CreateRunningNumberResponse(nextNumberId);
-            }, cancellationToken);
+            var runningNumberCounterId = AreaToIdentityMapping[request.CounterArea];
+            var aggregate = this.AggregateRepository.GetById<RunningNumberCounterAggregateRoot>(runningNumberCounterId);
+            var nextNumberId = this.GuidGenerator.GenerateGuid();
+            aggregate.AddNextNumber(nextNumberId);
+            await this.AggregateRepository.SaveAsync(aggregate);
+            return new CreateRunningNumberResponse(nextNumberId);
         }
 
         #endregion
@@ -49,20 +46,17 @@ namespace GF.DillyDally.WriteModel.Domain.RunningNumbers
         public async Task<CreateRunningNumberCounterResponse> Handle(CreateRunningNumberCounterCommand request,
             CancellationToken cancellationToken)
         {
-            return await Task.Run(() =>
+            var runningNumberId = AreaToIdentityMapping[request.CounterArea];
+            if (this.AggregateRepository.TryGetById(runningNumberId, out RunningNumberCounterAggregateRoot root))
             {
-                var runningNumberId = AreaToIdentityMapping[request.CounterArea];
-                if (this.AggregateRepository.TryGetById(runningNumberId, out RunningNumberCounterAggregateRoot root))
-                {
-                    throw new RunningNumberCounterAlreadyExistException(runningNumberId);
-                }
+                throw new RunningNumberCounterAlreadyExistException(runningNumberId);
+            }
 
-                var aggregate = RunningNumberCounterAggregateRoot.Create(runningNumberId, request.CounterArea,
-                    request.Prefix,
-                    request.InitialNumber);
-                this.AggregateRepository.Save(aggregate);
-                return new CreateRunningNumberCounterResponse();
-            }, cancellationToken);
+            var aggregate = RunningNumberCounterAggregateRoot.Create(runningNumberId, request.CounterArea,
+                request.Prefix,
+                request.InitialNumber);
+            await this.AggregateRepository.SaveAsync(aggregate);
+            return new CreateRunningNumberCounterResponse();
         }
 
         #endregion

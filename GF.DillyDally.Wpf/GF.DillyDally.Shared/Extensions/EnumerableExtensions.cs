@@ -38,5 +38,10 @@ namespace GF.DillyDally.Shared.Extensions
                 buffer[j] = buffer[i];
             }
         }
+
+        public static IEnumerable<T> Yield<T>(this T singleElement)
+        {
+            return new[] { singleElement };
+        }
     }
 }
