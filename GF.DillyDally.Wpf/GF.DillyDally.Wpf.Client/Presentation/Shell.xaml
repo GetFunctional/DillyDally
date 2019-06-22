@@ -90,13 +90,16 @@
                             <dxn:NavBarControl.Groups>
                                 <dxn:NavBarGroup Header="Dashboard">
                                     <dxn:NavBarGroup.Items>
-                                        <dxn:NavBarItem Content="Search" />
+                                        <dxn:NavBarItem
+                                            Command="{Binding NavigateInNavigatorCommand, Mode=OneWay}"
+                                            CommandParameter="{Binding SearchContentNavigationTarget}"
+                                            Content="Search" />
                                     </dxn:NavBarGroup.Items>
                                 </dxn:NavBarGroup>
                                 <dxn:NavBarGroup Header="Tasks">
                                     <dxn:NavBarGroup.Items>
                                         <dxn:NavBarItem
-                                            Command="{Binding OpenTaskboardCommand, Mode=OneWay}"
+                                            Command="{Binding NavigateInNavigatorCommand, Mode=OneWay}"
                                             CommandParameter="{Binding TaskBoardNavigationTarget}"
                                             Content="Taskboard" />
                                         <dxn:NavBarItem

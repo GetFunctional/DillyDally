@@ -43,14 +43,14 @@ namespace GF.DillyDally.Wpf.Client.Core
             this.RegisterMediatRFramework(serviceContainer);
             this.RegisterMvvmcDependencies(serviceContainer);
             this.RegisterControllersAndViewModels(serviceContainer);
-            this.RegisterDialogService(serviceContainer);
+            this.RegisterApplicationServices(serviceContainer);
             this._dataTemplateInitializer.RegisterDataTemplates(this._application);
             this._navigationInitializer.InitializeNavigation(serviceContainer);
         }
 
-        private void RegisterDialogService(IServiceContainer serviceContainer)
+        private void RegisterApplicationServices(IServiceContainer serviceContainer)
         {
-            serviceContainer.Register<IDialogService, DialogService>();
+            serviceContainer.Register<NavigationService>();
         }
 
         private void RegisterControllersAndViewModels(IServiceContainer serviceContainer)

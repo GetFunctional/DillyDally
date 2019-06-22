@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using GF.DillyDally.Data.Sqlite;
 using GF.DillyDally.Mvvmc;
 using GF.DillyDally.ReadModel.Views.TaskBoard;
+using GF.DillyDally.Wpf.Client.Core;
 using GF.DillyDally.Wpf.Client.Core.Dialoge;
 using GF.DillyDally.Wpf.Client.Presentation.Content.Commands;
 using MediatR;
@@ -20,10 +21,10 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.TaskBoard
         private readonly IDisposable _whenTaskChangedObservable;
 
         public TaskBoardController(TaskBoardViewModel viewModel, DatabaseFileHandler databaseFileHandler,
-            ControllerFactory controllerFactory, IDialogService dialogService, IMediator mediator) : base(viewModel)
+            ControllerFactory controllerFactory, IMediator mediator) : base(viewModel)
         {
             this._databaseFileHandler = databaseFileHandler;
-            this._commands = new TaskCommands(controllerFactory, dialogService, mediator);
+            this._commands = new TaskCommands(controllerFactory, mediator);
             this._createNewTaskCommand = this._commands.CreateNewTaskCommand;
             this._whenTaskChangedObservable = this._taskboardDragDropHandler.WhenTaskChangedLane.Subscribe(this.HandleTaskLaneChange);
 

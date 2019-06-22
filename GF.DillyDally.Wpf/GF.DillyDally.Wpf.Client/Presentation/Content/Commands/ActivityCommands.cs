@@ -1,7 +1,8 @@
 ﻿using System.Threading.Tasks;
 using GF.DillyDally.Mvvmc;
-using GF.DillyDally.Wpf.Client.Core.Dialoge;
+using GF.DillyDally.Wpf.Client.Core;
 using GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create;
+using MediatR;
 using ReactiveUI;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Content.Commands
@@ -9,12 +10,12 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Commands
     public sealed class ActivityCommands
     {
         private readonly ControllerFactory _controllerFactory;
-        private readonly IDialogService _dialogService;
+        private readonly NavigationService _navigationService;
 
-        public ActivityCommands(ControllerFactory controllerFactory, IDialogService dialogService)
+        public ActivityCommands(ControllerFactory controllerFactory, IMediator mediator)
         {
             this._controllerFactory = controllerFactory;
-            this._dialogService = dialogService;
+            this._navigationService = new NavigationService(mediator);
 
             this.CreateNewActivityCommand = ReactiveCommand.CreateFromTask(this.CreateNewActivity);
         }
@@ -26,7 +27,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Commands
             var createActivityController = this._controllerFactory.CreateController<CreateActivityController>();
             using (createActivityController)
             {
-                await this._dialogService.ShowDialogAsync(createActivityController);
+                await this._navigationService.ShowDialogAsync(createActivityController);
             }
         }
     }

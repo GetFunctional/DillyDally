@@ -9,18 +9,15 @@ namespace GF.DillyDally.Wpf.Client.Presentation
     public sealed class ShellViewModel : ViewModelBase
     {
         private ContentBrowserViewModel _contentBrowserViewModel;
-        private HeaderMenuViewModel _headerMenuViewModel;
-        private OverlayViewModel _overlayViewModel;
-        private IReactiveCommand _openTaskboardCommand;
         private IReactiveCommand _createNewActivityCommand;
         private IReactiveCommand _createNewTaskCommand;
+        private HeaderMenuViewModel _headerMenuViewModel;
+        private IReactiveCommand _navigateInNavigatorCommand;
+        private OverlayViewModel _overlayViewModel;
 
         public ContentBrowserViewModel ContentBrowserViewModel
         {
-            get
-            {
-                return this._contentBrowserViewModel;
-            }
+            get { return this._contentBrowserViewModel; }
             set
             {
                 if (this.RaiseAndSetIfChanged(ref this._contentBrowserViewModel, value) == value)
@@ -32,78 +29,47 @@ namespace GF.DillyDally.Wpf.Client.Presentation
 
         public ContentNavigatorViewModel ContentNavigatorViewModel
         {
-            get
-            {
-                return this._contentBrowserViewModel.CurrentActiveNavigator;
-            }
+            get { return this._contentBrowserViewModel.CurrentActiveNavigator; }
         }
 
         public HeaderMenuViewModel HeaderMenuViewModel
         {
-            get
-            {
-                return this._headerMenuViewModel;
-            }
-            set
-            {
-                this.RaiseAndSetIfChanged(ref this._headerMenuViewModel, value);
-            }
+            get { return this._headerMenuViewModel; }
+            set { this.RaiseAndSetIfChanged(ref this._headerMenuViewModel, value); }
         }
 
         public OverlayViewModel OverlayViewModel
         {
-            get
-            {
-                return this._overlayViewModel;
-            }
-            set
-            {
-                this.RaiseAndSetIfChanged(ref this._overlayViewModel, value);
-            }
+            get { return this._overlayViewModel; }
+            set { this.RaiseAndSetIfChanged(ref this._overlayViewModel, value); }
         }
 
         public Guid TaskBoardNavigationTarget
         {
-            get
-            {
-                return Content.Tasks.TaskBoard.TaskBoardNavigationTarget.TargetId;
-            }
+            get { return Content.Tasks.TaskBoard.TaskBoardNavigationTarget.TargetId; }
         }
 
-        public IReactiveCommand OpenTaskboardCommand
+        public IReactiveCommand NavigateInNavigatorCommand
         {
-            get
-            {
-                return this._openTaskboardCommand;
-            }
-            set
-            {
-                this.RaiseAndSetIfChanged(ref this._openTaskboardCommand, value);
-            }
+            get { return this._navigateInNavigatorCommand; }
+            set { this.RaiseAndSetIfChanged(ref this._navigateInNavigatorCommand, value); }
         }
 
         public IReactiveCommand CreateNewActivityCommand
         {
-            get
-            {
-                return this._createNewActivityCommand;
-            }
-            set
-            {
-                this.RaiseAndSetIfChanged(ref this._createNewActivityCommand, value);
-            }
+            get { return this._createNewActivityCommand; }
+            set { this.RaiseAndSetIfChanged(ref this._createNewActivityCommand, value); }
         }
 
         public IReactiveCommand CreateNewTaskCommand
         {
-            get
-            {
-                return this._createNewTaskCommand;
-            }
-            set
-            {
-                this.RaiseAndSetIfChanged(ref this._createNewTaskCommand, value);
-            }
+            get { return this._createNewTaskCommand; }
+            set { this.RaiseAndSetIfChanged(ref this._createNewTaskCommand, value); }
+        }
+
+        public Guid SearchContentNavigationTarget
+        {
+            get { return ContentNavigation.SearchContentNavigationTarget.TargetId; }
         }
     }
 }

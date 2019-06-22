@@ -1,6 +1,6 @@
 ﻿namespace GF.DillyDally.Wpf.Client.Core.Mediation.Navigation
 {
-    internal sealed class NavigationResponse
+    public sealed class NavigationResponse
     {
         public NavigationResponse(bool successful)
         {
