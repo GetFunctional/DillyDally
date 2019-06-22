@@ -30,7 +30,7 @@
             SearchResultItemTemplate="{StaticResource SearchTextControlItemTemplate}"
             SearchResultItemsSource="{Binding SearchResults, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
             SearchText="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-            WatermarkText="Search for existing activities..." />
+            WatermarkText="Titleearch for existing activities..." />
 
 
         <ItemsControl ItemTemplate="{StaticResource ActivityItemTemplate}" ItemsSource="{Binding Activities, Mode=OneWay}">

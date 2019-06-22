@@ -49,7 +49,7 @@
                     TextAlignment="Center" />
                 <TextBlock
                     Style="{StaticResource DescriptionTextBlockStyle}"
-                    Text="(Minimal Size 1600x900px)"
+                    Text="(Minimal Titleize 1600x900px)"
                     TextAlignment="Center" />
             </WrapPanel>
         </Grid>

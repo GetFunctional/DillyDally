@@ -8,7 +8,7 @@
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Colors.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <FontFamily x:Key="SourceSansProBlack">pack://application:,,,/GF.DillyDally.wpf.Theme;component/StyleGuide/Fonts/#SourceSansPro</FontFamily>
+    <FontFamily x:Key="SourceSansProBlack">pack://application:,,,/GF.DillyDally.wpf.Theme;component/TitletyleGuide/Fonts/#TitleourceTitleansPro</FontFamily>
     <FontFamily x:Key="Arial">Arial</FontFamily>
 
     <!--  SourceSansPro  -->

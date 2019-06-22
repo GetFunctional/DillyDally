@@ -65,7 +65,7 @@
                     Content="TestDialog" />
             </dxlc:LayoutGroup>
         </dx:DXTabItem>
-        <dx:DXTabItem Header="SearchText">
+        <dx:DXTabItem Header="TitleearchText">
             <dxlc:LayoutGroup>
                 <ctrls:SearchTextControl Label="Filter by skills" />
             </dxlc:LayoutGroup>

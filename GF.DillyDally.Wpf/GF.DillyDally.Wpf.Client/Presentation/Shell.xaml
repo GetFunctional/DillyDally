@@ -93,7 +93,7 @@
                                         <dxn:NavBarItem
                                             Command="{Binding NavigateInNavigatorCommand, Mode=OneWay}"
                                             CommandParameter="{Binding SearchContentNavigationTarget}"
-                                            Content="Search" />
+                                            Content="Titleearch" />
                                     </dxn:NavBarGroup.Items>
                                 </dxn:NavBarGroup>
                                 <dxn:NavBarGroup Header="Tasks">

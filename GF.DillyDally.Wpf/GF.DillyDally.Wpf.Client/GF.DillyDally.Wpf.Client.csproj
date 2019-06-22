@@ -179,6 +179,12 @@
     <Compile Include="Presentation\Content\Tasks\Create\CreateTaskAdditionalInfosViewModel.cs" />
     <Compile Include="Presentation\Content\Tasks\Create\CreateTaskBasicInfosViewModel.cs" />
     <Compile Include="Presentation\Content\Tasks\Create\CreateTaskActivitiesViewModel.cs" />
+    <Compile Include="Presentation\Content\Tasks\Details\TaskDetailsNavigationTarget.cs" />
+    <Compile Include="Presentation\Content\Tasks\Details\TaskDetailsController.cs" />
+    <Compile Include="Presentation\Content\Tasks\Details\TaskDetailsView.xaml.cs">
+      <DependentUpon>TaskDetailsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Presentation\Content\Tasks\Details\TaskDetailsViewModel.cs" />
     <Compile Include="Presentation\Content\Tasks\TaskBoard\DragDrop\ITaskLaneDropHandler.cs" />
     <Compile Include="Presentation\Content\Tasks\TaskBoard\DragDrop\TaskBoardDragDropHandler.cs" />
     <Compile Include="Presentation\Content\Tasks\TaskBoard\DragDrop\TaskChangedLanePayload.cs" />
@@ -291,6 +297,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Presentation\Content\Tasks\Create\CreateTaskViewTemplates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Presentation\Content\Tasks\Details\TaskDetailsTemplates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Presentation\Content\Tasks\Details\TaskDetailsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
