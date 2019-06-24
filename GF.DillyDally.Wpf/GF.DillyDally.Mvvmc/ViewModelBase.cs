@@ -8,6 +8,7 @@ namespace GF.DillyDally.Mvvmc
 
         #region IViewModel Members
 
+
         public bool IsBusy
         {
             get

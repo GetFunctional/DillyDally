@@ -76,6 +76,7 @@ namespace GF.DillyDally.Mvvmc
             return new List<string> {this[propertyName]};
         }
 
+        [Browsable(false)]
         public bool HasErrors
         {
             get
