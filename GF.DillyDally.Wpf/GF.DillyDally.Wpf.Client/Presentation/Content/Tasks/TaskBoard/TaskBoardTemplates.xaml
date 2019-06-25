@@ -11,7 +11,8 @@
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Colors.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Typography.xaml" />
+        <ResourceDictionary
+            Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Typography.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <SolidColorBrush x:Key="TaskItemBorderBrush" Color="{StaticResource Layer1BorderColor}" />
@@ -69,9 +70,9 @@
                     HorizontalAlignment="Left"
                     ItemSpace="13"
                     Orientation="Vertical">
-                    <ctrls:InternalLinkControl MaxWidth="200" DisplayLink="{Binding RunningNumber}" />
+                    <!--<ctrls:InternalLinkControl MaxWidth="200" DisplayLink="{Binding RunningNumber}" />-->
                     <TextBlock
-                        MaxWidth="200"
+                        MaxWidth="225"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
                         FontSize="13"
@@ -80,11 +81,19 @@
                         Text="{Binding Name}"
                         TextAlignment="Left"
                         TextWrapping="Wrap" />
-                    <ctrls:LabelControl
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Top"
-                        LabelBrush="{Binding ColorString, Converter={StaticResource ColorStringToBrushConverter}}"
-                        LabelText="{Binding Category}" />
+                    <dxlc:LayoutGroup>
+                        <ctrls:LabelControl
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            LabelBrush="{Binding ColorString, Converter={StaticResource ColorStringToBrushConverter}}"
+                            LabelText="{Binding Category}" />
+                        <ctrls:LabelControl
+                            Height="20"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            LabelBrush="#FF4B64"
+                            LabelText="12.04.2019" />
+                    </dxlc:LayoutGroup>
 
                 </dxlc:LayoutGroup>
                 <dxlc:LayoutGroup
@@ -97,11 +106,18 @@
                         VerticalAlignment="Bottom"
                         Style="{StaticResource DescriptionTextBlockStyle}"
                         Text="1/4 Done" />
-                    <ctrls:LabelControl
+                    <ctrls:ChromelessButtonControl
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Bottom"
+                        Command="{Binding OpenTaskDetailsCommand, Mode=OneWay}"
+                        CommandParameter="{Binding TaskId, Mode=OneWay}">
+                        <fa5:FontAwesome Icon="Solid_Edit" />
+                    </ctrls:ChromelessButtonControl>
+                    <!--<ctrls:LabelControl
                         HorizontalAlignment="Right"
                         VerticalAlignment="Bottom"
                         LabelBrush="{StaticResource TaskItemHightlightBrush}"
-                        LabelText="{Binding Storypoints}" />
+                        LabelText="{Binding Storypoints}" />-->
                 </dxlc:LayoutGroup>
             </Grid>
         </Border>

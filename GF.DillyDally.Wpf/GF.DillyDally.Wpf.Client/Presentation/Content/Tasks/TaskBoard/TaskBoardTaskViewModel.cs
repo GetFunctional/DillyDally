@@ -11,6 +11,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.TaskBoard
         private string _name;
         private string _runningNumber;
         private int _storypoints;
+        private IReactiveCommand _openTaskDetailsCommand;
 
         public TaskBoardTaskViewModel(Guid taskId, string name, string runningNumber, string colorString, string category, int storypoints)
         {
@@ -82,6 +83,12 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.TaskBoard
             {
                 this.RaiseAndSetIfChanged(ref this._storypoints, value);
             }
+        }
+
+        public IReactiveCommand OpenTaskDetailsCommand
+        {
+            get { return this._openTaskDetailsCommand; }
+            set { this.RaiseAndSetIfChanged(ref this._openTaskDetailsCommand, value); }
         }
     }
 }

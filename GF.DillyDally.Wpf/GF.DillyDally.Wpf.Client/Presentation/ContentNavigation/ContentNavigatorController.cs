@@ -17,10 +17,10 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
             this._contentNavigator.Navigated += this.HandleNavigatorNavigated;
         }
 
-        public bool NavigateToTarget(INavigationTarget navigationTarget)
+        public IController NavigateToTarget(INavigationTarget navigationTarget)
         {
             var controller = this._contentNavigator.Navigate(navigationTarget);
-            return controller != null;
+            return controller;
         }
 
         private void HandleNavigatorNavigated(object sender, EventArgs e)

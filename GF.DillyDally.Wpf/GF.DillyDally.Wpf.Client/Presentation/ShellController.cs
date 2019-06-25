@@ -30,7 +30,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation
             this.ViewModel.CreateNewTaskCommand = this._taskCommands.CreateNewTaskCommand;
         }
 
-        public bool NavigateInCurrentNavigatorTo(INavigationTarget navigationTarget)
+        public IController NavigateInCurrentNavigatorTo(INavigationTarget navigationTarget)
         {
             return this._contentBrowserController.NavigateInCurrentNavigator(navigationTarget);
         }

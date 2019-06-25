@@ -1,4 +1,6 @@
-﻿using GF.DillyDally.Mvvmc;
+﻿using System;
+using System.Threading.Tasks;
+using GF.DillyDally.Mvvmc;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Details
 {
@@ -6,6 +8,11 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Details
     {
         public TaskDetailsController(TaskDetailsViewModel viewModel) : base(viewModel)
         {
+        }
+
+        public async Task LoadTaskDetailsAsync(Guid taskId)
+        {
+            await Task.CompletedTask;
         }
     }
 }

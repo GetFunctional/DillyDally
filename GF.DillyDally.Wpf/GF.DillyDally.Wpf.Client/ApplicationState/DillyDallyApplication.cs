@@ -19,7 +19,7 @@ namespace GF.DillyDally.Wpf.Client.ApplicationState
 
         #region IDillyDallyApplication Members
 
-        public bool NavigateInCurrentNavigator(INavigationTarget navigationTarget)
+        public IController NavigateInCurrentNavigator(INavigationTarget navigationTarget)
         {
             return this._shellController.NavigateInCurrentNavigatorTo(navigationTarget);
         }

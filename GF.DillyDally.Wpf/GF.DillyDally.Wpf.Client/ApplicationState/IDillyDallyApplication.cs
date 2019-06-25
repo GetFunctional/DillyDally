@@ -6,7 +6,7 @@ namespace GF.DillyDally.Wpf.Client.ApplicationState
 {
     public interface IDillyDallyApplication
     {
-        bool NavigateInCurrentNavigator(INavigationTarget navigationTarget);
+        IController NavigateInCurrentNavigator(INavigationTarget navigationTarget);
         void ShowOverlayDialog(IViewModel overlayContent, DialogSettings dialogSettings);
         void ConfirmOverlayWith(IDialogResult result);
     }

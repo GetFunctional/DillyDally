@@ -21,7 +21,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
             this._controllerFactory = controllerFactory;
         }
 
-        public bool NavigateInCurrentNavigator(INavigationTarget navigationTarget)
+        public IController NavigateInCurrentNavigator(INavigationTarget navigationTarget)
         {
             var currentActiveNavigator = this.ViewModel.CurrentActiveNavigator;
             if (currentActiveNavigator != null)
@@ -31,7 +31,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
                 return controllerForViewModel.NavigateToTarget(navigationTarget);
             }
 
-            return false;
+            return null;
         }
 
         protected override async Task OnInitializeAsync()

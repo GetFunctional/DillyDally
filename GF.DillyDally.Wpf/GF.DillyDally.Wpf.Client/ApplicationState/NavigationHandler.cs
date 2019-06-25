@@ -35,8 +35,8 @@ namespace GF.DillyDally.Wpf.Client.ApplicationState
                     navigationTarget = this._navigationTargetProvider.FindNavigationTargetWithKey(request.NavigationTargetId.Value);
                 }
 
-                var navigationResult = this._dillyDallyApplication.NavigateInCurrentNavigator(navigationTarget);
-                return new NavigationResponse(navigationResult);
+                var targetController = this._dillyDallyApplication.NavigateInCurrentNavigator(navigationTarget);
+                return new NavigationResponse(targetController != null, targetController);
             }, cancellationToken);
         }
 

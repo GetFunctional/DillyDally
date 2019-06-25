@@ -14,6 +14,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.TaskBoard
     public class TaskBoardController : ControllerBase<TaskBoardViewModel>
     {
         private readonly TaskCommands _commands;
+        private readonly IReactiveCommand _openTaskDetailsCommand;
         private readonly IReactiveCommand _createNewTaskCommand;
         private readonly DatabaseFileHandler _databaseFileHandler;
         private readonly TaskBoardDragDropHandler _taskboardDragDropHandler = new TaskBoardDragDropHandler();
@@ -26,6 +27,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.TaskBoard
             this._databaseFileHandler = databaseFileHandler;
             this._commands = new TaskCommands(controllerFactory, mediator);
             this._createNewTaskCommand = this._commands.CreateNewTaskCommand;
+            this._openTaskDetailsCommand = this._commands.OpenTaskDetailsCommand;
             this._whenTaskChangedObservable = this._taskboardDragDropHandler.WhenTaskChangedLane.Subscribe(this.HandleTaskLaneChange);
 
         }
@@ -57,7 +59,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.TaskBoard
                 var lanes = await taskBoardRepository.GetTaskBoardLanesAsync(connection);
 
                 var laneViewModels =
-                    this._taskBoardLaneViewModelFactory.CreateLaneViewModels(lanes, this._taskboardDragDropHandler, this._createNewTaskCommand);
+                    this._taskBoardLaneViewModelFactory.CreateLaneViewModels(lanes, this._taskboardDragDropHandler, this._createNewTaskCommand, this._openTaskDetailsCommand);
                 this._taskboardDragDropHandler.IntroduceTaskLanes(laneViewModels);
                 this.ViewModel.Lanes = laneViewModels;
             }
