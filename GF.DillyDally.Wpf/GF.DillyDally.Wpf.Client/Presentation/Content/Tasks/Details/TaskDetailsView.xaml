@@ -37,10 +37,10 @@
                     HorizontalAlignment="Left" />
                 <dxlc:LayoutGroup ItemSpace="25" Orientation="Vertical">
                     <TextBlock VerticalAlignment="Top" Text="TTitleK-10234" />
-                    <TextBlock VerticalAlignment="Top" Text="Visual Overview of the Dashboard Prepare UI Kit" />
+                    <TextBlock VerticalAlignment="Top" Text="{Binding TaskName}" />
                     <WrapPanel VerticalAlignment="Top" Orientation="Horizontal">
                         <ctrls:LabelControl LabelText="Design" />
-                        <ctrls:LabelControl LabelText="12.04.2019" />
+                        <ctrls:LabelControl LabelText="{Binding DueDate}" />
                     </WrapPanel>
                     <ctrls:HeaderTitleContent
                         Title="Definition of Done"
