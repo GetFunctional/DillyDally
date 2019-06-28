@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace GF.DillyDally.Data.Contracts
+namespace GF.DillyDally.Data.Sqlite
 {
     public sealed class UpdateStep
     {

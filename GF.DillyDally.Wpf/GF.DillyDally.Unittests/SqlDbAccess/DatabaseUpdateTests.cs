@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using GF.DillyDally.Data.Contracts;
 using GF.DillyDally.Data.Sqlite;
 using NUnit.Framework;
 
@@ -18,7 +17,7 @@ namespace GF.DillyDally.Unittests.SqlDbAccess
             databaseFileHandler.DeleteDatabaseIfExists();
 
             // Act && Assert
-            var fullexampleFile = Path.Combine(Directories.GetUserApplicationDatabasesDirectory(), exampleFile);
+            var fullexampleFile = Path.Combine(DataDirectories.GetUserApplicationDatabasesDirectory(), exampleFile);
             Assert.DoesNotThrow(() => databaseFileHandler.CreateNewDatabase());
             var fileExists = File.Exists(fullexampleFile);
             Assert.DoesNotThrow(() => databaseUpdater.UpdateDatabase());

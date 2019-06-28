@@ -2,7 +2,6 @@
 using System.Data;
 using System.IO;
 using System.Linq;
-using GF.DillyDally.Data.Contracts;
 using GF.DillyDally.Data.Sqlite;
 using NUnit.Framework;
 
@@ -20,7 +19,7 @@ namespace GF.DillyDally.Unittests.SqlDbAccess
             databaseFileHandler.DeleteDatabaseIfExists();
 
             // Act && Assert
-            var fullexampleFile = Path.Combine(Directories.GetUserApplicationDatabasesDirectory(), exampleFile);
+            var fullexampleFile = Path.Combine(DataDirectories.GetUserApplicationDatabasesDirectory(), exampleFile);
             Assert.DoesNotThrow(() => databaseFileHandler.CreateNewDatabase());
             var fileWasCreated = File.Exists(fullexampleFile);
             var connectionWasOpened = false;
@@ -43,7 +42,7 @@ namespace GF.DillyDally.Unittests.SqlDbAccess
             databaseFileHandler.DeleteDatabaseIfExists();
 
             // Act && Assert
-            var fullexampleFile = Path.Combine(Directories.GetUserApplicationDatabasesDirectory(), exampleFile);
+            var fullexampleFile = Path.Combine(DataDirectories.GetUserApplicationDatabasesDirectory(), exampleFile);
             Assert.DoesNotThrow(() => databaseFileHandler.CreateNewDatabase());
 
             Assert.That(File.Exists(fullexampleFile));
@@ -70,7 +69,7 @@ namespace GF.DillyDally.Unittests.SqlDbAccess
             databaseFileHandler.DeleteDatabaseIfExists();
 
             // Act
-            var fullexampleFile = Path.Combine(Directories.GetUserApplicationDatabasesDirectory(), exampleFile);
+            var fullexampleFile = Path.Combine(DataDirectories.GetUserApplicationDatabasesDirectory(), exampleFile);
             Assert.DoesNotThrow(() => databaseFileHandler.CreateNewDatabase());
             Assert.That(File.Exists(fullexampleFile));
             databaseFileHandler.DeleteDatabaseIfExists();

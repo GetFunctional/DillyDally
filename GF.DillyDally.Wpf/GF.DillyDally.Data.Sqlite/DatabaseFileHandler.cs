@@ -4,7 +4,6 @@ using System.Data.SQLite;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
-using GF.DillyDally.Data.Contracts;
 using log4net;
 
 namespace GF.DillyDally.Data.Sqlite
@@ -37,9 +36,9 @@ namespace GF.DillyDally.Data.Sqlite
         {
             if (!this.DatabaseExists())
             {
-                if (!Directory.Exists(Directories.GetUserApplicationDatabasesDirectory()))
+                if (!Directory.Exists(DataDirectories.GetUserApplicationDatabasesDirectory()))
                 {
-                    Directory.CreateDirectory(Directories.GetUserApplicationDatabasesDirectory());
+                    Directory.CreateDirectory(DataDirectories.GetUserApplicationDatabasesDirectory());
                 }
 
                 this.CreateDillyDallyDatabase(this._fullDatabaseFilePath);
@@ -58,7 +57,7 @@ namespace GF.DillyDally.Data.Sqlite
         private string GetFullDatabaseFilePath(string databaseName)
         {
             var databaseFile = this.GetDatabaseFileName(databaseName);
-            var fullDatabaseFilePath = Path.Combine(Directories.GetUserApplicationDatabasesDirectory(), databaseFile);
+            var fullDatabaseFilePath = Path.Combine(DataDirectories.GetUserApplicationDatabasesDirectory(), databaseFile);
             return fullDatabaseFilePath;
         }
 

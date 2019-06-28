@@ -62,6 +62,7 @@
     <Compile Include="ConnectionStringFactory.cs" />
     <Compile Include="DatabaseFileHandler.cs" />
     <Compile Include="DatabaseUpdater.cs" />
+    <Compile Include="DataDirectories.cs" />
     <Compile Include="GuidGenerator.cs" />
     <Compile Include="IGuidGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -69,12 +70,7 @@
     <Compile Include="Repository\Base\Repository.Generic.cs" />
     <Compile Include="SqlScriptReader.cs" />
     <Compile Include="SqlScriptSelector.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\GF.DillyDally.Data.Contracts\GF.DillyDally.Data.Contracts.csproj">
-      <Project>{ba07a76b-05d6-4682-bad9-2872cb3f95bd}</Project>
-      <Name>GF.DillyDally.Data.Contracts</Name>
-    </ProjectReference>
+    <Compile Include="UpdateStep.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Scripts\1.0.0.0.sql" />

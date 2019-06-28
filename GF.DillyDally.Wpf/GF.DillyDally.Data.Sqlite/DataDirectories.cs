@@ -1,9 +1,9 @@
 ﻿using System;
 using System.IO;
 
-namespace GF.DillyDally.Contracts
+namespace GF.DillyDally.Data.Sqlite
 {
-    public static class Directories
+    public static class DataDirectories
     {
         public static string GetUserApplicationDataDirectory()
         {

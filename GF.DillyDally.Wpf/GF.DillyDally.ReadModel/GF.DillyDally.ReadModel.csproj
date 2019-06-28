@@ -106,10 +106,6 @@
     <Compile Include="Views\TaskBoard\TaskBoardTaskEntity.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GF.DillyDally.Data.Contracts\GF.DillyDally.Data.Contracts.csproj">
-      <Project>{ba07a76b-05d6-4682-bad9-2872cb3f95bd}</Project>
-      <Name>GF.DillyDally.Data.Contracts</Name>
-    </ProjectReference>
     <ProjectReference Include="..\GF.DillyDally.Data.Sqlite\GF.DillyDally.Data.Sqlite.csproj">
       <Project>{cb0541c1-d36e-4e82-b1f8-d82520b80fd6}</Project>
       <Name>GF.DillyDally.Data.Sqlite</Name>
