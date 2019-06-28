@@ -24,12 +24,13 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Details
                 var taskDetailRepository = new TaskDetailsRepository();
                 var taskDetailData = await taskDetailRepository.GetTaskDetailsAsync(connection, taskId);
 
-
                 this.ViewModel.TaskName = taskDetailData.Name;
                 this.ViewModel.DueDate = taskDetailData.DueDate;
+                this.ViewModel.DefinitionOfDone = taskDetailData.DefinitionOfDone;
+                this.ViewModel.Description = taskDetailData.Description;
             }
 
-            this.ViewModel.IsBusy = true;
+            this.ViewModel.IsBusy = false;
         }
     }
 }

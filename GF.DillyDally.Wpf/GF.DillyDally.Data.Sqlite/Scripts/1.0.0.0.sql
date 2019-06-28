@@ -131,7 +131,8 @@ CREATE TABLE [TaskImages]
 	[RowID] INTEGER PRIMARY KEY AUTOINCREMENT, 
 	[TaskImageId] GUID NOT NULL UNIQUE,	
 	[TaskId] GUID NOT NULL REFERENCES [Tasks]([TaskId]),
-	[ImageId] GUID NOT NULL REFERENCES [Images]([ImageId])
+	[ImageId] GUID NOT NULL REFERENCES [Images]([ImageId]),
+	UNIQUE ([TaskId],[ImageId])
 	);
 
 CREATE UNIQUE INDEX [IX_TaskImages_TaskImageId] ON [TaskImages]([TaskImageId]);
@@ -142,7 +143,8 @@ CREATE TABLE [TaskFiles]
 	[RowID] INTEGER PRIMARY KEY AUTOINCREMENT, 
 	[TaskFileId] GUID NOT NULL UNIQUE,	
 	[TaskId] GUID NOT NULL REFERENCES [Tasks]([TaskId]),
-	[FileId] GUID NOT NULL REFERENCES [Files]([FileId])
+	[FileId] GUID NOT NULL REFERENCES [Files]([FileId]),
+	UNIQUE ([TaskId],[FileId])
 	);
 
 CREATE UNIQUE INDEX [IX_TaskFiles_TaskFileId] ON [TaskFiles]([TaskFileId]);
@@ -157,6 +159,19 @@ CREATE TABLE [TaskLinks]
 	);
 
 CREATE UNIQUE INDEX [IX_TaskLinks_TaskLinkId] ON [TaskLinks]([TaskLinkId]);
+GO
+
+
+CREATE TABLE [TaskActivities]
+	(
+	[RowID] INTEGER PRIMARY KEY AUTOINCREMENT, 
+	[TaskActivityId] GUID NOT NULL UNIQUE,	
+	[TaskId] GUID NOT NULL REFERENCES [Tasks]([TaskId]),
+	[ActivityId] GUID NOT NULL REFERENCES [Activities]([ActivityId]),
+	UNIQUE ([TaskId],[ActivityId])
+	);
+
+CREATE UNIQUE INDEX [IX_TaskActivities_TaskActivityId] ON [TaskActivities]([TaskActivityId]);
 GO
 
 --CREATE TABLE [Achievement]

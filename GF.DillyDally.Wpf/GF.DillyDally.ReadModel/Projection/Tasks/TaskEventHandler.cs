@@ -10,7 +10,8 @@ using MediatR;
 namespace GF.DillyDally.ReadModel.Projection.Tasks
 {
     internal sealed class TaskEventHandler : INotificationHandler<TaskCreatedEvent>,
-        INotificationHandler<AttachedFileToTaskEvent>, INotificationHandler<PreviewImageAssignedEvent>, INotificationHandler<TaskLinkCreatedEvent>, INotificationHandler<DefinitionOfDoneChangedEvent>
+        INotificationHandler<AttachedFileToTaskEvent>, INotificationHandler<PreviewImageAssignedEvent>, INotificationHandler<TaskLinkCreatedEvent>,
+        INotificationHandler<DefinitionOfDoneChangedEvent>, INotificationHandler<TaskLinkedToActivitiesEvent>
     {
         private readonly DatabaseFileHandler _fileHandler;
 
@@ -47,6 +48,19 @@ namespace GF.DillyDally.ReadModel.Projection.Tasks
                                                                          FileId = notification.FileId
                                                                      });
                 }
+            }
+        }
+
+        #endregion
+
+        #region INotificationHandler<DefinitionOfDoneChangedEvent> Members
+
+        public async Task Handle(DefinitionOfDoneChangedEvent notification, CancellationToken cancellationToken)
+        {
+            using (var connection = this._fileHandler.OpenConnection())
+            {
+                var repository = new TaskRepository();
+                await repository.UpdateDefinitionOfDoneAsync(connection, notification.AggregateId, notification.DefinitionOfDone);
             }
         }
 
@@ -104,13 +118,17 @@ namespace GF.DillyDally.ReadModel.Projection.Tasks
 
         #endregion
 
-        public async Task Handle(DefinitionOfDoneChangedEvent notification, CancellationToken cancellationToken)
+        #region INotificationHandler<TaskLinkedToActivitiesEvent> Members
+
+        public async Task Handle(TaskLinkedToActivitiesEvent notification, CancellationToken cancellationToken)
         {
             using (var connection = this._fileHandler.OpenConnection())
             {
-                var repository = new TaskRepository();
-                await repository.UpdateDefinitionOfDoneAsync(connection, notification.AggregateId, notification.DefinitionOfDone);
+                var repository = new TaskActivityRepository();
+                await repository.LinkTaskToActivitiesAsync(connection, notification.AggregateId, notification.ActivityIds);
             }
         }
+
+        #endregion
     }
 }

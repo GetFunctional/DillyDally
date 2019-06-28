@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using GF.DillyDally.Mvvmc;
 using GF.DillyDally.ReadModel.Projection.Activities.Repository;
 using GF.DillyDally.Wpf.Client.Core.Dialoge;
+using GF.DillyDally.WriteModel.Domain.Activities;
 using GF.DillyDally.WriteModel.Domain.Activities.Commands;
 using MediatR;
 using ReactiveUI;
@@ -12,12 +13,12 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create
 {
     public class CreateActivityController : DialogControllerBase<CreateActivityViewModel>
     {
-        private readonly IMediator _mediator;
+        private readonly ActivityService _activityService;
 
-        public CreateActivityController(CreateActivityViewModel viewModel, IMediator mediator) :
+        public CreateActivityController(CreateActivityViewModel viewModel, ActivityService activityService) :
             base(viewModel)
         {
-            this._mediator = mediator;
+            this._activityService = activityService;
 
             viewModel.CreateActivityCommand =
                 ReactiveCommand.CreateFromTask(async () => await this.CompleteProcess());
@@ -53,18 +54,16 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create
                 var activityType = step1.SelectedActivityTypeViewModel?.ActivityType;
                 var previewImageForActivity = step1.PreviewImageBytes;
 
-                var commandDispatcher = this._mediator;
-
                 switch (activityType)
                 {
                     case ActivityType.Percentage:
                         if (previewImageForActivity != null)
                         {
-                            var activity = await commandDispatcher.Send(new CreatePercentageActivityCommand(activityName, previewImageForActivity));
+                            var activity = await this._activityService.CreatePercentageActivityAsync(activityName, previewImageForActivity);
                         }
                         else
                         {
-                            var activity = await commandDispatcher.Send(new CreatePercentageActivityCommand(activityName));
+                            var activity = await this._activityService.CreatePercentageActivityAsync(activityName);
                         }
 
                         this.ConfirmDialogWith(this.CreateActivityDialogResult);

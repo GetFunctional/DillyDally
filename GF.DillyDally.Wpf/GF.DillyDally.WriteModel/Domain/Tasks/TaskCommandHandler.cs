@@ -17,7 +17,7 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks
         IRequestHandler<CreateTaskCommand, CreateTaskResponse>,
         IRequestHandler<AttachFileToTaskCommand, AttachFileToTaskResponse>,
         IRequestHandler<AssignPreviewImageCommand, AssignPreviewImageResponse>, IRequestHandler<LinkTaskCommand, LinkTaskResponse>,
-        IRequestHandler<AssignDefinitionOfDoneCommand, AssignDefinitionOfDoneResponse>, IRequestHandler<ChangeTaskLaneCommand, ChangeTaskLaneResponse>
+        IRequestHandler<AssignDefinitionOfDoneCommand, AssignDefinitionOfDoneResponse>, IRequestHandler<ChangeTaskLaneCommand, ChangeTaskLaneResponse>, IRequestHandler<LinkTaskToActivitiesCommand, LinkTaskToActivitiesResponse>
     {
         private readonly DatabaseFileHandler _databaseFileHandler;
         private readonly RunningNumberFactory _runningNumberFactory;
@@ -110,8 +110,8 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks
             var sourceTask = this.AggregateRepository.GetById<TaskAggregateRoot>(request.TaskId);
             var taskToLink = this.AggregateRepository.GetById<TaskAggregateRoot>(request.LinkToTaskId);
 
-            sourceTask.LinkTo(taskToLink.AggregateId);
-            taskToLink.LinkTo(sourceTask.AggregateId);
+            sourceTask.LinkToTask(taskToLink.AggregateId);
+            taskToLink.LinkToTask(sourceTask.AggregateId);
 
             await this.AggregateRepository.SaveAsync(sourceTask);
             await this.AggregateRepository.SaveAsync(taskToLink);
@@ -133,6 +133,16 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks
             await this.AggregateRepository.SaveAsync(sourceLane);
             await this.AggregateRepository.SaveAsync(targetLane);
             return new ChangeTaskLaneResponse();
+        }
+
+        public async Task<LinkTaskToActivitiesResponse> Handle(LinkTaskToActivitiesCommand request, CancellationToken cancellationToken)
+        {
+            var sourceTask = this.AggregateRepository.GetById<TaskAggregateRoot>(request.TaskId);
+
+            sourceTask.LinkToActivities(request.ActivityIds);
+
+            await this.AggregateRepository.SaveAsync(sourceTask);
+            return new LinkTaskToActivitiesResponse();
         }
     }
 }

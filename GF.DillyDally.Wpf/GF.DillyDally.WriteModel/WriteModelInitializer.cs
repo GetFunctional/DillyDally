@@ -1,5 +1,6 @@
 ﻿using System.Data.SQLite;
 using System.Reflection;
+using GF.DillyDally.WriteModel.Domain.Activities;
 using GF.DillyDally.WriteModel.Domain.Tasks;
 using GF.DillyDally.WriteModel.Infrastructure;
 using LightInject;
@@ -34,6 +35,7 @@ namespace GF.DillyDally.WriteModel
         private void RegisterCommandServices(IServiceContainer serviceContainer)
         {
             serviceContainer.Register<TaskService>();
+            serviceContainer.Register<ActivityService>();
         }
 
         private static void RegisterMediations(IServiceContainer serviceContainer)

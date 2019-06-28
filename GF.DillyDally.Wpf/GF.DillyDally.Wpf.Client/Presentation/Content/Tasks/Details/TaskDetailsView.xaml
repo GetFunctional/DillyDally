@@ -45,12 +45,12 @@
                     <ctrls:HeaderTitleContent
                         Title="Definition of Done"
                         VerticalAlignment="Top"
-                        Description="It's best to keep the name short and then add the details in the task Body. Also select a category that Matches the Topic best. "
+                        Description="{Binding DefinitionOfDone}"
                         HeaderType="H2" />
                     <ctrls:HeaderTitleContent
                         Title="Description"
                         VerticalAlignment="Top"
-                        Description="It's best to keep the name short and then add the details in the task Body. Also select a category that Matches the Topic best. "
+                        Description="{Binding Description}"
                         HeaderType="H2" />
                 </dxlc:LayoutGroup>
             </dxlc:LayoutGroup>

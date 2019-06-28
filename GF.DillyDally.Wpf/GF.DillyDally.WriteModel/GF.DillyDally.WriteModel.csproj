@@ -75,6 +75,7 @@
     <Compile Include="Domain\Achievements\AchievementCommandHandler.cs" />
     <Compile Include="Domain\Activities\ActivityAggregateRoot.cs" />
     <Compile Include="Domain\Activities\ActivityCommandHandler.cs" />
+    <Compile Include="Domain\Activities\ActivityService.cs" />
     <Compile Include="Domain\Activities\ActivityType.cs" />
     <Compile Include="Domain\Activities\Commands\CreatePercentageActivityCommand.cs" />
     <Compile Include="Domain\Activities\Commands\CreatePercentageActivityResponse.cs" />
@@ -124,8 +125,11 @@
     <Compile Include="Domain\Tasks\Commands\CreateTaskResponse.cs" />
     <Compile Include="Domain\Tasks\Commands\LinkTaskCommand.cs" />
     <Compile Include="Domain\Tasks\Commands\LinkTaskResponse.cs" />
+    <Compile Include="Domain\Tasks\Commands\LinkTaskToActivitiesCommand.cs" />
+    <Compile Include="Domain\Tasks\Commands\LinkTaskToActivitiesResponse.cs" />
     <Compile Include="Domain\Tasks\Events\DefinitionOfDoneChangedEvent.cs" />
     <Compile Include="Domain\Tasks\Events\PreviewImageAssignedEvent.cs" />
+    <Compile Include="Domain\Tasks\Events\TaskLinkedToActivitiesEvent.cs" />
     <Compile Include="Domain\Tasks\Exceptions\DuplicateAttachedFileException.cs" />
     <Compile Include="Domain\Tasks\Events\AttachedFileToTaskEvent.cs" />
     <Compile Include="Domain\Tasks\Exceptions\DuplicateTaskLinkException.cs" />

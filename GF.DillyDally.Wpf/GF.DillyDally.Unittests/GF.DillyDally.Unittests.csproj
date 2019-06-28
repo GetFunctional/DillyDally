@@ -102,6 +102,7 @@
     <Compile Include="DatabaseTestSetup.cs" />
     <Compile Include="WriteModel\AchievementTests.cs" />
     <Compile Include="WriteModel\RunningNumberTests.cs" />
+    <Compile Include="WriteModel\TaskActivityTests.cs" />
     <Compile Include="WriteModel\TaskLinkingTests.cs" />
     <Compile Include="WriteModel\TaskTests.cs" />
   </ItemGroup>

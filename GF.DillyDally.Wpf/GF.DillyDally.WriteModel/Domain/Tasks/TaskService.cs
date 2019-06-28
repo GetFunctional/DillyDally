@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using GF.DillyDally.WriteModel.Domain.Tasks.Commands;
 using MediatR;
@@ -22,7 +23,13 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks
 
         public async Task<ChangeTaskLaneResponse> ChangeTaskLaneAsync(Guid taskId, Guid targetLaneId, Guid sourceLaneId)
         {
-            var task = await this._commandDispatcher.Send(new ChangeTaskLaneCommand(taskId, targetLaneId,sourceLaneId));
+            var task = await this._commandDispatcher.Send(new ChangeTaskLaneCommand(taskId, targetLaneId, sourceLaneId));
+            return task;
+        }
+
+        public async Task<LinkTaskToActivitiesResponse> LinkTaskToActivitiesAsync(Guid taskId, ISet<Guid> activityIds)
+        {
+            var task = await this._commandDispatcher.Send(new LinkTaskToActivitiesCommand(taskId, activityIds));
             return task;
         }
     }

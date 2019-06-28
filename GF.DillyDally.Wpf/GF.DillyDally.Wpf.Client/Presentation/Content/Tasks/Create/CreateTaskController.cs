@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using GF.DillyDally.Data.Sqlite;
 using GF.DillyDally.Mvvmc;
@@ -52,15 +54,40 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Create
 
             if (this.IsInputValid(this.ViewModel))
             {
-                var basicInfos = this.ViewModel.GetPage<CreateTaskBasicInfosViewModel>();
+                var basicInfos = this.GetTaskBasicInfos();
                 var taskName = basicInfos.TaskName;
                 var category = basicInfos.SelectedCategory;
 
                 var task = await this._taskService.CreateNewTaskAsync(taskName, category.CategoryId, this._presetLane);
+
+                var activities = this.GetTaskActivities();
+                if (activities.Any())
+                {
+                    var activityIds = new HashSet<Guid>(activities.Select(x => x.ActivityId).Distinct());
+                    await this._taskService.LinkTaskToActivitiesAsync(task.TaskId, activityIds);
+                }
+
                 this.ConfirmDialogWith(this.CreateTaskDialogResult);
             }
 
             this.ViewModel.IsBusy = false;
+        }
+
+        private IList<ActivityItemViewModel> GetTaskActivities()
+        {
+            var vmPage = this.ViewModel.GetPage<CreateTaskActivitiesViewModel>();
+
+            if (vmPage.ActivityContainerViewModel.Activities.Any())
+            {
+                return vmPage.ActivityContainerViewModel.Activities;
+            }
+
+            return new List<ActivityItemViewModel>();
+        }
+
+        private CreateTaskBasicInfosViewModel GetTaskBasicInfos()
+        {
+            return this.ViewModel.GetPage<CreateTaskBasicInfosViewModel>();
         }
 
         private bool IsInputValid(CreateTaskViewModel viewModel)
