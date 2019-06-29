@@ -1,6 +1,12 @@
-﻿using System.Data.SQLite;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.SQLite;
 using System.Reflection;
+using System.Threading.Tasks;
 using GF.DillyDally.WriteModel.Domain.Activities;
+using GF.DillyDally.WriteModel.Domain.Lanes.Commands;
+using GF.DillyDally.WriteModel.Domain.RunningNumbers.Commands;
+using GF.DillyDally.WriteModel.Domain.RunningNumbers.Events;
 using GF.DillyDally.WriteModel.Domain.Tasks;
 using GF.DillyDally.WriteModel.Infrastructure;
 using LightInject;
@@ -22,14 +28,69 @@ namespace GF.DillyDally.WriteModel
             0x4, 0x3, 0x2, 0xA, 0x4, 0x6, 0x6, 0x2, 0xD, 0x4, 0xA, 0x6, 0x1, 0x4, 0xe, 0x6
         };
 
-        public void Initialize(IServiceContainer serviceContainer, string dillyDallyStoreConnectionString)
+        public async Task InitializeAsync(IServiceContainer serviceContainer, string storeConnectionString)
         {
             this.RegisterServices(serviceContainer);
-            var storeEvents = this.WireupEventStore(dillyDallyStoreConnectionString);
+            var storeEvents = this.WireupEventStore(storeConnectionString);
             RegisterMediations(serviceContainer);
             serviceContainer.RegisterInstance(typeof(IStoreEvents), storeEvents);
 
             this.RegisterCommandServices(serviceContainer);
+            await this.CreateMandatoryData(serviceContainer);
+        }
+
+        private async Task CreateMandatoryData(IServiceContainer serviceContainer)
+        {
+            var commandDispatcher = serviceContainer.GetInstance<IMediator>();
+
+            await this.InitializeNumberCounters(commandDispatcher);
+            await this.InitializeLanes(commandDispatcher);
+            await this.InitializeActivities(commandDispatcher);
+        }
+
+        private async Task InitializeActivities(IMediator commandDispatcher)
+        {
+            var activityService = new ActivityService(commandDispatcher);
+            await activityService.CreateActivityList();
+        }
+
+        private async Task InitializeLanes(IMediator commandDispatcher)
+        {
+            // Act && Assert
+
+            var data = new List<Tuple<string, string, bool, bool>>
+            {
+                new Tuple<string, string, bool, bool>("Undefined", "#0C53BD", false, false),
+                new Tuple<string, string, bool, bool>("Defined", "#0C53BD", false, false),
+                new Tuple<string, string, bool, bool>("Stories", "#0C53BD", false, false),
+                new Tuple<string, string, bool, bool>("Ready", "#0C53BD", false, false),
+                new Tuple<string, string, bool, bool>("Sprint", "#0C53BD", false, false),
+                new Tuple<string, string, bool, bool>("Rejected", "#0C53BD", false, true),
+                new Tuple<string, string, bool, bool>("Done", "#0C53BD", true, false)
+            };
+
+            var createdIds = new List<Guid>();
+            foreach (var lane in data)
+            {
+                var createLaneCommand = new CreateLaneCommand(lane.Item1, lane.Item2, lane.Item3, lane.Item4);
+                var createdLane = await commandDispatcher.Send(createLaneCommand);
+                createdIds.Add(createdLane.LaneId);
+            }
+        }
+
+        private async Task InitializeNumberCounters(IMediator commandDispatcher)
+        {
+            var createCommand = new CreateRunningNumberCounterCommand(RunningNumberCounterArea.Category, "CAT", 0);
+            await commandDispatcher.Send(createCommand);
+
+            createCommand = new CreateRunningNumberCounterCommand(RunningNumberCounterArea.Task, "TSK", 0);
+            await commandDispatcher.Send(createCommand);
+
+            createCommand = new CreateRunningNumberCounterCommand(RunningNumberCounterArea.Lane, "LN", 0);
+            await commandDispatcher.Send(createCommand);
+
+            createCommand = new CreateRunningNumberCounterCommand(RunningNumberCounterArea.Achievement, "ACVM", 0);
+            await commandDispatcher.Send(createCommand);
         }
 
         private void RegisterCommandServices(IServiceContainer serviceContainer)

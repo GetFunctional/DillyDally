@@ -13,6 +13,11 @@ namespace GF.DillyDally.WriteModel.Domain.Activities
             this._commandDispatcher = commandDispatcher;
         }
 
+        public async Task CreateActivityList()
+        {
+            await this._commandDispatcher.Send(new CreateActivityListCommand());
+        }
+
         public async Task<CreatePercentageActivityResponse> CreatePercentageActivityAsync(string activityName, byte[] previewImageForActivity = null)
         {
             var task = await this._commandDispatcher.Send(new CreatePercentageActivityCommand(activityName,previewImageForActivity));

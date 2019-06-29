@@ -14,17 +14,24 @@ namespace GF.DillyDally.Unittests.WriteModel
     [TestFixture]
     public class RunningNumberTests
     {
-        #region SetupDatabase/Teardown
+        #region SetupDatabaseAsync/Teardown
 
         [SetUp]
-        public void Setup()
+        public async Task Setup()
         {
-            this._testInfrastructure.SetupDatabase(UnittestsSetup.ExampleDatabase);
+            await this._testInfrastructure.SetupDatabaseAsync(UnittestsSetup.GetTestRunDatabaseName());
         }
 
+        [TearDown]
+        public void Destroy()
+        {
+            this._testInfrastructure.Destroy();
+        }
         #endregion
 
         private readonly TestInfrastructure _testInfrastructure = new TestInfrastructure();
+
+        [TearDown]
 
 
         [Test]

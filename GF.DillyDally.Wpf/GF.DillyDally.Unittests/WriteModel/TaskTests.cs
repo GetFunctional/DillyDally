@@ -20,13 +20,20 @@ namespace GF.DillyDally.Unittests.WriteModel
     [TestFixture]
     public class TaskTests
     {
-        #region SetupDatabase/Teardown
+        #region SetupDatabaseAsync/Teardown
 
         [SetUp]
-        public void Setup()
+        public async Task Setup()
         {
-            this._testInfrastructure.SetupDatabase(UnittestsSetup.ExampleDatabase);
+            await this._testInfrastructure.SetupDatabaseAsync(UnittestsSetup.GetTestRunDatabaseName());
         }
+
+        [TearDown]
+        public void Destroy()
+        {
+            this._testInfrastructure.Destroy();
+        }
+
 
         #endregion
 

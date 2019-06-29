@@ -20,10 +20,10 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks
 
 
         private TaskAggregateRoot(Guid taskId, string name, Guid runningNumberId,
-            Guid categoryId, Guid? PreviewImageFileId, int storypoints = 0) : this()
+            Guid categoryId, Guid? previewImageFileId, int storypoints = 0) : this()
         {
             var creationEvent = new TaskCreatedEvent(taskId, name, runningNumberId, categoryId,
-                PreviewImageFileId, DateTime.Now, storypoints);
+                previewImageFileId, DateTime.Now, storypoints);
             this.RaiseEvent(creationEvent);
         }
 
@@ -100,10 +100,10 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks
         }
 
         internal static TaskAggregateRoot CreateTask(Guid taskId, string name, Guid runningNumberId,
-            Guid categoryId, Guid? PreviewImageFileId, int storypoints)
+            Guid categoryId, Guid? previewImageFileId, int storypoints)
         {
             return new TaskAggregateRoot(taskId, name, runningNumberId, categoryId,
-                PreviewImageFileId, storypoints);
+                previewImageFileId, storypoints);
         }
 
         private void Apply(TaskCreatedEvent obj)

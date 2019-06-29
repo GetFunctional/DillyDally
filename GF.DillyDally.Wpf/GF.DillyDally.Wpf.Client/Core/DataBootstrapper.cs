@@ -1,4 +1,5 @@
-﻿using GF.DillyDally.ReadModel;
+﻿using System.Threading.Tasks;
+using GF.DillyDally.ReadModel;
 using GF.DillyDally.WriteModel;
 using LightInject;
 
@@ -16,13 +17,13 @@ namespace GF.DillyDally.Wpf.Client.Core
             this._serviceContainer = serviceContainer;
         }
 
-        public void Run(InitializationSettings dataInitializationSettings)
+        public async Task RunAsync(InitializationSettings dataInitializationSettings)
         {
             var serviceContainer = this._serviceContainer;
             var databaseFileHandler = this._dataStoreInitializer.Initialize(dataInitializationSettings);
             serviceContainer.RegisterInstance(databaseFileHandler);
 
-            this._writeModelInitializer.Initialize(serviceContainer, databaseFileHandler.GetConnectionString());
+            await this._writeModelInitializer.InitializeAsync(serviceContainer, databaseFileHandler.GetConnectionString());
             this._readModelInitializer.Initialize(serviceContainer);
         }
     }

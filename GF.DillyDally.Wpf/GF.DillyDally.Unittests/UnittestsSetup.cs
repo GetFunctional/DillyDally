@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using GF.DillyDally.Data.Sqlite;
 using GF.DillyDally.Unittests.Core;
 using NUnit.Framework;
@@ -8,28 +9,34 @@ namespace GF.DillyDally.Unittests
     [SetUpFixture]
     public class UnittestsSetup
     {
-        public const string ExampleDatabase = "Unittests.db";
-        private DatabaseTestSetup _databaseTestSetup;
+        //private DatabaseTestSetup _databaseTestSetup;
+        //private string _testRunName;
 
-        [OneTimeSetUp]
-        public async Task RunBeforeAnyTests()
+        public static string GetTestRunDatabaseName()
         {
-            DeleteUnittestDatabase();
-            this._databaseTestSetup = new DatabaseTestSetup();
-            await this._databaseTestSetup.SetupAsync(ExampleDatabase);
+            return $"TestRun_{Guid.NewGuid()}";
         }
 
-        private static void DeleteUnittestDatabase()
+        //[OneTimeSetUp]
+        //public async Task RunBeforeAnyTests()
+        //{
+        //    //this._testRunName = GetTestRunDatabaseName();
+        //    //DeleteUnittestDatabase(this._testRunName);
+        //    //this._databaseTestSetup = new DatabaseTestSetup();
+        //    //await this._databaseTestSetup.SetupAsync(this._testRunName);
+        //}
+
+        private static void DeleteUnittestDatabase(string databaseName)
         {
-            var fileHandler = new DatabaseFileHandler(ExampleDatabase);
-            fileHandler.DeleteDatabaseIfExists();
+            //var fileHandler = new DatabaseFileHandler(databaseName);
+            //fileHandler.DeleteDatabaseIfExists();
         }
 
         [OneTimeTearDown]
         public void RunAfterAnyTests()
         {
-            var fileHandler = new DatabaseFileHandler(ExampleDatabase);
-            fileHandler.ArchiveDatabase("Unittests_LastRun.db");
+            //var fileHandler = new DatabaseFileHandler(this._testRunName);
+            //fileHandler.ArchiveDatabase("Unittests_LastRun.db");
         }
     }
 }

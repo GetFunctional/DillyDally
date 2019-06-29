@@ -24,30 +24,12 @@ namespace GF.DillyDally.Unittests.Core
 
         public async Task SetupAsync(string exampleFile)
         {
-            this._testInfrastructure.SetupAll(exampleFile);
+            await this._testInfrastructure.SetupDatabaseAsync(exampleFile);
+
             this._diContainer = this._testInfrastructure.DiContainer;
-            await this.CreateNumberCounters();
             await this.CreateTestCategories();
-            await this.CreateTestLanes();
             await this.CreateTestRewards();
         }
-
-        private async Task CreateNumberCounters()
-        {
-            var commandDispatcher = this._diContainer.GetInstance<IMediator>();
-            var createCommand = new CreateRunningNumberCounterCommand(RunningNumberCounterArea.Category, "CAT", 0);
-            await commandDispatcher.Send(createCommand);
-
-            createCommand = new CreateRunningNumberCounterCommand(RunningNumberCounterArea.Task, "TSK", 0);
-            await commandDispatcher.Send(createCommand);
-
-            createCommand = new CreateRunningNumberCounterCommand(RunningNumberCounterArea.Lane, "LN", 0);
-            await commandDispatcher.Send(createCommand);
-
-            createCommand = new CreateRunningNumberCounterCommand(RunningNumberCounterArea.Achievement, "ACVM", 0);
-            await commandDispatcher.Send(createCommand);
-        }
-
 
         private async Task CreateTestCategories()
         {
@@ -75,32 +57,7 @@ namespace GF.DillyDally.Unittests.Core
                 createdIds.Add(createdCat.CategoryId);
             }
         }
-
-        private async Task CreateTestLanes()
-        {
-            // Act && Assert
-            var commandDispatcher = this._diContainer.GetInstance<IMediator>();
-
-            var data = new List<Tuple<string, string, bool, bool>>
-                       {
-                           new Tuple<string, string, bool, bool>("Undefined", "#0C53BD", false, false),
-                           new Tuple<string, string, bool, bool>("Defined", "#0C53BD", false, false),
-                           new Tuple<string, string, bool, bool>("Stories", "#0C53BD", false, false),
-                           new Tuple<string, string, bool, bool>("Ready", "#0C53BD", false, false),
-                           new Tuple<string, string, bool, bool>("Sprint", "#0C53BD", false, false),
-                           new Tuple<string, string, bool, bool>("Rejected", "#0C53BD", false, true),
-                           new Tuple<string, string, bool, bool>("Done", "#0C53BD", true, false)
-                       };
-
-            var createdIds = new List<Guid>();
-            foreach (var lane in data)
-            {
-                var createLaneCommand = new CreateLaneCommand(lane.Item1, lane.Item2, lane.Item3, lane.Item4);
-                var createdLane = await commandDispatcher.Send(createLaneCommand);
-                createdIds.Add(createdLane.LaneId);
-            }
-        }
-
+        
         private async Task CreateTestRewards()
         {
             // Act && Assert

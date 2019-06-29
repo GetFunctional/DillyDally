@@ -9,15 +9,21 @@ namespace GF.DillyDally.Unittests.Mvvmc
     internal class ControllerTests
     {
         [SetUp]
-        public void Setup()
+        public async Task Setup()
         {
-            this._testInfrastructure.SetupAll(UnittestsSetup.ExampleDatabase);
+            await this._testInfrastructure.SetupDatabaseAsync( UnittestsSetup.GetTestRunDatabaseName());
             this._testInfrastructure.DiContainer.Register<TestController>();
             this._testInfrastructure.DiContainer.Register<TestViewModel>();
             this._testInfrastructure.DiContainer.Register<ChildTestController>();
             this._testInfrastructure.DiContainer.Register<ChildViewModel>();
         }
         
+        [TearDown]
+        public void Destroy()
+        {
+            this._testInfrastructure.Destroy();
+        }
+
         private readonly TestInfrastructure _testInfrastructure = new TestInfrastructure();
 
         [Test]

@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using System.Threading.Tasks;
 using GF.DillyDally.Data.Sqlite;
 using GF.DillyDally.Mvvmc;
 using GF.DillyDally.Wpf.Client.Core;
@@ -9,36 +10,40 @@ namespace GF.DillyDally.Unittests.Core
 {
     internal class TestInfrastructure
     {
+        private string _exampleFile;
+
         public TestInfrastructure()
         {
             this.TestData = new TestData();
+            this.DiContainer = this.CreateDependencyInjectionContainer();
         }
 
-        public ServiceContainer DiContainer { get; set; }
+        public ServiceContainer DiContainer { get; }
 
         public TestData TestData { get; }
 
-        public void SetupDatabase(string exampleFile)
+        public async Task SetupDatabaseAsync(string exampleFile)
         {
-            var typeregistrar = new TypeRegistrar();
-            this.DiContainer = this.CreateDependencyInjectionContainer();
-            var bootstrapper = new DataBootstrapper(this.DiContainer);
-            bootstrapper.Run(new InitializationSettings(exampleFile, false, false));
-            typeregistrar.RegisterMediatRFramework(this.DiContainer);
-
-        }
-
-        public void SetupAll(string exampleFile)
-        {
-            this.DiContainer = this.CreateDependencyInjectionContainer();
+            this._exampleFile = exampleFile;
             var bootstrapper = new Bootstrapper(new UnittestApplicationRuntime(), this.DiContainer);
-            bootstrapper.Run(new InitializationSettings(exampleFile, false, false));
+            await bootstrapper.RunAsync(new InitializationSettings(exampleFile, false, false));
+            //var typeregistrar = new TypeRegistrar();
+            //var bootstrapper = new DataBootstrapper(this.DiContainer);
+            //await bootstrapper.RunAsync(new InitializationSettings(exampleFile, false, false));
+            //typeregistrar.RegisterMediatRFramework(this.DiContainer);
         }
+
 
         private ServiceContainer CreateDependencyInjectionContainer()
         {
             return new ServiceContainer(new ContainerOptions
                 {EnablePropertyInjection = false, EnableVariance = false});
+        }
+
+        public void Destroy()
+        {
+            var fileHandler = new DatabaseFileHandler(this._exampleFile);
+            fileHandler.ArchiveDatabase("Unittests_LastRun.db");
         }
 
         public IDbConnection OpenDatabaseConnection()

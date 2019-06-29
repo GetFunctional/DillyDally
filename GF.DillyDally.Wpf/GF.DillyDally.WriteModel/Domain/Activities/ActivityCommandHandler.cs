@@ -10,14 +10,28 @@ using MediatR;
 namespace GF.DillyDally.WriteModel.Domain.Activities
 {
     internal sealed class ActivityCommandHandler : CommandHandlerBase,
-        IRequestHandler<CreatePercentageActivityCommand, CreatePercentageActivityResponse>
+        IRequestHandler<CreatePercentageActivityCommand, CreatePercentageActivityResponse>,
+        IRequestHandler<CreateActivityListCommand, CreateActivityListResponse>
     {
         private readonly DatabaseFileHandler _databaseFileHandler;
 
-        public ActivityCommandHandler(IAggregateRepository aggregateRepository, DatabaseFileHandler databaseFileHandler) : base(aggregateRepository)
+        public ActivityCommandHandler(IAggregateRepository aggregateRepository, DatabaseFileHandler databaseFileHandler)
+            : base(aggregateRepository)
         {
             this._databaseFileHandler = databaseFileHandler;
         }
+
+        #region IRequestHandler<CreateActivityListCommand,CreateActivityListResponse> Members
+
+        public async Task<CreateActivityListResponse> Handle(CreateActivityListCommand request,
+            CancellationToken cancellationToken)
+        {
+            var activity = ActivityListAggregateRoot.Create();
+            await this.AggregateRepository.SaveAsync(activity);
+            return new CreateActivityListResponse();
+        }
+
+        #endregion
 
         #region IRequestHandler<CreatePercentageActivityCommand,CreatePercentageActivityResponse> Members
 
@@ -25,20 +39,25 @@ namespace GF.DillyDally.WriteModel.Domain.Activities
             CancellationToken cancellationToken)
         {
             var activityId = this.GuidGenerator.GenerateGuid();
-            var aggregate = ActivityAggregateRoot.Create(activityId, request.Name, ActivityType.Percentage);
+            var activity = ActivityAggregateRoot.Create(activityId, request.Name, ActivityType.Percentage);
+            var activityList =
+                this.AggregateRepository.GetById<ActivityListAggregateRoot>(ActivityListAggregateRoot.ActivityListId);
+            activityList.AddActivity(activity.AggregateId, activity.Name);
 
             if (request.PreviewImageBytes != null)
             {
                 using (var connection = this._databaseFileHandler.OpenConnection())
                 {
                     var fileCreateCommand = new StoreFileCommand(request.PreviewImageBytes);
-                    var response = await FileCommandHandler.GetOrCreateFileAsync(fileCreateCommand, this.AggregateRepository, connection,
+                    var response = await FileCommandHandler.GetOrCreateFileAsync(fileCreateCommand,
+                        this.AggregateRepository, connection,
                         this.GuidGenerator);
-                    aggregate.AssignPreviewImage(response.FileId);
+                    activity.AssignPreviewImage(response.FileId);
                 }
             }
 
-            await this.AggregateRepository.SaveAsync(aggregate);
+            await this.AggregateRepository.SaveAsync(activityList);
+            await this.AggregateRepository.SaveAsync(activity);
             return new CreatePercentageActivityResponse(activityId);
         }
 
