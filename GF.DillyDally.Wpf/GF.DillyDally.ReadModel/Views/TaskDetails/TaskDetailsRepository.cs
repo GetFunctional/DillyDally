@@ -19,7 +19,7 @@ namespace GF.DillyDally.ReadModel.Views.TaskBoard
 FROM {TaskEntity.TableNameConstant} te 
 JOIN {RunningNumberEntity.TableNameConstant} rn ON rn.RunningNumberId = te.RunningNumberId 
 WHERE TaskId = @taskId; 
-SELECT ae.ActivityId, ae.Name, ae.Description, ae.ActivityType, ae.ActivityValue, ae.CurrentLevel, img.PreviewImageBytes 
+SELECT ae.ActivityId, ae.Name, ae.Description, ae.ActivityType, ae.ActivityValue, ae.CurrentLevel, img.Binary AS PreviewImageBytes 
 FROM {ActivityEntity.TableNameConstant} ae 
 JOIN {TaskActivityEntity.TableNameConstant} tae ON tae.ActivityId = ae.ActivityId
 LEFT JOIN {ImageEntity.TableNameConstant} img ON ae.PreviewImageFileId = img.OriginalFileId
