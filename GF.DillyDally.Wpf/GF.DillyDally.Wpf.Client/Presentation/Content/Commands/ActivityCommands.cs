@@ -24,8 +24,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Commands
 
         private async Task CreateNewActivity()
         {
-            var createActivityController = this._controllerFactory.CreateController<CreateActivityController>();
-            using (createActivityController)
+            using (var createActivityController = this._controllerFactory.CreateAndInitializeController<CreateActivityController>())
             {
                 await this._navigationService.ShowDialogAsync(createActivityController);
             }

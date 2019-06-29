@@ -10,12 +10,12 @@ namespace GF.DillyDally.Unittests.WriteModel
     [TestFixture]
     public class AchievementTests
     {
-        #region Setup/Teardown
+        #region SetupDatabase/Teardown
 
         [SetUp]
         public void Setup()
         {
-            this._testInfrastructure.Setup(UnittestsSetup.ExampleDatabase);
+            this._testInfrastructure.SetupDatabase(UnittestsSetup.ExampleDatabase);
         }
 
         #endregion

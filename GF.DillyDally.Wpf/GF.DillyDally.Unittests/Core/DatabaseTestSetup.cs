@@ -24,7 +24,7 @@ namespace GF.DillyDally.Unittests.Core
 
         public async Task SetupAsync(string exampleFile)
         {
-            this._testInfrastructure.Setup(exampleFile);
+            this._testInfrastructure.SetupAll(exampleFile);
             this._diContainer = this._testInfrastructure.DiContainer;
             await this.CreateNumberCounters();
             await this.CreateTestCategories();

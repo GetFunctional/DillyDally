@@ -1,98 +1,52 @@
-﻿using System;
-using System.Reflection;
-using System.Windows;
-using GF.DillyDally.Mvvmc;
+﻿using GF.DillyDally.Wpf.Client.ApplicationState;
 using GF.DillyDally.Wpf.Client.Core.DataTemplates;
-using GF.DillyDally.Wpf.Client.Core.Dialoge;
 using GF.DillyDally.Wpf.Client.Core.Navigator;
 using LightInject;
-using MediatR;
-using MediatR.Pipeline;
 
 namespace GF.DillyDally.Wpf.Client.Core
 {
     internal sealed class Bootstrapper
     {
-        
         private const string DefaultDatabaseName = "Unittests_LastRun.db";
+
         //private const string DefaultDatabaseName = "DillyDallyData.db";
-        private readonly Application _application;
+        private readonly IApplicationRuntime _application;
         private readonly DataBootstrapper _dataBootstrapper;
         private readonly DataTemplateInitializer _dataTemplateInitializer = new DataTemplateInitializer();
         private readonly NavigationInitializer _navigationInitializer = new NavigationInitializer();
         private readonly IServiceContainer _serviceContainer;
 
-        public Bootstrapper(Application application) : this(application, new ServiceContainer(new ContainerOptions
-                                                                                              {EnablePropertyInjection = false, EnableVariance = false}))
+        public Bootstrapper(IApplicationRuntime application) : this(application, new ServiceContainer(
+            new ContainerOptions
+                {EnablePropertyInjection = false, EnableVariance = false}))
         {
         }
 
-        public Bootstrapper(Application application, IServiceContainer serviceContainer)
+        public Bootstrapper(IApplicationRuntime application, IServiceContainer serviceContainer)
         {
             this._application = application;
             this._serviceContainer = serviceContainer;
             this._dataBootstrapper = new DataBootstrapper(serviceContainer);
         }
 
-
         public void Run()
         {
-            var serviceContainer = this._serviceContainer;
+            this.Run(new InitializationSettings(DefaultDatabaseName, false, true));
+        }
 
-            this._dataBootstrapper.Run(new InitializationSettings(DefaultDatabaseName, false, true));
-            this.RegisterMediatRFramework(serviceContainer);
-            this.RegisterMvvmcDependencies(serviceContainer);
-            this.RegisterControllersAndViewModels(serviceContainer);
-            this.RegisterApplicationServices(serviceContainer);
+        public void Run(InitializationSettings dataInitializationSettings)
+        {
+            var serviceContainer = this._serviceContainer;
+            serviceContainer.RegisterInstance<IServiceContainer>(serviceContainer);
+
+            this._dataBootstrapper.Run(dataInitializationSettings);
+            var typeregistrar = new TypeRegistrar();
+            typeregistrar.RegisterMediatRFramework(serviceContainer);
+            typeregistrar.RegisterMvvmcDependencies(serviceContainer);
+            typeregistrar.RegisterControllersAndViewModels(serviceContainer);
+            typeregistrar.RegisterApplicationServices(serviceContainer);
             this._dataTemplateInitializer.RegisterDataTemplates(this._application);
             this._navigationInitializer.InitializeNavigation(serviceContainer);
-        }
-
-        private void RegisterApplicationServices(IServiceContainer serviceContainer)
-        {
-            serviceContainer.Register<NavigationService>();
-        }
-
-        private void RegisterControllersAndViewModels(IServiceContainer serviceContainer)
-        {
-            serviceContainer.RegisterAssembly(typeof(Bootstrapper).GetTypeInfo().Assembly,
-                this.IsControllerOrViewModelType);
-        }
-
-        private bool IsControllerOrViewModelType(Type serviceType, Type implementingType)
-        {
-            var isAbstract = implementingType.IsAbstract;
-            var isController = typeof(IController).IsAssignableFrom(implementingType);
-            var isViewModel = typeof(IViewModel).IsAssignableFrom(implementingType);
-            return !isAbstract && (isController || isViewModel);
-        }
-
-        private void RegisterMediatRFramework(IServiceContainer serviceContainer)
-        {
-            serviceContainer.Register<IMediator, Mediator>();
-            serviceContainer.RegisterAssembly(typeof(Bootstrapper).GetTypeInfo().Assembly,
-                (serviceType, implementingType) =>
-                    serviceType.IsConstructedGenericType &&
-                    (
-                        serviceType.GetGenericTypeDefinition() == typeof(IRequestHandler<,>) ||
-                        serviceType.GetGenericTypeDefinition() == typeof(INotificationHandler<>)
-                    ));
-
-            serviceContainer.RegisterOrdered(typeof(IPipelineBehavior<,>),
-                new[]
-                {
-                    typeof(RequestPreProcessorBehavior<,>),
-                    typeof(RequestPostProcessorBehavior<,>)
-                }, type => new PerContainerLifetime());
-
-            serviceContainer.Register<ServiceFactory>(fac => fac.GetInstance);
-        }
-
-
-        private void RegisterMvvmcDependencies(IServiceContainer serviceContainer)
-        {
-            serviceContainer.Register<MvvmcServiceFactory>(fac => fac.GetInstance);
-            serviceContainer.Register<ControllerFactory>();
         }
     }
 }

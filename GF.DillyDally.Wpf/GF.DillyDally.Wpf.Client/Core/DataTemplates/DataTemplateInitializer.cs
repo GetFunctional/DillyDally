@@ -1,11 +1,12 @@
 ﻿using System.Reflection;
 using System.Windows;
+using GF.DillyDally.Wpf.Client.ApplicationState;
 
 namespace GF.DillyDally.Wpf.Client.Core.DataTemplates
 {
     internal sealed class DataTemplateInitializer
     {
-        internal void RegisterDataTemplates(Application application)
+        internal void RegisterDataTemplates(IApplicationRuntime application)
         {
             var dataTemplateAggregator = new ViewDataTemplateAggregator();
             var dataTemplates =
@@ -14,7 +15,7 @@ namespace GF.DillyDally.Wpf.Client.Core.DataTemplates
 
             foreach (var dataTemplate in dataTemplates)
             {
-                application.Resources.Add(dataTemplate.DataTemplateKey, dataTemplate);
+                application.AddDataTemplate(dataTemplate.DataTemplateKey, dataTemplate);
             }
         }
     }

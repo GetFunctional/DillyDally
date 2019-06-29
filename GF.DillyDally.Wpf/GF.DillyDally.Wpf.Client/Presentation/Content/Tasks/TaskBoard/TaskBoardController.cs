@@ -6,6 +6,7 @@ using GF.DillyDally.ReadModel.Views.TaskBoard;
 using GF.DillyDally.Wpf.Client.Core;
 using GF.DillyDally.Wpf.Client.Core.Dialoge;
 using GF.DillyDally.Wpf.Client.Presentation.Content.Commands;
+using GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.TaskBoard.DragDrop;
 using MediatR;
 using ReactiveUI;
 
@@ -21,8 +22,8 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.TaskBoard
         private readonly TaskBoardLaneViewModelFactory _taskBoardLaneViewModelFactory = new TaskBoardLaneViewModelFactory();
         private readonly IDisposable _whenTaskChangedObservable;
 
-        public TaskBoardController(TaskBoardViewModel viewModel, DatabaseFileHandler databaseFileHandler,
-            ControllerFactory controllerFactory, IMediator mediator) : base(viewModel)
+        public TaskBoardController(TaskBoardViewModel viewModel, DatabaseFileHandler databaseFileHandler, IMediator mediator, ControllerFactory controllerFactory) :
+            base(viewModel,controllerFactory)
         {
             this._databaseFileHandler = databaseFileHandler;
             this._commands = new TaskCommands(controllerFactory, mediator);

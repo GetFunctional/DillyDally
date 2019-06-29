@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using GF.DillyDally.Wpf.Client.Core.Mediation.Dialog;
+using GF.DillyDally.Wpf.Client.Core;
+using GF.DillyDally.Wpf.Client.Core.Dialoge;
 using MediatR;
 
 namespace GF.DillyDally.Wpf.Client.ApplicationState
 {
     internal sealed class DialogHandler : INotificationHandler<DialogRequest>, INotificationHandler<DialogConfirmed>
     {
-        private readonly IDillyDallyApplication _dillyDallyApplication;
+        private readonly IApplicationRuntime _dillyDallyApplication;
 
-        public DialogHandler(IDillyDallyApplication dillyDallyApplication)
+        public DialogHandler(IApplicationRuntime dillyDallyApplication)
         {
             this._dillyDallyApplication = dillyDallyApplication;
         }

@@ -23,7 +23,6 @@ namespace GF.DillyDally.Wpf.Client
         private static readonly log4net.ILog AppLogger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private Bootstrapper _bootstrapper;
-        private DillyDallyApplication _dillyDallyApplication;
 
         protected override void OnStartup(StartupEventArgs e)
         {
@@ -42,14 +41,17 @@ namespace GF.DillyDally.Wpf.Client
             DispatcherUnhandledException += this.HandleDispatcherException;
             TaskScheduler.UnobservedTaskException += HandleUnobservedTaskException;
 
-            var currentApplication = Current;
+            var currentApplication = new ApplicationRuntime(Current);
             var serviceContainer = this.CreateDependencyInjectionContainer();
 
             this._bootstrapper = new Bootstrapper(currentApplication, serviceContainer);
             this._bootstrapper.Run();
 
-            this._dillyDallyApplication = this.CreateDillyDallyApplicationAsync(serviceContainer);
-            this._dillyDallyApplication.ShowUi();
+            var shellController = this.CreateShellController(serviceContainer);
+            var shell = new Shell(shellController.ViewModel);
+            currentApplication.AttachShell(shellController,shell);
+            serviceContainer.RegisterInstance(typeof(IApplicationRuntime), currentApplication);
+            currentApplication.ShowUi();
         }
 
         private void HandleDispatcherException(object sender, DispatcherUnhandledExceptionEventArgs e)
@@ -79,19 +81,10 @@ namespace GF.DillyDally.Wpf.Client
             var exception = args.ExceptionObject as Exception;
             exception.TraceException();
         }
-
-        private DillyDallyApplication CreateDillyDallyApplicationAsync(ServiceContainer serviceContainer)
-        {
-            var shellController = this.CreateShellController(serviceContainer);
-            var shell = new Shell(shellController.ViewModel);
-            var dillyDallyApplication = new DillyDallyApplication(shellController, shell);
-            serviceContainer.RegisterInstance<IDillyDallyApplication>(dillyDallyApplication);
-            return dillyDallyApplication;
-        }
-
+        
         private ShellController CreateShellController(ServiceContainer serviceContainer)
         {
-            var shellController = serviceContainer.GetInstance<ControllerFactory>().CreateController<ShellController>();
+            var shellController = serviceContainer.GetInstance<ControllerFactory>().CreateAndInitializeController<ShellController>();
             return shellController;
         }
 

@@ -2,5 +2,8 @@
 
 namespace GF.DillyDally.Mvvmc
 {
-    public delegate object MvvmcServiceFactory(Type serviceType);
+    public interface IMvvmcServiceFactory
+    {
+        IController GetController(Type controllerType);
+    }
 }

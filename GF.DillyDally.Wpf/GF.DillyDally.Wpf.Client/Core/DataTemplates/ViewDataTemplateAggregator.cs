@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Windows;
 using GF.DillyDally.Mvvmc;
+using GF.DillyDally.Wpf.Client.ApplicationState;
 using GF.DillyDally.Wpf.Client.Core.Exceptions;
 
 namespace GF.DillyDally.Wpf.Client.Core.DataTemplates
@@ -15,7 +16,7 @@ namespace GF.DillyDally.Wpf.Client.Core.DataTemplates
 
         private readonly DataTemplateFactory _dataTemplateFactory = new DataTemplateFactory();
 
-        private object TryFindResource(Type associatedType, Application application)
+        private object TryFindResource(Type associatedType, IApplicationRuntime application)
         {
             var key = new DataTemplateKey(associatedType);
             return application.TryFindResource(key);
@@ -29,7 +30,7 @@ namespace GF.DillyDally.Wpf.Client.Core.DataTemplates
         }
 
         internal IList<DataTemplate> CreateDataTemplatesForViewModelsInAssembly(Assembly assembly,
-            Application application)
+            IApplicationRuntime application)
         {
             var viewModelTypes = assembly.GetTypes().Where(this.TypeRespectsViewModelConvention).ToList();
             var viewTypes = assembly.GetTypes().Where(this.TypeRespectsViewConvention).ToList();
@@ -70,7 +71,7 @@ namespace GF.DillyDally.Wpf.Client.Core.DataTemplates
             return generatedViewModelDataTemplates;
         }
 
-        private bool HasDataTemplateResourceForType(Type type, Application application)
+        private bool HasDataTemplateResourceForType(Type type, IApplicationRuntime application)
         {
             return this.TryFindResource(type, application) != null;
         }

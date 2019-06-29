@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using GF.DillyDally.ReadModel.Views.TaskBoard;
+using GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.TaskBoard.DragDrop;
 using ReactiveUI;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.TaskBoard

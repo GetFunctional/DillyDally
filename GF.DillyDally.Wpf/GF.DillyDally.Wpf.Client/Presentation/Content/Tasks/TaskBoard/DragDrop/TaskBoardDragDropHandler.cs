@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reactive.Subjects;
 using GongSolutions.Wpf.DragDrop;
 
-namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.TaskBoard
+namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.TaskBoard.DragDrop
 {
     internal sealed class TaskBoardDragDropHandler : DefaultDropHandler, ITaskLaneDropHandler
     {

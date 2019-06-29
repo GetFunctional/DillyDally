@@ -1,8 +1,7 @@
 using System;
 using GF.DillyDally.Wpf.Client.Core.Navigator;
-using GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Details;
 
-namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.TaskBoard
+namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Details
 {
     public sealed class TaskDetailsNavigationTarget : NavigationTargetBase<TaskDetailsController>
     {

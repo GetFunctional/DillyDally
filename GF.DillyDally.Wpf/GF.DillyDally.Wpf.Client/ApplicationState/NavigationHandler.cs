@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using GF.DillyDally.Wpf.Client.Core.Mediation.Navigation;
+using GF.DillyDally.Wpf.Client.Core;
 using GF.DillyDally.Wpf.Client.Core.Navigator;
 using MediatR;
 
@@ -9,10 +9,10 @@ namespace GF.DillyDally.Wpf.Client.ApplicationState
 {
     internal sealed class NavigationHandler : IRequestHandler<NavigationRequest, NavigationResponse>
     {
-        private readonly IDillyDallyApplication _dillyDallyApplication;
+        private readonly IApplicationRuntime _dillyDallyApplication;
         private readonly INavigationTargetProvider _navigationTargetProvider;
 
-        public NavigationHandler(IDillyDallyApplication dillyDallyApplication, INavigationTargetProvider navigationTargetProvider)
+        public NavigationHandler(IApplicationRuntime dillyDallyApplication, INavigationTargetProvider navigationTargetProvider)
         {
             this._dillyDallyApplication = dillyDallyApplication;
             this._navigationTargetProvider = navigationTargetProvider;

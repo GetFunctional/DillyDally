@@ -10,7 +10,7 @@ namespace GF.DillyDally.Mvvmc
         private readonly Subject<IDialogResult> _confirmationResult = new Subject<IDialogResult>();
 
 
-        protected DialogControllerBase(TViewModel viewModel) : base(viewModel)
+        protected DialogControllerBase(TViewModel viewModel, ControllerFactory controllerFactory) : base(viewModel,controllerFactory)
         {
             this.AvailableResults = new List<IDialogResult>();
         }

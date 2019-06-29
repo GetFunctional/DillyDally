@@ -1,4 +1,4 @@
-namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.TaskBoard
+namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.TaskBoard.DragDrop
 {
     public sealed class TaskChangedLanePayload
     {

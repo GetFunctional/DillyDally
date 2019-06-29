@@ -1,9 +1,8 @@
 ﻿using System;
 using GF.DillyDally.Mvvmc;
-using GF.DillyDally.Wpf.Client.Core.Dialoge;
 using MediatR;
 
-namespace GF.DillyDally.Wpf.Client.Core.Mediation.Dialog
+namespace GF.DillyDally.Wpf.Client.Core.Dialoge
 {
     internal class DialogRequest : INotification
     {

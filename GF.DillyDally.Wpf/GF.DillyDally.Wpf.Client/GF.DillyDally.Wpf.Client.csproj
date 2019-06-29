@@ -150,6 +150,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ApplicationState\ApplicationRuntime.cs" />
     <Compile Include="ApplicationState\DialogHandler.cs" />
     <Compile Include="Core\DataBootstrapper.cs" />
     <Compile Include="Core\DataStoreInitializer.cs" />
@@ -157,7 +158,10 @@
     <Compile Include="Core\Dialoge\DialogCommandResult.cs" />
     <Compile Include="Core\Dialoge\DialogSettings.cs" />
     <Compile Include="Core\Dialoge\IDialogSettings.cs" />
+    <Compile Include="ApplicationState\IApplicationRuntime.cs" />
+    <Compile Include="Core\MvvmcServiceFactoryAdapter.cs" />
     <Compile Include="Core\NavigationService.cs" />
+    <Compile Include="Core\TypeRegistrar.cs" />
     <Compile Include="Presentation\Content\Activities\Container\ActivityItemViewModelFactory.cs" />
     <Compile Include="Presentation\Content\Activities\Container\SearchRequestEventArgs.cs" />
     <Compile Include="Presentation\Content\Activities\Create\CreateActivityValidationRule.cs" />
@@ -212,7 +216,6 @@
     <Compile Include="Core\Navigator\NavigationJournalEntry.cs" />
     <Compile Include="Core\Navigator\NavigationTargetMap.cs" />
     <Compile Include="Core\Exceptions\NavigationTargetNotFoundException.cs" />
-    <Compile Include="ApplicationState\DillyDallyApplication.cs" />
     <Compile Include="Presentation\HeaderMenu\HeaderMenuView.xaml.cs">
       <DependentUpon>HeaderMenuView.xaml</DependentUpon>
     </Compile>
@@ -226,7 +229,6 @@
       <DependentUpon>ShowCaseView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Presentation\ShowCase\ShowCaseViewModel.cs" />
-    <Compile Include="ApplicationState\IDillyDallyApplication.cs" />
     <Compile Include="Core\Navigator\NavigationRequest.cs" />
     <Compile Include="Presentation\ContentNavigation\NavigationTargetViewModel.cs" />
     <Compile Include="Presentation\ContentNavigation\AddNewNavigatorCommand.cs" />

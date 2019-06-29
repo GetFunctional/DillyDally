@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using GF.DillyDally.Mvvmc;
-using GF.DillyDally.Wpf.Client.Core.Mediation.Navigation;
 using GF.DillyDally.Wpf.Client.Core.Navigator;
 using MediatR;
 using ReactiveUI;
@@ -14,8 +13,8 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
     {
         private readonly IMediator _mediator;
 
-        public SearchContentController(INavigationTargetProvider navigationTargetProvider, IMediator mediator) : base(
-            new SearchContentViewModel(CreateNavigationTargetsFrom(navigationTargetProvider)))
+        public SearchContentController(INavigationTargetProvider navigationTargetProvider, IMediator mediator, ControllerFactory controllerFactory) :
+            base(new SearchContentViewModel(CreateNavigationTargetsFrom(navigationTargetProvider)),controllerFactory)
         {
             this._mediator = mediator;
 

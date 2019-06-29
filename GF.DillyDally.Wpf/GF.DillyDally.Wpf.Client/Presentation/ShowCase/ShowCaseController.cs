@@ -12,7 +12,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ShowCase
         private readonly NavigationService _navigationService;
 
         public ShowCaseController(ShowCaseViewModel viewModel, NavigationService navigationService,
-            ControllerFactory controllerFactory) : base(viewModel)
+            ControllerFactory controllerFactory) : base(viewModel, controllerFactory)
         {
             this._navigationService = navigationService;
             this._controllerFactory = controllerFactory;
@@ -21,7 +21,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ShowCase
 
         private async Task ShowTestDialog()
         {
-            var createTaskController = this._controllerFactory.CreateController<CreateTaskController>();
+            var createTaskController = this.CreateChildController<CreateTaskController>();
             using (createTaskController)
             {
                 await this._navigationService.ShowDialogAsync(createTaskController);

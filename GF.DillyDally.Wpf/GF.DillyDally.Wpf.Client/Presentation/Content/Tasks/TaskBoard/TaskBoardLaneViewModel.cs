@@ -1,6 +1,7 @@
 using System;
 using System.Collections.ObjectModel;
 using GF.DillyDally.Mvvmc;
+using GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.TaskBoard.DragDrop;
 using GongSolutions.Wpf.DragDrop;
 using ReactiveUI;
 

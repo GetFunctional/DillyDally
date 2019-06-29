@@ -62,6 +62,7 @@
     <Compile Include="IDialogController.cs" />
     <Compile Include="IDialogResult.cs" />
     <Compile Include="IDisplayPage.cs" />
+    <Compile Include="INeedsInitialization.cs" />
     <Compile Include="InitializationBase.cs" />
     <Compile Include="Exceptions\InitializationException.cs" />
     <Compile Include="IViewModel.cs" />

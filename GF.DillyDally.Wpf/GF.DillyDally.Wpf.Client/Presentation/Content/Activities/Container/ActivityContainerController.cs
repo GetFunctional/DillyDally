@@ -21,8 +21,8 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Container
         private SynchronizationContext _uiSyncContext = new DispatcherSynchronizationContext(Application.Current.Dispatcher);
         private readonly IDisposable _disposableObserver;
 
-        public ActivityContainerController(ActivityContainerViewModel viewModel, DatabaseFileHandler fileHandler) :
-            base(viewModel)
+        public ActivityContainerController(ActivityContainerViewModel viewModel, ControllerFactory controllerFactory, DatabaseFileHandler fileHandler) :
+            base(viewModel,controllerFactory)
         {
             this._fileHandler = fileHandler;
 

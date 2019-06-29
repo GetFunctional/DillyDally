@@ -2,7 +2,7 @@
 
 namespace GF.DillyDally.Mvvmc
 {
-    public interface IController : IDisposable, ICloseAware
+    public interface IController : IDisposable, ICloseAware, INeedsInitialization
     {
         IViewModel ViewModel { get; }
 

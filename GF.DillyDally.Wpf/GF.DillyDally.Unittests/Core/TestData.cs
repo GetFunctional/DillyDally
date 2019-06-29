@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using GF.DillyDally.Shared.Extensions;
@@ -8,12 +10,12 @@ namespace GF.DillyDally.Unittests.Core
 {
     internal class TestData
     {
-        private readonly Queue<string> _activityNames = ShuffleAndCreateQueueFor(new[]
+        private readonly ConcurrentQueue<string> _activityNames = ShuffleAndCreateQueueFor(new[]
             {"Rudern", "Malen", "PS4 Spielen", "Programmieren", "Kochen", "Aufräumen", "Staubsaugen", "Putzen"});
 
-        private static Queue<string> ShuffleAndCreateQueueFor(IEnumerable<string> values)
+        private static ConcurrentQueue<string> ShuffleAndCreateQueueFor(IEnumerable<string> values)
         {
-            var activityQueue = new Queue<string>();
+            var activityQueue = new ConcurrentQueue<string>();
             foreach (var val in values.Shuffle())
             {
                 activityQueue.Enqueue(val);
@@ -24,7 +26,13 @@ namespace GF.DillyDally.Unittests.Core
 
         internal string GetRandomActivityName()
         {
-            return this._activityNames.Dequeue();
+            string name;
+            if (this._activityNames.TryDequeue(out name))
+            {
+                return name;
+            }
+
+            throw new NotSupportedException();
         }
 
         public string GetRandomImageFilePath()

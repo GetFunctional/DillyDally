@@ -9,8 +9,8 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
     {
         private readonly IContentNavigator _contentNavigator;
 
-        public ContentNavigatorController(ContentNavigatorViewModel viewModel, IContentNavigator contentNavigator) :
-            base(viewModel)
+        public ContentNavigatorController(ContentNavigatorViewModel viewModel, IContentNavigator contentNavigator, ControllerFactory controllerFactory) :
+            base(viewModel,controllerFactory)
         {
             this._contentNavigator = contentNavigator;
             this.SynchronizeCurrentDisplayTargetWithNavigator();

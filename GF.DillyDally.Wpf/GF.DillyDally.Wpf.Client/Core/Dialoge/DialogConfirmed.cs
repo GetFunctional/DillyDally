@@ -1,7 +1,7 @@
 ﻿using GF.DillyDally.Mvvmc;
 using MediatR;
 
-namespace GF.DillyDally.Wpf.Client.Core.Mediation.Dialog
+namespace GF.DillyDally.Wpf.Client.Core.Dialoge
 {
     internal class DialogConfirmed : INotification
     {

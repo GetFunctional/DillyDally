@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
 using GF.DillyDally.Mvvmc;
-using GF.DillyDally.Wpf.Client.Core.Mediation.Dialog;
-using GF.DillyDally.Wpf.Client.Core.Mediation.Navigation;
+using GF.DillyDally.Wpf.Client.Core.Dialoge;
+using GF.DillyDally.Wpf.Client.Core.Navigator;
 using MediatR;
 using ReactiveUI;
 using Unit = System.Reactive.Unit;

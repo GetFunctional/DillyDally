@@ -66,7 +66,7 @@ namespace GF.DillyDally.Wpf.Client.Core.Navigator
 
         private IController ResolveNextNavigationTargetAsync(INavigationTarget navigationTarget)
         {
-            return this._controllerFactory.CreateController(navigationTarget.NavigationTargetControllerType);
+            return this._controllerFactory.CreateAndInitializeController(navigationTarget.NavigationTargetControllerType);
         }
 
         private bool CurrentTargetDeniesNavigation(IController currentTarget)

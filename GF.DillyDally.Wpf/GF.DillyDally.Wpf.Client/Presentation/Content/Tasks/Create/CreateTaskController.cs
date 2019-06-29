@@ -21,8 +21,8 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Create
         private Guid? _presetLane;
 
         public CreateTaskController(CreateTaskViewModel viewModel, DatabaseFileHandler databaseFileHandler, TaskService taskService,
-            CategorySelectorController categorySelectorController, ActivityContainerController activityContainerController) :
-            base(viewModel)
+            CategorySelectorController categorySelectorController, ActivityContainerController activityContainerController, ControllerFactory controllerFactory) :
+            base(viewModel,controllerFactory)
         {
             this._databaseFileHandler = databaseFileHandler;
             this._taskService = taskService;

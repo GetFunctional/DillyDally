@@ -12,7 +12,8 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Category
     {
         private readonly DatabaseFileHandler _databaseFileHandler;
 
-        public CategorySelectorController(CategorySelectorViewModel viewModel, DatabaseFileHandler databaseFileHandler) : base(viewModel)
+        public CategorySelectorController(CategorySelectorViewModel viewModel, DatabaseFileHandler databaseFileHandler, ControllerFactory controllerFactory) :
+            base(viewModel,controllerFactory)
         {
             this._databaseFileHandler = databaseFileHandler;
         }

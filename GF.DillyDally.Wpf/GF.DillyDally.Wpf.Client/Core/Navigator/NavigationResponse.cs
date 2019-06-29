@@ -1,6 +1,6 @@
 ﻿using GF.DillyDally.Mvvmc;
 
-namespace GF.DillyDally.Wpf.Client.Core.Mediation.Navigation
+namespace GF.DillyDally.Wpf.Client.Core.Navigator
 {
     public sealed class NavigationResponse
     {

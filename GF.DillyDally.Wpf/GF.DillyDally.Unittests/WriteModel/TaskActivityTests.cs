@@ -18,12 +18,12 @@ namespace GF.DillyDally.Unittests.WriteModel
     [TestFixture]
     public class TaskActivityTests
     {
-        #region Setup/Teardown
+        #region SetupDatabase/Teardown
 
         [SetUp]
         public void Setup()
         {
-            this._testInfrastructure.Setup(UnittestsSetup.ExampleDatabase);
+            this._testInfrastructure.SetupDatabase(UnittestsSetup.ExampleDatabase);
         }
 
         #endregion
@@ -54,10 +54,12 @@ namespace GF.DillyDally.Unittests.WriteModel
             var activityService = this._testInfrastructure.DiContainer.GetInstance<ActivityService>();
             var taskService = this._testInfrastructure.DiContainer.GetInstance<TaskService>();
             var aggregateRepository = this._testInfrastructure.DiContainer.GetInstance<IAggregateRepository>();
+            var firstActivityName = this._testInfrastructure.TestData.GetRandomActivityName();
+            var secondActivityName = this._testInfrastructure.TestData.GetRandomActivityName();
 
             var task = await this.CreateNewTask();
-            var activity = await activityService.CreatePercentageActivityAsync("Test1234");
-            var activity2 = await activityService.CreatePercentageActivityAsync("862637328");
+            var activity = await activityService.CreatePercentageActivityAsync(firstActivityName);
+            var activity2 = await activityService.CreatePercentageActivityAsync(secondActivityName);
             var activitySet = new HashSet<Guid>(new[] {activity.ActivityId, activity2.ActivityId});
 
             // Act

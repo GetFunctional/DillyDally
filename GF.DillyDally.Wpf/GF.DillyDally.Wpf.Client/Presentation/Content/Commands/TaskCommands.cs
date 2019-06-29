@@ -5,6 +5,7 @@ using GF.DillyDally.Wpf.Client.Core;
 using GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Create;
 using GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Details;
 using GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.TaskBoard;
+using GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.TaskBoard.DragDrop;
 using GF.DillyDally.WriteModel.Domain.Tasks;
 using MediatR;
 using ReactiveUI;
@@ -63,15 +64,13 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Commands
 
         private async Task CreateNewTask(Guid? laneId)
         {
-            var createTaskController = this._controllerFactory.CreateController<CreateTaskController>();
-
-            if (laneId != null)
+            using (var createTaskController = this._controllerFactory.CreateAndInitializeController<CreateTaskController>())
             {
-                createTaskController.PresetLane(laneId.Value);
-            }
+                if (laneId != null)
+                {
+                    createTaskController.PresetLane(laneId.Value);
+                }
 
-            using (createTaskController)
-            {
                 await this._navigationService.ShowDialogAsync(createTaskController);
             }
         }
