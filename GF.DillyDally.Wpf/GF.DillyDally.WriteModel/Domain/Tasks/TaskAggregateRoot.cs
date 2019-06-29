@@ -20,10 +20,10 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks
 
 
         private TaskAggregateRoot(Guid taskId, string name, Guid runningNumberId,
-            Guid categoryId, Guid? previewImageId, int storypoints = 0) : this()
+            Guid categoryId, Guid? PreviewImageFileId, int storypoints = 0) : this()
         {
             var creationEvent = new TaskCreatedEvent(taskId, name, runningNumberId, categoryId,
-                previewImageId, DateTime.Now, storypoints);
+                PreviewImageFileId, DateTime.Now, storypoints);
             this.RaiseEvent(creationEvent);
         }
 
@@ -47,7 +47,7 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks
         private HashSet<Guid> TaskLinks { get; } = new HashSet<Guid>();
         internal string Name { get; private set; }
         internal Guid CategoryId { get; private set; }
-        internal Guid? PreviewImageId { get; private set; }
+        internal Guid? PreviewImageFileId { get; private set; }
         private HashSet<Guid> Files { get; } = new HashSet<Guid>();
         internal string DefinitionOfDone { get; private set; }
         internal int Storypoints { get; private set; }
@@ -80,7 +80,7 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks
 
         private void Apply(PreviewImageAssignedEvent obj)
         {
-            this.PreviewImageId = obj.FileId;
+            this.PreviewImageFileId = obj.FileId;
         }
 
         private void Apply(TaskLinkCreatedEvent obj)
@@ -100,10 +100,10 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks
         }
 
         internal static TaskAggregateRoot CreateTask(Guid taskId, string name, Guid runningNumberId,
-            Guid categoryId, Guid? previewImageId, int storypoints)
+            Guid categoryId, Guid? PreviewImageFileId, int storypoints)
         {
             return new TaskAggregateRoot(taskId, name, runningNumberId, categoryId,
-                previewImageId, storypoints);
+                PreviewImageFileId, storypoints);
         }
 
         private void Apply(TaskCreatedEvent obj)
@@ -111,7 +111,7 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks
             this.AggregateId = obj.AggregateId;
             this.Name = obj.Name;
             this.CategoryId = obj.CategoryId;
-            this.PreviewImageId = obj.PreviewImageId;
+            this.PreviewImageFileId = obj.PreviewImageFileId;
             this.Storypoints = obj.StoryPoints;
         }
 

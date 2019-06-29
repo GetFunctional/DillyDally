@@ -50,7 +50,7 @@ CREATE TABLE [Activities]
 	[ActivityType] int NOT NULL,
 	[ActivityValue] int NOT NULL,
 	[CurrentLevel] int NOT NULL,
-	[PreviewImageId] GUID NULL REFERENCES [Images]([ImageId])
+	[PreviewImageFileId] GUID NULL REFERENCES [Files]([FileId])
 	);
 
 CREATE UNIQUE INDEX [IX_Activities_ActivityId] ON [Activities]([ActivityId]);
@@ -64,7 +64,7 @@ CREATE TABLE [Achievements]
 	[Name] VARCHAR2(255) NOT NULL,
 	[Description] VARCHAR2 NULL,
 	[CompletedOn] DATETIME NULL,
-	[PreviewImageId] GUID NULL REFERENCES [Images]([ImageId])
+	[PreviewImageFileId] GUID NULL REFERENCES [Files]([FileId])
 	);
 
 CREATE UNIQUE INDEX [IX_Achievements_AchievementId] ON [Achievements]([AchievementId]);
@@ -107,7 +107,7 @@ CREATE TABLE [Tasks]
 	[CreatedOn] DATETIME NOT NULL,
 	[Description] VARCHAR2 NULL,
 	[DefinitionOfDone] VARCHAR2 NULL,
-	[PreviewImageId] GUID NULL REFERENCES [Images]([ImageId])
+	[PreviewImageFileId] GUID NULL REFERENCES [Files]([FileId])
 	);
 
 CREATE UNIQUE INDEX [IX_Tasks_TaskId] ON [Tasks]([TaskId]);
@@ -131,8 +131,8 @@ CREATE TABLE [TaskImages]
 	[RowID] INTEGER PRIMARY KEY AUTOINCREMENT, 
 	[TaskImageId] GUID NOT NULL UNIQUE,	
 	[TaskId] GUID NOT NULL REFERENCES [Tasks]([TaskId]),
-	[ImageId] GUID NOT NULL REFERENCES [Images]([ImageId]),
-	UNIQUE ([TaskId],[ImageId])
+	[ImageFileId] GUID NOT NULL REFERENCES [Files]([FileId]),
+	UNIQUE ([TaskId],[ImageFileId])
 	);
 
 CREATE UNIQUE INDEX [IX_TaskImages_TaskImageId] ON [TaskImages]([TaskImageId]);
@@ -155,12 +155,12 @@ CREATE TABLE [TaskLinks]
 	[RowID] INTEGER PRIMARY KEY AUTOINCREMENT, 
 	[TaskLinkId] GUID NOT NULL UNIQUE,	
 	[TaskId] GUID NOT NULL REFERENCES [Tasks]([TaskId]),
-	[LinkedTaskId] GUID NOT NULL REFERENCES [Tasks]([TaskId])
+	[LinkedTaskId] GUID NOT NULL REFERENCES [Tasks]([TaskId]),
+	UNIQUE ([TaskId],[LinkedTaskId])
 	);
 
 CREATE UNIQUE INDEX [IX_TaskLinks_TaskLinkId] ON [TaskLinks]([TaskLinkId]);
 GO
-
 
 CREATE TABLE [TaskActivities]
 	(
@@ -187,7 +187,7 @@ GO
 --	[DueDate] DATETIME NULL,
 --	[CreatedOn] DATETIME NOT NULL,
 --	[Description] VARCHAR2 NULL,
---	[PreviewImageId] GUID NULL REFERENCES [Images]([ImageId])
+--	[PreviewImageFileId] GUID NULL REFERENCES [Images]([ImageId])
 --	);
 
 --CREATE UNIQUE INDEX [IX_Achievement_AchievementId] ON [Achievement]([AchievementId]);

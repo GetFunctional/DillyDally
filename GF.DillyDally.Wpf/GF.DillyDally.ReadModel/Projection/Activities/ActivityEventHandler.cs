@@ -34,9 +34,8 @@ namespace GF.DillyDally.ReadModel.Projection.Activities
                 var file = await fileRepository.GetByIdAsync(connection, notification.FileId);
                 var activityId = notification.AggregateId;
 
-                var storedImages = await imageRepository.StoreImagesAsync(connection, file);
-                var previewImage = storedImages.Single(x => x.SizeType == ImageSizeType.PreviewSize);
-                await activityRepository.AssignPreviewImageAsync(connection, activityId, previewImage.ImageId);
+                await imageRepository.StoreImagesAsync(connection, file);
+                await activityRepository.AssignPreviewImageAsync(connection, activityId, notification.FileId);
             }
         }
 

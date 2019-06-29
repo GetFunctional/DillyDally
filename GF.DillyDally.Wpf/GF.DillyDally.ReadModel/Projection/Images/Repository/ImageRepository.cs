@@ -23,7 +23,7 @@ namespace GF.DillyDally.ReadModel.Projection.Images.Repository
             return (await connection.QueryAsync<ImageEntity>(querySql, new {id = fileId})).ToList();
         }
 
-        public async Task<Guid> GetPreviewImageIdForFileAsync(IDbConnection connection, Guid fileId)
+        public async Task<Guid> GetPreviewImageFileIdForFileAsync(IDbConnection connection, Guid fileId)
         {
             var querySql =
                 $"SELECT {nameof(ImageEntity.ImageId)} " +

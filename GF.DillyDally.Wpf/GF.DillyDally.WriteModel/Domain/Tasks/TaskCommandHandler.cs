@@ -91,7 +91,7 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks
 
             // Create Task
             var aggregate = TaskAggregateRoot.CreateTask(taskId, request.Name, newRunningNumberId,
-                category.AggregateId, request.PreviewImageId, request.StoryPoints);
+                category.AggregateId, request.PreviewImageFileId, request.StoryPoints);
 
             // Add Task to lane
             laneAggregate.AddTask(taskId);

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using GF.DillyDally.ReadModel.Projection.Activities.Repository;
+using GF.DillyDally.Unittests.Core;
 using GF.DillyDally.WriteModel.Domain.Activities;
 using GF.DillyDally.WriteModel.Domain.Activities.Commands;
 using LightInject;
@@ -17,22 +18,22 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
         [SetUp]
         public void Setup()
         {
-            this._infrastructureSetup.Setup(UnittestsSetup.ExampleDatabase);
+            this._testInfrastructure.Setup(UnittestsSetup.ExampleDatabase);
         }
 
         #endregion
 
-        private readonly InfrastructureTestSetup _infrastructureSetup = new InfrastructureTestSetup();
+        private readonly TestInfrastructure _testInfrastructure = new TestInfrastructure();
 
         [Test]
         public async Task Creating_Activity_ShouldCreateProjection()
         {
-            using (var connection = this._infrastructureSetup.OpenDatabaseConnection())
+            using (var connection = this._testInfrastructure.OpenDatabaseConnection())
             {
                 // Arrange
-                var activityService = this._infrastructureSetup.DiContainer.GetInstance<ActivityService>();
+                var activityService = this._testInfrastructure.DiContainer.GetInstance<ActivityService>();
                 var repository = new ActivityRepository();
-                var activityName = "Test";
+                var activityName = this._testInfrastructure.TestData.GetRandomActivityName();
 
                 // Act
                 var newActivity = await activityService.CreatePercentageActivityAsync(activityName);

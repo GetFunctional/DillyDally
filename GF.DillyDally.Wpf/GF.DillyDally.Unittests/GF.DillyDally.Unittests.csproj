@@ -84,8 +84,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\TestData.cs" />
     <Compile Include="Guideline\EventClassGuideline.cs" />
-    <Compile Include="InfrastructureTestSetup.cs" />
+    <Compile Include="Core\TestInfrastructure.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReadModel\Projection\AchievementTests.cs" />
     <Compile Include="ReadModel\Projection\ActivityTests.cs" />
@@ -99,8 +100,9 @@
     <Compile Include="SqlDbAccess\DatabaseUpdateTests.cs" />
     <Compile Include="SqlDbAccess\SqlScriptSelectorTests.cs" />
     <Compile Include="UnittestsSetup.cs" />
-    <Compile Include="DatabaseTestSetup.cs" />
+    <Compile Include="Core\DatabaseTestSetup.cs" />
     <Compile Include="WriteModel\AchievementTests.cs" />
+    <Compile Include="WriteModel\ActivityTests.cs" />
     <Compile Include="WriteModel\RunningNumberTests.cs" />
     <Compile Include="WriteModel\TaskActivityTests.cs" />
     <Compile Include="WriteModel\TaskLinkingTests.cs" />

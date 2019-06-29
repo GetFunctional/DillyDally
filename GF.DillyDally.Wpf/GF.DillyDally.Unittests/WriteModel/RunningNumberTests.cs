@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using GF.DillyDally.Unittests.Core;
 using GF.DillyDally.WriteModel.Domain.RunningNumbers;
 using GF.DillyDally.WriteModel.Domain.RunningNumbers.Commands;
 using GF.DillyDally.WriteModel.Domain.RunningNumbers.Events;
@@ -18,20 +19,20 @@ namespace GF.DillyDally.Unittests.WriteModel
         [SetUp]
         public void Setup()
         {
-            this._infrastructureSetup.Setup(UnittestsSetup.ExampleDatabase);
+            this._testInfrastructure.Setup(UnittestsSetup.ExampleDatabase);
         }
 
         #endregion
 
-        private readonly InfrastructureTestSetup _infrastructureSetup = new InfrastructureTestSetup();
+        private readonly TestInfrastructure _testInfrastructure = new TestInfrastructure();
 
 
         [Test]
         public async Task RunningNumber_GetNext_IncreasesCounter()
         {
             // Arrange
-            var aggregateRepository = this._infrastructureSetup.DiContainer.GetInstance<IAggregateRepository>();
-            var commandDispatcher = this._infrastructureSetup.DiContainer.GetInstance<IMediator>();
+            var aggregateRepository = this._testInfrastructure.DiContainer.GetInstance<IAggregateRepository>();
+            var commandDispatcher = this._testInfrastructure.DiContainer.GetInstance<IMediator>();
             var nextNumberCommand = new CreateRunningNumberCommand(RunningNumberCounterArea.Achievement);
 
             var attachResult = await commandDispatcher.Send(nextNumberCommand);

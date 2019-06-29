@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Data;
-using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
+using GF.DillyDally.ReadModel.Projection.Activities.Repository;
+using GF.DillyDally.ReadModel.Projection.Images.Repository;
 using GF.DillyDally.ReadModel.Projection.RunningNumbers.Repository;
 using GF.DillyDally.ReadModel.Projection.Tasks.Repository;
 using GF.DillyDally.ReadModel.Views.TaskDetails;
@@ -13,29 +14,23 @@ namespace GF.DillyDally.ReadModel.Views.TaskBoard
     {
         public async Task<TaskDetailsEntity> GetTaskDetailsAsync(IDbConnection connection, Guid taskId)
         {
-            var sql = $"SELECT TaskId, CategoryId, {RunningNumberEntity.TableNameConstant}.RunningNumber, Name, DueDate, CreatedOn, Description, DefinitionOfDone " +
-                      $"FROM {TaskEntity.TableNameConstant} " +
-                      $"JOIN {RunningNumberEntity.TableNameConstant} ON {RunningNumberEntity.TableNameConstant}.RunningNumberId = {TaskEntity.TableNameConstant}.RunningNumberId " +
-                      $"WHERE TaskId = @taskId;";
+            var sql =
+                $@"SELECT TaskId, CategoryId, rn.RunningNumber, Name, DueDate, CreatedOn, Description, DefinitionOfDone 
+FROM {TaskEntity.TableNameConstant} te 
+JOIN {RunningNumberEntity.TableNameConstant} rn ON rn.RunningNumberId = te.RunningNumberId 
+WHERE TaskId = @taskId; 
+SELECT ae.ActivityId, ae.Name, ae.Description, ae.ActivityType, ae.ActivityValue, ae.CurrentLevel, img.PreviewImageBytes 
+FROM {ActivityEntity.TableNameConstant} ae 
+JOIN {TaskActivityEntity.TableNameConstant} tae ON tae.ActivityId = ae.ActivityId
+LEFT JOIN {ImageEntity.TableNameConstant} img ON ae.PreviewImageFileId = img.OriginalFileId
+WHERE tae.TaskId = @taskId;";
 
             using (var multiSelect = await connection.QueryMultipleAsync(sql, new {taskId}))
             {
-                var taskEntity = (await multiSelect.ReadAsync<TaskDetailsEntity>()).Single();
-                //var tasks = await multiSelect.ReadAsync<TaskBoardTaskEntity>();
-                //var categories = await multiSelect.ReadAsync<TaskBoardCategoryEntity>();
+                var taskEntity = await multiSelect.ReadSingleAsync<TaskDetailsEntity>();
+                var taskActivities = await multiSelect.ReadAsync<TaskDetailsActivityEntity>();
 
-                //foreach (var categoryEntity in categories)
-                //{
-                //    foreach (var tsk in tasks.Where(x => x.CategoryId == categoryEntity.CategoryId))
-                //    {
-                //        tsk.Category = categoryEntity;
-                //    }
-                //}
-
-                //foreach (var taskBoardLaneEntity in lanes)
-                //{
-                //    taskBoardLaneEntity.Tasks = new List<TaskBoardTaskEntity>(tasks.Where(x => x.LaneId == taskBoardLaneEntity.LaneId));
-                //}
+                taskEntity.AssignTaskActivities(taskActivities);
 
                 return taskEntity;
             }

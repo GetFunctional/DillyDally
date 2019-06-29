@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using GF.DillyDally.ReadModel.Projection.Categories.Repository;
 using GF.DillyDally.ReadModel.Projection.Lanes.Repository;
 using GF.DillyDally.Shared.Extensions;
+using GF.DillyDally.Unittests.Core;
 using GF.DillyDally.WriteModel.Domain.Activities;
 using GF.DillyDally.WriteModel.Domain.Tasks;
 using GF.DillyDally.WriteModel.Domain.Tasks.Commands;
@@ -22,18 +23,18 @@ namespace GF.DillyDally.Unittests.WriteModel
         [SetUp]
         public void Setup()
         {
-            this._infrastructureSetup.Setup(UnittestsSetup.ExampleDatabase);
+            this._testInfrastructure.Setup(UnittestsSetup.ExampleDatabase);
         }
 
         #endregion
 
-        private readonly InfrastructureTestSetup _infrastructureSetup = new InfrastructureTestSetup();
+        private readonly TestInfrastructure _testInfrastructure = new TestInfrastructure();
 
         private async Task<CreateTaskResponse> CreateNewTask()
         {
-            using (var connection = this._infrastructureSetup.OpenDatabaseConnection())
+            using (var connection = this._testInfrastructure.OpenDatabaseConnection())
             {
-                var taskService = this._infrastructureSetup.DiContainer.GetInstance<TaskService>();
+                var taskService = this._testInfrastructure.DiContainer.GetInstance<TaskService>();
                 var categoryRepository = new CategoryRepository();
                 var laneRepository = new LaneRepository();
 
@@ -50,9 +51,9 @@ namespace GF.DillyDally.Unittests.WriteModel
         public async Task Task_CreateAndAddActivities()
         {
             // Arrange
-            var activityService = this._infrastructureSetup.DiContainer.GetInstance<ActivityService>();
-            var taskService = this._infrastructureSetup.DiContainer.GetInstance<TaskService>();
-            var aggregateRepository = this._infrastructureSetup.DiContainer.GetInstance<IAggregateRepository>();
+            var activityService = this._testInfrastructure.DiContainer.GetInstance<ActivityService>();
+            var taskService = this._testInfrastructure.DiContainer.GetInstance<TaskService>();
+            var aggregateRepository = this._testInfrastructure.DiContainer.GetInstance<IAggregateRepository>();
 
             var task = await this.CreateNewTask();
             var activity = await activityService.CreatePercentageActivityAsync("Test1234");

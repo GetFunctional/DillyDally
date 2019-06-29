@@ -35,8 +35,8 @@ namespace GF.DillyDally.ReadModel.Projection.Tasks
                     var imageRepository = new ImageRepository();
                     var taskImagesRepository = new TaskImageRepository();
 
-                    var storedImages = await imageRepository.StoreImagesAsync(connection, file);
-                    await taskImagesRepository.CreateTaskImageLinks(connection, taskId, storedImages);
+                    await imageRepository.StoreImagesAsync(connection, file);
+                    await taskImagesRepository.CreateTaskImageLinks(connection, taskId, file.FileId);
                 }
                 else
                 {
@@ -74,11 +74,11 @@ namespace GF.DillyDally.ReadModel.Projection.Tasks
             {
                 var taskRepository = new TaskRepository();
                 var imageRepository = new ImageRepository();
-                var previewImageIdForFile =
-                    await imageRepository.GetPreviewImageIdForFileAsync(connection, notification.FileId);
+                var PreviewImageFileIdForFile =
+                    await imageRepository.GetPreviewImageFileIdForFileAsync(connection, notification.FileId);
                 var taskId = notification.AggregateId;
 
-                await taskRepository.ChangePreviewImageAsync(connection, taskId, previewImageIdForFile);
+                await taskRepository.ChangePreviewImageAsync(connection, taskId, PreviewImageFileIdForFile);
             }
         }
 
@@ -98,7 +98,7 @@ namespace GF.DillyDally.ReadModel.Projection.Tasks
                                                                  CategoryId = notification.CategoryId,
                                                                  RunningNumberId = notification.RunningNumberId,
                                                                  CreatedOn = notification.CreatedOn,
-                                                                 PreviewImageId = notification.PreviewImageId
+                                                                 PreviewImageFileId = notification.PreviewImageFileId
                                                              });
             }
         }

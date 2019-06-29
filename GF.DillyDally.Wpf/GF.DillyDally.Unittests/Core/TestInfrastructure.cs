@@ -4,17 +4,22 @@ using GF.DillyDally.Wpf.Client.Core;
 using LightInject;
 using MediatR;
 
-namespace GF.DillyDally.Unittests
+namespace GF.DillyDally.Unittests.Core
 {
-    internal class InfrastructureTestSetup
+    internal class TestInfrastructure
     {
         public ServiceContainer DiContainer { get; set; }
+
+        public TestInfrastructure()
+        {
+            this.TestData = new TestData();
+        }
 
         public void Setup(string exampleFile)
         {
             this.DiContainer = this.CreateDependencyInjectionContainer();
             this.DiContainer.Register<IMediator, Mediator>();
-
+            
             var dataBootstrapper = new DataBootstrapper(this.DiContainer);
             dataBootstrapper.Run(new InitializationSettings(exampleFile, false, false));
         }
@@ -29,5 +34,7 @@ namespace GF.DillyDally.Unittests
         {
             return this.DiContainer.GetInstance<DatabaseFileHandler>().OpenConnection();
         }
+
+        public TestData TestData { get; }
     }
 }

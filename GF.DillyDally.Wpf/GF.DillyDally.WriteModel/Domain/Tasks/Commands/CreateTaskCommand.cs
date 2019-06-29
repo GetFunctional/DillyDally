@@ -16,19 +16,19 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks.Commands
         }
 
         internal CreateTaskCommand(string name, Guid categoryId, Guid? laneId,
-            Guid? previewImageId, int storyPoints = 0)
+            Guid? PreviewImageFileId, int storyPoints = 0)
         {
             this.Name = name;
             this.CategoryId = categoryId;
             this.LaneId = laneId;
-            this.PreviewImageId = previewImageId;
+            this.PreviewImageFileId = PreviewImageFileId;
             this.StoryPoints = storyPoints;
         }
 
         public string Name { get; }
         public Guid CategoryId { get; }
         public Guid? LaneId { get; }
-        public Guid? PreviewImageId { get; }
+        public Guid? PreviewImageFileId { get; }
         public int StoryPoints { get; }
     }
 }

@@ -24,13 +24,13 @@ namespace GF.DillyDally.ReadModel.Projection.Activities.Repository
             });
         }
 
-        internal async Task AssignPreviewImageAsync(IDbConnection connection, Guid activityId, Guid? previewImageId)
+        internal async Task AssignPreviewImageAsync(IDbConnection connection, Guid activityId, Guid? originalFileId)
         {
-            var sql = $"UPDATE {ActivityEntity.TableNameConstant} " +
-                      $"SET {nameof(ActivityEntity.PreviewImageId)} = @{nameof(previewImageId)} " +
-                      $"WHERE {nameof(ActivityEntity.ActivityId)} = @{nameof(activityId)};";
+            var sql = $@"UPDATE {ActivityEntity.TableNameConstant} 
+SET PreviewImageFileId = @originalFileId 
+WHERE ActivityId = @activityId;";
 
-            await connection.ExecuteAsync(sql, new {activityId, previewImageId});
+            await connection.ExecuteAsync(sql, new {activityId, originalFileId});
         }
 
         public async Task<IEnumerable<ActivitySearchResultEntity>> SearchActivitiesByTextAsync(IDbConnection connection,
@@ -47,7 +47,7 @@ namespace GF.DillyDally.ReadModel.Projection.Activities.Repository
                 $"{nameof(ImageEntity.Binary)} AS {nameof(ActivitySearchResultEntity.PreviewImageBinary)}, " +
                 $"1 AS {nameof(ActivitySearchResultEntity.Usages)} " +
                 $"FROM {ActivityEntity.TableNameConstant} " +
-                $"LEFT JOIN {ImageEntity.TableNameConstant} ON {ActivityEntity.TableNameConstant}.{nameof(ActivityEntity.PreviewImageId)} = {ImageEntity.TableNameConstant}.{nameof(ImageEntity.ImageId)} " +
+                $"LEFT JOIN {ImageEntity.TableNameConstant} ON {ActivityEntity.TableNameConstant}.{nameof(ActivityEntity.PreviewImageFileId)} = {ImageEntity.TableNameConstant}.{nameof(ImageEntity.ImageId)} " +
                 $"WHERE {nameof(ActivitySearchResultEntity.Name)} LIKE @{nameof(searchParameter)};";
 
 

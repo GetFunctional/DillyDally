@@ -8,13 +8,13 @@ namespace GF.DillyDally.ReadModel.Projection.Tasks.Repository
 {
     internal class TaskRepository : Repository<TaskEntity>
     {
-        public async Task ChangePreviewImageAsync(IDbConnection connection, Guid taskId, Guid previewImageId)
+        public async Task ChangePreviewImageAsync(IDbConnection connection, Guid taskId, Guid PreviewImageFileId)
         {
             await connection.ExecuteAsync(
                 $"UPDATE {TaskEntity.TableNameConstant} " +
-                $"SET {nameof(TaskEntity.PreviewImageId)} = @previewImageId " +
+                $"SET {nameof(TaskEntity.PreviewImageFileId)} = @PreviewImageFileId " +
                 $"WHERE {nameof(TaskEntity.TaskId)} = @taskId;",
-                new {taskId, previewImageId});
+                new {taskId, PreviewImageFileId});
         }
 
         public async Task UpdateDefinitionOfDoneAsync(IDbConnection connection, Guid taskId, string definitionOfDone)

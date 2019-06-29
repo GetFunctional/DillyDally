@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using GF.DillyDally.Data.Sqlite;
+using GF.DillyDally.Unittests.Core;
 using NUnit.Framework;
 
 namespace GF.DillyDally.Unittests

@@ -20,7 +20,14 @@ namespace GF.DillyDally.ReadModel.Views.TaskDetails
         public string Description { get; set; }
 
         public string DefinitionOfDone { get; set; }
-        
-        public IList<TaskDetailsImageEntity> TaskImages { get; set; }
+
+        public IReadOnlyList<TaskDetailsImageEntity> TaskImages { get; private set; }
+        public IReadOnlyList<TaskDetailsActivityEntity> TaskActivities { get; private set; }
+
+
+        internal void AssignTaskActivities(IEnumerable<TaskDetailsActivityEntity> activityEntities)
+        {
+            this.TaskActivities = new List<TaskDetailsActivityEntity>(activityEntities);
+        }
     }
 }

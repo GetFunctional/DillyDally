@@ -106,6 +106,7 @@
     <Compile Include="Projection\Tasks\Repository\TaskLinksRepository.cs" />
     <Compile Include="Projection\Tasks\Repository\TaskRepository.cs" />
     <Compile Include="Views\TaskBoard\TaskBoardTaskEntity.cs" />
+    <Compile Include="Views\TaskDetails\TaskDetailsActivityEntity.cs" />
     <Compile Include="Views\TaskDetails\TaskDetailsImageEntity.cs" />
     <Compile Include="Views\TaskDetails\TaskDetailsRepository.cs" />
     <Compile Include="Views\TaskDetails\TaskDetailsEntity.cs" />

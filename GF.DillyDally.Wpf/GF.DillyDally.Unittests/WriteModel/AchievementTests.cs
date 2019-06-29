@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using GF.DillyDally.Unittests.Core;
 using GF.DillyDally.WriteModel.Domain.Achievements.Commands;
 using LightInject;
 using MediatR;
@@ -14,18 +15,18 @@ namespace GF.DillyDally.Unittests.WriteModel
         [SetUp]
         public void Setup()
         {
-            this._infrastructureSetup.Setup(UnittestsSetup.ExampleDatabase);
+            this._testInfrastructure.Setup(UnittestsSetup.ExampleDatabase);
         }
 
         #endregion
 
-        private readonly InfrastructureTestSetup _infrastructureSetup = new InfrastructureTestSetup();
+        private readonly TestInfrastructure _testInfrastructure = new TestInfrastructure();
         
         [Test]
         public async Task CompletingAchievement_CompletesAchievement()
         {
             // Arrange
-            var commandDispatcher = this._infrastructureSetup.DiContainer.GetInstance<IMediator>();
+            var commandDispatcher = this._testInfrastructure.DiContainer.GetInstance<IMediator>();
             var createCommand = new CreateAchievementCommand("Test", 1, 3);
             var newAchievement = await commandDispatcher.Send(createCommand);
             var command = new CompleteAchievementCommand(newAchievement.AchievementId);
@@ -41,7 +42,7 @@ namespace GF.DillyDally.Unittests.WriteModel
         public void Creating_Achievement_PersistsAcvm()
         {
             // Arrange
-            var commandDispatcher = this._infrastructureSetup.DiContainer.GetInstance<IMediator>();
+            var commandDispatcher = this._testInfrastructure.DiContainer.GetInstance<IMediator>();
             var command = new CreateAchievementCommand("Test", 1, 3);
 
             // Act

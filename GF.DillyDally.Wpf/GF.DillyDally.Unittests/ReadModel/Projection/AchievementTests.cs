@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using GF.DillyDally.ReadModel.Projection.Achievements.Repository;
+using GF.DillyDally.Unittests.Core;
 using GF.DillyDally.WriteModel.Domain.Achievements.Commands;
 using LightInject;
 using MediatR;
@@ -17,20 +18,20 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
         [SetUp]
         public void Setup()
         {
-            this._infrastructureSetup.Setup(UnittestsSetup.ExampleDatabase);
+            this._testInfrastructure.Setup(UnittestsSetup.ExampleDatabase);
         }
 
         #endregion
 
-        private readonly InfrastructureTestSetup _infrastructureSetup = new InfrastructureTestSetup();
+        private readonly TestInfrastructure _testInfrastructure = new TestInfrastructure();
 
         [Test]
         public async Task Creating_Achievement_ShouldCreateProjection()
         {
-            using (var connection = this._infrastructureSetup.OpenDatabaseConnection())
+            using (var connection = this._testInfrastructure.OpenDatabaseConnection())
             {
                 // Arrange
-                var commandDispatcher = this._infrastructureSetup.DiContainer.GetInstance<IMediator>();
+                var commandDispatcher = this._testInfrastructure.DiContainer.GetInstance<IMediator>();
                 var repository = new AchievementRepository();
                 var command = new CreateAchievementCommand("Test", 1, 5);
 
@@ -49,10 +50,10 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
         [Test]
         public async Task CompletingAchievement_ShouldCompleteProjection()
         {
-            using (var connection = this._infrastructureSetup.OpenDatabaseConnection())
+            using (var connection = this._testInfrastructure.OpenDatabaseConnection())
             {
                 // Arrange
-                var commandDispatcher = this._infrastructureSetup.DiContainer.GetInstance<IMediator>();
+                var commandDispatcher = this._testInfrastructure.DiContainer.GetInstance<IMediator>();
                 var repository = new AchievementRepository();
                 var command = new CreateAchievementCommand("Test", 1, 5);
                 var newAchievement = await commandDispatcher.Send(command);

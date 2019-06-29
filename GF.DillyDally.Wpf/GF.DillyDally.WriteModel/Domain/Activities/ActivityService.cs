@@ -15,7 +15,7 @@ namespace GF.DillyDally.WriteModel.Domain.Activities
 
         public async Task<CreatePercentageActivityResponse> CreatePercentageActivityAsync(string activityName, byte[] previewImageForActivity = null)
         {
-            var task = await this._commandDispatcher.Send(new CreatePercentageActivityCommand(activityName));
+            var task = await this._commandDispatcher.Send(new CreatePercentageActivityCommand(activityName,previewImageForActivity));
             return task;
         }
     }

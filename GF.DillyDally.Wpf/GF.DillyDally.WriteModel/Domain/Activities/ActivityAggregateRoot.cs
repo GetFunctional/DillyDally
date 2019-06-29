@@ -35,7 +35,7 @@ namespace GF.DillyDally.WriteModel.Domain.Activities
             }
         }
 
-        public Guid? PreviewImageId { get; private set; }
+        public Guid? PreviewImageFileId { get; private set; }
 
         public string Name { get; private set; }
         public ActivityType ActivityType { get; private set; }
@@ -46,7 +46,7 @@ namespace GF.DillyDally.WriteModel.Domain.Activities
 
         private void Apply(ActivityPreviewImageAssigned obj)
         {
-            this.PreviewImageId = obj.FileId;
+            this.PreviewImageFileId = obj.FileId;
         }
 
         private void Apply(TaskLinkedToActivityEvent obj)
@@ -119,14 +119,14 @@ namespace GF.DillyDally.WriteModel.Domain.Activities
             return new ActivityAggregateRoot(activityId, name, activityType);
         }
 
-        internal void AssignPreviewImage(Guid previewImageId)
+        internal void AssignPreviewImage(Guid previewImageFileId)
         {
-            if (Guid.Empty == previewImageId)
+            if (Guid.Empty == previewImageFileId)
             {
                 throw new ArgumentException();
             }
 
-            var previewImageAssigned = new ActivityPreviewImageAssigned(this.AggregateId, previewImageId);
+            var previewImageAssigned = new ActivityPreviewImageAssigned(this.AggregateId, previewImageFileId);
             this.RaiseEvent(previewImageAssigned);
         }
     }

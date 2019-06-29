@@ -13,7 +13,7 @@ namespace GF.DillyDally.ReadModel.Projection.Achievements.Repository
 
         public string Name { get; set; }
         public string Description { get; set; }
-        public Guid? PreviewImageId { get; set; }
+        public Guid? PreviewImageFileId { get; set; }
         public Guid RunningNumberId { get; set; }
         public DateTime? CompletedOn { get; set; }
     }

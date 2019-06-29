@@ -6,6 +6,7 @@ using GF.DillyDally.ReadModel.Projection.Categories.Repository;
 using GF.DillyDally.ReadModel.Projection.Files.Repository;
 using GF.DillyDally.ReadModel.Projection.Lanes.Repository;
 using GF.DillyDally.Shared.Extensions;
+using GF.DillyDally.Unittests.Core;
 using GF.DillyDally.WriteModel.Domain.Tasks;
 using GF.DillyDally.WriteModel.Domain.Tasks.Commands;
 using GF.DillyDally.WriteModel.Domain.Tasks.Exceptions;
@@ -24,18 +25,18 @@ namespace GF.DillyDally.Unittests.WriteModel
         [SetUp]
         public void Setup()
         {
-            this._infrastructureSetup.Setup(UnittestsSetup.ExampleDatabase);
+            this._testInfrastructure.Setup(UnittestsSetup.ExampleDatabase);
         }
 
         #endregion
 
-        private readonly InfrastructureTestSetup _infrastructureSetup = new InfrastructureTestSetup();
+        private readonly TestInfrastructure _testInfrastructure = new TestInfrastructure();
 
         private async Task<CreateTaskResponse> CreateNewTask()
         {
-            using (var connection = this._infrastructureSetup.OpenDatabaseConnection())
+            using (var connection = this._testInfrastructure.OpenDatabaseConnection())
             {
-                var commandDispatcher = this._infrastructureSetup.DiContainer.GetInstance<IMediator>();
+                var commandDispatcher = this._testInfrastructure.DiContainer.GetInstance<IMediator>();
                 var categoryRepository = new CategoryRepository();
                 var laneRepository = new LaneRepository();
 
@@ -51,10 +52,9 @@ namespace GF.DillyDally.Unittests.WriteModel
         public async Task Task_AssignPreviewImage_ReplacesImage()
         {
             // Arrange
-            var commandDispatcher = this._infrastructureSetup.DiContainer.GetInstance<IMediator>();
+            var commandDispatcher = this._testInfrastructure.DiContainer.GetInstance<IMediator>();
             var newTask = await this.CreateNewTask();
-            var fileName = "TestImage.jpg";
-            var filePath = Path.Combine(TestContext.CurrentContext.TestDirectory, "TestResources", fileName);
+            var filePath = this._testInfrastructure.TestData.GetRandomImageFilePath();
 
             var attachImageCommand = new AttachFileToTaskCommand(newTask.TaskId, filePath);
             var attachResult = await commandDispatcher.Send(attachImageCommand);
@@ -68,14 +68,14 @@ namespace GF.DillyDally.Unittests.WriteModel
         public async Task Task_AssignDefinitionOfDone_ShouldSuccess(string definitionOfDone)
         {
             // Arrange
-            var commandDispatcher = this._infrastructureSetup.DiContainer.GetInstance<IMediator>();
+            var commandDispatcher = this._testInfrastructure.DiContainer.GetInstance<IMediator>();
             var newTask = await this.CreateNewTask();
 
             var definitionOfDoneCommand = new AssignDefinitionOfDoneCommand(newTask.TaskId, definitionOfDone);
 
             // Act
             var result = await commandDispatcher.Send(definitionOfDoneCommand);
-            var aggregateRepository = this._infrastructureSetup.DiContainer.GetInstance<IAggregateRepository>();
+            var aggregateRepository = this._testInfrastructure.DiContainer.GetInstance<IAggregateRepository>();
             var afterChanges = aggregateRepository.GetById<TaskAggregateRoot>(newTask.TaskId);
 
             // Assert
@@ -87,7 +87,7 @@ namespace GF.DillyDally.Unittests.WriteModel
         public async Task Task_AssignDefinitionOfDone_ShouldFail(string definitionOfDone)
         {
             // Arrange
-            var commandDispatcher = this._infrastructureSetup.DiContainer.GetInstance<IMediator>();
+            var commandDispatcher = this._testInfrastructure.DiContainer.GetInstance<IMediator>();
             var newTask = await this.CreateNewTask();
 
             // Act
@@ -101,11 +101,10 @@ namespace GF.DillyDally.Unittests.WriteModel
         public async Task UsingTwiceSameImage_ForDifferentTasks_ReusesImage()
         {
             // Arrange
-            var commandDispatcher = this._infrastructureSetup.DiContainer.GetInstance<IMediator>();
+            var commandDispatcher = this._testInfrastructure.DiContainer.GetInstance<IMediator>();
             var newTask = await this.CreateNewTask();
             var newTask2 = await this.CreateNewTask();
-            var fileName = "TestImage.jpg";
-            var filePath = Path.Combine(TestContext.CurrentContext.TestDirectory, "TestResources", fileName);
+            var filePath = this._testInfrastructure.TestData.GetRandomImageFilePath();
 
             var attachImageCommand = new AttachFileToTaskCommand(newTask.TaskId, filePath);
             var attachImageCommand2 = new AttachFileToTaskCommand(newTask2.TaskId, filePath);
@@ -121,10 +120,10 @@ namespace GF.DillyDally.Unittests.WriteModel
         [Test]
         public async Task Task_AttachImage()
         {
-            using (var connection = this._infrastructureSetup.OpenDatabaseConnection())
+            using (var connection = this._testInfrastructure.OpenDatabaseConnection())
             {
                 // Arrange
-                var commandDispatcher = this._infrastructureSetup.DiContainer.GetInstance<IMediator>();
+                var commandDispatcher = this._testInfrastructure.DiContainer.GetInstance<IMediator>();
                 var fileRepository = new FileRepository();
 
                 var newTask = await this.CreateNewTask();

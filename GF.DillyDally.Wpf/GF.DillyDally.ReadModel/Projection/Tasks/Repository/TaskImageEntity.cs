@@ -13,6 +13,6 @@ namespace GF.DillyDally.ReadModel.Projection.Tasks.Repository
 
         public Guid TaskId { get; set; }
 
-        public Guid ImageId { get; set; }
+        public Guid ImageFileId { get; set; }
     }
 }

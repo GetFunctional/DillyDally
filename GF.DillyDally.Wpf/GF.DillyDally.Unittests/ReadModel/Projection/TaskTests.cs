@@ -5,6 +5,7 @@ using GF.DillyDally.ReadModel.Projection.Categories.Repository;
 using GF.DillyDally.ReadModel.Projection.Lanes.Repository;
 using GF.DillyDally.ReadModel.Projection.Tasks.Repository;
 using GF.DillyDally.Shared.Extensions;
+using GF.DillyDally.Unittests.Core;
 using GF.DillyDally.WriteModel.Domain.Tasks;
 using GF.DillyDally.WriteModel.Domain.Tasks.Commands;
 using LightInject;
@@ -21,18 +22,18 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
         [SetUp]
         public void Setup()
         {
-            this._infrastructureSetup.Setup(UnittestsSetup.ExampleDatabase);
+            this._testInfrastructure.Setup(UnittestsSetup.ExampleDatabase);
         }
 
         #endregion
 
-        private readonly InfrastructureTestSetup _infrastructureSetup = new InfrastructureTestSetup();
+        private readonly TestInfrastructure _testInfrastructure = new TestInfrastructure();
 
         private async Task<CreateTaskResponse> CreateNewTask()
         {
-            using (var connection = this._infrastructureSetup.OpenDatabaseConnection())
+            using (var connection = this._testInfrastructure.OpenDatabaseConnection())
             {
-                var commandDispatcher = this._infrastructureSetup.DiContainer.GetInstance<IMediator>();
+                var commandDispatcher = this._testInfrastructure.DiContainer.GetInstance<IMediator>();
                 var categoryRepository = new CategoryRepository();
                 var laneRepository = new LaneRepository();
 
@@ -48,10 +49,10 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
         public async Task Setting_DefinitionOfDone_ShouldCreateProjection(string definitionOfDone)
         {
             // Arrange
-            using (var connection = this._infrastructureSetup.OpenDatabaseConnection())
+            using (var connection = this._testInfrastructure.OpenDatabaseConnection())
             {
                 // Arrange
-                var commandDispatcher = this._infrastructureSetup.DiContainer.GetInstance<IMediator>();
+                var commandDispatcher = this._testInfrastructure.DiContainer.GetInstance<IMediator>();
                 var repository = new TaskRepository();
                 var newTask = await this.CreateNewTask();
 
@@ -72,9 +73,9 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
         public async Task Creating_Task_ShouldCreate_TaskLaneProjection()
         {
             // Arrange
-            using (var connection = this._infrastructureSetup.OpenDatabaseConnection())
+            using (var connection = this._testInfrastructure.OpenDatabaseConnection())
             {
-                var commandDispatcher = this._infrastructureSetup.DiContainer.GetInstance<IMediator>();
+                var commandDispatcher = this._testInfrastructure.DiContainer.GetInstance<IMediator>();
                 var repository = new TaskRepository();
                 var categoryRepository = new CategoryRepository();
                 var laneRepository = new LaneRepository();
@@ -107,9 +108,9 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
         public async Task Creating_Task_ShouldCreateProjection()
         {
             // Arrange
-            using (var connection = this._infrastructureSetup.OpenDatabaseConnection())
+            using (var connection = this._testInfrastructure.OpenDatabaseConnection())
             {
-                var commandDispatcher = this._infrastructureSetup.DiContainer.GetInstance<IMediator>();
+                var commandDispatcher = this._testInfrastructure.DiContainer.GetInstance<IMediator>();
                 var repository = new TaskRepository();
                 var categoryRepository = new CategoryRepository();
                 var laneRepository = new LaneRepository();
@@ -138,9 +139,9 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
         public async Task Creating_Task_ShouldNotThrowException()
         {
             // Arrange
-            using (var connection = this._infrastructureSetup.OpenDatabaseConnection())
+            using (var connection = this._testInfrastructure.OpenDatabaseConnection())
             {
-                var commandDispatcher = this._infrastructureSetup.DiContainer.GetInstance<IMediator>();
+                var commandDispatcher = this._testInfrastructure.DiContainer.GetInstance<IMediator>();
                 var categoryRepository = new CategoryRepository();
                 var laneRepository = new LaneRepository();
                 var exampleCategory = (await categoryRepository.GetAllAsync(connection)).Shuffle().FirstOrDefault();

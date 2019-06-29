@@ -6,55 +6,34 @@ using System.Threading.Tasks;
 using Dapper;
 using GF.DillyDally.Data.Sqlite.Repository.Base;
 using GF.DillyDally.ReadModel.Projection.Images.Repository;
-using GF.DillyDally.Shared.Images;
 
 namespace GF.DillyDally.ReadModel.Projection.Tasks.Repository
 {
     internal class TaskImageRepository : Repository<TaskImageEntity>
     {
-        #region ITaskImageRepository Members
-
         public async Task<IList<ImageEntity>> GetImagesForTaskAsync(IDbConnection connection, Guid taskId)
         {
-            var querySql =
-                "SELECT * " +
-                $"FROM {ImageEntity.TableNameConstant} " +
-                $"JOIN {TaskImageEntity.TableNameConstant} ON {ImageEntity.TableNameConstant}.{nameof(ImageEntity.ImageId)} = {TaskImageEntity.TableNameConstant}.{nameof(TaskImageEntity.ImageId)} " +
-                $"WHERE {nameof(TaskImageEntity.TaskId)} = @taskId";
+            var querySql = $@"SELECT * 
+FROM {ImageEntity.TableNameConstant} ie 
+JOIN {TaskImageEntity.TableNameConstant} tie ON ie.OriginalFileId = tie.ImageFileId 
+WHERE tie.TaskId = @taskId";
             return (await connection.QueryAsync<ImageEntity>(querySql, new {taskId})).ToList();
         }
 
-        #endregion
-
-        internal async Task CreateTaskImageLinks(IDbConnection connection, Guid taskId, IList<ImageEntity> storedImages)
+        internal async Task CreateTaskImageLinks(IDbConnection connection, Guid taskId, Guid originalFileId)
         {
-            var previewImage = storedImages.Single(x => x.SizeType == ImageSizeType.PreviewSize);
-            var smallImage = storedImages.Single(x => x.SizeType == ImageSizeType.Small);
-            var fullImage = storedImages.Single(x => x.SizeType == ImageSizeType.Full);
-
-            var taskImageLinks = this.CreateTaskImageLinks(taskId, previewImage, smallImage, fullImage);
-            await this.InsertMultipleAsync(connection, taskImageLinks);
+            var taskImageLink = this.CreateTaskImageEntity(taskId, originalFileId);
+            await this.InsertAsync(connection, taskImageLink);
         }
 
-        private List<TaskImageEntity> CreateTaskImageLinks(Guid taskId, ImageEntity previewImage,
-            ImageEntity smallImage, ImageEntity fullImage)
-        {
-            return new List<TaskImageEntity>
-                   {
-                       this.CreateTaskImageEntity(taskId, previewImage),
-                       this.CreateTaskImageEntity(taskId, smallImage),
-                       this.CreateTaskImageEntity(taskId, fullImage)
-                   };
-        }
-
-        private TaskImageEntity CreateTaskImageEntity(Guid taskId, ImageEntity imageEntity)
+        private TaskImageEntity CreateTaskImageEntity(Guid taskId, Guid originalFileId)
         {
             return new TaskImageEntity
-                   {
-                       TaskId = taskId,
-                       ImageId = imageEntity.ImageId,
-                       TaskImageId = this.GuidGenerator.GenerateGuid()
-                   };
+            {
+                TaskId = taskId,
+                ImageFileId = originalFileId,
+                TaskImageId = this.GuidGenerator.GenerateGuid()
+            };
         }
     }
 }

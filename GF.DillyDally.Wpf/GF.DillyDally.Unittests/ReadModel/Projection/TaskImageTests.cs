@@ -7,6 +7,7 @@ using GF.DillyDally.ReadModel.Projection.Images.Repository;
 using GF.DillyDally.ReadModel.Projection.Lanes.Repository;
 using GF.DillyDally.ReadModel.Projection.Tasks.Repository;
 using GF.DillyDally.Shared.Images;
+using GF.DillyDally.Unittests.Core;
 using GF.DillyDally.WriteModel.Domain.Tasks.Commands;
 using GF.DillyDally.WriteModel.Domain.Tasks.Exceptions;
 using LightInject;
@@ -23,18 +24,18 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
         [SetUp]
         public void Setup()
         {
-            this._infrastructureSetup.Setup(UnittestsSetup.ExampleDatabase);
+            this._testInfrastructure.Setup(UnittestsSetup.ExampleDatabase);
         }
 
         #endregion
 
-        private readonly InfrastructureTestSetup _infrastructureSetup = new InfrastructureTestSetup();
+        private readonly TestInfrastructure _testInfrastructure = new TestInfrastructure();
 
         private async Task<CreateTaskResponse> CreateNewTask()
         {
-            using (var connection = this._infrastructureSetup.OpenDatabaseConnection())
+            using (var connection = this._testInfrastructure.OpenDatabaseConnection())
             {
-                var commandDispatcher = this._infrastructureSetup.DiContainer.GetInstance<IMediator>();
+                var commandDispatcher = this._testInfrastructure.DiContainer.GetInstance<IMediator>();
                 var categoryRepository = new CategoryRepository();
                 var laneRepository = new LaneRepository();
 
@@ -50,9 +51,9 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
         public async Task AttachingImage_ToTask_ShouldCreateProjection()
         {
             // Arrange
-            using (var connection = this._infrastructureSetup.OpenDatabaseConnection())
+            using (var connection = this._testInfrastructure.OpenDatabaseConnection())
             {
-                var commandDispatcher = this._infrastructureSetup.DiContainer.GetInstance<IMediator>();
+                var commandDispatcher = this._testInfrastructure.DiContainer.GetInstance<IMediator>();
                 var repository = new TaskImageRepository();
                 var newTask = await this.CreateNewTask();
                 var fileName = "TestImage.jpg";
@@ -74,10 +75,10 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
         [Test]
         public async Task UsingTwiceSameImage_ForDifferentTasks_ReusesImage()
         {
-            using (var connection = this._infrastructureSetup.OpenDatabaseConnection())
+            using (var connection = this._testInfrastructure.OpenDatabaseConnection())
             {
                 // Arrange
-                var commandDispatcher = this._infrastructureSetup.DiContainer.GetInstance<IMediator>();
+                var commandDispatcher = this._testInfrastructure.DiContainer.GetInstance<IMediator>();
                 var taskImagesRepository = new TaskImageRepository();
                 var newTask = await this.CreateNewTask();
                 var newTask2 = await this.CreateNewTask();
@@ -104,10 +105,10 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
         [Test]
         public async Task Task_AssignPreviewImage_ReplacesImage()
         {
-            using (var connection = this._infrastructureSetup.OpenDatabaseConnection())
+            using (var connection = this._testInfrastructure.OpenDatabaseConnection())
             {
                 // Arrange
-                var commandDispatcher = this._infrastructureSetup.DiContainer.GetInstance<IMediator>();
+                var commandDispatcher = this._testInfrastructure.DiContainer.GetInstance<IMediator>();
                 var taskRepository = new TaskRepository();
                 var imageRepository = new ImageRepository();
 
@@ -125,7 +126,7 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
                 // Assert
                 var taskData = await taskRepository.GetByIdAsync(connection, newTask.TaskId);
                 var imageData = await imageRepository.GetByOriginalFileIdAsync(connection,attachResult.FileId);
-                Assert.That(taskData.PreviewImageId, Is.EqualTo(imageData.Single(x => x.SizeType == ImageSizeType.PreviewSize).ImageId));
+                Assert.That(taskData.PreviewImageFileId, Is.EqualTo(imageData.Single(x => x.SizeType == ImageSizeType.PreviewSize).ImageId));
             }
         }
 
@@ -133,7 +134,7 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
         public async Task UsingTwiceSameImage_ThrowsException()
         {
             // Arrange
-            var commandDispatcher = this._infrastructureSetup.DiContainer.GetInstance<IMediator>();
+            var commandDispatcher = this._testInfrastructure.DiContainer.GetInstance<IMediator>();
             var newTask = await this.CreateNewTask();
             var fileName = "TestImage.jpg";
             var filePath = Path.Combine(TestContext.CurrentContext.TestDirectory, "TestResources", fileName);

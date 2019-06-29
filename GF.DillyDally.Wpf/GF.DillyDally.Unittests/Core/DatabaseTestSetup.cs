@@ -10,22 +10,22 @@ using GF.DillyDally.WriteModel.Domain.RunningNumbers.Events;
 using LightInject;
 using MediatR;
 
-namespace GF.DillyDally.Unittests
+namespace GF.DillyDally.Unittests.Core
 {
     internal class DatabaseTestSetup
     {
-        private readonly InfrastructureTestSetup _infrastructureSetup;
+        private readonly TestInfrastructure _testInfrastructure;
         private ServiceContainer _diContainer;
 
         public DatabaseTestSetup()
         {
-            this._infrastructureSetup = new InfrastructureTestSetup();
+            this._testInfrastructure = new TestInfrastructure();
         }
 
         public async Task SetupAsync(string exampleFile)
         {
-            this._infrastructureSetup.Setup(exampleFile);
-            this._diContainer = this._infrastructureSetup.DiContainer;
+            this._testInfrastructure.Setup(exampleFile);
+            this._diContainer = this._testInfrastructure.DiContainer;
             await this.CreateNumberCounters();
             await this.CreateTestCategories();
             await this.CreateTestLanes();
