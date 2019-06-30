@@ -6,9 +6,10 @@ using ReactiveUI;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Container
 {
-    public class ActivityContainerViewModel : ViewModelBase
+    public sealed class ActivityContainerViewModel : ViewModelBase
     {
         private ObservableCollection<ActivityItemViewModel> _activities;
+        private bool _isSearchBarVisible;
         private ObservableCollection<ActivityItemViewModel> _searchResults;
         private string _searchText;
         private ActivityItemViewModel _selectedResult;
@@ -19,7 +20,6 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Container
             this.SearchResults = new ObservableCollection<ActivityItemViewModel>();
         }
 
-
         public ObservableCollection<ActivityItemViewModel> Activities
         {
             get { return this._activities; }
@@ -29,10 +29,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Container
         public ObservableCollection<ActivityItemViewModel> SearchResults
         {
             get { return this._searchResults; }
-            set
-            {
-                this.RaiseAndSetIfChanged(ref this._searchResults, value);
-            }
+            set { this.RaiseAndSetIfChanged(ref this._searchResults, value); }
         }
 
         public string SearchText
@@ -40,7 +37,8 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Container
             get { return this._searchText; }
             set
             {
-                if (this.RaiseAndSetIfChanged(ref this._searchText, value) == value && !string.IsNullOrWhiteSpace(value) &&
+                if (this.RaiseAndSetIfChanged(ref this._searchText, value) == value &&
+                    !string.IsNullOrWhiteSpace(value) &&
                     value != this.SelectedResult?.ActivityName)
                 {
                     this.RaiseRequestSearchResults(value);
@@ -68,11 +66,27 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Container
             get { return nameof(ActivityItemViewModel.ActivityName); }
         }
 
+        public bool IsSearchBarVisible
+        {
+            get { return this._isSearchBarVisible; }
+            set { this.RaiseAndSetIfChanged(ref this._isSearchBarVisible, value); }
+        }
+
         private void RaiseRequestSearchResults(string value)
         {
             RequestSearchResults?.Invoke(this, new SearchRequestEventArgs(value));
         }
 
         internal event EventHandler<SearchRequestEventArgs> RequestSearchResults;
+
+        public void ShowSearchBar()
+        {
+            this.IsSearchBarVisible = true;
+        }
+
+        public void HideSearchBar()
+        {
+            this.IsSearchBarVisible = false;
+        }
     }
 }

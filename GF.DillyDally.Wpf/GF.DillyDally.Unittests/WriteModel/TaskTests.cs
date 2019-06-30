@@ -138,7 +138,11 @@ namespace GF.DillyDally.Unittests.WriteModel
                 var fileInStore = await fileRepository.GetByIdAsync(connection, fileAttachResult.FileId);
 
                 Assert.That(fileInfo.Exists, Is.True);
-                Assert.That(fileInStore.Name, Is.EqualTo(fileName));
+                if (!fileAttachResult.FileExistedBefore)
+                {
+                    Assert.That(fileInStore.Name, Is.EqualTo(fileName));
+                }
+
                 Assert.That(fileInStore.IsImage, Is.EqualTo(true));
                 Assert.That(fileAttachResult.FileId, Is.Not.EqualTo(Guid.Empty));
             }

@@ -19,6 +19,8 @@
                 <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Typography.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Client;component/Presentation/Content/Activities/Container/ActivityContainerViewTemplates.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         </ResourceDictionary>
     </UserControl.Resources>
 
@@ -30,7 +32,8 @@
             SearchResultItemTemplate="{StaticResource SearchTextControlItemTemplate}"
             SearchResultItemsSource="{Binding SearchResults, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
             SearchText="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-            WatermarkText="Titleearch for existing activities..." />
+            Visibility="{Binding IsSearchBarVisible, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+            WatermarkText="Search for existing activities..." />
 
 
         <ItemsControl ItemTemplate="{StaticResource ActivityItemTemplate}" ItemsSource="{Binding Activities, Mode=OneWay}">

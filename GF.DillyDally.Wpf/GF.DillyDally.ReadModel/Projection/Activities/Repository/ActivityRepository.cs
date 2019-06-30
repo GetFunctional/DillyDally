@@ -6,6 +6,7 @@ using Dapper;
 using Dapper.Contrib.Extensions;
 using GF.DillyDally.Data.Sqlite;
 using GF.DillyDally.ReadModel.Projection.Images.Repository;
+using GF.DillyDally.Shared.Images;
 
 namespace GF.DillyDally.ReadModel.Projection.Activities.Repository
 {
@@ -39,16 +40,21 @@ WHERE ActivityId = @activityId;";
             var searchParameter = $"%{searchText ?? string.Empty}%";
 
             var sql =
-                $"SELECT {nameof(ActivitySearchResultEntity.ActivityId)}, " +
-                $"{nameof(ActivitySearchResultEntity.Name)}, " +
-                $"{nameof(ActivitySearchResultEntity.ActivityType)}, " +
-                $"{nameof(ActivitySearchResultEntity.ActivityValue)}, " +
-                $"{nameof(ActivitySearchResultEntity.CurrentLevel)}, " +
-                $"{nameof(ImageEntity.Binary)} AS {nameof(ActivitySearchResultEntity.PreviewImageBinary)}, " +
-                $"1 AS {nameof(ActivitySearchResultEntity.Usages)} " +
-                $"FROM {ActivityEntity.TableNameConstant} " +
-                $"LEFT JOIN {ImageEntity.TableNameConstant} ON {ActivityEntity.TableNameConstant}.{nameof(ActivityEntity.PreviewImageFileId)} = {ImageEntity.TableNameConstant}.{nameof(ImageEntity.ImageId)} " +
-                $"WHERE {nameof(ActivitySearchResultEntity.Name)} LIKE @{nameof(searchParameter)};";
+                $@"SELECT a.ActivityId, a.Name, a.ActivityType, a.ActivityValue, a.CurrentLevel, img.Binary AS PreviewImageBinary 
+FROM {ActivityEntity.TableNameConstant} AS a 
+LEFT JOIN {ImageEntity.TableNameConstant} img ON a.PreviewImageFileId = img.OriginalFileId AND img.SizeType = {(int) ImageSizeType.PreviewSize} 
+WHERE a.Name LIKE @searchParameter;";
+
+                //$"SELECT {nameof(ActivitySearchResultEntity.ActivityId)}, " +
+                //$"{nameof(ActivitySearchResultEntity.Name)}, " +
+                //$"{nameof(ActivitySearchResultEntity.ActivityType)}, " +
+                //$"{nameof(ActivitySearchResultEntity.ActivityValue)}, " +
+                //$"{nameof(ActivitySearchResultEntity.CurrentLevel)}, " +
+                //$"{nameof(ImageEntity.Binary)} AS {nameof(ActivitySearchResultEntity.PreviewImageBinary)}, " +
+                //$"1 AS {nameof(ActivitySearchResultEntity.Usages)} " +
+                //$"FROM {ActivityEntity.TableNameConstant} " +
+                //$"LEFT JOIN {ImageEntity.TableNameConstant} ON {ActivityEntity.TableNameConstant}.{nameof(ActivityEntity.PreviewImageFileId)} = {ImageEntity.TableNameConstant}.{nameof(ImageEntity.ImageId)} " +
+                //$"WHERE {nameof(ActivitySearchResultEntity.Name)} LIKE @{nameof(searchParameter)};";
 
 
             return await connection.QueryAsync<ActivitySearchResultEntity>(sql, new {searchParameter});

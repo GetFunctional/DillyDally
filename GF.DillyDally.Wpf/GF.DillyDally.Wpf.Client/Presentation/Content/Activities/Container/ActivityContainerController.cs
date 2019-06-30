@@ -2,29 +2,35 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Net.Mime;
-using System.Reactive.Concurrency;
 using System.Reactive.Linq;
-using System.Threading;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Threading;
 using GF.DillyDally.Data.Sqlite;
 using GF.DillyDally.Mvvmc;
 using GF.DillyDally.ReadModel.Projection.Activities.Repository;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Container
 {
-    public class ActivityContainerController : ControllerBase<ActivityContainerViewModel>
+    public sealed class ActivityContainerController : ControllerBase<ActivityContainerViewModel>
     {
+        private IDisposable _disposableObserver;
         private readonly DatabaseFileHandler _fileHandler;
-        private SynchronizationContext _uiSyncContext = new DispatcherSynchronizationContext(Application.Current.Dispatcher);
-        private readonly IDisposable _disposableObserver;
 
-        public ActivityContainerController(ActivityContainerViewModel viewModel, ControllerFactory controllerFactory, DatabaseFileHandler fileHandler) :
-            base(viewModel,controllerFactory)
+        public ActivityContainerController(ActivityContainerViewModel viewModel, ControllerFactory controllerFactory,
+            DatabaseFileHandler fileHandler) :
+            base(viewModel, controllerFactory)
         {
             this._fileHandler = fileHandler;
+            this.ActivateAddingNewActivities();
+        }
+
+        private void HandleSearchRequest(ObservableCollection<ActivityItemViewModel> result)
+        {
+            this.ViewModel.SearchResults = result;
+        }
+
+        public void ActivateAddingNewActivities()
+        {
+            this.ViewModel.ShowSearchBar();
 
             var query = Observable.FromEventPattern<SearchRequestEventArgs>(
                     s => this.ViewModel.RequestSearchResults += s,
@@ -38,9 +44,10 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Container
             this._disposableObserver = query.Subscribe(this.HandleSearchRequest);
         }
 
-        private void HandleSearchRequest(ObservableCollection<ActivityItemViewModel> result)
+        public void DeactivateAddingNewActivities()
         {
-           this.ViewModel.SearchResults = result;
+            this.ViewModel.HideSearchBar();
+            this._disposableObserver?.Dispose();
         }
 
         private async Task<ObservableCollection<ActivityItemViewModel>> SearchResultsAsync(string searchText)

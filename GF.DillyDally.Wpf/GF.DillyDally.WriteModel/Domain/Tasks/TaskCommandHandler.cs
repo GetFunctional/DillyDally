@@ -71,7 +71,7 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks
                 var task = this.AggregateRepository.GetById<TaskAggregateRoot>(request.TaskId);
                 task.AttachFile(fileInStore.FileId);
                 await this.AggregateRepository.SaveAsync(task);
-                return new AttachFileToTaskResponse(fileInStore.FileId);
+                return new AttachFileToTaskResponse(fileInStore.FileId, fileInStore.FileExistedBefore);
             }
         }
 

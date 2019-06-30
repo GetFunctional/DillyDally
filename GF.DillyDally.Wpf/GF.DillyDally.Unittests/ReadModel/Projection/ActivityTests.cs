@@ -36,9 +36,10 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
                 var repository = new ActivityRepository();
 
                 var activityName = await this._testInfrastructure.TestData.GetRandomActivityNameAsync(activityService);
+                var testImage = this._testInfrastructure.TestData.GetRandomImageBytes();
 
                 // Act
-                var newActivity = await activityService.CreatePercentageActivityAsync(activityName);
+                var newActivity = await activityService.CreatePercentageActivityAsync(activityName,testImage);
                 var projection = await repository.GetByIdAsync(connection, newActivity.ActivityId);
 
                 // Assert

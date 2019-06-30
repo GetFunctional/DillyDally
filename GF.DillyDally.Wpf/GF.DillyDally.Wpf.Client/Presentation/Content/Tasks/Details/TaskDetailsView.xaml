@@ -59,10 +59,12 @@
                 Grid.Row="1"
                 Grid.Column="1"
                 TabContentCacheMode="CacheTabsOnSelecting">
-                <TabItem Header="Activities">
-                    <container:ActivityContainerView DataContext="{Binding ActivitiesViewModel, Mode=OneWay}" />
-                </TabItem>
-                <TabItem Header="Achievements" />
+                <dx:DXTabItem Header="Activities">
+                    <dx:DXTabItem.Content>
+                        <container:ActivityContainerView DataContext="{Binding ActivitiesViewModel, Mode=OneWay}" />
+                    </dx:DXTabItem.Content>
+                </dx:DXTabItem>
+                <dx:DXTabItem Header="Achievements" />
             </dx:DXTabControl>
         </Grid>
     </ctrls:NavigationTargetContentContainer>

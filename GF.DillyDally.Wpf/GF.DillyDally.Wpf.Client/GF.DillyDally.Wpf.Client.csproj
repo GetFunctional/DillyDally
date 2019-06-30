@@ -183,6 +183,7 @@
     <Compile Include="Presentation\Content\Tasks\Create\CreateTaskAdditionalInfosViewModel.cs" />
     <Compile Include="Presentation\Content\Tasks\Create\CreateTaskBasicInfosViewModel.cs" />
     <Compile Include="Presentation\Content\Tasks\Create\CreateTaskActivitiesViewModel.cs" />
+    <Compile Include="Presentation\Content\Tasks\Details\TaskDetailDataConverter.cs" />
     <Compile Include="Presentation\Content\Tasks\Details\TaskDetailsNavigationTarget.cs" />
     <Compile Include="Presentation\Content\Tasks\Details\TaskDetailsController.cs" />
     <Compile Include="Presentation\Content\Tasks\Details\TaskDetailsView.xaml.cs">
