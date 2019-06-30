@@ -3,7 +3,9 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using GF.DillyDally.Shared.Extensions;
+using GF.DillyDally.WriteModel.Domain.Activities;
 using NUnit.Framework;
 
 namespace GF.DillyDally.Unittests.Core
@@ -24,12 +26,18 @@ namespace GF.DillyDally.Unittests.Core
             return activityQueue;
         }
 
-        internal string GetRandomActivityName()
+        internal async Task<string> GetRandomActivityNameAsync(ActivityService activityService)
         {
             string name;
             if (this._activityNames.TryDequeue(out name))
             {
-                return name;
+                var response = await activityService.CanCreateActivityAsync(name);
+                if (response.CanCreate)
+                {
+                    return name;
+                }
+
+                return await this.GetRandomActivityNameAsync(activityService);
             }
 
             throw new NotSupportedException();

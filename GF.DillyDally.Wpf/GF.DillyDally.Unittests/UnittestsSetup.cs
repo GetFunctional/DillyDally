@@ -9,34 +9,27 @@ namespace GF.DillyDally.Unittests
     [SetUpFixture]
     public class UnittestsSetup
     {
-        //private DatabaseTestSetup _databaseTestSetup;
-        //private string _testRunName;
+        public const string ExampleDatabase = "Unittests.db";
 
-        public static string GetTestRunDatabaseName()
+        [OneTimeSetUp]
+        public async Task RunBeforeAnyTests()
         {
-            return $"TestRun_{Guid.NewGuid()}";
+            DeleteUnittestDatabase(ExampleDatabase);
+            var infrastructure = new TestInfrastructure();
+            await infrastructure.CreateNewUnittestDatabaseAsync(ExampleDatabase);
         }
-
-        //[OneTimeSetUp]
-        //public async Task RunBeforeAnyTests()
-        //{
-        //    //this._testRunName = GetTestRunDatabaseName();
-        //    //DeleteUnittestDatabase(this._testRunName);
-        //    //this._databaseTestSetup = new DatabaseTestSetup();
-        //    //await this._databaseTestSetup.SetupAsync(this._testRunName);
-        //}
 
         private static void DeleteUnittestDatabase(string databaseName)
         {
-            //var fileHandler = new DatabaseFileHandler(databaseName);
-            //fileHandler.DeleteDatabaseIfExists();
+            var fileHandler = new DatabaseFileHandler(databaseName);
+            fileHandler.DeleteDatabaseIfExists();
         }
 
         [OneTimeTearDown]
         public void RunAfterAnyTests()
         {
-            //var fileHandler = new DatabaseFileHandler(this._testRunName);
-            //fileHandler.ArchiveDatabase("Unittests_LastRun.db");
+            var fileHandler = new DatabaseFileHandler(ExampleDatabase);
+            fileHandler.ArchiveDatabase("Unittests_LastRun.db");
         }
     }
 }

@@ -18,15 +18,17 @@ namespace GF.DillyDally.WriteModel.Domain.Activities
 
         private ActivityListAggregateRoot(Guid activityListId) : this()
         {
-            this.Activities = new Dictionary<string, Guid>();
-            this.AggregateId = activityListId;
-            this.RaiseEvent(new ActivityListCreated(this.AggregateId));
+            var createdEvent = new ActivityListCreated(activityListId);
+            this.Apply(createdEvent);
+            this.RaiseEvent(new ActivityListCreated(activityListId));
         }
 
-        private Dictionary<string, Guid> Activities { get; }
+        private Dictionary<string, Guid> Activities { get; set; }
 
         private void Apply(ActivityListCreated obj)
         {
+            this.Activities = new Dictionary<string, Guid>();
+            this.AggregateId = obj.AggregateId;
         }
 
         internal static ActivityListAggregateRoot Create()
@@ -41,12 +43,17 @@ namespace GF.DillyDally.WriteModel.Domain.Activities
 
         internal void AddActivity(Guid activityId, string name)
         {
-            if (this.Activities.ContainsKey(name))
+            if (this.HasActivityWithName(name))
             {
                 throw new DuplicateActivityException(name);
             }
 
             this.RaiseEvent(new ActivityAddedToActivityList(activityId, name));
+        }
+
+        public bool HasActivityWithName(string activityName)
+        {
+            return this.Activities.ContainsKey(activityName);
         }
     }
 }

@@ -52,6 +52,7 @@ namespace GF.DillyDally.Wpf.Client.Core
 
         internal void RegisterMvvmcDependencies(IServiceContainer serviceContainer)
         {
+            serviceContainer.RegisterInstance(serviceContainer);
             serviceContainer.Register<IMvvmcServiceFactory, MvvmcServiceFactoryAdapter>();
             serviceContainer.Register<ControllerFactory>();
         }

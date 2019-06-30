@@ -11,7 +11,8 @@ namespace GF.DillyDally.WriteModel.Domain.Activities
 {
     internal sealed class ActivityCommandHandler : CommandHandlerBase,
         IRequestHandler<CreatePercentageActivityCommand, CreatePercentageActivityResponse>,
-        IRequestHandler<CreateActivityListCommand, CreateActivityListResponse>
+        IRequestHandler<CreateActivityListCommand, CreateActivityListResponse>,
+        IRequestHandler<CanCreateActivityCommand, CanCreateActivityResponse>
     {
         private readonly DatabaseFileHandler _databaseFileHandler;
 
@@ -20,6 +21,24 @@ namespace GF.DillyDally.WriteModel.Domain.Activities
         {
             this._databaseFileHandler = databaseFileHandler;
         }
+
+        #region IRequestHandler<CanCreateActivityCommand,CanCreateActivityResponse> Members
+
+        public Task<CanCreateActivityResponse> Handle(CanCreateActivityCommand request,
+            CancellationToken cancellationToken)
+        {
+            var activityList =
+                this.AggregateRepository.GetById<ActivityListAggregateRoot>(ActivityListAggregateRoot.ActivityListId);
+
+            if (activityList.HasActivityWithName(request.Name))
+            {
+                return Task.FromResult(new CanCreateActivityResponse(false));
+            }
+
+            return Task.FromResult(new CanCreateActivityResponse(true));
+        }
+
+        #endregion
 
         #region IRequestHandler<CreateActivityListCommand,CreateActivityListResponse> Members
 

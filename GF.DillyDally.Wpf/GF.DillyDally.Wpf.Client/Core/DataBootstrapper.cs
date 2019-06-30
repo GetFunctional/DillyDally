@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using GF.DillyDally.ReadModel;
+﻿using GF.DillyDally.ReadModel;
 using GF.DillyDally.WriteModel;
 using LightInject;
 
@@ -10,20 +9,20 @@ namespace GF.DillyDally.Wpf.Client.Core
         private readonly DataStoreInitializer _dataStoreInitializer = new DataStoreInitializer();
         private readonly ReadModelInitializer _readModelInitializer = new ReadModelInitializer();
         private readonly IServiceContainer _serviceContainer;
-        private readonly WriteModelInitializer _writeModelInitializer = new WriteModelInitializer();
+        private readonly WriteModelBootstrapper _writeModelBootstrapper = new WriteModelBootstrapper();
 
         public DataBootstrapper(IServiceContainer serviceContainer)
         {
             this._serviceContainer = serviceContainer;
         }
 
-        public async Task RunAsync(InitializationSettings dataInitializationSettings)
+        public void Run(InitializationSettings dataInitializationSettings)
         {
             var serviceContainer = this._serviceContainer;
             var databaseFileHandler = this._dataStoreInitializer.Initialize(dataInitializationSettings);
             serviceContainer.RegisterInstance(databaseFileHandler);
 
-            await this._writeModelInitializer.InitializeAsync(serviceContainer, databaseFileHandler.GetConnectionString());
+            this._writeModelBootstrapper.Run(serviceContainer, databaseFileHandler.GetConnectionString());
             this._readModelInitializer.Initialize(serviceContainer);
         }
     }

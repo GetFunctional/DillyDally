@@ -13,20 +13,14 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
     [TestFixture]
     public class AchievementTests
     {
-        #region SetupDatabaseAsync/Teardown
+        #region Run/Teardown
 
         [SetUp]
-        public async Task Setup()
+        public void Setup()
         {
-            await this._testInfrastructure.SetupDatabaseAsync(UnittestsSetup.GetTestRunDatabaseName());
+            this._testInfrastructure.Run(UnittestsSetup.ExampleDatabase);
         }
-
-        [TearDown]
-        public void Destroy()
-        {
-            this._testInfrastructure.Destroy();
-        }
-
+        
         #endregion
 
         private readonly TestInfrastructure _testInfrastructure = new TestInfrastructure();

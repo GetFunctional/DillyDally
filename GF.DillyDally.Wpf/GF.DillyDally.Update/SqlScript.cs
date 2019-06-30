@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace GF.DillyDally.Data.Sqlite
+namespace GF.DillyDally.Update
 {
-    public sealed class UpdateStep
+    public sealed class SqlScript
     {
-        public UpdateStep(Version version, IList<string> sqlCommands)
+        public SqlScript(Version version, IList<string> sqlCommands)
         {
             this.Version = version;
             this.SqlCommands = sqlCommands;

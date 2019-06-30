@@ -4,35 +4,40 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using GF.DillyDally.Data.Sqlite;
 
-namespace GF.DillyDally.Data.Sqlite
+namespace GF.DillyDally.Update
 {
     public sealed class SqlScriptSelector
     {
-        private const string AssemblyName = @"GF.DillyDally.Data.Sqlite";
-        private const string ScriptsNamespace = AssemblyName + ".Scripts";
         private readonly Assembly _assembly = Assembly.GetAssembly(typeof(SqlScriptSelector));
 
-        public IList<UpdateStep> GetUpdateStepsBeginningFromVersion(Version versionBegin)
+        public IList<SqlScript> GetUpdateStepsBeginningFromVersion(Version versionBegin)
         {
-            var updateSteps = new List<UpdateStep>();
+            var updateSteps = new List<SqlScript>();
 
             foreach (var embeddedScript in this.FindEmbeddedScripts())
             {
                 var fileNameWithoutExtension = this.GetVersionFromScript(embeddedScript);
                 var updateStepVersion =
                     Version.Parse(fileNameWithoutExtension ?? throw new InvalidOperationException());
-                var fullResourceName = $"{ScriptsNamespace}.{embeddedScript}";
+                var fullResourceName = $"{GetScriptsNamespace(this._assembly)}.{embeddedScript}";
 
                 using (var sqlScriptStream = this._assembly.GetManifestResourceStream(fullResourceName))
                 {
                     var scriptStreamReader = new SqlScriptReader(sqlScriptStream);
-                    var updateStep = new UpdateStep(updateStepVersion, new List<string>(scriptStreamReader.ToList()));
+                    var updateStep = new SqlScript(updateStepVersion, new List<string>(scriptStreamReader.ToList()));
                     updateSteps.Add(updateStep);
                 }
             }
 
             return updateSteps;
+        }
+
+        private static string GetScriptsNamespace(Assembly assembly)
+        {
+            var assemblyName = assembly.GetName();
+            return assemblyName.Name + ".Scripts";
         }
 
         private string GetVersionFromScript(string embeddedScript)
@@ -53,11 +58,18 @@ namespace GF.DillyDally.Data.Sqlite
 
         private IList<string> FindEmbeddedScripts()
         {
+            var scriptsNameSpace = GetScriptsNamespace(this._assembly);
             return
-                this.GetManifestResourceNames(ScriptsNamespace)
+                this.GetManifestResourceNames(scriptsNameSpace)
                     .Where(res => res.EndsWith(".sql", StringComparison.OrdinalIgnoreCase))
                     .Distinct()
                     .OrderBy(name => new Version(this.GetVersionFromScript(name))).ToList();
+        }
+
+        public IList<string> GetScriptsForVersion(Version version)
+        {
+            return this.GetUpdateStepsBeginningFromVersion(version).Where(x => x.Version == version)
+                .SelectMany(x => x.SqlCommands).ToList();
         }
     }
 }

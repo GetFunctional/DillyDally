@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace GF.DillyDally.Data.Sqlite
 {
-    internal sealed class SqlScriptReader : IEnumerable<string>
+    public sealed class SqlScriptReader : IEnumerable<string>
     {
         private readonly Stream _stream;
 

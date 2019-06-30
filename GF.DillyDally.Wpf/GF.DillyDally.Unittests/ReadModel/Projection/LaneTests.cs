@@ -12,18 +12,12 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
     [TestFixture]
     public class LaneTests
     {
-        #region SetupDatabaseAsync/Teardown
+        #region Run/Teardown
 
         [SetUp]
-        public async Task Setup()
+        public void Setup()
         {
-            await this._testInfrastructure.SetupDatabaseAsync(UnittestsSetup.GetTestRunDatabaseName());
-        }
-
-        [TearDown]
-        public void Destroy()
-        {
-            this._testInfrastructure.Destroy();
+            this._testInfrastructure.Run(UnittestsSetup.ExampleDatabase);
         }
 
         #endregion

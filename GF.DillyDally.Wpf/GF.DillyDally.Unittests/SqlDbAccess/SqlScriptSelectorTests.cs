@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using GF.DillyDally.Data.Sqlite;
+using GF.DillyDally.Update;
 using NUnit.Framework;
 
 namespace GF.DillyDally.Unittests.SqlDbAccess

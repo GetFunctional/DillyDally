@@ -13,19 +13,14 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
     [TestFixture]
     public class ActivityTests
     {
-        #region SetupDatabaseAsync/Teardown
+        #region Run/Teardown
 
         [SetUp]
-        public async Task Setup()
+        public void Setup()
         {
-            await this._testInfrastructure.SetupDatabaseAsync(UnittestsSetup.GetTestRunDatabaseName());
+            this._testInfrastructure.Run(UnittestsSetup.ExampleDatabase);
         }
 
-        [TearDown]
-        public void Destroy()
-        {
-            this._testInfrastructure.Destroy();
-        }
 
         #endregion
 
@@ -39,7 +34,8 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
                 // Arrange
                 var activityService = this._testInfrastructure.DiContainer.GetInstance<ActivityService>();
                 var repository = new ActivityRepository();
-                var activityName = this._testInfrastructure.TestData.GetRandomActivityName();
+
+                var activityName = await this._testInfrastructure.TestData.GetRandomActivityNameAsync(activityService);
 
                 // Act
                 var newActivity = await activityService.CreatePercentageActivityAsync(activityName);

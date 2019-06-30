@@ -24,7 +24,7 @@ namespace GF.DillyDally.Wpf.Client
 
         private Bootstrapper _bootstrapper;
 
-        protected override async void OnStartup(StartupEventArgs e)
+        protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
 
@@ -45,7 +45,7 @@ namespace GF.DillyDally.Wpf.Client
             var serviceContainer = this.CreateDependencyInjectionContainer();
 
             this._bootstrapper = new Bootstrapper(currentApplication, serviceContainer);
-            await this._bootstrapper.RunAsync();
+            this._bootstrapper.Run();
 
             var shellController = this.CreateShellController(serviceContainer);
             var shell = new Shell(shellController.ViewModel);

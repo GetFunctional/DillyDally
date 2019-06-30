@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>GF.DillyDally.Wpf.Client</RootNamespace>
     <AssemblyName>GF.DillyDally.Wpf.Client</AssemblyName>
-    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -398,6 +398,10 @@
     <ProjectReference Include="..\GF.DillyDally.Shared\GF.DillyDally.Shared.csproj">
       <Project>{cac4358f-f1af-49f5-9054-a6064abe235e}</Project>
       <Name>GF.DillyDally.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GF.DillyDally.Update\GF.DillyDally.Update.csproj">
+      <Project>{d9368be8-3fc7-420f-866f-94d5edbc0d2f}</Project>
+      <Name>GF.DillyDally.Update</Name>
     </ProjectReference>
     <ProjectReference Include="..\GF.DillyDally.Wpf.Theme\GF.DillyDally.Wpf.Theme.csproj">
       <Project>{3149aaa7-f9dd-4191-924c-e5c0347486dc}</Project>

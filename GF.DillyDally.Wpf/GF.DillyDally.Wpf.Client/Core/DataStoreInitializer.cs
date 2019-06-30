@@ -16,8 +16,6 @@ namespace GF.DillyDally.Wpf.Client.Core
             {
                 databaseFileHandler.DeleteDatabaseIfExists();
                 databaseFileHandler.CreateNewDatabase();
-                var databaseUpdater = new DatabaseUpdater(new SqlScriptSelector(), databaseFileHandler);
-                databaseUpdater.UpdateDatabase();
             }
 
             return databaseFileHandler;

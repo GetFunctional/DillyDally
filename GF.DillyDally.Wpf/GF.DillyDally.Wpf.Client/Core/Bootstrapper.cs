@@ -30,21 +30,21 @@ namespace GF.DillyDally.Wpf.Client.Core
             this._dataBootstrapper = new DataBootstrapper(serviceContainer);
         }
 
-        public async Task RunAsync()
+        public void Run()
         {
-            await this.RunAsync(new InitializationSettings(DefaultDatabaseName, false, true));
+            this.Run(new InitializationSettings(DefaultDatabaseName, false, true));
         }
 
-        public async Task RunAsync(InitializationSettings dataInitializationSettings)
+        public void Run(InitializationSettings dataInitializationSettings)
         {
             var serviceContainer = this._serviceContainer;
 
             var typeregistrar = new TypeRegistrar();
-            typeregistrar.RegisterMediatRFramework(serviceContainer);
             typeregistrar.RegisterMvvmcDependencies(serviceContainer);
+            typeregistrar.RegisterMediatRFramework(serviceContainer);
             typeregistrar.RegisterControllersAndViewModels(serviceContainer);
             typeregistrar.RegisterApplicationServices(serviceContainer);
-            await this._dataBootstrapper.RunAsync(dataInitializationSettings);
+            this._dataBootstrapper.Run(dataInitializationSettings);
             this._dataTemplateInitializer.RegisterDataTemplates(this._application);
             this._navigationInitializer.InitializeNavigation(serviceContainer);
         }

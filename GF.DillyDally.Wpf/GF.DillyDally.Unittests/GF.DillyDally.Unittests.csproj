@@ -11,7 +11,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>GF.DillyDally.Unittests</RootNamespace>
     <AssemblyName>GF.DillyDally.Unittests</AssemblyName>
-    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">15.0</VisualStudioVersion>
@@ -21,6 +21,7 @@
     <TestProjectType>UnitTest</TestProjectType>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -108,10 +109,9 @@
     <Compile Include="ReadModel\Projection\TaskLinkTests.cs" />
     <Compile Include="ReadModel\Projection\TaskTests.cs" />
     <Compile Include="SqlDbAccess\CreateDatabaseTests.cs" />
-    <Compile Include="SqlDbAccess\DatabaseUpdateTests.cs" />
+    <Compile Include="DatabaseUpdateTests.cs" />
     <Compile Include="SqlDbAccess\SqlScriptSelectorTests.cs" />
     <Compile Include="UnittestsSetup.cs" />
-    <Compile Include="Core\DatabaseTestSetup.cs" />
     <Compile Include="WriteModel\AchievementTests.cs" />
     <Compile Include="WriteModel\ActivityTests.cs" />
     <Compile Include="WriteModel\RunningNumberTests.cs" />
@@ -135,6 +135,10 @@
     <ProjectReference Include="..\GF.DillyDally.Shared\GF.DillyDally.Shared.csproj">
       <Project>{cac4358f-f1af-49f5-9054-a6064abe235e}</Project>
       <Name>GF.DillyDally.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GF.DillyDally.Update\GF.DillyDally.Update.csproj">
+      <Project>{d9368be8-3fc7-420f-866f-94d5edbc0d2f}</Project>
+      <Name>GF.DillyDally.Update</Name>
     </ProjectReference>
     <ProjectReference Include="..\GF.DillyDally.Wpf.Client\GF.DillyDally.Wpf.Client.csproj">
       <Project>{65ab5c0d-009d-4870-baf6-536870f97b74}</Project>

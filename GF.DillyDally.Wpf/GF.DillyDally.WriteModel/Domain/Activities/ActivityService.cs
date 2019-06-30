@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using GF.DillyDally.WriteModel.Domain.Activities.Commands;
+using GF.DillyDally.WriteModel.Infrastructure;
 using MediatR;
 
 namespace GF.DillyDally.WriteModel.Domain.Activities
@@ -16,6 +17,12 @@ namespace GF.DillyDally.WriteModel.Domain.Activities
         public async Task CreateActivityList()
         {
             await this._commandDispatcher.Send(new CreateActivityListCommand());
+        }
+
+        public async Task<CanCreateActivityResponse> CanCreateActivityAsync(string activityName)
+        {
+            var task = await this._commandDispatcher.Send(new CanCreateActivityCommand(activityName));
+            return task;
         }
 
         public async Task<CreatePercentageActivityResponse> CreatePercentageActivityAsync(string activityName, byte[] previewImageForActivity = null)
