@@ -21,14 +21,13 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Create
         private readonly TaskService _taskService;
         private Guid? _presetLane;
 
-        public CreateTaskController(CreateTaskViewModel viewModel, DatabaseFileHandler databaseFileHandler, TaskService taskService,
-            CategorySelectorController categorySelectorController, ActivityContainerController activityContainerController, ControllerFactory controllerFactory) :
+        public CreateTaskController(CreateTaskViewModel viewModel, DatabaseFileHandler databaseFileHandler, TaskService taskService, ControllerFactory controllerFactory) :
             base(viewModel,controllerFactory)
         {
             this._databaseFileHandler = databaseFileHandler;
             this._taskService = taskService;
-            this._categorySelectorController = categorySelectorController;
-            this._activityContainerController = activityContainerController;
+            this._categorySelectorController = this.CreateChildController<CategorySelectorController>();
+            this._activityContainerController = this.CreateChildController<ActivityContainerController>();
 
             viewModel.CreateTaskCommand =
                 ReactiveCommand.CreateFromTask(async () => await this.CompleteProcess());
@@ -36,7 +35,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Create
                 ReactiveCommand.Create(this.CancelProcess);
 
             viewModel.TaskAchievementsViewModel = new TaskAchievementsViewModel();
-            viewModel.AddPage(new CreateTaskBasicInfosViewModel(categorySelectorController.ViewModel));
+            viewModel.AddPage(new CreateTaskBasicInfosViewModel(this._categorySelectorController.ViewModel));
             viewModel.AddPage(new CreateTaskAdditionalInfosViewModel());
             viewModel.AddPage(new CreateTaskActivitiesViewModel(this._activityContainerController.ViewModel));
         }
@@ -93,15 +92,8 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Create
 
         private bool IsInputValid(CreateTaskViewModel viewModel)
         {
-            return true;
-        }
-
-
-        protected override async Task OnInitializeAsync()
-        {
-            await this._activityContainerController.InitializeAsync();
-            await this._categorySelectorController.InitializeAsync();
-            await base.OnInitializeAsync();
+            var firstPage = viewModel.GetPage<CreateTaskBasicInfosViewModel>();
+            return !string.IsNullOrWhiteSpace(firstPage.TaskName) && firstPage.SelectedCategory != null;
         }
 
         public void PresetLane(Guid laneId)

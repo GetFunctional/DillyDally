@@ -4,7 +4,6 @@ using System.Reactive.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Threading;
 using DevExpress.Xpf.Editors;
 using DevExpress.Xpf.Editors.Helpers;
 using GF.DillyDally.Wpf.Theme.Extensions;
@@ -194,7 +193,7 @@ namespace GF.DillyDally.Wpf.Theme.Controls.Shared
                 .Subscribe(this.HandleWhenPopupOpened);
 
             this._searchItemsSourceObservable = this.Observe(SearchResultItemsSourceProperty);
-            this._searchItemsSourceObservable.Throttle(TimeSpan.FromMilliseconds(25)).ObserveOnDispatcher(DispatcherPriority.Background)
+            this._searchItemsSourceObservable.Throttle(TimeSpan.FromMilliseconds(25)).ObserveOnDispatcher()
                 .Subscribe(this.SearchResultItemsSourceChanged);
         }
 

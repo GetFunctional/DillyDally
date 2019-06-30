@@ -36,12 +36,18 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Container
                     s => this.ViewModel.RequestSearchResults += s,
                     s => this.ViewModel.RequestSearchResults -= s)
                 .Throttle(TimeSpan.FromMilliseconds(250))
-                .Select(evt => evt.EventArgs.SearchText) // better to select on the UI thread
+                .Select(evt => evt.EventArgs.SearchText)
                 .DistinctUntilChanged()
                 .Select(searchText => Observable.FromAsync(async => this.SearchResultsAsync(searchText)))
                 .Merge(4);
 
             this._disposableObserver = query.Subscribe(this.HandleSearchRequest);
+        }
+
+        protected override async Task OnInitializeAsync()
+        {
+            var searchResult = await this.SearchResultsAsync(string.Empty);
+            this.HandleSearchRequest(searchResult);
         }
 
         public void DeactivateAddingNewActivities()

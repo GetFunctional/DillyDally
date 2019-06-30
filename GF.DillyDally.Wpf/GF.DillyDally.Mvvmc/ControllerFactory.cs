@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 using GF.DillyDally.Mvvmc.Contracts;
+using GF.DillyDally.Mvvmc.Exceptions;
 
 namespace GF.DillyDally.Mvvmc
 {
@@ -23,29 +25,37 @@ namespace GF.DillyDally.Mvvmc
 
         public IController CreateAndInitializeController(Type controllerType)
         {
-            //var currentSynchronizationContext = SynchronizationContext.Current ??
+            var currentSynchronizationContext = SynchronizationContext.Current;
+            //??
             //                                    new DispatcherSynchronizationContext(Application.Current.Dispatcher);
             var controller = this.CreateController(controllerType);
-            this._controllerInitializer.InitializeControllerAsync(controller).ConfigureAwait(true);
-            //this._controllerInitializer.InitializeControllerAsync(controller)
-            //    .ContinueWith(t =>
-            //    {
-            //        currentSynchronizationContext.Send(state =>
-            //                throw new InitializationException("Exception was raised during initialization",
-            //                    t.Exception),
-            //            null);
-            //    }, TaskContinuationOptions.OnlyOnFaulted).ConfigureAwait(false);
+            if (currentSynchronizationContext == null)
+            {
+                this._controllerInitializer.InitializeControllerAsync(controller).ConfigureAwait(true);
+            }
+            else
+            {
+                this._controllerInitializer.InitializeControllerAsync(controller)
+                    .ContinueWith(t =>
+                    {
+                        currentSynchronizationContext.Send(state =>
+                                throw new InitializationException("Exception was raised during initialization",
+                                    t.Exception),
+                            null);
+                    }, TaskContinuationOptions.OnlyOnFaulted).ConfigureAwait(false);
+            }
+
             return controller;
         }
 
         public TController CreateController<TController>() where TController : IController
         {
-            return (TController) this.CreateController(typeof(TController));
+            return (TController)this.CreateController(typeof(TController));
         }
 
         public TController CreateAndInitializeController<TController>() where TController : IController
         {
-            return (TController) this.CreateAndInitializeController(typeof(TController));
+            return (TController)this.CreateAndInitializeController(typeof(TController));
         }
     }
 }

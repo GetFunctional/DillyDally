@@ -43,21 +43,15 @@ WHERE ActivityId = @activityId;";
                 $@"SELECT a.ActivityId, a.Name, a.ActivityType, a.ActivityValue, a.CurrentLevel, img.Binary AS PreviewImageBinary 
 FROM {ActivityEntity.TableNameConstant} AS a 
 LEFT JOIN {ImageEntity.TableNameConstant} img ON a.PreviewImageFileId = img.OriginalFileId AND img.SizeType = {(int) ImageSizeType.PreviewSize} 
-WHERE a.Name LIKE @searchParameter;";
-
-                //$"SELECT {nameof(ActivitySearchResultEntity.ActivityId)}, " +
-                //$"{nameof(ActivitySearchResultEntity.Name)}, " +
-                //$"{nameof(ActivitySearchResultEntity.ActivityType)}, " +
-                //$"{nameof(ActivitySearchResultEntity.ActivityValue)}, " +
-                //$"{nameof(ActivitySearchResultEntity.CurrentLevel)}, " +
-                //$"{nameof(ImageEntity.Binary)} AS {nameof(ActivitySearchResultEntity.PreviewImageBinary)}, " +
-                //$"1 AS {nameof(ActivitySearchResultEntity.Usages)} " +
-                //$"FROM {ActivityEntity.TableNameConstant} " +
-                //$"LEFT JOIN {ImageEntity.TableNameConstant} ON {ActivityEntity.TableNameConstant}.{nameof(ActivityEntity.PreviewImageFileId)} = {ImageEntity.TableNameConstant}.{nameof(ImageEntity.ImageId)} " +
-                //$"WHERE {nameof(ActivitySearchResultEntity.Name)} LIKE @{nameof(searchParameter)};";
-
+WHERE a.Name LIKE @searchParameter 
+{this.LimitResults(searchText)};";
 
             return await connection.QueryAsync<ActivitySearchResultEntity>(sql, new {searchParameter});
+        }
+
+        private string LimitResults(string searchParameter)
+        {
+            return string.IsNullOrWhiteSpace(searchParameter) || string.IsNullOrEmpty(searchParameter) ? "LIMIT 10" : string.Empty;
         }
     }
 }
