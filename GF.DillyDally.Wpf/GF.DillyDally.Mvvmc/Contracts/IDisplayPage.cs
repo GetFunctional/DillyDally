@@ -1,6 +1,6 @@
 ﻿using GF.DillyDally.Mvvmc.Validation;
 
-namespace GF.DillyDally.Mvvmc
+namespace GF.DillyDally.Mvvmc.Contracts
 {
     public interface IDisplayPage : IViewModel, IValidateable
     {

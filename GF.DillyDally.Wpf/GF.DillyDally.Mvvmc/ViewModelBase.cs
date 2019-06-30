@@ -1,4 +1,5 @@
-﻿using ReactiveUI;
+﻿using GF.DillyDally.Mvvmc.Contracts;
+using ReactiveUI;
 
 namespace GF.DillyDally.Mvvmc
 {

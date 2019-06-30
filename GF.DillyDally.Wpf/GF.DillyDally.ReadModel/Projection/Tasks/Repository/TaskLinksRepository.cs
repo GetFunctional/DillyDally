@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
 using Dapper.Contrib.Extensions;
-using GF.DillyDally.Data.Sqlite.Repository.Base;
+using GF.DillyDally.Data.Sqlite;
 
 namespace GF.DillyDally.ReadModel.Projection.Tasks.Repository
 {

@@ -7,7 +7,7 @@ namespace GF.DillyDally.Wpf.Client.Core
     public sealed class DataBootstrapper
     {
         private readonly DataStoreInitializer _dataStoreInitializer = new DataStoreInitializer();
-        private readonly ReadModelInitializer _readModelInitializer = new ReadModelInitializer();
+        private readonly ReadModelBootstrapper _readModelBootstrapper = new ReadModelBootstrapper();
         private readonly IServiceContainer _serviceContainer;
         private readonly WriteModelBootstrapper _writeModelBootstrapper = new WriteModelBootstrapper();
 
@@ -23,7 +23,7 @@ namespace GF.DillyDally.Wpf.Client.Core
             serviceContainer.RegisterInstance(databaseFileHandler);
 
             this._writeModelBootstrapper.Run(serviceContainer, databaseFileHandler.GetConnectionString());
-            this._readModelInitializer.Initialize(serviceContainer);
+            this._readModelBootstrapper.Initialize(serviceContainer);
         }
     }
 }

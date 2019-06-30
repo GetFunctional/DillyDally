@@ -5,18 +5,19 @@ using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using GF.DillyDally.Data.Sqlite;
+using GF.DillyDally.Update.UpdateSteps.SqlScripts;
 
-namespace GF.DillyDally.Update
+namespace GF.DillyDally.Update.UpdateSteps
 {
     public sealed class SqlScriptSelector
     {
         private readonly Assembly _assembly = Assembly.GetAssembly(typeof(SqlScriptSelector));
 
-        public IList<SqlScript> GetUpdateStepsBeginningFromVersion(Version versionBegin)
+        public IList<SqlScript> GetUpdateStepsBeginningFromVersion(Version versionBegin, Version versionEnd = null)
         {
             var updateSteps = new List<SqlScript>();
 
-            foreach (var embeddedScript in this.FindEmbeddedScripts())
+            foreach (var embeddedScript in this.FindEmbeddedScripts(versionBegin,versionEnd).ToList())
             {
                 var fileNameWithoutExtension = this.GetVersionFromScript(embeddedScript);
                 var updateStepVersion =
@@ -37,7 +38,7 @@ namespace GF.DillyDally.Update
         private static string GetScriptsNamespace(Assembly assembly)
         {
             var assemblyName = assembly.GetName();
-            return assemblyName.Name + ".Scripts";
+            return assemblyName.Name + ".UpdateSteps.SqlScripts";
         }
 
         private string GetVersionFromScript(string embeddedScript)
@@ -56,20 +57,21 @@ namespace GF.DillyDally.Update
             return this._assembly.GetManifestResourceNames().Select(item => item.Substring(nameSpace.Length + 1));
         }
 
-        private IList<string> FindEmbeddedScripts()
+        private IEnumerable<string> FindEmbeddedScripts(Version fromVersion,Version toVersion)
         {
             var scriptsNameSpace = GetScriptsNamespace(this._assembly);
             return
                 this.GetManifestResourceNames(scriptsNameSpace)
                     .Where(res => res.EndsWith(".sql", StringComparison.OrdinalIgnoreCase))
                     .Distinct()
-                    .OrderBy(name => new Version(this.GetVersionFromScript(name))).ToList();
+                    .Select( scriptName => new { Version = new Version(this.GetVersionFromScript(scriptName)), ScriptName = scriptName })
+                    .Where(script => script.Version >= fromVersion && (toVersion == null || script.Version <= toVersion))
+                    .OrderBy(script => script.Version).Select(x => x.ScriptName);
         }
 
         public IList<string> GetScriptsForVersion(Version version)
         {
-            return this.GetUpdateStepsBeginningFromVersion(version).Where(x => x.Version == version)
-                .SelectMany(x => x.SqlCommands).ToList();
+            return this.GetUpdateStepsBeginningFromVersion(version,version).SelectMany(x => x.SqlCommands).ToList();
         }
     }
 }

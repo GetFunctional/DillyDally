@@ -1,4 +1,5 @@
 ﻿using GF.DillyDally.Mvvmc;
+using GF.DillyDally.Mvvmc.Contracts;
 using MediatR;
 
 namespace GF.DillyDally.Wpf.Client.Core.Dialoge

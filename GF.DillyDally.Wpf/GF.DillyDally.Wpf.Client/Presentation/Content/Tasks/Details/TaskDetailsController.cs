@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using GF.DillyDally.Data.Sqlite;
 using GF.DillyDally.Mvvmc;
 using GF.DillyDally.ReadModel.Views.TaskBoard;
+using GF.DillyDally.ReadModel.Views.TaskDetails;
 using GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Container;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Details

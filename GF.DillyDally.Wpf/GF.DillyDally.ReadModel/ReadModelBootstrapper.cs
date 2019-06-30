@@ -5,7 +5,7 @@ using MediatR.Pipeline;
 
 namespace GF.DillyDally.ReadModel
 {
-    public sealed class ReadModelInitializer
+    public sealed class ReadModelBootstrapper
     {
         public void Initialize(IServiceContainer serviceContainer)
         {
@@ -14,7 +14,7 @@ namespace GF.DillyDally.ReadModel
 
         private static void RegisterMediations(IServiceContainer serviceContainer)
         {
-            serviceContainer.RegisterAssembly(typeof(ReadModelInitializer).GetTypeInfo().Assembly,
+            serviceContainer.RegisterAssembly(typeof(ReadModelBootstrapper).GetTypeInfo().Assembly,
                 (serviceType, implementingType) =>
                     serviceType.IsConstructedGenericType &&
                     (

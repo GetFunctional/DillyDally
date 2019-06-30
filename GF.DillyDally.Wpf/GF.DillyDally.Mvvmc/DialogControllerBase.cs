@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reactive.Subjects;
+using GF.DillyDally.Mvvmc.Contracts;
 
 namespace GF.DillyDally.Mvvmc
 {

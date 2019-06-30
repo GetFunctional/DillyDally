@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using GF.DillyDally.Mvvmc.Contracts;
 
 namespace GF.DillyDally.Mvvmc
 {

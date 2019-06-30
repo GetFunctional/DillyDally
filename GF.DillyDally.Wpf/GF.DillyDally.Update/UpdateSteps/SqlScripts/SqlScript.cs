@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace GF.DillyDally.Update
+namespace GF.DillyDally.Update.UpdateSteps.SqlScripts
 {
     public sealed class SqlScript
     {

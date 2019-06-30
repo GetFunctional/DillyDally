@@ -4,7 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
-using GF.DillyDally.Data.Sqlite.Repository.Base;
+using GF.DillyDally.Data.Sqlite;
 using GF.DillyDally.ReadModel.Projection.Images.Repository;
 
 namespace GF.DillyDally.ReadModel.Projection.Tasks.Repository

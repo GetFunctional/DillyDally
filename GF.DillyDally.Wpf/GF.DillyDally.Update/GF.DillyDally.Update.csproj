@@ -44,19 +44,16 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DatabaseUpdater.cs" />
-    <Compile Include="IUpdateStep.cs" />
+    <Compile Include="UpdateSteps\IUpdateStep.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SqlScriptSelector.cs" />
+    <Compile Include="UpdateSteps\SqlScriptSelector.cs" />
     <Compile Include="UpdateCoordinator.cs" />
-    <Compile Include="SqlScript.cs" />
+    <Compile Include="UpdateSteps\SqlScripts\SqlScript.cs" />
     <Compile Include="UpdateSteps\Version_1000.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -70,7 +67,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Scripts\1.0.0.0.sql" />
+    <EmbeddedResource Include="UpdateSteps\SqlScripts\1.0.0.0.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

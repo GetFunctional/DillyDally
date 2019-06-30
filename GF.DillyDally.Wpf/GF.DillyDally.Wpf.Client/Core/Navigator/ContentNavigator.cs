@@ -1,5 +1,6 @@
 ﻿using System;
 using GF.DillyDally.Mvvmc;
+using GF.DillyDally.Mvvmc.Contracts;
 using GF.DillyDally.Wpf.Client.Core.Exceptions;
 
 namespace GF.DillyDally.Wpf.Client.Core.Navigator

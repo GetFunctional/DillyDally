@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace GF.DillyDally.Mvvmc
+namespace GF.DillyDally.Mvvmc.Contracts
 {
     public interface IViewModel : INotifyPropertyChanged
     {

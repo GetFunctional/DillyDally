@@ -5,7 +5,8 @@
     xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
     xmlns:dxwui="http://schemas.devexpress.com/winfx/2008/xaml/windowsui"
     xmlns:layout="clr-namespace:GF.DillyDally.Wpf.Theme.Controls.Layout"
-    xmlns:mvvmc="http://schemas.getfunctional.de/dillydally/mvvmc">
+    xmlns:mvvmc="http://schemas.getfunctional.de/dillydally/mvvmc"
+    xmlns:contracts="clr-namespace:GF.DillyDally.Mvvmc.Contracts;assembly=GF.DillyDally.Mvvmc">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Colors.xaml" />
@@ -19,7 +20,7 @@
     <SolidColorBrush x:Key="PageBadgeBorderBrush" Color="{StaticResource Layer1BorderColor}" />
     <SolidColorBrush x:Key="PageTitleForegroundBrush" Color="{StaticResource BodyForegroundColor}" />
 
-    <DataTemplate x:Key="PageDisplayTemplate" DataType="{x:Type mvvmc:IDisplayPage}">
+    <DataTemplate x:Key="PageDisplayTemplate" DataType="{x:Type contracts:IDisplayPage}">
         <dxlc:LayoutGroup
             HorizontalAlignment="Left"
             VerticalAlignment="Center"

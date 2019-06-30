@@ -3,7 +3,7 @@ using System.Data;
 using System.Threading.Tasks;
 using Dapper;
 using Dapper.Contrib.Extensions;
-using GF.DillyDally.Data.Sqlite.Repository.Base;
+using GF.DillyDally.Data.Sqlite;
 using GF.DillyDally.WriteModel.Domain.RunningNumbers.Events;
 
 namespace GF.DillyDally.ReadModel.Projection.RunningNumbers.Repository

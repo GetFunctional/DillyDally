@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Windows;
 using System.Windows.Threading;
+using GF.DillyDally.Mvvmc.Contracts;
 
 namespace GF.DillyDally.Mvvmc
 {

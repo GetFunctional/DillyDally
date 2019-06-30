@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Reflection;
 using GF.DillyDally.Mvvmc;
+using GF.DillyDally.Mvvmc.Contracts;
 using LightInject;
 using MediatR;
 using MediatR.Pipeline;

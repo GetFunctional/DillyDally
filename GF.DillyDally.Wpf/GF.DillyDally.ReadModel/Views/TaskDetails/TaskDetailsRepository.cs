@@ -6,9 +6,8 @@ using GF.DillyDally.ReadModel.Projection.Activities.Repository;
 using GF.DillyDally.ReadModel.Projection.Images.Repository;
 using GF.DillyDally.ReadModel.Projection.RunningNumbers.Repository;
 using GF.DillyDally.ReadModel.Projection.Tasks.Repository;
-using GF.DillyDally.ReadModel.Views.TaskDetails;
 
-namespace GF.DillyDally.ReadModel.Views.TaskBoard
+namespace GF.DillyDally.ReadModel.Views.TaskDetails
 {
     public sealed class TaskDetailsRepository
     {

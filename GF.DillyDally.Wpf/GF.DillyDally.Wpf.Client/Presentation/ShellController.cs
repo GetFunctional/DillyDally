@@ -1,4 +1,5 @@
 ﻿using GF.DillyDally.Mvvmc;
+using GF.DillyDally.Mvvmc.Contracts;
 using GF.DillyDally.Wpf.Client.Core.Dialoge;
 using GF.DillyDally.Wpf.Client.Core.Navigator;
 using GF.DillyDally.Wpf.Client.Presentation.Content.Commands;

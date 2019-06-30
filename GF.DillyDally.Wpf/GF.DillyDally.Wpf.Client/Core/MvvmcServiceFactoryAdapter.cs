@@ -1,5 +1,6 @@
 ﻿using System;
 using GF.DillyDally.Mvvmc;
+using GF.DillyDally.Mvvmc.Contracts;
 using LightInject;
 
 namespace GF.DillyDally.Wpf.Client.Core

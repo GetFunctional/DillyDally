@@ -8,6 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using DevExpress.Mvvm;
 using GF.DillyDally.Mvvmc;
+using GF.DillyDally.Mvvmc.Contracts;
 
 namespace GF.DillyDally.Wpf.Theme.Controls.Layout
 {

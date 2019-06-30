@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using MediatR;
 
-namespace GF.DillyDally.Update
+namespace GF.DillyDally.Update.UpdateSteps
 {
     public interface IUpdateStep
     {

@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using GF.DillyDally.Mvvmc.Contracts;
 
 namespace GF.DillyDally.Mvvmc
 {
