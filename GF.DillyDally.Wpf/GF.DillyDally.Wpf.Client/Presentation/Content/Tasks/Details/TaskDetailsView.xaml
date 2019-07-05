@@ -17,7 +17,7 @@
     dx:ThemeManager.ThemeName="{x:Static theme:ThemeConstants.DevExpressThemeName}"
     mc:Ignorable="d">
 
-    <ctrls:NavigationTargetContentContainer Title="Task Details">
+    <ctrls:NavigationTargetContentContainer Title="Task Details" IsBusy="{Binding IsBusy}">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="70*" />
@@ -35,7 +35,8 @@
                 <ctrls:ImageInputControl
                     Width="300"
                     Height="300"
-                    HorizontalAlignment="Left" />
+                    HorizontalAlignment="Left"
+                    ImageBytes="{Binding TaskPreviewImageBytes, Mode=OneWay}" />
                 <dxlc:LayoutGroup ItemSpace="25" Orientation="Vertical">
                     <TextBlock VerticalAlignment="Top" Text="TTitleK-10234" />
                     <TextBlock VerticalAlignment="Top" Text="{Binding TaskName}" />
@@ -55,6 +56,28 @@
                         HeaderType="H2" />
                 </dxlc:LayoutGroup>
             </dxlc:LayoutGroup>
+            <dx:DXTabControl
+                Grid.Row="1"
+                Grid.Column="0"
+                TabContentCacheMode="CacheTabsOnSelecting">
+                <dx:DXTabItem Header="Images">
+                    <dx:DXTabItem.Content>
+                        <container:ActivityContainerView DataContext="{Binding ActivitiesViewModel, Mode=OneWay}" />
+                    </dx:DXTabItem.Content>
+                </dx:DXTabItem>
+                <dx:DXTabItem Header="Linked Tasks" />
+            </dx:DXTabControl>
+            <dx:DXTabControl
+                Grid.Row="0"
+                Grid.Column="1"
+                TabContentCacheMode="CacheTabsOnSelecting">
+                <dx:DXTabItem Header="History">
+                    <dx:DXTabItem.Content>
+                        <container:ActivityContainerView DataContext="{Binding ActivitiesViewModel, Mode=OneWay}" />
+                    </dx:DXTabItem.Content>
+                </dx:DXTabItem>
+                <dx:DXTabItem Header="Achievements" />
+            </dx:DXTabControl>
             <dx:DXTabControl
                 Grid.Row="1"
                 Grid.Column="1"

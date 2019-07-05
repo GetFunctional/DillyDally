@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Windows;
 using GF.DillyDally.Mvvmc;
 using GF.DillyDally.Mvvmc.Contracts;
-using GF.DillyDally.Wpf.Client.ApplicationState;
+using GF.DillyDally.Wpf.Client.Core.ApplicationState;
 using GF.DillyDally.Wpf.Client.Core.Exceptions;
 
 namespace GF.DillyDally.Wpf.Client.Core.DataTemplates

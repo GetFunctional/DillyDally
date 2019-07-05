@@ -12,6 +12,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Details
         private DateTime? _dueDate;
         private string _taskName;
         private ActivityContainerViewModel _activitiesViewModel;
+        private byte[] _taskPreviewImageBytes;
 
         public TaskDetailsViewModel()
         {
@@ -45,6 +46,12 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Details
         {
             get { return this._activitiesViewModel; }
             internal set { this.RaiseAndSetIfChanged(ref this._activitiesViewModel, value); }
+        }
+
+        public byte[] TaskPreviewImageBytes
+        {
+            get { return this._taskPreviewImageBytes; }
+            set { this.RaiseAndSetIfChanged(ref this._taskPreviewImageBytes, value); }
         }
     }
 }

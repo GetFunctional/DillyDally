@@ -1,18 +1,21 @@
 ﻿using System.Threading.Tasks;
-using GF.DillyDally.Mvvmc;
+using GF.DillyDally.Wpf.Client.Core.Mvvmc;
 
 namespace GF.DillyDally.Unittests.Mvvmc.TestModels
 {
-    internal class TestController : ControllerBase<TestViewModel>
+    internal class TestController : DDControllerBase<TestViewModel>
     {
-        public TestController(TestViewModel viewModel, ControllerFactory controllerFactory) : base(viewModel, controllerFactory)
+        internal int InitializationCount;
+
+        public TestController(TestViewModel viewModel,ControllerFactory controllerFactory)
+            : base(viewModel, controllerFactory)
         {
             this.ChildController = this.CreateChildController<ChildTestController>();
         }
 
         public ChildTestController ChildController { get; set; }
 
-        internal int InitializationCount = 0;
+        public ChildTestController AnotherChildController { get; set; }
 
         protected override Task OnInitializeAsync()
         {
@@ -24,7 +27,5 @@ namespace GF.DillyDally.Unittests.Mvvmc.TestModels
         {
             this.AnotherChildController = this.CreateChildController<ChildTestController>();
         }
-
-        public ChildTestController AnotherChildController { get; set; }
     }
 }

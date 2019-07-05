@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Threading.Tasks;
-using GF.DillyDally.Mvvmc;
 using GF.DillyDally.Mvvmc.Contracts;
+using GF.DillyDally.Wpf.Client.Core.Mvvmc;
 using GF.DillyDally.Wpf.Client.Core.Navigator;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
 {
-    public sealed class ContentNavigatorController : ControllerBase<ContentNavigatorViewModel>
+    internal sealed class ContentNavigatorController : DDControllerBase<ContentNavigatorViewModel>
     {
         private readonly IContentNavigator _contentNavigator;
 
-        public ContentNavigatorController(ContentNavigatorViewModel viewModel, IContentNavigator contentNavigator, ControllerFactory controllerFactory) :
-            base(viewModel,controllerFactory)
+        public ContentNavigatorController(ContentNavigatorViewModel viewModel, IContentNavigator contentNavigator,ControllerFactory controllerFactory)
+            : base(viewModel, controllerFactory)
         {
             this._contentNavigator = contentNavigator;
             this.SynchronizeCurrentDisplayTargetWithNavigator();

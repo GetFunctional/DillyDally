@@ -1,22 +1,19 @@
 ﻿using System.Threading.Tasks;
-using GF.DillyDally.Mvvmc;
 using GF.DillyDally.Wpf.Client.Core;
+using GF.DillyDally.Wpf.Client.Core.Mvvmc;
 using GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Create;
-using ReactiveUI;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.ShowCase
 {
-    internal class ShowCaseController : ControllerBase<ShowCaseViewModel>
+    internal class ShowCaseController : DDControllerBase<ShowCaseViewModel>
     {
-        private readonly ControllerFactory _controllerFactory;
         private readonly NavigationService _navigationService;
 
-        public ShowCaseController(ShowCaseViewModel viewModel, NavigationService navigationService,
-            ControllerFactory controllerFactory) : base(viewModel, controllerFactory)
+        public ShowCaseController(ShowCaseViewModel viewModel, NavigationService navigationService,ControllerFactory controllerFactory)
+            : base(viewModel, controllerFactory)
         {
             this._navigationService = navigationService;
-            this._controllerFactory = controllerFactory;
-            this.ViewModel.TestDialogCommand = ReactiveCommand.CreateFromTask(this.ShowTestDialog);
+            this.ViewModel.TestDialogCommand = this.CommandFactory.CreateFromTask(this.ShowTestDialog);
         }
 
         private async Task ShowTestDialog()

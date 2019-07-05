@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using LightInject;
 using MediatR;
 using MediatR.Pipeline;
@@ -7,20 +8,15 @@ namespace GF.DillyDally.ReadModel
 {
     public sealed class ReadModelBootstrapper
     {
-        public void Initialize(IServiceContainer serviceContainer)
+        public void Run(IServiceContainer serviceContainer)
         {
-            RegisterMediations(serviceContainer);
+            this.RegisterMediations(serviceContainer);
         }
 
-        private static void RegisterMediations(IServiceContainer serviceContainer)
+
+        private void RegisterMediations(IServiceContainer serviceContainer)
         {
-            serviceContainer.RegisterAssembly(typeof(ReadModelBootstrapper).GetTypeInfo().Assembly,
-                (serviceType, implementingType) =>
-                    serviceType.IsConstructedGenericType &&
-                    (
-                        serviceType.GetGenericTypeDefinition() == typeof(IRequestHandler<,>) ||
-                        serviceType.GetGenericTypeDefinition() == typeof(INotificationHandler<>)
-                    ));
+            serviceContainer.RegisterAssembly(typeof(ReadModelBootstrapper).GetTypeInfo().Assembly, this.IsRequestHandler);
 
             serviceContainer.RegisterOrdered(typeof(IPipelineBehavior<,>),
                 new[]
@@ -28,8 +24,15 @@ namespace GF.DillyDally.ReadModel
                     typeof(RequestPreProcessorBehavior<,>),
                     typeof(RequestPostProcessorBehavior<,>)
                 }, type => new PerContainerLifetime());
+        }
 
-            serviceContainer.Register<ServiceFactory>(fac => fac.GetInstance);
+        private bool IsRequestHandler(Type serviceType, Type implementingType)
+        {
+            return serviceType.IsConstructedGenericType &&
+                   (
+                       serviceType.GetGenericTypeDefinition() == typeof(IRequestHandler<,>) ||
+                       serviceType.GetGenericTypeDefinition() == typeof(INotificationHandler<>)
+                   );
         }
     }
 }

@@ -1,20 +1,19 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using GF.DillyDally.Mvvmc;
 using GF.DillyDally.Mvvmc.Contracts;
+using GF.DillyDally.Wpf.Client.Core.Mvvmc;
 using GF.DillyDally.Wpf.Client.Core.Navigator;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
 {
-    public sealed class ContentBrowserController : ControllerBase<ContentBrowserViewModel>
+    internal sealed class ContentBrowserController : DDControllerBase<ContentBrowserViewModel>
     {
         private readonly IList<ContentNavigatorController> _navigatorControllers =
             new List<ContentNavigatorController>();
 
-        public ContentBrowserController(ContentBrowserViewModel viewModel,
-            ControllerFactory controllerFactory)
-            : base(viewModel,controllerFactory)
+        public ContentBrowserController(ContentBrowserViewModel viewModel,ControllerFactory controllerFactory)
+            : base(viewModel, controllerFactory)
         {
         }
 

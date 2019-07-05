@@ -1,9 +1,11 @@
 ﻿using System.Data;
 using System.Threading.Tasks;
 using GF.DillyDally.Data.Sqlite;
-using GF.DillyDally.Mvvmc;
 using GF.DillyDally.Update;
 using GF.DillyDally.Wpf.Client.Core;
+using GF.DillyDally.Wpf.Client.Core.ApplicationState;
+using GF.DillyDally.Wpf.Client.Core.Ioc;
+using GF.DillyDally.Wpf.Client.Core.Mvvmc;
 using LightInject;
 using MediatR;
 
@@ -14,16 +16,16 @@ namespace GF.DillyDally.Unittests.Core
         public TestInfrastructure()
         {
             this.TestData = new TestData();
-            this.DiContainer = this.CreateDependencyInjectionContainer();
+            this.DiContainer = ServiceContainerBuilder.CreateDependencyInjectionContainer();
         }
 
-        public ServiceContainer DiContainer { get; }
+        public IServiceContainer DiContainer { get; }
 
         public TestData TestData { get; }
 
         public async Task CreateNewUnittestDatabaseAsync(string exampleFile)
         {
-            var bootstrapper = new Bootstrapper(new UnittestApplicationRuntime(), this.DiContainer);
+            var bootstrapper = new Bootstrapper(new ApplicationRuntime(this.DiContainer), this.DiContainer);
             bootstrapper.Run(new InitializationSettings(exampleFile, true, true));
             var databaseUpdater = new DatabaseUpdater(new UpdateCoordinator());
             await databaseUpdater.UpdateDatabaseAsync(this.DiContainer.GetInstance<IMediator>(), exampleFile);
@@ -31,14 +33,8 @@ namespace GF.DillyDally.Unittests.Core
 
         public void Run(string exampleFile)
         {
-            var bootstrapper = new Bootstrapper(new UnittestApplicationRuntime(), this.DiContainer);
+            var bootstrapper = new Bootstrapper(new ApplicationRuntime(this.DiContainer), this.DiContainer);
             bootstrapper.Run(new InitializationSettings(exampleFile, false, false));
-        }
-
-        private ServiceContainer CreateDependencyInjectionContainer()
-        {
-            return new ServiceContainer(new ContainerOptions
-                {EnablePropertyInjection = false, EnableVariance = false});
         }
 
         public IDbConnection OpenDatabaseConnection()

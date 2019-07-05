@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using GF.DillyDally.Mvvmc.Contracts;
 
 namespace GF.DillyDally.Mvvmc
@@ -9,21 +6,10 @@ namespace GF.DillyDally.Mvvmc
     public abstract class ControllerBase<TViewModel> : InitializationBase, IController<TViewModel>
         where TViewModel : IViewModel
     {
-        private readonly List<IController> _childControllers;
-
-        protected ControllerBase(TViewModel viewModel, ControllerFactory controllerFactory)
+        protected ControllerBase(TViewModel viewModel)
         {
             this.ViewModel = viewModel;
-            this.ChildControllerFactory = controllerFactory;
-            this._childControllers = new List<IController>();
         }
-
-        protected IReadOnlyList<IController> ChildControllers
-        {
-            get { return this._childControllers; }
-        }
-
-        private ControllerFactory ChildControllerFactory { get; }
 
         public TViewModel ViewModel { get; }
 
@@ -31,16 +17,14 @@ namespace GF.DillyDally.Mvvmc
 
         IViewModel IController.ViewModel
         {
-            get { return this.ViewModel; }
+            get
+            {
+                return this.ViewModel;
+            }
         }
 
-        public void Dispose()
+        public virtual void Dispose()
         {
-            foreach (var childController in this._childControllers)
-            {
-                childController.Dispose();
-            }
-
             this.Dispose(true);
             GC.SuppressFinalize(this);
         }
@@ -52,43 +36,15 @@ namespace GF.DillyDally.Mvvmc
 
         public void Close()
         {
-            foreach (var childController in this._childControllers)
-            {
-                childController.Close();
-            }
-
             this.OnClose();
             this.Dispose(true);
         }
 
         #endregion
 
-        protected override async Task OnInitializeAsync()
+        protected virtual bool OnConfirmClosing(object callSource)
         {
-            await base.OnInitializeAsync();
-
-            await Task.WhenAll(this._childControllers.Select(ctrl => ctrl.InitializeAsync()));
-        }
-
-        protected IController CreateChildController(Type controllerType)
-        {
-            IController controller;
-            if (this.IsInitialized)
-            {
-                controller = this.ChildControllerFactory.CreateAndInitializeController(controllerType);
-            }
-            else
-            {
-                controller = this.ChildControllerFactory.CreateController(controllerType);
-            }
-
-            this._childControllers.Add(controller);
-            return controller;
-        }
-
-        protected TController CreateChildController<TController>() where TController : IController
-        {
-            return (TController) this.CreateChildController(typeof(TController));
+            return true;
         }
 
         protected virtual void Dispose(bool disposing)
@@ -96,17 +52,6 @@ namespace GF.DillyDally.Mvvmc
             if (disposing)
             {
             }
-        }
-
-        protected virtual bool OnConfirmClosing(object callSource)
-        {
-            var confirmClosing = true;
-            foreach (var childController in this._childControllers)
-            {
-                confirmClosing = confirmClosing && childController.ConfirmClosing(callSource);
-            }
-
-            return confirmClosing;
         }
 
         protected virtual void OnClose()

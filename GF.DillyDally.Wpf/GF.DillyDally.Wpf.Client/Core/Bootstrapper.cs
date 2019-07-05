@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
-using GF.DillyDally.Wpf.Client.ApplicationState;
+using GF.DillyDally.Wpf.Client.Core.ApplicationState;
 using GF.DillyDally.Wpf.Client.Core.DataTemplates;
+using GF.DillyDally.Wpf.Client.Core.Ioc;
 using GF.DillyDally.Wpf.Client.Core.Navigator;
 using LightInject;
 
@@ -17,9 +18,7 @@ namespace GF.DillyDally.Wpf.Client.Core
         private readonly NavigationInitializer _navigationInitializer = new NavigationInitializer();
         private readonly IServiceContainer _serviceContainer;
 
-        public Bootstrapper(IApplicationRuntime application) : this(application, new ServiceContainer(
-            new ContainerOptions
-                {EnablePropertyInjection = false, EnableVariance = false}))
+        public Bootstrapper(IApplicationRuntime application) : this(application, ServiceContainerBuilder.CreateDependencyInjectionContainer())
         {
         }
 

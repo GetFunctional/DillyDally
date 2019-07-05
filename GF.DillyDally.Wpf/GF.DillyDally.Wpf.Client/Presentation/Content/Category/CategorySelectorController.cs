@@ -3,17 +3,17 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using GF.DillyDally.Data.Sqlite;
-using GF.DillyDally.Mvvmc;
 using GF.DillyDally.ReadModel.Views.Selectors;
+using GF.DillyDally.Wpf.Client.Core.Mvvmc;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Content.Category
 {
-    public class CategorySelectorController : ControllerBase<CategorySelectorViewModel>
+    internal class CategorySelectorController : DDControllerBase<CategorySelectorViewModel>
     {
         private readonly DatabaseFileHandler _databaseFileHandler;
 
-        public CategorySelectorController(CategorySelectorViewModel viewModel, DatabaseFileHandler databaseFileHandler, ControllerFactory controllerFactory) :
-            base(viewModel,controllerFactory)
+        public CategorySelectorController(CategorySelectorViewModel viewModel, DatabaseFileHandler databaseFileHandler,ControllerFactory controllerFactory)
+            : base(viewModel, controllerFactory)
         {
             this._databaseFileHandler = databaseFileHandler;
         }

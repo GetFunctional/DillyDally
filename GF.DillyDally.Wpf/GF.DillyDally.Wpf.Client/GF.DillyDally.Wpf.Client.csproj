@@ -150,16 +150,25 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ApplicationState\ApplicationRuntime.cs" />
-    <Compile Include="ApplicationState\DialogHandler.cs" />
+    <Compile Include="Core\ApplicationState\ApplicationRuntime.cs" />
+    <Compile Include="Core\ApplicationState\DialogHandler.cs" />
+    <Compile Include="Core\Commands\ReactiveCommandFactory.cs" />
     <Compile Include="Core\DataBootstrapper.cs" />
     <Compile Include="Core\DataStoreInitializer.cs" />
     <Compile Include="Core\DataTemplates\DataTemplateInitializer.cs" />
     <Compile Include="Core\Dialoge\DialogCommandResult.cs" />
     <Compile Include="Core\Dialoge\DialogSettings.cs" />
     <Compile Include="Core\Dialoge\IDialogSettings.cs" />
-    <Compile Include="ApplicationState\IApplicationRuntime.cs" />
+    <Compile Include="Core\ApplicationState\IApplicationRuntime.cs" />
+    <Compile Include="Core\Exceptions\ExceptionEvaluator.cs" />
+    <Compile Include="Core\Ioc\AnnotatedPropertyDependencySelector.cs" />
+    <Compile Include="Core\Ioc\InjectAttribute.cs" />
+    <Compile Include="Core\Ioc\ServiceContainerBuilder.cs" />
     <Compile Include="Core\MvvmcServiceFactoryAdapter.cs" />
+    <Compile Include="Core\Mvvmc\ControllerFactory.cs" />
+    <Compile Include="Core\Mvvmc\DDControllerBase.cs" />
+    <Compile Include="Core\Mvvmc\DialogControllerBase.cs" />
+    <Compile Include="Core\Mvvmc\MvvmcServiceFactory.cs" />
     <Compile Include="Core\NavigationService.cs" />
     <Compile Include="Core\TypeRegistrar.cs" />
     <Compile Include="Presentation\Content\Activities\Container\ActivityItemViewModelFactory.cs" />
@@ -203,7 +212,7 @@
     <Compile Include="Core\Dialoge\DialogConfirmed.cs" />
     <Compile Include="Core\Dialoge\DialogRequest.cs" />
     <Compile Include="Core\Navigator\NavigationTargetBase.cs" />
-    <Compile Include="ApplicationState\NavigationHandler.cs" />
+    <Compile Include="Core\ApplicationState\NavigationHandler.cs" />
     <Compile Include="Core\Navigator\NavigationResponse.cs" />
     <Compile Include="Core\Navigator\NavigationInitializer.cs" />
     <Compile Include="Core\Navigator\ContentNavigator.cs" />

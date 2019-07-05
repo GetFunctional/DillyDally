@@ -1,6 +1,7 @@
-﻿using GF.DillyDally.Mvvmc;
-using GF.DillyDally.Mvvmc.Contracts;
+﻿using GF.DillyDally.Mvvmc.Contracts;
+using GF.DillyDally.Wpf.Client.Core.Commands;
 using GF.DillyDally.Wpf.Client.Core.Dialoge;
+using GF.DillyDally.Wpf.Client.Core.Mvvmc;
 using GF.DillyDally.Wpf.Client.Core.Navigator;
 using GF.DillyDally.Wpf.Client.Presentation.Content.Commands;
 using GF.DillyDally.Wpf.Client.Presentation.ContentNavigation;
@@ -9,19 +10,21 @@ using MediatR;
 
 namespace GF.DillyDally.Wpf.Client.Presentation
 {
-    internal sealed class ShellController : ControllerBase<ShellViewModel>
+    internal sealed class ShellController : DDControllerBase<ShellViewModel>
     {
         private readonly ActivityCommands _activityCommands;
-        private readonly TaskCommands _taskCommands;
         private readonly ContentBrowserController _contentBrowserController;
         private readonly HeaderMenuController _headerMenuController;
-
-        public ShellController(ShellViewModel viewModel, ControllerFactory controllerFactory, IMediator mediator) :
-            base(
-                viewModel, controllerFactory)
+        private readonly TaskCommands _taskCommands;
+        
+        public ShellController(ShellViewModel viewModel, IMediator mediator, ReactiveCommandFactory reactiveCommandFactory,ControllerFactory controllerFactory)
+            : base(viewModel, controllerFactory)
         {
-            this._taskCommands = new TaskCommands(controllerFactory, mediator);
-            this._activityCommands = new ActivityCommands(controllerFactory, mediator);
+            this._taskCommands = new TaskCommands(this.ChildControllerFactory, mediator);
+            this._activityCommands = new ActivityCommands(this.ChildControllerFactory, mediator,reactiveCommandFactory);
+            this.AddDisposable(this._taskCommands);
+            this.AddDisposable(this._activityCommands);
+
             this.ViewModel.OverlayViewModel = new OverlayViewModel();
             this.ViewModel.NavigateInNavigatorCommand = this._taskCommands.NavigateInNavigatorCommand;
             this.ViewModel.CreateNewActivityCommand = this._activityCommands.CreateNewActivityCommand;

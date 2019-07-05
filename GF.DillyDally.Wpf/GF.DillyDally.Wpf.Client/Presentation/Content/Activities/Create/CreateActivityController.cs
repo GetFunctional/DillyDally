@@ -1,23 +1,21 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using GF.DillyDally.Mvvmc;
 using GF.DillyDally.Mvvmc.Contracts;
 using GF.DillyDally.ReadModel.Projection.Activities.Repository;
 using GF.DillyDally.Wpf.Client.Core.Dialoge;
+using GF.DillyDally.Wpf.Client.Core.Mvvmc;
 using GF.DillyDally.WriteModel.Domain.Activities;
-using GF.DillyDally.WriteModel.Domain.Activities.Commands;
-using MediatR;
 using ReactiveUI;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create
 {
-    public class CreateActivityController : DialogControllerBase<CreateActivityViewModel>
+    internal class CreateActivityController : DialogControllerBase<CreateActivityViewModel>
     {
         private readonly ActivityService _activityService;
 
-        public CreateActivityController(CreateActivityViewModel viewModel, ActivityService activityService, ControllerFactory controllerFactory) :
-            base(viewModel,controllerFactory)
+        public CreateActivityController(CreateActivityViewModel viewModel, ActivityService activityService,ControllerFactory controllerFactory)
+            : base(viewModel, controllerFactory)
         {
             this._activityService = activityService;
 

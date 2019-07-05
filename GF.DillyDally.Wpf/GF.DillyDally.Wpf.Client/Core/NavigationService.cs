@@ -1,26 +1,20 @@
 ﻿using System;
 using System.Threading.Tasks;
-using GF.DillyDally.Mvvmc;
 using GF.DillyDally.Mvvmc.Contracts;
 using GF.DillyDally.Wpf.Client.Core.Dialoge;
 using GF.DillyDally.Wpf.Client.Core.Navigator;
 using MediatR;
-using ReactiveUI;
-using Unit = System.Reactive.Unit;
 
 namespace GF.DillyDally.Wpf.Client.Core
 {
-    public class NavigationService
+    internal sealed class NavigationService
     {
         private readonly IMediator _mediator;
 
         public NavigationService(IMediator mediator)
         {
             this._mediator = mediator;
-            this.NavigateInNavigatorCommand = ReactiveCommand.CreateFromTask<Guid>(this.NavigateToTargetAsync);
         }
-
-        public ReactiveCommand<Guid, Unit> NavigateInNavigatorCommand { get; }
 
         public async Task<NavigationResponse> NavigateToTargetAsync(Guid targetId)
         {

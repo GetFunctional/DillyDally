@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using GF.DillyDally.Data.Sqlite;
-using GF.DillyDally.Mvvmc;
 using GF.DillyDally.Mvvmc.Contracts;
 using GF.DillyDally.Wpf.Client.Core.Dialoge;
+using GF.DillyDally.Wpf.Client.Core.Mvvmc;
 using GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Container;
 using GF.DillyDally.Wpf.Client.Presentation.Content.Category;
 using GF.DillyDally.WriteModel.Domain.Tasks;
@@ -13,7 +13,7 @@ using ReactiveUI;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Create
 {
-    public class CreateTaskController : DialogControllerBase<CreateTaskViewModel>
+    internal class CreateTaskController : DialogControllerBase<CreateTaskViewModel>
     {
         private readonly ActivityContainerController _activityContainerController;
         private readonly CategorySelectorController _categorySelectorController;
@@ -21,8 +21,8 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Create
         private readonly TaskService _taskService;
         private Guid? _presetLane;
 
-        public CreateTaskController(CreateTaskViewModel viewModel, DatabaseFileHandler databaseFileHandler, TaskService taskService, ControllerFactory controllerFactory) :
-            base(viewModel,controllerFactory)
+        public CreateTaskController(CreateTaskViewModel viewModel, DatabaseFileHandler databaseFileHandler, TaskService taskService,ControllerFactory controllerFactory)
+            : base(viewModel, controllerFactory)
         {
             this._databaseFileHandler = databaseFileHandler;
             this._taskService = taskService;
@@ -30,7 +30,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Create
             this._activityContainerController = this.CreateChildController<ActivityContainerController>();
 
             viewModel.CreateTaskCommand =
-                ReactiveCommand.CreateFromTask(async () => await this.CompleteProcess());
+                this.CommandFactory.CreateFromTask(async () => await this.CompleteProcess());
             viewModel.CancelProcessCommand =
                 ReactiveCommand.Create(this.CancelProcess);
 

@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Reflection;
-using GF.DillyDally.Mvvmc;
 using GF.DillyDally.Mvvmc.Contracts;
+using GF.DillyDally.Wpf.Client.Core.Commands;
+using GF.DillyDally.Wpf.Client.Core.Mvvmc;
 using LightInject;
 using MediatR;
 using MediatR.Pipeline;
@@ -23,14 +24,9 @@ namespace GF.DillyDally.Wpf.Client.Core
 
         internal void RegisterMediatRFramework(IServiceContainer serviceContainer)
         {
+            serviceContainer.Register<ServiceFactory>(fac => fac.GetInstance);
             serviceContainer.Register<IMediator, Mediator>();
-            serviceContainer.RegisterAssembly(typeof(Bootstrapper).GetTypeInfo().Assembly,
-                (serviceType, implementingType) =>
-                    serviceType.IsConstructedGenericType &&
-                    (
-                        serviceType.GetGenericTypeDefinition() == typeof(IRequestHandler<,>) ||
-                        serviceType.GetGenericTypeDefinition() == typeof(INotificationHandler<>)
-                    ));
+            serviceContainer.RegisterAssembly(typeof(Bootstrapper).GetTypeInfo().Assembly, this.IsRequestHandler);
 
             serviceContainer.RegisterOrdered(typeof(IPipelineBehavior<,>),
                 new[]
@@ -38,16 +34,20 @@ namespace GF.DillyDally.Wpf.Client.Core
                     typeof(RequestPreProcessorBehavior<,>),
                     typeof(RequestPostProcessorBehavior<,>)
                 }, type => new PerContainerLifetime());
+        }
 
-            serviceContainer.Register<ServiceFactory>(fac => fac.GetInstance);
+        private bool IsRequestHandler(Type serviceType, Type implementingType)
+        {
+            return serviceType.IsConstructedGenericType &&
+                   (
+                       serviceType.GetGenericTypeDefinition() == typeof(IRequestHandler<,>) ||
+                       serviceType.GetGenericTypeDefinition() == typeof(INotificationHandler<>)
+                   );
         }
 
         private bool IsControllerOrViewModelType(Type serviceType, Type implementingType)
         {
-            var isAbstract = implementingType.IsAbstract;
-            var isController = typeof(IController).IsAssignableFrom(implementingType);
-            var isViewModel = typeof(IViewModel).IsAssignableFrom(implementingType);
-            return !isAbstract && (isController || isViewModel);
+            return !implementingType.IsAbstract && (typeof(IController).IsAssignableFrom(serviceType) || typeof(IViewModel).IsAssignableFrom(serviceType));
         }
 
 
@@ -56,6 +56,7 @@ namespace GF.DillyDally.Wpf.Client.Core
             serviceContainer.RegisterInstance(serviceContainer);
             serviceContainer.Register<IMvvmcServiceFactory, MvvmcServiceFactoryAdapter>();
             serviceContainer.Register<ControllerFactory>();
+            serviceContainer.Register<ReactiveCommandFactory>();
         }
     }
 }

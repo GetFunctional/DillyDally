@@ -91,9 +91,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\TestData.cs" />
-    <Compile Include="Core\UnittestApplicationRuntime.cs" />
     <Compile Include="Guideline\EventClassGuideline.cs" />
     <Compile Include="Core\TestInfrastructure.cs" />
+    <Compile Include="Mvvmc\ShellControllerTests.cs" />
     <Compile Include="Mvvmc\TestModels\ChildTestController.cs" />
     <Compile Include="Mvvmc\TestModels\ChildViewModel.cs" />
     <Compile Include="Mvvmc\ControllerTests.cs" />

@@ -1,20 +1,21 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using GF.DillyDally.Data.Sqlite;
-using GF.DillyDally.Mvvmc;
 using GF.DillyDally.ReadModel.Views.TaskDetails;
+using GF.DillyDally.Wpf.Client.Core.Mvvmc;
 using GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Container;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Details
 {
-    public sealed class TaskDetailsController : ControllerBase<TaskDetailsViewModel>
+    internal sealed class TaskDetailsController : DDControllerBase<TaskDetailsViewModel>
     {
         private readonly ActivityContainerController _activityContainerController;
         private readonly DatabaseFileHandler _databaseFileHandler;
         private readonly TaskDetailDataConverter _taskDetailDataConverter = new TaskDetailDataConverter();
 
-        public TaskDetailsController(TaskDetailsViewModel viewModel, ControllerFactory controllerFactory,
-            DatabaseFileHandler databaseFileHandler) : base(viewModel, controllerFactory)
+        public TaskDetailsController(TaskDetailsViewModel viewModel, DatabaseFileHandler databaseFileHandler,ControllerFactory controllerFactory)
+            : base(viewModel, controllerFactory)
         {
             this._databaseFileHandler = databaseFileHandler;
             this._activityContainerController = this.CreateChildController<ActivityContainerController>();
@@ -32,10 +33,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Details
                 var taskDetailRepository = new TaskDetailsRepository();
                 var taskDetailData = await taskDetailRepository.GetTaskDetailsAsync(connection, taskId);
 
-                this.ViewModel.TaskName = taskDetailData.Name;
-                this.ViewModel.DueDate = taskDetailData.DueDate;
-                this.ViewModel.DefinitionOfDone = taskDetailData.DefinitionOfDone;
-                this.ViewModel.Description = taskDetailData.Description;
+                this.ApplyDataToViewModel(taskDetailData);
 
                 this._activityContainerController.AssignActivities(
                     this._taskDetailDataConverter.ConvertToActivityItemViewModels(taskDetailData.TaskActivities));
@@ -43,6 +41,19 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Details
 
 
             this.ViewModel.IsBusy = false;
+        }
+
+        private void ApplyDataToViewModel(TaskDetailsEntity taskDetailData)
+        {
+            this.ViewModel.TaskName = taskDetailData.Name;
+            this.ViewModel.DueDate = taskDetailData.DueDate;
+            this.ViewModel.DefinitionOfDone = taskDetailData.DefinitionOfDone;
+            this.ViewModel.Description = taskDetailData.Description;
+
+            if (taskDetailData.TaskImages.Any(x => x.IsPreviewImage))
+            {
+                this.ViewModel.TaskPreviewImageBytes = taskDetailData.TaskImages.First(x => x.IsPreviewImage).ImageBytesMedium;
+            }
         }
     }
 }

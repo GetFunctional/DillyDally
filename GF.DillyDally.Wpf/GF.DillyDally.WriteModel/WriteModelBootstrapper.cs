@@ -1,4 +1,5 @@
-﻿using System.Data.SQLite;
+﻿using System;
+using System.Data.SQLite;
 using System.Reflection;
 using GF.DillyDally.WriteModel.Domain.Activities;
 using GF.DillyDally.WriteModel.Domain.Tasks;
@@ -17,8 +18,6 @@ namespace GF.DillyDally.WriteModel
     {
         private static readonly byte[] EncryptionKey =
         {
-            //432A462D4A614E64
-
             0x4, 0x3, 0x2, 0xA, 0x4, 0x6, 0x6, 0x2, 0xD, 0x4, 0xA, 0x6, 0x1, 0x4, 0xe, 0x6
         };
 
@@ -26,7 +25,7 @@ namespace GF.DillyDally.WriteModel
         {
             this.RegisterServices(serviceContainer);
             var storeEvents = this.WireupEventStore(storeConnectionString);
-            RegisterMediations(serviceContainer);
+            this.RegisterMediations(serviceContainer);
             serviceContainer.RegisterInstance(typeof(IStoreEvents), storeEvents);
 
             this.RegisterCommandServices(serviceContainer);
@@ -38,15 +37,9 @@ namespace GF.DillyDally.WriteModel
             serviceContainer.Register<ActivityService>();
         }
 
-        private static void RegisterMediations(IServiceContainer serviceContainer)
+        private void RegisterMediations(IServiceContainer serviceContainer)
         {
-            serviceContainer.RegisterAssembly(typeof(WriteModelBootstrapper).GetTypeInfo().Assembly,
-                (serviceType, implementingType) =>
-                    serviceType.IsConstructedGenericType &&
-                    (
-                        serviceType.GetGenericTypeDefinition() == typeof(IRequestHandler<,>) ||
-                        serviceType.GetGenericTypeDefinition() == typeof(INotificationHandler<>)
-                    ));
+            serviceContainer.RegisterAssembly(typeof(WriteModelBootstrapper).GetTypeInfo().Assembly, this.IsRequestHandler);
 
             serviceContainer.RegisterOrdered(typeof(IPipelineBehavior<,>),
                 new[]
@@ -54,8 +47,15 @@ namespace GF.DillyDally.WriteModel
                     typeof(RequestPreProcessorBehavior<,>),
                     typeof(RequestPostProcessorBehavior<,>)
                 }, type => new PerContainerLifetime());
+        }
 
-            serviceContainer.Register<ServiceFactory>(fac => fac.GetInstance);
+        private bool IsRequestHandler(Type serviceType, Type implementingType)
+        {
+            return serviceType.IsConstructedGenericType &&
+                   (
+                       serviceType.GetGenericTypeDefinition() == typeof(IRequestHandler<,>) ||
+                       serviceType.GetGenericTypeDefinition() == typeof(INotificationHandler<>)
+                   );
         }
 
         private void RegisterServices(IServiceContainer serviceContainer)

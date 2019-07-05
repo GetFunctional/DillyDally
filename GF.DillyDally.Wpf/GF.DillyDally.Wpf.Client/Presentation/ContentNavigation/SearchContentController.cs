@@ -2,23 +2,22 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using GF.DillyDally.Mvvmc;
+using GF.DillyDally.Wpf.Client.Core.Mvvmc;
 using GF.DillyDally.Wpf.Client.Core.Navigator;
 using MediatR;
-using ReactiveUI;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
 {
-    public class SearchContentController : ControllerBase<SearchContentViewModel>
+    internal class SearchContentController : DDControllerBase<SearchContentViewModel>
     {
         private readonly IMediator _mediator;
 
         public SearchContentController(INavigationTargetProvider navigationTargetProvider, IMediator mediator, ControllerFactory controllerFactory) :
-            base(new SearchContentViewModel(CreateNavigationTargetsFrom(navigationTargetProvider)),controllerFactory)
+            base(new SearchContentViewModel(CreateNavigationTargetsFrom(navigationTargetProvider)), controllerFactory)
         {
             this._mediator = mediator;
 
-            this.ViewModel.NavigateToTargetCommand = ReactiveCommand.CreateFromTask<Guid>(this.NavigateToTargetAsync);
+            this.ViewModel.NavigateToTargetCommand = this.CommandFactory.CreateFromTask<Guid>(this.NavigateToTargetAsync);
         }
 
         private async Task NavigateToTargetAsync(Guid targetId)

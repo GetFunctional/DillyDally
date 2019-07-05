@@ -1,10 +1,11 @@
-﻿using GF.DillyDally.Mvvmc;
+﻿using GF.DillyDally.Wpf.Client.Core.Mvvmc;
 
 namespace GF.DillyDally.Unittests.Mvvmc.TestModels
 {
-    internal class ChildTestController : ControllerBase<ChildViewModel>
+    internal class ChildTestController : DDControllerBase<ChildViewModel>
     {
-        public ChildTestController(ChildViewModel viewModel, ControllerFactory controllerFactory) : base(viewModel, controllerFactory)
+        public ChildTestController(ChildViewModel viewModel,ControllerFactory controllerFactory)
+            : base(viewModel, controllerFactory)
         {
         }
     }

@@ -5,19 +5,18 @@ using System.Linq;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 using GF.DillyDally.Data.Sqlite;
-using GF.DillyDally.Mvvmc;
 using GF.DillyDally.ReadModel.Projection.Activities.Repository;
+using GF.DillyDally.Wpf.Client.Core.Mvvmc;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Container
 {
-    public sealed class ActivityContainerController : ControllerBase<ActivityContainerViewModel>
+    internal sealed class ActivityContainerController : DDControllerBase<ActivityContainerViewModel>
     {
-        private IDisposable _disposableObserver;
         private readonly DatabaseFileHandler _fileHandler;
+        private IDisposable _disposableObserver;
 
-        public ActivityContainerController(ActivityContainerViewModel viewModel, ControllerFactory controllerFactory,
-            DatabaseFileHandler fileHandler) :
-            base(viewModel, controllerFactory)
+        public ActivityContainerController(ActivityContainerViewModel viewModel, DatabaseFileHandler fileHandler,ControllerFactory controllerFactory)
+            : base(viewModel, controllerFactory)
         {
             this._fileHandler = fileHandler;
             this.ActivateAddingNewActivities();
