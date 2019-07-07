@@ -2,7 +2,7 @@
 
 namespace GF.DillyDally.WriteModel.Domain.Files.Commands
 {
-    public sealed class StoreFileCommand : IRequest<StoreFileResponse>
+    internal sealed class StoreFileCommand : IRequest<StoreFileResponse>
     {
         public StoreFileCommand(string filePath)
         {

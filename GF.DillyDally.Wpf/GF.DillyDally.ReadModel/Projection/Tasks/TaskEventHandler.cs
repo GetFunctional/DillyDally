@@ -75,12 +75,9 @@ namespace GF.DillyDally.ReadModel.Projection.Tasks
             using (var connection = this._readModelStore.OpenConnection())
             {
                 var taskRepository = new TaskRepository();
-                var imageRepository = new ImageRepository();
-                var PreviewImageFileIdForFile =
-                    await imageRepository.GetPreviewImageFileIdForFileAsync(connection, notification.FileId);
                 var taskId = notification.AggregateId;
 
-                await taskRepository.ChangePreviewImageAsync(connection, taskId, PreviewImageFileIdForFile);
+                await taskRepository.ChangePreviewImageAsync(connection, taskId, notification.FileId);
             }
         }
 

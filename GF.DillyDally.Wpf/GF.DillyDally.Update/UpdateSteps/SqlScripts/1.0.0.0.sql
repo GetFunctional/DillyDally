@@ -17,7 +17,8 @@ CREATE TABLE [Images](
   [ImageId] GUID NOT NULL UNIQUE,
   [Binary] BLOB NOT NULL, 
   [OriginalFileId] GUID NOT NULL REFERENCES [Files]([FileId]),
-  [SizeType] INTEGER NOT NULL);
+  [SizeType] INTEGER NOT NULL,
+  UNIQUE ([OriginalFileId],[SizeType]));
 
 CREATE UNIQUE INDEX [IX_Images_ImageId] ON [Images]([ImageId]);
 GO
@@ -131,8 +132,8 @@ CREATE TABLE [TaskImages]
 	[RowID] INTEGER PRIMARY KEY AUTOINCREMENT, 
 	[TaskImageId] GUID NOT NULL UNIQUE,	
 	[TaskId] GUID NOT NULL REFERENCES [Tasks]([TaskId]),
-	[ImageFileId] GUID NOT NULL REFERENCES [Files]([FileId]),
-	UNIQUE ([TaskId],[ImageFileId])
+	[OriginalFileId] GUID NOT NULL REFERENCES [Files]([FileId]),
+	UNIQUE ([TaskId],[OriginalFileId])
 	);
 
 CREATE UNIQUE INDEX [IX_TaskImages_TaskImageId] ON [TaskImages]([TaskImageId]);

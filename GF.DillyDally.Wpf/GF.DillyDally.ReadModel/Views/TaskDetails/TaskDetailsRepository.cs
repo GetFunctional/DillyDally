@@ -23,14 +23,25 @@ SELECT ae.ActivityId, ae.Name, ae.Description, ae.ActivityType, ae.ActivityValue
 FROM {ActivityEntity.TableNameConstant} ae 
 JOIN {TaskActivityEntity.TableNameConstant} tae ON tae.ActivityId = ae.ActivityId
 LEFT JOIN {ImageEntity.TableNameConstant} img ON ae.PreviewImageFileId = img.OriginalFileId AND img.SizeType = {(int) ImageSizeType.PreviewSize}
-WHERE tae.TaskId = @taskId;";
+WHERE tae.TaskId = @taskId;
+SELECT ti.OriginalFileId, 
+( SELECT Images.Binary FROM {ImageEntity.TableNameConstant} WHERE Images.OriginalFileId = img.OriginalFileId AND Images.SizeType = 0 ) AS ImageBytesSmall,
+( SELECT Images.Binary FROM {ImageEntity.TableNameConstant} WHERE Images.OriginalFileId = img.OriginalFileId AND Images.SizeType = 1 ) AS ImageBytesMedium,
+(CASE WHEN ti.OriginalFileId = t.PreviewImageFileId THEN TRUE ELSE FALSE END) AS IsPreviewImage
+FROM {TaskImageEntity.TableNameConstant} ti
+JOIN {ImageEntity.TableNameConstant} img ON img.OriginalFileId = ti.OriginalFileId 
+JOIN Tasks t ON ti.TaskId = t.TaskId 
+WHERE ti.TaskId = @taskId
+GROUP BY ti.OriginalFileId;";
 
             using (var multiSelect = await connection.QueryMultipleAsync(sql, new {taskId}))
             {
                 var taskEntity = await multiSelect.ReadSingleAsync<TaskDetailsEntity>();
                 var taskActivities = await multiSelect.ReadAsync<TaskDetailsActivityEntity>();
+                var taskImages = await multiSelect.ReadAsync<TaskDetailsImageEntity>();
 
                 taskEntity.AssignTaskActivities(taskActivities);
+                taskEntity.AssignTaskImages(taskImages);
 
                 return taskEntity;
             }

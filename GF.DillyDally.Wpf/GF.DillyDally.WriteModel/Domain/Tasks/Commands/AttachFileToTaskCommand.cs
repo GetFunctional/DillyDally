@@ -3,7 +3,7 @@ using MediatR;
 
 namespace GF.DillyDally.WriteModel.Domain.Tasks.Commands
 {
-    public sealed class AttachFileToTaskCommand : IRequest<AttachFileToTaskResponse>
+    internal sealed class AttachFileToTaskCommand : IRequest<AttachFileToTaskResponse>
     {
         public AttachFileToTaskCommand(Guid taskId, string filePath)
         {
@@ -11,6 +11,13 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks.Commands
             this.FilePath = filePath;
         }
 
+        public AttachFileToTaskCommand(Guid taskId, Guid fileId)
+        {
+            this.TaskId = taskId;
+            this.FileId = fileId;
+        }
+
+        public Guid? FileId { get; }
         public Guid TaskId { get; }
         public string FilePath { get; }
     }

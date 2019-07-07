@@ -4,7 +4,7 @@ namespace GF.DillyDally.ReadModel.Views.TaskDetails
 {
     public class TaskDetailsImageEntity
     {
-        public Guid ImageId { get; set; }
+        public Guid OriginalFileId { get; set; }
 
         public byte[] ImageBytesSmall { get; set; }
 

@@ -15,7 +15,7 @@ namespace GF.DillyDally.ReadModel.Projection.Tasks.Repository
         {
             var querySql = $@"SELECT * 
 FROM {ImageEntity.TableNameConstant} ie 
-JOIN {TaskImageEntity.TableNameConstant} tie ON ie.OriginalFileId = tie.ImageFileId 
+JOIN {TaskImageEntity.TableNameConstant} tie ON ie.OriginalFileId = tie.OriginalFileId 
 WHERE tie.TaskId = @taskId";
             return (await connection.QueryAsync<ImageEntity>(querySql, new {taskId})).ToList();
         }
@@ -31,7 +31,7 @@ WHERE tie.TaskId = @taskId";
             return new TaskImageEntity
             {
                 TaskId = taskId,
-                ImageFileId = originalFileId,
+                OriginalFileId = originalFileId,
                 TaskImageId = this.GuidGenerator.GenerateGuid()
             };
         }

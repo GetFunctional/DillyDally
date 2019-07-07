@@ -8,6 +8,7 @@ using GF.DillyDally.ReadModel.Projection.Lanes.Repository;
 using GF.DillyDally.ReadModel.Projection.Tasks.Repository;
 using GF.DillyDally.Shared.Images;
 using GF.DillyDally.Unittests.Core;
+using GF.DillyDally.WriteModel.Domain.Tasks;
 using GF.DillyDally.WriteModel.Domain.Tasks.Commands;
 using GF.DillyDally.WriteModel.Domain.Tasks.Exceptions;
 using LightInject;
@@ -79,26 +80,19 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
             using (var connection = this._testInfrastructure.OpenDatabaseConnection())
             {
                 // Arrange
-                var commandDispatcher = this._testInfrastructure.DiContainer.GetInstance<IMediator>();
+                var service = this._testInfrastructure.DiContainer.GetInstance<TaskService>();
                 var taskRepository = new TaskRepository();
-                var imageRepository = new ImageRepository();
 
                 var newTask = await this.CreateNewTask();
                 var fileName = "TestImage.jpg";
                 var filePath = Path.Combine(TestContext.CurrentContext.TestDirectory, "TestResources", fileName);
 
-                var attachImageCommand = new AttachFileToTaskCommand(newTask.TaskId, filePath);
-                var attachResult = await commandDispatcher.Send(attachImageCommand);
-
                 // Act
-                var replacePrimaryImageCommand = new AssignPreviewImageCommand(newTask.TaskId, attachResult.FileId);
-                await commandDispatcher.Send(replacePrimaryImageCommand);
+                var result = await service.AttachPreviewImageToTaskAsync(newTask.TaskId, filePath);
 
                 // Assert
                 var taskData = await taskRepository.GetByIdAsync(connection, newTask.TaskId);
-                var imageData = await imageRepository.GetByOriginalFileIdAsync(connection, attachResult.FileId);
-                Assert.That(taskData.PreviewImageFileId,
-                    Is.EqualTo(imageData.Single(x => x.SizeType == ImageSizeType.PreviewSize).ImageId));
+                Assert.That(taskData.PreviewImageFileId, Is.EqualTo(result.FileId));
             }
         }
 

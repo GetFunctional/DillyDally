@@ -29,5 +29,10 @@ namespace GF.DillyDally.ReadModel.Views.TaskDetails
         {
             this.TaskActivities = new List<TaskDetailsActivityEntity>(activityEntities);
         }
+
+        internal void AssignTaskImages(IEnumerable<TaskDetailsImageEntity> imageEntities)
+        {
+            this.TaskImages = new List<TaskDetailsImageEntity>(imageEntities);
+        }
     }
 }

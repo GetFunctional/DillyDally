@@ -3,7 +3,7 @@ using MediatR;
 
 namespace GF.DillyDally.WriteModel.Domain.Tasks.Commands
 {
-    public sealed class AssignPreviewImageCommand : IRequest<AssignPreviewImageResponse>
+    internal sealed class AssignPreviewImageCommand : IRequest<AssignPreviewImageResponse>
     {
         public AssignPreviewImageCommand(Guid taskId, Guid fileId)
         {

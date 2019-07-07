@@ -53,6 +53,11 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Create
                 var taskService = this.ControllerServices.GetDomainService<TaskService>();
 
                 var task = await taskService.CreateNewTaskAsync(taskName, category.CategoryId, this._presetLane);
+                var previewImage = basicInfos.PreviewImageBytes;
+                if (previewImage != null)
+                {
+                    await taskService.AttachPreviewImageToTaskAsync(task.TaskId, previewImage);
+                }
 
                 var activities = this.GetTaskActivities();
                 if (activities.Any())

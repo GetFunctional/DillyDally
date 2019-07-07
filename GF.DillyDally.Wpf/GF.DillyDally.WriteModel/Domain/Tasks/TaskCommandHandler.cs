@@ -1,4 +1,6 @@
-﻿using System.Threading;
+﻿using System;
+using System.Diagnostics;
+using System.Threading;
 using System.Threading.Tasks;
 using GF.DillyDally.Data.Sqlite;
 using GF.DillyDally.WriteModel.Domain.Categories;
@@ -56,7 +58,7 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks
             aggregate.AssignPreviewImage(request.FileId);
             await this.AggregateRepository.SaveAsync(aggregate);
 
-            return new AssignPreviewImageResponse();
+            return new AssignPreviewImageResponse(request.FileId);
         }
 
         #endregion
@@ -66,16 +68,34 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks
         public async Task<AttachFileToTaskResponse> Handle(AttachFileToTaskCommand request,
             CancellationToken cancellationToken)
         {
+            if (!request.FileId.HasValue && string.IsNullOrEmpty(request.FilePath))
+            {
+                throw new ArgumentException();
+            }
+
             using (var connection = this._writeModelStore.OpenConnection())
             {
-                var fileCreateCommand = new StoreFileCommand(request.FilePath);
-                var fileInStore = await FileCommandHandler.GetOrCreateFileAsync(fileCreateCommand,
-                    this.AggregateRepository, connection, this.GuidGenerator);
+                Guid fileId;
+                var fileExistedBefore = false;
+                if (!request.FileId.HasValue && !string.IsNullOrEmpty(request.FilePath))
+                {
+                    var fileCreateCommand = new StoreFileCommand(request.FilePath);
+                    var fileInStore = await FileCommandHandler.GetOrCreateFileAsync(fileCreateCommand,
+                        this.AggregateRepository, connection, this.GuidGenerator);
+                    fileId = fileInStore.FileId;
+                    fileExistedBefore = fileInStore.FileExistedBefore;
+                }
+                else
+                {
+                    Debug.Assert(request.FileId != null, "request.FileId != null");
+                    fileId = request.FileId.Value;
+                    fileExistedBefore = true;
+                }
 
                 var task = this.AggregateRepository.GetById<TaskAggregateRoot>(request.TaskId);
-                task.AttachFile(fileInStore.FileId);
+                task.AttachFile(fileId);
                 await this.AggregateRepository.SaveAsync(task);
-                return new AttachFileToTaskResponse(fileInStore.FileId, fileInStore.FileExistedBefore);
+                return new AttachFileToTaskResponse(fileId, fileExistedBefore);
             }
         }
 

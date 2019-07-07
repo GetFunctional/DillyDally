@@ -20,17 +20,7 @@ namespace GF.DillyDally.ReadModel.Projection.Images.Repository
                 $"WHERE {nameof(ImageEntity.OriginalFileId)} = @id";
             return (await connection.QueryAsync<ImageEntity>(querySql, new {id = fileId})).ToList();
         }
-
-        public async Task<Guid> GetPreviewImageFileIdForFileAsync(IDbConnection connection, Guid fileId)
-        {
-            var querySql =
-                $"SELECT {nameof(ImageEntity.ImageId)} " +
-                $"FROM {ImageEntity.TableNameConstant} " +
-                $"WHERE {nameof(ImageEntity.OriginalFileId)} = @id AND {nameof(ImageEntity.SizeType)} = {(int) ImageSizeType.PreviewSize}";
-            var imageEntity = await connection.QuerySingleAsync<ImageEntity>(querySql, new {id = fileId});
-            return imageEntity.ImageId;
-        }
-
+        
         internal async Task<IList<ImageEntity>> StoreImagesAsync(IDbConnection connection, FileEntity file)
         {
             var imagesForFile = await this.GetByOriginalFileIdAsync(connection, file.FileId);
