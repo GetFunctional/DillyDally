@@ -12,8 +12,8 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
     {
         private readonly IMediator _mediator;
 
-        public SearchContentController(INavigationTargetProvider navigationTargetProvider, IMediator mediator, ControllerFactory controllerFactory) :
-            base(new SearchContentViewModel(CreateNavigationTargetsFrom(navigationTargetProvider)), controllerFactory)
+        public SearchContentController(INavigationTargetProvider navigationTargetProvider, IMediator mediator, IControllerServices controllerServices) :
+            base(new SearchContentViewModel(CreateNavigationTargetsFrom(navigationTargetProvider)), controllerServices)
         {
             this._mediator = mediator;
 

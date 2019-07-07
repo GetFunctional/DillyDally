@@ -12,19 +12,19 @@ namespace GF.DillyDally.WriteModel.Domain.Files
     internal sealed class FileCommandHandler : CommandHandlerBase,
         IRequestHandler<StoreFileCommand, StoreFileResponse>
     {
-        private readonly DatabaseFileHandler _databaseFileHandler;
+        private readonly IWriteModelStore _writeModelStore;
 
-        public FileCommandHandler(IAggregateRepository aggregateRepository, DatabaseFileHandler databaseFileHandler) : base(
+        public FileCommandHandler(IAggregateRepository aggregateRepository, IWriteModelStore writeModelStore) : base(
             aggregateRepository)
         {
-            this._databaseFileHandler = databaseFileHandler;
+             this._writeModelStore = writeModelStore;
         }
 
         #region IRequestHandler<StoreFileCommand,StoreFileResponse> Members
 
         public async Task<StoreFileResponse> Handle(StoreFileCommand request, CancellationToken cancellationToken)
         {
-            using (var connection = this._databaseFileHandler.OpenConnection())
+            using (var connection = this._writeModelStore.OpenConnection())
             {
                 return await GetOrCreateFileAsync(request, this.AggregateRepository, connection, this.GuidGenerator);
             }

@@ -19,13 +19,13 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks
         IRequestHandler<AssignPreviewImageCommand, AssignPreviewImageResponse>, IRequestHandler<LinkTaskCommand, LinkTaskResponse>,
         IRequestHandler<AssignDefinitionOfDoneCommand, AssignDefinitionOfDoneResponse>, IRequestHandler<ChangeTaskLaneCommand, ChangeTaskLaneResponse>, IRequestHandler<LinkTaskToActivitiesCommand, LinkTaskToActivitiesResponse>
     {
-        private readonly DatabaseFileHandler _databaseFileHandler;
+        private readonly IWriteModelStore _writeModelStore;
         private readonly RunningNumberFactory _runningNumberFactory;
 
-        public TaskCommandHandler(IAggregateRepository aggregateRepository, DatabaseFileHandler databaseFileHandler) :
+        public TaskCommandHandler(IAggregateRepository aggregateRepository, IWriteModelStore writeModelStore) :
             base(aggregateRepository)
         {
-            this._databaseFileHandler = databaseFileHandler;
+             this._writeModelStore = writeModelStore;
             this._runningNumberFactory = new RunningNumberFactory(aggregateRepository, new GuidGenerator());
         }
 
@@ -62,7 +62,7 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks
         public async Task<AttachFileToTaskResponse> Handle(AttachFileToTaskCommand request,
             CancellationToken cancellationToken)
         {
-            using (var connection = this._databaseFileHandler.OpenConnection())
+            using (var connection = this._writeModelStore.OpenConnection())
             {
                 var fileCreateCommand = new StoreFileCommand(request.FilePath);
                 var fileInStore = await FileCommandHandler.GetOrCreateFileAsync(fileCreateCommand,

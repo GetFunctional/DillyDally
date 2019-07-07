@@ -1,5 +1,4 @@
 ﻿using System;
-using GF.DillyDally.Mvvmc;
 using GF.DillyDally.Mvvmc.Contracts;
 using GF.DillyDally.Wpf.Client.Core.Exceptions;
 using GF.DillyDally.Wpf.Client.Core.Mvvmc;
@@ -27,8 +26,6 @@ namespace GF.DillyDally.Wpf.Client.Core.Navigator
 
         public event EventHandler Navigated;
 
-        #endregion
-
         public IController Navigate(Guid navigationTargetId)
         {
             return this.InternalNavigate(this.CurrentContentController,
@@ -39,6 +36,8 @@ namespace GF.DillyDally.Wpf.Client.Core.Navigator
         {
             return this.InternalNavigate(this.CurrentContentController, target);
         }
+
+        #endregion
 
         private IController InternalNavigate(IController currentRealTarget, INavigationTarget navigationTarget)
         {
@@ -68,7 +67,8 @@ namespace GF.DillyDally.Wpf.Client.Core.Navigator
 
         private IController ResolveNextNavigationTargetAsync(INavigationTarget navigationTarget)
         {
-            return this._controllerFactory.CreateAndInitializeController(navigationTarget.NavigationTargetControllerType);
+            return this._controllerFactory.CreateAndInitializeController(
+                navigationTarget.NavigationTargetControllerType);
         }
 
         private bool CurrentTargetDeniesNavigation(IController currentTarget)

@@ -10,18 +10,18 @@ namespace GF.DillyDally.ReadModel.Projection.RunningNumbers
 {
     internal sealed class RunningNumbersEventHandler : INotificationHandler<RunningNumberCounterCreatedEvent>, INotificationHandler<AddNextNumberEvent>
     {
-        private readonly DatabaseFileHandler _fileHandler;
+        private readonly IReadModelStore _readModelStore;
 
-        public RunningNumbersEventHandler(DatabaseFileHandler fileHandler)
+        public RunningNumbersEventHandler(IReadModelStore readModelStore)
         {
-            this._fileHandler = fileHandler;
+           this._readModelStore = readModelStore;
         }
 
         #region INotificationHandler<AddNextNumberEvent> Members
 
         public async Task Handle(AddNextNumberEvent notification, CancellationToken cancellationToken)
         {
-            using (var connection = this._fileHandler.OpenConnection())
+            using (var connection = this._readModelStore.OpenConnection())
             {
                 var runningNumberCounterRepository = new RunningNumberCounterRepository();
                 var runningNumberCounterId = notification.AggregateId;
@@ -39,7 +39,7 @@ namespace GF.DillyDally.ReadModel.Projection.RunningNumbers
 
         public async Task Handle(RunningNumberCounterCreatedEvent notification, CancellationToken cancellationToken)
         {
-            using (var connection = this._fileHandler.OpenConnection())
+            using (var connection = this._readModelStore.OpenConnection())
             {
                 var repository = new RunningNumberCounterRepository();
                 var runningNumberCounterId = notification.AggregateId;

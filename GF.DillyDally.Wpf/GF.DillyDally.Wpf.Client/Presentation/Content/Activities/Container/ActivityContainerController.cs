@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
-using GF.DillyDally.Data.Sqlite;
 using GF.DillyDally.ReadModel.Projection.Activities.Repository;
 using GF.DillyDally.Wpf.Client.Core.Mvvmc;
 
@@ -12,13 +11,11 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Container
 {
     internal sealed class ActivityContainerController : DDControllerBase<ActivityContainerViewModel>
     {
-        private readonly DatabaseFileHandler _fileHandler;
         private IDisposable _disposableObserver;
 
-        public ActivityContainerController(ActivityContainerViewModel viewModel, DatabaseFileHandler fileHandler,ControllerFactory controllerFactory)
-            : base(viewModel, controllerFactory)
+        public ActivityContainerController(ActivityContainerViewModel viewModel, IControllerServices controllerServices)
+            : base(viewModel, controllerServices)
         {
-            this._fileHandler = fileHandler;
             this.ActivateAddingNewActivities();
         }
 
@@ -57,7 +54,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Container
 
         private async Task<ObservableCollection<ActivityItemViewModel>> SearchResultsAsync(string searchText)
         {
-            using (var connection = this._fileHandler.OpenConnection())
+            using (var connection = this.ControllerServices.ReadModelStore.OpenConnection())
             {
                 var factory = new ActivityItemViewModelFactory();
                 var repository = new ActivityRepository();

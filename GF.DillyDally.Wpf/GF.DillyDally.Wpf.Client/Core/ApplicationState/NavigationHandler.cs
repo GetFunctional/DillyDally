@@ -8,12 +8,12 @@ namespace GF.DillyDally.Wpf.Client.Core.ApplicationState
 {
     internal sealed class NavigationHandler : IRequestHandler<NavigationRequest, NavigationResponse>
     {
-        private readonly IApplicationRuntime _dillyDallyApplication;
+        private readonly IApplicationRuntime _applicationRuntime;
         private readonly INavigationTargetProvider _navigationTargetProvider;
 
-        public NavigationHandler(IApplicationRuntime dillyDallyApplication, INavigationTargetProvider navigationTargetProvider)
+        public NavigationHandler(IApplicationRuntime applicationRuntime, INavigationTargetProvider navigationTargetProvider)
         {
-            this._dillyDallyApplication = dillyDallyApplication;
+            this._applicationRuntime = applicationRuntime;
             this._navigationTargetProvider = navigationTargetProvider;
         }
 
@@ -34,7 +34,7 @@ namespace GF.DillyDally.Wpf.Client.Core.ApplicationState
                     navigationTarget = this._navigationTargetProvider.FindNavigationTargetWithKey(request.NavigationTargetId.Value);
                 }
 
-                var targetController = this._dillyDallyApplication.NavigateInCurrentNavigator(navigationTarget);
+                var targetController = this._applicationRuntime.NavigateInCurrentNavigator(navigationTarget);
                 return new NavigationResponse(targetController != null, targetController);
             }, cancellationToken);
         }

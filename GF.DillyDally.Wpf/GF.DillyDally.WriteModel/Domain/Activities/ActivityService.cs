@@ -5,7 +5,7 @@ using MediatR;
 
 namespace GF.DillyDally.WriteModel.Domain.Activities
 {
-    public sealed class ActivityService
+    public sealed class ActivityService : IDomainService
     {
         private readonly IMediator _commandDispatcher;
 

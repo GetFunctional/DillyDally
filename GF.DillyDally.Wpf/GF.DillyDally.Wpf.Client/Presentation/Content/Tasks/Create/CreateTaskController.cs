@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using GF.DillyDally.Data.Sqlite;
 using GF.DillyDally.Mvvmc.Contracts;
 using GF.DillyDally.Wpf.Client.Core.Dialoge;
 using GF.DillyDally.Wpf.Client.Core.Mvvmc;
@@ -17,15 +16,11 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Create
     {
         private readonly ActivityContainerController _activityContainerController;
         private readonly CategorySelectorController _categorySelectorController;
-        private readonly DatabaseFileHandler _databaseFileHandler;
-        private readonly TaskService _taskService;
         private Guid? _presetLane;
 
-        public CreateTaskController(CreateTaskViewModel viewModel, DatabaseFileHandler databaseFileHandler, TaskService taskService,ControllerFactory controllerFactory)
-            : base(viewModel, controllerFactory)
+        public CreateTaskController(CreateTaskViewModel viewModel, IControllerServices controllerServices)
+            : base(viewModel, controllerServices)
         {
-            this._databaseFileHandler = databaseFileHandler;
-            this._taskService = taskService;
             this._categorySelectorController = this.CreateChildController<CategorySelectorController>();
             this._activityContainerController = this.CreateChildController<ActivityContainerController>();
 
@@ -57,14 +52,15 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Create
                 var basicInfos = this.GetTaskBasicInfos();
                 var taskName = basicInfos.TaskName;
                 var category = basicInfos.SelectedCategory;
+                var taskService = this.ControllerServices.GetDomainService<TaskService>();
 
-                var task = await this._taskService.CreateNewTaskAsync(taskName, category.CategoryId, this._presetLane);
+                var task = await taskService.CreateNewTaskAsync(taskName, category.CategoryId, this._presetLane);
 
                 var activities = this.GetTaskActivities();
                 if (activities.Any())
                 {
                     var activityIds = new HashSet<Guid>(activities.Select(x => x.ActivityId).Distinct());
-                    await this._taskService.LinkTaskToActivitiesAsync(task.TaskId, activityIds);
+                    await taskService.LinkTaskToActivitiesAsync(task.TaskId, activityIds);
                 }
 
                 this.ConfirmDialogWith(this.CreateTaskDialogResult);

@@ -14,8 +14,8 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create
     {
         private readonly ActivityService _activityService;
 
-        public CreateActivityController(CreateActivityViewModel viewModel, ActivityService activityService,ControllerFactory controllerFactory)
-            : base(viewModel, controllerFactory)
+        public CreateActivityController(CreateActivityViewModel viewModel, ActivityService activityService,IControllerServices controllerServices)
+            : base(viewModel, controllerServices)
         {
             this._activityService = activityService;
 

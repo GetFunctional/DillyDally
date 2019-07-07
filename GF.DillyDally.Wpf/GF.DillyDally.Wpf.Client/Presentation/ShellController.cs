@@ -1,12 +1,10 @@
 ﻿using GF.DillyDally.Mvvmc.Contracts;
-using GF.DillyDally.Wpf.Client.Core.Commands;
 using GF.DillyDally.Wpf.Client.Core.Dialoge;
 using GF.DillyDally.Wpf.Client.Core.Mvvmc;
 using GF.DillyDally.Wpf.Client.Core.Navigator;
 using GF.DillyDally.Wpf.Client.Presentation.Content.Commands;
 using GF.DillyDally.Wpf.Client.Presentation.ContentNavigation;
 using GF.DillyDally.Wpf.Client.Presentation.HeaderMenu;
-using MediatR;
 
 namespace GF.DillyDally.Wpf.Client.Presentation
 {
@@ -16,14 +14,12 @@ namespace GF.DillyDally.Wpf.Client.Presentation
         private readonly ContentBrowserController _contentBrowserController;
         private readonly HeaderMenuController _headerMenuController;
         private readonly TaskCommands _taskCommands;
-        
-        public ShellController(ShellViewModel viewModel, IMediator mediator, ReactiveCommandFactory reactiveCommandFactory,ControllerFactory controllerFactory)
-            : base(viewModel, controllerFactory)
+
+        public ShellController(ShellViewModel viewModel, IControllerServices controllerServices)
+            : base(viewModel, controllerServices)
         {
-            this._taskCommands = new TaskCommands(this.ChildControllerFactory, mediator);
-            this._activityCommands = new ActivityCommands(this.ChildControllerFactory, mediator,reactiveCommandFactory);
-            this.AddDisposable(this._taskCommands);
-            this.AddDisposable(this._activityCommands);
+            this._taskCommands = new TaskCommands(this.ControllerServices);
+            this._activityCommands = new ActivityCommands(this.ControllerServices);
 
             this.ViewModel.OverlayViewModel = new OverlayViewModel();
             this.ViewModel.NavigateInNavigatorCommand = this._taskCommands.NavigateInNavigatorCommand;

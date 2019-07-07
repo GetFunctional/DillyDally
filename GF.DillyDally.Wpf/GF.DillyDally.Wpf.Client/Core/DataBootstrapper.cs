@@ -1,4 +1,5 @@
-﻿using GF.DillyDally.ReadModel;
+﻿using GF.DillyDally.Data.Sqlite;
+using GF.DillyDally.ReadModel;
 using GF.DillyDally.WriteModel;
 using LightInject;
 
@@ -20,7 +21,9 @@ namespace GF.DillyDally.Wpf.Client.Core
         {
             var serviceContainer = this._serviceContainer;
             var databaseFileHandler = this._dataStoreInitializer.Initialize(dataInitializationSettings);
-            serviceContainer.RegisterInstance(databaseFileHandler);
+           
+            serviceContainer.RegisterInstance<IReadModelStore>(databaseFileHandler);
+            serviceContainer.RegisterInstance<IWriteModelStore>(databaseFileHandler);
 
             this._writeModelBootstrapper.Run(serviceContainer, databaseFileHandler.GetConnectionString());
             this._readModelBootstrapper.Run(serviceContainer);

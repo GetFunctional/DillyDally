@@ -11,13 +11,11 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Details
     internal sealed class TaskDetailsController : DDControllerBase<TaskDetailsViewModel>
     {
         private readonly ActivityContainerController _activityContainerController;
-        private readonly DatabaseFileHandler _databaseFileHandler;
         private readonly TaskDetailDataConverter _taskDetailDataConverter = new TaskDetailDataConverter();
 
-        public TaskDetailsController(TaskDetailsViewModel viewModel, DatabaseFileHandler databaseFileHandler,ControllerFactory controllerFactory)
-            : base(viewModel, controllerFactory)
+        public TaskDetailsController(TaskDetailsViewModel viewModel, IControllerServices controllerServices)
+            : base(viewModel, controllerServices)
         {
-            this._databaseFileHandler = databaseFileHandler;
             this._activityContainerController = this.CreateChildController<ActivityContainerController>();
             this._activityContainerController.DeactivateAddingNewActivities();
 
@@ -28,7 +26,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Details
         {
             this.ViewModel.IsBusy = true;
 
-            using (var connection = await this._databaseFileHandler.OpenConnectionAsync())
+            using (var connection = await this.ControllerServices.ReadModelStore.OpenConnectionAsync())
             {
                 var taskDetailRepository = new TaskDetailsRepository();
                 var taskDetailData = await taskDetailRepository.GetTaskDetailsAsync(connection, taskId);

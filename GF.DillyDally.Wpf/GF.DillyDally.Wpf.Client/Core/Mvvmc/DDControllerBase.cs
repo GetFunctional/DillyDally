@@ -10,13 +10,16 @@ namespace GF.DillyDally.Wpf.Client.Core.Mvvmc
 {
     internal abstract class DDControllerBase<TViewModel> : ControllerBase<TViewModel> where TViewModel : IViewModel
     {
+        public IControllerServices ControllerServices { get; }
         private readonly HashSet<IDisposable> _additionalDisposables = new HashSet<IDisposable>();
         private readonly HashSet<IController> _childControllers;
 
-        protected DDControllerBase(TViewModel viewModel, ControllerFactory controllerFactory) : base(viewModel)
+        protected DDControllerBase(TViewModel viewModel, IControllerServices controllerServices) : base(viewModel)
         {
-            this.ChildControllerFactory = controllerFactory;
+            this.ControllerServices = controllerServices;
+            this.ChildControllerFactory = controllerServices.ControllerFactory;
             this._childControllers = new HashSet<IController>();
+            this.AddDisposable(controllerServices);
         }
 
         protected IReadOnlyList<IController> ChildControllers

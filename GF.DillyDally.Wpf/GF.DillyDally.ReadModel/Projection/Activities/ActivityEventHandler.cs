@@ -14,18 +14,18 @@ namespace GF.DillyDally.ReadModel.Projection.Activities
 {
     internal sealed class ActivityEventHandler : INotificationHandler<PercentageActivityCreatedEvent>, INotificationHandler<ActivityPreviewImageAssigned>
     {
-        private readonly DatabaseFileHandler _fileHandler;
+        private readonly IReadModelStore _readModelStore;
 
-        public ActivityEventHandler(DatabaseFileHandler fileHandler)
+        public ActivityEventHandler(IReadModelStore readModelStore)
         {
-            this._fileHandler = fileHandler;
+           this._readModelStore = readModelStore;
         }
 
         #region INotificationHandler<ActivityPreviewImageAssigned> Members
 
         public async Task Handle(ActivityPreviewImageAssigned notification, CancellationToken cancellationToken)
         {
-            using (var connection = this._fileHandler.OpenConnection())
+            using (var connection = this._readModelStore.OpenConnection())
             {
                 var activityRepository = new ActivityRepository();
                 var imageRepository = new ImageRepository();
@@ -45,7 +45,7 @@ namespace GF.DillyDally.ReadModel.Projection.Activities
 
         public async Task Handle(PercentageActivityCreatedEvent notification, CancellationToken cancellationToken)
         {
-            using (var connection = this._fileHandler.OpenConnection())
+            using (var connection = this._readModelStore.OpenConnection())
             {
                 var activityRepository = new ActivityRepository();
                 await activityRepository.CreateNewAsync(connection, notification.AggregateId, notification.Name, ActivityType.Percentage);

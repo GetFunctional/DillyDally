@@ -9,8 +9,8 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ShowCase
     {
         private readonly NavigationService _navigationService;
 
-        public ShowCaseController(ShowCaseViewModel viewModel, NavigationService navigationService,ControllerFactory controllerFactory)
-            : base(viewModel, controllerFactory)
+        public ShowCaseController(ShowCaseViewModel viewModel, NavigationService navigationService,IControllerServices controllerServices)
+            : base(viewModel, controllerServices)
         {
             this._navigationService = navigationService;
             this.ViewModel.TestDialogCommand = this.CommandFactory.CreateFromTask(this.ShowTestDialog);

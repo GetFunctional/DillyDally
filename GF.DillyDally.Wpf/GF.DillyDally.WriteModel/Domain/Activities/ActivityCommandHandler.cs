@@ -14,12 +14,12 @@ namespace GF.DillyDally.WriteModel.Domain.Activities
         IRequestHandler<CreateActivityListCommand, CreateActivityListResponse>,
         IRequestHandler<CanCreateActivityCommand, CanCreateActivityResponse>
     {
-        private readonly DatabaseFileHandler _databaseFileHandler;
+        private readonly IWriteModelStore _writeModelStore;
 
-        public ActivityCommandHandler(IAggregateRepository aggregateRepository, DatabaseFileHandler databaseFileHandler)
+        public ActivityCommandHandler(IAggregateRepository aggregateRepository, IWriteModelStore writeModelStore)
             : base(aggregateRepository)
         {
-            this._databaseFileHandler = databaseFileHandler;
+            this._writeModelStore = writeModelStore;
         }
 
         #region IRequestHandler<CanCreateActivityCommand,CanCreateActivityResponse> Members
@@ -65,7 +65,7 @@ namespace GF.DillyDally.WriteModel.Domain.Activities
 
             if (request.PreviewImageBytes != null)
             {
-                using (var connection = this._databaseFileHandler.OpenConnection())
+                using (var connection = this._writeModelStore.OpenConnection())
                 {
                     var fileCreateCommand = new StoreFileCommand(request.PreviewImageBytes);
                     var response = await FileCommandHandler.GetOrCreateFileAsync(fileCreateCommand,

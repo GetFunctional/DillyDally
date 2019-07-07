@@ -18,16 +18,14 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.TaskBoard
         private readonly TaskCommands _commands;
         private readonly IReactiveCommand _openTaskDetailsCommand;
         private readonly IReactiveCommand _createNewTaskCommand;
-        private readonly DatabaseFileHandler _databaseFileHandler;
         private readonly TaskBoardDragDropHandler _taskboardDragDropHandler = new TaskBoardDragDropHandler();
         private readonly TaskBoardLaneViewModelFactory _taskBoardLaneViewModelFactory = new TaskBoardLaneViewModelFactory();
         private readonly IDisposable _whenTaskChangedObservable;
 
-        public TaskBoardController(TaskBoardViewModel viewModel, DatabaseFileHandler databaseFileHandler, IMediator mediator,ControllerFactory controllerFactory)
-            : base(viewModel, controllerFactory)
+        public TaskBoardController(TaskBoardViewModel viewModel, IControllerServices controllerServices)
+            : base(viewModel, controllerServices)
         {
-            this._databaseFileHandler = databaseFileHandler;
-            this._commands = new TaskCommands(this.ChildControllerFactory, mediator);
+            this._commands = new TaskCommands(controllerServices);
             this._createNewTaskCommand = this._commands.CreateNewTaskCommand;
             this._openTaskDetailsCommand = this._commands.OpenTaskDetailsCommand;
             this._whenTaskChangedObservable = this._taskboardDragDropHandler.WhenTaskChangedLane.Subscribe(this.HandleTaskLaneChange);
@@ -55,7 +53,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.TaskBoard
 
         private async Task ComposeTaskboardLanesAsync()
         {
-            using (var connection = await this._databaseFileHandler.OpenConnectionAsync())
+            using (var connection = await this.ControllerServices.ReadModelStore.OpenConnectionAsync())
             {
                 var taskBoardRepository = new TaskBoardRepository();
                 var lanes = await taskBoardRepository.GetTaskBoardLanesAsync(connection);

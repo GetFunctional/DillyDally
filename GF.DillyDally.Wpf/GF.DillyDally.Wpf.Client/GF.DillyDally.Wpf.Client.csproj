@@ -161,6 +161,8 @@
     <Compile Include="Core\Dialoge\IDialogSettings.cs" />
     <Compile Include="Core\ApplicationState\IApplicationRuntime.cs" />
     <Compile Include="Core\Exceptions\ExceptionEvaluator.cs" />
+    <Compile Include="Core\Mvvmc\ControllerServices.cs" />
+    <Compile Include="Core\Mvvmc\IControllerServices.cs" />
     <Compile Include="Core\Ioc\AnnotatedPropertyDependencySelector.cs" />
     <Compile Include="Core\Ioc\InjectAttribute.cs" />
     <Compile Include="Core\Ioc\ServiceContainerBuilder.cs" />

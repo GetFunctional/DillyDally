@@ -1,0 +1,45 @@
+﻿using GF.DillyDally.Data.Sqlite;
+using GF.DillyDally.Wpf.Client.Core.Commands;
+using GF.DillyDally.WriteModel.Infrastructure;
+using LightInject;
+using MediatR;
+
+namespace GF.DillyDally.Wpf.Client.Core.Mvvmc
+{
+    internal sealed class ControllerServices : IControllerServices
+    {
+        private readonly IServiceContainer _serviceContainer;
+
+        public ControllerServices(ControllerFactory controllerFactory, IReadModelStore readModelStore,
+            IServiceContainer serviceContainer, IMediator mediator, NavigationService navigationService,
+            ReactiveCommandFactory reactiveCommandFactory)
+        {
+            this._serviceContainer = serviceContainer;
+            this.Mediator = mediator;
+            this.NavigationService = navigationService;
+            this.ReactiveCommandFactory = reactiveCommandFactory;
+            this.ControllerFactory = controllerFactory;
+            this.ReadModelStore = readModelStore;
+        }
+
+        #region IControllerServices Members
+
+        public ReactiveCommandFactory ReactiveCommandFactory { get; }
+        public NavigationService NavigationService { get; }
+        public ControllerFactory ControllerFactory { get; }
+        public IReadModelStore ReadModelStore { get; }
+        public IMediator Mediator { get; }
+
+        public TService GetDomainService<TService>() where TService : IDomainService
+        {
+            return this._serviceContainer.GetInstance<TService>();
+        }
+
+        public void Dispose()
+        {
+            this.ReactiveCommandFactory?.Dispose();
+        }
+
+        #endregion
+    }
+}

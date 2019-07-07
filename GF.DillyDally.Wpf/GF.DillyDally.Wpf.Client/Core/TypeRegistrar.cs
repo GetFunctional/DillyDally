@@ -47,7 +47,8 @@ namespace GF.DillyDally.Wpf.Client.Core
 
         private bool IsControllerOrViewModelType(Type serviceType, Type implementingType)
         {
-            return !implementingType.IsAbstract && (typeof(IController).IsAssignableFrom(serviceType) || typeof(IViewModel).IsAssignableFrom(serviceType));
+            return !implementingType.IsAbstract && (typeof(IController).IsAssignableFrom(serviceType) ||
+                                                    typeof(IViewModel).IsAssignableFrom(serviceType));
         }
 
 
@@ -57,6 +58,8 @@ namespace GF.DillyDally.Wpf.Client.Core
             serviceContainer.Register<IMvvmcServiceFactory, MvvmcServiceFactoryAdapter>();
             serviceContainer.Register<ControllerFactory>();
             serviceContainer.Register<ReactiveCommandFactory>();
+            serviceContainer.Register<IControllerServices, ControllerServices>();
+
         }
     }
 }

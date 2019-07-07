@@ -10,17 +10,14 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Category
 {
     internal class CategorySelectorController : DDControllerBase<CategorySelectorViewModel>
     {
-        private readonly DatabaseFileHandler _databaseFileHandler;
-
-        public CategorySelectorController(CategorySelectorViewModel viewModel, DatabaseFileHandler databaseFileHandler,ControllerFactory controllerFactory)
-            : base(viewModel, controllerFactory)
+        public CategorySelectorController(CategorySelectorViewModel viewModel, IControllerServices controllerServices)
+            : base(viewModel, controllerServices)
         {
-            this._databaseFileHandler = databaseFileHandler;
         }
 
         protected override async Task OnInitializeAsync()
         {
-            using (var connection = await this._databaseFileHandler.OpenConnectionAsync())
+            using (var connection = this.ControllerServices.ReadModelStore.OpenConnection())
             {
                 var categorySelectorRepository = new CategorySelectorRepository();
                 var categories = await categorySelectorRepository.GetAllCategoriesAsync(connection);

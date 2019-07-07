@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Data;
 using System.Data.SQLite;
-using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 using log4net;
 
 namespace GF.DillyDally.Data.Sqlite
 {
-    public sealed class DatabaseFileHandler
+    public sealed class DatabaseFileHandler : IReadModelStore, IWriteModelStore
     {
+        private static readonly ILog DatabaseFileLogger = LogManager.GetLogger(typeof(DatabaseFileHandler));
         private readonly string _databaseName;
         private readonly string _fullDatabaseFilePath;
 
@@ -57,7 +57,8 @@ namespace GF.DillyDally.Data.Sqlite
         private string GetFullDatabaseFilePath(string databaseName)
         {
             var databaseFile = this.GetDatabaseFileName(databaseName);
-            var fullDatabaseFilePath = Path.Combine(DataDirectories.GetUserApplicationDatabasesDirectory(), databaseFile);
+            var fullDatabaseFilePath =
+                Path.Combine(DataDirectories.GetUserApplicationDatabasesDirectory(), databaseFile);
             return fullDatabaseFilePath;
         }
 
@@ -74,18 +75,18 @@ namespace GF.DillyDally.Data.Sqlite
         private string BuildConnectionString(string fullDatabaseFilePath)
         {
             var builder = new SQLiteConnectionStringBuilder
-                          {
-                              DataSource = fullDatabaseFilePath,
-                              Version = 3,
-                              BinaryGUID = true,
-                              DefaultTimeout = 5000,
-                              SyncMode = SynchronizationModes.Off,
-                              JournalMode = SQLiteJournalModeEnum.Memory,
-                              PageSize = 65536,
-                              CacheSize = 16777216,
-                              FailIfMissing = false,
-                              ReadOnly = false
-                          };
+            {
+                DataSource = fullDatabaseFilePath,
+                Version = 3,
+                BinaryGUID = true,
+                DefaultTimeout = 5000,
+                SyncMode = SynchronizationModes.Off,
+                JournalMode = SQLiteJournalModeEnum.Memory,
+                PageSize = 65536,
+                CacheSize = 16777216,
+                FailIfMissing = false,
+                ReadOnly = false
+            };
 
             return builder.ConnectionString;
         }
@@ -95,8 +96,6 @@ namespace GF.DillyDally.Data.Sqlite
             var connection = new SQLiteConnection(this.BuildConnectionString(fullDatabaseFilePath));
             return connection;
         }
-
-        private static readonly ILog DatabaseFileLogger = LogManager.GetLogger(typeof(DatabaseFileHandler));
 
         private void HandleTrace(object sender, TraceEventArgs e)
         {
@@ -136,4 +135,6 @@ namespace GF.DillyDally.Data.Sqlite
             File.Move(currentDatabase, archiveDatabase);
         }
     }
+
+    
 }

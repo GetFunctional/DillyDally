@@ -11,8 +11,8 @@ namespace GF.DillyDally.Wpf.Client.Core.Mvvmc
         private readonly Subject<IDialogResult> _confirmationResult = new Subject<IDialogResult>();
 
 
-        protected DialogControllerBase(TViewModel viewModel,ControllerFactory controllerFactory)
-            : base(viewModel, controllerFactory)
+        protected DialogControllerBase(TViewModel viewModel,IControllerServices controllerServices)
+            : base(viewModel, controllerServices)
         {
             this.AvailableResults = new List<IDialogResult>();
         }

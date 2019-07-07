@@ -12,8 +12,8 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
         private readonly IList<ContentNavigatorController> _navigatorControllers =
             new List<ContentNavigatorController>();
 
-        public ContentBrowserController(ContentBrowserViewModel viewModel,ControllerFactory controllerFactory)
-            : base(viewModel, controllerFactory)
+        public ContentBrowserController(ContentBrowserViewModel viewModel,IControllerServices controllerServices)
+            : base(viewModel, controllerServices)
         {
         }
 

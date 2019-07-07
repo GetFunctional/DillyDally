@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using GF.DillyDally.WriteModel.Domain.Tasks.Commands;
+using GF.DillyDally.WriteModel.Infrastructure;
 using MediatR;
 
 namespace GF.DillyDally.WriteModel.Domain.Tasks
 {
-    public sealed class TaskService
+    public sealed class TaskService : IDomainService
     {
         private readonly IMediator _commandDispatcher;
 

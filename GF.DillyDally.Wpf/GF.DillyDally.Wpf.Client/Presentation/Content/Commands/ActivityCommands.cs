@@ -1,42 +1,29 @@
-﻿using System;
-using System.Threading.Tasks;
-using GF.DillyDally.Wpf.Client.Core;
-using GF.DillyDally.Wpf.Client.Core.Commands;
+﻿using System.Threading.Tasks;
 using GF.DillyDally.Wpf.Client.Core.Mvvmc;
 using GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create;
-using MediatR;
 using ReactiveUI;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Content.Commands
 {
-    internal sealed class ActivityCommands : IDisposable
+    internal sealed class ActivityCommands
     {
-        private readonly ControllerFactory _controllerFactory;
-        private readonly NavigationService _navigationService;
+        private readonly IControllerServices _controllerServices;
 
-        public ActivityCommands(ControllerFactory controllerFactory, IMediator mediator, ReactiveCommandFactory reactiveCommandFactory)
+        public ActivityCommands(IControllerServices controllerServices)
         {
-            this._controllerFactory = controllerFactory;
-            this._navigationService = new NavigationService(mediator);
-            this.CreateNewActivityCommand = reactiveCommandFactory.CreateFromTask(this.CreateNewActivity);
+            this._controllerServices = controllerServices;
+            this.CreateNewActivityCommand =
+                controllerServices.ReactiveCommandFactory.CreateFromTask(this.CreateNewActivity);
         }
 
         public IReactiveCommand CreateNewActivityCommand { get; }
 
-        #region IDisposable Members
-
-        public void Dispose()
-        {
-            this.CreateNewActivityCommand?.Dispose();
-        }
-
-        #endregion
-
         private async Task CreateNewActivity()
         {
-            using (var createActivityController = this._controllerFactory.CreateAndInitializeController<CreateActivityController>())
+            using (var createActivityController =
+                this._controllerServices.ControllerFactory.CreateAndInitializeController<CreateActivityController>())
             {
-                await this._navigationService.ShowDialogAsync(createActivityController);
+                await this._controllerServices.NavigationService.ShowDialogAsync(createActivityController);
             }
         }
     }

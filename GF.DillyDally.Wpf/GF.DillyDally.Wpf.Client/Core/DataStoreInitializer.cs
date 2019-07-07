@@ -2,7 +2,7 @@
 
 namespace GF.DillyDally.Wpf.Client.Core
 {
-    internal class DataStoreInitializer
+    internal sealed class DataStoreInitializer
     {
         public DatabaseFileHandler Initialize(InitializationSettings settings)
         {
