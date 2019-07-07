@@ -1,16 +1,17 @@
-﻿using GF.DillyDally.Mvvmc;
-using ReactiveUI;
+﻿using System.Windows.Input;
+using GF.DillyDally.Mvvmc;
+
 
 namespace GF.DillyDally.Wpf.Client.Presentation.ShowCase
 {
     public class ShowCaseViewModel : ViewModelBase
     {
-        private IReactiveCommand _testDialogCommand;
+        private ICommand _testDialogCommand;
 
-        public IReactiveCommand TestDialogCommand
+        public ICommand TestDialogCommand
         {
             get { return this._testDialogCommand; }
-            internal set { this.RaiseAndSetIfChanged(ref this._testDialogCommand, value); }
+            internal set { this.SetAndRaiseIfChanged(ref this._testDialogCommand, value); }
         }
     }
 }

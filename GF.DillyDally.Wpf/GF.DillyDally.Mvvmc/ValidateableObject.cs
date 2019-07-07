@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using GF.DillyDally.Mvvmc.Validation;
-using ReactiveUI;
 
 namespace GF.DillyDally.Mvvmc
 {
@@ -37,7 +36,7 @@ namespace GF.DillyDally.Mvvmc
             }
             private set
             {
-                this.RaiseAndSetIfChanged(ref this._error, value);
+                this.SetAndRaiseIfChanged(ref this._error, value);
             }
         }
 
@@ -85,7 +84,7 @@ namespace GF.DillyDally.Mvvmc
             }
             private set
             {
-                this.RaiseAndSetIfChanged(ref this._hasErrors, value);
+                this.SetAndRaiseIfChanged(ref this._hasErrors, value);
             }
         }
 

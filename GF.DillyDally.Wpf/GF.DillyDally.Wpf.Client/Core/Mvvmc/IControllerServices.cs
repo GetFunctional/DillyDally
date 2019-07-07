@@ -6,18 +6,16 @@ using MediatR;
 
 namespace GF.DillyDally.Wpf.Client.Core.Mvvmc
 {
-    internal interface IControllerServices : IDisposable
+    internal interface IControllerServices
     {
-        ReactiveCommandFactory ReactiveCommandFactory { get; }
+        CommandFactory CommandFactory { get; }
 
         NavigationService NavigationService { get; }
 
         ControllerFactory ControllerFactory { get; }
 
         IReadModelStore ReadModelStore { get; }
-
-        IMediator Mediator { get; }
-
+        
         TService GetDomainService<TService>() where TService : IDomainService;
     }
 }

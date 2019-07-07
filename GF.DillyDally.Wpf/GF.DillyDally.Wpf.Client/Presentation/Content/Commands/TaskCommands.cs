@@ -1,39 +1,39 @@
 ﻿using System;
 using System.Reactive;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using DevExpress.Mvvm;
 using GF.DillyDally.Wpf.Client.Core.Commands;
 using GF.DillyDally.Wpf.Client.Core.Mvvmc;
 using GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Create;
 using GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Details;
 using GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.TaskBoard.DragDrop;
 using GF.DillyDally.WriteModel.Domain.Tasks;
-using ReactiveUI;
+
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Content.Commands
 {
     internal sealed class TaskCommands
     {
         private readonly IControllerServices _controllerServices;
-        private readonly ReactiveCommandFactory _reactiveCommandFactory = new ReactiveCommandFactory();
 
         public TaskCommands(IControllerServices controllerServices)
         {
             this._controllerServices = controllerServices;
 
-            this.CreateNewTaskCommand = this._reactiveCommandFactory.CreateFromTask<Guid?>(this.CreateNewTask);
+            this.CreateNewTaskCommand = controllerServices.CommandFactory.CreateFromTask<Guid?>(this.CreateNewTask);
             this.NavigateInNavigatorCommand =
-                this._reactiveCommandFactory.CreateFromTask<Guid>(this._controllerServices.NavigationService
+                controllerServices.CommandFactory.CreateFromTask<Guid>(this._controllerServices.NavigationService
                     .NavigateToTargetAsync);
             this.MoveTaskToOtherLaneCommand =
-                this._reactiveCommandFactory.CreateFromTask<TaskChangedLanePayload>(this.ChangeTaskLaneAsync);
-            this.OpenTaskDetailsCommand =
-                this._reactiveCommandFactory.CreateFromTask<Guid>(this.OpenTaskDetailsCommandAsync);
+                controllerServices.CommandFactory.CreateFromTask<TaskChangedLanePayload>(this.ChangeTaskLaneAsync);
+            this.OpenTaskDetailsCommand = controllerServices.CommandFactory.CreateFromTask<Guid>(this.OpenTaskDetailsCommandAsync);
         }
 
-        public IReactiveCommand NavigateInNavigatorCommand { get; }
-        public IReactiveCommand CreateNewTaskCommand { get; }
-        public ReactiveCommand<TaskChangedLanePayload, Unit> MoveTaskToOtherLaneCommand { get; }
-        public IReactiveCommand OpenTaskDetailsCommand { get; }
+        public ICommand NavigateInNavigatorCommand { get; }
+        public ICommand CreateNewTaskCommand { get; }
+        public ICommand<TaskChangedLanePayload> MoveTaskToOtherLaneCommand { get; }
+        public ICommand OpenTaskDetailsCommand { get; }
 
         private async Task OpenTaskDetailsCommandAsync(Guid taskId)
         {

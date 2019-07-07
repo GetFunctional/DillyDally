@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using GF.DillyDally.Mvvmc;
-using ReactiveUI;
+
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.TaskBoard
 {
@@ -20,7 +20,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.TaskBoard
             }
             internal set
             {
-                this.RaiseAndSetIfChanged(ref this._lanes, value);
+                this.SetAndRaiseIfChanged(ref this._lanes, value);
             }
         }
     }

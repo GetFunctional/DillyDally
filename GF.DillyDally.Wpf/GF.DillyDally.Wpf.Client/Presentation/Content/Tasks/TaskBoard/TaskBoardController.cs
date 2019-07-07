@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using GF.DillyDally.Data.Sqlite;
 using GF.DillyDally.Mvvmc;
 using GF.DillyDally.ReadModel.Views.TaskBoard;
@@ -9,15 +10,15 @@ using GF.DillyDally.Wpf.Client.Core.Mvvmc;
 using GF.DillyDally.Wpf.Client.Presentation.Content.Commands;
 using GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.TaskBoard.DragDrop;
 using MediatR;
-using ReactiveUI;
+
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.TaskBoard
 {
     internal class TaskBoardController : DDControllerBase<TaskBoardViewModel>
     {
         private readonly TaskCommands _commands;
-        private readonly IReactiveCommand _openTaskDetailsCommand;
-        private readonly IReactiveCommand _createNewTaskCommand;
+        private readonly ICommand _openTaskDetailsCommand;
+        private readonly ICommand _createNewTaskCommand;
         private readonly TaskBoardDragDropHandler _taskboardDragDropHandler = new TaskBoardDragDropHandler();
         private readonly TaskBoardLaneViewModelFactory _taskBoardLaneViewModelFactory = new TaskBoardLaneViewModelFactory();
         private readonly IDisposable _whenTaskChangedObservable;

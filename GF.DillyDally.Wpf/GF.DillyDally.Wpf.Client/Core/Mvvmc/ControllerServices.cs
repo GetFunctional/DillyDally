@@ -12,19 +12,19 @@ namespace GF.DillyDally.Wpf.Client.Core.Mvvmc
 
         public ControllerServices(ControllerFactory controllerFactory, IReadModelStore readModelStore,
             IServiceContainer serviceContainer, IMediator mediator, NavigationService navigationService,
-            ReactiveCommandFactory reactiveCommandFactory)
+            CommandFactory commandFactory)
         {
             this._serviceContainer = serviceContainer;
             this.Mediator = mediator;
             this.NavigationService = navigationService;
-            this.ReactiveCommandFactory = reactiveCommandFactory;
+            this.CommandFactory = commandFactory;
             this.ControllerFactory = controllerFactory;
             this.ReadModelStore = readModelStore;
         }
 
         #region IControllerServices Members
 
-        public ReactiveCommandFactory ReactiveCommandFactory { get; }
+        public CommandFactory CommandFactory { get; }
         public NavigationService NavigationService { get; }
         public ControllerFactory ControllerFactory { get; }
         public IReadModelStore ReadModelStore { get; }
@@ -33,11 +33,6 @@ namespace GF.DillyDally.Wpf.Client.Core.Mvvmc
         public TService GetDomainService<TService>() where TService : IDomainService
         {
             return this._serviceContainer.GetInstance<TService>();
-        }
-
-        public void Dispose()
-        {
-            this.ReactiveCommandFactory?.Dispose();
         }
 
         #endregion

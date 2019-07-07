@@ -40,12 +40,6 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Container
             this._disposableObserver = query.Subscribe(this.HandleSearchRequest);
         }
 
-        protected override async Task OnInitializeAsync()
-        {
-            var searchResult = await this.SearchResultsAsync(string.Empty);
-            this.HandleSearchRequest(searchResult);
-        }
-
         public void DeactivateAddingNewActivities()
         {
             this.ViewModel.HideSearchBar();

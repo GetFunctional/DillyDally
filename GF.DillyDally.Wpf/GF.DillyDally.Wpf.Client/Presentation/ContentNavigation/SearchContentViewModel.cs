@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
+using System.Windows.Input;
 using GF.DillyDally.Mvvmc;
-using ReactiveUI;
+
 
 namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
 {
     public sealed class SearchContentViewModel : ViewModelBase
     {
         private IList<NavigationTargetViewModel> _availableNavigationTargets;
-        private IReactiveCommand _navigateToTargetCommand;
+        private ICommand _navigateToTargetCommand;
         private NavigationTargetViewModel _selectedTarget;
 
         public SearchContentViewModel() : this(new List<NavigationTargetViewModel>())
@@ -27,7 +28,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
             }
             set
             {
-                this.RaiseAndSetIfChanged(ref this._availableNavigationTargets, value);
+                this.SetAndRaiseIfChanged(ref this._availableNavigationTargets, value);
             }
         }
 
@@ -39,7 +40,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
             }
             set
             {
-                this.RaiseAndSetIfChanged(ref this._selectedTarget, value);
+                this.SetAndRaiseIfChanged(ref this._selectedTarget, value);
             }
         }
 
@@ -51,7 +52,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
             }
         }
 
-        public IReactiveCommand NavigateToTargetCommand
+        public ICommand NavigateToTargetCommand
         {
             get
             {
@@ -59,7 +60,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
             }
             internal set
             {
-                this.RaiseAndSetIfChanged(ref this._navigateToTargetCommand, value);
+                this.SetAndRaiseIfChanged(ref this._navigateToTargetCommand, value);
             }
         }
     }

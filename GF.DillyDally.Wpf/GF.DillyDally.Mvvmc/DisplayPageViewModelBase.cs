@@ -1,5 +1,4 @@
 ﻿using GF.DillyDally.Mvvmc.Contracts;
-using ReactiveUI;
 
 namespace GF.DillyDally.Mvvmc
 {
@@ -20,7 +19,7 @@ namespace GF.DillyDally.Mvvmc
             }
             set
             {
-                this.RaiseAndSetIfChanged(ref this._isCurrent, value);
+                this.SetAndRaiseIfChanged(ref this._isCurrent, value);
             }
         }
 
@@ -32,7 +31,7 @@ namespace GF.DillyDally.Mvvmc
             }
             set
             {
-                this.RaiseAndSetIfChanged(ref this._pageNumber, value);
+                this.SetAndRaiseIfChanged(ref this._pageNumber, value);
             }
         }
 

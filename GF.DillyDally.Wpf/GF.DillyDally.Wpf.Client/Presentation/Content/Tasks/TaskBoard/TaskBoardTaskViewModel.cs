@@ -1,6 +1,7 @@
 using System;
+using System.Windows.Input;
 using GF.DillyDally.Mvvmc;
-using ReactiveUI;
+
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.TaskBoard
 {
@@ -11,7 +12,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.TaskBoard
         private string _name;
         private string _runningNumber;
         private int _storypoints;
-        private IReactiveCommand _openTaskDetailsCommand;
+        private ICommand _openTaskDetailsCommand;
 
         public TaskBoardTaskViewModel(Guid taskId, string name, string runningNumber, string colorString, string category, int storypoints)
         {
@@ -33,7 +34,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.TaskBoard
             }
             set
             {
-                this.RaiseAndSetIfChanged(ref this._name, value);
+                this.SetAndRaiseIfChanged(ref this._name, value);
             }
         }
 
@@ -45,7 +46,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.TaskBoard
             }
             set
             {
-                this.RaiseAndSetIfChanged(ref this._runningNumber, value);
+                this.SetAndRaiseIfChanged(ref this._runningNumber, value);
             }
         }
 
@@ -57,7 +58,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.TaskBoard
             }
             set
             {
-                this.RaiseAndSetIfChanged(ref this._colorString, value);
+                this.SetAndRaiseIfChanged(ref this._colorString, value);
             }
         }
 
@@ -69,7 +70,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.TaskBoard
             }
             set
             {
-                this.RaiseAndSetIfChanged(ref this._category, value);
+                this.SetAndRaiseIfChanged(ref this._category, value);
             }
         }
 
@@ -81,14 +82,14 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.TaskBoard
             }
             set
             {
-                this.RaiseAndSetIfChanged(ref this._storypoints, value);
+                this.SetAndRaiseIfChanged(ref this._storypoints, value);
             }
         }
 
-        public IReactiveCommand OpenTaskDetailsCommand
+        public ICommand OpenTaskDetailsCommand
         {
             get { return this._openTaskDetailsCommand; }
-            set { this.RaiseAndSetIfChanged(ref this._openTaskDetailsCommand, value); }
+            set { this.SetAndRaiseIfChanged(ref this._openTaskDetailsCommand, value); }
         }
     }
 }

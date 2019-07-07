@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using GF.DillyDally.Wpf.Client.Core.ApplicationState;
 using GF.DillyDally.Wpf.Client.Core.Navigator;
 using MediatR;
 
-namespace GF.DillyDally.Wpf.Client.Core.ApplicationState
+namespace GF.DillyDally.Wpf.Client.Core
 {
     internal sealed class NavigationHandler : IRequestHandler<NavigationRequest, NavigationResponse>
     {

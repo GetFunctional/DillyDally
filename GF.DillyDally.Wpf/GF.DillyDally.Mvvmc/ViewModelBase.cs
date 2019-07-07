@@ -1,5 +1,4 @@
 ﻿using GF.DillyDally.Mvvmc.Contracts;
-using ReactiveUI;
 
 namespace GF.DillyDally.Mvvmc
 {
@@ -18,7 +17,7 @@ namespace GF.DillyDally.Mvvmc
             }
             set
             {
-                this.RaiseAndSetIfChanged(ref this._isBusy, value);
+                this.SetAndRaiseIfChanged(ref this._isBusy, value);
             }
         }
 

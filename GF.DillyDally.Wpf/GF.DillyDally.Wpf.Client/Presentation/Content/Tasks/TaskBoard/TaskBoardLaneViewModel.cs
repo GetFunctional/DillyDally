@@ -1,15 +1,16 @@
 using System;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 using GF.DillyDally.Mvvmc;
 using GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.TaskBoard.DragDrop;
 using GongSolutions.Wpf.DragDrop;
-using ReactiveUI;
+
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.TaskBoard
 {
     public class TaskBoardLaneViewModel : ViewModelBase
     {
-        private IReactiveCommand _createNewTaskCommand;
+        private ICommand _createNewTaskCommand;
         private string _laneName;
         private ObservableCollection<TaskBoardTaskViewModel> _tasks;
 
@@ -32,7 +33,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.TaskBoard
             }
             set
             {
-                this.RaiseAndSetIfChanged(ref this._laneName, value);
+                this.SetAndRaiseIfChanged(ref this._laneName, value);
             }
         }
 
@@ -46,7 +47,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.TaskBoard
             }
             set
             {
-                if (this.RaiseAndSetIfChanged(ref this._tasks, value) == value)
+                if (this.SetAndRaiseIfChanged(ref this._tasks, value))
                 {
                     this.RaisePropertyChanged(nameof(this.TaskCount));
                 }
@@ -61,7 +62,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.TaskBoard
             }
         }
 
-        public IReactiveCommand CreateNewTaskCommand
+        public ICommand CreateNewTaskCommand
         {
             get
             {
@@ -69,7 +70,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.TaskBoard
             }
             set
             {
-                this.RaiseAndSetIfChanged(ref this._createNewTaskCommand, value);
+                this.SetAndRaiseIfChanged(ref this._createNewTaskCommand, value);
             }
         }
 

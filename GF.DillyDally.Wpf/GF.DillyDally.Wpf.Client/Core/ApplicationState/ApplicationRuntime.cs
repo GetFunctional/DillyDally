@@ -1,4 +1,7 @@
-﻿using System.Windows;
+﻿using System;
+using System.Threading;
+using System.Windows;
+using System.Windows.Threading;
 using GF.DillyDally.Mvvmc.Contracts;
 using GF.DillyDally.Wpf.Client.Core.Dialoge;
 using GF.DillyDally.Wpf.Client.Core.Navigator;
@@ -9,6 +12,7 @@ namespace GF.DillyDally.Wpf.Client.Core.ApplicationState
 {
     public sealed class ApplicationRuntime : IApplicationRuntime
     {
+        private readonly ExceptionSolver _exceptionSolver = new ExceptionSolver();
         private readonly Application _wpfApplication;
         private Shell _shell;
         private ShellController _shellController;
@@ -17,6 +21,9 @@ namespace GF.DillyDally.Wpf.Client.Core.ApplicationState
         {
             this.ServiceContainer = serviceContainer;
             this._wpfApplication = wpfApplication;
+            this.ApplicationSynchronizationContext = this._wpfApplication != null
+                ? new DispatcherSynchronizationContext(this._wpfApplication.Dispatcher)
+                : SynchronizationContext.Current;
         }
 
         /// <summary>
@@ -30,6 +37,8 @@ namespace GF.DillyDally.Wpf.Client.Core.ApplicationState
         public IServiceContainer ServiceContainer { get; }
 
         #region IApplicationRuntime Members
+
+        public SynchronizationContext ApplicationSynchronizationContext { get; }
 
         public void AddDataTemplate(object key, DataTemplate dataTemplate)
         {
@@ -62,6 +71,11 @@ namespace GF.DillyDally.Wpf.Client.Core.ApplicationState
             }
 
             return null;
+        }
+
+        public void SendException(Exception exception)
+        {
+            this.ApplicationSynchronizationContext.Send(state => this._exceptionSolver.Solve(exception), null);
         }
 
         #endregion

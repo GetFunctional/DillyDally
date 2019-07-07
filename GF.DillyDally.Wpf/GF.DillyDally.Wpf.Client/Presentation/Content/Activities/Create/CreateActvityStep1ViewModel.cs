@@ -1,6 +1,6 @@
 using System.Collections.ObjectModel;
 using GF.DillyDally.Mvvmc;
-using ReactiveUI;
+
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create
 {
@@ -24,7 +24,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create
             }
             set
             {
-                this.RaiseAndSetIfChanged(ref this._availableActivityTypes, value);
+                this.SetAndRaiseIfChanged(ref this._availableActivityTypes, value);
             }
         }
 
@@ -36,7 +36,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create
             }
             set
             {
-                this.RaiseAndSetIfChanged(ref this._activityName, value);
+                this.SetAndRaiseIfChanged(ref this._activityName, value);
             }
         }
 
@@ -48,7 +48,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create
             }
             set
             {
-                this.RaiseAndSetIfChanged(ref this._previewImageBytes, value);
+                this.SetAndRaiseIfChanged(ref this._previewImageBytes, value);
             }
         }
 
@@ -60,7 +60,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create
             }
             set
             {
-                this.RaiseAndSetIfChanged(ref this._selectedActivityTypeViewModel, value);
+                this.SetAndRaiseIfChanged(ref this._selectedActivityTypeViewModel, value);
             }
         }
 

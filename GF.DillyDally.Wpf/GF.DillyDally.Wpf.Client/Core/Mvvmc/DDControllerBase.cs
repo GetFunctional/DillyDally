@@ -4,36 +4,26 @@ using System.Linq;
 using System.Threading.Tasks;
 using GF.DillyDally.Mvvmc;
 using GF.DillyDally.Mvvmc.Contracts;
-using GF.DillyDally.Wpf.Client.Core.Commands;
 
 namespace GF.DillyDally.Wpf.Client.Core.Mvvmc
 {
     internal abstract class DDControllerBase<TViewModel> : ControllerBase<TViewModel> where TViewModel : IViewModel
     {
-        public IControllerServices ControllerServices { get; }
         private readonly HashSet<IDisposable> _additionalDisposables = new HashSet<IDisposable>();
         private readonly HashSet<IController> _childControllers;
 
         protected DDControllerBase(TViewModel viewModel, IControllerServices controllerServices) : base(viewModel)
         {
             this.ControllerServices = controllerServices;
-            this.ChildControllerFactory = controllerServices.ControllerFactory;
             this._childControllers = new HashSet<IController>();
-            this.AddDisposable(controllerServices);
         }
+
+        public IControllerServices ControllerServices { get; }
 
         protected IReadOnlyList<IController> ChildControllers
         {
-            get
-            {
-                return this._childControllers.ToList();
-            }
+            get { return this._childControllers.ToList(); }
         }
-
-        protected ControllerFactory ChildControllerFactory { get; }
-
-        protected ReactiveCommandFactory CommandFactory { get; } = new ReactiveCommandFactory();
-
 
         protected void AddDisposable(IDisposable disposable)
         {
@@ -89,7 +79,7 @@ namespace GF.DillyDally.Wpf.Client.Core.Mvvmc
 
         protected TController CreateChildController<TController>() where TController : IController
         {
-            return (TController)this.CreateChildController(typeof(TController));
+            return (TController) this.CreateChildController(typeof(TController));
         }
 
 
@@ -98,11 +88,11 @@ namespace GF.DillyDally.Wpf.Client.Core.Mvvmc
             IController controller;
             if (this.IsInitialized)
             {
-                controller = this.ChildControllerFactory.CreateAndInitializeController(controllerType);
+                controller = this.ControllerServices.ControllerFactory.CreateAndInitializeController(controllerType);
             }
             else
             {
-                controller = this.ChildControllerFactory.CreateController(controllerType);
+                controller = this.ControllerServices.ControllerFactory.CreateController(controllerType);
             }
 
             this._childControllers.Add(controller);

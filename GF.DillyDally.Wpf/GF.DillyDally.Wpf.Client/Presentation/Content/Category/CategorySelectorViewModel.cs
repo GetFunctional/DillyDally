@@ -1,6 +1,6 @@
 using System.Collections.ObjectModel;
 using GF.DillyDally.Mvvmc;
-using ReactiveUI;
+
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Content.Category
 {
@@ -17,7 +17,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Category
             }
             set
             {
-                this.RaiseAndSetIfChanged(ref this._availableCategories, value);
+                this.SetAndRaiseIfChanged(ref this._availableCategories, value);
             }
         }
 
@@ -29,7 +29,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Category
             }
             set
             {
-                this.RaiseAndSetIfChanged(ref this._selectedCategory, value);
+                this.SetAndRaiseIfChanged(ref this._selectedCategory, value);
             }
         }
     }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Reflection;
 using System.Runtime.ExceptionServices;
 using System.Threading.Tasks;
@@ -7,7 +8,6 @@ using System.Windows.Threading;
 using DevExpress.Xpf.Core;
 using GF.DillyDally.Wpf.Client.Core;
 using GF.DillyDally.Wpf.Client.Core.ApplicationState;
-using GF.DillyDally.Wpf.Client.Core.Exceptions;
 using GF.DillyDally.Wpf.Client.Core.Ioc;
 using GF.DillyDally.Wpf.Client.Core.Mvvmc;
 using GF.DillyDally.Wpf.Client.Presentation;
@@ -25,6 +25,7 @@ namespace GF.DillyDally.Wpf.Client
         private static readonly ILog AppLogger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         private Bootstrapper _bootstrapper;
+        private ApplicationRuntime _currentApplication;
 
         protected override void OnStartup(StartupEventArgs e)
         {
@@ -36,51 +37,67 @@ namespace GF.DillyDally.Wpf.Client
             ThemeManager.EnableDPICorrection = true;
             ApplicationThemeHelper.ApplicationThemeName = ThemeConstants.DevExpressThemeName;
 
-            AppDomain.CurrentDomain.UnhandledException += CurrentDomainOnUnhandledException;
+            AppDomain.CurrentDomain.UnhandledException += this.CurrentDomainOnUnhandledException;
 #if DEBUG
-            AppDomain.CurrentDomain.FirstChanceException += CurrentDomainOnFirstChanceException;
+            AppDomain.CurrentDomain.FirstChanceException += this.CurrentDomainOnFirstChanceException;
 #endif
             DispatcherUnhandledException += this.HandleDispatcherException;
-            TaskScheduler.UnobservedTaskException += HandleUnobservedTaskException;
+            TaskScheduler.UnobservedTaskException += this.HandleUnobservedTaskException;
 
             var serviceContainer = ServiceContainerBuilder.CreateDependencyInjectionContainer();
-            var currentApplication = new ApplicationRuntime(Current, serviceContainer);
+            this._currentApplication = new ApplicationRuntime(Current, serviceContainer);
 
-            this._bootstrapper = new Bootstrapper(currentApplication, serviceContainer);
+            this._bootstrapper = new Bootstrapper(this._currentApplication, serviceContainer);
             this._bootstrapper.Run();
 
             var shellController = this.CreateShellController(serviceContainer);
             var shell = new Shell(shellController.ViewModel);
-            currentApplication.AttachShell(shellController, shell);
-            serviceContainer.RegisterInstance(typeof(IApplicationRuntime), currentApplication);
-            currentApplication.ShowUi();
+            this._currentApplication.AttachShell(shellController, shell);
+            this._currentApplication.ShowUi();
         }
 
         private void HandleDispatcherException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
             e.Handled = true;
-            ExceptionEvaluator.Evaluate(e.Exception);
+            this._currentApplication.SendException(e.Exception);
         }
 
-        private static void HandleUnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
+        private void HandleUnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
         {
             e.SetObserved();
-            ExceptionEvaluator.Evaluate(e.Exception);
+            this._currentApplication.SendException(e.Exception);
         }
 
-        private static void CurrentDomainOnFirstChanceException(object sender, FirstChanceExceptionEventArgs args)
+        private void CurrentDomainOnFirstChanceException(object sender, FirstChanceExceptionEventArgs args)
         {
-            ExceptionEvaluator.Evaluate(args.Exception);
+            if (this.IsIgnorableReactiveUiStartupException(args))
+            {
+                return;
+            }
+
+            this._currentApplication.SendException(args.Exception);
         }
 
-        private static void CurrentDomainOnUnhandledException(object sender, UnhandledExceptionEventArgs args)
+        private bool IsIgnorableReactiveUiStartupException(FirstChanceExceptionEventArgs args)
         {
-            ExceptionEvaluator.Evaluate(args.ExceptionObject as Exception);
+            return args.Exception is FileNotFoundException fnf && (fnf.FileName ==
+                                                                   "ReactiveUI.XamForms, Version=9.13.0.0, Culture=neutral, PublicKeyToken=null"
+                                                                   || fnf.FileName ==
+                                                                   "ReactiveUI.Winforms, Version=9.13.0.0, Culture=neutral, PublicKeyToken=null"
+                                                                   || fnf.FileName ==
+                                                                   "ReactiveUI.Wpf, Version=9.13.0.0, Culture=neutral, PublicKeyToken=null"
+                   );
+        }
+
+        private void CurrentDomainOnUnhandledException(object sender, UnhandledExceptionEventArgs args)
+        {
+            this._currentApplication.SendException(args.ExceptionObject as Exception);
         }
 
         private ShellController CreateShellController(IServiceContainer serviceContainer)
         {
-            var shellController = serviceContainer.GetInstance<ControllerFactory>().CreateAndInitializeController<ShellController>();
+            var shellController = serviceContainer.GetInstance<ControllerFactory>()
+                .CreateAndInitializeController<ShellController>();
             return shellController;
         }
     }

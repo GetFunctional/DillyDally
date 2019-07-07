@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using GF.DillyDally.Mvvmc;
-using ReactiveUI;
+
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Container
 {
@@ -23,13 +23,13 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Container
         public ObservableCollection<ActivityItemViewModel> Activities
         {
             get { return this._activities; }
-            set { this.RaiseAndSetIfChanged(ref this._activities, value); }
+            set { this.SetAndRaiseIfChanged(ref this._activities, value); }
         }
 
         public ObservableCollection<ActivityItemViewModel> SearchResults
         {
             get { return this._searchResults; }
-            set { this.RaiseAndSetIfChanged(ref this._searchResults, value); }
+            set { this.SetAndRaiseIfChanged(ref this._searchResults, value); }
         }
 
         public string SearchText
@@ -37,7 +37,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Container
             get { return this._searchText; }
             set
             {
-                if (this.RaiseAndSetIfChanged(ref this._searchText, value) == value &&
+                if (this.SetAndRaiseIfChanged(ref this._searchText, value) &&
                     !string.IsNullOrWhiteSpace(value) &&
                     value != this.SelectedResult?.ActivityName)
                 {
@@ -51,7 +51,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Container
             get { return this._selectedResult; }
             set
             {
-                if (this.RaiseAndSetIfChanged(ref this._selectedResult, value) == this._selectedResult && value != null)
+                if (this.SetAndRaiseIfChanged(ref this._selectedResult, value))
                 {
                     if (this.Activities.All(act => act.ActivityId != value.ActivityId))
                     {
@@ -69,7 +69,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Container
         public bool IsSearchBarVisible
         {
             get { return this._isSearchBarVisible; }
-            set { this.RaiseAndSetIfChanged(ref this._isSearchBarVisible, value); }
+            set { this.SetAndRaiseIfChanged(ref this._isSearchBarVisible, value); }
         }
 
         private void RaiseRequestSearchResults(string value)

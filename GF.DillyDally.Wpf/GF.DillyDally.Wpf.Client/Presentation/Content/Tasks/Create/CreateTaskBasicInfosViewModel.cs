@@ -1,6 +1,6 @@
 using GF.DillyDally.Mvvmc;
 using GF.DillyDally.Wpf.Client.Presentation.Content.Category;
-using ReactiveUI;
+
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Create
 {
@@ -24,7 +24,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Create
             }
             set
             {
-                this.RaiseAndSetIfChanged(ref this._taskName, value);
+                this.SetAndRaiseIfChanged(ref this._taskName, value);
             }
         }
 
@@ -44,7 +44,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Create
             }
             set
             {
-                this.RaiseAndSetIfChanged(ref this._categorySelectorViewModel, value);
+                this.SetAndRaiseIfChanged(ref this._categorySelectorViewModel, value);
             }
         }
 
@@ -58,7 +58,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Create
             }
             set
             {
-                this.RaiseAndSetIfChanged(ref this._previewImageBytes, value);
+                this.SetAndRaiseIfChanged(ref this._previewImageBytes, value);
             }
         }
     }

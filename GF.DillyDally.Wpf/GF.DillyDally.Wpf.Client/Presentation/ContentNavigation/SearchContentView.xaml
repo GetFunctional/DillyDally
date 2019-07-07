@@ -27,7 +27,7 @@
                 HorizontalAlignment="Center"
                 VerticalAlignment="Top"
                 FontSize="45"
-                Text="TitleEARCH..." />
+                Text="Search..." />
 
 
             <dxlc:LayoutGroup
@@ -58,7 +58,7 @@
                     HorizontalAlignment="Center"
                     Command="{Binding NavigateToTargetCommand, Mode=OneWay}"
                     CommandParameter="{Binding SelectedTarget.NavigationTargetId, Mode=OneWay}"
-                    Content="Titleearch" />
+                    Content="Search" />
             </dxlc:LayoutGroup>
         </dxlc:LayoutGroup>
     </Grid>

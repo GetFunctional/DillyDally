@@ -8,7 +8,7 @@ using GF.DillyDally.Wpf.Client.Core.Mvvmc;
 using GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Container;
 using GF.DillyDally.Wpf.Client.Presentation.Content.Category;
 using GF.DillyDally.WriteModel.Domain.Tasks;
-using ReactiveUI;
+
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Create
 {
@@ -23,11 +23,10 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Create
         {
             this._categorySelectorController = this.CreateChildController<CategorySelectorController>();
             this._activityContainerController = this.CreateChildController<ActivityContainerController>();
-
+            
             viewModel.CreateTaskCommand =
-                this.CommandFactory.CreateFromTask(async () => await this.CompleteProcess());
-            viewModel.CancelProcessCommand =
-                ReactiveCommand.Create(this.CancelProcess);
+                controllerServices.CommandFactory.CreateFromTask(async () => await this.CompleteProcess());
+            viewModel.CancelProcessCommand = controllerServices.CommandFactory.CreateFromAction(this.CancelProcess);
 
             viewModel.TaskAchievementsViewModel = new TaskAchievementsViewModel();
             viewModel.AddPage(new CreateTaskBasicInfosViewModel(this._categorySelectorController.ViewModel));

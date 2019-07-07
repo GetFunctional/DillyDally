@@ -1,15 +1,16 @@
+using System.Windows.Input;
 using GF.DillyDally.Mvvmc;
-using ReactiveUI;
+
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Create
 {
     public class CreateTaskViewModel : PagedContentViewModel
     {
-        private IReactiveCommand _cancelProcessCommand;
-        private IReactiveCommand _createTaskCommand;
+        private ICommand _cancelProcessCommand;
+        private ICommand _createTaskCommand;
         private TaskAchievementsViewModel _taskAchievementsViewModel;
 
-        public IReactiveCommand CreateTaskCommand
+        public ICommand CreateTaskCommand
         {
             get
             {
@@ -17,11 +18,11 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Create
             }
             set
             {
-                this.RaiseAndSetIfChanged(ref this._createTaskCommand, value);
+                this.SetAndRaiseIfChanged(ref this._createTaskCommand, value);
             }
         }
 
-        public IReactiveCommand CancelProcessCommand
+        public ICommand CancelProcessCommand
         {
             get
             {
@@ -29,7 +30,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Create
             }
             set
             {
-                this.RaiseAndSetIfChanged(ref this._cancelProcessCommand, value);
+                this.SetAndRaiseIfChanged(ref this._cancelProcessCommand, value);
             }
         }
 
@@ -41,7 +42,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Create
             }
             set
             {
-                this.RaiseAndSetIfChanged(ref this._taskAchievementsViewModel, value);
+                this.SetAndRaiseIfChanged(ref this._taskAchievementsViewModel, value);
             }
         }
     }

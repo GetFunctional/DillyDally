@@ -10,19 +10,17 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
 {
     internal class SearchContentController : DDControllerBase<SearchContentViewModel>
     {
-        private readonly IMediator _mediator;
-
-        public SearchContentController(INavigationTargetProvider navigationTargetProvider, IMediator mediator, IControllerServices controllerServices) :
+        public SearchContentController(INavigationTargetProvider navigationTargetProvider,
+            IControllerServices controllerServices) :
             base(new SearchContentViewModel(CreateNavigationTargetsFrom(navigationTargetProvider)), controllerServices)
         {
-            this._mediator = mediator;
-
-            this.ViewModel.NavigateToTargetCommand = this.CommandFactory.CreateFromTask<Guid>(this.NavigateToTargetAsync);
+            this.ViewModel.NavigateToTargetCommand =
+                controllerServices.CommandFactory.CreateFromTask<Guid>(this.NavigateToTargetAsync);
         }
 
         private async Task NavigateToTargetAsync(Guid targetId)
         {
-            await this._mediator.Send(new NavigationRequest(targetId));
+            await this.ControllerServices.NavigationService.NavigateToTargetAsync(targetId);
         }
 
         private static IList<NavigationTargetViewModel> CreateNavigationTargetsFrom(

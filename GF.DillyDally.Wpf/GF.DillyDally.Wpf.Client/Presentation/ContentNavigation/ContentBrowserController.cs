@@ -15,6 +15,9 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
         public ContentBrowserController(ContentBrowserViewModel viewModel,IControllerServices controllerServices)
             : base(viewModel, controllerServices)
         {
+            var newNavigator = this.CreateChildController<ContentNavigatorController>();
+            this._navigatorControllers.Add(newNavigator);
+            this.ViewModel.SelectCurrentNavigator(newNavigator.ViewModel);
         }
 
         public IController NavigateInCurrentNavigator(INavigationTarget navigationTarget)
@@ -28,15 +31,6 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
             }
 
             return null;
-        }
-
-        protected override async Task OnInitializeAsync()
-        {
-            var newNavigator = this.CreateChildController<ContentNavigatorController>();
-            this._navigatorControllers.Add(newNavigator);
-            this.ViewModel.SelectCurrentNavigator(newNavigator.ViewModel);
-
-            await base.OnInitializeAsync();
         }
     }
 }

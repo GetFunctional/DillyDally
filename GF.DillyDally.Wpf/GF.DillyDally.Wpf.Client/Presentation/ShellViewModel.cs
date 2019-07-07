@@ -1,18 +1,19 @@
 ﻿using System;
+using System.Windows.Input;
 using GF.DillyDally.Mvvmc;
 using GF.DillyDally.Wpf.Client.Presentation.ContentNavigation;
 using GF.DillyDally.Wpf.Client.Presentation.HeaderMenu;
-using ReactiveUI;
+
 
 namespace GF.DillyDally.Wpf.Client.Presentation
 {
     public sealed class ShellViewModel : ViewModelBase
     {
         private ContentBrowserViewModel _contentBrowserViewModel;
-        private IReactiveCommand _createNewActivityCommand;
-        private IReactiveCommand _createNewTaskCommand;
+        private ICommand _createNewActivityCommand;
+        private ICommand _createNewTaskCommand;
         private HeaderMenuViewModel _headerMenuViewModel;
-        private IReactiveCommand _navigateInNavigatorCommand;
+        private ICommand _navigateInNavigatorCommand;
         private OverlayViewModel _overlayViewModel;
 
         public ContentBrowserViewModel ContentBrowserViewModel
@@ -20,7 +21,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation
             get { return this._contentBrowserViewModel; }
             set
             {
-                if (this.RaiseAndSetIfChanged(ref this._contentBrowserViewModel, value) == value)
+                if (this.SetAndRaiseIfChanged(ref this._contentBrowserViewModel, value))
                 {
                     this.RaisePropertyChanged(nameof(ContentNavigation.ContentNavigatorViewModel));
                 }
@@ -35,13 +36,13 @@ namespace GF.DillyDally.Wpf.Client.Presentation
         public HeaderMenuViewModel HeaderMenuViewModel
         {
             get { return this._headerMenuViewModel; }
-            set { this.RaiseAndSetIfChanged(ref this._headerMenuViewModel, value); }
+            set { this.SetAndRaiseIfChanged(ref this._headerMenuViewModel, value); }
         }
 
         public OverlayViewModel OverlayViewModel
         {
             get { return this._overlayViewModel; }
-            set { this.RaiseAndSetIfChanged(ref this._overlayViewModel, value); }
+            set { this.SetAndRaiseIfChanged(ref this._overlayViewModel, value); }
         }
 
         public Guid TaskBoardNavigationTarget
@@ -49,22 +50,22 @@ namespace GF.DillyDally.Wpf.Client.Presentation
             get { return Content.Tasks.TaskBoard.TaskBoardNavigationTarget.TargetId; }
         }
 
-        public IReactiveCommand NavigateInNavigatorCommand
+        public ICommand NavigateInNavigatorCommand
         {
             get { return this._navigateInNavigatorCommand; }
-            set { this.RaiseAndSetIfChanged(ref this._navigateInNavigatorCommand, value); }
+            set { this.SetAndRaiseIfChanged(ref this._navigateInNavigatorCommand, value); }
         }
 
-        public IReactiveCommand CreateNewActivityCommand
+        public ICommand CreateNewActivityCommand
         {
             get { return this._createNewActivityCommand; }
-            set { this.RaiseAndSetIfChanged(ref this._createNewActivityCommand, value); }
+            set { this.SetAndRaiseIfChanged(ref this._createNewActivityCommand, value); }
         }
 
-        public IReactiveCommand CreateNewTaskCommand
+        public ICommand CreateNewTaskCommand
         {
             get { return this._createNewTaskCommand; }
-            set { this.RaiseAndSetIfChanged(ref this._createNewTaskCommand, value); }
+            set { this.SetAndRaiseIfChanged(ref this._createNewTaskCommand, value); }
         }
 
         public Guid SearchContentNavigationTarget

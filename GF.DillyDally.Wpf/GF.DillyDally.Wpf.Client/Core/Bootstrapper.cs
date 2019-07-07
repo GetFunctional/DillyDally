@@ -37,6 +37,7 @@ namespace GF.DillyDally.Wpf.Client.Core
         public void Run(InitializationSettings dataInitializationSettings)
         {
             var serviceContainer = this._serviceContainer;
+            serviceContainer.RegisterInstance(typeof(IApplicationRuntime), this._application);
 
             var typeregistrar = new TypeRegistrar();
             typeregistrar.RegisterMvvmcDependencies(serviceContainer);

@@ -1,14 +1,15 @@
+using System.Windows.Input;
 using GF.DillyDally.Mvvmc;
-using ReactiveUI;
+
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create
 {
     public class CreateActivityViewModel : PagedContentViewModel
     {
-        private IReactiveCommand _cancelProcessCommand;
-        private IReactiveCommand _createActivityCommand;
+        private ICommand _cancelProcessCommand;
+        private ICommand _createActivityCommand;
 
-        public IReactiveCommand CreateActivityCommand
+        public ICommand CreateActivityCommand
         {
             get
             {
@@ -16,11 +17,11 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create
             }
             set
             {
-                this.RaiseAndSetIfChanged(ref this._createActivityCommand, value);
+                this.SetAndRaiseIfChanged(ref this._createActivityCommand, value);
             }
         }
 
-        public IReactiveCommand CancelProcessCommand
+        public ICommand CancelProcessCommand
         {
             get
             {
@@ -28,7 +29,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create
             }
             set
             {
-                this.RaiseAndSetIfChanged(ref this._cancelProcessCommand, value);
+                this.SetAndRaiseIfChanged(ref this._cancelProcessCommand, value);
             }
         }
     }

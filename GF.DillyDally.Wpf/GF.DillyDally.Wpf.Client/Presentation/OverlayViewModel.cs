@@ -1,6 +1,6 @@
 using GF.DillyDally.Mvvmc;
 using GF.DillyDally.Mvvmc.Contracts;
-using ReactiveUI;
+
 
 namespace GF.DillyDally.Wpf.Client.Presentation
 {
@@ -11,7 +11,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation
         public IViewModel OverlayContent
         {
             get { return this._overlayContent; }
-            set { this.RaiseAndSetIfChanged(ref this._overlayContent, value); }
+            set { this.SetAndRaiseIfChanged(ref this._overlayContent, value); }
         }
     }
 }

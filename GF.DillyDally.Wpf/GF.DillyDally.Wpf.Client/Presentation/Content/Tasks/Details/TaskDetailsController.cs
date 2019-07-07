@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using GF.DillyDally.Data.Sqlite;
 using GF.DillyDally.ReadModel.Views.TaskDetails;
 using GF.DillyDally.Wpf.Client.Core.Mvvmc;
 using GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Container;
@@ -50,7 +49,8 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Details
 
             if (taskDetailData.TaskImages.Any(x => x.IsPreviewImage))
             {
-                this.ViewModel.TaskPreviewImageBytes = taskDetailData.TaskImages.First(x => x.IsPreviewImage).ImageBytesMedium;
+                this.ViewModel.TaskPreviewImageBytes =
+                    taskDetailData.TaskImages.First(x => x.IsPreviewImage).ImageBytesMedium;
             }
         }
     }

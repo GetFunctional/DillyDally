@@ -165,7 +165,10 @@ namespace GF.DillyDally.Wpf.Theme.Controls.Shared
 
         public void SearchResultItemsSourceChanged(EventArgs eventArgs)
         {
-            this._itemsDisplay.ShowPopup();
+            if (this.Visibility == Visibility.Visible)
+            {
+                this._itemsDisplay.ShowPopup();
+            }
         }
 
         public override void OnApplyTemplate()

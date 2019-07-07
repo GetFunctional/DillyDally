@@ -13,7 +13,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ShowCase
             : base(viewModel, controllerServices)
         {
             this._navigationService = navigationService;
-            this.ViewModel.TestDialogCommand = this.CommandFactory.CreateFromTask(this.ShowTestDialog);
+            this.ViewModel.TestDialogCommand = controllerServices.CommandFactory.CreateFromTask(this.ShowTestDialog);
         }
 
         private async Task ShowTestDialog()

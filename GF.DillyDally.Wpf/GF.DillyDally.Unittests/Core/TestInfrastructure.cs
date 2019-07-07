@@ -39,7 +39,7 @@ namespace GF.DillyDally.Unittests.Core
 
         public IDbConnection OpenDatabaseConnection()
         {
-            return this.DiContainer.GetInstance<DatabaseFileHandler>().OpenConnection();
+            return this.DiContainer.GetInstance<IReadModelStore>().OpenConnection();
         }
 
         public ControllerFactory GetControllerFactory()

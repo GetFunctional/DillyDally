@@ -1,6 +1,6 @@
 using System;
 using GF.DillyDally.Mvvmc;
-using ReactiveUI;
+
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Create
 {
@@ -19,7 +19,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Create
             }
             set
             {
-                this.RaiseAndSetIfChanged(ref this._dueDate, value);
+                this.SetAndRaiseIfChanged(ref this._dueDate, value);
             }
         }
 
@@ -31,7 +31,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Create
             }
             set
             {
-                this.RaiseAndSetIfChanged(ref this._definitionOfDone, value);
+                this.SetAndRaiseIfChanged(ref this._definitionOfDone, value);
             }
         }
 
@@ -43,7 +43,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Create
             }
             set
             {
-                this.RaiseAndSetIfChanged(ref this._description, value);
+                this.SetAndRaiseIfChanged(ref this._description, value);
             }
         }
     }

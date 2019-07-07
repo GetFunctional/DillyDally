@@ -47,7 +47,7 @@ namespace GF.DillyDally.Wpf.Client.Core.Navigator
             }
 
             // Resolve the next Target
-            var nextContent = this.ResolveNextNavigationTargetAsync(navigationTarget);
+            var nextContent = this.ResolveNextNavigationTarget(navigationTarget);
             if (nextContent == null)
             {
                 throw new NavigationTargetNotFoundException();
@@ -65,7 +65,7 @@ namespace GF.DillyDally.Wpf.Client.Core.Navigator
             return this.CurrentContentController;
         }
 
-        private IController ResolveNextNavigationTargetAsync(INavigationTarget navigationTarget)
+        private IController ResolveNextNavigationTarget(INavigationTarget navigationTarget)
         {
             return this._controllerFactory.CreateAndInitializeController(
                 navigationTarget.NavigationTargetControllerType);

@@ -34,9 +34,6 @@
   <ItemGroup>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="ReactiveUI">
-      <HintPath>..\..\Libs\ReactiveUI.dll</HintPath>
-    </Reference>
     <Reference Include="Splat, Version=7.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libs\Splat.dll</HintPath>

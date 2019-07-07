@@ -1,17 +1,18 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows.Input;
 using GF.DillyDally.ReadModel.Views.TaskBoard;
 using GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.TaskBoard.DragDrop;
-using ReactiveUI;
+
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.TaskBoard
 {
     internal sealed class TaskBoardLaneViewModelFactory
     {
         internal IList<TaskBoardLaneViewModel> CreateLaneViewModels(IList<TaskBoardLaneEntity> lanes,
-            ITaskLaneDropHandler dragDropHandler, IReactiveCommand createNewTaskCommand,
-            IReactiveCommand openTaskDetailsCommand)
+            ITaskLaneDropHandler dragDropHandler, ICommand createNewTaskCommand,
+            ICommand openTaskDetailsCommand)
         {
             return lanes.Select(lane =>
             {
@@ -26,7 +27,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.TaskBoard
         }
 
         private TaskBoardTaskViewModel CreateTaskViewModel(TaskBoardTaskEntity task,
-            IReactiveCommand openTaskDetailsCommand)
+            ICommand openTaskDetailsCommand)
         {
             var taskVm =
                 new TaskBoardTaskViewModel(task.TaskId, task.Name, task.RunningNumber, task.Category.ColorCode,

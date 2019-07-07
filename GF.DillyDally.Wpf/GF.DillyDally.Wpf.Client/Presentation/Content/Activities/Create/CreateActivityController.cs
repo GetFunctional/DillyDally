@@ -6,23 +6,17 @@ using GF.DillyDally.ReadModel.Projection.Activities.Repository;
 using GF.DillyDally.Wpf.Client.Core.Dialoge;
 using GF.DillyDally.Wpf.Client.Core.Mvvmc;
 using GF.DillyDally.WriteModel.Domain.Activities;
-using ReactiveUI;
+
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create
 {
     internal class CreateActivityController : DialogControllerBase<CreateActivityViewModel>
     {
-        private readonly ActivityService _activityService;
-
-        public CreateActivityController(CreateActivityViewModel viewModel, ActivityService activityService,IControllerServices controllerServices)
+        public CreateActivityController(CreateActivityViewModel viewModel, IControllerServices controllerServices)
             : base(viewModel, controllerServices)
         {
-            this._activityService = activityService;
-
-            viewModel.CreateActivityCommand =
-                ReactiveCommand.CreateFromTask(async () => await this.CompleteProcess());
-            viewModel.CancelProcessCommand =
-                ReactiveCommand.Create(this.CancelProcess);
+            viewModel.CreateActivityCommand = controllerServices.CommandFactory.CreateFromTask(async () => await this.CompleteProcess());
+            viewModel.CancelProcessCommand =controllerServices.CommandFactory.CreateFromAction(this.CancelProcess);
 
             var step1 = new CreateActvityStep1ViewModel();
             step1.AvailableActivityTypes = new ObservableCollection<ActivityTypeViewModel>
@@ -52,17 +46,18 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create
                 var activityName = step1.ActivityName;
                 var activityType = step1.SelectedActivityTypeViewModel?.ActivityType;
                 var previewImageForActivity = step1.PreviewImageBytes;
+                var activityService = this.ControllerServices.GetDomainService<ActivityService>();
 
                 switch (activityType)
                 {
                     case ActivityType.Percentage:
                         if (previewImageForActivity != null)
                         {
-                            var activity = await this._activityService.CreatePercentageActivityAsync(activityName, previewImageForActivity);
+                            var activity = await activityService.CreatePercentageActivityAsync(activityName, previewImageForActivity);
                         }
                         else
                         {
-                            var activity = await this._activityService.CreatePercentageActivityAsync(activityName);
+                            var activity = await activityService.CreatePercentageActivityAsync(activityName);
                         }
 
                         this.ConfirmDialogWith(this.CreateActivityDialogResult);

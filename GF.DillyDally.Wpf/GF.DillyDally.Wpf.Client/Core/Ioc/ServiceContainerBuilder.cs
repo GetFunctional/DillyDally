@@ -8,7 +8,6 @@ namespace GF.DillyDally.Wpf.Client.Core.Ioc
         {
             var serviceContainerOptions = new ContainerOptions {EnablePropertyInjection = false, EnableVariance = false};
             var serviceContainer = new ServiceContainer(serviceContainerOptions);
-            serviceContainer.PropertyDependencySelector = new AnnotatedPropertyDependencySelector(new PropertySelector());
             serviceContainer.ScopeManagerProvider = new PerLogicalCallContextScopeManagerProvider();
             return serviceContainer;
         }
