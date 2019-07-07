@@ -7,7 +7,7 @@ namespace GF.DillyDally.Unittests.Mvvmc.TestModels
     {
         internal int InitializationCount;
 
-        public TestController(TestViewModel viewModel,IControllerServices controllerServices)
+        public TestController(TestViewModel viewModel, IControllerServices controllerServices)
             : base(viewModel, controllerServices)
         {
             this.ChildController = this.CreateChildController<ChildTestController>();

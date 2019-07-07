@@ -13,10 +13,7 @@ namespace GF.DillyDally.Wpf.Client.Core.Navigator
 
         public IReadOnlyCollection<INavigationJournalEntry> BackNavigationHistory
         {
-            get
-            {
-                return this._backStack.ToList();
-            }
+            get { return this._backStack.ToList(); }
         }
 
         /// <summary>
@@ -31,10 +28,7 @@ namespace GF.DillyDally.Wpf.Client.Core.Navigator
         /// <value><c>true</c> if the journal can go back; otherwise, <c>false</c>.</value>
         public bool CanGoBack
         {
-            get
-            {
-                return this._backStack.Count > 0;
-            }
+            get { return this._backStack.Count > 0; }
         }
 
         /// <summary>
@@ -45,10 +39,7 @@ namespace GF.DillyDally.Wpf.Client.Core.Navigator
         /// </value>
         public bool CanGoForward
         {
-            get
-            {
-                return this._forwardStack.Count > 0;
-            }
+            get { return this._forwardStack.Count > 0; }
         }
 
         public bool ContainsNavigationTarget(INavigationTarget navigationTarget)

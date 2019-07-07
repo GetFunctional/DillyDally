@@ -19,7 +19,7 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
     [TestFixture]
     public class TaskImageTests
     {
-        #region Run/Teardown
+        #region Setup/Teardown
 
         [SetUp]
         public void Setup()
@@ -42,7 +42,8 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
                 var exampleCategory = (await categoryRepository.GetAllAsync(connection)).FirstOrDefault();
                 var exampleLane = (await laneRepository.GetAllAsync(connection)).FirstOrDefault();
 
-                var task = await commandDispatcher.Send(new CreateTaskCommand("Test", exampleCategory.CategoryId, exampleLane.LaneId));
+                var task = await commandDispatcher.Send(new CreateTaskCommand("Test", exampleCategory.CategoryId,
+                    exampleLane.LaneId));
                 return task;
             }
         }
@@ -73,6 +74,35 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
         }
 
         [Test]
+        public async Task Task_AssignPreviewImage_ReplacesImage()
+        {
+            using (var connection = this._testInfrastructure.OpenDatabaseConnection())
+            {
+                // Arrange
+                var commandDispatcher = this._testInfrastructure.DiContainer.GetInstance<IMediator>();
+                var taskRepository = new TaskRepository();
+                var imageRepository = new ImageRepository();
+
+                var newTask = await this.CreateNewTask();
+                var fileName = "TestImage.jpg";
+                var filePath = Path.Combine(TestContext.CurrentContext.TestDirectory, "TestResources", fileName);
+
+                var attachImageCommand = new AttachFileToTaskCommand(newTask.TaskId, filePath);
+                var attachResult = await commandDispatcher.Send(attachImageCommand);
+
+                // Act
+                var replacePrimaryImageCommand = new AssignPreviewImageCommand(newTask.TaskId, attachResult.FileId);
+                await commandDispatcher.Send(replacePrimaryImageCommand);
+
+                // Assert
+                var taskData = await taskRepository.GetByIdAsync(connection, newTask.TaskId);
+                var imageData = await imageRepository.GetByOriginalFileIdAsync(connection, attachResult.FileId);
+                Assert.That(taskData.PreviewImageFileId,
+                    Is.EqualTo(imageData.Single(x => x.SizeType == ImageSizeType.PreviewSize).ImageId));
+            }
+        }
+
+        [Test]
         public async Task UsingTwiceSameImage_ForDifferentTasks_ReusesImage()
         {
             using (var connection = this._testInfrastructure.OpenDatabaseConnection())
@@ -98,35 +128,8 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
 
                 Assert.That(resultTask1.FileId, Is.EqualTo(resultTask2.FileId));
                 Assert.That(task1Images.Count, Is.EqualTo(task2Images.Count));
-                Assert.That(task1Images.Select(x => x.ImageId).SequenceEqual(task2Images.Select(x => x.ImageId)), Is.True);
-            }
-        }
-
-        [Test]
-        public async Task Task_AssignPreviewImage_ReplacesImage()
-        {
-            using (var connection = this._testInfrastructure.OpenDatabaseConnection())
-            {
-                // Arrange
-                var commandDispatcher = this._testInfrastructure.DiContainer.GetInstance<IMediator>();
-                var taskRepository = new TaskRepository();
-                var imageRepository = new ImageRepository();
-
-                var newTask = await this.CreateNewTask();
-                var fileName = "TestImage.jpg";
-                var filePath = Path.Combine(TestContext.CurrentContext.TestDirectory, "TestResources", fileName);
-
-                var attachImageCommand = new AttachFileToTaskCommand(newTask.TaskId, filePath);
-                var attachResult = await commandDispatcher.Send(attachImageCommand);
-
-                // Act
-                var replacePrimaryImageCommand = new AssignPreviewImageCommand(newTask.TaskId, attachResult.FileId);
-                await commandDispatcher.Send(replacePrimaryImageCommand);
-
-                // Assert
-                var taskData = await taskRepository.GetByIdAsync(connection, newTask.TaskId);
-                var imageData = await imageRepository.GetByOriginalFileIdAsync(connection,attachResult.FileId);
-                Assert.That(taskData.PreviewImageFileId, Is.EqualTo(imageData.Single(x => x.SizeType == ImageSizeType.PreviewSize).ImageId));
+                Assert.That(task1Images.Select(x => x.ImageId).SequenceEqual(task2Images.Select(x => x.ImageId)),
+                    Is.True);
             }
         }
 

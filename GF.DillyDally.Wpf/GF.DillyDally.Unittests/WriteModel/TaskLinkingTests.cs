@@ -15,14 +15,13 @@ namespace GF.DillyDally.Unittests.WriteModel
     [TestFixture]
     public class TaskLinkingTests
     {
-        #region Run/Teardown
+        #region Setup/Teardown
 
         [SetUp]
         public void Setup()
         {
             this._testInfrastructure.Run(UnittestsSetup.ExampleDatabase);
         }
-
 
         #endregion
 
@@ -39,7 +38,8 @@ namespace GF.DillyDally.Unittests.WriteModel
                 var exampleCategory = (await categoryRepository.GetAllAsync(connection)).FirstOrDefault();
                 var exampleLane = (await laneRepository.GetAllAsync(connection)).FirstOrDefault();
 
-                var task = await commandDispatcher.Send(new CreateTaskCommand("Test", exampleCategory.CategoryId, exampleLane.LaneId));
+                var task = await commandDispatcher.Send(new CreateTaskCommand("Test", exampleCategory.CategoryId,
+                    exampleLane.LaneId));
                 return task;
             }
         }

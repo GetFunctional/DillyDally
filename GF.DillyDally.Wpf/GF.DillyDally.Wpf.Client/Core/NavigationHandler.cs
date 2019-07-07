@@ -12,7 +12,8 @@ namespace GF.DillyDally.Wpf.Client.Core
         private readonly IApplicationRuntime _applicationRuntime;
         private readonly INavigationTargetProvider _navigationTargetProvider;
 
-        public NavigationHandler(IApplicationRuntime applicationRuntime, INavigationTargetProvider navigationTargetProvider)
+        public NavigationHandler(IApplicationRuntime applicationRuntime,
+            INavigationTargetProvider navigationTargetProvider)
         {
             this._applicationRuntime = applicationRuntime;
             this._navigationTargetProvider = navigationTargetProvider;
@@ -32,7 +33,8 @@ namespace GF.DillyDally.Wpf.Client.Core
                         throw new ArgumentException(nameof(request.NavigationTargetId));
                     }
 
-                    navigationTarget = this._navigationTargetProvider.FindNavigationTargetWithKey(request.NavigationTargetId.Value);
+                    navigationTarget =
+                        this._navigationTargetProvider.FindNavigationTargetWithKey(request.NavigationTargetId.Value);
                 }
 
                 var targetController = this._applicationRuntime.NavigateInCurrentNavigator(navigationTarget);

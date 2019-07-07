@@ -5,8 +5,8 @@ namespace GF.DillyDally.Data.Sqlite
 {
     public interface IReadModelStore
     {
+        IGuidGenerator GuidGenerator { get; }
         IDbConnection OpenConnection();
         Task<IDbConnection> OpenConnectionAsync();
-        IGuidGenerator GuidGenerator { get; }
     }
 }

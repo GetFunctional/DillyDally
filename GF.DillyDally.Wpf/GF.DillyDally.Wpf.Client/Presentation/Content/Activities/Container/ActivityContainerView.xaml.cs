@@ -16,10 +16,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Container
 
         public ActivityContainerViewModel ViewModel
         {
-            get
-            {
-                return (ActivityContainerViewModel)this.DataContext;
-            }
+            get { return (ActivityContainerViewModel) this.DataContext; }
         }
 
         #endregion

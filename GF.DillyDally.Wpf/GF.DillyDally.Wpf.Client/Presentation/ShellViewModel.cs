@@ -4,7 +4,6 @@ using GF.DillyDally.Mvvmc;
 using GF.DillyDally.Wpf.Client.Presentation.ContentNavigation;
 using GF.DillyDally.Wpf.Client.Presentation.HeaderMenu;
 
-
 namespace GF.DillyDally.Wpf.Client.Presentation
 {
     public sealed class ShellViewModel : ViewModelBase

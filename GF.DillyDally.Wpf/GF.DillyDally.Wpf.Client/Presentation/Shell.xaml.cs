@@ -17,14 +17,8 @@ namespace GF.DillyDally.Wpf.Client.Presentation
 
         public ShellViewModel ViewModel
         {
-            get
-            {
-                return (ShellViewModel)this.DataContext;
-            }
-            set
-            {
-                this.DataContext = value;
-            }
+            get { return (ShellViewModel) this.DataContext; }
+            set { this.DataContext = value; }
         }
 
         #endregion

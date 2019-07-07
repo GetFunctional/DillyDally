@@ -8,17 +8,10 @@ namespace GF.DillyDally.Mvvmc
 
         #region IViewModel Members
 
-
         public bool IsBusy
         {
-            get
-            {
-                return this._isBusy;
-            }
-            set
-            {
-                this.SetAndRaiseIfChanged(ref this._isBusy, value);
-            }
+            get { return this._isBusy; }
+            set { this.SetAndRaiseIfChanged(ref this._isBusy, value); }
         }
 
         #endregion

@@ -18,7 +18,7 @@ namespace GF.DillyDally.Unittests.WriteModel
     [TestFixture]
     public class TaskActivityTests
     {
-        #region Run/Teardown
+        #region Setup/Teardown
 
         [SetUp]
         public void Setup()
@@ -41,7 +41,8 @@ namespace GF.DillyDally.Unittests.WriteModel
                 var exampleCategory = (await categoryRepository.GetAllAsync(connection)).Shuffle().FirstOrDefault();
                 var exampleLane = (await laneRepository.GetAllAsync(connection)).Shuffle().FirstOrDefault();
 
-                var task = await taskService.CreateNewTaskAsync("Prepare Q2 Overview of Mixpanel Statistics (Keynote required)",
+                var task = await taskService.CreateNewTaskAsync(
+                    "Prepare Q2 Overview of Mixpanel Statistics (Keynote required)",
                     exampleCategory.CategoryId, exampleLane.LaneId);
                 return task;
             }
@@ -55,7 +56,8 @@ namespace GF.DillyDally.Unittests.WriteModel
             var taskService = this._testInfrastructure.DiContainer.GetInstance<TaskService>();
             var aggregateRepository = this._testInfrastructure.DiContainer.GetInstance<IAggregateRepository>();
             var firstActivityName = await this._testInfrastructure.TestData.GetRandomActivityNameAsync(activityService);
-            var secondActivityName = await this._testInfrastructure.TestData.GetRandomActivityNameAsync(activityService);
+            var secondActivityName =
+                await this._testInfrastructure.TestData.GetRandomActivityNameAsync(activityService);
 
             var task = await this.CreateNewTask();
             var activity = await activityService.CreatePercentageActivityAsync(firstActivityName);

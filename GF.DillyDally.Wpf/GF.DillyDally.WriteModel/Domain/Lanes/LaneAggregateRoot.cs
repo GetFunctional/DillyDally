@@ -16,7 +16,8 @@ namespace GF.DillyDally.WriteModel.Domain.Lanes
             this.RegisterTransition<TaskRemovedEvent>(this.Apply);
         }
 
-        private LaneAggregateRoot(Guid laneId, Guid runningNumberId, string name, string colorCode, bool isCompletedLane, bool isRejectedLane) : this()
+        private LaneAggregateRoot(Guid laneId, Guid runningNumberId, string name, string colorCode,
+            bool isCompletedLane, bool isRejectedLane) : this()
         {
             if (!this.ValidateColorCode(colorCode))
             {
@@ -24,7 +25,8 @@ namespace GF.DillyDally.WriteModel.Domain.Lanes
             }
 
 
-            var creationEvent = new LaneCreatedEvent(laneId, runningNumberId, name, colorCode, isCompletedLane, isRejectedLane);
+            var creationEvent =
+                new LaneCreatedEvent(laneId, runningNumberId, name, colorCode, isCompletedLane, isRejectedLane);
             this.RaiseEvent(creationEvent);
         }
 
@@ -58,7 +60,8 @@ namespace GF.DillyDally.WriteModel.Domain.Lanes
             return colorCode.StartsWith("#") && colorCode.Length == 7 || colorCode.Length == 9;
         }
 
-        internal static LaneAggregateRoot Create(Guid laneId, Guid runningNumberId, string name, string colorCode, bool isCompletedLane, bool isRejectedLane)
+        internal static LaneAggregateRoot Create(Guid laneId, Guid runningNumberId, string name, string colorCode,
+            bool isCompletedLane, bool isRejectedLane)
         {
             return new LaneAggregateRoot(laneId, runningNumberId, name, colorCode, isCompletedLane, isRejectedLane);
         }

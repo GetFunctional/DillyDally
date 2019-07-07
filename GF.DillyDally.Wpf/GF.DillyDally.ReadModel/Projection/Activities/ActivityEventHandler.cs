@@ -1,24 +1,22 @@
-﻿using System.Linq;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using GF.DillyDally.Data.Sqlite;
 using GF.DillyDally.ReadModel.Projection.Activities.Repository;
 using GF.DillyDally.ReadModel.Projection.Files.Repository;
 using GF.DillyDally.ReadModel.Projection.Images.Repository;
-using GF.DillyDally.ReadModel.Projection.Tasks.Repository;
-using GF.DillyDally.Shared.Images;
 using GF.DillyDally.WriteModel.Domain.Activities.Events;
 using MediatR;
 
 namespace GF.DillyDally.ReadModel.Projection.Activities
 {
-    internal sealed class ActivityEventHandler : INotificationHandler<PercentageActivityCreatedEvent>, INotificationHandler<ActivityPreviewImageAssigned>
+    internal sealed class ActivityEventHandler : INotificationHandler<PercentageActivityCreatedEvent>,
+        INotificationHandler<ActivityPreviewImageAssigned>
     {
         private readonly IReadModelStore _readModelStore;
 
         public ActivityEventHandler(IReadModelStore readModelStore)
         {
-           this._readModelStore = readModelStore;
+            this._readModelStore = readModelStore;
         }
 
         #region INotificationHandler<ActivityPreviewImageAssigned> Members
@@ -48,7 +46,8 @@ namespace GF.DillyDally.ReadModel.Projection.Activities
             using (var connection = this._readModelStore.OpenConnection())
             {
                 var activityRepository = new ActivityRepository();
-                await activityRepository.CreateNewAsync(connection, notification.AggregateId, notification.Name, ActivityType.Percentage);
+                await activityRepository.CreateNewAsync(connection, notification.AggregateId, notification.Name,
+                    ActivityType.Percentage);
             }
         }
 

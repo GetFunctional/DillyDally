@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using GF.DillyDally.WriteModel.Domain.Lanes.Events;
+using GF.DillyDally.WriteModel.Domain.Lanes.Exceptions;
 using GF.DillyDally.WriteModel.Infrastructure;
 
 namespace GF.DillyDally.WriteModel.Domain.Lanes

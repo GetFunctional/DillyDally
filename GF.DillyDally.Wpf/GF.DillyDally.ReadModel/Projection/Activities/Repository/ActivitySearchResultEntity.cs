@@ -7,6 +7,7 @@ namespace GF.DillyDally.ReadModel.Projection.Activities.Repository
     {
         [ExplicitKey]
         public Guid ActivityId { get; set; }
+
         public string Name { get; set; }
         public int ActivityValue { get; set; }
         public ActivityType ActivityType { get; set; }

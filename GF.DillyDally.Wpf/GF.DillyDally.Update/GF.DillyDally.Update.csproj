@@ -69,5 +69,8 @@
   <ItemGroup>
     <EmbeddedResource Include="UpdateSteps\SqlScripts\1.0.0.0.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

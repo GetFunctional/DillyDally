@@ -30,10 +30,7 @@ namespace GF.DillyDally.Wpf.Theme.Wpf
         /// </summary>
         public static IReadOnlyDictionary<Uri, WeakReference> SharedCache
         {
-            get
-            {
-                return InternalSharedCache;
-            }
+            get { return InternalSharedCache; }
         }
 
         /// <summary>
@@ -41,10 +38,7 @@ namespace GF.DillyDally.Wpf.Theme.Wpf
         /// </summary>
         public new Uri Source
         {
-            get
-            {
-                return this._sourceCore;
-            }
+            get { return this._sourceCore; }
             set
             {
                 this._sourceCore = value;
@@ -64,7 +58,7 @@ namespace GF.DillyDally.Wpf.Theme.Wpf
                 }
                 else
                 {
-                    var resourceDictionary = (ResourceDictionary)SharedCache[this._sourceCore].Target;
+                    var resourceDictionary = (ResourceDictionary) SharedCache[this._sourceCore].Target;
                     if (resourceDictionary != null)
                     {
                         this.MergedDictionaries.Add(resourceDictionary);

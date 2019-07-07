@@ -6,14 +6,12 @@ namespace GF.DillyDally.Shared.Extensions
 {
     public static class AttributeExtensions
     {
-        #region - Methoden oeffentlich -
-
         public static TValue GetCustomAttributeValueOrDefault<TAttribute, TValue>(
             this ICustomAttributeProvider attProvider,
             Func<TAttribute, TValue> valueSelector)
             where TAttribute : Attribute
         {
-            return GetCustomAttributeValueOrDefault(attProvider, valueSelector, default(TValue));
+            return GetCustomAttributeValueOrDefault(attProvider, valueSelector, default);
         }
 
         public static TValue GetCustomAttributeValueOrDefault<TAttribute, TValue>(
@@ -28,9 +26,8 @@ namespace GF.DillyDally.Shared.Extensions
             {
                 return valueSelector(att);
             }
+
             return defaultValue;
         }
-
-        #endregion
     }
 }

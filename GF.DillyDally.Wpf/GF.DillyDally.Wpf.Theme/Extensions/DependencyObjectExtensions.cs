@@ -9,7 +9,7 @@ namespace GF.DillyDally.Wpf.Theme.Extensions
     public static class DependencyObjectExtensions
     {
         public static IObservable<EventArgs> Observe<T>(this T component, DependencyProperty dependencyProperty)
-            where T:DependencyObject
+            where T : DependencyObject
         {
             return Observable.Create<EventArgs>(observer =>
             {

@@ -12,5 +12,5 @@ namespace GF.DillyDally.Wpf.Theme.Controls.Layout
             DefaultStyleKeyProperty.OverrideMetadata(
                 typeof(FormFooter), new FrameworkPropertyMetadata(typeof(FormFooter)));
         }
-        }
+    }
 }

@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using GF.DillyDally.Data.Sqlite;
 using GF.DillyDally.ReadModel.Views.Selectors;
 using GF.DillyDally.Wpf.Client.Core.Mvvmc;
 

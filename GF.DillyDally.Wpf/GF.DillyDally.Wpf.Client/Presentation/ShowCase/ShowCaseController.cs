@@ -9,7 +9,8 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ShowCase
     {
         private readonly NavigationService _navigationService;
 
-        public ShowCaseController(ShowCaseViewModel viewModel, NavigationService navigationService,IControllerServices controllerServices)
+        public ShowCaseController(ShowCaseViewModel viewModel, NavigationService navigationService,
+            IControllerServices controllerServices)
             : base(viewModel, controllerServices)
         {
             this._navigationService = navigationService;

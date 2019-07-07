@@ -9,7 +9,6 @@ using GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Container;
 using GF.DillyDally.Wpf.Client.Presentation.Content.Category;
 using GF.DillyDally.WriteModel.Domain.Tasks;
 
-
 namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Create
 {
     internal class CreateTaskController : DialogControllerBase<CreateTaskViewModel>
@@ -23,7 +22,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Create
         {
             this._categorySelectorController = this.CreateChildController<CategorySelectorController>();
             this._activityContainerController = this.CreateChildController<ActivityContainerController>();
-            
+
             viewModel.CreateTaskCommand =
                 controllerServices.CommandFactory.CreateFromTask(async () => await this.CompleteProcess());
             viewModel.CancelProcessCommand = controllerServices.CommandFactory.CreateFromAction(this.CancelProcess);

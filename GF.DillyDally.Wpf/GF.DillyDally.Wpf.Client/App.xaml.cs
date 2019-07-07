@@ -38,9 +38,8 @@ namespace GF.DillyDally.Wpf.Client
             ApplicationThemeHelper.ApplicationThemeName = ThemeConstants.DevExpressThemeName;
 
             AppDomain.CurrentDomain.UnhandledException += this.CurrentDomainOnUnhandledException;
-#if DEBUG
-            AppDomain.CurrentDomain.FirstChanceException += this.CurrentDomainOnFirstChanceException;
-#endif
+            //AppDomain.CurrentDomain.FirstChanceException += this.CurrentDomainOnFirstChanceException;
+
             DispatcherUnhandledException += this.HandleDispatcherException;
             TaskScheduler.UnobservedTaskException += this.HandleUnobservedTaskException;
 

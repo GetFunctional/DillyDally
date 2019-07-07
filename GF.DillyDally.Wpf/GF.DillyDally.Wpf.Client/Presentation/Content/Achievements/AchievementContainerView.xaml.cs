@@ -1,7 +1,7 @@
 ﻿namespace GF.DillyDally.Wpf.Client.Presentation.Content.Achievements
 {
     /// <summary>
-    /// Interaktionslogik für AchievementContainerView.xaml
+    ///     Interaktionslogik für AchievementContainerView.xaml
     /// </summary>
     public partial class AchievementContainerView
     {

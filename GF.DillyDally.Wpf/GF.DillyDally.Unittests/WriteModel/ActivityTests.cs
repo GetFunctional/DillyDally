@@ -11,14 +11,13 @@ namespace GF.DillyDally.Unittests.WriteModel
     public class ActivityTests
 
     {
-        #region Run/Teardown
+        #region Setup/Teardown
 
         [SetUp]
         public void Setup()
         {
             this._testInfrastructure.Run(UnittestsSetup.ExampleDatabase);
         }
-
 
         #endregion
 

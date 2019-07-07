@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using GF.DillyDally.Data.Sqlite;
 using GF.DillyDally.ReadModel.Projection.RunningNumbers.Repository;
@@ -8,13 +7,14 @@ using MediatR;
 
 namespace GF.DillyDally.ReadModel.Projection.RunningNumbers
 {
-    internal sealed class RunningNumbersEventHandler : INotificationHandler<RunningNumberCounterCreatedEvent>, INotificationHandler<AddNextNumberEvent>
+    internal sealed class RunningNumbersEventHandler : INotificationHandler<RunningNumberCounterCreatedEvent>,
+        INotificationHandler<AddNextNumberEvent>
     {
         private readonly IReadModelStore _readModelStore;
 
         public RunningNumbersEventHandler(IReadModelStore readModelStore)
         {
-           this._readModelStore = readModelStore;
+            this._readModelStore = readModelStore;
         }
 
         #region INotificationHandler<AddNextNumberEvent> Members
@@ -28,11 +28,12 @@ namespace GF.DillyDally.ReadModel.Projection.RunningNumbers
                 var runningNumberRepository = new RunningNumberRepository();
 
                 var runningNumber = $"{notification.Prefix}-{notification.NextNumberInRow}";
-                await runningNumberRepository.CreateNewRunningNumberAsync(connection,notification.NextNumberId, runningNumberCounterId, runningNumber);
+                await runningNumberRepository.CreateNewRunningNumberAsync(connection, notification.NextNumberId,
+                    runningNumberCounterId, runningNumber);
                 await runningNumberCounterRepository.IncreaseCounterAsync(connection, runningNumberCounterId);
             }
         }
-        
+
         #endregion
 
         #region INotificationHandler<RunningNumberCounterCreatedEvent> Members
@@ -47,7 +48,8 @@ namespace GF.DillyDally.ReadModel.Projection.RunningNumbers
                 var initialNumber = notification.InitialNumber;
                 var prefix = notification.Prefix;
 
-                await repository.CreateNewRunningNumberCounterAsync(connection, runningNumberCounterId, counterArea, initialNumber, prefix);
+                await repository.CreateNewRunningNumberCounterAsync(connection, runningNumberCounterId, counterArea,
+                    initialNumber, prefix);
             }
         }
 

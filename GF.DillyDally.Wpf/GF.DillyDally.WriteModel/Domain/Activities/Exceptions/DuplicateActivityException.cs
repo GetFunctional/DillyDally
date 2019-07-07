@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GF.DillyDally.WriteModel.Domain.Tasks.Exceptions
+namespace GF.DillyDally.WriteModel.Domain.Activities.Exceptions
 {
     public sealed class DuplicateActivityException : Exception
     {

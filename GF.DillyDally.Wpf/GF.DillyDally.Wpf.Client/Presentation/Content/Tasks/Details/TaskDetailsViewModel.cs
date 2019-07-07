@@ -2,21 +2,16 @@
 using GF.DillyDally.Mvvmc;
 using GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Container;
 
-
 namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Details
 {
     public sealed class TaskDetailsViewModel : ViewModelBase
     {
+        private ActivityContainerViewModel _activitiesViewModel;
         private string _definitionOfDone;
         private string _description;
         private DateTime? _dueDate;
         private string _taskName;
-        private ActivityContainerViewModel _activitiesViewModel;
         private byte[] _taskPreviewImageBytes;
-
-        public TaskDetailsViewModel()
-        {
-        }
 
         public DateTime? DueDate
         {

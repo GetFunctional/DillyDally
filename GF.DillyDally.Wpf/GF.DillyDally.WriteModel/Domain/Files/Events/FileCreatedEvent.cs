@@ -5,7 +5,8 @@ namespace GF.DillyDally.WriteModel.Domain.Files.Events
 {
     public sealed class FileCreatedEvent : AggregateEventBase
     {
-        public FileCreatedEvent(Guid aggregateId, string name, long size, string md5Hash, string extension) : base(aggregateId)
+        public FileCreatedEvent(Guid aggregateId, string name, long size, string md5Hash, string extension) : base(
+            aggregateId)
         {
             this.Name = name;
             this.Size = size;

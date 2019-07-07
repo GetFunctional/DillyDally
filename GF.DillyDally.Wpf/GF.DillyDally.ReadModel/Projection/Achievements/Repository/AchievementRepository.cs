@@ -18,14 +18,15 @@ namespace GF.DillyDally.ReadModel.Projection.Achievements.Repository
             await connection.ExecuteAsync(sql, new {achievementId, completedOn});
         }
 
-        public async Task CreateNewAsync(IDbConnection connection, Guid achievementId, string achievementName, Guid runningNumberId)
+        public async Task CreateNewAsync(IDbConnection connection, Guid achievementId, string achievementName,
+            Guid runningNumberId)
         {
             await connection.InsertAsync(new AchievementEntity
-                                         {
-                                             AchievementId = achievementId,
-                                             Name = achievementName,
-                                             RunningNumberId = runningNumberId
-                                         });
+            {
+                AchievementId = achievementId,
+                Name = achievementName,
+                RunningNumberId = runningNumberId
+            });
         }
     }
 }

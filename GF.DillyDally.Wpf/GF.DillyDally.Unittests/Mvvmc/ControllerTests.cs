@@ -8,33 +8,22 @@ namespace GF.DillyDally.Unittests.Mvvmc
     [TestFixture]
     internal class ControllerTests
     {
+        #region Setup/Teardown
+
         [SetUp]
         public void Setup()
         {
-            this._testInfrastructure.Run( UnittestsSetup.ExampleDatabase);
+            this._testInfrastructure.Run(UnittestsSetup.ExampleDatabase);
             this._testInfrastructure.DiContainer.Register<TestController>();
             this._testInfrastructure.DiContainer.Register<TestViewModel>();
             this._testInfrastructure.DiContainer.Register<ChildTestController>();
             this._testInfrastructure.DiContainer.Register<ChildViewModel>();
         }
-        
+
+        #endregion
+
 
         private readonly TestInfrastructure _testInfrastructure = new TestInfrastructure();
-
-        [Test]
-        public async Task Controller_Initialize_Hierarchical()
-        {
-            // Arrange
-            var controllerFactory = this._testInfrastructure.GetControllerFactory();
-            var testController = controllerFactory.CreateController<TestController>();
-
-            // Act
-            await testController.InitializeAsync();
-
-            // Assert
-            var childController = testController.ChildController;
-            Assert.That(childController.IsInitialized, Is.EqualTo(true));
-        }
 
         [Test]
         public async Task Controller_ChildControllerGetsInitialized_EvenAfterInitialization()
@@ -49,6 +38,21 @@ namespace GF.DillyDally.Unittests.Mvvmc
 
             // Assert
             Assert.That(testController.AnotherChildController.IsInitialized, Is.EqualTo(true));
+        }
+
+        [Test]
+        public async Task Controller_Initialize_Hierarchical()
+        {
+            // Arrange
+            var controllerFactory = this._testInfrastructure.GetControllerFactory();
+            var testController = controllerFactory.CreateController<TestController>();
+
+            // Act
+            await testController.InitializeAsync();
+
+            // Assert
+            var childController = testController.ChildController;
+            Assert.That(childController.IsInitialized, Is.EqualTo(true));
         }
 
         [Test]

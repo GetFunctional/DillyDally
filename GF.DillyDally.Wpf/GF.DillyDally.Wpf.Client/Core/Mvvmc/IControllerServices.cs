@@ -1,8 +1,6 @@
-﻿using System;
-using GF.DillyDally.Data.Sqlite;
+﻿using GF.DillyDally.Data.Sqlite;
 using GF.DillyDally.Wpf.Client.Core.Commands;
 using GF.DillyDally.WriteModel.Infrastructure;
-using MediatR;
 
 namespace GF.DillyDally.Wpf.Client.Core.Mvvmc
 {
@@ -15,7 +13,7 @@ namespace GF.DillyDally.Wpf.Client.Core.Mvvmc
         ControllerFactory ControllerFactory { get; }
 
         IReadModelStore ReadModelStore { get; }
-        
+
         TService GetDomainService<TService>() where TService : IDomainService;
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GF.DillyDally.WriteModel.Domain.Lanes
+namespace GF.DillyDally.WriteModel.Domain.Lanes.Exceptions
 {
     internal class LaneAlreadyExistsException : Exception
     {

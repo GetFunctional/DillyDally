@@ -12,14 +12,13 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
     [TestFixture]
     public class CategoryTests
     {
-        #region Run/Teardown
+        #region Setup/Teardown
 
         [SetUp]
         public void Setup()
         {
             this._testInfrastructure.Run(UnittestsSetup.ExampleDatabase);
         }
-
 
         #endregion
 
@@ -36,7 +35,8 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
 
                 // Act
                 var categoryResponse = await commandDispatcher.Send(new CreateCategoryCommand("Test", "#123456"));
-                var categoryFromProjection = await categoryRepository.GetByIdAsync(connection, categoryResponse.CategoryId);
+                var categoryFromProjection =
+                    await categoryRepository.GetByIdAsync(connection, categoryResponse.CategoryId);
 
                 // Assert
                 Assert.That(categoryResponse, Is.Not.EqualTo(Guid.Empty));

@@ -55,7 +55,8 @@ namespace GF.DillyDally.WriteModel.Domain.Activities
             this.ActivityValue = obj.NewActivityValue;
         }
 
-        private int RecalculatePercentageActivityValue(IDictionary<Guid, int> linkedTasks, ISet<Guid> completedLinkedTasks)
+        private int RecalculatePercentageActivityValue(IDictionary<Guid, int> linkedTasks,
+            ISet<Guid> completedLinkedTasks)
         {
             if (this.LinkedTasks.Count == 0)
             {
@@ -67,7 +68,8 @@ namespace GF.DillyDally.WriteModel.Domain.Activities
             return storypointsCompleted * 100 / totalStorypoints;
         }
 
-        private int RecalculateLevelingActivityValue(IDictionary<Guid, int> linkedTasks, ISet<Guid> completedLinkedTasks)
+        private int RecalculateLevelingActivityValue(IDictionary<Guid, int> linkedTasks,
+            ISet<Guid> completedLinkedTasks)
         {
             var totalStorypoints = linkedTasks.Sum(x => x.Value);
             var storypointsCompleted = linkedTasks.Where(lt => completedLinkedTasks.Contains(lt.Key)).Sum(x => x.Value);
@@ -109,7 +111,8 @@ namespace GF.DillyDally.WriteModel.Domain.Activities
                     throw new ArgumentOutOfRangeException();
             }
 
-            var taskLinkedToActivityEvent = new TaskLinkedToActivityEvent(this.AggregateId, linkedTaskId, storypoints, newActivityValue);
+            var taskLinkedToActivityEvent =
+                new TaskLinkedToActivityEvent(this.AggregateId, linkedTaskId, storypoints, newActivityValue);
             this.Apply(taskLinkedToActivityEvent);
             this.RaiseEvent(taskLinkedToActivityEvent);
         }

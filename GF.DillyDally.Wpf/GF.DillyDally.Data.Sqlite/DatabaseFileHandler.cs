@@ -25,7 +25,26 @@ namespace GF.DillyDally.Data.Sqlite
             this._fullDatabaseFilePath = this.GetFullDatabaseFilePath(databaseName);
         }
 
+        #region IReadModelStore Members
+
         public IGuidGenerator GuidGenerator { get; } = new GuidGenerator();
+
+        public IDbConnection OpenConnection()
+        {
+            var connection = this.CreateConnection(this._fullDatabaseFilePath).OpenAndReturn();
+            connection.Trace += this.HandleTrace;
+            return connection;
+        }
+
+        public async Task<IDbConnection> OpenConnectionAsync()
+        {
+            var connection = this.CreateConnection(this._fullDatabaseFilePath);
+            await connection.OpenAsync();
+            connection.Trace += this.HandleTrace;
+            return connection;
+        }
+
+        #endregion
 
         public bool DatabaseExists()
         {
@@ -102,21 +121,6 @@ namespace GF.DillyDally.Data.Sqlite
             DatabaseFileLogger.Info(e.Statement);
         }
 
-        public IDbConnection OpenConnection()
-        {
-            var connection = this.CreateConnection(this._fullDatabaseFilePath).OpenAndReturn();
-            connection.Trace += this.HandleTrace;
-            return connection;
-        }
-
-        public async Task<IDbConnection> OpenConnectionAsync()
-        {
-            var connection = this.CreateConnection(this._fullDatabaseFilePath);
-            await connection.OpenAsync();
-            connection.Trace += this.HandleTrace;
-            return connection;
-        }
-
         public string GetConnectionString()
         {
             return this.BuildConnectionString(this._fullDatabaseFilePath);
@@ -135,6 +139,4 @@ namespace GF.DillyDally.Data.Sqlite
             File.Move(currentDatabase, archiveDatabase);
         }
     }
-
-    
 }

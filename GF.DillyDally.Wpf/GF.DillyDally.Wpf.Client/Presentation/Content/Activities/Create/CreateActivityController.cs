@@ -7,7 +7,6 @@ using GF.DillyDally.Wpf.Client.Core.Dialoge;
 using GF.DillyDally.Wpf.Client.Core.Mvvmc;
 using GF.DillyDally.WriteModel.Domain.Activities;
 
-
 namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create
 {
     internal class CreateActivityController : DialogControllerBase<CreateActivityViewModel>
@@ -15,15 +14,16 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create
         public CreateActivityController(CreateActivityViewModel viewModel, IControllerServices controllerServices)
             : base(viewModel, controllerServices)
         {
-            viewModel.CreateActivityCommand = controllerServices.CommandFactory.CreateFromTask(async () => await this.CompleteProcess());
-            viewModel.CancelProcessCommand =controllerServices.CommandFactory.CreateFromAction(this.CancelProcess);
+            viewModel.CreateActivityCommand =
+                controllerServices.CommandFactory.CreateFromTask(async () => await this.CompleteProcess());
+            viewModel.CancelProcessCommand = controllerServices.CommandFactory.CreateFromAction(this.CancelProcess);
 
             var step1 = new CreateActvityStep1ViewModel();
             step1.AvailableActivityTypes = new ObservableCollection<ActivityTypeViewModel>
-                                           {
-                                               new ActivityTypeViewModel(ActivityType.Percentage),
-                                               new ActivityTypeViewModel(ActivityType.Leveling)
-                                           };
+            {
+                new ActivityTypeViewModel(ActivityType.Percentage),
+                new ActivityTypeViewModel(ActivityType.Leveling)
+            };
 
             viewModel.AddPage(step1);
         }
@@ -53,7 +53,9 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create
                     case ActivityType.Percentage:
                         if (previewImageForActivity != null)
                         {
-                            var activity = await activityService.CreatePercentageActivityAsync(activityName, previewImageForActivity);
+                            var activity =
+                                await activityService.CreatePercentageActivityAsync(activityName,
+                                    previewImageForActivity);
                         }
                         else
                         {

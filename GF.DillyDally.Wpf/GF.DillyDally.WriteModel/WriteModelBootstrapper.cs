@@ -39,7 +39,8 @@ namespace GF.DillyDally.WriteModel
 
         private void RegisterMediations(IServiceContainer serviceContainer)
         {
-            serviceContainer.RegisterAssembly(typeof(WriteModelBootstrapper).GetTypeInfo().Assembly, this.IsRequestHandler);
+            serviceContainer.RegisterAssembly(typeof(WriteModelBootstrapper).GetTypeInfo().Assembly,
+                this.IsRequestHandler);
 
             serviceContainer.RegisterOrdered(typeof(IPipelineBehavior<,>),
                 new[]

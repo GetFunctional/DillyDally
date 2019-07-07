@@ -16,10 +16,7 @@ namespace GF.DillyDally.Mvvmc
 
         public IReadOnlyList<IDisplayPage> Pages
         {
-            get
-            {
-                return this._pages;
-            }
+            get { return this._pages; }
         }
 
         public void AddPage(IDisplayPage page)

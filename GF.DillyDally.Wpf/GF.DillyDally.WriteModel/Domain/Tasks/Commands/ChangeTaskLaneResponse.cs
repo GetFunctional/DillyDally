@@ -2,8 +2,5 @@
 {
     public class ChangeTaskLaneResponse
     {
-        public ChangeTaskLaneResponse()
-        {
-        }
     }
 }

@@ -17,14 +17,13 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
     [TestFixture]
     public class TaskTests
     {
-        #region Run/Teardown
+        #region Setup/Teardown
 
         [SetUp]
         public void Setup()
         {
             this._testInfrastructure.Run(UnittestsSetup.ExampleDatabase);
         }
-
 
         #endregion
 
@@ -41,7 +40,8 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
                 var exampleCategory = (await categoryRepository.GetAllAsync(connection)).Shuffle().FirstOrDefault();
                 var exampleLane = (await laneRepository.GetAllAsync(connection)).Shuffle().FirstOrDefault();
 
-                var task = await commandDispatcher.Send(new CreateTaskCommand("Test", exampleCategory.CategoryId, exampleLane.LaneId));
+                var task = await commandDispatcher.Send(new CreateTaskCommand("Test", exampleCategory.CategoryId,
+                    exampleLane.LaneId));
                 return task;
             }
         }
@@ -88,7 +88,8 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
                 var taskService = new TaskService(commandDispatcher);
 
                 // Act
-                var newTask = await taskService.CreateNewTaskAsync(taskName,exampleCategory.CategoryId, exampleLane.LaneId);
+                var newTask =
+                    await taskService.CreateNewTaskAsync(taskName, exampleCategory.CategoryId, exampleLane.LaneId);
                 var projection = await repository.GetByIdAsync(connection, newTask.TaskId);
                 var createdLink = await laneTaskRepository.GetLaneTaskByTaskId(connection, newTask.TaskId);
 
@@ -122,7 +123,8 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
                 var taskName = "Test";
 
                 // Act
-                var newTask = await taskService.CreateNewTaskAsync(taskName,exampleCategory.CategoryId, exampleLane.LaneId);
+                var newTask =
+                    await taskService.CreateNewTaskAsync(taskName, exampleCategory.CategoryId, exampleLane.LaneId);
                 var projection = await repository.GetByIdAsync(connection, newTask.TaskId);
 
                 // Assert
@@ -150,7 +152,8 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
                 var taskService = new TaskService(commandDispatcher);
 
                 // Act
-                Assert.DoesNotThrowAsync(async () => await taskService.CreateNewTaskAsync("Test",exampleCategory.CategoryId, exampleLane.LaneId));
+                Assert.DoesNotThrowAsync(async () =>
+                    await taskService.CreateNewTaskAsync("Test", exampleCategory.CategoryId, exampleLane.LaneId));
             }
         }
     }

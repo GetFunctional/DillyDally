@@ -13,7 +13,7 @@ namespace GF.DillyDally.ReadModel.Projection.Categories
 
         public CategoryEventHandler(IReadModelStore readModelStore)
         {
-           this._readModelStore = readModelStore;
+            this._readModelStore = readModelStore;
         }
 
         #region INotificationHandler<CategoryCreatedEvent> Members
@@ -24,12 +24,12 @@ namespace GF.DillyDally.ReadModel.Projection.Categories
             {
                 var categoryRepository = new CategoryRepository();
                 await categoryRepository.InsertAsync(connection, new CategoryEntity
-                                                                 {
-                                                                     CategoryId = notification.AggregateId,
-                                                                     Name = notification.Name,
-                                                                     ColorCode = notification.ColorCode,
-                                                                     RunningNumberId = notification.RunningNumberId
-                                                                 });
+                {
+                    CategoryId = notification.AggregateId,
+                    Name = notification.Name,
+                    ColorCode = notification.ColorCode,
+                    RunningNumberId = notification.RunningNumberId
+                });
             }
         }
 

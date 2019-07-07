@@ -20,14 +20,14 @@ namespace GF.DillyDally.Unittests.WriteModel
     [TestFixture]
     public class TaskTests
     {
-        #region Run/Teardown
+        #region Setup/Teardown
 
         [SetUp]
         public void Setup()
         {
             this._testInfrastructure.Run(UnittestsSetup.ExampleDatabase);
         }
-        
+
         #endregion
 
         private readonly TestInfrastructure _testInfrastructure = new TestInfrastructure();
@@ -43,24 +43,11 @@ namespace GF.DillyDally.Unittests.WriteModel
                 var exampleCategory = (await categoryRepository.GetAllAsync(connection)).Shuffle().FirstOrDefault();
                 var exampleLane = (await laneRepository.GetAllAsync(connection)).Shuffle().FirstOrDefault();
 
-                var task = await commandDispatcher.Send(new CreateTaskCommand("Prepare Q2 Overview of Mixpanel Statistics (Keynote required)", exampleCategory.CategoryId, exampleLane.LaneId));
+                var task = await commandDispatcher.Send(new CreateTaskCommand(
+                    "Prepare Q2 Overview of Mixpanel Statistics (Keynote required)", exampleCategory.CategoryId,
+                    exampleLane.LaneId));
                 return task;
             }
-        }
-
-        [Test]
-        public async Task Task_AssignPreviewImage_ReplacesImage()
-        {
-            // Arrange
-            var commandDispatcher = this._testInfrastructure.DiContainer.GetInstance<IMediator>();
-            var newTask = await this.CreateNewTask();
-            var filePath = this._testInfrastructure.TestData.GetRandomImageFilePath();
-
-            var attachImageCommand = new AttachFileToTaskCommand(newTask.TaskId, filePath);
-            var attachResult = await commandDispatcher.Send(attachImageCommand);
-
-            var replacePrimaryImageCommand = new AssignPreviewImageCommand(newTask.TaskId, attachResult.FileId);
-            await commandDispatcher.Send(replacePrimaryImageCommand);
         }
 
         [TestCase("Do your Job")]
@@ -94,27 +81,23 @@ namespace GF.DillyDally.Unittests.WriteModel
             var definitionOfDoneCommand = new AssignDefinitionOfDoneCommand(newTask.TaskId, definitionOfDone);
 
             // Assert & Act
-            Assert.ThrowsAsync<InvalidDefinitionOfDoneException>(async () => await commandDispatcher.Send(definitionOfDoneCommand));
+            Assert.ThrowsAsync<InvalidDefinitionOfDoneException>(async () =>
+                await commandDispatcher.Send(definitionOfDoneCommand));
         }
 
         [Test]
-        public async Task UsingTwiceSameImage_ForDifferentTasks_ReusesImage()
+        public async Task Task_AssignPreviewImage_ReplacesImage()
         {
             // Arrange
             var commandDispatcher = this._testInfrastructure.DiContainer.GetInstance<IMediator>();
             var newTask = await this.CreateNewTask();
-            var newTask2 = await this.CreateNewTask();
             var filePath = this._testInfrastructure.TestData.GetRandomImageFilePath();
 
             var attachImageCommand = new AttachFileToTaskCommand(newTask.TaskId, filePath);
-            var attachImageCommand2 = new AttachFileToTaskCommand(newTask2.TaskId, filePath);
+            var attachResult = await commandDispatcher.Send(attachImageCommand);
 
-            // Act
-            var resultTask1 = await commandDispatcher.Send(attachImageCommand);
-            var resultTask2 = await commandDispatcher.Send(attachImageCommand2);
-
-            // Assert
-            Assert.That(resultTask1.FileId, Is.EqualTo(resultTask2.FileId));
+            var replacePrimaryImageCommand = new AssignPreviewImageCommand(newTask.TaskId, attachResult.FileId);
+            await commandDispatcher.Send(replacePrimaryImageCommand);
         }
 
         [Test]
@@ -132,7 +115,8 @@ namespace GF.DillyDally.Unittests.WriteModel
                 var fileInfo = new FileInfo(filePath);
 
                 // Act
-                var fileAttachResult = await commandDispatcher.Send(new AttachFileToTaskCommand(newTask.TaskId, filePath));
+                var fileAttachResult =
+                    await commandDispatcher.Send(new AttachFileToTaskCommand(newTask.TaskId, filePath));
 
                 // Assert
                 var fileInStore = await fileRepository.GetByIdAsync(connection, fileAttachResult.FileId);
@@ -157,6 +141,26 @@ namespace GF.DillyDally.Unittests.WriteModel
             // Assert
             Assert.That(newTask != null, Is.True);
             Assert.That(newTask.TaskId, Is.Not.EqualTo(Guid.Empty));
+        }
+
+        [Test]
+        public async Task UsingTwiceSameImage_ForDifferentTasks_ReusesImage()
+        {
+            // Arrange
+            var commandDispatcher = this._testInfrastructure.DiContainer.GetInstance<IMediator>();
+            var newTask = await this.CreateNewTask();
+            var newTask2 = await this.CreateNewTask();
+            var filePath = this._testInfrastructure.TestData.GetRandomImageFilePath();
+
+            var attachImageCommand = new AttachFileToTaskCommand(newTask.TaskId, filePath);
+            var attachImageCommand2 = new AttachFileToTaskCommand(newTask2.TaskId, filePath);
+
+            // Act
+            var resultTask1 = await commandDispatcher.Send(attachImageCommand);
+            var resultTask2 = await commandDispatcher.Send(attachImageCommand2);
+
+            // Assert
+            Assert.That(resultTask1.FileId, Is.EqualTo(resultTask2.FileId));
         }
     }
 }

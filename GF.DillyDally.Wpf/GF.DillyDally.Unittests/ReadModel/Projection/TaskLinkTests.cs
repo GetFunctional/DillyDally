@@ -14,14 +14,14 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
     [TestFixture]
     public class TaskLinkTests
     {
-        #region Run/Teardown
+        #region Setup/Teardown
 
         [SetUp]
         public void Setup()
         {
             this._testInfrastructure.Run(UnittestsSetup.ExampleDatabase);
         }
-        
+
         #endregion
 
         private readonly TestInfrastructure _testInfrastructure = new TestInfrastructure();
@@ -37,7 +37,8 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
                 var exampleCategory = (await categoryRepository.GetAllAsync(connection)).FirstOrDefault();
                 var exampleLane = (await laneRepository.GetAllAsync(connection)).FirstOrDefault();
 
-                var task = await commandDispatcher.Send(new CreateTaskCommand("Test", exampleCategory.CategoryId, exampleLane.LaneId));
+                var task = await commandDispatcher.Send(new CreateTaskCommand("Test", exampleCategory.CategoryId,
+                    exampleLane.LaneId));
                 return task;
             }
         }
@@ -58,8 +59,8 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
                 var result = await commandDispatcher.Send(new LinkTaskCommand(newTask1.TaskId, newTask2.TaskId));
 
                 // Assert
-                var links = await taskLinksRepository.GetLinksForTaskIdAsync(connection ,newTask1.TaskId);
-                var links2 = await taskLinksRepository.GetLinksForTaskIdAsync(connection ,newTask2.TaskId);
+                var links = await taskLinksRepository.GetLinksForTaskIdAsync(connection, newTask1.TaskId);
+                var links2 = await taskLinksRepository.GetLinksForTaskIdAsync(connection, newTask2.TaskId);
 
                 Assert.That(links.Count, Is.EqualTo(1));
                 Assert.That(links2.Count, Is.EqualTo(1));

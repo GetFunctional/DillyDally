@@ -22,13 +22,14 @@ namespace GF.DillyDally.Wpf.Client.Core.Mvvmc
             this.ReadModelStore = readModelStore;
         }
 
+        public IMediator Mediator { get; }
+
         #region IControllerServices Members
 
         public CommandFactory CommandFactory { get; }
         public NavigationService NavigationService { get; }
         public ControllerFactory ControllerFactory { get; }
         public IReadModelStore ReadModelStore { get; }
-        public IMediator Mediator { get; }
 
         public TService GetDomainService<TService>() where TService : IDomainService
         {

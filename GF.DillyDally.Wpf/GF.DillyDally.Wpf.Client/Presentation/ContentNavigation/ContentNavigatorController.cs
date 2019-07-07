@@ -10,7 +10,8 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
     {
         private readonly IContentNavigator _contentNavigator;
 
-        public ContentNavigatorController(ContentNavigatorViewModel viewModel, IContentNavigator contentNavigator,IControllerServices controllerServices)
+        public ContentNavigatorController(ContentNavigatorViewModel viewModel, IContentNavigator contentNavigator,
+            IControllerServices controllerServices)
             : base(viewModel, controllerServices)
         {
             this._contentNavigator = contentNavigator;

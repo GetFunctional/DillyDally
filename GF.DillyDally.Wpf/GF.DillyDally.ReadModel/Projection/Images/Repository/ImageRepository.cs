@@ -12,8 +12,6 @@ namespace GF.DillyDally.ReadModel.Projection.Images.Repository
 {
     internal class ImageRepository : Repository<ImageEntity>
     {
-        #region IImageRepository Members
-
         public async Task<IList<ImageEntity>> GetByOriginalFileIdAsync(IDbConnection connection, Guid fileId)
         {
             var querySql =
@@ -28,12 +26,10 @@ namespace GF.DillyDally.ReadModel.Projection.Images.Repository
             var querySql =
                 $"SELECT {nameof(ImageEntity.ImageId)} " +
                 $"FROM {ImageEntity.TableNameConstant} " +
-                $"WHERE {nameof(ImageEntity.OriginalFileId)} = @id AND {nameof(ImageEntity.SizeType)} = {(int)ImageSizeType.PreviewSize}";
+                $"WHERE {nameof(ImageEntity.OriginalFileId)} = @id AND {nameof(ImageEntity.SizeType)} = {(int) ImageSizeType.PreviewSize}";
             var imageEntity = await connection.QuerySingleAsync<ImageEntity>(querySql, new {id = fileId});
             return imageEntity.ImageId;
         }
-
-        #endregion
 
         internal async Task<IList<ImageEntity>> StoreImagesAsync(IDbConnection connection, FileEntity file)
         {
@@ -41,8 +37,10 @@ namespace GF.DillyDally.ReadModel.Projection.Images.Repository
 
             var previewImage = imagesForFile.FirstOrDefault(x => x.SizeType == ImageSizeType.PreviewSize) ??
                                this.CreateImageEntity(file, ImageSizeType.PreviewSize);
-            var smallImage = imagesForFile.FirstOrDefault(x => x.SizeType == ImageSizeType.Small) ?? this.CreateImageEntity(file, ImageSizeType.Small);
-            var fullImage = imagesForFile.FirstOrDefault(x => x.SizeType == ImageSizeType.Full) ?? this.CreateImageEntity(file, ImageSizeType.Full);
+            var smallImage = imagesForFile.FirstOrDefault(x => x.SizeType == ImageSizeType.Small) ??
+                             this.CreateImageEntity(file, ImageSizeType.Small);
+            var fullImage = imagesForFile.FirstOrDefault(x => x.SizeType == ImageSizeType.Full) ??
+                            this.CreateImageEntity(file, ImageSizeType.Full);
 
             var images = new List<ImageEntity> {previewImage, smallImage, fullImage};
 
@@ -57,12 +55,12 @@ namespace GF.DillyDally.ReadModel.Projection.Images.Repository
         private ImageEntity CreateImageEntity(FileEntity file, ImageSizeType imageSizeType)
         {
             return new ImageEntity
-                   {
-                       Binary = ImageResizer.CreateImagePreview(file.Binary, imageSizeType),
-                       ImageId = this.GuidGenerator.GenerateGuid(),
-                       OriginalFileId = file.FileId,
-                       SizeType = imageSizeType
-                   };
+            {
+                Binary = ImageResizer.CreateImagePreview(file.Binary, imageSizeType),
+                ImageId = this.GuidGenerator.GenerateGuid(),
+                OriginalFileId = file.FileId,
+                SizeType = imageSizeType
+            };
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using GF.DillyDally.Mvvmc;
 
-
 namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
 {
     public sealed class ContentBrowserViewModel : ViewModelBase
@@ -17,14 +16,8 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
 
         public ContentNavigatorViewModel CurrentActiveNavigator
         {
-            get
-            {
-                return this._currentActiveNavigator;
-            }
-            set
-            {
-                this.SetAndRaiseIfChanged(ref this._currentActiveNavigator, value);
-            }
+            get { return this._currentActiveNavigator; }
+            set { this.SetAndRaiseIfChanged(ref this._currentActiveNavigator, value); }
         }
 
         public CloseNavigatorCommand CloseNavigatorCommand { get; }

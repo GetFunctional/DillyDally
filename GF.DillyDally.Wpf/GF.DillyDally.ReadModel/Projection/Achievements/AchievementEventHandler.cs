@@ -24,7 +24,8 @@ namespace GF.DillyDally.ReadModel.Projection.Achievements
             using (var connection = this._readModelStore.OpenConnection())
             {
                 var achievementCompletionRepository = new AchievementRepository();
-                await achievementCompletionRepository.CompletedAsync(connection, notification.AggregateId, notification.CompletedOn);
+                await achievementCompletionRepository.CompletedAsync(connection, notification.AggregateId,
+                    notification.CompletedOn);
             }
         }
 
@@ -37,7 +38,8 @@ namespace GF.DillyDally.ReadModel.Projection.Achievements
             using (var connection = this._readModelStore.OpenConnection())
             {
                 var achievementRepository = new AchievementRepository();
-                await achievementRepository.CreateNewAsync(connection, notification.AggregateId, notification.Name, notification.RunningNumberId);
+                await achievementRepository.CreateNewAsync(connection, notification.AggregateId, notification.Name,
+                    notification.RunningNumberId);
             }
         }
 

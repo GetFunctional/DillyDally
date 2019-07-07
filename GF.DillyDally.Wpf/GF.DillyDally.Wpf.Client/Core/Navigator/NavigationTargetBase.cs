@@ -1,5 +1,4 @@
 ﻿using System;
-using GF.DillyDally.Mvvmc;
 using GF.DillyDally.Mvvmc.Contracts;
 
 namespace GF.DillyDally.Wpf.Client.Core.Navigator
@@ -13,10 +12,7 @@ namespace GF.DillyDally.Wpf.Client.Core.Navigator
 
         public Type NavigationTargetControllerType
         {
-            get
-            {
-                return typeof(TController);
-            }
+            get { return typeof(TController); }
         }
 
 

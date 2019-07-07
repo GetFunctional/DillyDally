@@ -28,7 +28,7 @@ namespace GF.DillyDally.ReadModel.Views.TaskBoard
 
             using (var multiSelect = await connection.QueryMultipleAsync(sql))
             {
-                var lanes= (await multiSelect.ReadAsync<TaskBoardLaneEntity>()).ToList();
+                var lanes = (await multiSelect.ReadAsync<TaskBoardLaneEntity>()).ToList();
                 var tasks = await multiSelect.ReadAsync<TaskBoardTaskEntity>();
                 var categories = await multiSelect.ReadAsync<TaskBoardCategoryEntity>();
 
@@ -42,7 +42,8 @@ namespace GF.DillyDally.ReadModel.Views.TaskBoard
 
                 foreach (var taskBoardLaneEntity in lanes)
                 {
-                    taskBoardLaneEntity.Tasks = new List<TaskBoardTaskEntity>(tasks.Where(x => x.LaneId == taskBoardLaneEntity.LaneId));
+                    taskBoardLaneEntity.Tasks =
+                        new List<TaskBoardTaskEntity>(tasks.Where(x => x.LaneId == taskBoardLaneEntity.LaneId));
                 }
 
                 return lanes;

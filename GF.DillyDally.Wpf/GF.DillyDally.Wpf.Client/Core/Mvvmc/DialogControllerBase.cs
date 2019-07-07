@@ -11,7 +11,7 @@ namespace GF.DillyDally.Wpf.Client.Core.Mvvmc
         private readonly Subject<IDialogResult> _confirmationResult = new Subject<IDialogResult>();
 
 
-        protected DialogControllerBase(TViewModel viewModel,IControllerServices controllerServices)
+        protected DialogControllerBase(TViewModel viewModel, IControllerServices controllerServices)
             : base(viewModel, controllerServices)
         {
             this.AvailableResults = new List<IDialogResult>();
@@ -21,10 +21,7 @@ namespace GF.DillyDally.Wpf.Client.Core.Mvvmc
 
         public IObservable<IDialogResult> WhenConfirmedResult
         {
-            get
-            {
-                return this._confirmationResult;
-            }
+            get { return this._confirmationResult; }
         }
 
         public IList<IDialogResult> AvailableResults { get; }

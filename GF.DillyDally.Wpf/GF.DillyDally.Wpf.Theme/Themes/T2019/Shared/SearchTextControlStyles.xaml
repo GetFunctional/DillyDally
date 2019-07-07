@@ -11,8 +11,10 @@
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Colors.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Typography.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/Input/LabelStyles.xaml" />
+        <ResourceDictionary
+            Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Typography.xaml" />
+        <ResourceDictionary
+            Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/Input/LabelStyles.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <SolidColorBrush x:Key="SearchTextBorderBrush" Color="{StaticResource InputControlsBorderColor}" />
@@ -42,7 +44,8 @@
                     BorderBrush="{StaticResource SearchTextBorderBrush}"
                     BorderThickness="1"
                     CornerRadius="3">
-                    <Grid Validation.ValidationAdornerSiteFor="{Binding RelativeSource={RelativeSource TemplatedParent}}">
+                    <Grid
+                        Validation.ValidationAdornerSiteFor="{Binding RelativeSource={RelativeSource TemplatedParent}}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="40" />
                             <ColumnDefinition Width="*" />
@@ -96,7 +99,8 @@
                         </Validation.ErrorTemplate>
                     </Grid>
                 </Border>
-                <ItemsControl ItemTemplate="{StaticResource LastSearchItemTemplate}" ItemsSource="{TemplateBinding LastSearchItemsSource}">
+                <ItemsControl ItemTemplate="{StaticResource LastSearchItemTemplate}"
+                              ItemsSource="{TemplateBinding LastSearchItemsSource}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <dxlc:LayoutGroup Orientation="Horizontal" />
@@ -107,10 +111,12 @@
         </dxlc:LayoutItem>
         <ControlTemplate.Triggers>
             <Trigger Property="IsKeyboardFocusWithin" Value="True">
-                <Setter TargetName="TextInputBorder" Property="BorderBrush" Value="{StaticResource SearchTextSelectedBorderBrush}" />
+                <Setter TargetName="TextInputBorder" Property="BorderBrush"
+                        Value="{StaticResource SearchTextSelectedBorderBrush}" />
             </Trigger>
             <Trigger Property="IsKeyboardFocusWithin" Value="False">
-                <Setter TargetName="TextInputBorder" Property="BorderBrush" Value="{StaticResource SearchTextBorderBrush}" />
+                <Setter TargetName="TextInputBorder" Property="BorderBrush"
+                        Value="{StaticResource SearchTextBorderBrush}" />
             </Trigger>
             <MultiTrigger>
                 <MultiTrigger.Conditions>
@@ -118,7 +124,8 @@
                     <Condition Property="IsKeyboardFocusWithin" Value="False" />
                 </MultiTrigger.Conditions>
                 <MultiTrigger.Setters>
-                    <Setter TargetName="TextInputBorder" Property="BorderBrush" Value="{StaticResource SearchTextHoverBorderBrush}" />
+                    <Setter TargetName="TextInputBorder" Property="BorderBrush"
+                            Value="{StaticResource SearchTextHoverBorderBrush}" />
                 </MultiTrigger.Setters>
             </MultiTrigger>
         </ControlTemplate.Triggers>

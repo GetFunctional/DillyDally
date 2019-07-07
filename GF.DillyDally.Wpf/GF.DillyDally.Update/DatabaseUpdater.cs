@@ -19,7 +19,8 @@ namespace GF.DillyDally.Update
         {
             var databaseFileHandler = new DatabaseFileHandler(database);
 
-            foreach (var updateStep in this._updateCoordinator.GetUpdateStepsBeginningFromVersion(new Version(1, 0, 0, 0)))
+            foreach (var updateStep in this._updateCoordinator.GetUpdateStepsBeginningFromVersion(new Version(1, 0, 0,
+                0)))
             {
                 using (var connection = databaseFileHandler.OpenConnection())
                 {

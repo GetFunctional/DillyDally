@@ -12,7 +12,7 @@ namespace GF.DillyDally.Wpf.Theme.Converter
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var booleanValue = (bool)value;
+            var booleanValue = (bool) value;
 
             return booleanValue ? new Thickness(0) : new Thickness(1);
         }

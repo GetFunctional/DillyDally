@@ -7,7 +7,7 @@ namespace GF.DillyDally.Mvvmc
     {
         public Task InitializeControllerAsync(IController controller)
         {
-            return this.InitializeInternal((InitializationBase)controller);
+            return this.InitializeInternal((InitializationBase) controller);
         }
 
         private Task InitializeInternal(InitializationBase initializeComponent)

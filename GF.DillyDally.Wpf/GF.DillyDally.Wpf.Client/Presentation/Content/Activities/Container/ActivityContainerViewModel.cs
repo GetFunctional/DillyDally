@@ -3,7 +3,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using GF.DillyDally.Mvvmc;
 
-
 namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Container
 {
     public sealed class ActivityContainerViewModel : ViewModelBase

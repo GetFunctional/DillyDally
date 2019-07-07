@@ -7,14 +7,15 @@ using MediatR;
 
 namespace GF.DillyDally.ReadModel.Projection.Lanes
 {
-    internal sealed class LaneEventHandler : INotificationHandler<LaneCreatedEvent>, INotificationHandler<TaskAddedEvent>,
+    internal sealed class LaneEventHandler : INotificationHandler<LaneCreatedEvent>,
+        INotificationHandler<TaskAddedEvent>,
         INotificationHandler<TaskRemovedEvent>
     {
         private readonly IReadModelStore _readModelStore;
 
         public LaneEventHandler(IReadModelStore readModelStore)
         {
-           this._readModelStore = readModelStore;
+            this._readModelStore = readModelStore;
         }
 
         #region INotificationHandler<LaneCreatedEvent> Members
@@ -25,14 +26,14 @@ namespace GF.DillyDally.ReadModel.Projection.Lanes
             {
                 var laneRepository = new LaneRepository();
                 await laneRepository.InsertAsync(connection, new LaneEntity
-                                                             {
-                                                                 LaneId = notification.AggregateId,
-                                                                 Name = notification.Name,
-                                                                 IsCompletedLane = notification.IsCompletedLane,
-                                                                 IsRejectedLane = notification.IsRejectedLane,
-                                                                 ColorCode = notification.ColorCode,
-                                                                 RunningNumberId = notification.RunningNumberId
-                                                             });
+                {
+                    LaneId = notification.AggregateId,
+                    Name = notification.Name,
+                    IsCompletedLane = notification.IsCompletedLane,
+                    IsRejectedLane = notification.IsRejectedLane,
+                    ColorCode = notification.ColorCode,
+                    RunningNumberId = notification.RunningNumberId
+                });
             }
         }
 
@@ -45,7 +46,8 @@ namespace GF.DillyDally.ReadModel.Projection.Lanes
             using (var connection = this._readModelStore.OpenConnection())
             {
                 var laneRepository = new LaneTaskRepository();
-                await laneRepository.AddTaskToLaneAsync(connection, notification.TaskId, notification.AggregateId, notification.OrderNumber);
+                await laneRepository.AddTaskToLaneAsync(connection, notification.TaskId, notification.AggregateId,
+                    notification.OrderNumber);
             }
         }
 

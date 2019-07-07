@@ -10,14 +10,15 @@ using MediatR;
 namespace GF.DillyDally.ReadModel.Projection.Tasks
 {
     internal sealed class TaskEventHandler : INotificationHandler<TaskCreatedEvent>,
-        INotificationHandler<AttachedFileToTaskEvent>, INotificationHandler<PreviewImageAssignedEvent>, INotificationHandler<TaskLinkCreatedEvent>,
+        INotificationHandler<AttachedFileToTaskEvent>, INotificationHandler<PreviewImageAssignedEvent>,
+        INotificationHandler<TaskLinkCreatedEvent>,
         INotificationHandler<DefinitionOfDoneChangedEvent>, INotificationHandler<TaskLinkedToActivitiesEvent>
     {
         private readonly IReadModelStore _readModelStore;
 
         public TaskEventHandler(IReadModelStore readModelStore)
         {
-           this._readModelStore = readModelStore;
+            this._readModelStore = readModelStore;
         }
 
         #region INotificationHandler<AttachedFileToTaskEvent> Members
@@ -42,11 +43,11 @@ namespace GF.DillyDally.ReadModel.Projection.Tasks
                 {
                     var taskFileRepository = new TaskFileRepository();
                     await taskFileRepository.InsertAsync(connection, new TaskFileEntity
-                                                                     {
-                                                                         TaskFileId = this._readModelStore.GuidGenerator.GenerateGuid(),
-                                                                         TaskId = taskId,
-                                                                         FileId = notification.FileId
-                                                                     });
+                    {
+                        TaskFileId = this._readModelStore.GuidGenerator.GenerateGuid(),
+                        TaskId = taskId,
+                        FileId = notification.FileId
+                    });
                 }
             }
         }
@@ -60,7 +61,8 @@ namespace GF.DillyDally.ReadModel.Projection.Tasks
             using (var connection = this._readModelStore.OpenConnection())
             {
                 var repository = new TaskRepository();
-                await repository.UpdateDefinitionOfDoneAsync(connection, notification.AggregateId, notification.DefinitionOfDone);
+                await repository.UpdateDefinitionOfDoneAsync(connection, notification.AggregateId,
+                    notification.DefinitionOfDone);
             }
         }
 
@@ -92,14 +94,14 @@ namespace GF.DillyDally.ReadModel.Projection.Tasks
             {
                 var taskRepository = new TaskRepository();
                 await taskRepository.InsertAsync(connection, new TaskEntity
-                                                             {
-                                                                 TaskId = notification.AggregateId,
-                                                                 Name = notification.Name,
-                                                                 CategoryId = notification.CategoryId,
-                                                                 RunningNumberId = notification.RunningNumberId,
-                                                                 CreatedOn = notification.CreatedOn,
-                                                                 PreviewImageFileId = notification.PreviewImageFileId
-                                                             });
+                {
+                    TaskId = notification.AggregateId,
+                    Name = notification.Name,
+                    CategoryId = notification.CategoryId,
+                    RunningNumberId = notification.RunningNumberId,
+                    CreatedOn = notification.CreatedOn,
+                    PreviewImageFileId = notification.PreviewImageFileId
+                });
             }
         }
 
@@ -112,7 +114,8 @@ namespace GF.DillyDally.ReadModel.Projection.Tasks
             using (var connection = this._readModelStore.OpenConnection())
             {
                 var repository = new TaskLinksRepository();
-                await repository.CreateNewLinkbetweenTasksAsync(connection, notification.AggregateId, notification.LinkToTaskId);
+                await repository.CreateNewLinkbetweenTasksAsync(connection, notification.AggregateId,
+                    notification.LinkToTaskId);
             }
         }
 
@@ -125,7 +128,8 @@ namespace GF.DillyDally.ReadModel.Projection.Tasks
             using (var connection = this._readModelStore.OpenConnection())
             {
                 var repository = new TaskActivityRepository();
-                await repository.LinkTaskToActivitiesAsync(connection, notification.AggregateId, notification.ActivityIds);
+                await repository.LinkTaskToActivitiesAsync(connection, notification.AggregateId,
+                    notification.ActivityIds);
             }
         }
 

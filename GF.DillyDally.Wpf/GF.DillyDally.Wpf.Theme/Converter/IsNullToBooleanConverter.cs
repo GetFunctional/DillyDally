@@ -17,6 +17,7 @@ namespace GF.DillyDally.Wpf.Theme.Converter
             {
                 return value != null;
             }
+
             return value == null;
         }
 

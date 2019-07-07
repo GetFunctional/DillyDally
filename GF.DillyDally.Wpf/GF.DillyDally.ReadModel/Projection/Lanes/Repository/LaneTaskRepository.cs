@@ -12,12 +12,12 @@ namespace GF.DillyDally.ReadModel.Projection.Lanes.Repository
         public async Task AddTaskToLaneAsync(IDbConnection connection, Guid taskId, Guid laneId, int orderNumber)
         {
             await this.InsertAsync(connection, new LaneTaskEntity
-                                               {
-                                                   LaneTaskId = this.GuidGenerator.GenerateGuid(),
-                                                   TaskId = taskId,
-                                                   LaneId = laneId,
-                                                   OrderNumber = orderNumber
-                                               });
+            {
+                LaneTaskId = this.GuidGenerator.GenerateGuid(),
+                TaskId = taskId,
+                LaneId = laneId,
+                OrderNumber = orderNumber
+            });
         }
 
         public async Task RemoveTaskFromLaneAsync(IDbConnection connection, Guid taskId, Guid laneId)

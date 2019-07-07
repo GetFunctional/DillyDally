@@ -57,7 +57,6 @@
     <system:Double x:Key="InputControlsLabelFontSize">14</system:Double>
 
 
-
     <!--  Usage Template Styles  -->
     <Style x:Key="BodyContentControlTypoStyle" TargetType="{x:Type ContentControl}">
         <Setter Property="FontFamily" Value="{StaticResource Arial}" />

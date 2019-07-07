@@ -7,7 +7,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using DevExpress.Mvvm;
-using GF.DillyDally.Mvvmc;
 using GF.DillyDally.Mvvmc.Contracts;
 
 namespace GF.DillyDally.Wpf.Theme.Controls.Layout
@@ -50,71 +49,41 @@ namespace GF.DillyDally.Wpf.Theme.Controls.Layout
         [Bindable(true)]
         public bool HasNextPage
         {
-            get
-            {
-                return (bool)this.GetValue(HasNextPageProperty);
-            }
-            set
-            {
-                this.SetValue(HasNextPageProperty, value);
-            }
+            get { return (bool) this.GetValue(HasNextPageProperty); }
+            set { this.SetValue(HasNextPageProperty, value); }
         }
 
         [Bindable(true)]
         public bool HasPreviousPage
         {
-            get
-            {
-                return (bool)this.GetValue(HasPreviousPageProperty);
-            }
-            set
-            {
-                this.SetValue(HasPreviousPageProperty, value);
-            }
+            get { return (bool) this.GetValue(HasPreviousPageProperty); }
+            set { this.SetValue(HasPreviousPageProperty, value); }
         }
 
         [Bindable(true, BindingDirection.OneWay)]
         public ICommand PreviousPageCommand
         {
-            get
-            {
-                return this._previousPageCommand;
-            }
+            get { return this._previousPageCommand; }
         }
 
         [Bindable(true, BindingDirection.OneWay)]
         public ICommand NextPageCommand
         {
-            get
-            {
-                return this._nextPageCommand;
-            }
+            get { return this._nextPageCommand; }
         }
 
         [Bindable(true)]
         public object CurrentPage
         {
-            get
-            {
-                return this.GetValue(CurrentPageProperty);
-            }
-            set
-            {
-                this.SetValue(CurrentPageProperty, value);
-            }
+            get { return this.GetValue(CurrentPageProperty); }
+            set { this.SetValue(CurrentPageProperty, value); }
         }
 
         [Bindable(true)]
         public bool HasMultiplePages
         {
-            get
-            {
-                return (bool)this.GetValue(HasMultiplePagesProperty);
-            }
-            set
-            {
-                this.SetValue(HasMultiplePagesProperty, value);
-            }
+            get { return (bool) this.GetValue(HasMultiplePagesProperty); }
+            set { this.SetValue(HasMultiplePagesProperty, value); }
         }
 
         private static void HandleCurrentPageChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -129,8 +98,8 @@ namespace GF.DillyDally.Wpf.Theme.Controls.Layout
                 newPage.IsCurrent = true;
             }
 
-            ((PagedContentControl)d)._previousPageCommand.RaiseCanExecuteChanged();
-            ((PagedContentControl)d)._nextPageCommand.RaiseCanExecuteChanged();
+            ((PagedContentControl) d)._previousPageCommand.RaiseCanExecuteChanged();
+            ((PagedContentControl) d)._nextPageCommand.RaiseCanExecuteChanged();
         }
 
         protected override void OnItemsSourceChanged(IEnumerable oldValue, IEnumerable newValue)

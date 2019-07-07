@@ -58,7 +58,6 @@ namespace GF.DillyDally.Wpf.Client.Core
             serviceContainer.Register<ControllerFactory>();
             serviceContainer.Register<CommandFactory>();
             serviceContainer.Register<IControllerServices, ControllerServices>();
-
         }
     }
 }

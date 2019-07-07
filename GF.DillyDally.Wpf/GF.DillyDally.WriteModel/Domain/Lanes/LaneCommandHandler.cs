@@ -25,12 +25,13 @@ namespace GF.DillyDally.WriteModel.Domain.Lanes
         {
             var laneId = this.GuidGenerator.GenerateGuid();
 
-            var runningNumberForCategory = await 
+            var runningNumberForCategory = await
                 this._runningNumberFactory.CreateNewRunningNumberForAsync(RunningNumberCounterArea.Lane);
             var aggregate = LaneAggregateRoot.Create(laneId, runningNumberForCategory, request.Name,
                 request.ColorCode, request.IsCompletedLane, request.IsRejectedLane);
 
-            if (!this.AggregateRepository.TryGetById(LaneListAggregateRoot.LaneListAggregateId, out LaneListAggregateRoot laneList))
+            if (!this.AggregateRepository.TryGetById(LaneListAggregateRoot.LaneListAggregateId,
+                out LaneListAggregateRoot laneList))
             {
                 laneList = LaneListAggregateRoot.Create();
             }

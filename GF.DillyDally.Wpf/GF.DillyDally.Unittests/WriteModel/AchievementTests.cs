@@ -10,7 +10,7 @@ namespace GF.DillyDally.Unittests.WriteModel
     [TestFixture]
     public class AchievementTests
     {
-        #region Run/Teardown
+        #region Setup/Teardown
 
         [SetUp]
         public void Setup()
@@ -21,7 +21,7 @@ namespace GF.DillyDally.Unittests.WriteModel
         #endregion
 
         private readonly TestInfrastructure _testInfrastructure = new TestInfrastructure();
-        
+
         [Test]
         public async Task CompletingAchievement_CompletesAchievement()
         {

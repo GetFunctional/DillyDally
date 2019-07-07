@@ -7,7 +7,8 @@
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Colors.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Typography.xaml" />
+        <ResourceDictionary
+            Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Typography.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <SolidColorBrush x:Key="ElementGroupBackgroundBrush" Color="{StaticResource Layer1BackgroundColor}" />
@@ -29,7 +30,8 @@
                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                 Orientation="Vertical">
-                <ContentControl Content="{TemplateBinding HeaderTitleContent}" ContentTemplate="{TemplateBinding HeaderContentTemplate}" />
+                <ContentControl Content="{TemplateBinding HeaderTitleContent}"
+                                ContentTemplate="{TemplateBinding HeaderContentTemplate}" />
                 <ContentControl
                     Content="{TemplateBinding Content}"
                     ContentStringFormat="{TemplateBinding ContentStringFormat}"

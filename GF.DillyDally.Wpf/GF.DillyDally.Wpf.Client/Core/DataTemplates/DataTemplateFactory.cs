@@ -35,7 +35,7 @@ namespace GF.DillyDally.Wpf.Client.Core.DataTemplates
             context.XmlnsDictionary.Add("vm", "vm");
             context.XmlnsDictionary.Add("v", "v");
 
-            var template = (DataTemplate)XamlReader.Parse(xaml, context);
+            var template = (DataTemplate) XamlReader.Parse(xaml, context);
             return template;
         }
 

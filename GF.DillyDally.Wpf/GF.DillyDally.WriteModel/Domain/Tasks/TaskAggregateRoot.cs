@@ -29,18 +29,12 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks
 
         internal IEnumerable<Guid> LinkedTasks
         {
-            get
-            {
-                return this.TaskLinks;
-            }
+            get { return this.TaskLinks; }
         }
 
         internal IEnumerable<Guid> LinkedActivities
         {
-            get
-            {
-                return this.ActivityLinks;
-            }
+            get { return this.ActivityLinks; }
         }
 
         private HashSet<Guid> ActivityLinks { get; } = new HashSet<Guid>();
@@ -54,10 +48,7 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks
 
         internal IReadOnlyCollection<Guid> AttachedFiles
         {
-            get
-            {
-                return this.Files;
-            }
+            get { return this.Files; }
         }
 
         private void Apply(TaskLinkedToActivitiesEvent obj)

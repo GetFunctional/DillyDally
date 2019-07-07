@@ -9,7 +9,8 @@ namespace GF.DillyDally.WriteModel.Domain.Files
 {
     internal sealed class FileDataRepository
     {
-        internal async Task<Filedata> LoadFileAsync(IDbConnection connection, IGuidGenerator guidGenerator, FileRepository fileRepository,
+        internal async Task<Filedata> LoadFileAsync(IDbConnection connection, IGuidGenerator guidGenerator,
+            FileRepository fileRepository,
             byte[] binary)
         {
             var fileBytes = binary;
@@ -17,11 +18,13 @@ namespace GF.DillyDally.WriteModel.Domain.Files
             var fileName = Guid.NewGuid().ToString();
             var fileExtension = this.GetFileExtensionForDataFormat(fileBytes);
 
-            return await this.GetFileData(connection, guidGenerator, fileRepository, md5HashString, fileBytes, fileName, fileExtension);
+            return await this.GetFileData(connection, guidGenerator, fileRepository, md5HashString, fileBytes, fileName,
+                fileExtension);
         }
 
 
-        internal async Task<Filedata> LoadFileAsync(IDbConnection connection, IGuidGenerator guidGenerator, FileRepository fileRepository,
+        internal async Task<Filedata> LoadFileAsync(IDbConnection connection, IGuidGenerator guidGenerator,
+            FileRepository fileRepository,
             string filePath)
         {
             var file = new FileInfo(filePath);
@@ -36,10 +39,12 @@ namespace GF.DillyDally.WriteModel.Domain.Files
             var fileName = file.Name;
             var fileExtension = file.Extension;
 
-            return await this.GetFileData(connection, guidGenerator, fileRepository, md5HashString, fileBytes, fileName, fileExtension);
+            return await this.GetFileData(connection, guidGenerator, fileRepository, md5HashString, fileBytes, fileName,
+                fileExtension);
         }
 
-        private async Task<Filedata> GetFileData(IDbConnection connection, IGuidGenerator guidGenerator, FileRepository fileRepository, string md5HashString,
+        private async Task<Filedata> GetFileData(IDbConnection connection, IGuidGenerator guidGenerator,
+            FileRepository fileRepository, string md5HashString,
             byte[] fileBytes, string fileName, string fileExtension)
         {
             if (!await fileRepository.HasFileWithSameHashAsync(connection, md5HashString))
@@ -65,7 +70,7 @@ namespace GF.DillyDally.WriteModel.Domain.Files
                 throw new NotImplementedException();
             }
 
-            return ImageFormatDetector.GetFileExtensionForImageFormat(imageFormat).Replace("*", string.Empty);
+            return imageFormat.GetFileExtensionForImageFormat().Replace("*", string.Empty);
         }
     }
 }

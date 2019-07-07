@@ -5,7 +5,8 @@ namespace GF.DillyDally.WriteModel.Domain.Lanes.Events
 {
     public sealed class LaneCreatedEvent : AggregateEventBase
     {
-        public LaneCreatedEvent(Guid aggregateId, Guid runningNumberId, string name, string colorCode, bool isCompletedLane, bool isRejectedLane) :
+        public LaneCreatedEvent(Guid aggregateId, Guid runningNumberId, string name, string colorCode,
+            bool isCompletedLane, bool isRejectedLane) :
             base(aggregateId)
         {
             this.RunningNumberId = runningNumberId;

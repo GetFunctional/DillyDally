@@ -13,14 +13,13 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
     [TestFixture]
     public class RunningNumberTests
     {
-        #region Run/Teardown
+        #region Setup/Teardown
 
         [SetUp]
         public void Setup()
         {
             this._testInfrastructure.Run(UnittestsSetup.ExampleDatabase);
         }
-
 
         #endregion
 
@@ -38,13 +37,16 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
 
                 var commandDispatcher = this._testInfrastructure.DiContainer.GetInstance<IMediator>();
                 var nextNumberCommand = new CreateRunningNumberCommand(RunningNumberCounterArea.Achievement);
-                var achievementCounterId = RunningNumberCounterCommandHandler.AreaToIdentityMapping[RunningNumberCounterArea.Achievement];
-                var runningNumberBefore = await runningNumberCounterRepository.GetByIdAsync(connection, achievementCounterId);
+                var achievementCounterId =
+                    RunningNumberCounterCommandHandler.AreaToIdentityMapping[RunningNumberCounterArea.Achievement];
+                var runningNumberBefore =
+                    await runningNumberCounterRepository.GetByIdAsync(connection, achievementCounterId);
 
                 // Act
                 var attachResult = await commandDispatcher.Send(nextNumberCommand);
                 var newNumber = await runningNumberRepository.GetByIdAsync(connection, attachResult.RunningNumberId);
-                var runningNumberAfter = await runningNumberCounterRepository.GetByIdAsync(connection, achievementCounterId);
+                var runningNumberAfter =
+                    await runningNumberCounterRepository.GetByIdAsync(connection, achievementCounterId);
 
                 // Assert
                 Assert.That(newNumber, Is.Not.Null);

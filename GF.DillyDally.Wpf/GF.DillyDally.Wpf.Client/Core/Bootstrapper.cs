@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using GF.DillyDally.Wpf.Client.Core.ApplicationState;
+﻿using GF.DillyDally.Wpf.Client.Core.ApplicationState;
 using GF.DillyDally.Wpf.Client.Core.DataTemplates;
 using GF.DillyDally.Wpf.Client.Core.Ioc;
 using GF.DillyDally.Wpf.Client.Core.Navigator;
@@ -18,7 +17,8 @@ namespace GF.DillyDally.Wpf.Client.Core
         private readonly NavigationInitializer _navigationInitializer = new NavigationInitializer();
         private readonly IServiceContainer _serviceContainer;
 
-        public Bootstrapper(IApplicationRuntime application) : this(application, ServiceContainerBuilder.CreateDependencyInjectionContainer())
+        public Bootstrapper(IApplicationRuntime application) : this(application,
+            ServiceContainerBuilder.CreateDependencyInjectionContainer())
         {
         }
 

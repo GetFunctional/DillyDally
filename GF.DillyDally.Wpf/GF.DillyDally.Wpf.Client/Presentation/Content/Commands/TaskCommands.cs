@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Reactive;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using DevExpress.Mvvm;
-using GF.DillyDally.Wpf.Client.Core.Commands;
 using GF.DillyDally.Wpf.Client.Core.Mvvmc;
 using GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Create;
 using GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Details;
 using GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.TaskBoard.DragDrop;
 using GF.DillyDally.WriteModel.Domain.Tasks;
-
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Content.Commands
 {
@@ -27,7 +24,8 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Commands
                     .NavigateToTargetAsync);
             this.MoveTaskToOtherLaneCommand =
                 controllerServices.CommandFactory.CreateFromTask<TaskChangedLanePayload>(this.ChangeTaskLaneAsync);
-            this.OpenTaskDetailsCommand = controllerServices.CommandFactory.CreateFromTask<Guid>(this.OpenTaskDetailsCommandAsync);
+            this.OpenTaskDetailsCommand =
+                controllerServices.CommandFactory.CreateFromTask<Guid>(this.OpenTaskDetailsCommandAsync);
         }
 
         public ICommand NavigateInNavigatorCommand { get; }

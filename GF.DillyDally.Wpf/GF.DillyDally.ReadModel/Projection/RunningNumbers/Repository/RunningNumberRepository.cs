@@ -8,14 +8,15 @@ namespace GF.DillyDally.ReadModel.Projection.RunningNumbers.Repository
 {
     internal class RunningNumberRepository : Repository<RunningNumberEntity>
     {
-        public async Task CreateNewRunningNumberAsync(IDbConnection connection, Guid runningNumberId, Guid runningNumberCounterId, string runningNumber)
+        public async Task CreateNewRunningNumberAsync(IDbConnection connection, Guid runningNumberId,
+            Guid runningNumberCounterId, string runningNumber)
         {
             var runningNumberEntity = new RunningNumberEntity
-                                      {
-                                          RunningNumberId = runningNumberId,
-                                          RunningNumberCounterId = runningNumberCounterId,
-                                          RunningNumber = runningNumber
-                                      };
+            {
+                RunningNumberId = runningNumberId,
+                RunningNumberCounterId = runningNumberCounterId,
+                RunningNumber = runningNumber
+            };
 
             await connection.InsertAsync(runningNumberEntity);
         }

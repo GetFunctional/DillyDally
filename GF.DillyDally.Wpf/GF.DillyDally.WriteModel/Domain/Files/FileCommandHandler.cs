@@ -17,7 +17,7 @@ namespace GF.DillyDally.WriteModel.Domain.Files
         public FileCommandHandler(IAggregateRepository aggregateRepository, IWriteModelStore writeModelStore) : base(
             aggregateRepository)
         {
-             this._writeModelStore = writeModelStore;
+            this._writeModelStore = writeModelStore;
         }
 
         #region IRequestHandler<StoreFileCommand,StoreFileResponse> Members
@@ -32,7 +32,8 @@ namespace GF.DillyDally.WriteModel.Domain.Files
 
         #endregion
 
-        internal static async Task<StoreFileResponse> GetOrCreateFileAsync(StoreFileCommand request, IAggregateRepository aggregateRepository,
+        internal static async Task<StoreFileResponse> GetOrCreateFileAsync(StoreFileCommand request,
+            IAggregateRepository aggregateRepository,
             IDbConnection connection, IGuidGenerator guidGenerator)
         {
             // Load File
@@ -41,11 +42,13 @@ namespace GF.DillyDally.WriteModel.Domain.Files
             Filedata fileDataToStore;
             if (request.FilePath != null)
             {
-                fileDataToStore = await fileDataRepository.LoadFileAsync(connection, guidGenerator, fileRepository, request.FilePath);
+                fileDataToStore =
+                    await fileDataRepository.LoadFileAsync(connection, guidGenerator, fileRepository, request.FilePath);
             }
             else if (request.Binary != null)
             {
-                fileDataToStore = await fileDataRepository.LoadFileAsync(connection, guidGenerator, fileRepository, request.Binary);
+                fileDataToStore =
+                    await fileDataRepository.LoadFileAsync(connection, guidGenerator, fileRepository, request.Binary);
             }
             else
             {
@@ -56,17 +59,18 @@ namespace GF.DillyDally.WriteModel.Domain.Files
             {
                 // Store File first
                 await fileRepository.InsertAsync(connection, new FileEntity
-                                                             {
-                                                                 Binary = fileDataToStore.Binary,
-                                                                 Extension = fileDataToStore.Extension,
-                                                                 FileId = fileDataToStore.FileId,
-                                                                 Md5Hash = fileDataToStore.Md5Hash,
-                                                                 Name = fileDataToStore.Name,
-                                                                 Size = fileDataToStore.Size,
-                                                                 IsImage = fileDataToStore.IsImage
-                                                             });
+                {
+                    Binary = fileDataToStore.Binary,
+                    Extension = fileDataToStore.Extension,
+                    FileId = fileDataToStore.FileId,
+                    Md5Hash = fileDataToStore.Md5Hash,
+                    Name = fileDataToStore.Name,
+                    Size = fileDataToStore.Size,
+                    IsImage = fileDataToStore.IsImage
+                });
 
-                var aggregate = FileAggregateRoot.Create(fileDataToStore.FileId, fileDataToStore.Name, fileDataToStore.Size, fileDataToStore.Md5Hash,
+                var aggregate = FileAggregateRoot.Create(fileDataToStore.FileId, fileDataToStore.Name,
+                    fileDataToStore.Size, fileDataToStore.Md5Hash,
                     fileDataToStore.Extension);
                 await aggregateRepository.SaveAsync(aggregate);
 

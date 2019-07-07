@@ -1,23 +1,15 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using GF.DillyDally.Mvvmc.Contracts;
 
 namespace GF.DillyDally.Mvvmc
 {
     public abstract class InitializationBase : INeedsInitialization
     {
-        private bool _isInitialized = false;
         private readonly object _initializationLock = new object();
 
-        protected internal bool IsInitialized
-        {
-            get { return this._isInitialized; }
-        }
+        protected internal bool IsInitialized { get; private set; }
 
-        protected virtual async Task OnInitializeAsync()
-        {
-            await Task.CompletedTask;
-        }
+        #region INeedsInitialization Members
 
         public async Task InitializeAsync()
         {
@@ -35,12 +27,19 @@ namespace GF.DillyDally.Mvvmc
 
                 if (!this.IsInitialized)
                 {
-                    this._isInitialized = true;
+                    this.IsInitialized = true;
                 }
             }
 
             await this.OnInitializeAsync();
             await this.OnInitializeCompletedAsync();
+        }
+
+        #endregion
+
+        protected virtual async Task OnInitializeAsync()
+        {
+            await Task.CompletedTask;
         }
 
         protected virtual async Task OnInitializeCompletedAsync()

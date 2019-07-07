@@ -31,66 +31,36 @@ namespace GF.DillyDally.Wpf.Theme.Controls.Input
         [Bindable(true)]
         public bool IsRequired
         {
-            get
-            {
-                return (bool)this.GetValue(IsRequiredProperty);
-            }
-            set
-            {
-                this.SetValue(IsRequiredProperty, value);
-            }
+            get { return (bool) this.GetValue(IsRequiredProperty); }
+            set { this.SetValue(IsRequiredProperty, value); }
         }
 
         [Bindable(true)]
         public bool IsMultiline
         {
-            get
-            {
-                return (bool)this.GetValue(IsMultilineProperty);
-            }
-            set
-            {
-                this.SetValue(IsMultilineProperty, value);
-            }
+            get { return (bool) this.GetValue(IsMultilineProperty); }
+            set { this.SetValue(IsMultilineProperty, value); }
         }
 
         [Bindable(true)]
         public string WatermarkText
         {
-            get
-            {
-                return (string)this.GetValue(WatermarkTextProperty);
-            }
-            set
-            {
-                this.SetValue(WatermarkTextProperty, value);
-            }
+            get { return (string) this.GetValue(WatermarkTextProperty); }
+            set { this.SetValue(WatermarkTextProperty, value); }
         }
 
         [Bindable(true)]
         public string InputValue
         {
-            get
-            {
-                return (string)this.GetValue(InputValueProperty);
-            }
-            set
-            {
-                this.SetValue(InputValueProperty, value);
-            }
+            get { return (string) this.GetValue(InputValueProperty); }
+            set { this.SetValue(InputValueProperty, value); }
         }
 
         [Bindable(true)]
         public object Label
         {
-            get
-            {
-                return this.GetValue(LabelProperty);
-            }
-            set
-            {
-                this.SetValue(LabelProperty, value);
-            }
+            get { return this.GetValue(LabelProperty); }
+            set { this.SetValue(LabelProperty, value); }
         }
     }
 }

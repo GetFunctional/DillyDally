@@ -44,10 +44,10 @@ namespace GF.DillyDally.Wpf.Theme.Controls.Shared
         public static readonly DependencyProperty DisplayMemberProperty = DependencyProperty.Register(
             "DisplayMember", typeof(string), typeof(SearchTextControl), new PropertyMetadata(default(string)));
 
-        private IObservable<EventArgs> _searchItemsSourceObservable;
-
         private ComboBoxEdit _itemsDisplay;
         private TextEdit _searchBox;
+
+        private IObservable<EventArgs> _searchItemsSourceObservable;
 
         static SearchTextControl()
         {
@@ -59,101 +59,53 @@ namespace GF.DillyDally.Wpf.Theme.Controls.Shared
         [Bindable(true)]
         public string SearchText
         {
-            get
-            {
-                return (string)this.GetValue(SearchTextProperty);
-            }
-            set
-            {
-                this.SetValue(SearchTextProperty, value);
-            }
+            get { return (string) this.GetValue(SearchTextProperty); }
+            set { this.SetValue(SearchTextProperty, value); }
         }
 
         public object LastSearchItemsSource
         {
-            get
-            {
-                return this.GetValue(LastSearchItemsSourceProperty);
-            }
-            set
-            {
-                this.SetValue(LastSearchItemsSourceProperty, value);
-            }
+            get { return this.GetValue(LastSearchItemsSourceProperty); }
+            set { this.SetValue(LastSearchItemsSourceProperty, value); }
         }
 
         public object SearchResultItemsSource
         {
-            get
-            {
-                return this.GetValue(SearchResultItemsSourceProperty);
-            }
-            set
-            {
-                this.SetValue(SearchResultItemsSourceProperty, value);
-            }
+            get { return this.GetValue(SearchResultItemsSourceProperty); }
+            set { this.SetValue(SearchResultItemsSourceProperty, value); }
         }
 
         public DataTemplate SearchResultItemTemplate
         {
-            get
-            {
-                return (DataTemplate)this.GetValue(SearchResultItemTemplateProperty);
-            }
-            set
-            {
-                this.SetValue(SearchResultItemTemplateProperty, value);
-            }
+            get { return (DataTemplate) this.GetValue(SearchResultItemTemplateProperty); }
+            set { this.SetValue(SearchResultItemTemplateProperty, value); }
         }
 
         [Bindable(true)]
         public string WatermarkText
         {
-            get
-            {
-                return (string)this.GetValue(WatermarkTextProperty);
-            }
-            set
-            {
-                this.SetValue(WatermarkTextProperty, value);
-            }
+            get { return (string) this.GetValue(WatermarkTextProperty); }
+            set { this.SetValue(WatermarkTextProperty, value); }
         }
 
         [Bindable(true)]
         public object InputValue
         {
-            get
-            {
-                return this.GetValue(InputValueProperty);
-            }
-            set
-            {
-                this.SetValue(InputValueProperty, value);
-            }
+            get { return this.GetValue(InputValueProperty); }
+            set { this.SetValue(InputValueProperty, value); }
         }
 
         [Bindable(true)]
         public object Label
         {
-            get
-            {
-                return this.GetValue(LabelProperty);
-            }
-            set
-            {
-                this.SetValue(LabelProperty, value);
-            }
+            get { return this.GetValue(LabelProperty); }
+            set { this.SetValue(LabelProperty, value); }
         }
 
         public string DisplayMember
         {
-            get
-            {
-                return (string)this.GetValue(DisplayMemberProperty);
-            }
-            set
-            {
-                this.SetValue(DisplayMemberProperty, value);
-            }
+            get { return (string) this.GetValue(DisplayMemberProperty); }
+            set { this.SetValue(DisplayMemberProperty, value); }
         }
 
         public void HandleWhenPopupOpened(RoutedEventArgs e)
@@ -174,8 +126,8 @@ namespace GF.DillyDally.Wpf.Theme.Controls.Shared
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            this._searchBox = (TextEdit)this.GetTemplateChild(PARTSearchBox);
-            this._itemsDisplay = (ComboBoxEdit)this.GetTemplateChild(PARTItemsDisplay);
+            this._searchBox = (TextEdit) this.GetTemplateChild(PARTSearchBox);
+            this._itemsDisplay = (ComboBoxEdit) this.GetTemplateChild(PARTItemsDisplay);
 
             this.EventRegistrations();
         }
@@ -183,14 +135,16 @@ namespace GF.DillyDally.Wpf.Theme.Controls.Shared
         private void EventRegistrations()
         {
             var whenEditValueChanged = Observable
-                .FromEventPattern<EditValueChangedEventHandler, EditValueChangedEventArgs>(s => this._itemsDisplay.EditValueChanged += s,
+                .FromEventPattern<EditValueChangedEventHandler, EditValueChangedEventArgs>(
+                    s => this._itemsDisplay.EditValueChanged += s,
                     s => this._itemsDisplay.EditValueChanged -= s)
                 .Select(x => x.EventArgs);
             whenEditValueChanged.ObserveOnDispatcher()
                 .Subscribe(this.SearchBoxOnEditValueChanged);
 
             var whenPopupOpened = Observable
-                .FromEventPattern<RoutedEventHandler, RoutedEventArgs>(s => this._itemsDisplay.PopupOpened += s, s => this._itemsDisplay.PopupOpened -= s)
+                .FromEventPattern<RoutedEventHandler, RoutedEventArgs>(s => this._itemsDisplay.PopupOpened += s,
+                    s => this._itemsDisplay.PopupOpened -= s)
                 .Select(x => x.EventArgs);
             whenPopupOpened.ObserveOnDispatcher()
                 .Subscribe(this.HandleWhenPopupOpened);

@@ -16,14 +16,8 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
 
         public SearchContentViewModel ViewModel
         {
-            get
-            {
-                return (SearchContentViewModel)this.DataContext;
-            }
-            set
-            {
-                this.DataContext = value;
-            }
+            get { return (SearchContentViewModel) this.DataContext; }
+            set { this.DataContext = value; }
         }
 
         #endregion

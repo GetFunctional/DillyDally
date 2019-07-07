@@ -16,10 +16,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.TaskBoard
 
         public TaskBoardViewModel ViewModel
         {
-            get
-            {
-                return (TaskBoardViewModel)this.DataContext;
-            }
+            get { return (TaskBoardViewModel) this.DataContext; }
         }
 
         #endregion

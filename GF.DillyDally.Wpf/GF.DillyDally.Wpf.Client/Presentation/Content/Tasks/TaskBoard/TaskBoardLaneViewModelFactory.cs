@@ -5,7 +5,6 @@ using System.Windows.Input;
 using GF.DillyDally.ReadModel.Views.TaskBoard;
 using GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.TaskBoard.DragDrop;
 
-
 namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.TaskBoard
 {
     internal sealed class TaskBoardLaneViewModelFactory

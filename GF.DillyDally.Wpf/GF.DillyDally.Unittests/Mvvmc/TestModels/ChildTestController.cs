@@ -4,7 +4,7 @@ namespace GF.DillyDally.Unittests.Mvvmc.TestModels
 {
     internal class ChildTestController : DDControllerBase<ChildViewModel>
     {
-        public ChildTestController(ChildViewModel viewModel,IControllerServices controllerServices)
+        public ChildTestController(ChildViewModel viewModel, IControllerServices controllerServices)
             : base(viewModel, controllerServices)
         {
         }

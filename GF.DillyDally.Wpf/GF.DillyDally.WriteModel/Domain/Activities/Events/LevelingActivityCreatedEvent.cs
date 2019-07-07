@@ -11,6 +11,5 @@ namespace GF.DillyDally.WriteModel.Domain.Activities.Events
         }
 
         public string Name { get; }
-
     }
 }

@@ -11,12 +11,12 @@ namespace GF.DillyDally.ReadModel.Projection.Tasks.Repository
     {
         public async Task LinkTaskToActivitiesAsync(IDbConnection connection, Guid taskId, ISet<Guid> activityIds)
         {
-            var newLinks = activityIds.Select(actId => new TaskActivityEntity()
-                                                       {
-                                                           TaskId = taskId,
-                                                           ActivityId = actId,
-                                                           TaskActivityId = this.GuidGenerator.GenerateGuid()
-                                                       }).ToList();
+            var newLinks = activityIds.Select(actId => new TaskActivityEntity
+            {
+                TaskId = taskId,
+                ActivityId = actId,
+                TaskActivityId = this.GuidGenerator.GenerateGuid()
+            }).ToList();
 
             await this.InsertMultipleAsync(connection, newLinks);
         }

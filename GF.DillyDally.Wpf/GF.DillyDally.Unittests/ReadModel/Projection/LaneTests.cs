@@ -12,7 +12,7 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
     [TestFixture]
     public class LaneTests
     {
-        #region Run/Teardown
+        #region Setup/Teardown
 
         [SetUp]
         public void Setup()

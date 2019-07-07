@@ -16,10 +16,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.HeaderMenu
 
         public HeaderMenuViewModel ViewModel
         {
-            get
-            {
-                return (HeaderMenuViewModel)this.DataContext;
-            }
+            get { return (HeaderMenuViewModel) this.DataContext; }
         }
 
         #endregion

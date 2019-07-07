@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
-using GF.DillyDally.Mvvmc;
 using GF.DillyDally.Mvvmc.Contracts;
 
 namespace GF.DillyDally.Wpf.Client.Core.Navigator

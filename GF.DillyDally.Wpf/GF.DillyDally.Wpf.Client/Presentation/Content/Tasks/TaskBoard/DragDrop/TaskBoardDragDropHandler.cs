@@ -9,25 +9,22 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.TaskBoard.DragDrop
     internal sealed class TaskBoardDragDropHandler : DefaultDropHandler, ITaskLaneDropHandler
     {
         private readonly Subject<TaskChangedLanePayload> _whenTaskChangedLane = new Subject<TaskChangedLanePayload>();
-        private readonly Subject<TaskChangedPositionPayload> _whenTaskChangedPosition = new Subject<TaskChangedPositionPayload>();
+
+        private readonly Subject<TaskChangedPositionPayload> _whenTaskChangedPosition =
+            new Subject<TaskChangedPositionPayload>();
+
         private TaskChangedLanePayload _currentMoveTaskToOtherLanePayload;
         private TaskChangedPositionPayload _currentMoveTaskToOtherPositionPayload;
         private IList<TaskBoardLaneViewModel> _taskboardLaneViewModels;
 
         internal IObservable<TaskChangedLanePayload> WhenTaskChangedLane
         {
-            get
-            {
-                return this._whenTaskChangedLane;
-            }
+            get { return this._whenTaskChangedLane; }
         }
 
         internal IObservable<TaskChangedPositionPayload> WhenTaskChangedPosition
         {
-            get
-            {
-                return this._whenTaskChangedPosition;
-            }
+            get { return this._whenTaskChangedPosition; }
         }
 
         #region ITaskLaneDropHandler Members
@@ -40,7 +37,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.TaskBoard.DragDrop
             this._currentMoveTaskToOtherPositionPayload = null;
 
             var targetCollection = dropInfo.TargetCollection;
-            var sourceItem = (TaskBoardTaskViewModel)dropInfo.Data;
+            var sourceItem = (TaskBoardTaskViewModel) dropInfo.Data;
             var targetLane = this._taskboardLaneViewModels.SingleOrDefault(x => Equals(x.Tasks, targetCollection));
             var sourceLane = this._taskboardLaneViewModels.SingleOrDefault(lane => lane.Tasks.Contains(sourceItem));
 
@@ -84,17 +81,20 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.TaskBoard.DragDrop
             this._taskboardLaneViewModels = taskboardLaneViewModels;
         }
 
-        private void PrepareMoveTaskPosition(TaskBoardTaskViewModel sourceItem, TaskBoardTaskViewModel targetItem = null)
+        private void PrepareMoveTaskPosition(TaskBoardTaskViewModel sourceItem,
+            TaskBoardTaskViewModel targetItem = null)
         {
             this._currentMoveTaskToOtherLanePayload = null;
             this._currentMoveTaskToOtherPositionPayload = new TaskChangedPositionPayload(sourceItem, targetItem);
         }
 
-        private void PrepareMoveTaskToOtherLane(TaskBoardLaneViewModel sourceLane, TaskBoardLaneViewModel targetLane, TaskBoardTaskViewModel sourceItem,
+        private void PrepareMoveTaskToOtherLane(TaskBoardLaneViewModel sourceLane, TaskBoardLaneViewModel targetLane,
+            TaskBoardTaskViewModel sourceItem,
             TaskBoardTaskViewModel targetItem = null)
         {
             this._currentMoveTaskToOtherPositionPayload = null;
-            this._currentMoveTaskToOtherLanePayload = new TaskChangedLanePayload(sourceLane, targetLane, sourceItem, targetItem);
+            this._currentMoveTaskToOtherLanePayload =
+                new TaskChangedLanePayload(sourceLane, targetLane, sourceItem, targetItem);
         }
     }
 }

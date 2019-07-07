@@ -41,7 +41,7 @@ namespace GF.DillyDally.Shared.Extensions
 
         public static IEnumerable<T> Yield<T>(this T singleElement)
         {
-            return new[] { singleElement };
+            return new[] {singleElement};
         }
     }
 }

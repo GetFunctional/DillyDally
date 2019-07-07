@@ -14,7 +14,7 @@ namespace GF.DillyDally.Unittests.WriteModel
     [TestFixture]
     public class RunningNumberTests
     {
-        #region Run/Teardown
+        #region Setup/Teardown
 
         [SetUp]
         public void Setup()
@@ -27,8 +27,6 @@ namespace GF.DillyDally.Unittests.WriteModel
         private readonly TestInfrastructure _testInfrastructure = new TestInfrastructure();
 
         [TearDown]
-
-
         [Test]
         public async Task RunningNumber_GetNext_IncreasesCounter()
         {
@@ -41,7 +39,8 @@ namespace GF.DillyDally.Unittests.WriteModel
             var runningNumberCounter =
                 aggregateRepository.GetById<RunningNumberCounterAggregateRoot>(
                     RunningNumberCounterCommandHandler.AreaToIdentityMapping[RunningNumberCounterArea.Achievement]);
-            var nextNumber = runningNumberCounter.Numbers.Single(x => x.RunningNumberId == attachResult.RunningNumberId);
+            var nextNumber =
+                runningNumberCounter.Numbers.Single(x => x.RunningNumberId == attachResult.RunningNumberId);
 
             Assert.That(nextNumber, Is.Not.Null);
         }

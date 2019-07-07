@@ -51,7 +51,9 @@ WHERE a.Name LIKE @searchParameter
 
         private string LimitResults(string searchParameter)
         {
-            return string.IsNullOrWhiteSpace(searchParameter) || string.IsNullOrEmpty(searchParameter) ? "LIMIT 10" : string.Empty;
+            return string.IsNullOrWhiteSpace(searchParameter) || string.IsNullOrEmpty(searchParameter)
+                ? "LIMIT 10"
+                : string.Empty;
         }
     }
 }

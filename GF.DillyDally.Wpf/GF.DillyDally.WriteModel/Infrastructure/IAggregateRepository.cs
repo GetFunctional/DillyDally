@@ -6,7 +6,8 @@ namespace GF.DillyDally.WriteModel.Infrastructure
 {
     internal interface IAggregateRepository
     {
-        Task<IReadOnlyList<IAggregateEvent>> SaveAsync<TAggregate>(TAggregate aggregate) where TAggregate : IAggregateRoot;
+        Task<IReadOnlyList<IAggregateEvent>> SaveAsync<TAggregate>(TAggregate aggregate)
+            where TAggregate : IAggregateRoot;
 
         TAggregate GetById<TAggregate>(Guid aggregateId) where TAggregate : IAggregateRoot, new();
 

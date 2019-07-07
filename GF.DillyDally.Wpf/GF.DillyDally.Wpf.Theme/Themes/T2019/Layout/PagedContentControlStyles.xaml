@@ -10,7 +10,8 @@
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Colors.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Typography.xaml" />
+        <ResourceDictionary
+            Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Typography.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <SolidColorBrush x:Key="SelectedPageBadgeBackgroundBrush" Color="{StaticResource HighlightBlue}" />
@@ -60,13 +61,17 @@
         <DataTemplate.Triggers>
             <DataTrigger Binding="{Binding IsCurrent}" Value="False">
                 <Setter TargetName="PageTitle" Property="Opacity" Value="0.5" />
-                <Setter TargetName="Badge" Property="Background" Value="{StaticResource UnselectedPageBadgeBackgroundBrush}" />
-                <Setter TargetName="BadgeContent" Property="Foreground" Value="{StaticResource UnselectedPageBadgeForegroundBrush}" />
+                <Setter TargetName="Badge" Property="Background"
+                        Value="{StaticResource UnselectedPageBadgeBackgroundBrush}" />
+                <Setter TargetName="BadgeContent" Property="Foreground"
+                        Value="{StaticResource UnselectedPageBadgeForegroundBrush}" />
             </DataTrigger>
             <DataTrigger Binding="{Binding IsCurrent}" Value="true">
                 <Setter TargetName="PageTitle" Property="Opacity" Value="1" />
-                <Setter TargetName="Badge" Property="Background" Value="{StaticResource SelectedPageBadgeBackgroundBrush}" />
-                <Setter TargetName="BadgeContent" Property="Foreground" Value="{StaticResource SelectedPageBadgeForegroundBrush}" />
+                <Setter TargetName="Badge" Property="Background"
+                        Value="{StaticResource SelectedPageBadgeBackgroundBrush}" />
+                <Setter TargetName="BadgeContent" Property="Foreground"
+                        Value="{StaticResource SelectedPageBadgeForegroundBrush}" />
             </DataTrigger>
         </DataTemplate.Triggers>
     </DataTemplate>

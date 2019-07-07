@@ -42,7 +42,8 @@ namespace GF.DillyDally.WriteModel.Domain.RunningNumbers
             this.Numbers.Add(nextNumber);
         }
 
-        internal static RunningNumberCounterAggregateRoot Create(Guid runningNumberId, RunningNumberCounterArea counterArea, string prefix,
+        internal static RunningNumberCounterAggregateRoot Create(Guid runningNumberId,
+            RunningNumberCounterArea counterArea, string prefix,
             int initialNumber)
         {
             return new RunningNumberCounterAggregateRoot(runningNumberId, counterArea, prefix, initialNumber);
@@ -51,7 +52,8 @@ namespace GF.DillyDally.WriteModel.Domain.RunningNumbers
         internal void AddNextNumber(Guid nextNumberId)
         {
             var nextNumberInRow = (this.Numbers.Any() ? this.Numbers.Max(x => x.Number) : this.InitialNumber) + 1;
-            var nextNumberEvent = new AddNextNumberEvent(this.AggregateId, nextNumberId, this.CounterArea, this.Prefix, nextNumberInRow);
+            var nextNumberEvent = new AddNextNumberEvent(this.AggregateId, nextNumberId, this.CounterArea, this.Prefix,
+                nextNumberInRow);
             this.RaiseEvent(nextNumberEvent);
         }
     }

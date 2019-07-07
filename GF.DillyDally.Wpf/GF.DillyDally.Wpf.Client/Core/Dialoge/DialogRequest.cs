@@ -1,5 +1,4 @@
 ﻿using System;
-using GF.DillyDally.Mvvmc;
 using GF.DillyDally.Mvvmc.Contracts;
 using MediatR;
 

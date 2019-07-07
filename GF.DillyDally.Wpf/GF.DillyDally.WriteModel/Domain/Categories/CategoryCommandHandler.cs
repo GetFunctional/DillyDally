@@ -24,7 +24,7 @@ namespace GF.DillyDally.WriteModel.Domain.Categories
             CancellationToken cancellationToken)
         {
             var categoryId = this.GuidGenerator.GenerateGuid();
-            var runningNumberId = await 
+            var runningNumberId = await
                 this._runningNumberFactory.CreateNewRunningNumberForAsync(RunningNumberCounterArea.Category);
 
             var aggregate =

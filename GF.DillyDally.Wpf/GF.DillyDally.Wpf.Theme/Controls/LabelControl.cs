@@ -22,26 +22,14 @@ namespace GF.DillyDally.Wpf.Theme.Controls
 
         public Brush LabelBrush
         {
-            get
-            {
-                return (Brush)this.GetValue(LabelBrushProperty);
-            }
-            set
-            {
-                this.SetValue(LabelBrushProperty, value);
-            }
+            get { return (Brush) this.GetValue(LabelBrushProperty); }
+            set { this.SetValue(LabelBrushProperty, value); }
         }
 
         public string LabelText
         {
-            get
-            {
-                return (string)this.GetValue(LabelTextProperty);
-            }
-            set
-            {
-                this.SetValue(LabelTextProperty, value);
-            }
+            get { return (string) this.GetValue(LabelTextProperty); }
+            set { this.SetValue(LabelTextProperty, value); }
         }
     }
 }

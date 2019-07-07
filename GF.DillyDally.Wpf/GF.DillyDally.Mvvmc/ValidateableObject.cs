@@ -30,14 +30,8 @@ namespace GF.DillyDally.Mvvmc
         [Browsable(false)]
         public string Error
         {
-            get
-            {
-                return this._error;
-            }
-            private set
-            {
-                this.SetAndRaiseIfChanged(ref this._error, value);
-            }
+            get { return this._error; }
+            private set { this.SetAndRaiseIfChanged(ref this._error, value); }
         }
 
         /// <summary>
@@ -78,14 +72,8 @@ namespace GF.DillyDally.Mvvmc
         [Browsable(false)]
         public bool HasErrors
         {
-            get
-            {
-                return this._hasErrors;
-            }
-            private set
-            {
-                this.SetAndRaiseIfChanged(ref this._hasErrors, value);
-            }
+            get { return this._hasErrors; }
+            private set { this.SetAndRaiseIfChanged(ref this._hasErrors, value); }
         }
 
         public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
@@ -156,7 +144,7 @@ namespace GF.DillyDally.Mvvmc
         }
 
         /// <summary>
-        /// Override this method to trigger validation of child viewmodels.
+        ///     Override this method to trigger validation of child viewmodels.
         /// </summary>
         /// <returns>Result of the validation</returns>
         protected virtual bool BeforeValidate()

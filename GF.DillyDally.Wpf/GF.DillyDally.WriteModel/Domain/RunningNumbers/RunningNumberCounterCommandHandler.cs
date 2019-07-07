@@ -29,7 +29,8 @@ namespace GF.DillyDally.WriteModel.Domain.RunningNumbers
 
         #region IRequestHandler<CreateRunningNumberCommand,CreateRunningNumberResponse> Members
 
-        public async Task<CreateRunningNumberResponse> Handle(CreateRunningNumberCommand request, CancellationToken cancellationToken)
+        public async Task<CreateRunningNumberResponse> Handle(CreateRunningNumberCommand request,
+            CancellationToken cancellationToken)
         {
             var runningNumberCounterId = AreaToIdentityMapping[request.CounterArea];
             var aggregate = this.AggregateRepository.GetById<RunningNumberCounterAggregateRoot>(runningNumberCounterId);

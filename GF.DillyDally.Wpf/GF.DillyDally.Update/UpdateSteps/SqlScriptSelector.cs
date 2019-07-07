@@ -17,7 +17,7 @@ namespace GF.DillyDally.Update.UpdateSteps
         {
             var updateSteps = new List<SqlScript>();
 
-            foreach (var embeddedScript in this.FindEmbeddedScripts(versionBegin,versionEnd).ToList())
+            foreach (var embeddedScript in this.FindEmbeddedScripts(versionBegin, versionEnd).ToList())
             {
                 var fileNameWithoutExtension = this.GetVersionFromScript(embeddedScript);
                 var updateStepVersion =
@@ -57,21 +57,23 @@ namespace GF.DillyDally.Update.UpdateSteps
             return this._assembly.GetManifestResourceNames().Select(item => item.Substring(nameSpace.Length + 1));
         }
 
-        private IEnumerable<string> FindEmbeddedScripts(Version fromVersion,Version toVersion)
+        private IEnumerable<string> FindEmbeddedScripts(Version fromVersion, Version toVersion)
         {
             var scriptsNameSpace = GetScriptsNamespace(this._assembly);
             return
                 this.GetManifestResourceNames(scriptsNameSpace)
                     .Where(res => res.EndsWith(".sql", StringComparison.OrdinalIgnoreCase))
                     .Distinct()
-                    .Select( scriptName => new { Version = new Version(this.GetVersionFromScript(scriptName)), ScriptName = scriptName })
-                    .Where(script => script.Version >= fromVersion && (toVersion == null || script.Version <= toVersion))
+                    .Select(scriptName => new
+                        {Version = new Version(this.GetVersionFromScript(scriptName)), ScriptName = scriptName})
+                    .Where(script =>
+                        script.Version >= fromVersion && (toVersion == null || script.Version <= toVersion))
                     .OrderBy(script => script.Version).Select(x => x.ScriptName);
         }
 
         public IList<string> GetScriptsForVersion(Version version)
         {
-            return this.GetUpdateStepsBeginningFromVersion(version,version).SelectMany(x => x.SqlCommands).ToList();
+            return this.GetUpdateStepsBeginningFromVersion(version, version).SelectMany(x => x.SqlCommands).ToList();
         }
     }
 }

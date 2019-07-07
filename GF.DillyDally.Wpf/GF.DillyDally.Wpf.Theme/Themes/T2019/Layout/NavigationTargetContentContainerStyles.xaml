@@ -12,7 +12,8 @@
     <SolidColorBrush x:Key="ContentHeaderBorderBrush" Color="{StaticResource Layer4BorderColor}" />
     <SolidColorBrush x:Key="ContentHeaderBackgroundBrush" Color="{StaticResource Layer1BackgroundColor}" />
 
-    <ControlTemplate x:Key="NavigationTargetContentContainerTemplate" TargetType="{x:Type layout:NavigationTargetContentContainer}">
+    <ControlTemplate x:Key="NavigationTargetContentContainerTemplate"
+                     TargetType="{x:Type layout:NavigationTargetContentContainer}">
         <Grid>
             <dx:WaitIndicator
                 HorizontalAlignment="Center"
@@ -40,10 +41,12 @@
         </Grid>
     </ControlTemplate>
 
-    <Style x:Key="DefaultNavigationTargetContentContainerStyle" TargetType="{x:Type layout:NavigationTargetContentContainer}">
+    <Style x:Key="DefaultNavigationTargetContentContainerStyle"
+           TargetType="{x:Type layout:NavigationTargetContentContainer}">
         <Setter Property="Template" Value="{StaticResource NavigationTargetContentContainerTemplate}" />
     </Style>
 
-    <Style BasedOn="{StaticResource DefaultNavigationTargetContentContainerStyle}" TargetType="{x:Type layout:NavigationTargetContentContainer}" />
+    <Style BasedOn="{StaticResource DefaultNavigationTargetContentContainerStyle}"
+           TargetType="{x:Type layout:NavigationTargetContentContainer}" />
 
 </ResourceDictionary>

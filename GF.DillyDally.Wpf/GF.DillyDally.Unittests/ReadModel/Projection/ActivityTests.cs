@@ -3,9 +3,7 @@ using System.Threading.Tasks;
 using GF.DillyDally.ReadModel.Projection.Activities.Repository;
 using GF.DillyDally.Unittests.Core;
 using GF.DillyDally.WriteModel.Domain.Activities;
-using GF.DillyDally.WriteModel.Domain.Activities.Commands;
 using LightInject;
-using MediatR;
 using NUnit.Framework;
 
 namespace GF.DillyDally.Unittests.ReadModel.Projection
@@ -13,14 +11,13 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
     [TestFixture]
     public class ActivityTests
     {
-        #region Run/Teardown
+        #region Setup/Teardown
 
         [SetUp]
         public void Setup()
         {
             this._testInfrastructure.Run(UnittestsSetup.ExampleDatabase);
         }
-
 
         #endregion
 
@@ -39,7 +36,7 @@ namespace GF.DillyDally.Unittests.ReadModel.Projection
                 var testImage = this._testInfrastructure.TestData.GetRandomImageBytes();
 
                 // Act
-                var newActivity = await activityService.CreatePercentageActivityAsync(activityName,testImage);
+                var newActivity = await activityService.CreatePercentageActivityAsync(activityName, testImage);
                 var projection = await repository.GetByIdAsync(connection, newActivity.ActivityId);
 
                 // Assert

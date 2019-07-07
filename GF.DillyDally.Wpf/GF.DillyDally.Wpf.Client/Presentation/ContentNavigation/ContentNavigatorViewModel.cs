@@ -1,7 +1,6 @@
 ﻿using GF.DillyDally.Mvvmc;
 using GF.DillyDally.Mvvmc.Contracts;
 
-
 namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
 {
     public sealed class ContentNavigatorViewModel : ViewModelBase
@@ -12,26 +11,14 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
 
         public IViewModel DisplayTarget
         {
-            get
-            {
-                return this._displayTarget;
-            }
-            private set
-            {
-                this.SetAndRaiseIfChanged(ref this._displayTarget, value);
-            }
+            get { return this._displayTarget; }
+            private set { this.SetAndRaiseIfChanged(ref this._displayTarget, value); }
         }
 
         public string ContentTitle
         {
-            get
-            {
-                return this._contentTitle;
-            }
-            private set
-            {
-                this.SetAndRaiseIfChanged(ref this._contentTitle, value);
-            }
+            get { return this._contentTitle; }
+            private set { this.SetAndRaiseIfChanged(ref this._contentTitle, value); }
         }
 
         internal void AssignDisplayTarget(IViewModel displayTarget, string contentTitle)

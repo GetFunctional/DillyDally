@@ -16,22 +16,26 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks
     internal sealed class TaskCommandHandler : CommandHandlerBase,
         IRequestHandler<CreateTaskCommand, CreateTaskResponse>,
         IRequestHandler<AttachFileToTaskCommand, AttachFileToTaskResponse>,
-        IRequestHandler<AssignPreviewImageCommand, AssignPreviewImageResponse>, IRequestHandler<LinkTaskCommand, LinkTaskResponse>,
-        IRequestHandler<AssignDefinitionOfDoneCommand, AssignDefinitionOfDoneResponse>, IRequestHandler<ChangeTaskLaneCommand, ChangeTaskLaneResponse>, IRequestHandler<LinkTaskToActivitiesCommand, LinkTaskToActivitiesResponse>
+        IRequestHandler<AssignPreviewImageCommand, AssignPreviewImageResponse>,
+        IRequestHandler<LinkTaskCommand, LinkTaskResponse>,
+        IRequestHandler<AssignDefinitionOfDoneCommand, AssignDefinitionOfDoneResponse>,
+        IRequestHandler<ChangeTaskLaneCommand, ChangeTaskLaneResponse>,
+        IRequestHandler<LinkTaskToActivitiesCommand, LinkTaskToActivitiesResponse>
     {
-        private readonly IWriteModelStore _writeModelStore;
         private readonly RunningNumberFactory _runningNumberFactory;
+        private readonly IWriteModelStore _writeModelStore;
 
         public TaskCommandHandler(IAggregateRepository aggregateRepository, IWriteModelStore writeModelStore) :
             base(aggregateRepository)
         {
-             this._writeModelStore = writeModelStore;
+            this._writeModelStore = writeModelStore;
             this._runningNumberFactory = new RunningNumberFactory(aggregateRepository, new GuidGenerator());
         }
 
         #region IRequestHandler<AssignDefinitionOfDoneCommand,AssignDefinitionOfDoneResponse> Members
 
-        public async Task<AssignDefinitionOfDoneResponse> Handle(AssignDefinitionOfDoneCommand request, CancellationToken cancellationToken)
+        public async Task<AssignDefinitionOfDoneResponse> Handle(AssignDefinitionOfDoneCommand request,
+            CancellationToken cancellationToken)
         {
             var task = this.AggregateRepository.GetById<TaskAggregateRoot>(request.TaskId);
 
@@ -77,12 +81,32 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks
 
         #endregion
 
+        #region IRequestHandler<ChangeTaskLaneCommand,ChangeTaskLaneResponse> Members
+
+        public async Task<ChangeTaskLaneResponse> Handle(ChangeTaskLaneCommand request,
+            CancellationToken cancellationToken)
+        {
+            var taskId = request.TaskId;
+            var sourceLane = this.AggregateRepository.GetById<LaneAggregateRoot>(request.SourceLaneId);
+            var targetLane = this.AggregateRepository.GetById<LaneAggregateRoot>(request.DestinationLaneId);
+
+            sourceLane.RemoveTask(taskId);
+            targetLane.AddTask(taskId);
+
+            await this.AggregateRepository.SaveAsync(sourceLane);
+            await this.AggregateRepository.SaveAsync(targetLane);
+            return new ChangeTaskLaneResponse();
+        }
+
+        #endregion
+
         #region IRequestHandler<CreateTaskCommand,CreateTaskResponse> Members
 
         public async Task<CreateTaskResponse> Handle(CreateTaskCommand request, CancellationToken cancellationToken)
         {
             var category = this.AggregateRepository.GetById<CategoryAggregateRoot>(request.CategoryId);
-            var laneList = this.AggregateRepository.GetById<LaneListAggregateRoot>(LaneListAggregateRoot.LaneListAggregateId);
+            var laneList =
+                this.AggregateRepository.GetById<LaneListAggregateRoot>(LaneListAggregateRoot.LaneListAggregateId);
             var laneId = request.LaneId != null ? laneList.GetLane(request.LaneId.Value) : laneList.GetFirstLane();
             var laneAggregate = this.AggregateRepository.GetById<LaneAggregateRoot>(laneId);
             var newRunningNumberId = await
@@ -121,21 +145,10 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks
 
         #endregion
 
-        public async Task<ChangeTaskLaneResponse> Handle(ChangeTaskLaneCommand request, CancellationToken cancellationToken)
-        {
-            var taskId = request.TaskId;
-            var sourceLane = this.AggregateRepository.GetById<LaneAggregateRoot>(request.SourceLaneId);
-            var targetLane = this.AggregateRepository.GetById<LaneAggregateRoot>(request.DestinationLaneId);
+        #region IRequestHandler<LinkTaskToActivitiesCommand,LinkTaskToActivitiesResponse> Members
 
-            sourceLane.RemoveTask(taskId);
-            targetLane.AddTask(taskId);
-
-            await this.AggregateRepository.SaveAsync(sourceLane);
-            await this.AggregateRepository.SaveAsync(targetLane);
-            return new ChangeTaskLaneResponse();
-        }
-
-        public async Task<LinkTaskToActivitiesResponse> Handle(LinkTaskToActivitiesCommand request, CancellationToken cancellationToken)
+        public async Task<LinkTaskToActivitiesResponse> Handle(LinkTaskToActivitiesCommand request,
+            CancellationToken cancellationToken)
         {
             var sourceTask = this.AggregateRepository.GetById<TaskAggregateRoot>(request.TaskId);
 
@@ -144,5 +157,7 @@ namespace GF.DillyDally.WriteModel.Domain.Tasks
             await this.AggregateRepository.SaveAsync(sourceTask);
             return new LinkTaskToActivitiesResponse();
         }
+
+        #endregion
     }
 }

@@ -2,12 +2,8 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.TaskBoard.DragDrop
 {
     public sealed class TaskChangedLanePayload
     {
-        public TaskBoardLaneViewModel SourceLane { get; }
-        public TaskBoardLaneViewModel TargetLane { get; }
-        public TaskBoardTaskViewModel SourceItem { get; }
-        public TaskBoardTaskViewModel TargetItem { get; }
-
-        public TaskChangedLanePayload(TaskBoardLaneViewModel sourceLane, TaskBoardLaneViewModel targetLane, TaskBoardTaskViewModel sourceItem,
+        public TaskChangedLanePayload(TaskBoardLaneViewModel sourceLane, TaskBoardLaneViewModel targetLane,
+            TaskBoardTaskViewModel sourceItem,
             TaskBoardTaskViewModel targetItem = null)
         {
             this.SourceLane = sourceLane;
@@ -15,5 +11,10 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.TaskBoard.DragDrop
             this.SourceItem = sourceItem;
             this.TargetItem = targetItem;
         }
+
+        public TaskBoardLaneViewModel SourceLane { get; }
+        public TaskBoardLaneViewModel TargetLane { get; }
+        public TaskBoardTaskViewModel SourceItem { get; }
+        public TaskBoardTaskViewModel TargetItem { get; }
     }
 }

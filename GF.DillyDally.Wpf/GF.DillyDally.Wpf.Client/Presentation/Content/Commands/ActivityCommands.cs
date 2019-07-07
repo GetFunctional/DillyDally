@@ -3,7 +3,6 @@ using System.Windows.Input;
 using GF.DillyDally.Wpf.Client.Core.Mvvmc;
 using GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create;
 
-
 namespace GF.DillyDally.Wpf.Client.Presentation.Content.Commands
 {
     internal sealed class ActivityCommands

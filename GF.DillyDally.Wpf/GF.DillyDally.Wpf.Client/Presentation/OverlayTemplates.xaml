@@ -8,7 +8,6 @@
     </ResourceDictionary.MergedDictionaries>
 
 
-
     <DataTemplate x:Key="OverlayTemplate" DataType="{x:Type presentation:OverlayViewModel}">
         <Grid>
             <Grid.Background>

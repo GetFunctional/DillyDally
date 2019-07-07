@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using GF.DillyDally.Wpf.Client.Core.Mvvmc;
 using GF.DillyDally.Wpf.Client.Core.Navigator;
-using MediatR;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
 {

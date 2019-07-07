@@ -9,7 +9,8 @@ namespace GF.DillyDally.Wpf.Theme.Controls.Layout
             "Title", typeof(string), typeof(NavigationTargetContentContainer), new PropertyMetadata(default(string)));
 
         public static readonly DependencyProperty IsBusyProperty =
-            DependencyProperty.Register("IsBusy", typeof(bool), typeof(NavigationTargetContentContainer), new PropertyMetadata(default(bool)));
+            DependencyProperty.Register("IsBusy", typeof(bool), typeof(NavigationTargetContentContainer),
+                new PropertyMetadata(default(bool)));
 
         static NavigationTargetContentContainer()
         {
@@ -20,26 +21,14 @@ namespace GF.DillyDally.Wpf.Theme.Controls.Layout
 
         public string Title
         {
-            get
-            {
-                return (string)this.GetValue(TitleProperty);
-            }
-            set
-            {
-                this.SetValue(TitleProperty, value);
-            }
+            get { return (string) this.GetValue(TitleProperty); }
+            set { this.SetValue(TitleProperty, value); }
         }
 
         public bool IsBusy
         {
-            get
-            {
-                return (bool)this.GetValue(IsBusyProperty);
-            }
-            set
-            {
-                this.SetValue(IsBusyProperty, value);
-            }
+            get { return (bool) this.GetValue(IsBusyProperty); }
+            set { this.SetValue(IsBusyProperty, value); }
         }
     }
 }

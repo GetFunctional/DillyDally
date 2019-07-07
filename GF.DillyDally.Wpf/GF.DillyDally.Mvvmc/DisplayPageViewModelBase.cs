@@ -13,26 +13,14 @@ namespace GF.DillyDally.Mvvmc
 
         public bool IsCurrent
         {
-            get
-            {
-                return this._isCurrent;
-            }
-            set
-            {
-                this.SetAndRaiseIfChanged(ref this._isCurrent, value);
-            }
+            get { return this._isCurrent; }
+            set { this.SetAndRaiseIfChanged(ref this._isCurrent, value); }
         }
 
         public int PageNumber
         {
-            get
-            {
-                return this._pageNumber;
-            }
-            set
-            {
-                this.SetAndRaiseIfChanged(ref this._pageNumber, value);
-            }
+            get { return this._pageNumber; }
+            set { this.SetAndRaiseIfChanged(ref this._pageNumber, value); }
         }
 
         #endregion

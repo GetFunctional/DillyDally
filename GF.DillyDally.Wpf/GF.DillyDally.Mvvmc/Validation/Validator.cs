@@ -23,7 +23,8 @@ namespace GF.DillyDally.Mvvmc.Validation
         {
             var result = ValidationConstants.NoError();
 
-            var validationRuleResults = this.ValidationRules.Select(rule => rule.ValidateProperty(validationObject, propertyName))
+            var validationRuleResults = this.ValidationRules
+                .Select(rule => rule.ValidateProperty(validationObject, propertyName))
                 .Where(err => !string.IsNullOrWhiteSpace(err)).ToArray();
 
             if (validationRuleResults.Any())
@@ -34,23 +35,27 @@ namespace GF.DillyDally.Mvvmc.Validation
             return result;
         }
 
-        public ValidationResult ValidateObject(IValidateable validationObject, ValidationCompleteness validationCompleteness)
+        public ValidationResult ValidateObject(IValidateable validationObject,
+            ValidationCompleteness validationCompleteness)
         {
             var errors = new List<PropertyError>();
 
-            errors.AddRange(this.ValidationRules.SelectMany(rule => rule.ValidateObject(validationObject, validationCompleteness).Errors));
+            errors.AddRange(this.ValidationRules.SelectMany(rule =>
+                rule.ValidateObject(validationObject, validationCompleteness).Errors));
 
             var validationResult = new ValidationResult(errors);
             return validationResult;
         }
 
-        public ValidationSummary ValidateObjects(IEnumerable<IValidateable> validationObjects, ValidationCompleteness validationCompleteness)
+        public ValidationSummary ValidateObjects(IEnumerable<IValidateable> validationObjects,
+            ValidationCompleteness validationCompleteness)
         {
             var errors = new List<KeyValuePair<IValidateable, ValidationResult>>();
 
             foreach (var validationObject in validationObjects)
             {
-                errors.Add(new KeyValuePair<IValidateable, ValidationResult>(validationObject, this.ValidateObject(validationObject, validationCompleteness)));
+                errors.Add(new KeyValuePair<IValidateable, ValidationResult>(validationObject,
+                    this.ValidateObject(validationObject, validationCompleteness)));
                 if (validationCompleteness == ValidationCompleteness.ReturnOnFirstError && errors.Any())
                 {
                     break;

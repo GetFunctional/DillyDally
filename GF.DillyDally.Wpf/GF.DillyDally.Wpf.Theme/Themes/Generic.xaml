@@ -5,33 +5,48 @@
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Colors.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Typography.xaml" />
+        <ResourceDictionary
+            Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Typography.xaml" />
 
-        <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/InternalLinkControlStyles.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/LabelControlStyles.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/InternalLinkControlStyles.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/HeaderTitleContentStyles.xaml" />
+        <ResourceDictionary
+            Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/InternalLinkControlStyles.xaml" />
+        <ResourceDictionary
+            Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/LabelControlStyles.xaml" />
+        <ResourceDictionary
+            Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/InternalLinkControlStyles.xaml" />
+        <ResourceDictionary
+            Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/HeaderTitleContentStyles.xaml" />
 
         <!--  Buttons  -->
-        <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/Buttons/ColoredButtonControlStyles.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/Buttons/ChromelessButtonControlStyles.xaml" />
+        <ResourceDictionary
+            Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/Buttons/ColoredButtonControlStyles.xaml" />
+        <ResourceDictionary
+            Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/Buttons/ChromelessButtonControlStyles.xaml" />
 
 
         <!--  Layout Controls  -->
-        <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/Layout/FormElementGroupControlStyles.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/Layout/FormStyles.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/Layout/PagedContentControlStyles.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/Layout/NavigationTargetContentContainerStyles.xaml" />
+        <ResourceDictionary
+            Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/Layout/FormElementGroupControlStyles.xaml" />
+        <ResourceDictionary
+            Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/Layout/FormStyles.xaml" />
+        <ResourceDictionary
+            Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/Layout/PagedContentControlStyles.xaml" />
+        <ResourceDictionary
+            Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/Layout/NavigationTargetContentContainerStyles.xaml" />
 
         <!--  Input Controls  -->
-        <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/Input/ImageInputControlStyles.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/Input/TextInputControlStyles.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/Input/ComboInputControlStyles.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/Input/DateInputControlStyles.xaml" />
+        <ResourceDictionary
+            Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/Input/ImageInputControlStyles.xaml" />
+        <ResourceDictionary
+            Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/Input/TextInputControlStyles.xaml" />
+        <ResourceDictionary
+            Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/Input/ComboInputControlStyles.xaml" />
+        <ResourceDictionary
+            Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/Input/DateInputControlStyles.xaml" />
 
         <!--  Shared Controls  -->
-        <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/Shared/SearchTextControlStyles.xaml" />
-
+        <ResourceDictionary
+            Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/Shared/SearchTextControlStyles.xaml" />
 
 
     </ResourceDictionary.MergedDictionaries>

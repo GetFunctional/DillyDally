@@ -41,7 +41,7 @@ namespace GF.DillyDally.WriteModel.Domain.Achievements
             CancellationToken cancellationToken)
         {
             var achievementId = this.GuidGenerator.GenerateGuid();
-            var newRunningNumberId = await 
+            var newRunningNumberId = await
                 this._runningNumberFactory.CreateNewRunningNumberForAsync(RunningNumberCounterArea.Achievement);
 
             var aggregate = AchievementAggregateRoot.Create(achievementId, newRunningNumberId, request.Name,

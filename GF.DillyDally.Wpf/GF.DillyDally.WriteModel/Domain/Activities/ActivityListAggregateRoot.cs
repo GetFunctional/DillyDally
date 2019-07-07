@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using GF.DillyDally.WriteModel.Domain.Activities.Events;
+using GF.DillyDally.WriteModel.Domain.Activities.Exceptions;
 using GF.DillyDally.WriteModel.Domain.Tasks.Exceptions;
 using GF.DillyDally.WriteModel.Infrastructure;
 

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using GF.DillyDally.Mvvmc.Contracts;
 using GF.DillyDally.Wpf.Client.Core.Mvvmc;
 using GF.DillyDally.Wpf.Client.Core.Navigator;
@@ -12,7 +11,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
         private readonly IList<ContentNavigatorController> _navigatorControllers =
             new List<ContentNavigatorController>();
 
-        public ContentBrowserController(ContentBrowserViewModel viewModel,IControllerServices controllerServices)
+        public ContentBrowserController(ContentBrowserViewModel viewModel, IControllerServices controllerServices)
             : base(viewModel, controllerServices)
         {
             var newNavigator = this.CreateChildController<ContentNavigatorController>();

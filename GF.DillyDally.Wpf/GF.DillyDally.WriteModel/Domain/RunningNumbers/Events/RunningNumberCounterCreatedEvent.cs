@@ -5,7 +5,8 @@ namespace GF.DillyDally.WriteModel.Domain.RunningNumbers.Events
 {
     public sealed class RunningNumberCounterCreatedEvent : AggregateEventBase
     {
-        public RunningNumberCounterCreatedEvent(Guid aggregateId, RunningNumberCounterArea counterArea, string prefix, int initialNumber)
+        public RunningNumberCounterCreatedEvent(Guid aggregateId, RunningNumberCounterArea counterArea, string prefix,
+            int initialNumber)
             : base(aggregateId)
         {
             this.CounterArea = counterArea;

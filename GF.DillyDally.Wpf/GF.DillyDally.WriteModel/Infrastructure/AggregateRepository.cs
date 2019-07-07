@@ -23,7 +23,8 @@ namespace GF.DillyDally.WriteModel.Infrastructure
 
         #region IAggregateRepository Members
 
-        public async Task<IReadOnlyList<IAggregateEvent>> SaveAsync<TAggregate>(TAggregate aggregate) where TAggregate : IAggregateRoot
+        public async Task<IReadOnlyList<IAggregateEvent>> SaveAsync<TAggregate>(TAggregate aggregate)
+            where TAggregate : IAggregateRoot
         {
             var events = aggregate.GetUncommitedEvents();
             if (!events.Any())
@@ -73,7 +74,7 @@ namespace GF.DillyDally.WriteModel.Infrastructure
             {
                 if (stream.CommitSequence == 0)
                 {
-                    aggregate = default(TAggregate);
+                    aggregate = default;
                     return false;
                 }
 
@@ -119,7 +120,7 @@ namespace GF.DillyDally.WriteModel.Infrastructure
         {
             if (eventMessages.Count == 0)
             {
-                aggregateResult = default(TResult);
+                aggregateResult = default;
                 return false;
             }
 
@@ -130,7 +131,7 @@ namespace GF.DillyDally.WriteModel.Infrastructure
             }
             catch (Exception)
             {
-                aggregateResult = default(TResult);
+                aggregateResult = default;
                 return false;
             }
         }
@@ -146,7 +147,7 @@ namespace GF.DillyDally.WriteModel.Infrastructure
             var result = new TResult();
             foreach (var eventMessage in eventMessages)
             {
-                result.ApplyEvent((IAggregateEvent)eventMessage.Body);
+                result.ApplyEvent((IAggregateEvent) eventMessage.Body);
             }
 
             return result;

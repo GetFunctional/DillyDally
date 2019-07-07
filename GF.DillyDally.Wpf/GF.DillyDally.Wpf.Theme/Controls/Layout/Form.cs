@@ -23,7 +23,8 @@ namespace GF.DillyDally.Wpf.Theme.Controls.Layout
             "Description", typeof(string), typeof(Form), new PropertyMetadata(default(string)));
 
         public static readonly DependencyProperty CloseCommandProperty = DependencyProperty.Register(
-            "CloseCommand", typeof(ICommand), typeof(Form), new PropertyMetadata(default(ICommand), HandleCloseCommandChanged));
+            "CloseCommand", typeof(ICommand), typeof(Form),
+            new PropertyMetadata(default(ICommand), HandleCloseCommandChanged));
 
         private FormFooter _footer;
 
@@ -37,54 +38,30 @@ namespace GF.DillyDally.Wpf.Theme.Controls.Layout
 
         public ICommand CloseCommand
         {
-            get
-            {
-                return (ICommand)this.GetValue(CloseCommandProperty);
-            }
-            set
-            {
-                this.SetValue(CloseCommandProperty, value);
-            }
+            get { return (ICommand) this.GetValue(CloseCommandProperty); }
+            set { this.SetValue(CloseCommandProperty, value); }
         }
 
 
         [Bindable(true)]
         public string Title
         {
-            get
-            {
-                return (string)this.GetValue(TitleProperty);
-            }
-            set
-            {
-                this.SetValue(TitleProperty, value);
-            }
+            get { return (string) this.GetValue(TitleProperty); }
+            set { this.SetValue(TitleProperty, value); }
         }
 
         [Bindable(true)]
         public string Description
         {
-            get
-            {
-                return (string)this.GetValue(DescriptionProperty);
-            }
-            set
-            {
-                this.SetValue(DescriptionProperty, value);
-            }
+            get { return (string) this.GetValue(DescriptionProperty); }
+            set { this.SetValue(DescriptionProperty, value); }
         }
 
         [Bindable(true)]
         public object FooterContent
         {
-            get
-            {
-                return this.GetValue(FooterContentProperty);
-            }
-            set
-            {
-                this.SetValue(FooterContentProperty, value);
-            }
+            get { return this.GetValue(FooterContentProperty); }
+            set { this.SetValue(FooterContentProperty, value); }
         }
 
 
@@ -99,9 +76,9 @@ namespace GF.DillyDally.Wpf.Theme.Controls.Layout
 
         private static void HandleCloseCommandChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var form = (Form)d;
+            var form = (Form) d;
 
-            form.AssignCloseCommandToHeader((ICommand)e.NewValue);
+            form.AssignCloseCommandToHeader((ICommand) e.NewValue);
         }
 
         private void AssignCloseCommandToHeader(ICommand command)

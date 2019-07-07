@@ -5,6 +5,7 @@ namespace GF.DillyDally.Wpf.Client.Core.ApplicationState
 {
     public class ExceptionSolver
     {
+        private const string TracedSymbol = "Traced";
         private readonly ILog _exceptionLogger = LogManager.GetLogger(typeof(ExceptionSolver));
 
         internal void Solve(Exception ex)
@@ -27,7 +28,6 @@ namespace GF.DillyDally.Wpf.Client.Core.ApplicationState
             }
         }
 
-        private const string TracedSymbol = "Traced";
         private void SetTraced(Exception exception)
         {
             this.AddDebugInformation(exception, TracedSymbol, true);

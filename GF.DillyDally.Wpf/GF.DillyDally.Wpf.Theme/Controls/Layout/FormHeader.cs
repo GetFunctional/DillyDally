@@ -17,52 +17,35 @@ namespace GF.DillyDally.Wpf.Theme.Controls.Layout
             "Description", typeof(string), typeof(FormHeader), new PropertyMetadata(default(string)));
 
         public static readonly DependencyProperty CloseCommandProperty = DependencyProperty.Register(
-            "CloseCommand", typeof(ICommand), typeof(FormHeader), new PropertyMetadata(default(ICommand), HandleCloseCommandChanged));
+            "CloseCommand", typeof(ICommand), typeof(FormHeader),
+            new PropertyMetadata(default(ICommand), HandleCloseCommandChanged));
 
         [Bindable(true)]
         public string Title
         {
-            get
-            {
-                return (string)this.GetValue(TitleProperty);
-            }
-            set
-            {
-                this.SetValue(TitleProperty, value);
-            }
+            get { return (string) this.GetValue(TitleProperty); }
+            set { this.SetValue(TitleProperty, value); }
         }
 
         [Bindable(true)]
         public string Description
         {
-            get
-            {
-                return (string)this.GetValue(DescriptionProperty);
-            }
-            set
-            {
-                this.SetValue(DescriptionProperty, value);
-            }
+            get { return (string) this.GetValue(DescriptionProperty); }
+            set { this.SetValue(DescriptionProperty, value); }
         }
 
         [Bindable(true)]
         public ICommand CloseCommand
         {
-            get
-            {
-                return (ICommand)this.GetValue(CloseCommandProperty);
-            }
-            set
-            {
-                this.SetValue(CloseCommandProperty, value);
-            }
+            get { return (ICommand) this.GetValue(CloseCommandProperty); }
+            set { this.SetValue(CloseCommandProperty, value); }
         }
 
         private static void HandleCloseCommandChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var form = (FormHeader)d;
-            var newCommand = (ICommand)e.NewValue;
-            var oldCommand = (ICommand)e.OldValue;
+            var form = (FormHeader) d;
+            var newCommand = (ICommand) e.NewValue;
+            var oldCommand = (ICommand) e.OldValue;
 
             if (oldCommand != null)
             {

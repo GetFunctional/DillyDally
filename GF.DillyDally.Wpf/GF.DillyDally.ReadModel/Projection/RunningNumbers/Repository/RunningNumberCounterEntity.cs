@@ -15,6 +15,5 @@ namespace GF.DillyDally.ReadModel.Projection.RunningNumbers.Repository
         public int CurrentNumber { get; set; }
         public RunningNumberCounterArea CounterArea { get; set; }
         public string Prefix { get; set; }
-
     }
 }

@@ -16,7 +16,8 @@ namespace GF.DillyDally.ReadModel
 
         private void RegisterMediations(IServiceContainer serviceContainer)
         {
-            serviceContainer.RegisterAssembly(typeof(ReadModelBootstrapper).GetTypeInfo().Assembly, this.IsRequestHandler);
+            serviceContainer.RegisterAssembly(typeof(ReadModelBootstrapper).GetTypeInfo().Assembly,
+                this.IsRequestHandler);
 
             serviceContainer.RegisterOrdered(typeof(IPipelineBehavior<,>),
                 new[]

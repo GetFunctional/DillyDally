@@ -1,5 +1,4 @@
 ﻿using System.Reflection;
-using System.Windows;
 using GF.DillyDally.Wpf.Client.Core.ApplicationState;
 
 namespace GF.DillyDally.Wpf.Client.Core.DataTemplates

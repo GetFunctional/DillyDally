@@ -5,12 +5,6 @@ namespace GF.DillyDally.WriteModel
 {
     internal class AuthorizationPipelineHook : PipelineHookBase
     {
-        public override void Dispose()
-        {
-            this.Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
         public override ICommit Select(ICommit committed)
         {
             // return null if the user isn't authorized to see this commit
@@ -21,12 +15,7 @@ namespace GF.DillyDally.WriteModel
         {
             // anything to do after the commit has been persisted.
         }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            // no op
-        }
-
+        
         public override bool PreCommit(CommitAttempt attempt)
         {
             // Can easily do logging or other such activities here
