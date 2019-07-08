@@ -179,10 +179,17 @@
     <Compile Include="Presentation\Content\Activities\Create\CreateActivityViewModel.cs" />
     <Compile Include="Presentation\Content\Commands\ActivityCommands.cs" />
     <Compile Include="Presentation\Content\Commands\TaskCommands.cs" />
+    <Compile Include="Presentation\Content\Images\Container\ImageContainerController.cs" />
+    <Compile Include="Presentation\Content\Images\Container\ImageContainerItemViewModel.cs" />
+    <Compile Include="Presentation\Content\Images\Container\ImageContainerView.xaml.cs">
+      <DependentUpon>ImageContainerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Presentation\Content\Images\Container\ImageContainerViewModel.cs" />
+    <Compile Include="Presentation\Content\Images\Container\ImageViewModelFactory.cs" />
     <Compile Include="Presentation\Content\Tasks\Create\CreateTaskAdditionalInfosViewModel.cs" />
     <Compile Include="Presentation\Content\Tasks\Create\CreateTaskBasicInfosViewModel.cs" />
     <Compile Include="Presentation\Content\Tasks\Create\CreateTaskActivitiesViewModel.cs" />
-    <Compile Include="Presentation\Content\Tasks\Details\TaskDetailDataConverter.cs" />
+    <Compile Include="Presentation\Content\Activities\Container\ActivityItemFactory.cs" />
     <Compile Include="Presentation\Content\Tasks\Details\TaskDetailsNavigationTarget.cs" />
     <Compile Include="Presentation\Content\Tasks\Details\TaskDetailsController.cs" />
     <Compile Include="Presentation\Content\Tasks\Details\TaskDetailsView.xaml.cs">
@@ -295,6 +302,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Presentation\ContentNavigation\SearchContentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Presentation\Content\Images\Container\ImageContainerViewTemplates.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Presentation\Content\Images\Container\ImageContainerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

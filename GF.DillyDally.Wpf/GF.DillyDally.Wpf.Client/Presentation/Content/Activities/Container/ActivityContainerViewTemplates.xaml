@@ -16,7 +16,7 @@
     </ControlTemplate>
 
     <DataTemplate x:Key="SearchTextControlItemTemplate" DataType="{x:Type local:ActivityItemViewModel}">
-        <dxlc:LayoutGroup Orientation="Horizontal">
+        <VirtualizingStackPanel Orientation="Horizontal">
             <ctrls:ImageInputControl
                 Width="50"
                 Height="32"
@@ -24,18 +24,18 @@
                 ImageBytes="{Binding ActivityPreviewImage, Mode=OneWay}"
                 IsReadOnly="True"
                 NoImageControlTemplate="{StaticResource NoImageControlTemplate}" />
-            <dxlc:LayoutGroup Orientation="Vertical">
+            <VirtualizingStackPanel Orientation="Vertical">
                 <TextBlock Style="{StaticResource BodyTextBlockStyle}" Text="{Binding ActivityName}" />
                 <TextBlock
                     Foreground="{StaticResource OrangeButtonBackgroundBrush1}"
                     Style="{StaticResource DescriptionTextBlockStyle}"
                     Text="Used 24 times ( 74% )" />
-            </dxlc:LayoutGroup>
-        </dxlc:LayoutGroup>
+            </VirtualizingStackPanel>
+        </VirtualizingStackPanel>
     </DataTemplate>
 
     <DataTemplate x:Key="ActivityItemTemplate" DataType="{x:Type local:ActivityItemViewModel}">
-        <dxlc:LayoutGroup
+        <VirtualizingStackPanel
             Width="140"
             Height="150"
             Orientation="Vertical">
@@ -44,13 +44,13 @@
                 ImageBytes="{Binding ActivityPreviewImage, Mode=OneWay}"
                 IsReadOnly="True"
                 NoImageControlTemplate="{StaticResource NoImageControlTemplate}" />
-            <dxlc:LayoutGroup Orientation="Vertical">
+            <VirtualizingStackPanel Orientation="Vertical">
                 <TextBlock Style="{StaticResource BodyTextBlockStyle}" Text="{Binding ActivityName}" />
                 <TextBlock
                     Foreground="{StaticResource OrangeButtonBackgroundBrush1}"
                     Style="{StaticResource DescriptionTextBlockStyle}"
                     Text="Used 24 times ( 74% )" />
-            </dxlc:LayoutGroup>
-        </dxlc:LayoutGroup>
+            </VirtualizingStackPanel>
+        </VirtualizingStackPanel>
     </DataTemplate>
 </ResourceDictionary>

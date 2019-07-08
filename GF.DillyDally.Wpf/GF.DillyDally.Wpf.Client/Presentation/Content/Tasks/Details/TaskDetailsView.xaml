@@ -3,7 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:container="clr-namespace:GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Container"
-    xmlns:create="clr-namespace:GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Create"
+    xmlns:container1="clr-namespace:GF.DillyDally.Wpf.Client.Presentation.Content.Images.Container"
     xmlns:ctrls="http://schemas.getfunctional.de/dillydally/controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
@@ -17,7 +17,10 @@
     dx:ThemeManager.ThemeName="{x:Static theme:ThemeConstants.DevExpressThemeName}"
     mc:Ignorable="d">
 
-    <ctrls:NavigationTargetContentContainer Title="Task Details" IsBusyMessage="Loading Task"  IsBusy="{Binding IsBusy}">
+    <ctrls:NavigationTargetContentContainer
+        Title="Task Details"
+        IsBusy="{Binding IsBusy}"
+        IsBusyMessage="Loading Task">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="70*" />
@@ -62,7 +65,7 @@
                 TabContentCacheMode="CacheTabsOnSelecting">
                 <dx:DXTabItem Header="Images">
                     <dx:DXTabItem.Content>
-                        <container:ActivityContainerView DataContext="{Binding ActivitiesViewModel, Mode=OneWay}" />
+                        <container1:ImageContainerView DataContext="{Binding ImagesContainerViewModel, Mode=OneWay}" />
                     </dx:DXTabItem.Content>
                 </dx:DXTabItem>
                 <dx:DXTabItem Header="Linked Tasks" />

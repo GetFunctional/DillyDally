@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using GF.DillyDally.ReadModel.Views.TaskDetails;
-using GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Container;
 
-namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Details
+namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Container
 {
-    internal sealed class TaskDetailDataConverter
+    internal sealed class ActivityItemFactory
     {
         internal IEnumerable<ActivityItemViewModel> ConvertToActivityItemViewModels(
             IReadOnlyList<TaskDetailsActivityEntity> taskActivities)
