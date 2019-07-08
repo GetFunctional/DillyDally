@@ -17,7 +17,7 @@
     dx:ThemeManager.ThemeName="{x:Static theme:ThemeConstants.DevExpressThemeName}"
     mc:Ignorable="d">
 
-    <ctrls:NavigationTargetContentContainer Title="Task Details" IsBusy="{Binding IsBusy}">
+    <ctrls:NavigationTargetContentContainer Title="Task Details" IsBusyMessage="Loading Task"  IsBusy="{Binding IsBusy}">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="70*" />

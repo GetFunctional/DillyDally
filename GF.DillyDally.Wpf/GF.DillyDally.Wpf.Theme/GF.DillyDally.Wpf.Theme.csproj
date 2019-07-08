@@ -134,10 +134,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\T2019\Layout\FormElementGroupControlStyles.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Themes\T2019\Layout\FormStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -197,7 +193,6 @@
     <Compile Include="Controls\Buttons\ColoredButtonControl.cs" />
     <Compile Include="Controls\Input\ComboInputControl.cs" />
     <Compile Include="Controls\Input\DateInputControl.cs" />
-    <Compile Include="Controls\Layout\FormElementGroupControl.cs" />
     <Compile Include="Controls\Layout\Form.cs" />
     <Compile Include="Controls\Layout\FormFooter.cs" />
     <Compile Include="Controls\Layout\FormHeader.cs" />

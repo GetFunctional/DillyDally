@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Markup;
 
 namespace GF.DillyDally.Wpf.Client.Core.DataTemplates
@@ -21,6 +23,14 @@ namespace GF.DillyDally.Wpf.Client.Core.DataTemplates
         }
 
         private string DataTemplateSchema { get; }
+
+        [Obsolete("Certain WPF Binding functionality is lost using this method. F.e ElementBinding from elements that are not part of the visual tree.")]
+        internal DataTemplate CreateViewModelDataTemplateFast(Type viewModelType, Type viewType)
+        {
+            var template = new DataTemplate(viewModelType);
+            template.VisualTree = new FrameworkElementFactory(viewType);
+            return template;
+        }
 
         internal DataTemplate CreateViewModelDataTemplate(Type viewModelType, Type viewType)
         {

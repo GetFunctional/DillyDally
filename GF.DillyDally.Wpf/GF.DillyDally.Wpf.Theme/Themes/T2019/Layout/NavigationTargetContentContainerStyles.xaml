@@ -9,44 +9,46 @@
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Colors.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
+    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     <SolidColorBrush x:Key="ContentHeaderBorderBrush" Color="{StaticResource Layer4BorderColor}" />
     <SolidColorBrush x:Key="ContentHeaderBackgroundBrush" Color="{StaticResource Layer1BackgroundColor}" />
 
-    <ControlTemplate x:Key="NavigationTargetContentContainerTemplate"
-                     TargetType="{x:Type layout:NavigationTargetContentContainer}">
+    <ControlTemplate x:Key="NavigationTargetContentContainerTemplate" TargetType="{x:Type layout:NavigationTargetContentContainer}">
         <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
             <dx:WaitIndicator
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                Content="Lade Daten" />
-            <dxlc:LayoutControl
-                Margin="0"
-                Padding="0"
-                Orientation="Vertical">
-                <Border
-                    Height="60"
-                    VerticalAlignment="Top"
-                    Background="{StaticResource ContentHeaderBackgroundBrush}"
-                    BorderBrush="{StaticResource ContentHeaderBorderBrush}"
-                    BorderThickness="0,0,0,1">
-                    <TextBlock Text="{TemplateBinding Title}" />
-                </Border>
-                <ScrollViewer
-                    Padding="29,29,0,0"
-                    HorizontalScrollBarVisibility="Auto"
-                    VerticalScrollBarVisibility="Auto">
-                    <ContentPresenter />
-                </ScrollViewer>
-            </dxlc:LayoutControl>
+                Content="{TemplateBinding IsBusyMessage}"
+                DeferedVisibility="True"
+                Visibility="{TemplateBinding IsBusy,
+                                             Converter={StaticResource BooleanToVisibilityConverter}}" />
+            <Border
+                Grid.Row="0"
+                Height="60"
+                VerticalAlignment="Top"
+                Background="{StaticResource ContentHeaderBackgroundBrush}"
+                BorderBrush="{StaticResource ContentHeaderBorderBrush}"
+                BorderThickness="0,0,0,1">
+                <TextBlock Text="{TemplateBinding Title}" />
+            </Border>
+            <ScrollViewer
+                Grid.Row="1"
+                Padding="29,29,0,0"
+                HorizontalScrollBarVisibility="Auto"
+                VerticalScrollBarVisibility="Auto">
+                <ContentPresenter />
+            </ScrollViewer>
         </Grid>
     </ControlTemplate>
 
-    <Style x:Key="DefaultNavigationTargetContentContainerStyle"
-           TargetType="{x:Type layout:NavigationTargetContentContainer}">
+    <Style x:Key="DefaultNavigationTargetContentContainerStyle" TargetType="{x:Type layout:NavigationTargetContentContainer}">
         <Setter Property="Template" Value="{StaticResource NavigationTargetContentContainerTemplate}" />
     </Style>
 
-    <Style BasedOn="{StaticResource DefaultNavigationTargetContentContainerStyle}"
-           TargetType="{x:Type layout:NavigationTargetContentContainer}" />
+    <Style BasedOn="{StaticResource DefaultNavigationTargetContentContainerStyle}" TargetType="{x:Type layout:NavigationTargetContentContainer}" />
 
 </ResourceDictionary>

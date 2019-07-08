@@ -26,12 +26,9 @@
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary
-                    Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Colors.xaml" />
-                <ResourceDictionary
-                    Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Typography.xaml" />
-                <ResourceDictionary
-                    Source="pack://application:,,,/GF.DillyDally.Wpf.Client;component/Presentation/OverlayTemplates.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Colors.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Typography.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Client;component/Presentation/OverlayTemplates.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <conv:ContentToVisiblityConverter x:Key="ContentToVisiblityConverter" />
             <SolidColorBrush x:Key="ApplicationBackgroundBrush" Color="{StaticResource Layer4BackgroundColor}" />
@@ -118,8 +115,7 @@
                                 </dxn:NavBarGroup>
                                 <dxn:NavBarGroup Header="Activities">
                                     <dxn:NavBarGroup.Items>
-                                        <dxn:NavBarItem Command="{Binding CreateNewActivityCommand, Mode=OneWay}"
-                                                        Content="Create Activity" />
+                                        <dxn:NavBarItem Command="{Binding CreateNewActivityCommand, Mode=OneWay}" Content="Create Activity" />
                                     </dxn:NavBarGroup.Items>
                                 </dxn:NavBarGroup>
                                 <dxn:NavBarGroup Header="Games">
@@ -144,8 +140,7 @@
                         <headerMenu:HeaderMenuView DataContext="{Binding HeaderMenuViewModel}" />
                     </Border>
 
-                    <contentNavigation:ContentNavigatorView
-                        DataContext="{Binding ContentNavigatorViewModel, Mode=OneWay}" />
+                    <contentNavigation:ContentNavigatorView DataContext="{Binding ContentNavigatorViewModel, Mode=OneWay}" />
                 </dxlc:LayoutGroup>
             </dxlc:LayoutControl>
         </Grid>
