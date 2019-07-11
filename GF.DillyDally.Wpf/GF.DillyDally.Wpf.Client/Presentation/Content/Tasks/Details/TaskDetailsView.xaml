@@ -59,39 +59,21 @@
                         HeaderType="H2" />
                 </dxlc:LayoutGroup>
             </dxlc:LayoutGroup>
-            <dx:DXTabControl
+
+            <ctrls:TabContentControl
                 Grid.Row="1"
                 Grid.Column="0"
-                TabContentCacheMode="CacheTabsOnSelecting">
-                <dx:DXTabItem Header="Images">
-                    <dx:DXTabItem.Content>
-                        <container1:ImageContainerView DataContext="{Binding ImagesContainerViewModel, Mode=OneWay}" />
-                    </dx:DXTabItem.Content>
-                </dx:DXTabItem>
-                <dx:DXTabItem Header="Linked Tasks" />
-            </dx:DXTabControl>
-            <dx:DXTabControl
+                TabItemsSource="{Binding LeftBottomTabContainerElements, Mode=OneWay}" />
+
+            <ctrls:TabContentControl
                 Grid.Row="0"
                 Grid.Column="1"
-                TabContentCacheMode="CacheTabsOnSelecting">
-                <dx:DXTabItem Header="History">
-                    <dx:DXTabItem.Content>
-                        <container:ActivityContainerView DataContext="{Binding ActivitiesViewModel, Mode=OneWay}" />
-                    </dx:DXTabItem.Content>
-                </dx:DXTabItem>
-                <dx:DXTabItem Header="Achievements" />
-            </dx:DXTabControl>
-            <dx:DXTabControl
+                TabItemsSource="{Binding RightTopTabContainerElements, Mode=OneWay}" />
+
+            <ctrls:TabContentControl
                 Grid.Row="1"
                 Grid.Column="1"
-                TabContentCacheMode="CacheTabsOnSelecting">
-                <dx:DXTabItem Header="Activities">
-                    <dx:DXTabItem.Content>
-                        <container:ActivityContainerView DataContext="{Binding ActivitiesViewModel, Mode=OneWay}" />
-                    </dx:DXTabItem.Content>
-                </dx:DXTabItem>
-                <dx:DXTabItem Header="Achievements" />
-            </dx:DXTabControl>
+                TabItemsSource="{Binding RightBottomTabContainerElements, Mode=OneWay}" />
         </Grid>
     </ctrls:NavigationTargetContentContainer>
 </UserControl>

@@ -1,0 +1,47 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:layout="clr-namespace:GF.DillyDally.Wpf.Theme.Controls.Layout">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Colors.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Typography.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <!--  Form Header  -->
+    <SolidColorBrush x:Key="TabContentControlBackgroundBrush" Color="{StaticResource Layer1BackgroundColor}" />
+
+    <DataTemplate x:Key="DefaultTabItemHeaderTemplate" DataType="{x:Type layout:ITabItem}">
+        <TextBlock Text="{Binding Title}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="DefaultTabItemContentTemplate" DataType="{x:Type layout:ITabItem}">
+        <ContentControl Content="{Binding Content}" Style="{StaticResource BodyContentControlTypoStyle}" />
+    </DataTemplate>
+
+    <ControlTemplate x:Key="TabContentControlTemplate" TargetType="{x:Type layout:TabContentControl}">
+        <dx:DXTabControl
+            ItemHeaderTemplate="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TabItemHeaderTemplate}"
+            ItemHeaderTemplateSelector="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TabItemHeaderTemplateSelector}"
+            ItemTemplate="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TabItemContentTemplate}"
+            ItemTemplateSelector="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TabItemContentTemplateSelector}"
+            ItemsSource="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TabItemsSource}"
+            SelectedItem="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SelectedTab, Mode=TwoWay}"
+            TabContentCacheMode="CacheTabsOnSelecting" />
+    </ControlTemplate>
+
+    <Style x:Key="TabContentStyle" TargetType="{x:Type layout:TabContentControl}">
+        <Setter Property="TabItemHeaderTemplate" Value="{StaticResource DefaultTabItemHeaderTemplate}" />
+        <Setter Property="TabItemContentTemplate" Value="{StaticResource DefaultTabItemContentTemplate}" />
+        <Setter Property="Template" Value="{StaticResource TabContentControlTemplate}" />
+        <Setter Property="FontSize" Value="{StaticResource BodyFontSize}" />
+        <Setter Property="FontWeight" Value="{StaticResource BodyFontWeight}" />
+        <Setter Property="FontFamily" Value="{StaticResource SourceSansProBlack}" />
+        <Setter Property="Background" Value="{StaticResource TabContentControlBackgroundBrush}" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+    </Style>
+
+    <Style BasedOn="{StaticResource TabContentStyle}" TargetType="{x:Type layout:TabContentControl}" />
+
+</ResourceDictionary>
