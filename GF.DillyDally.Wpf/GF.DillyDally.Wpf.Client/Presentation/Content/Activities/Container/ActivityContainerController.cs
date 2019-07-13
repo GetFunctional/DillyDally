@@ -74,7 +74,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Container
 
         internal void AssignActivities(IEnumerable<ActivityItemViewModel> activityItemViewModels)
         {
-            this.ViewModel.Activities = new ObservableCollection<ActivityItemViewModel>(activityItemViewModels);
+            this.ViewModel.AssignActivities(activityItemViewModels);
         }
     }
 }

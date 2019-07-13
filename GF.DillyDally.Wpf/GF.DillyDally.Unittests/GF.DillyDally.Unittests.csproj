@@ -108,7 +108,7 @@
     <Compile Include="SqlDbAccess\CreateDatabaseTests.cs" />
     <Compile Include="DatabaseUpdateTests.cs" />
     <Compile Include="SqlDbAccess\SqlScriptSelectorTests.cs" />
-    <Compile Include="UnittestsSetup.cs" />
+    <Compile Include="Unittests.cs" />
     <Compile Include="WriteModel\AchievementTests.cs" />
     <Compile Include="WriteModel\ActivityTests.cs" />
     <Compile Include="WriteModel\RunningNumberTests.cs" />

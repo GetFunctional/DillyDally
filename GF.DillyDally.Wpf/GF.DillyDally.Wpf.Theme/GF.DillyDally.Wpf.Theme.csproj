@@ -188,6 +188,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\LabelDisplayMode.cs" />
     <Compile Include="Controls\Layout\ITabItem.cs" />
     <Compile Include="Controls\Layout\NavigationTargetContentContainer.cs" />
     <Compile Include="Controls\Layout\TabContentControl.cs" />

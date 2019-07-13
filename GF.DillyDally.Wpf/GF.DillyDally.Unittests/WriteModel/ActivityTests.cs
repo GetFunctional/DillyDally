@@ -16,7 +16,7 @@ namespace GF.DillyDally.Unittests.WriteModel
         [SetUp]
         public void Setup()
         {
-            this._testInfrastructure.Run(UnittestsSetup.ExampleDatabase);
+            this._testInfrastructure.Run(Unittests.ExampleDatabase);
         }
 
         #endregion

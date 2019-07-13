@@ -5,9 +5,11 @@
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Colors.xaml" />
-        <ResourceDictionary
-            Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Typography.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Typography.xaml" />
     </ResourceDictionary.MergedDictionaries>
+
+    <SolidColorBrush x:Key="DefaultLabelBrush" Color="{StaticResource HighlightOrange}" />
+
 
     <ControlTemplate x:Key="DefaultLabelControlTemplate" TargetType="{x:Type controls:LabelControl}">
         <Border
@@ -26,9 +28,28 @@
         </Border>
     </ControlTemplate>
 
-    <SolidColorBrush x:Key="DefaultLabelBrush" Color="{StaticResource HighlightOrange}" />
+    <ControlTemplate x:Key="BadgeLabelControlTemplate" TargetType="{x:Type controls:LabelControl}">
+        <Border
+            Width="{TemplateBinding Height}"
+            Height="{TemplateBinding Height}"
+            Padding="0,1,0,0"
+            Background="{TemplateBinding LabelBrush}"
+            CornerRadius="10">
+            <TextBlock
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontFamily="{TemplateBinding FontFamily}"
+                FontSize="{TemplateBinding FontSize}"
+                Foreground="{TemplateBinding Foreground}"
+                Style="{StaticResource LabelTextBlockStyle}"
+                Text="{TemplateBinding LabelText}"
+                TextAlignment="Center" />
+        </Border>
+    </ControlTemplate>
+
 
     <Style x:Key="DefaultStyle" TargetType="{x:Type controls:LabelControl}">
+        <Setter Property="LabelDisplayMode" Value="Label" />
         <Setter Property="Template" Value="{StaticResource DefaultLabelControlTemplate}" />
         <Setter Property="Foreground" Value="{StaticResource LabelForeground}" />
         <Setter Property="FontSize" Value="{StaticResource LabelFontSize}" />
@@ -37,6 +58,15 @@
         <Setter Property="LabelBrush" Value="{StaticResource DefaultLabelBrush}" />
         <Setter Property="Height" Value="19" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Style.Triggers>
+            <Trigger Property="LabelDisplayMode" Value="Label">
+                <Setter Property="Template" Value="{StaticResource DefaultLabelControlTemplate}" />
+            </Trigger>
+            <Trigger Property="LabelDisplayMode" Value="Badge">
+                <Setter Property="Template" Value="{StaticResource BadgeLabelControlTemplate}" />
+                <Setter Property="Height" Value="16" />
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
     <Style BasedOn="{StaticResource DefaultStyle}" TargetType="{x:Type controls:LabelControl}" />

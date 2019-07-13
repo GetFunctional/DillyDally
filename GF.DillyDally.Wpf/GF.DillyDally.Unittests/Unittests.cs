@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace GF.DillyDally.Unittests
 {
     [SetUpFixture]
-    public class UnittestsSetup
+    public class Unittests
     {
         public const string ExampleDatabase = "Unittests.db";
 

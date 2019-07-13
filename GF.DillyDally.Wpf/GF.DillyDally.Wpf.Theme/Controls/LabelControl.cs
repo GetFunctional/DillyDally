@@ -14,10 +14,20 @@ namespace GF.DillyDally.Wpf.Theme.Controls
         public static readonly DependencyProperty LabelBrushProperty = DependencyProperty.Register(
             "LabelBrush", typeof(Brush), typeof(LabelControl), new PropertyMetadata(default(Brush)));
 
+        public static readonly DependencyProperty LabelDisplayModeProperty = DependencyProperty.Register(
+            "LabelDisplayMode", typeof(LabelDisplayMode), typeof(LabelControl),
+            new PropertyMetadata(default(LabelDisplayMode)));
+
         static LabelControl()
         {
             DefaultStyleKeyProperty.OverrideMetadata(
                 typeof(LabelControl), new FrameworkPropertyMetadata(typeof(LabelControl)));
+        }
+
+        public LabelDisplayMode LabelDisplayMode
+        {
+            get { return (LabelDisplayMode) this.GetValue(LabelDisplayModeProperty); }
+            set { this.SetValue(LabelDisplayModeProperty, value); }
         }
 
         public Brush LabelBrush

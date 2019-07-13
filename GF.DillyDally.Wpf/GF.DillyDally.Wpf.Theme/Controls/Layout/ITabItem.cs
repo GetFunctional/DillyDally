@@ -9,5 +9,9 @@ namespace GF.DillyDally.Wpf.Theme.Controls.Layout
         bool IsSelected { get; set; }
 
         INotifyPropertyChanged Content { get; }
+
+        string BadgeText { get; set; }
+
+        void RefreshBadgeText();
     }
 }

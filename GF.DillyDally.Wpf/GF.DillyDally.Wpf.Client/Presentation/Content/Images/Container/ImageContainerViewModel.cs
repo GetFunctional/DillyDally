@@ -1,16 +1,24 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Reactive.Subjects;
 using GF.DillyDally.Mvvmc;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Content.Images.Container
 {
-    public class ImageContainerViewModel : ViewModelBase
+    public class ImageContainerViewModel : ViewModelBase, IDisposable
     {
         private IList<ImageContainerItemViewModel> _images;
+        private readonly Subject<IList<ImageContainerItemViewModel>> _imagesChangedSubject = new Subject<IList<ImageContainerItemViewModel>>();
 
         public ImageContainerViewModel()
         {
             this._images = new List<ImageContainerItemViewModel>();
+        }
+
+        internal IObservable<IList<ImageContainerItemViewModel>> WhenImageCollectionChanged
+        {
+            get { return this._imagesChangedSubject; }
         }
 
         public IList<ImageContainerItemViewModel> Images
@@ -19,9 +27,12 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Images.Container
             {
                 return this._images;
             }
-            set
+            private set
             {
-                this.SetAndRaiseIfChanged(ref this._images, value);
+                if (this.SetAndRaiseIfChanged(ref this._images, value))
+                {
+                    this._imagesChangedSubject.OnNext(value);
+                }
             }
         }
 
@@ -29,6 +40,11 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Images.Container
         {
             var images = this.Images.Concat(newImages).Distinct().ToList();
             this.Images = images;
+        }
+
+        public void Dispose()
+        {
+            this._imagesChangedSubject?.Dispose();
         }
     }
 }

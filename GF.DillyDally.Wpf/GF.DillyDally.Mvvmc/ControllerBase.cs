@@ -48,6 +48,10 @@ namespace GF.DillyDally.Mvvmc
         {
             if (disposing)
             {
+                if (this.ViewModel is IDisposable disposable)
+                {
+                    disposable.Dispose();
+                }
             }
         }
 

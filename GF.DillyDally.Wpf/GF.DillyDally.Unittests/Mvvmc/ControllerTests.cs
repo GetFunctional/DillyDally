@@ -13,7 +13,7 @@ namespace GF.DillyDally.Unittests.Mvvmc
         [SetUp]
         public void Setup()
         {
-            this._testInfrastructure.Run(UnittestsSetup.ExampleDatabase);
+            this._testInfrastructure.Run(Unittests.ExampleDatabase);
             this._testInfrastructure.DiContainer.Register<TestController>();
             this._testInfrastructure.DiContainer.Register<TestViewModel>();
             this._testInfrastructure.DiContainer.Register<ChildTestController>();

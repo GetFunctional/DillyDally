@@ -1,54 +1,55 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reactive.Subjects;
 using GF.DillyDally.Mvvmc;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Container
 {
-    public sealed class ActivityContainerViewModel : ViewModelBase
+    public sealed class ActivityContainerViewModel : ViewModelBase, IDisposable
     {
+        private readonly Subject<IList<ActivityItemViewModel>> _activityItemsChangedSubject =
+            new Subject<IList<ActivityItemViewModel>>();
+
         private ObservableCollection<ActivityItemViewModel> _activities;
         private bool _isSearchBarVisible;
         private ObservableCollection<ActivityItemViewModel> _searchResults;
         private string _searchText;
         private ActivityItemViewModel _selectedResult;
 
+        internal IObservable<IList<ActivityItemViewModel>> WhenActivityCollectionChanged
+        {
+            get { return this._activityItemsChangedSubject; }
+        }
+
         public ActivityContainerViewModel()
         {
-            this.Activities = new ObservableCollection<ActivityItemViewModel>();
+            this.AssignActivities(Enumerable.Empty<ActivityItemViewModel>());
             this.SearchResults = new ObservableCollection<ActivityItemViewModel>();
         }
 
         public ObservableCollection<ActivityItemViewModel> Activities
         {
-            get
+            get { return this._activities; }
+            private set
             {
-                return this._activities;
-            }
-            set
-            {
-                this.SetAndRaiseIfChanged(ref this._activities, value);
+                if (this.SetAndRaiseIfChanged(ref this._activities, value))
+                {
+                    this._activityItemsChangedSubject.OnNext(value);
+                }
             }
         }
 
         public ObservableCollection<ActivityItemViewModel> SearchResults
         {
-            get
-            {
-                return this._searchResults;
-            }
-            set
-            {
-                this.SetAndRaiseIfChanged(ref this._searchResults, value);
-            }
+            get { return this._searchResults; }
+            set { this.SetAndRaiseIfChanged(ref this._searchResults, value); }
         }
 
         public string SearchText
         {
-            get
-            {
-                return this._searchText;
-            }
+            get { return this._searchText; }
             set
             {
                 if (this.SetAndRaiseIfChanged(ref this._searchText, value) &&
@@ -62,45 +63,44 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Container
 
         public ActivityItemViewModel SelectedResult
         {
-            get
-            {
-                return this._selectedResult;
-            }
+            get { return this._selectedResult; }
             set
             {
-                if (this.SetAndRaiseIfChanged(ref this._selectedResult, value))
+                if (this.SetAndRaiseIfChanged(ref this._selectedResult, value) && value != null)
                 {
-                    if (this.Activities.All(act => act.ActivityId != value.ActivityId))
-                    {
-                        this.Activities.Add(value);
-                    }
+                    this.AddActivity(value);
                 }
             }
         }
 
         public string ActivityDisplayMemberName
         {
-            get
-            {
-                return nameof(ActivityItemViewModel.ActivityName);
-            }
+            get { return nameof(ActivityItemViewModel.ActivityName); }
         }
 
         public bool IsSearchBarVisible
         {
-            get
-            {
-                return this._isSearchBarVisible;
-            }
-            set
-            {
-                this.SetAndRaiseIfChanged(ref this._isSearchBarVisible, value);
-            }
+            get { return this._isSearchBarVisible; }
+            set { this.SetAndRaiseIfChanged(ref this._isSearchBarVisible, value); }
         }
 
-        #region ITabItem Members
-        
+        #region IDisposable Members
+
+        public void Dispose()
+        {
+            this._activityItemsChangedSubject?.Dispose();
+        }
+
         #endregion
+
+        private void AddActivity(ActivityItemViewModel activity)
+        {
+            if (this.Activities.All(act => act.ActivityId != activity.ActivityId))
+            {
+                this.Activities.Add(activity);
+                this._activityItemsChangedSubject.OnNext(this.Activities);
+            }
+        }
 
         private void RaiseRequestSearchResults(string value)
         {
@@ -117,6 +117,11 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Container
         public void HideSearchBar()
         {
             this.IsSearchBarVisible = false;
+        }
+
+        public void AssignActivities(IEnumerable<ActivityItemViewModel> activityItemViewModels)
+        {
+            this.Activities = new ObservableCollection<ActivityItemViewModel>(activityItemViewModels);
         }
     }
 }
