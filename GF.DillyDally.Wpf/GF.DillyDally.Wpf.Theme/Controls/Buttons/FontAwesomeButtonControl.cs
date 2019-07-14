@@ -12,10 +12,20 @@ namespace GF.DillyDally.Wpf.Theme.Controls.Buttons
             "Icon", typeof(EFontAwesomeIcon), typeof(FontAwesomeButtonControl),
             new PropertyMetadata(default(EFontAwesomeIcon)));
 
+        public static readonly DependencyProperty ButtonFormProperty = DependencyProperty.Register(
+            "ButtonForm", typeof(ButtonForm), typeof(FontAwesomeButtonControl),
+            new PropertyMetadata(default(ButtonForm)));
+
         static FontAwesomeButtonControl()
         {
             DefaultStyleKeyProperty.OverrideMetadata(
                 typeof(FontAwesomeButtonControl), new FrameworkPropertyMetadata(typeof(FontAwesomeButtonControl)));
+        }
+
+        public ButtonForm ButtonForm
+        {
+            get { return (ButtonForm) this.GetValue(ButtonFormProperty); }
+            set { this.SetValue(ButtonFormProperty, value); }
         }
 
         public EFontAwesomeIcon Icon

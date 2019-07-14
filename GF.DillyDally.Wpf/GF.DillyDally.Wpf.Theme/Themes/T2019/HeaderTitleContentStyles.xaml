@@ -9,7 +9,7 @@
     </ResourceDictionary.MergedDictionaries>
 
     <ControlTemplate x:Key="DefaultHeaderTitleContentControlTemplate" TargetType="{x:Type shared:HeaderTitleContent}">
-        <WrapPanel VerticalAlignment="Center" Orientation="Vertical">
+        <StackPanel Orientation="Vertical">
             <TextBlock
                 x:Name="TitleBlock"
                 Style="{StaticResource H1TextBlockStyle}"
@@ -21,7 +21,7 @@
                 Style="{StaticResource DescriptionTextBlockStyle}"
                 Text="{TemplateBinding Description}"
                 TextWrapping="Wrap" />
-        </WrapPanel>
+        </StackPanel>
         <ControlTemplate.Triggers>
             <Trigger Property="HeaderType" Value="H1">
                 <Setter TargetName="TitleBlock" Property="Style" Value="{StaticResource H1TextBlockStyle}" />
@@ -41,7 +41,6 @@
         <Setter Property="Template" Value="{StaticResource DefaultHeaderTitleContentControlTemplate}" />
         <Setter Property="HeaderType" Value="H1" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-        <Setter Property="Margin" Value="0,0,0,19" />
     </Style>
 
     <Style BasedOn="{StaticResource DefaultStyle}" TargetType="{x:Type shared:HeaderTitleContent}" />

@@ -10,7 +10,7 @@
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Typography.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <SolidColorBrush x:Key="ButtonForegroundBrush" Color="{StaticResource Layer4BorderColor}" />
+    <SolidColorBrush x:Key="ButtonForegroundBrush" Color="{StaticResource ButtonForegroundColor}" />
     <SolidColorBrush x:Key="ButtonForegroundHoverBrush" Color="{StaticResource HighlightBlue}" />
 
     <ControlTemplate x:Key="ChromelessButtonControlTemplate" TargetType="{x:Type buttons:ChromelessButtonControl}">
@@ -77,8 +77,8 @@
         <Setter Property="FontSize" Value="{StaticResource BodyFontSize}" />
         <Setter Property="FontFamily" Value="{StaticResource Arial}" />
         <Setter Property="Cursor" Value="Hand" />
-        <Setter Property="Height" Value="24" />
-        <Setter Property="Width" Value="24" />
+        <Setter Property="Height" Value="Auto" />
+        <Setter Property="Width" Value="Auto" />
         <Setter Property="Template" Value="{StaticResource ChromelessButtonControlTemplate}" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
     </Style>

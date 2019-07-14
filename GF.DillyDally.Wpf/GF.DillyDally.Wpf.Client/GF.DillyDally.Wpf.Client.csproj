@@ -144,7 +144,6 @@
     </ApplicationDefinition>
     <Compile Include="Presentation\Content\Activities\Create\ActivityFieldViewModelFactory.cs" />
     <Compile Include="Presentation\Content\Activities\Create\Fields\ActivityFieldTypeViewModel.cs" />
-    <Compile Include="Presentation\Content\Activities\Create\Fields\AddNewFieldViewModel.cs" />
     <Compile Include="Presentation\Content\Activities\Create\Fields\ActivityFieldItemViewModel.cs" />
     <Compile Include="Presentation\Content\Activities\Create\Fields\ActivityFieldsItemTemplateSelector.cs" />
     <Compile Include="Core\ApplicationState\ApplicationRuntime.cs" />

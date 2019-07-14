@@ -11,7 +11,7 @@
     </ResourceDictionary.MergedDictionaries>
 
     <DataTemplate DataType="{x:Type local:CreateTaskBasicInfosViewModel}">
-        <VirtualizingStackPanel Orientation="Vertical">
+        <dxlc:LayoutGroup ItemSpace="19" Orientation="Vertical">
             <ctrls:HeaderTitleContent
                 Title="Task Infos"
                 VerticalAlignment="Top"
@@ -32,7 +32,7 @@
                         ContentTemplate="{StaticResource CategorySelectorTemplate}" />
                 </dxlc:LayoutGroup>
             </dxlc:LayoutGroup>
-        </VirtualizingStackPanel>
+        </dxlc:LayoutGroup>
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type local:CreateTaskAdditionalInfosViewModel}">

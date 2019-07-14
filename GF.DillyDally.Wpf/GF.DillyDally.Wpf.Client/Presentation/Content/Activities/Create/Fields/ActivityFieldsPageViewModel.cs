@@ -1,19 +1,21 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 using GF.DillyDally.Mvvmc;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create.Fields
 {
     internal class ActivityFieldsPageViewModel : DisplayPageViewModelBase
     {
-        private readonly AddNewFieldViewModel _addNewFieldViewModel;
         private readonly ObservableCollection<IActivityFieldViewModel> _activityFields;
 
-        public ActivityFieldsPageViewModel(AddNewFieldViewModel addNewFieldViewModel)
+        public ActivityFieldsPageViewModel(ICommand addNewFieldCommand)
         {
-            this._addNewFieldViewModel = addNewFieldViewModel;
-            this._activityFields = new ObservableCollection<IActivityFieldViewModel> {addNewFieldViewModel};
+            this.AddNewFieldCommand = addNewFieldCommand;
+            this._activityFields = new ObservableCollection<IActivityFieldViewModel>();
         }
+
+        public ICommand AddNewFieldCommand { get; set; }
 
         public override string Title
         {
@@ -28,8 +30,6 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create.Fields
         internal void AddNewActivityField(IActivityFieldViewModel activityFieldViewModel)
         {
             this._activityFields.Add(activityFieldViewModel);
-            this._activityFields.Move(this._activityFields.IndexOf(this._addNewFieldViewModel),
-                this.ActivityFields.Count - 1);
         }
 
         public void RemoveActivityField(IActivityFieldViewModel activityFieldViewModel)

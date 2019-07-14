@@ -11,12 +11,69 @@
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Typography.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <SolidColorBrush x:Key="ButtonForegroundBrush" Color="{StaticResource Layer4BorderColor}" />
+    <SolidColorBrush x:Key="ButtonForegroundBrush" Color="{StaticResource ButtonForegroundColor}" />
     <SolidColorBrush x:Key="ButtonForegroundHoverBrush" Color="{StaticResource HighlightBlue}" />
 
-    <ControlTemplate x:Key="FontAwesomeButtonTemplate" TargetType="{x:Type buttons:FontAwesomeButtonControl}">
+    <ControlTemplate x:Key="RegularFontAwesomeButtonTemplate" TargetType="{x:Type buttons:FontAwesomeButtonControl}">
         <Border Background="{TemplateBinding Background}">
             <fa5:FontAwesome
+                utils:FocusHelper.Focusable="False"
+                FontSize="{TemplateBinding FontSize}"
+                Icon="{TemplateBinding Icon}"
+                Style="{StaticResource UntouchedFontAwesomeStyle}" />
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation
+                                Storyboard.TargetProperty="(Foreground).(SolidColorBrush.Color)"
+                                To="{StaticResource Layer1BorderColor}"
+                                Duration="0:0:0.35" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetProperty="(Foreground).(SolidColorBrush.Color)" Duration="0:0:0.35" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation
+                                Storyboard.TargetProperty="Foreground.Color"
+                                To="{StaticResource HighlightBlue}"
+                                Duration="0:0:0.35" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetProperty="(Foreground).(SolidColorBrush.Color)" Duration="0:0:0.35" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="CircleFontAwesomeButtonTemplate" TargetType="{x:Type buttons:FontAwesomeButtonControl}">
+        <Border
+            Background="{TemplateBinding Background}"
+            BorderBrush="{TemplateBinding Foreground}"
+            BorderThickness="1"
+            CornerRadius="16"
+            Opacity="1">
+            <fa5:FontAwesome
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
                 utils:FocusHelper.Focusable="False"
                 FontSize="{TemplateBinding FontSize}"
                 Icon="{TemplateBinding Icon}"
@@ -74,10 +131,18 @@
         <Setter Property="FontSize" Value="{StaticResource BodyFontSize}" />
         <Setter Property="FontFamily" Value="{StaticResource Arial}" />
         <Setter Property="Cursor" Value="Hand" />
-        <Setter Property="Height" Value="24" />
-        <Setter Property="Width" Value="24" />
-        <Setter Property="Template" Value="{StaticResource FontAwesomeButtonTemplate}" />
+        <Setter Property="Height" Value="Auto" />
+        <Setter Property="Width" Value="Auto" />
+        <Setter Property="Template" Value="{StaticResource RegularFontAwesomeButtonTemplate}" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Style.Triggers>
+            <Trigger Property="ButtonForm" Value="RegularRoundedCorners">
+                <Setter Property="Template" Value="{StaticResource RegularFontAwesomeButtonTemplate}" />
+            </Trigger>
+            <Trigger Property="ButtonForm" Value="Circle">
+                <Setter Property="Template" Value="{StaticResource CircleFontAwesomeButtonTemplate}" />
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
     <Style BasedOn="{StaticResource FontAwesomeButtonStyle}" TargetType="{x:Type buttons:FontAwesomeButtonControl}" />

@@ -465,7 +465,7 @@
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Padding" Value="22,11" />
         <Setter Property="Cursor" Value="Hand" />
-        <Setter Property="Height" Value="36" />
+        <Setter Property="Height" Value="Auto" />
         <Setter Property="Width" Value="Auto" />
         <Setter Property="ButtonColor" Value="Gray" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />

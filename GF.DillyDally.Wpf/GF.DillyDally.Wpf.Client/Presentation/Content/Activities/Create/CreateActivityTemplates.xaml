@@ -16,88 +16,91 @@
     </DataTemplate>
 
     <DataTemplate x:Key="ActivityFieldItemViewModel" DataType="{x:Type fields:ActivityFieldItemViewModel}">
-        <dxlc:LayoutGroup
-            Margin="0,0,0,5"
-            ItemSpace="5"
-            Orientation="Horizontal">
-            <ctrls:ComboInputControl
-                Width="80"
-                HorizontalAlignment="Left"
-                InputValue="{Binding FieldType, Mode=TwoWay}"
-                ItemTemplate="{StaticResource ActivityFieldTypeTemplate}"
-                ItemsSource="{Binding AvailableFieldTypes, Mode=OneWay}"
-                Label="Fieldtype" />
-            <ctrls:TextInputControl InputValue="{Binding FieldName, Mode=TwoWay}" Label="Fieldname" />
-            <ctrls:TextInputControl
-                Width="50"
-                InputValue="{Binding UnitOfMeasure, Mode=TwoWay}"
-                Label="Unit" />
-            <ctrls:ColoredButtonControl
-                Width="24"
-                Height="24"
-                Margin="0,0,0,5"
-                Padding="0"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Bottom"
-                ButtonColor="Red"
-                ButtonForm="Circle"
-                Command="{Binding RemoveFieldCommand, Mode=OneWay}"
-                CommandParameter="{Binding}">
-                <ctrls:ColoredButtonControl.Content>
-                    <fa5:FontAwesome
-                        FontSize="{StaticResource FontIconSize}"
-                        FontWeight="Bold"
-                        Foreground="{StaticResource FontIconLightForegroundBrush}"
-                        Icon="Solid_Minus" />
-                </ctrls:ColoredButtonControl.Content>
-            </ctrls:ColoredButtonControl>
-        </dxlc:LayoutGroup>
+        <Border BorderBrush="{StaticResource FormInnerBorderBrush}" BorderThickness="0,0,0,1">
+            <dxlc:LayoutGroup
+                Padding="4,15"
+                ItemSpace="5"
+                Orientation="Horizontal">
+                <ctrls:ComboInputControl
+                    Width="60"
+                    HorizontalAlignment="Left"
+                    InputValue="{Binding FieldType, Mode=TwoWay}"
+                    ItemTemplate="{StaticResource ActivityFieldTypeTemplate}"
+                    ItemsSource="{Binding AvailableFieldTypes, Mode=OneWay}"
+                    Label="Fieldtype" />
+                <ctrls:TextInputControl InputValue="{Binding FieldName, Mode=TwoWay}" Label="Fieldname" />
+                <ctrls:TextInputControl
+                    Width="50"
+                    InputValue="{Binding UnitOfMeasure, Mode=TwoWay}"
+                    Label="Unit" />
+                <ctrls:ColoredButtonControl
+                    Width="24"
+                    Height="24"
+                    Margin="0,0,0,5"
+                    Padding="0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    ButtonColor="Red"
+                    ButtonForm="Circle"
+                    Command="{Binding RemoveFieldCommand, Mode=OneWay}"
+                    CommandParameter="{Binding}">
+                    <ctrls:ColoredButtonControl.Content>
+                        <fa5:FontAwesome
+                            FontSize="{StaticResource FontIconSize}"
+                            FontWeight="Bold"
+                            Foreground="{StaticResource FontIconLightForegroundBrush}"
+                            Icon="Solid_Minus" />
+                    </ctrls:ColoredButtonControl.Content>
+                </ctrls:ColoredButtonControl>
+            </dxlc:LayoutGroup>
+        </Border>
     </DataTemplate>
 
-    <DataTemplate x:Key="AddNewFieldDataTemplate" DataType="{x:Type fields:AddNewFieldViewModel}">
-        <ctrls:ColoredButtonControl
-            Width="24"
-            Height="24"
-            Padding="0"
-            HorizontalAlignment="Left"
-            ButtonColor="Blue"
-            ButtonForm="Circle"
-            Command="{Binding AddNewFieldCommand, Mode=OneWay}">
-            <ctrls:ColoredButtonControl.Content>
-                <fa5:FontAwesome
-                    FontSize="{StaticResource FontIconSize}"
-                    Foreground="{StaticResource FontIconLightForegroundBrush}"
-                    Icon="Solid_Plus" />
-            </ctrls:ColoredButtonControl.Content>
-        </ctrls:ColoredButtonControl>
-    </DataTemplate>
 
-    <fields:ActivityFieldsItemTemplateSelector
-        x:Key="ActivityFieldsItemTemplateSelector"
-        ActivityFieldItemViewModel="{StaticResource ActivityFieldItemViewModel}"
-        AddNewFieldDataTemplate="{StaticResource AddNewFieldDataTemplate}" />
+    <fields:ActivityFieldsItemTemplateSelector x:Key="ActivityFieldsItemTemplateSelector" ActivityFieldItemViewModel="{StaticResource ActivityFieldItemViewModel}" />
 
     <DataTemplate DataType="{x:Type fields:ActivityFieldsPageViewModel}">
-        <dxlc:LayoutGroup ItemSpace="0" Orientation="Vertical">
-            <ctrls:HeaderTitleContent
-                Title="Activity Fields"
-                VerticalAlignment="Top"
-                Description="Provide a few fields for more information about this activity."
-                HeaderType="H2" />
-            <Border
-                Padding="5"
-                BorderBrush="{StaticResource FormInnerBorderBrush}"
-                BorderThickness="1"
-                CornerRadius="3">
-                <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
+        <Border
+            BorderBrush="{StaticResource FormInnerBorderBrush}"
+            BorderThickness="1"
+            CornerRadius="3">
+            <dxlc:LayoutGroup ItemSpace="0" Orientation="Vertical">
+                <Border
+                    Height="70"
+                    VerticalAlignment="Top"
+                    BorderBrush="{StaticResource FormInnerBorderBrush}"
+                    BorderThickness="0,0,0,1">
+                    <dxlc:LayoutGroup Padding="20,0">
+                        <ctrls:HeaderTitleContent
+                            Title="Activity Fields"
+                            VerticalAlignment="Center"
+                            Description="Provide a few fields for more information about this activity."
+                            HeaderType="H2" />
+
+                        <ctrls:FontAwesomeButtonControl
+                            Width="32"
+                            Height="32"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            ButtonForm="Circle"
+                            Command="{Binding AddNewFieldCommand}"
+                            FontSize="11"
+                            Icon="Solid_Plus" />
+                    </dxlc:LayoutGroup>
+                </Border>
+
+                <ScrollViewer
+                    Padding="5"
+                    HorizontalScrollBarVisibility="Hidden"
+                    VerticalScrollBarVisibility="Auto">
                     <ItemsControl ItemTemplateSelector="{StaticResource ActivityFieldsItemTemplateSelector}" ItemsSource="{Binding ActivityFields, Mode=OneWay}" />
                 </ScrollViewer>
-            </Border>
-        </dxlc:LayoutGroup>
+            </dxlc:LayoutGroup>
+        </Border>
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type local:ActivityInfosPageViewModel}">
-        <VirtualizingStackPanel Orientation="Vertical">
+        <dxlc:LayoutGroup ItemSpace="19" Orientation="Vertical">
             <ctrls:HeaderTitleContent
                 Title="Activity infos"
                 VerticalAlignment="Top"
@@ -123,7 +126,7 @@
                         Label="Type" />
                 </dxlc:LayoutGroup>
             </dxlc:LayoutGroup>
-        </VirtualizingStackPanel>
+        </dxlc:LayoutGroup>
     </DataTemplate>
 
 </ResourceDictionary>

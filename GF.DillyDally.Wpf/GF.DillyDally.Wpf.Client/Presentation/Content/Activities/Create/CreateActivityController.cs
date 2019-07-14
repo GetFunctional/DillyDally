@@ -12,7 +12,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create
     internal class CreateActivityController : DialogControllerBase<CreateActivityViewModel>
     {
         private readonly ActivityFieldViewModelFactory _activityFieldViewModelFactory;
-            
+
 
         public CreateActivityController(CreateActivityViewModel viewModel, IControllerServices controllerServices)
             : base(viewModel, controllerServices)
@@ -22,15 +22,20 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create
             viewModel.CancelProcessCommand = controllerServices.CommandFactory.CreateFromAction(this.CancelProcess);
 
             var addNewFieldCommand = controllerServices.CommandFactory.CreateFromAction(this.CreateNewActivityField);
-            var removeFieldCommand = controllerServices.CommandFactory.CreateFromAction<IActivityFieldViewModel>(this.RemoveActivityField, this.CanRemoveActivityField);
+            var removeFieldCommand =
+                controllerServices.CommandFactory.CreateFromAction<IActivityFieldViewModel>(this.RemoveActivityField,
+                    this.CanRemoveActivityField);
             this._activityFieldViewModelFactory =
                 new ActivityFieldViewModelFactory(addNewFieldCommand, removeFieldCommand);
 
             var activityInfos = new ActivityInfosPageViewModel();
-            var activityFields = new ActivityFieldsPageViewModel(this._activityFieldViewModelFactory.CreateAddNewFieldViewModel());
+            var activityFields = new ActivityFieldsPageViewModel(addNewFieldCommand);
             viewModel.AddPage(activityInfos);
             viewModel.AddPage(activityFields);
         }
+
+        public IDialogResult CreateActivityDialogResult { get; } = new DialogCommandResult();
+        public IDialogResult CancelDialogResult { get; } = new DialogCommandResult();
 
         private bool CanRemoveActivityField(IActivityFieldViewModel cf)
         {
@@ -42,9 +47,6 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create
             var page = this.ViewModel.GetPage<ActivityFieldsPageViewModel>();
             page.RemoveActivityField(activityFieldViewModel);
         }
-
-        public IDialogResult CreateActivityDialogResult { get; } = new DialogCommandResult();
-        public IDialogResult CancelDialogResult { get; } = new DialogCommandResult();
 
         private void CreateNewActivityField()
         {

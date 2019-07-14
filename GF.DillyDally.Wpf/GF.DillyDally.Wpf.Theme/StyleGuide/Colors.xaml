@@ -14,6 +14,7 @@
     <Color x:Key="LinkForegroundColorActive">#00AEEF</Color>
     <Color x:Key="BodyForegroundColor">#354052</Color>
     <Color x:Key="DescriptionForegroundColor">#7F8FA4</Color>
+    <Color x:Key="ButtonForegroundColor">#7F8FA4</Color>
     <Color x:Key="LabelForegroundColor">#FFFFFF</Color>
     <Color x:Key="InputControlsForegroundColor">#333C48</Color>
     <Color x:Key="InputControlsLabelForegroundColor">#7F8FA4</Color>
