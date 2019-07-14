@@ -27,7 +27,11 @@
                 ItemTemplate="{StaticResource ActivityFieldTypeTemplate}"
                 ItemsSource="{Binding AvailableFieldTypes, Mode=OneWay}"
                 Label="Fieldtype" />
-            <ctrls:TextInputControl InputValue="{Binding FieldName}" Label="Fieldname" />
+            <ctrls:TextInputControl InputValue="{Binding FieldName, Mode=TwoWay}" Label="Fieldname" />
+            <ctrls:TextInputControl
+                Width="50"
+                InputValue="{Binding UnitOfMeasure, Mode=TwoWay}"
+                Label="Unit" />
             <ctrls:ColoredButtonControl
                 Width="24"
                 Height="24"
@@ -74,14 +78,22 @@
         AddNewFieldDataTemplate="{StaticResource AddNewFieldDataTemplate}" />
 
     <DataTemplate DataType="{x:Type fields:ActivityFieldsPageViewModel}">
-        <VirtualizingStackPanel Orientation="Vertical">
+        <dxlc:LayoutGroup ItemSpace="0" Orientation="Vertical">
             <ctrls:HeaderTitleContent
                 Title="Activity Fields"
                 VerticalAlignment="Top"
                 Description="Provide a few fields for more information about this activity."
                 HeaderType="H2" />
-            <ItemsControl ItemTemplateSelector="{StaticResource ActivityFieldsItemTemplateSelector}" ItemsSource="{Binding ActivityFields, Mode=OneWay}" />
-        </VirtualizingStackPanel>
+            <Border
+                Padding="5"
+                BorderBrush="{StaticResource FormInnerBorderBrush}"
+                BorderThickness="1"
+                CornerRadius="3">
+                <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
+                    <ItemsControl ItemTemplateSelector="{StaticResource ActivityFieldsItemTemplateSelector}" ItemsSource="{Binding ActivityFields, Mode=OneWay}" />
+                </ScrollViewer>
+            </Border>
+        </dxlc:LayoutGroup>
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type local:ActivityInfosPageViewModel}">

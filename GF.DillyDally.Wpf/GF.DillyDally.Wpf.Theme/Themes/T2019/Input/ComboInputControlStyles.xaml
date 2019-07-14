@@ -9,18 +9,15 @@
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Colors.xaml" />
-        <ResourceDictionary
-            Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Typography.xaml" />
-        <ResourceDictionary
-            Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/Input/LabelStyles.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Typography.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/Input/LabelStyles.xaml" />
 
     </ResourceDictionary.MergedDictionaries>
 
     <SolidColorBrush x:Key="ComboInputBorderBrush" Color="{StaticResource InputControlsBorderColor}" />
     <SolidColorBrush x:Key="ComboInputSelectedBorderBrush" Color="{StaticResource InputControlsSelectedBorderColor}" />
     <SolidColorBrush x:Key="ComboInputHoverBorderBrush" Color="{StaticResource InputControlsHoverBorderColor}" />
-    <SolidColorBrush x:Key="InputControlsValueForegroundBrush"
-                     Color="{StaticResource InputControlsValueForegroundColor}" />
+    <SolidColorBrush x:Key="InputControlsValueForegroundBrush" Color="{StaticResource InputControlsValueForegroundColor}" />
 
 
     <ControlTemplate x:Key="DefaultComboInputControlTemplate" TargetType="{x:Type input:ComboInputControl}">
@@ -55,12 +52,10 @@
         </dxlc:LayoutItem>
         <ControlTemplate.Triggers>
             <Trigger Property="IsKeyboardFocusWithin" Value="True">
-                <Setter TargetName="ComboInputBorder" Property="BorderBrush"
-                        Value="{StaticResource ComboInputSelectedBorderBrush}" />
+                <Setter TargetName="ComboInputBorder" Property="BorderBrush" Value="{StaticResource ComboInputSelectedBorderBrush}" />
             </Trigger>
             <Trigger Property="IsKeyboardFocusWithin" Value="False">
-                <Setter TargetName="ComboInputBorder" Property="BorderBrush"
-                        Value="{StaticResource ComboInputBorderBrush}" />
+                <Setter TargetName="ComboInputBorder" Property="BorderBrush" Value="{StaticResource ComboInputBorderBrush}" />
             </Trigger>
             <MultiTrigger>
                 <MultiTrigger.Conditions>
@@ -68,8 +63,7 @@
                     <Condition Property="IsKeyboardFocusWithin" Value="False" />
                 </MultiTrigger.Conditions>
                 <MultiTrigger.Setters>
-                    <Setter TargetName="ComboInputBorder" Property="BorderBrush"
-                            Value="{StaticResource ComboInputHoverBorderBrush}" />
+                    <Setter TargetName="ComboInputBorder" Property="BorderBrush" Value="{StaticResource ComboInputHoverBorderBrush}" />
                 </MultiTrigger.Setters>
             </MultiTrigger>
         </ControlTemplate.Triggers>

@@ -9,6 +9,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create.Fields
     {
         private string _fieldName;
         private ActivityFieldTypeViewModel _fieldType;
+        private string _unitOfMeasure;
 
         public ActivityFieldItemViewModel(ActivityFieldType fieldType, ICommand removeFieldCommand)
         {
@@ -27,6 +28,12 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create.Fields
         {
             get { return this._fieldType; }
             set { this.SetAndRaiseIfChanged(ref this._fieldType, value); }
+        }
+
+        public string UnitOfMeasure
+        {
+            get { return this._unitOfMeasure; }
+            set { this.SetAndRaiseIfChanged(ref this._unitOfMeasure, value); }
         }
 
         public IReadOnlyList<ActivityFieldTypeViewModel> AvailableFieldTypes { get; }
