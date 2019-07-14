@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:fa5="http://schemas.fontawesome.com/icons/"
     xmlns:shared="clr-namespace:GF.DillyDally.Wpf.Theme.Controls.Shared"
     xmlns:system="clr-namespace:System;assembly=mscorlib">
 
@@ -48,7 +49,7 @@
     <system:Double x:Key="LabelLineHeight">13</system:Double>
 
     <!--  Font Icons  -->
-    <system:Double x:Key="FontIconSize">14</system:Double>
+    <system:Double x:Key="FontIconSize">11</system:Double>
     <SolidColorBrush x:Key="FontIconLightForegroundBrush" Color="{StaticResource FontIconLightForegroundColor}" />
     <SolidColorBrush x:Key="FontIconDarkForegroundBrush" Color="{StaticResource FontIconDarkForegroundColor}" />
 
@@ -121,5 +122,15 @@
         <Setter Property="Foreground" Value="{StaticResource DescriptionForeground}" />
         <Setter Property="LineHeight" Value="{StaticResource DescriptionLineHeight}" />
     </Style>
+
+
+    <Style x:Key="UntouchedFontAwesomeStyle" TargetType="{x:Type fa5:FontAwesome}" />
+
+    <Style x:Key="DefaultFontAwesomeStyle" TargetType="{x:Type fa5:FontAwesome}">
+        <Setter Property="FontSize" Value="{StaticResource FontIconSize}" />
+        <Setter Property="Foreground" Value="{StaticResource FontIconLightForegroundBrush}" />
+    </Style>
+
+    <Style BasedOn="{StaticResource DefaultFontAwesomeStyle}" TargetType="{x:Type fa5:FontAwesome}" />
 
 </ResourceDictionary>

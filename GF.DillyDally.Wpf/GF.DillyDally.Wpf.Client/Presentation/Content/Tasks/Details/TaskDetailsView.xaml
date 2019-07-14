@@ -40,7 +40,7 @@
                     Height="300"
                     HorizontalAlignment="Left"
                     ImageBytes="{Binding TaskPreviewImageBytes, Mode=OneWay}" />
-                <dxlc:LayoutGroup ItemSpace="25" Orientation="Vertical">
+                <VirtualizingStackPanel Orientation="Vertical">
                     <TextBlock VerticalAlignment="Top" Text="TTitleK-10234" />
                     <TextBlock VerticalAlignment="Top" Text="{Binding TaskName}" />
                     <WrapPanel VerticalAlignment="Top" Orientation="Horizontal">
@@ -57,7 +57,7 @@
                         VerticalAlignment="Top"
                         Description="{Binding Description}"
                         HeaderType="H2" />
-                </dxlc:LayoutGroup>
+                </VirtualizingStackPanel>
             </dxlc:LayoutGroup>
 
             <ctrls:TabContentControl

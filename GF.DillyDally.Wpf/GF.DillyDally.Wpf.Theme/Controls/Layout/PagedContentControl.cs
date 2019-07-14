@@ -26,7 +26,7 @@ namespace GF.DillyDally.Wpf.Theme.Controls.Layout
 
         public static readonly DependencyProperty HasPreviousPageProperty = DependencyProperty.Register(
             "HasPreviousPage", typeof(bool), typeof(PagedContentControl), new PropertyMetadata(default(bool)));
-
+        
         private readonly DelegateCommand _nextPageCommand;
         private readonly DelegateCommand _previousPageCommand;
 
@@ -85,7 +85,7 @@ namespace GF.DillyDally.Wpf.Theme.Controls.Layout
             get { return (bool) this.GetValue(HasMultiplePagesProperty); }
             set { this.SetValue(HasMultiplePagesProperty, value); }
         }
-
+        
         private static void HandleCurrentPageChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (e.OldValue is IDisplayPage oldPage)

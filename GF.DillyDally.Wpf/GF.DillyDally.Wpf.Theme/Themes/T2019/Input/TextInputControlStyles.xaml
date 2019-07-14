@@ -9,17 +9,14 @@
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Colors.xaml" />
-        <ResourceDictionary
-            Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Typography.xaml" />
-        <ResourceDictionary
-            Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/Input/LabelStyles.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Typography.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/Input/LabelStyles.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <SolidColorBrush x:Key="TextInputBorderBrush" Color="{StaticResource InputControlsBorderColor}" />
     <SolidColorBrush x:Key="TextInputSelectedBorderBrush" Color="{StaticResource InputControlsSelectedBorderColor}" />
     <SolidColorBrush x:Key="TextInputHoverBorderBrush" Color="{StaticResource InputControlsHoverBorderColor}" />
-    <SolidColorBrush x:Key="InputControlsValueForegroundBrush"
-                     Color="{StaticResource InputControlsValueForegroundColor}" />
+    <SolidColorBrush x:Key="InputControlsValueForegroundBrush" Color="{StaticResource InputControlsValueForegroundColor}" />
 
     <ControlTemplate x:Key="ValidationErrorTemplate">
         <Border
@@ -46,6 +43,7 @@
                 <dxe:TextEdit
                     x:Name="TextInput"
                     Height="34"
+                    HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
                     dx:ThemeManager.ThemeName="{x:Static theme:ThemeConstants.DevExpressThemeName}"
                     AcceptsReturn="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsMultiline, Mode=TwoWay}"
                     EditValue="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=InputValue, ValidatesOnNotifyDataErrors=True, Mode=TwoWay}"
@@ -69,12 +67,10 @@
                 <Setter TargetName="TextInput" Property="VerticalContentAlignment" Value="Center" />
             </Trigger>
             <Trigger Property="IsKeyboardFocusWithin" Value="True">
-                <Setter TargetName="TextInputBorder" Property="BorderBrush"
-                        Value="{StaticResource TextInputSelectedBorderBrush}" />
+                <Setter TargetName="TextInputBorder" Property="BorderBrush" Value="{StaticResource TextInputSelectedBorderBrush}" />
             </Trigger>
             <Trigger Property="IsKeyboardFocusWithin" Value="False">
-                <Setter TargetName="TextInputBorder" Property="BorderBrush"
-                        Value="{StaticResource TextInputBorderBrush}" />
+                <Setter TargetName="TextInputBorder" Property="BorderBrush" Value="{StaticResource TextInputBorderBrush}" />
             </Trigger>
             <MultiTrigger>
                 <MultiTrigger.Conditions>
@@ -82,8 +78,7 @@
                     <Condition Property="IsKeyboardFocusWithin" Value="False" />
                 </MultiTrigger.Conditions>
                 <MultiTrigger.Setters>
-                    <Setter TargetName="TextInputBorder" Property="BorderBrush"
-                            Value="{StaticResource TextInputHoverBorderBrush}" />
+                    <Setter TargetName="TextInputBorder" Property="BorderBrush" Value="{StaticResource TextInputHoverBorderBrush}" />
                 </MultiTrigger.Setters>
             </MultiTrigger>
         </ControlTemplate.Triggers>
@@ -95,8 +90,7 @@
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Style.Triggers>
             <Trigger Property="Validation.HasError" Value="True">
-                <Setter Property="ToolTip"
-                        Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)[0].ErrorContent}" />
+                <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)[0].ErrorContent}" />
             </Trigger>
         </Style.Triggers>
     </Style>

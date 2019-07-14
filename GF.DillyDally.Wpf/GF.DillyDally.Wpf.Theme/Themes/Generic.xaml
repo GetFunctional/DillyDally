@@ -15,6 +15,7 @@
         <!--  Buttons  -->
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/Buttons/ColoredButtonControlStyles.xaml" />
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/Buttons/ChromelessButtonControlStyles.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/Buttons/FontAwesomeButtonControlStyles.xaml" />
 
 
         <!--  Layout Controls  -->

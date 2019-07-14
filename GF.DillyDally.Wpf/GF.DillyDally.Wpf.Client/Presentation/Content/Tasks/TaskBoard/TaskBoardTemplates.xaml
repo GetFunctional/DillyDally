@@ -11,8 +11,7 @@
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Colors.xaml" />
-        <ResourceDictionary
-            Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Typography.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Typography.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <SolidColorBrush x:Key="TaskItemBorderBrush" Color="{StaticResource Layer1BorderColor}" />
@@ -106,18 +105,15 @@
                         VerticalAlignment="Bottom"
                         Style="{StaticResource DescriptionTextBlockStyle}"
                         Text="1/4 Done" />
-                    <ctrls:ChromelessButtonControl
+                    <buttons:FontAwesomeButtonControl
+                        Width="20"
+                        Height="20"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Bottom"
                         Command="{Binding OpenTaskDetailsCommand, Mode=OneWay}"
-                        CommandParameter="{Binding TaskId, Mode=OneWay}">
-                        <fa5:FontAwesome Icon="Solid_Edit" />
-                    </ctrls:ChromelessButtonControl>
-                    <!--<ctrls:LabelControl
-                        HorizontalAlignment="Right"
-                        VerticalAlignment="Bottom"
-                        LabelBrush="{StaticResource TaskItemHightlightBrush}"
-                        LabelText="{Binding Storypoints}" />-->
+                        CommandParameter="{Binding TaskId, Mode=OneWay}"
+                        FontSize="14"
+                        Icon="Solid_Edit" />
                 </dxlc:LayoutGroup>
             </Grid>
         </Border>
@@ -205,10 +201,7 @@
                 Command="{Binding CreateNewTaskCommand, Mode=OneWay}"
                 CommandParameter="{Binding LaneId, Mode=OneWay}">
                 <buttons:ColoredButtonControl.Content>
-                    <fa5:FontAwesome
-                        FontSize="{StaticResource FontIconSize}"
-                        Foreground="{StaticResource FontIconDarkForegroundBrush}"
-                        Icon="Solid_Plus" />
+                    <fa5:FontAwesome Icon="Solid_Plus" />
                 </buttons:ColoredButtonControl.Content>
             </buttons:ColoredButtonControl>
         </Grid>

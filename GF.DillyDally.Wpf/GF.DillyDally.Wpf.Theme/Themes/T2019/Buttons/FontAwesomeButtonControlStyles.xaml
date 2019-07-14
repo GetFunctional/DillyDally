@@ -3,6 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:buttons="clr-namespace:GF.DillyDally.Wpf.Theme.Controls.Buttons"
     xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:fa5="http://schemas.fontawesome.com/icons/"
     xmlns:utils="clr-namespace:DevExpress.Xpf.Utils;assembly=DevExpress.Xpf.Core.v18.2">
 
     <ResourceDictionary.MergedDictionaries>
@@ -13,17 +14,13 @@
     <SolidColorBrush x:Key="ButtonForegroundBrush" Color="{StaticResource Layer4BorderColor}" />
     <SolidColorBrush x:Key="ButtonForegroundHoverBrush" Color="{StaticResource HighlightBlue}" />
 
-    <ControlTemplate x:Key="ChromelessButtonControlTemplate" TargetType="{x:Type buttons:ChromelessButtonControl}">
+    <ControlTemplate x:Key="FontAwesomeButtonTemplate" TargetType="{x:Type buttons:FontAwesomeButtonControl}">
         <Border Background="{TemplateBinding Background}">
-            <ContentControl
-                x:Name="ContentControl"
-                Margin="{TemplateBinding Padding}"
-                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+            <fa5:FontAwesome
                 utils:FocusHelper.Focusable="False"
-                Content="{TemplateBinding Content}"
-                Foreground="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}"
-                Style="{StaticResource BodyContentControlTypoStyle}" />
+                FontSize="{TemplateBinding FontSize}"
+                Icon="{TemplateBinding Icon}"
+                Style="{StaticResource UntouchedFontAwesomeStyle}" />
         </Border>
         <ControlTemplate.Triggers>
             <Trigger Property="IsEnabled" Value="False">
@@ -67,7 +64,7 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-    <Style x:Key="NoChromeButtonStyle" TargetType="{x:Type buttons:ChromelessButtonControl}">
+    <Style x:Key="FontAwesomeButtonStyle" TargetType="{x:Type buttons:FontAwesomeButtonControl}">
         <Setter Property="dx:ThemeManager.ThemeName" Value="None" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Background" Value="#00000000" />
@@ -79,10 +76,10 @@
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Height" Value="24" />
         <Setter Property="Width" Value="24" />
-        <Setter Property="Template" Value="{StaticResource ChromelessButtonControlTemplate}" />
+        <Setter Property="Template" Value="{StaticResource FontAwesomeButtonTemplate}" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
     </Style>
 
-    <Style BasedOn="{StaticResource NoChromeButtonStyle}" TargetType="{x:Type buttons:ChromelessButtonControl}" />
+    <Style BasedOn="{StaticResource FontAwesomeButtonStyle}" TargetType="{x:Type buttons:FontAwesomeButtonControl}" />
 
 </ResourceDictionary>

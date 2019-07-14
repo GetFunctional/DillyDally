@@ -142,6 +142,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Presentation\Content\Activities\Create\ActivityFieldViewModelFactory.cs" />
+    <Compile Include="Presentation\Content\Activities\Create\Fields\ActivityFieldTypeViewModel.cs" />
+    <Compile Include="Presentation\Content\Activities\Create\Fields\AddNewFieldViewModel.cs" />
+    <Compile Include="Presentation\Content\Activities\Create\Fields\ActivityFieldItemViewModel.cs" />
+    <Compile Include="Presentation\Content\Activities\Create\Fields\ActivityFieldsItemTemplateSelector.cs" />
     <Compile Include="Core\ApplicationState\ApplicationRuntime.cs" />
     <Compile Include="Core\DialogHandler.cs" />
     <Compile Include="Core\ApplicationState\ExceptionSolver.cs" />
@@ -163,8 +168,10 @@
     <Compile Include="Core\TypeRegistrar.cs" />
     <Compile Include="Presentation\Content\Activities\Container\ActivityItemViewModelFactory.cs" />
     <Compile Include="Presentation\Content\Activities\Container\SearchRequestEventArgs.cs" />
+    <Compile Include="Presentation\Content\Activities\Create\Fields\ActivityFieldsPageViewModel.cs" />
+    <Compile Include="Presentation\Content\Activities\Create\Fields\ActivityFieldType.cs" />
     <Compile Include="Presentation\Content\Activities\Create\CreateActivityValidationRule.cs" />
-    <Compile Include="Presentation\Content\Activities\Create\CreateActvityStep1ViewModel.cs" />
+    <Compile Include="Presentation\Content\Activities\Create\ActivityInfosPageViewModel.cs" />
     <Compile Include="Presentation\Content\Activities\Container\ActivityContainerController.cs" />
     <Compile Include="Presentation\Content\Activities\Container\ActivityContainerView.xaml.cs">
       <DependentUpon>ActivityContainerView.xaml</DependentUpon>
@@ -177,6 +184,7 @@
       <DependentUpon>CreateActivityView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Presentation\Content\Activities\Create\CreateActivityViewModel.cs" />
+    <Compile Include="Presentation\Content\Activities\Create\Fields\IActivityFieldViewModel.cs" />
     <Compile Include="Presentation\Content\Commands\ActivityCommands.cs" />
     <Compile Include="Presentation\Content\Commands\TaskCommands.cs" />
     <Compile Include="Presentation\Content\Images\Container\ImageContainerController.cs" />
@@ -286,6 +294,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Presentation\Content\Activities\Container\ActivityContainerViewTemplates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Presentation\Content\Activities\Create\CreateActivityTemplates.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

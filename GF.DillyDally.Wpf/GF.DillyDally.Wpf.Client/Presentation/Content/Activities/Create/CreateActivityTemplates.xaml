@@ -1,0 +1,117 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ctrls="http://schemas.getfunctional.de/dillydally/controls"
+    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+    xmlns:fa5="http://schemas.fontawesome.com/icons/"
+    xmlns:fields="clr-namespace:GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create.Fields"
+    xmlns:local="clr-namespace:GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create">
+
+    <DataTemplate x:Key="ActivityTypeTemplate" DataType="{x:Type local:ActivityTypeViewModel}">
+        <TextBlock Text="{Binding ActivityName, Mode=OneWay}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="ActivityFieldTypeTemplate" DataType="{x:Type fields:ActivityFieldTypeViewModel}">
+        <TextBlock Text="{Binding TypeName, Mode=OneWay}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="ActivityFieldItemViewModel" DataType="{x:Type fields:ActivityFieldItemViewModel}">
+        <dxlc:LayoutGroup
+            Margin="0,0,0,5"
+            ItemSpace="5"
+            Orientation="Horizontal">
+            <ctrls:ComboInputControl
+                Width="80"
+                HorizontalAlignment="Left"
+                InputValue="{Binding FieldType, Mode=TwoWay}"
+                ItemTemplate="{StaticResource ActivityFieldTypeTemplate}"
+                ItemsSource="{Binding AvailableFieldTypes, Mode=OneWay}"
+                Label="Fieldtype" />
+            <ctrls:TextInputControl InputValue="{Binding FieldName}" Label="Fieldname" />
+            <ctrls:ColoredButtonControl
+                Width="24"
+                Height="24"
+                Margin="0,0,0,5"
+                Padding="0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                ButtonColor="Red"
+                ButtonForm="Circle"
+                Command="{Binding RemoveFieldCommand, Mode=OneWay}"
+                CommandParameter="{Binding}">
+                <ctrls:ColoredButtonControl.Content>
+                    <fa5:FontAwesome
+                        FontSize="{StaticResource FontIconSize}"
+                        FontWeight="Bold"
+                        Foreground="{StaticResource FontIconLightForegroundBrush}"
+                        Icon="Solid_Minus" />
+                </ctrls:ColoredButtonControl.Content>
+            </ctrls:ColoredButtonControl>
+        </dxlc:LayoutGroup>
+    </DataTemplate>
+
+    <DataTemplate x:Key="AddNewFieldDataTemplate" DataType="{x:Type fields:AddNewFieldViewModel}">
+        <ctrls:ColoredButtonControl
+            Width="24"
+            Height="24"
+            Padding="0"
+            HorizontalAlignment="Left"
+            ButtonColor="Blue"
+            ButtonForm="Circle"
+            Command="{Binding AddNewFieldCommand, Mode=OneWay}">
+            <ctrls:ColoredButtonControl.Content>
+                <fa5:FontAwesome
+                    FontSize="{StaticResource FontIconSize}"
+                    Foreground="{StaticResource FontIconLightForegroundBrush}"
+                    Icon="Solid_Plus" />
+            </ctrls:ColoredButtonControl.Content>
+        </ctrls:ColoredButtonControl>
+    </DataTemplate>
+
+    <fields:ActivityFieldsItemTemplateSelector
+        x:Key="ActivityFieldsItemTemplateSelector"
+        ActivityFieldItemViewModel="{StaticResource ActivityFieldItemViewModel}"
+        AddNewFieldDataTemplate="{StaticResource AddNewFieldDataTemplate}" />
+
+    <DataTemplate DataType="{x:Type fields:ActivityFieldsPageViewModel}">
+        <VirtualizingStackPanel Orientation="Vertical">
+            <ctrls:HeaderTitleContent
+                Title="Activity Fields"
+                VerticalAlignment="Top"
+                Description="Provide a few fields for more information about this activity."
+                HeaderType="H2" />
+            <ItemsControl ItemTemplateSelector="{StaticResource ActivityFieldsItemTemplateSelector}" ItemsSource="{Binding ActivityFields, Mode=OneWay}" />
+        </VirtualizingStackPanel>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type local:ActivityInfosPageViewModel}">
+        <VirtualizingStackPanel Orientation="Vertical">
+            <ctrls:HeaderTitleContent
+                Title="Activity infos"
+                VerticalAlignment="Top"
+                Description="It's best to keep the name short and then add the details in the task Body. Also select a category that Matches the Topic best."
+                HeaderType="H2" />
+            <dxlc:LayoutGroup
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Top"
+                Orientation="Horizontal">
+                <ctrls:ImageInputControl ImageBytes="{Binding PreviewImageBytes, Mode=TwoWay}" />
+                <dxlc:LayoutGroup Orientation="Vertical">
+                    <ctrls:TextInputControl
+                        VerticalAlignment="Top"
+                        InputValue="{Binding ActivityName, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True}"
+                        IsRequired="True"
+                        Label="Title"
+                        WatermarkText="Give your activity a self explanatory title" />
+                    <ctrls:ComboInputControl
+                        VerticalAlignment="Top"
+                        InputValue="{Binding SelectedActivityTypeViewModel, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True}"
+                        ItemTemplate="{StaticResource ActivityTypeTemplate}"
+                        ItemsSource="{Binding AvailableActivityTypes, Mode=OneWay}"
+                        Label="Type" />
+                </dxlc:LayoutGroup>
+            </dxlc:LayoutGroup>
+        </VirtualizingStackPanel>
+    </DataTemplate>
+
+</ResourceDictionary>

@@ -23,6 +23,7 @@
     <!--  Form Header  -->
     <SolidColorBrush x:Key="FormHeaderBackgroundBrush" Color="{StaticResource Layer1BackgroundColor}" />
     <SolidColorBrush x:Key="FormHeaderBorderBrush" Color="{StaticResource Layer1BorderColor}" />
+    <SolidColorBrush x:Key="CloseFormIconBrush" Color="{StaticResource FontIconDarkForegroundColor}" />
 
     <ControlTemplate x:Key="FormHeaderControlTemplate" TargetType="{x:Type layout:FormHeader}">
         <Border
@@ -47,19 +48,20 @@
                     Title="{TemplateBinding Title}"
                     Grid.Row="1"
                     Grid.Column="0"
+                    Margin="0"
                     HorizontalAlignment="Left"
                     Description="{TemplateBinding Description}"
                     HeaderType="H1" />
-                <buttons:ChromelessButtonControl
+                <buttons:FontAwesomeButtonControl
                     Grid.Row="1"
                     Grid.Column="1"
                     Width="20"
                     Height="20"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Top"
-                    Command="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=CloseCommand}">
-                    <fa5:FontAwesome FontSize="14" Icon="Solid_Times" />
-                </buttons:ChromelessButtonControl>
+                    Command="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=CloseCommand}"
+                    FontSize="14"
+                    Icon="Solid_Times" />
             </Grid>
         </Border>
     </ControlTemplate>

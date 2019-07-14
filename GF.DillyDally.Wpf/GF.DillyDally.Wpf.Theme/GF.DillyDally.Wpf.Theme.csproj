@@ -122,6 +122,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Themes\T2019\Buttons\FontAwesomeButtonControlStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Themes\T2019\Buttons\ChromelessButtonControlStyles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -188,6 +192,8 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\Buttons\ButtonForm.cs" />
+    <Compile Include="Controls\Buttons\FontAwesomeButtonControl.cs" />
     <Compile Include="Controls\LabelDisplayMode.cs" />
     <Compile Include="Controls\Layout\ITabItem.cs" />
     <Compile Include="Controls\Layout\NavigationTargetContentContainer.cs" />

@@ -7,6 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
     xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
     xmlns:local="clr-namespace:GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:theme="clr-namespace:GF.DillyDally.Wpf.Theme;assembly=GF.DillyDally.Wpf.Theme"
@@ -17,39 +18,13 @@
 
     <UserControl.Resources>
         <ResourceDictionary>
-            <DataTemplate x:Key="ActivityTypeTemplate" DataType="{x:Type local:ActivityTypeViewModel}">
-                <TextBlock Text="{Binding ActivityName, Mode=OneWay}" />
-            </DataTemplate>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Client;component/Presentation/Content/Activities/Create/CreateActivityTemplates.xaml" />
+            </ResourceDictionary.MergedDictionaries>
 
-            <DataTemplate DataType="{x:Type local:CreateActvityStep1ViewModel}">
-                <dxlc:LayoutGroup ItemSpace="19" Orientation="Vertical">
-                    <ctrls:HeaderTitleContent
-                        Title="Activity infos"
-                        VerticalAlignment="Top"
-                        Description="It's best to keep the name short and then add the details in the task Body. Also select a category that Matches the Topic best. "
-                        HeaderType="H2" />
-                    <dxlc:LayoutGroup
-                        HorizontalAlignment="Stretch"
-                        VerticalAlignment="Top"
-                        Orientation="Horizontal">
-                        <ctrls:ImageInputControl ImageBytes="{Binding PreviewImageBytes, Mode=TwoWay}" />
-                        <dxlc:LayoutGroup Orientation="Vertical">
-                            <ctrls:TextInputControl
-                                VerticalAlignment="Top"
-                                InputValue="{Binding ActivityName, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True}"
-                                IsRequired="True"
-                                Label="Title"
-                                WatermarkText="Give your activity a self explanatory title" />
-                            <ctrls:ComboInputControl
-                                VerticalAlignment="Top"
-                                InputValue="{Binding SelectedActivityTypeViewModel, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True}"
-                                ItemTemplate="{StaticResource ActivityTypeTemplate}"
-                                ItemsSource="{Binding AvailableActivityTypes, Mode=OneWay}"
-                                Label="Type" />
-                        </dxlc:LayoutGroup>
-                    </dxlc:LayoutGroup>
-                </dxlc:LayoutGroup>
-            </DataTemplate>
+            <dxmvvm:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" Inverse="False" />
+            <dxmvvm:BooleanToVisibilityConverter x:Key="InvertedBooleanToVisibilityConverter" Inverse="True" />
+
         </ResourceDictionary>
 
     </UserControl.Resources>
@@ -60,21 +35,29 @@
         Description="Create a new activity to view the progress of a larger whole across multiple tasks.">
         <ctrls:Form.Content>
             <ctrls:PagedContentControl x:Name="PagedContent" ItemsSource="{Binding Pages, Mode=OneWay}" />
-
         </ctrls:Form.Content>
         <ctrls:Form.FooterContent>
             <dxlc:LayoutGroup Orientation="Horizontal">
                 <buttons:ColoredButtonControl
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center"
-                    ButtonColor="Blue"
-                    Command="{Binding CreateActivityCommand}"
-                    Content="Create Activity" />
+                    Command="{Binding ElementName=PagedContent, Path=PreviousPageCommand}"
+                    Content="Previous"
+                    Visibility="{Binding ElementName=PagedContent, Path=HasMultiplePages, Converter={StaticResource BooleanToVisibilityConverter}}" />
                 <buttons:ColoredButtonControl
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center"
-                    Command="{Binding CancelProcessCommand}"
-                    Content="Cancel" />
+                    ButtonColor="Blue"
+                    Command="{Binding ElementName=PagedContent, Path=NextPageCommand}"
+                    Content="Next"
+                    Visibility="{Binding ElementName=PagedContent, Path=HasNextPage, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                <buttons:ColoredButtonControl
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    ButtonColor="Blue"
+                    Command="{Binding Path=CreateActivityCommand}"
+                    Content="Finish"
+                    Visibility="{Binding ElementName=PagedContent, Path=HasNextPage, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" />
             </dxlc:LayoutGroup>
         </ctrls:Form.FooterContent>
     </ctrls:Form>

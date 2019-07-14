@@ -2,9 +2,9 @@ using GF.DillyDally.Mvvmc.Validation;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create
 {
-    public sealed class CreateActivityValidationRule : ValidationRuleBase<CreateActvityStep1ViewModel>
+    public sealed class CreateActivityValidationRule : ValidationRuleBase<ActivityInfosPageViewModel>
     {
-        public override string ValidateProperty(CreateActvityStep1ViewModel validationObject, string propertyName)
+        public override string ValidateProperty(ActivityInfosPageViewModel validationObject, string propertyName)
         {
             switch (propertyName)
             {

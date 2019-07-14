@@ -11,7 +11,7 @@
     </ResourceDictionary.MergedDictionaries>
 
     <DataTemplate DataType="{x:Type local:CreateTaskBasicInfosViewModel}">
-        <dxlc:LayoutGroup ItemSpace="25" Orientation="Vertical">
+        <VirtualizingStackPanel Orientation="Vertical">
             <ctrls:HeaderTitleContent
                 Title="Task Infos"
                 VerticalAlignment="Top"
@@ -32,7 +32,7 @@
                         ContentTemplate="{StaticResource CategorySelectorTemplate}" />
                 </dxlc:LayoutGroup>
             </dxlc:LayoutGroup>
-        </dxlc:LayoutGroup>
+        </VirtualizingStackPanel>
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type local:CreateTaskAdditionalInfosViewModel}">
@@ -55,7 +55,7 @@
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type local:CreateTaskActivitiesViewModel}">
-        <dxlc:LayoutGroup ItemSpace="25" Orientation="Vertical">
+        <VirtualizingStackPanel Orientation="Vertical">
             <ctrls:HeaderTitleContent
                 Title="Activities Infos"
                 VerticalAlignment="Top"
@@ -63,7 +63,7 @@
                 HeaderType="H2" />
 
             <container:ActivityContainerView DataContext="{Binding ActivityContainerViewModel, Mode=OneWay}" />
-        </dxlc:LayoutGroup>
+        </VirtualizingStackPanel>
     </DataTemplate>
 
 </ResourceDictionary>

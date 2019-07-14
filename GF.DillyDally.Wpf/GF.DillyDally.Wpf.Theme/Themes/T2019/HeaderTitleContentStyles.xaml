@@ -5,8 +5,7 @@
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Colors.xaml" />
-        <ResourceDictionary
-            Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Typography.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Typography.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <ControlTemplate x:Key="DefaultHeaderTitleContentControlTemplate" TargetType="{x:Type shared:HeaderTitleContent}">
@@ -42,6 +41,7 @@
         <Setter Property="Template" Value="{StaticResource DefaultHeaderTitleContentControlTemplate}" />
         <Setter Property="HeaderType" Value="H1" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Margin" Value="0,0,0,19" />
     </Style>
 
     <Style BasedOn="{StaticResource DefaultStyle}" TargetType="{x:Type shared:HeaderTitleContent}" />

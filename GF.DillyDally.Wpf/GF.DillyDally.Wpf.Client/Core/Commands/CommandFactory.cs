@@ -28,5 +28,11 @@ namespace GF.DillyDally.Wpf.Client.Core.Commands
         {
             return new DelegateCommand(execute, canExecute);
         }
+
+        public ICommand CreateFromAction<TParam>(Action<TParam> execute,
+            Func<TParam, bool> canExecute = null)
+        {
+            return new DelegateCommand<TParam>(execute, canExecute);
+        }
     }
 }
