@@ -22,7 +22,7 @@
                 ItemSpace="5"
                 Orientation="Horizontal">
                 <ctrls:ComboInputControl
-                    Width="60"
+                    Width="90"
                     HorizontalAlignment="Left"
                     InputValue="{Binding FieldType, Mode=TwoWay}"
                     ItemTemplate="{StaticResource ActivityFieldTypeTemplate}"
@@ -59,7 +59,7 @@
 
     <fields:ActivityFieldsItemTemplateSelector x:Key="ActivityFieldsItemTemplateSelector" ActivityFieldItemViewModel="{StaticResource ActivityFieldItemDataTemplate}" />
 
-    <!-- Pages -->
+    <!--  Pages  -->
     <DataTemplate DataType="{x:Type fields:ActivityFieldsPageViewModel}">
         <Border
             BorderBrush="{StaticResource FormInnerBorderBrush}"

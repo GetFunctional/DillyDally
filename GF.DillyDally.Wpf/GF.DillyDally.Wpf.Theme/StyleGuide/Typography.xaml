@@ -89,6 +89,7 @@
         <Setter Property="FontWeight" Value="{StaticResource BodyFontWeight}" />
         <Setter Property="Foreground" Value="{StaticResource BodyForeground}" />
         <Setter Property="LineHeight" Value="{StaticResource BodyLineHeight}" />
+        <Setter Property="Validation.ErrorTemplate" Value="{x:Null}" />
     </Style>
 
     <Style x:Key="H1TextBlockStyle" TargetType="{x:Type TextBlock}">
@@ -129,8 +130,8 @@
     <Style x:Key="DefaultFontAwesomeStyle" TargetType="{x:Type fa5:FontAwesome}">
         <Setter Property="FontSize" Value="{StaticResource FontIconSize}" />
         <Setter Property="Foreground" Value="{StaticResource FontIconLightForegroundBrush}" />
+        <Setter Property="Validation.ErrorTemplate" Value="{x:Null}" />
     </Style>
 
-    <Style BasedOn="{StaticResource DefaultFontAwesomeStyle}" TargetType="{x:Type fa5:FontAwesome}" />
 
 </ResourceDictionary>

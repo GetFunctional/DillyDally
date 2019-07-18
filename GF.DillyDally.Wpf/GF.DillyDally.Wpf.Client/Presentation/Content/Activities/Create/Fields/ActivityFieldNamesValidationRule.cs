@@ -9,7 +9,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create.Fields
         {
             var fields = validationObject.ActivityFields;
 
-            if (fields.Count > 1 && fields.GroupBy(x => x.FieldName).Count() > 1)
+            if (fields.Count > 1 && fields.GroupBy(x => x.FieldName).Any(grp => grp.Count() > 1))
             {
                 return "Fieldnames must be unique";
             }

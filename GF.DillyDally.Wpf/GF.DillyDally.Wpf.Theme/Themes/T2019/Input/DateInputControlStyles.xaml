@@ -9,15 +9,12 @@
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Colors.xaml" />
-        <ResourceDictionary
-            Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Typography.xaml" />
-        <ResourceDictionary
-            Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/Input/LabelStyles.xaml" />
-
+        <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Typography.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/Input/LabelStyles.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/Shared/ErrorTemplateStyles.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <SolidColorBrush x:Key="InputControlsValueForegroundBrush"
-                     Color="{StaticResource InputControlsValueForegroundColor}" />
+    <SolidColorBrush x:Key="InputControlsValueForegroundBrush" Color="{StaticResource InputControlsValueForegroundColor}" />
 
     <ControlTemplate x:Key="DefaultDateInputControlTemplate" TargetType="{x:Type input:DateInputControl}">
         <dxlc:LayoutItem
@@ -34,7 +31,9 @@
                 NullText="{TemplateBinding WatermarkText}"
                 ShowNullText="True"
                 SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                UseLayoutRounding="{TemplateBinding UseLayoutRounding}" />
+                UseLayoutRounding="{TemplateBinding UseLayoutRounding}"
+                Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
+                Validation.ValidationAdornerSiteFor="{Binding RelativeSource={RelativeSource TemplatedParent}}" />
         </dxlc:LayoutItem>
     </ControlTemplate>
 

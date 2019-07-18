@@ -80,6 +80,7 @@
     <Compile Include="Projection\Activities\Repository\ActivityRepository.cs" />
     <Compile Include="Projection\Activities\Repository\ActivitySearchResultEntity.cs" />
     <Compile Include="Projection\Activities\Repository\ActivityType.cs" />
+    <Compile Include="Projection\Activities\Repository\TaskActivityFieldValueEntity.cs" />
     <Compile Include="Projection\Lanes\Repository\LaneTaskEntity.cs" />
     <Compile Include="Projection\Lanes\Repository\LaneTaskRepository.cs" />
     <Compile Include="Projection\RunningNumbers\RunningNumbersEventHandler.cs" />
@@ -119,6 +120,7 @@
     <Compile Include="Projection\Tasks\Repository\TaskLinksRepository.cs" />
     <Compile Include="Projection\Tasks\Repository\TaskRepository.cs" />
     <Compile Include="Views\TaskBoard\TaskBoardTaskEntity.cs" />
+    <Compile Include="Views\TaskDetails\TaskActivityFieldEntity.cs" />
     <Compile Include="Views\TaskDetails\TaskDetailsActivityEntity.cs" />
     <Compile Include="Views\TaskDetails\TaskDetailsImageEntity.cs" />
     <Compile Include="Views\TaskDetails\TaskDetailsRepository.cs" />

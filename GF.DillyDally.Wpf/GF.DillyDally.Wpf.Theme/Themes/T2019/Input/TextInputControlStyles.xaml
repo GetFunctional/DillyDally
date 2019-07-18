@@ -11,22 +11,13 @@
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Colors.xaml" />
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Typography.xaml" />
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/Input/LabelStyles.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/Shared/ErrorTemplateStyles.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <SolidColorBrush x:Key="TextInputBorderBrush" Color="{StaticResource InputControlsBorderColor}" />
     <SolidColorBrush x:Key="TextInputSelectedBorderBrush" Color="{StaticResource InputControlsSelectedBorderColor}" />
     <SolidColorBrush x:Key="TextInputHoverBorderBrush" Color="{StaticResource InputControlsHoverBorderColor}" />
     <SolidColorBrush x:Key="InputControlsValueForegroundBrush" Color="{StaticResource InputControlsValueForegroundColor}" />
-
-    <ControlTemplate x:Key="ValidationErrorTemplate">
-        <Border
-            dx:FocusHelper2.Focusable="False"
-            BorderBrush="Red"
-            BorderThickness="1"
-            CornerRadius="3">
-            <AdornedElementPlaceholder />
-        </Border>
-    </ControlTemplate>
 
     <ControlTemplate x:Key="DefaultTextInputControlTemplate" TargetType="{x:Type input:TextInputControl}">
         <dxlc:LayoutItem

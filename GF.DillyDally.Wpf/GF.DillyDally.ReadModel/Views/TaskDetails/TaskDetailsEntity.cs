@@ -23,6 +23,7 @@ namespace GF.DillyDally.ReadModel.Views.TaskDetails
 
         public IReadOnlyList<TaskDetailsImageEntity> TaskImages { get; private set; }
         public IReadOnlyList<TaskDetailsActivityEntity> TaskActivities { get; private set; }
+        public IReadOnlyList<TaskActivityFieldEntity> TaskActivityFields { get; private set; }
 
 
         internal void AssignTaskActivities(IEnumerable<TaskDetailsActivityEntity> activityEntities)
@@ -33,6 +34,11 @@ namespace GF.DillyDally.ReadModel.Views.TaskDetails
         internal void AssignTaskImages(IEnumerable<TaskDetailsImageEntity> imageEntities)
         {
             this.TaskImages = new List<TaskDetailsImageEntity>(imageEntities);
+        }
+
+        public void AssignTaskActivityFields(IEnumerable<TaskActivityFieldEntity> taskActivityFields)
+        {
+            this.TaskActivityFields = new List<TaskActivityFieldEntity>(taskActivityFields);
         }
     }
 }

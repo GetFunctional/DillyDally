@@ -15,15 +15,28 @@ namespace GF.DillyDally.ReadModel.Views.TaskDetails
         public async Task<TaskDetailsEntity> GetTaskDetailsAsync(IDbConnection connection, Guid taskId)
         {
             var sql =
-                $@"SELECT TaskId, CategoryId, rn.RunningNumber, Name, DueDate, CreatedOn, Description, DefinitionOfDone 
+                $@"
+-- Select TaskDetails
+SELECT TaskId, CategoryId, rn.RunningNumber, Name, DueDate, CreatedOn, Description, DefinitionOfDone 
 FROM {TaskEntity.TableNameConstant} te 
 JOIN {RunningNumberEntity.TableNameConstant} rn ON rn.RunningNumberId = te.RunningNumberId 
 WHERE TaskId = @taskId; 
+
+-- Select Activites
 SELECT ae.ActivityId, ae.Name, ae.Description, ae.ActivityType, ae.ActivityValue, ae.CurrentLevel, img.Binary AS PreviewImageBytes 
 FROM {ActivityEntity.TableNameConstant} ae 
 JOIN {TaskActivityEntity.TableNameConstant} tae ON tae.ActivityId = ae.ActivityId
 LEFT JOIN {ImageEntity.TableNameConstant} img ON ae.PreviewImageFileId = img.OriginalFileId AND img.SizeType = {(int) ImageSizeType.PreviewSize}
 WHERE tae.TaskId = @taskId;
+
+-- Select Activity Fields
+SELECT aef.ActivityFieldId, aef.StringValue, aef.DateTimeValue, aef.IntegerValue, aef.DecimalValue, aef.IntegerValue, aef.BooleanValue, af.ActivityId, af.Name, af.FieldType, af.UnitOfMeasure
+FROM {TaskActivityEntity.TableNameConstant} ta
+LEFT JOIN {ActivityFieldEntity.TableNameConstant} af ON ta.ActivityId = af.ActivityId
+LEFT JOIN {TaskActivityFieldValueEntity.TableNameConstant} aef ON aef.ActivityFieldId = af.ActivityFieldId
+WHERE ta.TaskId = @taskId;
+
+-- Select Images
 SELECT ti.OriginalFileId, 
 ( SELECT Images.Binary FROM {ImageEntity.TableNameConstant} WHERE Images.OriginalFileId = img.OriginalFileId AND Images.SizeType = 0 ) AS ImageBytesSmall,
 ( SELECT Images.Binary FROM {ImageEntity.TableNameConstant} WHERE Images.OriginalFileId = img.OriginalFileId AND Images.SizeType = 1 ) AS ImageBytesMedium,
@@ -38,11 +51,12 @@ GROUP BY ti.OriginalFileId;";
             {
                 var taskEntity = await multiSelect.ReadSingleAsync<TaskDetailsEntity>();
                 var taskActivities = await multiSelect.ReadAsync<TaskDetailsActivityEntity>();
+                var taskActivityFields = await multiSelect.ReadAsync<TaskActivityFieldEntity>();
                 var taskImages = await multiSelect.ReadAsync<TaskDetailsImageEntity>();
 
                 taskEntity.AssignTaskActivities(taskActivities);
+                taskEntity.AssignTaskActivityFields(taskActivityFields);
                 taskEntity.AssignTaskImages(taskImages);
-
                 return taskEntity;
             }
         }

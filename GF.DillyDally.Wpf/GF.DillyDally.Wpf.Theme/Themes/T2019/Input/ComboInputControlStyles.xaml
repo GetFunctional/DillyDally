@@ -11,7 +11,7 @@
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Colors.xaml" />
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Typography.xaml" />
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/Input/LabelStyles.xaml" />
-
+        <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/Shared/ErrorTemplateStyles.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <SolidColorBrush x:Key="ComboInputBorderBrush" Color="{StaticResource InputControlsBorderColor}" />
@@ -48,7 +48,9 @@
                     ShowBorder="False"
                     ShowCustomItems="False"
                     ShowNullText="True"
-                    ShowPopupIfItemsSourceEmpty="False" />
+                    ShowPopupIfItemsSourceEmpty="False"
+                    Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
+                    Validation.ValidationAdornerSiteFor="{Binding RelativeSource={RelativeSource TemplatedParent}}" />
             </Border>
         </dxlc:LayoutItem>
         <ControlTemplate.Triggers>

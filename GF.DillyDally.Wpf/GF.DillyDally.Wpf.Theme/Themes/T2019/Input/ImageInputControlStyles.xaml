@@ -10,8 +10,8 @@
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Colors.xaml" />
-        <ResourceDictionary
-            Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Typography.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Typography.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/Shared/ErrorTemplateStyles.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <SolidColorBrush x:Key="ImageContentForegroundBrush" Color="{StaticResource InputControlsValueForegroundColor}" />
@@ -84,7 +84,9 @@
                 IsReadOnly="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsReadOnly}"
                 ShowBorder="False"
                 ShowMenu="False"
-                Stretch="Uniform" />
+                Stretch="Uniform"
+                Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
+                Validation.ValidationAdornerSiteFor="{Binding RelativeSource={RelativeSource TemplatedParent}}" />
         </Border>
         <ControlTemplate.Triggers>
             <Trigger Property="IsKeyboardFocusWithin" Value="True">

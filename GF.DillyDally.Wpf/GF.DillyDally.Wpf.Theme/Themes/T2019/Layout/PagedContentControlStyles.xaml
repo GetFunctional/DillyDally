@@ -21,13 +21,11 @@
     <SolidColorBrush x:Key="PageBadgeBorderBrush" Color="{StaticResource Layer1BorderColor}" />
     <SolidColorBrush x:Key="PageTitleForegroundBrush" Color="{StaticResource BodyForegroundColor}" />
 
-
-
     <DataTemplate x:Key="PageDisplayTemplate" DataType="{x:Type contracts:IDisplayPage}">
-        <dxlc:LayoutGroup
+        <VirtualizingStackPanel
             HorizontalAlignment="Left"
             VerticalAlignment="Center"
-            ItemSpace="12">
+            Orientation="Horizontal">
             <Border
                 x:Name="Badge"
                 Width="28"
@@ -50,6 +48,7 @@
             </Border>
             <TextBlock
                 x:Name="PageTitle"
+                Margin="12,0,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 FontFamily="{StaticResource Arial}"
@@ -59,7 +58,7 @@
                 Opacity="1"
                 Text="{Binding Title}"
                 TextAlignment="Left" />
-        </dxlc:LayoutGroup>
+        </VirtualizingStackPanel>
         <DataTemplate.Triggers>
             <DataTrigger Binding="{Binding IsCurrent}" Value="False">
                 <Setter TargetName="PageTitle" Property="Opacity" Value="0.5" />

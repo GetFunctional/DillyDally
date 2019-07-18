@@ -48,27 +48,29 @@ CREATE TABLE [Activities]
 	[ActivityId] GUID NOT NULL UNIQUE,	
 	[Name] VARCHAR2(255) UNIQUE NOT NULL,
 	[Description] VARCHAR2 NULL,
-	[ActivityType] int NOT NULL,
-	[ActivityValue] int NOT NULL,
-	[CurrentLevel] int NOT NULL,
+	[ActivityType] INTEGER NOT NULL,
+	[ActivityValue] INTEGER NOT NULL,
+	[CurrentLevel] INTEGER NOT NULL,
 	[PreviewImageFileId] GUID NULL REFERENCES [Files]([FileId])
 	);
 
 CREATE UNIQUE INDEX [IX_Activities_ActivityId] ON [Activities]([ActivityId]);
 GO
 
-CREATE TABLE [ActivitiyFields]
+CREATE TABLE [ActivityFields]
 	(
 	[RowID] INTEGER PRIMARY KEY AUTOINCREMENT, 
 	[ActivityFieldId] GUID NOT NULL UNIQUE,	
 	[ActivityId] GUID NOT NULL REFERENCES [Activities]([ActivityId]),
 	[Name] VARCHAR2(255) UNIQUE NOT NULL,	
-	[FieldType] int NOT NULL,
-	[UnitOfMeasure] VARCHAR2(25) NULL
+	[FieldType] INTEGER NOT NULL,
+	[UnitOfMeasure] VARCHAR2(25) NULL,
+	UNIQUE ([ActivityId],[Name])
 	);
 
-CREATE UNIQUE INDEX [IX_ActivitiyFields_ActivityFieldId] ON [ActivitiyFields]([ActivityFieldId]);
+CREATE UNIQUE INDEX [IX_ActivityFields_ActivityFieldId] ON [ActivityFields]([ActivityFieldId]);
 GO
+
 
 CREATE TABLE [Achievements]
 	(
@@ -186,6 +188,23 @@ CREATE TABLE [TaskActivities]
 	);
 
 CREATE UNIQUE INDEX [IX_TaskActivities_TaskActivityId] ON [TaskActivities]([TaskActivityId]);
+GO
+
+CREATE TABLE [TaskActivityFieldValues]
+	(
+	[RowID] INTEGER PRIMARY KEY AUTOINCREMENT, 
+	[TaskActivityFieldValueId] GUID NOT NULL UNIQUE,	
+	[ActivityFieldId] GUID NOT NULL REFERENCES [ActivityFields]([ActivityFieldId]),
+	[TaskId] GUID NOT NULL REFERENCES [Tasks]([TaskId]),
+	[StringValue] VARCHAR2 NULL,
+	[DateTimeValue] DATETIME NULL,
+	[DecimalValue] DECIMAL NULL,
+	[IntegerValue] INTEGER NULL,
+	[BooleanValue] BOOL NULL,
+	UNIQUE ([ActivityFieldId],[TaskId])
+	);
+	
+CREATE UNIQUE INDEX [IX_TaskActivityFieldValues_TaskActivityFieldValueId] ON [TaskActivityFieldValues]([TaskActivityFieldValueId]);
 GO
 
 --CREATE TABLE [Achievement]
