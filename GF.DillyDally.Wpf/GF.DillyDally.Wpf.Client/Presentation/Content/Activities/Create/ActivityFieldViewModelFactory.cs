@@ -1,4 +1,5 @@
 using System.Windows.Input;
+using GF.DillyDally.ReadModel.Projection.Activities.Repository;
 using GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create.Fields;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create

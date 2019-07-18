@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="Extensions\AttributeExtensions.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
+    <Compile Include="Extensions\ListExtensions.cs" />
     <Compile Include="Extensions\RandomExtensions.cs" />
     <Compile Include="Images\ImageFormat.cs" />
     <Compile Include="Images\ImageFormatDetector.cs" />

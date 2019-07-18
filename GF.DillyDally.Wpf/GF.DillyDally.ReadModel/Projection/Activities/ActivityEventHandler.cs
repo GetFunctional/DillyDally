@@ -10,7 +10,7 @@ using MediatR;
 namespace GF.DillyDally.ReadModel.Projection.Activities
 {
     internal sealed class ActivityEventHandler : INotificationHandler<PercentageActivityCreatedEvent>,
-        INotificationHandler<ActivityPreviewImageAssigned>
+        INotificationHandler<ActivityPreviewImageAssigned>, INotificationHandler<ActivityFieldAttached>
     {
         private readonly IReadModelStore _readModelStore;
 
@@ -18,6 +18,20 @@ namespace GF.DillyDally.ReadModel.Projection.Activities
         {
             this._readModelStore = readModelStore;
         }
+
+        #region INotificationHandler<ActivityFieldAttached> Members
+
+        public async Task Handle(ActivityFieldAttached notification, CancellationToken cancellationToken)
+        {
+            using (var connection = this._readModelStore.OpenConnection())
+            {
+                var activityRepository = new ActivityFieldRepository();
+                await activityRepository.AttachFieldToActivityAsync(connection, notification.AggregateId, notification.ActivityFieldType,
+                    notification.FieldName, notification.UnitOfMeasure);
+            }
+        }
+
+        #endregion
 
         #region INotificationHandler<ActivityPreviewImageAssigned> Members
 

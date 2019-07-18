@@ -32,6 +32,7 @@
         <dxlc:LayoutItem
             dx:FocusHelper2.Focusable="False"
             IsRequired="{TemplateBinding IsRequired}"
+            IsTabStop="False"
             Label="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Label, Mode=TwoWay}"
             Style="{StaticResource InputControlLabelStyle}">
             <Border
@@ -51,6 +52,7 @@
                     FontSize="{StaticResource InputControlsFontSize}"
                     FontWeight="Regular"
                     Foreground="{StaticResource InputControlsValueForegroundBrush}"
+                    IsTabStop="True"
                     NullText="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=WatermarkText, Mode=TwoWay}"
                     SelectAllOnGotFocus="True"
                     ShowBorder="False"
@@ -89,6 +91,7 @@
     <Style x:Key="DefaultTextInputControlStyle" TargetType="{x:Type input:TextInputControl}">
         <Setter Property="Template" Value="{StaticResource DefaultTextInputControlTemplate}" />
         <Setter Property="IsMultiline" Value="False" />
+        <Setter Property="IsTabStop" Value="False" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Style.Triggers>
             <Trigger Property="Validation.HasError" Value="True">

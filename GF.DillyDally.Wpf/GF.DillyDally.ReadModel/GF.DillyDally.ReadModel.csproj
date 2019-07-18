@@ -74,6 +74,9 @@
     <Compile Include="Projection\Achievements\AchievementEventHandler.cs" />
     <Compile Include="Projection\Activities\ActivityEventHandler.cs" />
     <Compile Include="Projection\Activities\Repository\ActivityEntity.cs" />
+    <Compile Include="Projection\Activities\Repository\ActivityFieldEntity.cs" />
+    <Compile Include="Projection\Activities\Repository\ActivityFieldRepository.cs" />
+    <Compile Include="Projection\Activities\Repository\ActivityFieldType.cs" />
     <Compile Include="Projection\Activities\Repository\ActivityRepository.cs" />
     <Compile Include="Projection\Activities\Repository\ActivitySearchResultEntity.cs" />
     <Compile Include="Projection\Activities\Repository\ActivityType.cs" />

@@ -16,13 +16,13 @@ namespace GF.DillyDally.ReadModel.Projection.Activities.Repository
             ActivityType activityType)
         {
             await connection.InsertAsync(new ActivityEntity
-            {
-                ActivityId = activityId,
-                Name = activityName,
-                ActivityValue = 0,
-                CurrentLevel = 1,
-                ActivityType = activityType
-            });
+                                         {
+                                             ActivityId = activityId,
+                                             Name = activityName,
+                                             ActivityValue = 0,
+                                             CurrentLevel = 1,
+                                             ActivityType = activityType
+                                         });
         }
 
         internal async Task AssignPreviewImageAsync(IDbConnection connection, Guid activityId, Guid? originalFileId)
@@ -42,7 +42,7 @@ WHERE ActivityId = @activityId;";
             var sql =
                 $@"SELECT a.ActivityId, a.Name, a.ActivityType, a.ActivityValue, a.CurrentLevel, img.Binary AS PreviewImageBinary 
 FROM {ActivityEntity.TableNameConstant} AS a 
-LEFT JOIN {ImageEntity.TableNameConstant} img ON a.PreviewImageFileId = img.OriginalFileId AND img.SizeType = {(int) ImageSizeType.PreviewSize} 
+LEFT JOIN {ImageEntity.TableNameConstant} img ON a.PreviewImageFileId = img.OriginalFileId AND img.SizeType = {(int)ImageSizeType.PreviewSize} 
 WHERE a.Name LIKE @searchParameter 
 {this.LimitResults(searchText)};";
 

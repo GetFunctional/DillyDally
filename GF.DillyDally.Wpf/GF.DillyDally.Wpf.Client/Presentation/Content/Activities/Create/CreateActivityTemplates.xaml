@@ -15,7 +15,7 @@
         <TextBlock Text="{Binding TypeName, Mode=OneWay}" />
     </DataTemplate>
 
-    <DataTemplate x:Key="ActivityFieldItemViewModel" DataType="{x:Type fields:ActivityFieldItemViewModel}">
+    <DataTemplate x:Key="ActivityFieldItemDataTemplate" DataType="{x:Type fields:ActivityFieldItemViewModel}">
         <Border BorderBrush="{StaticResource FormInnerBorderBrush}" BorderThickness="0,0,0,1">
             <dxlc:LayoutGroup
                 Padding="4,15"
@@ -57,8 +57,9 @@
     </DataTemplate>
 
 
-    <fields:ActivityFieldsItemTemplateSelector x:Key="ActivityFieldsItemTemplateSelector" ActivityFieldItemViewModel="{StaticResource ActivityFieldItemViewModel}" />
+    <fields:ActivityFieldsItemTemplateSelector x:Key="ActivityFieldsItemTemplateSelector" ActivityFieldItemViewModel="{StaticResource ActivityFieldItemDataTemplate}" />
 
+    <!-- Pages -->
     <DataTemplate DataType="{x:Type fields:ActivityFieldsPageViewModel}">
         <Border
             BorderBrush="{StaticResource FormInnerBorderBrush}"

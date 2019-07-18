@@ -3,6 +3,7 @@ using System.Data;
 using System.Data.SQLite;
 using System.IO;
 using System.Threading.Tasks;
+using Dapper.Contrib.Extensions;
 using log4net;
 
 namespace GF.DillyDally.Data.Sqlite

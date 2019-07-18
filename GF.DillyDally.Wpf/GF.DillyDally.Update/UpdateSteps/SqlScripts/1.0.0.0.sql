@@ -57,6 +57,19 @@ CREATE TABLE [Activities]
 CREATE UNIQUE INDEX [IX_Activities_ActivityId] ON [Activities]([ActivityId]);
 GO
 
+CREATE TABLE [ActivitiyFields]
+	(
+	[RowID] INTEGER PRIMARY KEY AUTOINCREMENT, 
+	[ActivityFieldId] GUID NOT NULL UNIQUE,	
+	[ActivityId] GUID NOT NULL REFERENCES [Activities]([ActivityId]),
+	[Name] VARCHAR2(255) UNIQUE NOT NULL,	
+	[FieldType] int NOT NULL,
+	[UnitOfMeasure] VARCHAR2(25) NULL
+	);
+
+CREATE UNIQUE INDEX [IX_ActivitiyFields_ActivityFieldId] ON [ActivitiyFields]([ActivityFieldId]);
+GO
+
 CREATE TABLE [Achievements]
 	(
 	[RowID] INTEGER PRIMARY KEY AUTOINCREMENT, 

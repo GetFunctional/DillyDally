@@ -36,6 +36,7 @@
                     dx:ThemeManager.ThemeName="{x:Static theme:ThemeConstants.DevExpressThemeName}"
                     ApplyItemTemplateToSelectedItem="True"
                     EditValue="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=InputValue, Mode=TwoWay}"
+                    EditValuePostMode="Immediate"
                     FontSize="{StaticResource InputControlsFontSize}"
                     FontWeight="Regular"
                     Foreground="{StaticResource InputControlsValueForegroundBrush}"

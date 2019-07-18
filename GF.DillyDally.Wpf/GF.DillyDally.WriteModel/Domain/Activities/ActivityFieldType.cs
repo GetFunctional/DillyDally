@@ -1,4 +1,4 @@
-﻿namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create.Fields
+﻿namespace GF.DillyDally.WriteModel.Domain.Activities
 {
     public enum ActivityFieldType
     {

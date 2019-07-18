@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using GF.DillyDally.WriteModel.Domain.Activities.Events;
+using GF.DillyDally.WriteModel.Domain.Activities.Exceptions;
 using GF.DillyDally.WriteModel.Infrastructure;
 
 namespace GF.DillyDally.WriteModel.Domain.Activities
@@ -14,6 +15,7 @@ namespace GF.DillyDally.WriteModel.Domain.Activities
             this.RegisterTransition<LevelingActivityCreatedEvent>(this.Apply);
             this.RegisterTransition<TaskLinkedToActivityEvent>(this.Apply);
             this.RegisterTransition<ActivityPreviewImageAssigned>(this.Apply);
+            this.RegisterTransition<ActivityFieldAttached>(this.Apply);
         }
 
         private ActivityAggregateRoot(Guid activityId, string name, ActivityType activityType) : this()
@@ -36,13 +38,23 @@ namespace GF.DillyDally.WriteModel.Domain.Activities
         }
 
         public Guid? PreviewImageFileId { get; private set; }
-
         public string Name { get; private set; }
         public ActivityType ActivityType { get; private set; }
         public int ActivityValue { get; private set; }
         public int CurrentLevel { get; private set; }
         public IDictionary<Guid, int> LinkedTasks { get; } = new Dictionary<Guid, int>();
         public ISet<Guid> CompletedLinkedTasks { get; } = new HashSet<Guid>();
+        public ISet<ActivityField> ActivityFields { get; } = new HashSet<ActivityField>();
+
+        private void Apply(ActivityFieldAttached obj)
+        {
+            if (this.ActivityFields.Any(a => string.Equals(a.Name, obj.FieldName, StringComparison.OrdinalIgnoreCase)))
+            {
+                throw new DuplicateFieldNameException();
+            }
+
+            this.ActivityFields.Add(new ActivityField(obj.ActivityFieldType, obj.FieldName, obj.UnitOfMeasure));
+        }
 
         private void Apply(ActivityPreviewImageAssigned obj)
         {
@@ -113,7 +125,6 @@ namespace GF.DillyDally.WriteModel.Domain.Activities
 
             var taskLinkedToActivityEvent =
                 new TaskLinkedToActivityEvent(this.AggregateId, linkedTaskId, storypoints, newActivityValue);
-            this.Apply(taskLinkedToActivityEvent);
             this.RaiseEvent(taskLinkedToActivityEvent);
         }
 
@@ -131,6 +142,17 @@ namespace GF.DillyDally.WriteModel.Domain.Activities
 
             var previewImageAssigned = new ActivityPreviewImageAssigned(this.AggregateId, previewImageFileId);
             this.RaiseEvent(previewImageAssigned);
+        }
+
+        public void AddActivityField(ActivityFieldType activityFieldType, string fieldName, string unitOfMeasure)
+        {
+            if (string.IsNullOrEmpty(fieldName) || fieldName.Length > 255)
+            {
+                throw new ArgumentException();
+            }
+
+            var activityFieldAttachedEvent = new ActivityFieldAttached(this.AggregateId, activityFieldType, fieldName, unitOfMeasure);
+            this.RaiseEvent(activityFieldAttachedEvent);
         }
     }
 }

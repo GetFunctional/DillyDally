@@ -1,4 +1,5 @@
 ﻿using GF.DillyDally.Mvvmc;
+using GF.DillyDally.ReadModel.Projection.Activities.Repository;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create.Fields
 {

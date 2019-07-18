@@ -143,6 +143,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Presentation\Content\Activities\Create\ActivityFieldViewModelFactory.cs" />
+    <Compile Include="Presentation\Content\Activities\Create\Fields\ActivityFieldItemValidationRule.cs" />
+    <Compile Include="Presentation\Content\Activities\Create\Fields\ActivityFieldNamesValidationRule.cs" />
     <Compile Include="Presentation\Content\Activities\Create\Fields\ActivityFieldTypeViewModel.cs" />
     <Compile Include="Presentation\Content\Activities\Create\Fields\ActivityFieldItemViewModel.cs" />
     <Compile Include="Presentation\Content\Activities\Create\Fields\ActivityFieldsItemTemplateSelector.cs" />
@@ -168,7 +170,6 @@
     <Compile Include="Presentation\Content\Activities\Container\ActivityItemViewModelFactory.cs" />
     <Compile Include="Presentation\Content\Activities\Container\SearchRequestEventArgs.cs" />
     <Compile Include="Presentation\Content\Activities\Create\Fields\ActivityFieldsPageViewModel.cs" />
-    <Compile Include="Presentation\Content\Activities\Create\Fields\ActivityFieldType.cs" />
     <Compile Include="Presentation\Content\Activities\Create\CreateActivityValidationRule.cs" />
     <Compile Include="Presentation\Content\Activities\Create\ActivityInfosPageViewModel.cs" />
     <Compile Include="Presentation\Content\Activities\Container\ActivityContainerController.cs" />
@@ -183,7 +184,6 @@
       <DependentUpon>CreateActivityView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Presentation\Content\Activities\Create\CreateActivityViewModel.cs" />
-    <Compile Include="Presentation\Content\Activities\Create\Fields\IActivityFieldViewModel.cs" />
     <Compile Include="Presentation\Content\Commands\ActivityCommands.cs" />
     <Compile Include="Presentation\Content\Commands\TaskCommands.cs" />
     <Compile Include="Presentation\Content\Images\Container\ImageContainerController.cs" />

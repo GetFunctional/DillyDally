@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using GF.DillyDally.Mvvmc.Contracts;
 using GF.DillyDally.ReadModel.Projection.Activities.Repository;
@@ -6,6 +7,7 @@ using GF.DillyDally.Wpf.Client.Core.Dialoge;
 using GF.DillyDally.Wpf.Client.Core.Mvvmc;
 using GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create.Fields;
 using GF.DillyDally.WriteModel.Domain.Activities;
+using ActivityFieldType = GF.DillyDally.WriteModel.Domain.Activities.ActivityFieldType;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create
 {
@@ -23,7 +25,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create
 
             var addNewFieldCommand = controllerServices.CommandFactory.CreateFromAction(this.CreateNewActivityField);
             var removeFieldCommand =
-                controllerServices.CommandFactory.CreateFromAction<IActivityFieldViewModel>(this.RemoveActivityField,
+                controllerServices.CommandFactory.CreateFromAction<ActivityFieldItemViewModel>(this.RemoveActivityField,
                     this.CanRemoveActivityField);
             this._activityFieldViewModelFactory =
                 new ActivityFieldViewModelFactory(addNewFieldCommand, removeFieldCommand);
@@ -37,12 +39,12 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create
         public IDialogResult CreateActivityDialogResult { get; } = new DialogCommandResult();
         public IDialogResult CancelDialogResult { get; } = new DialogCommandResult();
 
-        private bool CanRemoveActivityField(IActivityFieldViewModel cf)
+        private bool CanRemoveActivityField(ActivityFieldItemViewModel cf)
         {
             return cf != null;
         }
 
-        private void RemoveActivityField(IActivityFieldViewModel activityFieldViewModel)
+        private void RemoveActivityField(ActivityFieldItemViewModel activityFieldViewModel)
         {
             var page = this.ViewModel.GetPage<ActivityFieldsPageViewModel>();
             page.RemoveActivityField(activityFieldViewModel);
@@ -69,20 +71,23 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create
                 var activityName = step1.ActivityName;
                 var activityType = step1.SelectedActivityTypeViewModel?.ActivityType;
                 var previewImageForActivity = step1.PreviewImageBytes;
+
+                var step2 = this.ViewModel.GetPage<ActivityFieldsPageViewModel>();
+                var activities = step2.ActivityFields;
+
                 var activityService = this.ControllerServices.GetDomainService<ActivityService>();
 
                 switch (activityType)
                 {
                     case ActivityType.Percentage:
-                        if (previewImageForActivity != null)
+                        var activity =
+                            await activityService.CreatePercentageActivityAsync(activityName,
+                                previewImageForActivity);
+
+                        foreach (var activityFieldViewModel in activities)
                         {
-                            var activity =
-                                await activityService.CreatePercentageActivityAsync(activityName,
-                                    previewImageForActivity);
-                        }
-                        else
-                        {
-                            var activity = await activityService.CreatePercentageActivityAsync(activityName);
+                            await activityService.AttachActivityFieldsAsync(activity.ActivityId, (ActivityFieldType)activityFieldViewModel.FieldType.ActivityFieldType,
+                                activityFieldViewModel.FieldName, activityFieldViewModel.UnitOfMeasure);
                         }
 
                         this.ConfirmDialogWith(this.CreateActivityDialogResult);
@@ -107,9 +112,12 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create
         private bool IsInputValid(CreateActivityViewModel viewModel)
         {
             var step1 = viewModel.GetPage<ActivityInfosPageViewModel>();
-            var activityName = step1.ActivityName;
-            var activityType = step1.SelectedActivityTypeViewModel?.ActivityType;
-            return activityName != string.Empty && activityType != null;
+            var resultStep1 = step1.Validate();
+
+            var step2 = viewModel.GetPage<ActivityFieldsPageViewModel>();
+            var resultStep2 = step2.Validate();
+
+            return resultStep1 && resultStep2;
         }
     }
 }

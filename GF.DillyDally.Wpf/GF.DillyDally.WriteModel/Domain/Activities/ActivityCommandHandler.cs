@@ -12,7 +12,7 @@ namespace GF.DillyDally.WriteModel.Domain.Activities
     internal sealed class ActivityCommandHandler : CommandHandlerBase,
         IRequestHandler<CreatePercentageActivityCommand, CreatePercentageActivityResponse>,
         IRequestHandler<CreateActivityListCommand, CreateActivityListResponse>,
-        IRequestHandler<CanCreateActivityCommand, CanCreateActivityResponse>
+        IRequestHandler<CanCreateActivityCommand, CanCreateActivityResponse>, IRequestHandler<AttachActivityFieldCommand, AttachActivityFieldResponse>
     {
         private readonly IWriteModelStore _writeModelStore;
 
@@ -21,6 +21,18 @@ namespace GF.DillyDally.WriteModel.Domain.Activities
         {
             this._writeModelStore = writeModelStore;
         }
+
+        #region IRequestHandler<AttachActivityFieldsCommand,AttachActivityFieldsResponse> Members
+
+        public async Task<AttachActivityFieldResponse> Handle(AttachActivityFieldCommand request, CancellationToken cancellationToken)
+        {
+            var activity = this.AggregateRepository.GetById<ActivityAggregateRoot>(request.ActivityId);
+            activity.AddActivityField(request.ActivityFieldType, request.FieldName, request.UnitOfMeasure);
+            await this.AggregateRepository.SaveAsync(activity);
+            return new AttachActivityFieldResponse();
+        }
+
+        #endregion
 
         #region IRequestHandler<CanCreateActivityCommand,CanCreateActivityResponse> Members
 

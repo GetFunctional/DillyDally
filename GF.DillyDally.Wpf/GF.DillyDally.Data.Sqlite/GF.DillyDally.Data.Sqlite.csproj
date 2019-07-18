@@ -80,10 +80,17 @@
     <Compile Include="IRepository.Generic.cs" />
     <Compile Include="Repository.Generic.cs" />
     <Compile Include="SqlScriptReader.cs" />
+    <Compile Include="SqlTempTableCreator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GF.DillyDally.Shared\GF.DillyDally.Shared.csproj">
+      <Project>{cac4358f-f1af-49f5-9054-a6064abe235e}</Project>
+      <Name>GF.DillyDally.Shared</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.111.0\build\net46\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.111.0\build\net46\System.Data.SQLite.Core.targets')" />
