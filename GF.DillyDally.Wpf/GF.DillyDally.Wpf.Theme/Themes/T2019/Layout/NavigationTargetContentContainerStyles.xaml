@@ -19,13 +19,21 @@
                 <RowDefinition Height="60" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
+
             <dx:WaitIndicator
+                Grid.Row="0"
+                Grid.RowSpan="2"
+                Width="160"
+                Height="80"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                Content="{TemplateBinding IsBusyMessage}"
-                DeferedVisibility="True"
-                Visibility="{TemplateBinding IsBusy,
-                                             Converter={StaticResource BooleanToVisibilityConverter}}" />
+                Content="1234"
+                DeferedVisibility="False"
+                Visibility="Visible" />
+
+
+            <!--  Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsBusyMessage}"  -->
+            <!--  Visibility="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}"  -->
             <Border
                 Grid.Row="0"
                 Height="60"
@@ -47,6 +55,8 @@
 
     <Style x:Key="DefaultNavigationTargetContentContainerStyle" TargetType="{x:Type layout:NavigationTargetContentContainer}">
         <Setter Property="Template" Value="{StaticResource NavigationTargetContentContainerTemplate}" />
+        <Setter Property="IsBusy" Value="False" />
+        <Setter Property="IsBusyMessage" Value="Loading Data" />
     </Style>
 
     <Style BasedOn="{StaticResource DefaultNavigationTargetContentContainerStyle}" TargetType="{x:Type layout:NavigationTargetContentContainer}" />

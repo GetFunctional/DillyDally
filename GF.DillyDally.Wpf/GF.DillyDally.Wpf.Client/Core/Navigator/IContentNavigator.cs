@@ -21,7 +21,7 @@ namespace GF.DillyDally.Wpf.Client.Core.Navigator
         /// </summary>
         IController CurrentContentController { get; }
 
-        event EventHandler Navigated;
+        IObservable<NavigationPayload> WhenNavigated { get; }
 
         /// <summary>
         ///     Resolves the new Target and informs the involving instances of their change in the navigationprocess.

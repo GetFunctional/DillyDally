@@ -18,20 +18,26 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Container
         private string _searchText;
         private ActivityItemViewModel _selectedResult;
 
-        internal IObservable<IList<ActivityItemViewModel>> WhenActivityCollectionChanged
-        {
-            get { return this._activityItemsChangedSubject; }
-        }
-
         public ActivityContainerViewModel()
         {
             this.AssignActivities(Enumerable.Empty<ActivityItemViewModel>());
             this.SearchResults = new ObservableCollection<ActivityItemViewModel>();
         }
 
+        internal IObservable<IList<ActivityItemViewModel>> WhenActivityCollectionChanged
+        {
+            get
+            {
+                return this._activityItemsChangedSubject;
+            }
+        }
+
         public ObservableCollection<ActivityItemViewModel> Activities
         {
-            get { return this._activities; }
+            get
+            {
+                return this._activities;
+            }
             private set
             {
                 if (this.SetAndRaiseIfChanged(ref this._activities, value))
@@ -43,13 +49,22 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Container
 
         public ObservableCollection<ActivityItemViewModel> SearchResults
         {
-            get { return this._searchResults; }
-            set { this.SetAndRaiseIfChanged(ref this._searchResults, value); }
+            get
+            {
+                return this._searchResults;
+            }
+            set
+            {
+                this.SetAndRaiseIfChanged(ref this._searchResults, value);
+            }
         }
 
         public string SearchText
         {
-            get { return this._searchText; }
+            get
+            {
+                return this._searchText;
+            }
             set
             {
                 if (this.SetAndRaiseIfChanged(ref this._searchText, value) &&
@@ -62,7 +77,10 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Container
 
         public ActivityItemViewModel SelectedResult
         {
-            get { return this._selectedResult; }
+            get
+            {
+                return this._selectedResult;
+            }
             set
             {
                 if (this.SetAndRaiseIfChanged(ref this._selectedResult, value) && value != null)
@@ -74,13 +92,22 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Container
 
         public string ActivityDisplayMemberName
         {
-            get { return nameof(ActivityItemViewModel.ActivityName); }
+            get
+            {
+                return nameof(ActivityItemViewModel.ActivityName);
+            }
         }
 
         public bool IsSearchBarVisible
         {
-            get { return this._isSearchBarVisible; }
-            set { this.SetAndRaiseIfChanged(ref this._isSearchBarVisible, value); }
+            get
+            {
+                return this._isSearchBarVisible;
+            }
+            set
+            {
+                this.SetAndRaiseIfChanged(ref this._isSearchBarVisible, value);
+            }
         }
 
         #region IDisposable Members

@@ -15,44 +15,68 @@ namespace GF.DillyDally.Wpf.Theme.Controls.Layout
         {
         }
 
-        public TabItem(INotifyPropertyChanged content, string title) : this(content, title, delegate { return null;})
+        public TabItem(INotifyPropertyChanged content, string title) : this(content, title, delegate
+        {
+            return null;
+        })
         {
         }
 
-        public TabItem(INotifyPropertyChanged content, string title, Func<string> refreshBadgeTextFunction)
+        public TabItem(INotifyPropertyChanged content, string title, Func<string> refreshBadgeTextFunction = null)
         {
             this.Title = title;
             this.RefreshBadgeTextFunction = refreshBadgeTextFunction;
             this.Content = content;
         }
 
+        private Func<string> RefreshBadgeTextFunction { get; }
+
         #region ITabItem Members
 
         public string Title
         {
-            get { return this._title; }
-            set { this.SetAndRaiseIfChanged(ref this._title, value); }
+            get
+            {
+                return this._title;
+            }
+            set
+            {
+                this.SetAndRaiseIfChanged(ref this._title, value);
+            }
         }
-
-        private Func<string> RefreshBadgeTextFunction { get; }
 
         public bool IsSelected
         {
-            get { return this._isSelected; }
-            set { this.SetAndRaiseIfChanged(ref this._isSelected, value); }
+            get
+            {
+                return this._isSelected;
+            }
+            set
+            {
+                this.SetAndRaiseIfChanged(ref this._isSelected, value);
+            }
         }
 
         public INotifyPropertyChanged Content { get; }
 
         public string BadgeText
         {
-            get { return this._badgeText; }
-            set { this.SetAndRaiseIfChanged(ref this._badgeText, value); }
+            get
+            {
+                return this._badgeText;
+            }
+            set
+            {
+                this.SetAndRaiseIfChanged(ref this._badgeText, value);
+            }
         }
 
         public void RefreshBadgeText()
         {
-            this.BadgeText = this.RefreshBadgeTextFunction();
+            if (this.RefreshBadgeTextFunction != null)
+            {
+                this.BadgeText = this.RefreshBadgeTextFunction();
+            }
         }
 
         #endregion

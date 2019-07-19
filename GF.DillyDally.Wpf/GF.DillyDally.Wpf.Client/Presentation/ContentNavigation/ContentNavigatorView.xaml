@@ -5,13 +5,34 @@
     xmlns:contentNavigation="clr-namespace:GF.DillyDally.Wpf.Client.Presentation.ContentNavigation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxwui="http://schemas.devexpress.com/winfx/2008/xaml/windowsui"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:theme="http://schemas.getfunctional.de/dillydally/wpf"
+    Margin="0"
     d:DataContext="{d:DesignInstance Type={x:Type contentNavigation:ContentNavigatorViewModel}}"
     d:DesignHeight="450"
     d:DesignWidth="800"
     dx:ThemeManager.ThemeName="{x:Static theme:ThemeConstants.DevExpressThemeName}"
-    mc:Ignorable="d" Margin="0">
+    mc:Ignorable="d">
 
-    <ContentControl Content="{Binding DisplayTarget, Mode=OneWay}" />
+    <dxwui:PageView
+        Margin="0"
+        Padding="0"
+        AnimationSpeedRatio="0.7"
+        AnimationType="Fade"
+        ItemCacheMode="CacheOnSelecting"
+        ItemsSource="{Binding ActiveNavigationTargets, Mode=OneWay}"
+        SelectedItem="{Binding DisplayTarget, Mode=OneWay}">
+        <dxwui:PageView.ContentTemplate>
+            <DataTemplate>
+                <ContentControl Content="{Binding}" Style="{StaticResource BodyContentControlTypoStyle}" />
+            </DataTemplate>
+        </dxwui:PageView.ContentTemplate>
+        <dxwui:PageView.Resources>
+            <Style TargetType="{x:Type dxwui:PageViewItem}">
+                <Setter Property="Template" Value="{x:Null}" />
+            </Style>
+        </dxwui:PageView.Resources>
+    </dxwui:PageView>
+
 </UserControl>

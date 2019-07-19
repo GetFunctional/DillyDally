@@ -143,6 +143,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ActivityUsagesToForegroundBrushConverter.cs" />
+    <Compile Include="Core\Navigator\NavigationPayload.cs" />
     <Compile Include="Presentation\Content\Activities\Create\ActivityFieldViewModelFactory.cs" />
     <Compile Include="Presentation\Content\Activities\Create\Fields\ActivityFieldItemValidationRule.cs" />
     <Compile Include="Presentation\Content\Activities\Create\Fields\ActivityFieldNamesValidationRule.cs" />
@@ -204,6 +205,8 @@
       <DependentUpon>TaskDetailsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Presentation\Content\Tasks\Details\TaskDetailsViewModel.cs" />
+    <Compile Include="Presentation\Content\Tasks\Details\TaskDetailsViewModelFactory.cs" />
+    <Compile Include="Presentation\Content\Tasks\Details\TaskSummaryViewModel.cs" />
     <Compile Include="Presentation\Content\Tasks\TaskBoard\DragDrop\ITaskLaneDropHandler.cs" />
     <Compile Include="Presentation\Content\Tasks\TaskBoard\DragDrop\TaskBoardDragDropHandler.cs" />
     <Compile Include="Presentation\Content\Tasks\TaskBoard\DragDrop\TaskChangedLanePayload.cs" />

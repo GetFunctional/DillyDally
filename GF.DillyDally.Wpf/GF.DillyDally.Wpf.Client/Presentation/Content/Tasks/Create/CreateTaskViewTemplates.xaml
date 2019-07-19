@@ -11,13 +11,16 @@
     </ResourceDictionary.MergedDictionaries>
 
     <DataTemplate DataType="{x:Type local:CreateTaskBasicInfosViewModel}">
-        <dxlc:LayoutGroup ItemSpace="19" Orientation="Vertical">
+        <VirtualizingStackPanel Orientation="Vertical">
             <ctrls:HeaderTitleContent
                 Title="Task Infos"
                 VerticalAlignment="Top"
                 Description="It's best to keep the name short and then add the details in the task Body. Also select a category that Matches the Topic best. "
                 HeaderType="H2" />
-            <dxlc:LayoutGroup VerticalAlignment="Top" Orientation="Horizontal">
+            <dxlc:LayoutGroup
+                Margin="0,19,0,0"
+                VerticalAlignment="Top"
+                Orientation="Horizontal">
                 <ctrls:ImageInputControl ImageBytes="{Binding PreviewImageBytes, Mode=TwoWay}" />
                 <dxlc:LayoutGroup Orientation="Vertical">
                     <ctrls:TextInputControl
@@ -32,7 +35,7 @@
                         ContentTemplate="{StaticResource CategorySelectorTemplate}" />
                 </dxlc:LayoutGroup>
             </dxlc:LayoutGroup>
-        </dxlc:LayoutGroup>
+        </VirtualizingStackPanel>
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type local:CreateTaskAdditionalInfosViewModel}">
@@ -55,15 +58,14 @@
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type local:CreateTaskActivitiesViewModel}">
-        <dxlc:LayoutGroup ItemSpace="19" Orientation="Vertical">
+        <VirtualizingStackPanel Orientation="Vertical">
             <ctrls:HeaderTitleContent
                 Title="Activities Infos"
                 VerticalAlignment="Top"
-                Description="Does this Task realate to existing activities?"
+                Description="Does this Task relate to existing activities?"
                 HeaderType="H2" />
 
-            <container:ActivityContainerView DataContext="{Binding ActivityContainerViewModel, Mode=OneWay}" />
-        </dxlc:LayoutGroup>
+            <container:ActivityContainerView Margin="0,19,0,0" DataContext="{Binding ActivityContainerViewModel, Mode=OneWay}" />
+        </VirtualizingStackPanel>
     </DataTemplate>
-
 </ResourceDictionary>

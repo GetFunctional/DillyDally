@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reactive.Linq;
 using System.Threading.Tasks;
 using GF.DillyDally.Mvvmc.Contracts;
 using GF.DillyDally.Wpf.Client.Core.Mvvmc;
@@ -9,14 +10,15 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
     internal sealed class ContentNavigatorController : DDControllerBase<ContentNavigatorViewModel>
     {
         private readonly IContentNavigator _contentNavigator;
+        private readonly IDisposable _navigationObservable;
 
         public ContentNavigatorController(ContentNavigatorViewModel viewModel, IContentNavigator contentNavigator,
             IControllerServices controllerServices)
             : base(viewModel, controllerServices)
         {
             this._contentNavigator = contentNavigator;
-            this.SynchronizeCurrentDisplayTargetWithNavigator();
-            this._contentNavigator.Navigated += this.HandleNavigatorNavigated;
+            this._navigationObservable = this._contentNavigator.WhenNavigated.ObserveOnDispatcher().Subscribe(this.HandleNavigatorNavigated);
+            this.AddDisposable(this._navigationObservable);
         }
 
         public IController NavigateToTarget(INavigationTarget navigationTarget)
@@ -25,17 +27,18 @@ namespace GF.DillyDally.Wpf.Client.Presentation.ContentNavigation
             return controller;
         }
 
-        private void HandleNavigatorNavigated(object sender, EventArgs e)
+        private void HandleNavigatorNavigated(NavigationPayload navigationPayload)
         {
-            this.SynchronizeCurrentDisplayTargetWithNavigator();
+            this.SynchronizeCurrentDisplayTargetWithNavigator(navigationPayload);
         }
 
-        private void SynchronizeCurrentDisplayTargetWithNavigator()
+        private void SynchronizeCurrentDisplayTargetWithNavigator(NavigationPayload navigationPayload)
         {
-            this.ViewModel.AssignDisplayTarget(this._contentNavigator.CurrentContentController?.ViewModel,
-                this._contentNavigator.CurrentTarget?.DisplayName);
+            if (navigationPayload.NavigationTarget != null)
+            {
+                this.ViewModel.AssignDisplayTarget(navigationPayload.TargetController.ViewModel, navigationPayload.NavigationTarget.DisplayName);
+            }
         }
-
 
         protected override async Task OnInitializeAsync()
         {

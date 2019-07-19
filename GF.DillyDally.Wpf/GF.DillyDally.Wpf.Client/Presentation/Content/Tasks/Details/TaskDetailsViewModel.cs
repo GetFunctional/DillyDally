@@ -13,82 +13,45 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Details
     {
         private ActivityContainerViewModel _activitiesViewModel;
         private IDisposable _activityCollectionChangedObservable;
-        private string _definitionOfDone;
-        private string _description;
-        private DateTime? _dueDate;
         private IDisposable _imageCollectionChangedObservable;
         private ImageContainerViewModel _imagesContainerViewModel;
-        private string _taskName;
-        private byte[] _taskPreviewImageBytes;
+        private TaskSummaryViewModel _taskSummaryViewModel;
 
-        public DateTime? DueDate
-        {
-            get { return this._dueDate; }
-            set { this.SetAndRaiseIfChanged(ref this._dueDate, value); }
-        }
-
-        public string TaskName
-        {
-            get { return this._taskName; }
-            set { this.SetAndRaiseIfChanged(ref this._taskName, value); }
-        }
-
-        public string DefinitionOfDone
-        {
-            get { return this._definitionOfDone; }
-            set { this.SetAndRaiseIfChanged(ref this._definitionOfDone, value); }
-        }
-
-        public string Description
-        {
-            get { return this._description; }
-            set { this.SetAndRaiseIfChanged(ref this._description, value); }
-        }
 
         public ActivityContainerViewModel ActivitiesViewModel
         {
-            get { return this._activitiesViewModel; }
-            internal set
+            get
             {
-                var itemBefore = this._activitiesViewModel;
-                if (this.SetAndRaiseIfChanged(ref this._activitiesViewModel, value))
-                {
-                    var newTab =
-                        this.ReplaceActivityContainerTabItem(this.RightBottomTabContainerElements, value, itemBefore);
-
-                    if (newTab != null)
-                    {
-                        this._activityCollectionChangedObservable?.Dispose();
-                        this._activityCollectionChangedObservable =
-                            value.WhenActivityCollectionChanged.Subscribe(c => newTab.RefreshBadgeText());
-                    }
-                }
+                return this._activitiesViewModel;
+            }
+            private set
+            {
+                this.SetAndRaiseIfChanged(ref this._activitiesViewModel, value);
             }
         }
 
-        public byte[] TaskPreviewImageBytes
+
+        public TaskSummaryViewModel TaskSummaryViewModel
         {
-            get { return this._taskPreviewImageBytes; }
-            set { this.SetAndRaiseIfChanged(ref this._taskPreviewImageBytes, value); }
+            get
+            {
+                return this._taskSummaryViewModel;
+            }
+            private set
+            {
+                this.SetAndRaiseIfChanged(ref this._taskSummaryViewModel, value);
+            }
         }
 
         public ImageContainerViewModel ImagesContainerViewModel
         {
-            get { return this._imagesContainerViewModel; }
-            internal set
+            get
             {
-                var itemBefore = this._imagesContainerViewModel;
-                if (this.SetAndRaiseIfChanged(ref this._imagesContainerViewModel, value))
-                {
-                    var newTab =
-                        this.ReplaceImageContainerTabItem(this.LeftBottomTabContainerElements, value, itemBefore);
-                    if (newTab != null)
-                    {
-                        this._imageCollectionChangedObservable?.Dispose();
-                        this._imageCollectionChangedObservable =
-                            value.WhenImageCollectionChanged.Subscribe(c => newTab.RefreshBadgeText());
-                    }
-                }
+                return this._imagesContainerViewModel;
+            }
+            private set
+            {
+                this.SetAndRaiseIfChanged(ref this._imagesContainerViewModel, value);
             }
         }
 
@@ -101,9 +64,24 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Details
         public ObservableCollection<ITabItem> LeftBottomTabContainerElements { get; } =
             new ObservableCollection<ITabItem>();
 
+        public ObservableCollection<ITabItem> LeftTopTabContainerElements { get; } =
+            new ObservableCollection<ITabItem>();
+
+        #region IDisposable Members
+
+        public void Dispose()
+        {
+            this._activitiesViewModel?.Dispose();
+            this._activityCollectionChangedObservable?.Dispose();
+            this._imageCollectionChangedObservable?.Dispose();
+            this._imagesContainerViewModel?.Dispose();
+        }
+
+        #endregion
+
         private ITabItem ReplaceTabItem(ObservableCollection<ITabItem> tabItemContainer,
             INotifyPropertyChanged newValue,
-            INotifyPropertyChanged valueBefore, string title, Func<string> refreshBadgeFunction)
+            INotifyPropertyChanged valueBefore, string title, Func<string> refreshBadgeFunction = null)
         {
             if (valueBefore != null)
             {
@@ -121,28 +99,51 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Details
             return null;
         }
 
-        private ITabItem ReplaceImageContainerTabItem(ObservableCollection<ITabItem> tabItemContainer,
-            ImageContainerViewModel newValue,
-            ImageContainerViewModel valueBefore)
+        internal void ReplaceTaskSummaryContainerTabItem(TaskSummaryViewModel newValue)
         {
-            var refreshBadgeTextFunction = new Func<string>(() => newValue.Images.Count.ToString());
-            return this.ReplaceTabItem(tabItemContainer, newValue, valueBefore, "Images", refreshBadgeTextFunction);
+            var itemBefore = this._taskSummaryViewModel;
+            if (itemBefore != newValue)
+            {
+                this.ReplaceTabItem(this.LeftTopTabContainerElements, newValue, itemBefore, "Summary");
+                this.TaskSummaryViewModel = newValue;
+            }
         }
 
-        private ITabItem ReplaceActivityContainerTabItem(ObservableCollection<ITabItem> tabItemContainer,
-            ActivityContainerViewModel newValue,
-            ActivityContainerViewModel valueBefore)
+        internal void ReplaceImageContainerTabItem(ImageContainerViewModel newValue)
         {
-            var refreshBadgeTextFunction = new Func<string>(() => newValue.Activities.Count.ToString());
-            return this.ReplaceTabItem(tabItemContainer, newValue, valueBefore, "Activities", refreshBadgeTextFunction);
+            var itemBefore = this._imagesContainerViewModel;
+            if (itemBefore != newValue)
+            {
+                var refreshBadgeTextFunction = new Func<string>(() => newValue.Images.Count.ToString());
+                var newTab = this.ReplaceTabItem(this.LeftBottomTabContainerElements, newValue, itemBefore, "Images", refreshBadgeTextFunction);
+
+                if (newTab != null)
+                {
+                    this._imageCollectionChangedObservable?.Dispose();
+                    this._imageCollectionChangedObservable =
+                        newValue.WhenImageCollectionChanged.Subscribe(c => newTab.RefreshBadgeText());
+                }
+
+                this.ImagesContainerViewModel = newValue;
+            }
         }
 
-        public void Dispose()
+        internal void ReplaceActivityContainerTabItem(ActivityContainerViewModel newValue)
         {
-            this._activitiesViewModel?.Dispose();
-            this._activityCollectionChangedObservable?.Dispose();
-            this._imageCollectionChangedObservable?.Dispose();
-            this._imagesContainerViewModel?.Dispose();
+            var itemBefore = this._activitiesViewModel;
+            if (itemBefore != newValue)
+            {
+                var newTab = this.ReplaceTabItem(this.RightBottomTabContainerElements, newValue, itemBefore, "Activities");
+
+                if (newTab != null)
+                {
+                    this._activityCollectionChangedObservable?.Dispose();
+                    this._activityCollectionChangedObservable =
+                        newValue.WhenActivityCollectionChanged.Subscribe(c => newTab.RefreshBadgeText());
+                }
+
+                this.ActivitiesViewModel = newValue;
+            }
         }
     }
 }

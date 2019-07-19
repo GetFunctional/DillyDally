@@ -29,7 +29,6 @@
                 FontSize="45"
                 Text="Search..." />
 
-
             <dxlc:LayoutGroup
                 Height="24"
                 HorizontalAlignment="Stretch"

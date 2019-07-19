@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reactive.Subjects;
 using GF.DillyDally.Mvvmc.Contracts;
 using GF.DillyDally.Wpf.Client.Core.Exceptions;
 using GF.DillyDally.Wpf.Client.Core.Mvvmc;
@@ -8,7 +9,7 @@ namespace GF.DillyDally.Wpf.Client.Core.Navigator
     public sealed class ContentNavigator : IContentNavigator
     {
         private readonly ControllerFactory _controllerFactory;
-
+        private readonly Subject<NavigationPayload> _navigatedSubject = new Subject<NavigationPayload>();
         private readonly INavigationTargetProvider _navigationTargetProvider;
 
         public ContentNavigator(INavigationTargetProvider navigationTargetProvider, ControllerFactory controllerFactory)
@@ -24,7 +25,13 @@ namespace GF.DillyDally.Wpf.Client.Core.Navigator
         public INavigationJournal Journal { get; }
         public IController CurrentContentController { get; private set; }
 
-        public event EventHandler Navigated;
+        public IObservable<NavigationPayload> WhenNavigated
+        {
+            get
+            {
+                return this._navigatedSubject;
+            }
+        } 
 
         public IController Navigate(Guid navigationTargetId)
         {
@@ -55,11 +62,11 @@ namespace GF.DillyDally.Wpf.Client.Core.Navigator
 
             this.CurrentTarget = navigationTarget;
             this.CurrentContentController = nextContent;
+            this._navigatedSubject.OnNext(new NavigationPayload(nextContent,navigationTarget));
 
             INavigationJournalEntry journalEntry = new NavigationJournalEntry(navigationTarget);
             this.Journal.RecordNavigation(journalEntry);
 
-            this.RaiseNavigated();
             currentRealTarget?.Close();
 
             return this.CurrentContentController;
@@ -84,11 +91,6 @@ namespace GF.DillyDally.Wpf.Client.Core.Navigator
         private static bool IsNavigationDenied(IController currentRealTarget)
         {
             return currentRealTarget is INavigationAware navigationAware && !navigationAware.ConfirmNavigationAway();
-        }
-
-        private void RaiseNavigated()
-        {
-            Navigated?.Invoke(this, EventArgs.Empty);
         }
     }
 }
