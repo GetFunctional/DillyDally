@@ -114,4 +114,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ActivityContainer_ActivityItem_Summary_Percentage" xml:space="preserve">
+    <value>Used {0} times ({1}%)</value>
+  </data>
+  <data name="ActivityContainer_ActivityItem_Summary_Leveling" xml:space="preserve">
+    <value>Used {0} times (Level {1})</value>
+  </data>
 </root>

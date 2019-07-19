@@ -6,6 +6,7 @@ using Dapper;
 using Dapper.Contrib.Extensions;
 using GF.DillyDally.Data.Sqlite;
 using GF.DillyDally.ReadModel.Projection.Images.Repository;
+using GF.DillyDally.ReadModel.Projection.Tasks.Repository;
 using GF.DillyDally.Shared.Images;
 
 namespace GF.DillyDally.ReadModel.Projection.Activities.Repository
@@ -37,10 +38,11 @@ WHERE ActivityId = @activityId;";
         public async Task<IEnumerable<ActivitySearchResultEntity>> SearchActivitiesByTextAsync(IDbConnection connection,
             string searchText)
         {
-            var searchParameter = $"%{searchText ?? string.Empty}%";
+            var searchParameter = $"%{(searchText ?? string.Empty).Trim()}%";
 
             var sql =
-                $@"SELECT a.ActivityId, a.Name, a.ActivityType, a.ActivityValue, a.CurrentLevel, img.Binary AS PreviewImageBinary 
+                $@"SELECT a.ActivityId, a.Name, a.ActivityType, a.ActivityValue, a.CurrentLevel, img.Binary AS PreviewImageBinary,
+( SELECT COUNT(TaskId) FROM {TaskActivityEntity.TableNameConstant} ta WHERE ta.ActivityId = a.ActivityId GROUP BY ta.ActivityId ) AS Usages 
 FROM {ActivityEntity.TableNameConstant} AS a 
 LEFT JOIN {ImageEntity.TableNameConstant} img ON a.PreviewImageFileId = img.OriginalFileId AND img.SizeType = {(int)ImageSizeType.PreviewSize} 
 WHERE a.Name LIKE @searchParameter 

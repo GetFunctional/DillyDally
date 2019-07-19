@@ -53,7 +53,6 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Container
             set
             {
                 if (this.SetAndRaiseIfChanged(ref this._searchText, value) &&
-                    !string.IsNullOrWhiteSpace(value) &&
                     value != this.SelectedResult?.ActivityName)
                 {
                     this.RaiseRequestSearchResults(value);

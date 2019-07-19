@@ -55,7 +55,7 @@
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type local:CreateTaskActivitiesViewModel}">
-        <VirtualizingStackPanel Orientation="Vertical">
+        <dxlc:LayoutGroup ItemSpace="19" Orientation="Vertical">
             <ctrls:HeaderTitleContent
                 Title="Activities Infos"
                 VerticalAlignment="Top"
@@ -63,7 +63,7 @@
                 HeaderType="H2" />
 
             <container:ActivityContainerView DataContext="{Binding ActivityContainerViewModel, Mode=OneWay}" />
-        </VirtualizingStackPanel>
+        </dxlc:LayoutGroup>
     </DataTemplate>
 
 </ResourceDictionary>

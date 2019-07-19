@@ -1,12 +1,19 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:client="clr-namespace:GF.DillyDally.Wpf.Client"
     xmlns:ctrls="http://schemas.getfunctional.de/dillydally/controls"
-    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
     xmlns:fa5="http://schemas.fontawesome.com/icons/"
     xmlns:local="clr-namespace:GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Container">
 
     <SolidColorBrush x:Key="ImageContentForegroundBrush" Color="{StaticResource InputControlsValueForegroundColor}" />
+    <client:ActivityUsagesToForegroundBrushConverter
+        x:Key="ActivityUsagesToForegroundBrushConverter"
+        LessThan100Brush="{StaticResource GreenButtonBackgroundBrush2}"
+        LessThan10Brush="{StaticResource OrangeButtonBackgroundBrush1}"
+        LessThan25Brush="{StaticResource BlueButtonBackgroundBrush1}"
+        LessThan50Brush="{StaticResource GreenButtonBackgroundBrush1}"
+        LessThan5Brush="{StaticResource RedButtonBackgroundBrush1}" />
 
     <ControlTemplate x:Key="NoImageControlTemplate">
         <fa5:FontAwesome
@@ -14,6 +21,16 @@
             Foreground="{StaticResource ImageContentForegroundBrush}"
             Icon="Regular_Image" />
     </ControlTemplate>
+
+    <DataTemplate x:Key="ActivityItemSummaryTemplate" DataType="{x:Type local:ActivityItemViewModel}">
+        <VirtualizingStackPanel Orientation="Vertical">
+            <TextBlock Style="{StaticResource BodyTextBlockStyle}" Text="{Binding ActivityName}" />
+            <TextBlock
+                Foreground="{Binding ActivityUsages, Converter={StaticResource ActivityUsagesToForegroundBrushConverter}}"
+                Style="{StaticResource DescriptionTextBlockStyle}"
+                Text="{Binding ActivitySummaryText, Mode=OneWay}" />
+        </VirtualizingStackPanel>
+    </DataTemplate>
 
     <DataTemplate x:Key="SearchTextControlItemTemplate" DataType="{x:Type local:ActivityItemViewModel}">
         <VirtualizingStackPanel Orientation="Horizontal">
@@ -24,13 +41,7 @@
                 ImageBytes="{Binding ActivityPreviewImage, Mode=OneWay}"
                 IsReadOnly="True"
                 NoImageControlTemplate="{StaticResource NoImageControlTemplate}" />
-            <VirtualizingStackPanel Orientation="Vertical">
-                <TextBlock Style="{StaticResource BodyTextBlockStyle}" Text="{Binding ActivityName}" />
-                <TextBlock
-                    Foreground="{StaticResource OrangeButtonBackgroundBrush1}"
-                    Style="{StaticResource DescriptionTextBlockStyle}"
-                    Text="Used 24 times ( 74% )" />
-            </VirtualizingStackPanel>
+            <ContentPresenter ContentTemplate="{StaticResource ActivityItemSummaryTemplate}" />
         </VirtualizingStackPanel>
     </DataTemplate>
 
@@ -44,13 +55,7 @@
                 ImageBytes="{Binding ActivityPreviewImage, Mode=OneWay}"
                 IsReadOnly="True"
                 NoImageControlTemplate="{StaticResource NoImageControlTemplate}" />
-            <VirtualizingStackPanel Orientation="Vertical">
-                <TextBlock Style="{StaticResource BodyTextBlockStyle}" Text="{Binding ActivityName}" />
-                <TextBlock
-                    Foreground="{StaticResource OrangeButtonBackgroundBrush1}"
-                    Style="{StaticResource DescriptionTextBlockStyle}"
-                    Text="Used 24 times ( 74% )" />
-            </VirtualizingStackPanel>
+            <ContentPresenter ContentTemplate="{StaticResource ActivityItemSummaryTemplate}" />
         </VirtualizingStackPanel>
     </DataTemplate>
 </ResourceDictionary>

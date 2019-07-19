@@ -31,11 +31,10 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Container
             var query = Observable.FromEventPattern<SearchRequestEventArgs>(
                     s => this.ViewModel.RequestSearchResults += s,
                     s => this.ViewModel.RequestSearchResults -= s)
-                .Throttle(TimeSpan.FromMilliseconds(250))
+                .Throttle(TimeSpan.FromMilliseconds(80))
                 .Select(evt => evt.EventArgs.SearchText)
                 .DistinctUntilChanged()
-                .Select(searchText => Observable.FromAsync(async => this.SearchResultsAsync(searchText)))
-                .Merge(4);
+                .Select(searchText => Observable.FromAsync(async => this.SearchResultsAsync(searchText))).Merge();
 
             this._disposableObserver = query.Subscribe(this.HandleSearchRequest);
         }
@@ -50,9 +49,9 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Container
         {
             using (var connection = this.ControllerServices.ReadModelStore.OpenConnection())
             {
-                var factory = new ActivityItemViewModelFactory();
                 var repository = new ActivityRepository();
                 var results = await repository.SearchActivitiesByTextAsync(connection, searchText);
+                var factory = new ActivityItemViewModelFactory();
                 var resultViewModels = results.Select(res => factory.CreateViewModelFrom(res)).ToList();
                 return new ObservableCollection<ActivityItemViewModel>(resultViewModels);
             }

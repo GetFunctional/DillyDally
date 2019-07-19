@@ -142,6 +142,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ActivityUsagesToForegroundBrushConverter.cs" />
     <Compile Include="Presentation\Content\Activities\Create\ActivityFieldViewModelFactory.cs" />
     <Compile Include="Presentation\Content\Activities\Create\Fields\ActivityFieldItemValidationRule.cs" />
     <Compile Include="Presentation\Content\Activities\Create\Fields\ActivityFieldNamesValidationRule.cs" />
