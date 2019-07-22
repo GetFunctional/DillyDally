@@ -33,7 +33,6 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Details
 
             using (var connection = await this.ControllerServices.ReadModelStore.OpenConnectionAsync())
             {
-                await Task.Delay(5000);
                 var taskDetailRepository = new TaskDetailsRepository();
                 var taskDetailData = await taskDetailRepository.GetTaskDetailsAsync(connection, taskId);
 

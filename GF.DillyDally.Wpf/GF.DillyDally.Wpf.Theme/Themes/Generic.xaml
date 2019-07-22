@@ -3,6 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:buttons="clr-namespace:GF.DillyDally.Wpf.Theme.Controls.Buttons"
     xmlns:controls="clr-namespace:GF.DillyDally.Wpf.Theme.Controls"
+    xmlns:fa5="http://schemas.fontawesome.com/icons/"
     xmlns:input="clr-namespace:GF.DillyDally.Wpf.Theme.Controls.Input"
     xmlns:layout="clr-namespace:GF.DillyDally.Wpf.Theme.Controls.Layout"
     xmlns:shared="clr-namespace:GF.DillyDally.Wpf.Theme.Controls.Shared">
@@ -15,6 +16,7 @@
         <!--  Shared Controls  -->
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/Shared/SearchTextControlStyles.xaml" />
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/Shared/ErrorTemplateStyles.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/Shared/LoadingIndicatorControlStyles.xaml" />
 
 
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/InternalLinkControlStyles.xaml" />
@@ -41,16 +43,17 @@
 
     </ResourceDictionary.MergedDictionaries>
 
-    <!--  Global Styles  -->
-    <!--<Style BasedOn="{StaticResource DefaultSearchTextControlStyle}" TargetType="{x:Type shared:SearchTextControl}" />
+    <!--  Shared Styles  -->
+    <Style BasedOn="{StaticResource DefaultSearchTextControlStyle}" TargetType="{x:Type shared:SearchTextControl}" />
     <Style BasedOn="{StaticResource DefaultInternalLinkControlStyle}" TargetType="{x:Type controls:InternalLinkControl}" />
     <Style BasedOn="{StaticResource DefaultLabelControlStyle}" TargetType="{x:Type controls:LabelControl}" />
-    <Style BasedOn="{StaticResource DefaultHeaderTitleContentStyle}" TargetType="{x:Type shared:HeaderTitleContent}" />-->
+    <Style BasedOn="{StaticResource DefaultHeaderTitleContentStyle}" TargetType="{x:Type shared:HeaderTitleContent}" />
+    <Style BasedOn="{StaticResource DefaultLoadingIndicatorControlStyle}" TargetType="{x:Type shared:LoadingIndicatorControl}" />
 
     <!--  Buttons  -->
-    <!--<Style BasedOn="{StaticResource DefaultColoredButtonControlStyle}" TargetType="{x:Type buttons:ColoredButtonControl}" />
+    <Style BasedOn="{StaticResource DefaultColoredButtonControlStyle}" TargetType="{x:Type buttons:ColoredButtonControl}" />
     <Style BasedOn="{StaticResource NoChromeButtonStyle}" TargetType="{x:Type buttons:ChromelessButtonControl}" />
-    <Style BasedOn="{StaticResource FontAwesomeButtonStyle}" TargetType="{x:Type buttons:FontAwesomeButtonControl}" />-->
+    <Style BasedOn="{StaticResource FontAwesomeButtonStyle}" TargetType="{x:Type buttons:FontAwesomeButtonControl}" />
 
     <!--  Layout Container  -->
     <Style BasedOn="{StaticResource FormHeaderDefaultStyle}" TargetType="{x:Type layout:FormHeader}" />
@@ -61,12 +64,15 @@
     <Style BasedOn="{StaticResource TabContentStyle}" TargetType="{x:Type layout:TabContentControl}" />
 
     <!--  Input Controls  -->
-    <!--<Style BasedOn="{StaticResource DefaultImageInputControlStyle}" TargetType="{x:Type input:ImageInputControl}" />
+    <Style BasedOn="{StaticResource DefaultImageInputControlStyle}" TargetType="{x:Type input:ImageInputControl}" />
     <Style BasedOn="{StaticResource DefaultTextInputControlStyle}" TargetType="{x:Type input:TextInputControl}" />
     <Style BasedOn="{StaticResource DefaultComboInputControlStyle}" TargetType="{x:Type input:ComboInputControl}" />
-    <Style BasedOn="{StaticResource DefaultDateInputControlStyle}" TargetType="{x:Type input:DateInputControl}" />-->
+    <Style BasedOn="{StaticResource DefaultDateInputControlStyle}" TargetType="{x:Type input:DateInputControl}" />
 
-    <!--<Style TargetType="{x:Type Border}">
+
+
+
+    <Style TargetType="{x:Type Border}">
         <Setter Property="Validation.ErrorTemplate" Value="{x:Null}" />
     </Style>
 
@@ -79,6 +85,6 @@
     <Style BasedOn="{StaticResource DefaultFontAwesomeStyle}" TargetType="{x:Type fa5:FontAwesome}" />
 
 
-    <Style BasedOn="{StaticResource BodyContentControlTypoStyle}" TargetType="{x:Type ContentControl}" />-->
+    <Style BasedOn="{StaticResource BodyContentControlTypoStyle}" TargetType="{x:Type ContentControl}" />
 
 </ResourceDictionary>

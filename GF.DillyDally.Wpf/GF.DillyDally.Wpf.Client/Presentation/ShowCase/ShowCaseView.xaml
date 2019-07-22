@@ -64,13 +64,22 @@
                     Command="{Binding TestDialogCommand}"
                     Content="TestDialog" />
 
-                <dx:WaitIndicator
+                <ctrls:LoadingIndicatorControl
                     Width="160"
                     Height="80"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
-                    DeferedVisibility="False"
+                    Content="Wow works"
                     Visibility="Visible" />
+
+                <ProgressBar
+                    x:Name="progressBar"
+                    Width="26"
+                    Height="26"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    IsIndeterminate="True"
+                    Template="{StaticResource LoadingIndicatorCircleTemplate}" />
             </dxlc:FlowLayoutControl>
         </dx:DXTabItem>
         <dx:DXTabItem Header="Search">

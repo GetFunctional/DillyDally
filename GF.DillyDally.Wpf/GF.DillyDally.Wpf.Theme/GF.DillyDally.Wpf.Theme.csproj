@@ -186,6 +186,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Themes\T2019\Shared\LoadingIndicatorControlStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Themes\T2019\Shared\ErrorTemplateStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -193,6 +197,10 @@
     <Page Include="Themes\T2019\Shared\SearchTextControlStyles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\T2019\Shared\Shapes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -203,6 +211,7 @@
     <Compile Include="Controls\Layout\NavigationTargetContentContainer.cs" />
     <Compile Include="Controls\Layout\TabContentControl.cs" />
     <Compile Include="Controls\Layout\TabItem.cs" />
+    <Compile Include="Controls\Shared\LoadingIndicatorControl.cs" />
     <Compile Include="Extensions\DependencyObjectExtensions.cs" />
     <Compile Include="Controls\Shared\SearchTextControl.cs" />
     <Compile Include="Converter\BooleanToThicknessConverter.cs" />

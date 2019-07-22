@@ -404,6 +404,7 @@
                 <Setter TargetName="NormalButtonBackground" Property="BorderBrush" Value="{StaticResource BlueButtonBorderBrush1}" />
                 <Setter TargetName="ButtonPressedBackground" Property="BorderBrush" Value="{StaticResource BlueButtonBorderBrush2}" />
                 <Setter TargetName="ButtonMouseOverBackground" Property="BorderBrush" Value="{StaticResource BlueButtonBorderBrush2}" />
+                <Setter Property="Foreground" Value="{StaticResource LightForegroundBrush}" />
             </Trigger>
             <Trigger Property="ButtonColor" Value="{x:Static buttons:ButtonColor.Green}">
                 <Setter TargetName="NormalButtonBackground" Property="Background" Value="{StaticResource GreenButtonBackgroundBrush1}" />
@@ -412,6 +413,7 @@
                 <Setter TargetName="NormalButtonBackground" Property="BorderBrush" Value="{StaticResource GreenButtonBorderBrush1}" />
                 <Setter TargetName="ButtonPressedBackground" Property="BorderBrush" Value="{StaticResource GreenButtonBorderBrush2}" />
                 <Setter TargetName="ButtonMouseOverBackground" Property="BorderBrush" Value="{StaticResource GreenButtonBorderBrush2}" />
+                <Setter Property="Foreground" Value="{StaticResource LightForegroundBrush}" />
             </Trigger>
             <Trigger Property="ButtonColor" Value="{x:Static buttons:ButtonColor.Red}">
                 <Setter TargetName="NormalButtonBackground" Property="Background" Value="{StaticResource RedButtonBackgroundBrush1}" />
@@ -420,6 +422,7 @@
                 <Setter TargetName="NormalButtonBackground" Property="BorderBrush" Value="{StaticResource RedButtonBorderBrush1}" />
                 <Setter TargetName="ButtonPressedBackground" Property="BorderBrush" Value="{StaticResource RedButtonBorderBrush2}" />
                 <Setter TargetName="ButtonMouseOverBackground" Property="BorderBrush" Value="{StaticResource RedButtonBorderBrush2}" />
+                <Setter Property="Foreground" Value="{StaticResource LightForegroundBrush}" />
             </Trigger>
             <Trigger Property="ButtonColor" Value="{x:Static buttons:ButtonColor.Orange}">
                 <Setter TargetName="NormalButtonBackground" Property="Background" Value="{StaticResource OrangeButtonBackgroundBrush1}" />
@@ -428,6 +431,7 @@
                 <Setter TargetName="NormalButtonBackground" Property="BorderBrush" Value="{StaticResource OrangeButtonBorderBrush1}" />
                 <Setter TargetName="ButtonPressedBackground" Property="BorderBrush" Value="{StaticResource OrangeButtonBorderBrush2}" />
                 <Setter TargetName="ButtonMouseOverBackground" Property="BorderBrush" Value="{StaticResource OrangeButtonBorderBrush2}" />
+                <Setter Property="Foreground" Value="{StaticResource LightForegroundBrush}" />
             </Trigger>
             <Trigger Property="ButtonColor" Value="{x:Static buttons:ButtonColor.Black}">
                 <Setter TargetName="NormalButtonBackground" Property="Background" Value="{StaticResource BlackButtonBackgroundBrush1}" />
@@ -436,6 +440,7 @@
                 <Setter TargetName="NormalButtonBackground" Property="BorderBrush" Value="{StaticResource BlackButtonBorderBrush1}" />
                 <Setter TargetName="ButtonPressedBackground" Property="BorderBrush" Value="{StaticResource BlackButtonBorderBrush2}" />
                 <Setter TargetName="ButtonMouseOverBackground" Property="BorderBrush" Value="{StaticResource BlackButtonBorderBrush2}" />
+                <Setter Property="Foreground" Value="{StaticResource LightForegroundBrush}" />
             </Trigger>
             <Trigger Property="ButtonColor" Value="{x:Static buttons:ButtonColor.Purple}">
                 <Setter TargetName="NormalButtonBackground" Property="Background" Value="{StaticResource PurpleButtonBackgroundBrush1}" />
@@ -444,6 +449,7 @@
                 <Setter TargetName="NormalButtonBackground" Property="BorderBrush" Value="{StaticResource PurpleButtonBorderBrush1}" />
                 <Setter TargetName="ButtonPressedBackground" Property="BorderBrush" Value="{StaticResource PurpleButtonBorderBrush2}" />
                 <Setter TargetName="ButtonMouseOverBackground" Property="BorderBrush" Value="{StaticResource PurpleButtonBorderBrush2}" />
+                <Setter Property="Foreground" Value="{StaticResource LightForegroundBrush}" />
             </Trigger>
             <Trigger Property="ButtonColor" Value="{x:Static buttons:ButtonColor.Gray}">
                 <Setter TargetName="NormalButtonBackground" Property="Background" Value="{StaticResource GrayButtonBackgroundBrush1}" />
