@@ -30,9 +30,9 @@ LEFT JOIN {ImageEntity.TableNameConstant} img ON ae.PreviewImageFileId = img.Ori
 WHERE tae.TaskId = @taskId;
 
 -- Select Activity Fields
-SELECT aef.ActivityFieldId, aef.StringValue, aef.DateTimeValue, aef.IntegerValue, aef.DecimalValue, aef.IntegerValue, aef.BooleanValue, af.ActivityId, af.Name, af.FieldType, af.UnitOfMeasure
+SELECT af.ActivityFieldId, aef.StringValue, aef.DateTimeValue, aef.IntegerValue, aef.DecimalValue, aef.IntegerValue, aef.BooleanValue, af.ActivityId, af.Name, af.FieldType, af.UnitOfMeasure
 FROM {TaskActivityEntity.TableNameConstant} ta
-LEFT JOIN {ActivityFieldEntity.TableNameConstant} af ON ta.ActivityId = af.ActivityId
+JOIN {ActivityFieldEntity.TableNameConstant} af ON ta.ActivityId = af.ActivityId
 LEFT JOIN {TaskActivityFieldValueEntity.TableNameConstant} aef ON aef.ActivityFieldId = af.ActivityFieldId
 WHERE ta.TaskId = @taskId;
 

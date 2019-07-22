@@ -7,7 +7,7 @@ namespace GF.DillyDally.ReadModel.Views.TaskDetails
     {
         public Guid ActivityId { get; set; }
 
-        public Guid? ActivityFieldId { get; set; }
+        public Guid ActivityFieldId { get; set; }
 
         public string Name { get; set; }
 

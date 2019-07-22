@@ -11,14 +11,14 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Details
 {
     public sealed class TaskDetailsViewModel : ViewModelBase
     {
-        private ActivityContainerViewModel _activitiesViewModel;
+        private TaskActivitiesViewModel _activitiesViewModel;
         private IDisposable _activityCollectionChangedObservable;
         private IDisposable _imageCollectionChangedObservable;
         private ImageContainerViewModel _imagesContainerViewModel;
         private TaskSummaryViewModel _taskSummaryViewModel;
 
 
-        public ActivityContainerViewModel ActivitiesViewModel
+        public TaskActivitiesViewModel ActivitiesViewModel
         {
             get
             {
@@ -132,7 +132,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Details
             }
         }
 
-        internal void ReplaceActivityContainerTabItem(ActivityContainerViewModel newValue)
+        internal void ReplaceActivityContainerTabItem(TaskActivitiesViewModel newValue)
         {
             var itemBefore = this._activitiesViewModel;
             if (itemBefore != newValue)

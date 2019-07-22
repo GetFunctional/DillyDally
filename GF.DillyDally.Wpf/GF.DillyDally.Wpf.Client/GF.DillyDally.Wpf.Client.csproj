@@ -202,6 +202,13 @@
     <Compile Include="Presentation\Content\Tasks\Create\CreateTaskBasicInfosViewModel.cs" />
     <Compile Include="Presentation\Content\Tasks\Create\CreateTaskActivitiesViewModel.cs" />
     <Compile Include="Presentation\Content\Activities\Container\ActivityItemFactory.cs" />
+    <Compile Include="Presentation\Content\Tasks\Details\Fields\DateTaskActivityFieldViewModel.cs" />
+    <Compile Include="Presentation\Content\Tasks\Details\Fields\DateTimeTaskActivityFieldViewModel.cs" />
+    <Compile Include="Presentation\Content\Tasks\Details\Fields\DecimalTaskActivityFieldViewModel.cs" />
+    <Compile Include="Presentation\Content\Tasks\Details\Fields\IntegerTaskActivityFieldViewModel.cs" />
+    <Compile Include="Presentation\Content\Tasks\Details\TaskActivitiesViewModel.cs" />
+    <Compile Include="Presentation\Content\Tasks\Details\TaskActivityFieldViewModel.cs" />
+    <Compile Include="Presentation\Content\Tasks\Details\TaskActivityItemViewModel.cs" />
     <Compile Include="Presentation\Content\Tasks\Details\TaskDetailsNavigationTarget.cs" />
     <Compile Include="Presentation\Content\Tasks\Details\TaskDetailsController.cs" />
     <Compile Include="Presentation\Content\Tasks\Details\TaskDetailsView.xaml.cs">
@@ -210,6 +217,7 @@
     <Compile Include="Presentation\Content\Tasks\Details\TaskDetailsViewModel.cs" />
     <Compile Include="Presentation\Content\Tasks\Details\TaskDetailsViewModelFactory.cs" />
     <Compile Include="Presentation\Content\Tasks\Details\TaskSummaryViewModel.cs" />
+    <Compile Include="Presentation\Content\Tasks\Details\Fields\TextTaskActivityFieldViewModel.cs" />
     <Compile Include="Presentation\Content\Tasks\TaskBoard\DragDrop\ITaskLaneDropHandler.cs" />
     <Compile Include="Presentation\Content\Tasks\TaskBoard\DragDrop\TaskBoardDragDropHandler.cs" />
     <Compile Include="Presentation\Content\Tasks\TaskBoard\DragDrop\TaskChangedLanePayload.cs" />

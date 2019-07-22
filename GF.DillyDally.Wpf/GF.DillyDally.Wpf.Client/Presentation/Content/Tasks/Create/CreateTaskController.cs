@@ -66,7 +66,9 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Create
                     await taskService.LinkTaskToActivitiesAsync(task.TaskId, activityIds);
                 }
 
+                this.ViewModel.ClearBusy();
                 this.ConfirmDialogWith(this.CreateTaskDialogResult);
+                return;
             }
 
             this.ViewModel.ClearBusy();

@@ -59,21 +59,21 @@ namespace GF.DillyDally.Mvvmc
 
         private void HandleBusyChanged(ViewModelBusyChange payload)
         {
-            Application.Current.Dispatcher.Invoke(() =>
+            Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() =>
             {
                 this.IsBusy = payload.IsBusy;
                 this.IsBusyMessage = payload.IsBusyMessage;
-            }, DispatcherPriority.Background);
+            }));
         }
 
         public void MarkBusy(string busyMessage)
         {
-            this._viewModelBusyChanged.OnNext(new ViewModelBusyChange(true, busyMessage));
+            this._viewModelBusyChanged?.OnNext(new ViewModelBusyChange(true, busyMessage));
         }
 
         public void ClearBusy()
         {
-            this._viewModelBusyChanged.OnNext(new ViewModelBusyChange(false, null));
+            this._viewModelBusyChanged?.OnNext(new ViewModelBusyChange(false, null));
         }
 
         protected virtual void Dispose(bool disposing)

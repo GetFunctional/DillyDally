@@ -89,8 +89,9 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create
                                 activityFieldViewModel.FieldName, activityFieldViewModel.UnitOfMeasure);
                         }
 
+                        this.ViewModel.ClearBusy();
                         this.ConfirmDialogWith(this.CreateActivityDialogResult);
-                        break;
+                        return;
                     case ActivityType.Leveling:
                         break;
                     default:
