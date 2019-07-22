@@ -146,6 +146,5 @@
         </Style.Triggers>
     </Style>
 
-    <Style BasedOn="{StaticResource FontAwesomeButtonStyle}" TargetType="{x:Type buttons:FontAwesomeButtonControl}" />
 
 </ResourceDictionary>

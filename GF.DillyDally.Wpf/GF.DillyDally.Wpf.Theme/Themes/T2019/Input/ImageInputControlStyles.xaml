@@ -50,7 +50,7 @@
                     TextAlignment="Center" />
                 <TextBlock
                     Style="{StaticResource DescriptionTextBlockStyle}"
-                    Text="(Minimal Titleize 1600x900px)"
+                    Text="(Minimal Size 1600x900px)"
                     TextAlignment="Center" />
             </WrapPanel>
         </Grid>
@@ -107,7 +107,7 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-    <Style x:Key="DefaultStyle" TargetType="{x:Type input:ImageInputControl}">
+    <Style x:Key="DefaultImageInputControlStyle" TargetType="{x:Type input:ImageInputControl}">
         <Setter Property="Template" Value="{StaticResource ImageEditorControlTemplate}" />
         <Setter Property="IsReadOnly" Value="False" />
         <Setter Property="NoImageControlTemplate" Value="{StaticResource EmptyImageControlTemplate}" />
@@ -116,6 +116,5 @@
         <Setter Property="Height" Value="134" />
     </Style>
 
-    <Style BasedOn="{StaticResource DefaultStyle}" TargetType="{x:Type input:ImageInputControl}" />
 
 </ResourceDictionary>

@@ -132,6 +132,5 @@
 
     </Style>
 
-    <Style BasedOn="{StaticResource PageContentControlDefaultStyle}" TargetType="{x:Type layout:PagedContentControl}" />
 
 </ResourceDictionary>

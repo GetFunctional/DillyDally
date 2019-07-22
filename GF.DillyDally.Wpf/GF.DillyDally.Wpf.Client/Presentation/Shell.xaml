@@ -17,7 +17,7 @@
     Height="800"
     d:DataContext="{d:DesignInstance Type={x:Type presentation:ShellViewModel}}"
     dx:ThemeManager.ThemeName="{x:Static theme:ThemeConstants.DevExpressThemeName}"
-    FontFamily="{StaticResource SourceSansProBlack}"
+    FontFamily="{StaticResource SourceSansPro}"
     FontSize="{StaticResource BodyFontSize}"
     FontWeight="{StaticResource BodyFontWeight}"
     SnapsToDevicePixels="True"
@@ -93,7 +93,7 @@
                                         <dxn:NavBarItem
                                             Command="{Binding NavigateInNavigatorCommand, Mode=OneWay}"
                                             CommandParameter="{Binding SearchContentNavigationTarget}"
-                                            Content="Titleearch" />
+                                            Content="Search" />
                                     </dxn:NavBarGroup.Items>
                                 </dxn:NavBarGroup>
                                 <dxn:NavBarGroup Header="Tasks">

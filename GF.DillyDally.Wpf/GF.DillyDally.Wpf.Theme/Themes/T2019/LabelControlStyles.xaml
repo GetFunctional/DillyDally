@@ -48,13 +48,13 @@
     </ControlTemplate>
 
 
-    <Style x:Key="DefaultStyle" TargetType="{x:Type controls:LabelControl}">
+    <Style x:Key="DefaultLabelControlStyle" TargetType="{x:Type controls:LabelControl}">
         <Setter Property="LabelDisplayMode" Value="Label" />
         <Setter Property="Template" Value="{StaticResource DefaultLabelControlTemplate}" />
         <Setter Property="Foreground" Value="{StaticResource LabelForeground}" />
         <Setter Property="FontSize" Value="{StaticResource LabelFontSize}" />
         <Setter Property="FontWeight" Value="{StaticResource LabelFontWeight}" />
-        <Setter Property="FontFamily" Value="{StaticResource SourceSansProBlack}" />
+        <Setter Property="FontFamily" Value="{StaticResource SourceSansPro}" />
         <Setter Property="LabelBrush" Value="{StaticResource DefaultLabelBrush}" />
         <Setter Property="Height" Value="19" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
@@ -69,6 +69,5 @@
         </Style.Triggers>
     </Style>
 
-    <Style BasedOn="{StaticResource DefaultStyle}" TargetType="{x:Type controls:LabelControl}" />
 
 </ResourceDictionary>

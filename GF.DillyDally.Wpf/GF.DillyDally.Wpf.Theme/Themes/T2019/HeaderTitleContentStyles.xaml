@@ -37,12 +37,11 @@
 
     <SolidColorBrush x:Key="DefaultLabelBrush" Color="{StaticResource HighlightOrange}" />
 
-    <Style x:Key="DefaultStyle" TargetType="{x:Type shared:HeaderTitleContent}">
+    <Style x:Key="DefaultHeaderTitleContentStyle" TargetType="{x:Type shared:HeaderTitleContent}">
         <Setter Property="Template" Value="{StaticResource DefaultHeaderTitleContentControlTemplate}" />
         <Setter Property="HeaderType" Value="H1" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
     </Style>
 
-    <Style BasedOn="{StaticResource DefaultStyle}" TargetType="{x:Type shared:HeaderTitleContent}" />
 
 </ResourceDictionary>

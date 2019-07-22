@@ -56,11 +56,10 @@
         <Setter Property="Template" Value="{StaticResource TabContentControlTemplate}" />
         <Setter Property="FontSize" Value="{StaticResource BodyFontSize}" />
         <Setter Property="FontWeight" Value="{StaticResource BodyFontWeight}" />
-        <Setter Property="FontFamily" Value="{StaticResource SourceSansProBlack}" />
+        <Setter Property="FontFamily" Value="{StaticResource SourceSansPro}" />
         <Setter Property="Background" Value="{StaticResource TabContentControlBackgroundBrush}" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
     </Style>
 
-    <Style BasedOn="{StaticResource TabContentStyle}" TargetType="{x:Type layout:TabContentControl}" />
 
 </ResourceDictionary>

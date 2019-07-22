@@ -83,6 +83,5 @@
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
     </Style>
 
-    <Style BasedOn="{StaticResource NoChromeButtonStyle}" TargetType="{x:Type buttons:ChromelessButtonControl}" />
 
 </ResourceDictionary>

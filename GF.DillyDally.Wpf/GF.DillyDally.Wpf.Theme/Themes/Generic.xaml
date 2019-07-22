@@ -1,7 +1,11 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:fa5="http://schemas.fontawesome.com/icons/">
+    xmlns:buttons="clr-namespace:GF.DillyDally.Wpf.Theme.Controls.Buttons"
+    xmlns:controls="clr-namespace:GF.DillyDally.Wpf.Theme.Controls"
+    xmlns:input="clr-namespace:GF.DillyDally.Wpf.Theme.Controls.Input"
+    xmlns:layout="clr-namespace:GF.DillyDally.Wpf.Theme.Controls.Layout"
+    xmlns:shared="clr-namespace:GF.DillyDally.Wpf.Theme.Controls.Shared">
 
 
     <ResourceDictionary.MergedDictionaries>
@@ -15,7 +19,6 @@
 
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/InternalLinkControlStyles.xaml" />
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/LabelControlStyles.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/InternalLinkControlStyles.xaml" />
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/HeaderTitleContentStyles.xaml" />
 
         <!--  Buttons  -->
@@ -38,7 +41,32 @@
 
     </ResourceDictionary.MergedDictionaries>
 
-    <Style TargetType="{x:Type Border}">
+    <!--  Global Styles  -->
+    <!--<Style BasedOn="{StaticResource DefaultSearchTextControlStyle}" TargetType="{x:Type shared:SearchTextControl}" />
+    <Style BasedOn="{StaticResource DefaultInternalLinkControlStyle}" TargetType="{x:Type controls:InternalLinkControl}" />
+    <Style BasedOn="{StaticResource DefaultLabelControlStyle}" TargetType="{x:Type controls:LabelControl}" />
+    <Style BasedOn="{StaticResource DefaultHeaderTitleContentStyle}" TargetType="{x:Type shared:HeaderTitleContent}" />-->
+
+    <!--  Buttons  -->
+    <!--<Style BasedOn="{StaticResource DefaultColoredButtonControlStyle}" TargetType="{x:Type buttons:ColoredButtonControl}" />
+    <Style BasedOn="{StaticResource NoChromeButtonStyle}" TargetType="{x:Type buttons:ChromelessButtonControl}" />
+    <Style BasedOn="{StaticResource FontAwesomeButtonStyle}" TargetType="{x:Type buttons:FontAwesomeButtonControl}" />-->
+
+    <!--  Layout Container  -->
+    <Style BasedOn="{StaticResource FormHeaderDefaultStyle}" TargetType="{x:Type layout:FormHeader}" />
+    <Style BasedOn="{StaticResource FormFooterDefaultStyle}" TargetType="{x:Type layout:FormFooter}" />
+    <Style BasedOn="{StaticResource FormDefaultStyle}" TargetType="{x:Type layout:Form}" />
+    <Style BasedOn="{StaticResource PageContentControlDefaultStyle}" TargetType="{x:Type layout:PagedContentControl}" />
+    <Style BasedOn="{StaticResource DefaultNavigationTargetContentContainerStyle}" TargetType="{x:Type layout:NavigationTargetContentContainer}" />
+    <Style BasedOn="{StaticResource TabContentStyle}" TargetType="{x:Type layout:TabContentControl}" />
+
+    <!--  Input Controls  -->
+    <!--<Style BasedOn="{StaticResource DefaultImageInputControlStyle}" TargetType="{x:Type input:ImageInputControl}" />
+    <Style BasedOn="{StaticResource DefaultTextInputControlStyle}" TargetType="{x:Type input:TextInputControl}" />
+    <Style BasedOn="{StaticResource DefaultComboInputControlStyle}" TargetType="{x:Type input:ComboInputControl}" />
+    <Style BasedOn="{StaticResource DefaultDateInputControlStyle}" TargetType="{x:Type input:DateInputControl}" />-->
+
+    <!--<Style TargetType="{x:Type Border}">
         <Setter Property="Validation.ErrorTemplate" Value="{x:Null}" />
     </Style>
 
@@ -51,6 +79,6 @@
     <Style BasedOn="{StaticResource DefaultFontAwesomeStyle}" TargetType="{x:Type fa5:FontAwesome}" />
 
 
-    <Style BasedOn="{StaticResource BodyContentControlTypoStyle}" TargetType="{x:Type ContentControl}" />
+    <Style BasedOn="{StaticResource BodyContentControlTypoStyle}" TargetType="{x:Type ContentControl}" />-->
 
 </ResourceDictionary>

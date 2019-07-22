@@ -124,11 +124,10 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-    <Style x:Key="DefaultTextInputControlStyle" TargetType="{x:Type shared:SearchTextControl}">
+    <Style x:Key="DefaultSearchTextControlStyle" TargetType="{x:Type shared:SearchTextControl}">
         <Setter Property="Template" Value="{StaticResource DefaultSearchTextControlTemplate}" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
     </Style>
 
-    <Style BasedOn="{StaticResource DefaultTextInputControlStyle}" TargetType="{x:Type shared:SearchTextControl}" />
 
 </ResourceDictionary>

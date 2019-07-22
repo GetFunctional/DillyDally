@@ -46,6 +46,5 @@
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
     </Style>
 
-    <Style BasedOn="{StaticResource DefaultDateInputControlStyle}" TargetType="{x:Type input:DateInputControl}" />
 
 </ResourceDictionary>

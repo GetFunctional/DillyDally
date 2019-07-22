@@ -29,7 +29,16 @@
                 VerticalAlignment="Center"
                 Content="1234"
                 DeferedVisibility="False"
-                Visibility="Visible" />
+                Visibility="Visible">
+                <dx:WaitIndicator.ContentTemplate>
+                    <DataTemplate>
+                        <VirtualizingStackPanel Orientation="Vertical">
+                            <Button Width="60" Height="30" />
+                            <TextBlock Text="{Binding}" />
+                        </VirtualizingStackPanel>
+                    </DataTemplate>
+                </dx:WaitIndicator.ContentTemplate>
+            </dx:WaitIndicator>
 
 
             <!--  Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsBusyMessage}"  -->
@@ -59,6 +68,5 @@
         <Setter Property="IsBusyMessage" Value="Loading Data" />
     </Style>
 
-    <Style BasedOn="{StaticResource DefaultNavigationTargetContentContainerStyle}" TargetType="{x:Type layout:NavigationTargetContentContainer}" />
 
 </ResourceDictionary>

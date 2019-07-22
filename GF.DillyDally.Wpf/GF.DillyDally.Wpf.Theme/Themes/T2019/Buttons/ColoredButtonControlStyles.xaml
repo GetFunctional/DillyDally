@@ -457,7 +457,7 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-    <Style x:Key="DefaultStyle" TargetType="{x:Type buttons:ColoredButtonControl}">
+    <Style x:Key="DefaultColoredButtonControlStyle" TargetType="{x:Type buttons:ColoredButtonControl}">
         <Setter Property="Template" Value="{StaticResource RegularButtonControlTemplate}" />
         <Setter Property="Foreground" Value="{StaticResource LightForegroundBrush}" />
         <Setter Property="FontSize" Value="{StaticResource BodyFontSize}" />
@@ -481,6 +481,5 @@
         </Style.Triggers>
     </Style>
 
-    <Style BasedOn="{StaticResource DefaultStyle}" TargetType="{x:Type buttons:ColoredButtonControl}" />
 
 </ResourceDictionary>

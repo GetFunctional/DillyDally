@@ -19,14 +19,14 @@
     <dx:DXTabControl>
 
         <dx:DXTabItem Header="Typo">
-            <dxlc:LayoutGroup>
+            <dxlc:FlowLayoutControl>
                 <ctrls:LabelControl
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     LabelBrush="#435214"
                     LabelText="Test Test 1234" />
 
-                <ctrls:InternalLinkControl DisplayLink="TTitleK-44444" />
+                <ctrls:InternalLinkControl DisplayLink="Task-44444" />
 
                 <buttons:ColoredButtonControl
                     VerticalAlignment="Top"
@@ -63,9 +63,17 @@
                     ButtonColor="Red"
                     Command="{Binding TestDialogCommand}"
                     Content="TestDialog" />
-            </dxlc:LayoutGroup>
+
+                <dx:WaitIndicator
+                    Width="160"
+                    Height="80"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    DeferedVisibility="False"
+                    Visibility="Visible" />
+            </dxlc:FlowLayoutControl>
         </dx:DXTabItem>
-        <dx:DXTabItem Header="TitleearchText">
+        <dx:DXTabItem Header="Search">
             <dxlc:LayoutGroup>
                 <ctrls:SearchTextControl Label="Filter by skills" />
             </dxlc:LayoutGroup>

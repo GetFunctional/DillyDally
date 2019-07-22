@@ -91,6 +91,4 @@
         </Style.Triggers>
     </Style>
 
-    <Style BasedOn="{StaticResource DefaultTextInputControlStyle}" TargetType="{x:Type input:TextInputControl}" />
-
 </ResourceDictionary>
