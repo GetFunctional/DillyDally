@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Windows;
-using System.Windows.Threading;
 using GF.DillyDally.Mvvmc.Contracts;
 using GF.DillyDally.Wpf.Client.Core.Dialoge;
 using GF.DillyDally.Wpf.Client.Core.Navigator;
@@ -14,23 +13,28 @@ namespace GF.DillyDally.Wpf.Client.Core.ApplicationState
     {
         private readonly ExceptionSolver _exceptionSolver = new ExceptionSolver();
         private readonly Application _wpfApplication;
+        private readonly IPlatformProvider _platformProvider;
         private Shell _shell;
         private ShellController _shellController;
 
-        public ApplicationRuntime(Application wpfApplication, IServiceContainer serviceContainer)
+        public ApplicationRuntime(Application wpfApplication, IServiceContainer serviceContainer) : this(
+            new DispatcherPlatformProvider(wpfApplication.Dispatcher), serviceContainer)
+        {
+            this._wpfApplication = wpfApplication;
+        }
+
+        private ApplicationRuntime(IPlatformProvider platformProvider, IServiceContainer serviceContainer)
         {
             this.ServiceContainer = serviceContainer;
-            this._wpfApplication = wpfApplication;
-            this.ApplicationSynchronizationContext = this._wpfApplication != null
-                ? new DispatcherSynchronizationContext(this._wpfApplication.Dispatcher)
-                : SynchronizationContext.Current;
+            this._platformProvider = platformProvider;
+            this.ApplicationSynchronizationContext = this._platformProvider.GetSynchronizationContext;
         }
 
         /// <summary>
         ///     Unittests only
         /// </summary>
         /// <param name="serviceContainer"></param>
-        public ApplicationRuntime(IServiceContainer serviceContainer) : this(null, serviceContainer)
+        public ApplicationRuntime(IServiceContainer serviceContainer) : this(new DefaultPlatformProvider(), serviceContainer)
         {
         }
 

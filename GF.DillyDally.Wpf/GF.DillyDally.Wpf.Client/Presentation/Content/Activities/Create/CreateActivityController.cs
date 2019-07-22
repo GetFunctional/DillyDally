@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 using GF.DillyDally.Mvvmc.Contracts;
 using GF.DillyDally.ReadModel.Projection.Activities.Repository;
@@ -63,7 +62,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create
 
         private async Task CompleteProcess()
         {
-            this.ViewModel.IsBusy = true;
+            this.ViewModel.MarkBusy("Creating Activity");
 
             if (this.IsInputValid(this.ViewModel))
             {
@@ -106,7 +105,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create
                 }
             }
 
-            this.ViewModel.IsBusy = false;
+            this.ViewModel.ClearBusy();
         }
 
         private bool IsInputValid(CreateActivityViewModel viewModel)

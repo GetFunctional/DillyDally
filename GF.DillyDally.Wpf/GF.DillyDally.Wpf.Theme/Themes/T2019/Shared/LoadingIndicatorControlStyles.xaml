@@ -6,6 +6,7 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/Themes/T2019/Shared/Shapes.xaml" />
         <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Colors.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/GF.DillyDally.Wpf.Theme;component/StyleGuide/Typography.xaml" />
 
     </ResourceDictionary.MergedDictionaries>
 
@@ -64,7 +65,7 @@
                     Grid.Column="0"
                     Width="26"
                     Height="26"
-                    HorizontalAlignment="Center"
+                    HorizontalAlignment="Left"
                     VerticalAlignment="Center"
                     IsIndeterminate="True"
                     Template="{StaticResource LoadingIndicatorCircleTemplate}" />
@@ -81,6 +82,7 @@
     <DataTemplate x:Key="DefaultLoadingIndicatorTemplate">
         <TextBlock
             VerticalAlignment="Center"
+            Style="{StaticResource H1TextBlockStyle}"
             Text="{Binding}"
             TextWrapping="Wrap" />
     </DataTemplate>
@@ -90,7 +92,8 @@
         <Setter Property="ContentTemplate" Value="{StaticResource DefaultLoadingIndicatorTemplate}" />
         <Setter Property="Template" Value="{StaticResource LoadingIndicatorControlTemplate}" />
         <Setter Property="UseLayoutRounding" Value="True" />
-        <Setter Property="Width" Value="Auto" />
+        <Setter Property="Width" Value="180" />
+        <Setter Property="Height" Value="90" />
     </Style>
 
 </ResourceDictionary>

@@ -27,7 +27,7 @@
     <ctrls:NavigationTargetContentContainer
         Title="Task Details"
         IsBusy="{Binding IsBusy}"
-        IsBusyMessage="Loading Task">
+        IsBusyMessage="{Binding IsBusyMessage}">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="70*" />

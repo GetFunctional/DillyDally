@@ -29,8 +29,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Details
 
         public async Task LoadTaskDetailsAsync(Guid taskId)
         {
-            this.ViewModel.IsBusy = true;
-
+            this.ViewModel.MarkBusy("Loading Task");
             using (var connection = await this.ControllerServices.ReadModelStore.OpenConnectionAsync())
             {
                 var taskDetailRepository = new TaskDetailsRepository();
@@ -39,7 +38,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Details
                 this.ApplyDataToViewModel(taskDetailData);
             }
 
-            this.ViewModel.IsBusy = false;
+            this.ViewModel.ClearBusy();
         }
 
         private void ApplyDataToViewModel(TaskDetailsEntity taskDetailData)

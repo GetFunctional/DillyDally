@@ -40,10 +40,10 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Create
         {
             this.ConfirmDialogWith(this.CancelDialogResult);
         }
-
+        
         private async Task CompleteProcess()
         {
-            this.ViewModel.IsBusy = true;
+            this.ViewModel.MarkBusy("Creating Task");
 
             if (this.IsInputValid(this.ViewModel))
             {
@@ -69,7 +69,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Create
                 this.ConfirmDialogWith(this.CreateTaskDialogResult);
             }
 
-            this.ViewModel.IsBusy = false;
+            this.ViewModel.ClearBusy();
         }
 
         private IList<ActivityItemViewModel> GetTaskActivities()

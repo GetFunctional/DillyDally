@@ -42,9 +42,13 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Images.Container
             this.Images = images;
         }
 
-        public void Dispose()
+        protected override void Dispose(bool disposing)
         {
-            this._imagesChangedSubject?.Dispose();
+            base.Dispose(disposing);
+            if (disposing)
+            {
+                this._imagesChangedSubject?.Dispose();
+            }
         }
     }
 }

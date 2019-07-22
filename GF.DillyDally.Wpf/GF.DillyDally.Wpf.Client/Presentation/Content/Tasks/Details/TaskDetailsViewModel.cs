@@ -9,7 +9,7 @@ using GF.DillyDally.Wpf.Theme.Controls.Layout;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Details
 {
-    public sealed class TaskDetailsViewModel : ViewModelBase, IDisposable
+    public sealed class TaskDetailsViewModel : ViewModelBase
     {
         private ActivityContainerViewModel _activitiesViewModel;
         private IDisposable _activityCollectionChangedObservable;
@@ -69,12 +69,16 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Details
 
         #region IDisposable Members
 
-        public void Dispose()
+        protected override void Dispose(bool disposing)
         {
-            this._activitiesViewModel?.Dispose();
-            this._activityCollectionChangedObservable?.Dispose();
-            this._imageCollectionChangedObservable?.Dispose();
-            this._imagesContainerViewModel?.Dispose();
+            base.Dispose(disposing);
+            if (disposing)
+            {
+                this._activitiesViewModel?.Dispose();
+                this._activityCollectionChangedObservable?.Dispose();
+                this._imageCollectionChangedObservable?.Dispose();
+                this._imagesContainerViewModel?.Dispose();
+            }
         }
 
         #endregion

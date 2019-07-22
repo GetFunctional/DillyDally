@@ -34,7 +34,7 @@ namespace GF.DillyDally.Mvvmc
         public void Close()
         {
             this.OnClose();
-            this.Dispose(true);
+            this.Dispose();
         }
 
         #endregion

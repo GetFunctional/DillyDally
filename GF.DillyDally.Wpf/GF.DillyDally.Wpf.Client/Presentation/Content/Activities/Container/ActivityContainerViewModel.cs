@@ -112,9 +112,13 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Container
 
         #region IDisposable Members
 
-        public void Dispose()
+        protected override void Dispose(bool disposing)
         {
-            this._activityItemsChangedSubject?.Dispose();
+            base.Dispose(disposing);
+            if (disposing)
+            {
+                this._activityItemsChangedSubject?.Dispose();
+            }
         }
 
         #endregion

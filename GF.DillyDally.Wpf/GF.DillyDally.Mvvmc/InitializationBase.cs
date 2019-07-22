@@ -30,7 +30,6 @@ namespace GF.DillyDally.Mvvmc
                     this.IsInitialized = true;
                 }
             }
-
             await this.OnInitializeAsync();
             await this.OnInitializeCompletedAsync();
         }
