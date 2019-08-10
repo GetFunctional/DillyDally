@@ -48,11 +48,10 @@
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Extensions\ListExtensions.cs" />
     <Compile Include="Extensions\RandomExtensions.cs" />
-    <Compile Include="Images\ImageFormat.cs" />
-    <Compile Include="Images\ImageFormatDetector.cs" />
-    <Compile Include="Images\ImageResizer.cs" />
-    <Compile Include="Images\ImageSizeType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Images\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

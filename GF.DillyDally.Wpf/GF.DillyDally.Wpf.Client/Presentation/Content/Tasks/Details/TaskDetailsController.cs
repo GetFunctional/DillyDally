@@ -25,7 +25,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Details
         public async Task LoadTaskDetailsAsync(Guid taskId)
         {
             this.ViewModel.MarkBusy("Loading Task");
-            using (var connection = await this.ControllerServices.ReadModelStore.OpenConnectionAsync())
+            using (var connection = await this.ControllerServices.DbConnectionFactory.OpenConnectionAsync())
             {
                 var taskDetailRepository = new TaskDetailsRepository();
                 var taskDetailData = await taskDetailRepository.GetTaskDetailsAsync(connection, taskId);

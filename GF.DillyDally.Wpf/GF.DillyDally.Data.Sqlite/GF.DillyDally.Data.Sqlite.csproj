@@ -69,13 +69,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConnectionStringFactory.cs" />
     <Compile Include="DatabaseFileHandler.cs" />
     <Compile Include="DataDirectories.cs" />
     <Compile Include="GuidGenerator.cs" />
     <Compile Include="IGuidGenerator.cs" />
-    <Compile Include="IReadModelStore.cs" />
-    <Compile Include="IWriteModelStore.cs" />
+    <Compile Include="IDbConnectionFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IRepository.Generic.cs" />
     <Compile Include="Repository.Generic.cs" />

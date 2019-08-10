@@ -51,7 +51,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.TaskBoard
 
         private async Task ComposeTaskboardLanesAsync()
         {
-            using (var connection = await this.ControllerServices.ReadModelStore.OpenConnectionAsync())
+            using (var connection = await this.ControllerServices.DbConnectionFactory.OpenConnectionAsync())
             {
                 var taskBoardRepository = new TaskBoardRepository();
                 var lanes = await taskBoardRepository.GetTaskBoardLanesAsync(connection);

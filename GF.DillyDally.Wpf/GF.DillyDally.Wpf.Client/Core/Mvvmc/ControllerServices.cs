@@ -10,7 +10,7 @@ namespace GF.DillyDally.Wpf.Client.Core.Mvvmc
     {
         private readonly IServiceContainer _serviceContainer;
 
-        public ControllerServices(ControllerFactory controllerFactory, IReadModelStore readModelStore,
+        public ControllerServices(ControllerFactory controllerFactory, IDbConnectionFactory dbConnectionFactory,
             IServiceContainer serviceContainer, IMediator mediator, NavigationService navigationService,
             CommandFactory commandFactory)
         {
@@ -19,7 +19,7 @@ namespace GF.DillyDally.Wpf.Client.Core.Mvvmc
             this.NavigationService = navigationService;
             this.CommandFactory = commandFactory;
             this.ControllerFactory = controllerFactory;
-            this.ReadModelStore = readModelStore;
+            this.DbConnectionFactory = dbConnectionFactory;
         }
 
         public IMediator Mediator { get; }
@@ -29,7 +29,7 @@ namespace GF.DillyDally.Wpf.Client.Core.Mvvmc
         public CommandFactory CommandFactory { get; }
         public NavigationService NavigationService { get; }
         public ControllerFactory ControllerFactory { get; }
-        public IReadModelStore ReadModelStore { get; }
+        public IDbConnectionFactory DbConnectionFactory { get; }
 
         public TService GetDomainService<TService>() where TService : IDomainService
         {

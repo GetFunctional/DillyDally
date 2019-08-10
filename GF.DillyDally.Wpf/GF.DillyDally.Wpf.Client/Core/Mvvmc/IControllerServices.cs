@@ -12,7 +12,7 @@ namespace GF.DillyDally.Wpf.Client.Core.Mvvmc
 
         ControllerFactory ControllerFactory { get; }
 
-        IReadModelStore ReadModelStore { get; }
+        IDbConnectionFactory DbConnectionFactory { get; }
 
         TService GetDomainService<TService>() where TService : IDomainService;
     }

@@ -49,8 +49,8 @@
     <Reference Include="NEventStore, Version=7.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\NEventStore.7.0.0\lib\net45\NEventStore.dll</HintPath>
     </Reference>
-    <Reference Include="NEventStore.Persistence.Sql, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NEventStore.Persistence.Sql.7.1.0\lib\net451\NEventStore.Persistence.Sql.dll</HintPath>
+    <Reference Include="NEventStore.Persistence.Sql, Version=7.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NEventStore.Persistence.Sql.7.2.0\lib\net451\NEventStore.Persistence.Sql.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />

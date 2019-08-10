@@ -12,18 +12,18 @@ namespace GF.DillyDally.ReadModel.Projection.Activities
     internal sealed class ActivityEventHandler : INotificationHandler<PercentageActivityCreatedEvent>,
         INotificationHandler<ActivityPreviewImageAssigned>, INotificationHandler<ActivityFieldAttached>
     {
-        private readonly IReadModelStore _readModelStore;
+        private readonly IDbConnectionFactory _dbConnectionFactory;
 
-        public ActivityEventHandler(IReadModelStore readModelStore)
+        public ActivityEventHandler(IDbConnectionFactory dbConnectionFactory)
         {
-            this._readModelStore = readModelStore;
+            this._dbConnectionFactory = dbConnectionFactory;
         }
 
         #region INotificationHandler<ActivityFieldAttached> Members
 
         public async Task Handle(ActivityFieldAttached notification, CancellationToken cancellationToken)
         {
-            using (var connection = this._readModelStore.OpenConnection())
+            using (var connection = this._dbConnectionFactory.OpenConnection())
             {
                 var activityRepository = new ActivityFieldRepository();
                 await activityRepository.AttachFieldToActivityAsync(connection, notification.AggregateId, notification.ActivityFieldType,
@@ -37,7 +37,7 @@ namespace GF.DillyDally.ReadModel.Projection.Activities
 
         public async Task Handle(ActivityPreviewImageAssigned notification, CancellationToken cancellationToken)
         {
-            using (var connection = this._readModelStore.OpenConnection())
+            using (var connection = this._dbConnectionFactory.OpenConnection())
             {
                 var activityRepository = new ActivityRepository();
                 var imageRepository = new ImageRepository();
@@ -57,7 +57,7 @@ namespace GF.DillyDally.ReadModel.Projection.Activities
 
         public async Task Handle(PercentageActivityCreatedEvent notification, CancellationToken cancellationToken)
         {
-            using (var connection = this._readModelStore.OpenConnection())
+            using (var connection = this._dbConnectionFactory.OpenConnection())
             {
                 var activityRepository = new ActivityRepository();
                 await activityRepository.CreateNewAsync(connection, notification.AggregateId, notification.Name,

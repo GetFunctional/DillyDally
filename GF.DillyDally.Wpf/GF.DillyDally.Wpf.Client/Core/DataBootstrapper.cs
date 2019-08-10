@@ -22,7 +22,7 @@ namespace GF.DillyDally.Wpf.Client.Core
             var serviceContainer = this._serviceContainer;
             var databaseFileHandler = this._dataStoreInitializer.Initialize(dataInitializationSettings);
 
-            serviceContainer.RegisterInstance<IReadModelStore>(databaseFileHandler);
+            serviceContainer.RegisterInstance<IDbConnectionFactory>(databaseFileHandler);
             serviceContainer.RegisterInstance<IWriteModelStore>(databaseFileHandler);
 
             this._writeModelBootstrapper.Run(serviceContainer, databaseFileHandler.GetConnectionString());

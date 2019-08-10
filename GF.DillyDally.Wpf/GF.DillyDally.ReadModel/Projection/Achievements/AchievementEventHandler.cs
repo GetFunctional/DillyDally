@@ -10,18 +10,18 @@ namespace GF.DillyDally.ReadModel.Projection.Achievements
     internal sealed class AchievementEventHandler : INotificationHandler<AchievementCreatedEvent>,
         INotificationHandler<AchievementCompletedEvent>
     {
-        private readonly IReadModelStore _readModelStore;
+        private readonly IDbConnectionFactory _dbConnectionFactory;
 
-        public AchievementEventHandler(IReadModelStore readModelStore)
+        public AchievementEventHandler(IDbConnectionFactory dbConnectionFactory)
         {
-            this._readModelStore = readModelStore;
+            this._dbConnectionFactory = dbConnectionFactory;
         }
 
         #region INotificationHandler<AchievementCompletedEvent> Members
 
         public async Task Handle(AchievementCompletedEvent notification, CancellationToken cancellationToken)
         {
-            using (var connection = this._readModelStore.OpenConnection())
+            using (var connection = this._dbConnectionFactory.OpenConnection())
             {
                 var achievementCompletionRepository = new AchievementRepository();
                 await achievementCompletionRepository.CompletedAsync(connection, notification.AggregateId,
@@ -35,7 +35,7 @@ namespace GF.DillyDally.ReadModel.Projection.Achievements
 
         public async Task Handle(AchievementCreatedEvent notification, CancellationToken cancellationToken)
         {
-            using (var connection = this._readModelStore.OpenConnection())
+            using (var connection = this._dbConnectionFactory.OpenConnection())
             {
                 var achievementRepository = new AchievementRepository();
                 await achievementRepository.CreateNewAsync(connection, notification.AggregateId, notification.Name,

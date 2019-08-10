@@ -11,18 +11,18 @@ namespace GF.DillyDally.ReadModel.Projection.Lanes
         INotificationHandler<TaskAddedEvent>,
         INotificationHandler<TaskRemovedEvent>
     {
-        private readonly IReadModelStore _readModelStore;
+        private readonly IDbConnectionFactory _dbConnectionFactory;
 
-        public LaneEventHandler(IReadModelStore readModelStore)
+        public LaneEventHandler(IDbConnectionFactory dbConnectionFactory)
         {
-            this._readModelStore = readModelStore;
+            this._dbConnectionFactory = dbConnectionFactory;
         }
 
         #region INotificationHandler<LaneCreatedEvent> Members
 
         public async Task Handle(LaneCreatedEvent notification, CancellationToken cancellationToken)
         {
-            using (var connection = this._readModelStore.OpenConnection())
+            using (var connection = this._dbConnectionFactory.OpenConnection())
             {
                 var laneRepository = new LaneRepository();
                 await laneRepository.InsertAsync(connection, new LaneEntity
@@ -43,7 +43,7 @@ namespace GF.DillyDally.ReadModel.Projection.Lanes
 
         public async Task Handle(TaskAddedEvent notification, CancellationToken cancellationToken)
         {
-            using (var connection = this._readModelStore.OpenConnection())
+            using (var connection = this._dbConnectionFactory.OpenConnection())
             {
                 var laneRepository = new LaneTaskRepository();
                 await laneRepository.AddTaskToLaneAsync(connection, notification.TaskId, notification.AggregateId,
@@ -57,7 +57,7 @@ namespace GF.DillyDally.ReadModel.Projection.Lanes
 
         public async Task Handle(TaskRemovedEvent notification, CancellationToken cancellationToken)
         {
-            using (var connection = this._readModelStore.OpenConnection())
+            using (var connection = this._dbConnectionFactory.OpenConnection())
             {
                 var laneRepository = new LaneTaskRepository();
                 await laneRepository.RemoveTaskFromLaneAsync(connection, notification.TaskId, notification.AggregateId);

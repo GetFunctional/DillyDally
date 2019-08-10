@@ -14,18 +14,18 @@ namespace GF.DillyDally.ReadModel.Projection.Tasks
         INotificationHandler<TaskLinkCreatedEvent>,
         INotificationHandler<DefinitionOfDoneChangedEvent>, INotificationHandler<TaskLinkedToActivitiesEvent>
     {
-        private readonly IReadModelStore _readModelStore;
+        private readonly IDbConnectionFactory _dbConnectionFactory;
 
-        public TaskEventHandler(IReadModelStore readModelStore)
+        public TaskEventHandler(IDbConnectionFactory dbConnectionFactory)
         {
-            this._readModelStore = readModelStore;
+            this._dbConnectionFactory = dbConnectionFactory;
         }
 
         #region INotificationHandler<AttachedFileToTaskEvent> Members
 
         public async Task Handle(AttachedFileToTaskEvent notification, CancellationToken cancellationToken)
         {
-            using (var connection = this._readModelStore.OpenConnection())
+            using (var connection = this._dbConnectionFactory.OpenConnection())
             {
                 var fileRepository = new FileRepository();
                 var file = await fileRepository.GetByIdAsync(connection, notification.FileId);
@@ -44,7 +44,7 @@ namespace GF.DillyDally.ReadModel.Projection.Tasks
                     var taskFileRepository = new TaskFileRepository();
                     await taskFileRepository.InsertAsync(connection, new TaskFileEntity
                     {
-                        TaskFileId = this._readModelStore.GuidGenerator.GenerateGuid(),
+                        TaskFileId = this._dbConnectionFactory.GuidGenerator.GenerateGuid(),
                         TaskId = taskId,
                         FileId = notification.FileId
                     });
@@ -58,7 +58,7 @@ namespace GF.DillyDally.ReadModel.Projection.Tasks
 
         public async Task Handle(DefinitionOfDoneChangedEvent notification, CancellationToken cancellationToken)
         {
-            using (var connection = this._readModelStore.OpenConnection())
+            using (var connection = this._dbConnectionFactory.OpenConnection())
             {
                 var repository = new TaskRepository();
                 await repository.UpdateDefinitionOfDoneAsync(connection, notification.AggregateId,
@@ -72,7 +72,7 @@ namespace GF.DillyDally.ReadModel.Projection.Tasks
 
         public async Task Handle(PreviewImageAssignedEvent notification, CancellationToken cancellationToken)
         {
-            using (var connection = this._readModelStore.OpenConnection())
+            using (var connection = this._dbConnectionFactory.OpenConnection())
             {
                 var taskRepository = new TaskRepository();
                 var taskId = notification.AggregateId;
@@ -87,7 +87,7 @@ namespace GF.DillyDally.ReadModel.Projection.Tasks
 
         public async Task Handle(TaskCreatedEvent notification, CancellationToken cancellationToken)
         {
-            using (var connection = this._readModelStore.OpenConnection())
+            using (var connection = this._dbConnectionFactory.OpenConnection())
             {
                 var taskRepository = new TaskRepository();
                 await taskRepository.InsertAsync(connection, new TaskEntity
@@ -108,7 +108,7 @@ namespace GF.DillyDally.ReadModel.Projection.Tasks
 
         public async Task Handle(TaskLinkCreatedEvent notification, CancellationToken cancellationToken)
         {
-            using (var connection = this._readModelStore.OpenConnection())
+            using (var connection = this._dbConnectionFactory.OpenConnection())
             {
                 var repository = new TaskLinksRepository();
                 await repository.CreateNewLinkbetweenTasksAsync(connection, notification.AggregateId,
@@ -122,7 +122,7 @@ namespace GF.DillyDally.ReadModel.Projection.Tasks
 
         public async Task Handle(TaskLinkedToActivitiesEvent notification, CancellationToken cancellationToken)
         {
-            using (var connection = this._readModelStore.OpenConnection())
+            using (var connection = this._dbConnectionFactory.OpenConnection())
             {
                 var repository = new TaskActivityRepository();
                 await repository.LinkTaskToActivitiesAsync(connection, notification.AggregateId,

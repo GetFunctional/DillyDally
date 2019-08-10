@@ -9,18 +9,18 @@ namespace GF.DillyDally.ReadModel.Projection.Categories
 {
     internal sealed class CategoryEventHandler : INotificationHandler<CategoryCreatedEvent>
     {
-        private readonly IReadModelStore _readModelStore;
+        private readonly IDbConnectionFactory _dbConnectionFactory;
 
-        public CategoryEventHandler(IReadModelStore readModelStore)
+        public CategoryEventHandler(IDbConnectionFactory dbConnectionFactory)
         {
-            this._readModelStore = readModelStore;
+            this._dbConnectionFactory = dbConnectionFactory;
         }
 
         #region INotificationHandler<CategoryCreatedEvent> Members
 
         public async Task Handle(CategoryCreatedEvent notification, CancellationToken cancellationToken)
         {
-            using (var connection = this._readModelStore.OpenConnection())
+            using (var connection = this._dbConnectionFactory.OpenConnection())
             {
                 var categoryRepository = new CategoryRepository();
                 await categoryRepository.InsertAsync(connection, new CategoryEntity

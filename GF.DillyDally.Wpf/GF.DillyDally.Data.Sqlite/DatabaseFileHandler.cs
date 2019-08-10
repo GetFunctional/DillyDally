@@ -7,7 +7,7 @@ using log4net;
 
 namespace GF.DillyDally.Data.Sqlite
 {
-    public sealed class DatabaseFileHandler : IReadModelStore, IWriteModelStore
+    public sealed class DatabaseFileHandler : IDbConnectionFactory
     {
         private static readonly ILog DatabaseFileLogger = LogManager.GetLogger(typeof(DatabaseFileHandler));
         private readonly string _databaseName;
@@ -25,7 +25,7 @@ namespace GF.DillyDally.Data.Sqlite
             this._fullDatabaseFilePath = this.GetFullDatabaseFilePath(databaseName);
         }
 
-        #region IReadModelStore Members
+        #region IDbConnectionFactory Members
 
         public IGuidGenerator GuidGenerator { get; } = new GuidGenerator();
 

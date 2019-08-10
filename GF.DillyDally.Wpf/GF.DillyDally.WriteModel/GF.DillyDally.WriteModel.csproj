@@ -49,8 +49,8 @@
     <Reference Include="NEventStore, Version=7.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\NEventStore.7.0.0\lib\net45\NEventStore.dll</HintPath>
     </Reference>
-    <Reference Include="NEventStore.Persistence.Sql, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NEventStore.Persistence.Sql.7.1.0\lib\net451\NEventStore.Persistence.Sql.dll</HintPath>
+    <Reference Include="NEventStore.Persistence.Sql, Version=7.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NEventStore.Persistence.Sql.7.2.0\lib\net451\NEventStore.Persistence.Sql.dll</HintPath>
     </Reference>
     <Reference Include="NEventStore.Serialization.Json, Version=7.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\NEventStore.Serialization.Json.7.0.0\lib\net45\NEventStore.Serialization.Json.dll</HintPath>
@@ -112,17 +112,6 @@
     <Compile Include="Domain\Activities\Events\TaskLinkedToActivityEvent.cs" />
     <Compile Include="Domain\Activities\Exceptions\DuplicateActivityException.cs" />
     <Compile Include="Domain\Categories\Commands\CreateCategoryResponse.cs" />
-    <Compile Include="Domain\Files\Commands\StoreFileResponse.cs" />
-    <Compile Include="Domain\Files\FileAggregateRoot.cs" />
-    <Compile Include="Domain\Files\FileCommandHandler.cs" />
-    <Compile Include="Domain\Files\Commands\StoreFileCommand.cs" />
-    <Compile Include="Domain\Files\Events\FileCreatedEvent.cs" />
-    <Compile Include="Domain\Files\Filedata.cs" />
-    <Compile Include="Domain\Files\FileDataRepository.cs" />
-    <Compile Include="Domain\Files\FileEntity.cs" />
-    <Compile Include="Domain\Files\FileParameterData.cs" />
-    <Compile Include="Domain\Files\FileRepository.cs" />
-    <Compile Include="Domain\Files\Md5HashGenerator.cs" />
     <Compile Include="Domain\Lanes\Commands\CreateLaneResponse.cs" />
     <Compile Include="Domain\Lanes\Events\LaneAddedEvent.cs" />
     <Compile Include="Domain\Lanes\Events\TaskAddedEvent.cs" />
@@ -183,22 +172,7 @@
     <Compile Include="Domain\Rewards\RewardAggregateRoot.cs" />
     <Compile Include="Domain\Rewards\RewardCommandHandler.cs" />
     <Compile Include="Domain\Rewards\Events\RewardCreatedEvent.cs" />
-    <Compile Include="AuthorizationPipelineHook.cs" />
     <Compile Include="Domain\Tasks\TaskService.cs" />
-    <Compile Include="Infrastructure\AggregateEventBase.cs" />
-    <Compile Include="Infrastructure\Exceptions\AggregateNotFoundException.cs" />
-    <Compile Include="Infrastructure\CommandHandlerBase.cs" />
-    <Compile Include="Infrastructure\AggregateRootBase.cs" />
-    <Compile Include="Infrastructure\AggregateRepository.cs" />
-    <Compile Include="Infrastructure\Exceptions\MssingEventRouteException.cs" />
-    <Compile Include="Infrastructure\Exceptions\AggregateRevisionException.cs" />
-    <Compile Include="Infrastructure\IAggregateRoot.cs" />
-    <Compile Include="Infrastructure\IAggregateRepository.cs" />
-    <Compile Include="Infrastructure\IAggregateEvent.cs" />
-    <Compile Include="Infrastructure\Exceptions\InvalidAggregateIdException.cs" />
-    <Compile Include="Infrastructure\Exceptions\MissingEventsForAggregateException.cs" />
-    <Compile Include="Infrastructure\IDomainService.cs" />
-    <Compile Include="WriteModelBootstrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -214,6 +188,9 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Domain\Files\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

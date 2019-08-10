@@ -16,7 +16,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Category
 
         protected override async Task OnInitializeAsync()
         {
-            using (var connection = this.ControllerServices.ReadModelStore.OpenConnection())
+            using (var connection = this.ControllerServices.DbConnectionFactory.OpenConnection())
             {
                 var categorySelectorRepository = new CategorySelectorRepository();
                 var categories = await categorySelectorRepository.GetAllCategoriesAsync(connection);

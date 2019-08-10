@@ -47,7 +47,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Container
 
         private async Task<ObservableCollection<ActivityItemViewModel>> SearchResultsAsync(string searchText)
         {
-            using (var connection = this.ControllerServices.ReadModelStore.OpenConnection())
+            using (var connection = this.ControllerServices.DbConnectionFactory.OpenConnection())
             {
                 var repository = new ActivityRepository();
                 var results = await repository.SearchActivitiesByTextAsync(connection, searchText);
