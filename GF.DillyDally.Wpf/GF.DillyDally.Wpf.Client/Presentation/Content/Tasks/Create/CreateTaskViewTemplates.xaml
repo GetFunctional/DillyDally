@@ -27,8 +27,8 @@
                         VerticalAlignment="Top"
                         InputValue="{Binding TaskName, Mode=TwoWay}"
                         IsRequired="True"
-                        Label="Title"
-                        WatermarkText="Give your Task a self explanatory title" />
+                        Label="Name"
+                        WatermarkText="Give your Task a self explanatory name" />
                     <ContentControl
                         VerticalAlignment="Top"
                         Content="{Binding CategorySelectorViewModel, Mode=OneWay}"

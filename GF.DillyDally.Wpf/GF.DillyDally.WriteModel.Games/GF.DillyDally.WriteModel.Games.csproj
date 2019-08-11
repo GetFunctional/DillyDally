@@ -47,12 +47,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Aggregates\Collection\GameCollectionAggregate.cs" />
+    <Compile Include="Aggregates\Commands\CreateShelfCommand.cs" />
+    <Compile Include="Aggregates\Commands\CreateShelfResponse.cs" />
+    <Compile Include="Aggregates\GameCollectionService.cs" />
     <Compile Include="Aggregates\Games\Events\GameCreated.cs" />
+    <Compile Include="Aggregates\IGameCollectionService.cs" />
+    <Compile Include="Aggregates\ShelfCommandHandler.cs" />
+    <Compile Include="Aggregates\Shelves\Events\ShelfCreated.cs" />
+    <Compile Include="Aggregates\Shelves\Exceptions\GameAlreadyExistsOnShelfException.cs" />
+    <Compile Include="Aggregates\Shelves\Events\GameAddedToShelf.cs" />
+    <Compile Include="Aggregates\Shelves\ShelfDetailsEntity.cs" />
+    <Compile Include="Aggregates\Shelves\ShelfFactory.cs" />
     <Compile Include="GamesContext.cs" />
     <Compile Include="Aggregates\Games\GameAggregate.cs" />
     <Compile Include="Aggregates\Games\GameDetailsEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Aggregates\Collection\Events\ShelfAdded.cs" />
+    <Compile Include="Aggregates\Collection\Events\ShelfAddedToCollection.cs" />
     <Compile Include="Aggregates\Collection\Exceptions\ShelfAlreadyExistsException.cs" />
     <Compile Include="Aggregates\Collection\ShelfEntity.cs" />
     <Compile Include="Aggregates\Shelves\GameEntity.cs" />

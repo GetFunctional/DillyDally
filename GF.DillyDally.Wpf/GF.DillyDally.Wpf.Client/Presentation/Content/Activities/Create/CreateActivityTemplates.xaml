@@ -117,8 +117,8 @@
                         VerticalAlignment="Top"
                         InputValue="{Binding ActivityName, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True}"
                         IsRequired="True"
-                        Label="Title"
-                        WatermarkText="Give your activity a self explanatory title" />
+                        Label="Name"
+                        WatermarkText="Give your activity a self explanatory name" />
                     <ctrls:ComboInputControl
                         VerticalAlignment="Top"
                         InputValue="{Binding SelectedActivityTypeViewModel, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True}"

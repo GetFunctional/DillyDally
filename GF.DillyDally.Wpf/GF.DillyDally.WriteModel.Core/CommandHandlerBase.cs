@@ -17,8 +17,12 @@ namespace GF.DillyDally.WriteModel.Core
 
         private IAggregateRepository AggregateRepository { get; }
         private IMediator Mediator { get; }
-        protected IGuidGenerator GuidGenerator { get; } = new GuidGenerator();
+        private IGuidGenerator GuidGenerator { get; } = new GuidGenerator();
 
+        protected Guid GenerateGuid()
+        {
+            return this.GuidGenerator.GenerateGuid();
+        }
 
         protected async Task<IReadOnlyList<IAggregateEvent>> SaveAndDispatchAsync<TAggregate>(TAggregate aggregate)
             where TAggregate : IAggregateRoot
