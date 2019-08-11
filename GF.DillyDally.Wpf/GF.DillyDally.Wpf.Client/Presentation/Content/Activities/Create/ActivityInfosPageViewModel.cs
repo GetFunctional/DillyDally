@@ -1,6 +1,5 @@
 using System.Collections.ObjectModel;
 using GF.DillyDally.Mvvmc;
-using GF.DillyDally.ReadModel.Projection.Activities.Repository;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create
 {
@@ -13,12 +12,12 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create
 
         public ActivityInfosPageViewModel()
         {
-            this.Validator.AddValidationRule(new CreateActivityValidationRule());
-            this.AvailableActivityTypes = new ObservableCollection<ActivityTypeViewModel>
-            {
-                new ActivityTypeViewModel(ActivityType.Percentage),
-                new ActivityTypeViewModel(ActivityType.Leveling)
-            };
+            //this.Validator.AddValidationRule(new CreateActivityValidationRule());
+            //this.AvailableActivityTypes = new ObservableCollection<ActivityTypeViewModel>
+            //{
+            //    new ActivityTypeViewModel(ActivityType.Percentage),
+            //    new ActivityTypeViewModel(ActivityType.Leveling)
+            //};
         }
 
         public ObservableCollection<ActivityTypeViewModel> AvailableActivityTypes

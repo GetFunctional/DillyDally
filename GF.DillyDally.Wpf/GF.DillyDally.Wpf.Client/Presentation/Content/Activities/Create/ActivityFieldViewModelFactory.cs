@@ -1,5 +1,4 @@
 using System.Windows.Input;
-using GF.DillyDally.ReadModel.Projection.Activities.Repository;
 using GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create.Fields;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create
@@ -15,9 +14,9 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create
             this._removeFieldCommand = removeFieldCommand;
         }
         
-        internal ActivityFieldItemViewModel CreateTextFieldItem()
-        {
-            return new ActivityFieldItemViewModel(ActivityFieldType.Text, this._removeFieldCommand);
-        }
+        //internal ActivityFieldItemViewModel CreateTextFieldItem()
+        //{
+        //    return new ActivityFieldItemViewModel(ActivityFieldType.Text, this._removeFieldCommand);
+        //}
     }
 }

@@ -1,6 +1,6 @@
 ﻿using GF.DillyDally.Data.Sqlite;
 using GF.DillyDally.Wpf.Client.Core.Commands;
-using GF.DillyDally.WriteModel.Infrastructure;
+using GF.DillyDally.WriteModel.Core;
 
 namespace GF.DillyDally.Wpf.Client.Core.Mvvmc
 {

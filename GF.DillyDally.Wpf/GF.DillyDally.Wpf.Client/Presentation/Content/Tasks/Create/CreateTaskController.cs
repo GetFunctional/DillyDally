@@ -7,7 +7,6 @@ using GF.DillyDally.Wpf.Client.Core.Dialoge;
 using GF.DillyDally.Wpf.Client.Core.Mvvmc;
 using GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Container;
 using GF.DillyDally.Wpf.Client.Presentation.Content.Category;
-using GF.DillyDally.WriteModel.Domain.Tasks;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Create
 {
@@ -47,28 +46,29 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Create
 
             if (this.IsInputValid(this.ViewModel))
             {
-                var basicInfos = this.GetTaskBasicInfos();
-                var taskName = basicInfos.TaskName;
-                var category = basicInfos.SelectedCategory;
-                var taskService = this.ControllerServices.GetDomainService<TaskService>();
+                await Task.CompletedTask;
+                //var basicInfos = this.GetTaskBasicInfos();
+                //var taskName = basicInfos.TaskName;
+                //var category = basicInfos.SelectedCategory;
+                //var taskService = this.ControllerServices.GetDomainService<TaskService>();
 
-                var task = await taskService.CreateNewTaskAsync(taskName, category.CategoryId, this._presetLane);
-                var previewImage = basicInfos.PreviewImageBytes;
-                if (previewImage != null)
-                {
-                    await taskService.AttachPreviewImageToTaskAsync(task.TaskId, previewImage);
-                }
+                //var task = await taskService.CreateNewTaskAsync(taskName, category.CategoryId, this._presetLane);
+                //var previewImage = basicInfos.PreviewImageBytes;
+                //if (previewImage != null)
+                //{
+                //    await taskService.AttachPreviewImageToTaskAsync(task.TaskId, previewImage);
+                //}
 
-                var activities = this.GetTaskActivities();
-                if (activities.Any())
-                {
-                    var activityIds = new HashSet<Guid>(activities.Select(x => x.ActivityId).Distinct());
-                    await taskService.LinkTaskToActivitiesAsync(task.TaskId, activityIds);
-                }
+                //var activities = this.GetTaskActivities();
+                //if (activities.Any())
+                //{
+                //    var activityIds = new HashSet<Guid>(activities.Select(x => x.ActivityId).Distinct());
+                //    await taskService.LinkTaskToActivitiesAsync(task.TaskId, activityIds);
+                //}
 
-                this.ViewModel.ClearBusy();
-                this.ConfirmDialogWith(this.CreateTaskDialogResult);
-                return;
+                //this.ViewModel.ClearBusy();
+                //this.ConfirmDialogWith(this.CreateTaskDialogResult);
+                //return;
             }
 
             this.ViewModel.ClearBusy();

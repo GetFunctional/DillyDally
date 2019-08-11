@@ -432,10 +432,6 @@
       <Project>{2991a81d-e0e1-4143-ac99-395b5191adbd}</Project>
       <Name>GF.DillyDally.Mvvmc</Name>
     </ProjectReference>
-    <ProjectReference Include="..\GF.DillyDally.ReadModel\GF.DillyDally.ReadModel.csproj">
-      <Project>{24f297fb-5d67-4d69-b8fa-b3b7c73675d0}</Project>
-      <Name>GF.DillyDally.ReadModel</Name>
-    </ProjectReference>
     <ProjectReference Include="..\GF.DillyDally.Shared\GF.DillyDally.Shared.csproj">
       <Project>{cac4358f-f1af-49f5-9054-a6064abe235e}</Project>
       <Name>GF.DillyDally.Shared</Name>
@@ -448,9 +444,17 @@
       <Project>{3149aaa7-f9dd-4191-924c-e5c0347486dc}</Project>
       <Name>GF.DillyDally.Wpf.Theme</Name>
     </ProjectReference>
-    <ProjectReference Include="..\GF.DillyDally.WriteModel\GF.DillyDally.WriteModel.csproj">
-      <Project>{179ba6bf-8201-4a12-b1f4-4e9e54713e84}</Project>
-      <Name>GF.DillyDally.WriteModel</Name>
+    <ProjectReference Include="..\GF.DillyDally.WriteModel.Core\GF.DillyDally.WriteModel.Core.csproj">
+      <Project>{9e539eb6-2d83-43ce-a73e-b97321d517f5}</Project>
+      <Name>GF.DillyDally.WriteModel.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GF.DillyDally.WriteModel.Files\GF.DillyDally.WriteModel.Files.csproj">
+      <Project>{11535eb2-84d4-4757-9c6b-106ae65f52ae}</Project>
+      <Name>GF.DillyDally.WriteModel.Files</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GF.DillyDally.WriteModel.Games\GF.DillyDally.WriteModel.Games.csproj">
+      <Project>{8587aebb-6c76-4b81-bfce-cbea8c81b662}</Project>
+      <Name>GF.DillyDally.WriteModel.Games</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

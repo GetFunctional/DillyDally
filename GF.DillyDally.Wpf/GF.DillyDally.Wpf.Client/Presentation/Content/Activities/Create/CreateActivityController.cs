@@ -1,12 +1,9 @@
 using System;
 using System.Threading.Tasks;
 using GF.DillyDally.Mvvmc.Contracts;
-using GF.DillyDally.ReadModel.Projection.Activities.Repository;
 using GF.DillyDally.Wpf.Client.Core.Dialoge;
 using GF.DillyDally.Wpf.Client.Core.Mvvmc;
 using GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create.Fields;
-using GF.DillyDally.WriteModel.Domain.Activities;
-using ActivityFieldType = GF.DillyDally.WriteModel.Domain.Activities.ActivityFieldType;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create
 {
@@ -52,7 +49,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create
         private void CreateNewActivityField()
         {
             var page = this.ViewModel.GetPage<ActivityFieldsPageViewModel>();
-            page.AddNewActivityField(this._activityFieldViewModelFactory.CreateTextFieldItem());
+            //page.AddNewActivityField(this._activityFieldViewModelFactory.CreateTextFieldItem());
         }
 
         private void CancelProcess()
@@ -68,35 +65,35 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create
             {
                 var step1 = this.ViewModel.GetPage<ActivityInfosPageViewModel>();
                 var activityName = step1.ActivityName;
-                var activityType = step1.SelectedActivityTypeViewModel?.ActivityType;
+                //var activityType = step1.SelectedActivityTypeViewModel?.ActivityType;
                 var previewImageForActivity = step1.PreviewImageBytes;
 
                 var step2 = this.ViewModel.GetPage<ActivityFieldsPageViewModel>();
                 var activities = step2.ActivityFields;
+                await Task.CompletedTask;
+                //var activityService = this.ControllerServices.GetDomainService<ActivityService>();
 
-                var activityService = this.ControllerServices.GetDomainService<ActivityService>();
+                //switch (activityType)
+                //{
+                //    case ActivityType.Percentage:
+                //        var activity =
+                //            await activityService.CreatePercentageActivityAsync(activityName,
+                //                previewImageForActivity);
 
-                switch (activityType)
-                {
-                    case ActivityType.Percentage:
-                        var activity =
-                            await activityService.CreatePercentageActivityAsync(activityName,
-                                previewImageForActivity);
+                //        foreach (var activityFieldViewModel in activities)
+                //        {
+                //            await activityService.AttachActivityFieldsAsync(activity.ActivityId, (ActivityFieldType)activityFieldViewModel.FieldType.ActivityFieldType,
+                //                activityFieldViewModel.FieldName, activityFieldViewModel.UnitOfMeasure);
+                //        }
 
-                        foreach (var activityFieldViewModel in activities)
-                        {
-                            await activityService.AttachActivityFieldsAsync(activity.ActivityId, (ActivityFieldType)activityFieldViewModel.FieldType.ActivityFieldType,
-                                activityFieldViewModel.FieldName, activityFieldViewModel.UnitOfMeasure);
-                        }
-
-                        this.ViewModel.ClearBusy();
-                        this.ConfirmDialogWith(this.CreateActivityDialogResult);
-                        return;
-                    case ActivityType.Leveling:
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
-                }
+                //        this.ViewModel.ClearBusy();
+                //        this.ConfirmDialogWith(this.CreateActivityDialogResult);
+                //        return;
+                //    case ActivityType.Leveling:
+                //        break;
+                //    default:
+                //        throw new ArgumentOutOfRangeException();
+                //}
             }
             else
             {

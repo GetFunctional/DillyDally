@@ -17,18 +17,20 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MediatR, Version=7.0.0.0, Culture=neutral, PublicKeyToken=bb9a41a5e8aaa7e2, processorArchitecture=MSIL">
@@ -44,14 +46,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Collection\GameCollectionAggregate.cs" />
+    <Compile Include="Aggregates\Collection\GameCollectionAggregate.cs" />
+    <Compile Include="Aggregates\Games\Events\GameCreated.cs" />
     <Compile Include="GamesContext.cs" />
-    <Compile Include="Games\GameAggregate.cs" />
-    <Compile Include="Games\GameDetailsEntity.cs" />
+    <Compile Include="Aggregates\Games\GameAggregate.cs" />
+    <Compile Include="Aggregates\Games\GameDetailsEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Collection\ShelfAddedEvent.cs" />
-    <Compile Include="Collection\ShelfAlreadyExistsException.cs" />
-    <Compile Include="Collection\ShelfEntity.cs" />
+    <Compile Include="Aggregates\Collection\Events\ShelfAdded.cs" />
+    <Compile Include="Aggregates\Collection\Exceptions\ShelfAlreadyExistsException.cs" />
+    <Compile Include="Aggregates\Collection\ShelfEntity.cs" />
+    <Compile Include="Aggregates\Shelves\GameEntity.cs" />
+    <Compile Include="Aggregates\Shelves\ShelfAggregate.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GF.DillyDally.WriteModel.Core\GF.DillyDally.WriteModel.Core.csproj">
@@ -62,8 +67,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Shelves\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

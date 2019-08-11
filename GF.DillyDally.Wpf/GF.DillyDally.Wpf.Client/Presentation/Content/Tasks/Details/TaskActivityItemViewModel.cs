@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using GF.DillyDally.Mvvmc;
-using GF.DillyDally.ReadModel.Views.TaskDetails;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Details
 {

@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using GF.DillyDally.ReadModel.Views.Selectors;
 using GF.DillyDally.Wpf.Client.Core.Mvvmc;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Content.Category
@@ -16,19 +15,20 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Category
 
         protected override async Task OnInitializeAsync()
         {
-            using (var connection = this.ControllerServices.DbConnectionFactory.OpenConnection())
-            {
-                var categorySelectorRepository = new CategorySelectorRepository();
-                var categories = await categorySelectorRepository.GetAllCategoriesAsync(connection);
+            await Task.CompletedTask;
+            //using (var connection = this.ControllerServices.DbConnectionFactory.OpenConnection())
+            //{
+            //    var categorySelectorRepository = new CategorySelectorRepository();
+            //    var categories = await categorySelectorRepository.GetAllCategoriesAsync(connection);
 
-                var categoryViewModels = this.MapToCategoryViewModels(categories);
-                this.ViewModel.AvailableCategories = new ObservableCollection<CategoryViewModel>(categoryViewModels);
-            }
+            //    var categoryViewModels = this.MapToCategoryViewModels(categories);
+            //    this.ViewModel.AvailableCategories = new ObservableCollection<CategoryViewModel>(categoryViewModels);
+            //}
         }
 
-        private IList<CategoryViewModel> MapToCategoryViewModels(IList<CategorySelectorEntity> categories)
-        {
-            return categories.Select(x => new CategoryViewModel(x.Name, x.CategoryId)).ToList();
-        }
+        //private IList<CategoryViewModel> MapToCategoryViewModels(IList<CategorySelectorEntity> categories)
+        //{
+        //    return categories.Select(x => new CategoryViewModel(x.Name, x.CategoryId)).ToList();
+        //}
     }
 }

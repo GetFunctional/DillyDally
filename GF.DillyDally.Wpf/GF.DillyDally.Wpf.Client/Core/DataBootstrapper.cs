@@ -1,6 +1,8 @@
-﻿using GF.DillyDally.Data.Sqlite;
-using GF.DillyDally.ReadModel;
-using GF.DillyDally.WriteModel;
+﻿using System.Collections.Generic;
+using GF.DillyDally.Data.Sqlite;
+using GF.DillyDally.WriteModel.Core;
+using GF.DillyDally.WriteModel.Files;
+using GF.DillyDally.WriteModel.Games;
 using LightInject;
 
 namespace GF.DillyDally.Wpf.Client.Core
@@ -8,7 +10,6 @@ namespace GF.DillyDally.Wpf.Client.Core
     public sealed class DataBootstrapper
     {
         private readonly DataStoreInitializer _dataStoreInitializer = new DataStoreInitializer();
-        private readonly ReadModelBootstrapper _readModelBootstrapper = new ReadModelBootstrapper();
         private readonly IServiceContainer _serviceContainer;
         private readonly WriteModelBootstrapper _writeModelBootstrapper = new WriteModelBootstrapper();
 
@@ -23,10 +24,16 @@ namespace GF.DillyDally.Wpf.Client.Core
             var databaseFileHandler = this._dataStoreInitializer.Initialize(dataInitializationSettings);
 
             serviceContainer.RegisterInstance<IDbConnectionFactory>(databaseFileHandler);
-            serviceContainer.RegisterInstance<IWriteModelStore>(databaseFileHandler);
 
-            this._writeModelBootstrapper.Run(serviceContainer, databaseFileHandler.GetConnectionString());
-            this._readModelBootstrapper.Run(serviceContainer);
+            var boundedContexts = this.GetBoundedContexts();
+            this._writeModelBootstrapper.Run(serviceContainer, boundedContexts,
+                databaseFileHandler.GetConnectionString());
+        }
+
+        private IEnumerable<IBoundedContext> GetBoundedContexts()
+        {
+            yield return new FilesContext();
+            yield return new GamesContext();
         }
     }
 }

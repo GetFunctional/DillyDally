@@ -19,18 +19,20 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Dapper, Version=1.60.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -51,7 +53,6 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Data.SQLite, Version=1.0.111.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Data.SQLite.Core.1.0.111.0\lib\net46\System.Data.SQLite.dll</HintPath>
     </Reference>
@@ -63,32 +64,30 @@
     </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\StoreFileCommand.cs" />
-    <Compile Include="Commands\StoreFileResponse.cs" />
-    <Compile Include="Events\FileCreatedEvent.cs" />
-    <Compile Include="FileAggregateFactory.cs" />
-    <Compile Include="FileAggregateRoot.cs" />
-    <Compile Include="FileCommandHandler.cs" />
-    <Compile Include="FileData.cs" />
-    <Compile Include="FileDataRepository.cs" />
-    <Compile Include="FileEntity.cs" />
+    <Compile Include="Aggregates\Files\Commands\StoreFileCommand.cs" />
+    <Compile Include="Aggregates\Files\Commands\StoreFileResponse.cs" />
+    <Compile Include="Aggregates\Files\Events\FileCreated.cs" />
+    <Compile Include="Aggregates\Files\FileAggregateFactory.cs" />
+    <Compile Include="Aggregates\Files\FileAggregateRoot.cs" />
+    <Compile Include="Aggregates\Files\FileCommandHandler.cs" />
+    <Compile Include="Aggregates\Files\Filestore\FileData.cs" />
+    <Compile Include="Aggregates\Files\Filestore\FileDataRepository.cs" />
+    <Compile Include="Aggregates\Files\Filestore\FileEntity.cs" />
     <Compile Include="FileParameterData.cs" />
-    <Compile Include="FileRepository.cs" />
+    <Compile Include="Aggregates\Files\Filestore\FileRepository.cs" />
     <Compile Include="FilesContext.cs" />
-    <Compile Include="FileService.cs" />
-    <Compile Include="IFileService.cs" />
-    <Compile Include="ImageFormat.cs" />
-    <Compile Include="ImageFormatDetector.cs" />
-    <Compile Include="ImageResizer.cs" />
-    <Compile Include="ImageSizeType.cs" />
-    <Compile Include="Md5HashGenerator.cs" />
+    <Compile Include="Aggregates\FileService.cs" />
+    <Compile Include="Aggregates\IFileService.cs" />
+    <Compile Include="Aggregates\Files\Filestore\Imageprocessing\ImageFormat.cs" />
+    <Compile Include="Aggregates\Files\Filestore\Imageprocessing\ImageFormatDetector.cs" />
+    <Compile Include="Aggregates\Files\Filestore\Imageprocessing\ImageResizer.cs" />
+    <Compile Include="Aggregates\Files\Filestore\Imageprocessing\ImageSizeType.cs" />
+    <Compile Include="Aggregates\Files\Filestore\Md5HashGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

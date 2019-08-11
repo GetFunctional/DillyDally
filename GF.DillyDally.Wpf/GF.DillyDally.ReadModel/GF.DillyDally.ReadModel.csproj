@@ -81,6 +81,7 @@
     <Compile Include="Projection\Activities\Repository\ActivitySearchResultEntity.cs" />
     <Compile Include="Projection\Activities\Repository\ActivityType.cs" />
     <Compile Include="Projection\Activities\Repository\TaskActivityFieldValueEntity.cs" />
+    <Compile Include="Projection\Images\Repository\ImageSizeType.cs" />
     <Compile Include="Projection\Lanes\Repository\LaneTaskEntity.cs" />
     <Compile Include="Projection\Lanes\Repository\LaneTaskRepository.cs" />
     <Compile Include="Projection\RunningNumbers\RunningNumbersEventHandler.cs" />
@@ -134,10 +135,6 @@
     <ProjectReference Include="..\GF.DillyDally.Shared\GF.DillyDally.Shared.csproj">
       <Project>{cac4358f-f1af-49f5-9054-a6064abe235e}</Project>
       <Name>GF.DillyDally.Shared</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\GF.DillyDally.WriteModel\GF.DillyDally.WriteModel.csproj">
-      <Project>{179ba6bf-8201-4a12-b1f4-4e9e54713e84}</Project>
-      <Name>GF.DillyDally.WriteModel</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

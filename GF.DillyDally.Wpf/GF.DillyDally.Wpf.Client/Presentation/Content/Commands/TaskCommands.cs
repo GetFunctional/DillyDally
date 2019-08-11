@@ -6,7 +6,6 @@ using GF.DillyDally.Wpf.Client.Core.Mvvmc;
 using GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Create;
 using GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.Details;
 using GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.TaskBoard.DragDrop;
-using GF.DillyDally.WriteModel.Domain.Tasks;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Content.Commands
 {
@@ -55,9 +54,10 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Commands
 
         private async Task ChangeTaskLaneAsync(TaskChangedLanePayload taskLaneChange)
         {
-            await this._controllerServices.GetDomainService<TaskService>().ChangeTaskLaneAsync(
-                taskLaneChange.SourceItem.TaskId,
-                taskLaneChange.TargetLane.LaneId, taskLaneChange.SourceLane.LaneId);
+            await Task.CompletedTask;
+            //await this._controllerServices.GetDomainService<TaskService>().ChangeTaskLaneAsync(
+            //    taskLaneChange.SourceItem.TaskId,
+            //    taskLaneChange.TargetLane.LaneId, taskLaneChange.SourceLane.LaneId);
         }
 
         private async Task CreateNewTask(Guid? laneId)

@@ -88,7 +88,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\TestData.cs" />
-    <Compile Include="Guideline\EventClassGuideline.cs" />
     <Compile Include="Core\TestInfrastructure.cs" />
     <Compile Include="Mvvmc\ShellControllerTests.cs" />
     <Compile Include="Mvvmc\TestModels\ChildTestController.cs" />
@@ -97,24 +96,10 @@
     <Compile Include="Mvvmc\TestModels\TestController.cs" />
     <Compile Include="Mvvmc\TestModels\TestViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReadModel\Projection\AchievementTests.cs" />
-    <Compile Include="ReadModel\Projection\ActivityTests.cs" />
-    <Compile Include="ReadModel\Projection\CategoryTests.cs" />
-    <Compile Include="ReadModel\Projection\LaneTests.cs" />
-    <Compile Include="ReadModel\Projection\RunningNumberTests.cs" />
-    <Compile Include="ReadModel\Projection\TaskImageTests.cs" />
-    <Compile Include="ReadModel\Projection\TaskLinkTests.cs" />
-    <Compile Include="ReadModel\Projection\TaskTests.cs" />
     <Compile Include="SqlDbAccess\CreateDatabaseTests.cs" />
     <Compile Include="DatabaseUpdateTests.cs" />
     <Compile Include="SqlDbAccess\SqlScriptSelectorTests.cs" />
     <Compile Include="Unittests.cs" />
-    <Compile Include="WriteModel\AchievementTests.cs" />
-    <Compile Include="WriteModel\ActivityTests.cs" />
-    <Compile Include="WriteModel\RunningNumberTests.cs" />
-    <Compile Include="WriteModel\TaskActivityTests.cs" />
-    <Compile Include="WriteModel\TaskLinkingTests.cs" />
-    <Compile Include="WriteModel\TaskTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GF.DillyDally.Data.Sqlite\GF.DillyDally.Data.Sqlite.csproj">
@@ -124,10 +109,6 @@
     <ProjectReference Include="..\GF.DillyDally.Mvvmc\GF.DillyDally.Mvvmc.csproj">
       <Project>{2991a81d-e0e1-4143-ac99-395b5191adbd}</Project>
       <Name>GF.DillyDally.Mvvmc</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\GF.DillyDally.ReadModel\GF.DillyDally.ReadModel.csproj">
-      <Project>{24f297fb-5d67-4d69-b8fa-b3b7c73675d0}</Project>
-      <Name>GF.DillyDally.ReadModel</Name>
     </ProjectReference>
     <ProjectReference Include="..\GF.DillyDally.Shared\GF.DillyDally.Shared.csproj">
       <Project>{cac4358f-f1af-49f5-9054-a6064abe235e}</Project>
@@ -141,9 +122,9 @@
       <Project>{65ab5c0d-009d-4870-baf6-536870f97b74}</Project>
       <Name>GF.DillyDally.Wpf.Client</Name>
     </ProjectReference>
-    <ProjectReference Include="..\GF.DillyDally.WriteModel\GF.DillyDally.WriteModel.csproj">
-      <Project>{179ba6bf-8201-4a12-b1f4-4e9e54713e84}</Project>
-      <Name>GF.DillyDally.WriteModel</Name>
+    <ProjectReference Include="..\GF.DillyDally.WriteModel.Core\GF.DillyDally.WriteModel.Core.csproj">
+      <Project>{9e539eb6-2d83-43ce-a73e-b97321d517f5}</Project>
+      <Name>GF.DillyDally.WriteModel.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

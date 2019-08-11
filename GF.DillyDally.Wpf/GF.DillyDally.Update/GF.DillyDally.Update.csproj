@@ -54,16 +54,12 @@
     <Compile Include="UpdateSteps\SqlScriptSelector.cs" />
     <Compile Include="UpdateCoordinator.cs" />
     <Compile Include="UpdateSteps\SqlScripts\SqlScript.cs" />
-    <Compile Include="UpdateSteps\Version_1000.cs" />
+    <Compile Include="UpdateSteps\Version1000.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GF.DillyDally.Data.Sqlite\GF.DillyDally.Data.Sqlite.csproj">
       <Project>{cb0541c1-d36e-4e82-b1f8-d82520b80fd6}</Project>
       <Name>GF.DillyDally.Data.Sqlite</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\GF.DillyDally.WriteModel\GF.DillyDally.WriteModel.csproj">
-      <Project>{179ba6bf-8201-4a12-b1f4-4e9e54713e84}</Project>
-      <Name>GF.DillyDally.WriteModel</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

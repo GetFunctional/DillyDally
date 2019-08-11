@@ -1,18 +1,17 @@
 ﻿using GF.DillyDally.Mvvmc;
-using GF.DillyDally.ReadModel.Projection.Activities.Repository;
 
 namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Create.Fields
 {
     public class ActivityFieldTypeViewModel : ViewModelBase
     {
-        public ActivityFieldTypeViewModel(ActivityFieldType activityFieldType, string typeName)
-        {
-            this.ActivityFieldType = activityFieldType;
-            this.TypeName = typeName;
-        }
+        //public ActivityFieldTypeViewModel(ActivityFieldType activityFieldType, string typeName)
+        //{
+        //    this.ActivityFieldType = activityFieldType;
+        //    this.TypeName = typeName;
+        //}
 
-        public ActivityFieldType ActivityFieldType { get; }
+        //public ActivityFieldType ActivityFieldType { get; }
 
-        public string TypeName { get; }
+        //public string TypeName { get; }
     }
 }

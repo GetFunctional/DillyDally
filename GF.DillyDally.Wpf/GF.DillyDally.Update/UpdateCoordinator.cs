@@ -17,7 +17,7 @@ namespace GF.DillyDally.Update
         private ISet<IUpdateStep> ComposeVersionSteps()
         {
             var versions = new HashSet<IUpdateStep>();
-            versions.Add(new Version_1000());
+            versions.Add(new Version1000());
             return versions;
         }
 

@@ -15,7 +15,7 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Container
         private ObservableCollection<ActivityItemViewModel> _activities;
         private bool _isSearchBarVisible;
         private ObservableCollection<ActivityItemViewModel> _searchResults;
-        private string _searchText;
+        //private string _searchText;
         private ActivityItemViewModel _selectedResult;
 
         public ActivityContainerViewModel()
@@ -59,21 +59,21 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Container
             }
         }
 
-        public string SearchText
-        {
-            get
-            {
-                return this._searchText;
-            }
-            set
-            {
-                if (this.SetAndRaiseIfChanged(ref this._searchText, value) &&
-                    value != this.SelectedResult?.ActivityName)
-                {
-                    this.RaiseRequestSearchResults(value);
-                }
-            }
-        }
+        //public string SearchText
+        //{
+        //    get
+        //    {
+        //        return this._searchText;
+        //    }
+        //    set
+        //    {
+        //        //if (this.SetAndRaiseIfChanged(ref this._searchText, value) &&
+        //        //    value != this.SelectedResult?.ActivityName)
+        //        //{
+        //        //    this.RaiseRequestSearchResults(value);
+        //        //}
+        //    }
+        //}
 
         public ActivityItemViewModel SelectedResult
         {
@@ -90,13 +90,13 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Container
             }
         }
 
-        public string ActivityDisplayMemberName
-        {
-            get
-            {
-                return nameof(ActivityItemViewModel.ActivityName);
-            }
-        }
+        //public string ActivityDisplayMemberName
+        //{
+        //    get
+        //    {
+        //        return nameof(ActivityItemViewModel.ActivityName);
+        //    }
+        //}
 
         public bool IsSearchBarVisible
         {
@@ -125,11 +125,11 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Activities.Container
 
         private void AddActivity(ActivityItemViewModel activity)
         {
-            if (this.Activities.All(act => act.ActivityId != activity.ActivityId))
-            {
-                this.Activities.Add(activity);
-                this._activityItemsChangedSubject.OnNext(this.Activities);
-            }
+            //if (this.Activities.All(act => act.ActivityId != activity.ActivityId))
+            //{
+            //    this.Activities.Add(activity);
+            //    this._activityItemsChangedSubject.OnNext(this.Activities);
+            //}
         }
 
         private void RaiseRequestSearchResults(string value)

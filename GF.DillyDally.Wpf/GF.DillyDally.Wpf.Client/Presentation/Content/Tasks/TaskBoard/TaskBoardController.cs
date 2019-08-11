@@ -1,7 +1,6 @@
 using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using GF.DillyDally.ReadModel.Views.TaskBoard;
 using GF.DillyDally.Wpf.Client.Core.Mvvmc;
 using GF.DillyDally.Wpf.Client.Presentation.Content.Commands;
 using GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.TaskBoard.DragDrop;
@@ -53,14 +52,15 @@ namespace GF.DillyDally.Wpf.Client.Presentation.Content.Tasks.TaskBoard
         {
             using (var connection = await this.ControllerServices.DbConnectionFactory.OpenConnectionAsync())
             {
-                var taskBoardRepository = new TaskBoardRepository();
-                var lanes = await taskBoardRepository.GetTaskBoardLanesAsync(connection);
+                await Task.CompletedTask;
+                //var taskBoardRepository = new TaskBoardRepository();
+                //var lanes = await taskBoardRepository.GetTaskBoardLanesAsync(connection);
 
-                var laneViewModels =
-                    this._taskBoardLaneViewModelFactory.CreateLaneViewModels(lanes, this._taskboardDragDropHandler,
-                        this._createNewTaskCommand, this._openTaskDetailsCommand);
-                this._taskboardDragDropHandler.IntroduceTaskLanes(laneViewModels);
-                this.ViewModel.Lanes = laneViewModels;
+                //var laneViewModels =
+                //    this._taskBoardLaneViewModelFactory.CreateLaneViewModels(lanes, this._taskboardDragDropHandler,
+                //        this._createNewTaskCommand, this._openTaskDetailsCommand);
+                //this._taskboardDragDropHandler.IntroduceTaskLanes(laneViewModels);
+                //this.ViewModel.Lanes = laneViewModels;
             }
         }
     }
