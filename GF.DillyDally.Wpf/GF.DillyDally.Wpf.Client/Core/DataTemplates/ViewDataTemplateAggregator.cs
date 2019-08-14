@@ -14,6 +14,9 @@ namespace GF.DillyDally.Wpf.Client.Core.DataTemplates
         private static readonly Type ViewForTagType = typeof(IViewFor<>);
         private static readonly Type ViewModelConventionType = typeof(IViewModel);
 
+        private readonly DataTemplateDictionaryFactory _dataTemplateDictionaryFactory =
+            new DataTemplateDictionaryFactory();
+
         private readonly DataTemplateFactory _dataTemplateFactory = new DataTemplateFactory();
 
         private object TryFindResource(Type associatedType, IApplicationRuntime application)
@@ -27,6 +30,34 @@ namespace GF.DillyDally.Wpf.Client.Core.DataTemplates
             var genericInterfaces = ViewForTagType.MakeGenericType(viewModelType);
             var viewCandidates = viewTypes.Where(viewType => genericInterfaces.IsAssignableFrom(viewType));
             return viewCandidates;
+        }
+
+        internal ResourceDictionary CreateDataTemplateDictionaryForViewModelsInAssembly(Assembly assembly)
+        {
+            var viewModelTypes = assembly.GetTypes().Where(this.TypeRespectsViewModelConvention).ToList();
+            var viewTypes = assembly.GetTypes().Where(this.TypeRespectsViewConvention).ToList();
+
+            var viewModelViewCombinations = new Dictionary<Type, Type>();
+            foreach (var viewModelType in viewModelTypes)
+            {
+                var viewTypeCandidates = this.FindViewMatchesForViewModel(viewModelType, viewTypes).ToList();
+
+                if (viewTypeCandidates.Count > 0)
+                {
+                    if (viewTypeCandidates.Count > 1)
+                    {
+                        throw new MultipleViewDefinitionException(
+                            $"Found more than one View match for a single ViewModel. Check Namingconventions. ViewModel - {viewModelType}");
+                    }
+
+                    var viewTypeMatch = viewTypeCandidates.First();
+
+                    viewModelViewCombinations.Add(viewModelType, viewTypeMatch);
+                }
+            }
+
+            return this._dataTemplateDictionaryFactory.CreateDataTemplateDictionaryForViewModelsInAssembly(assembly,
+                viewModelViewCombinations);
         }
 
         internal IList<DataTemplate> CreateDataTemplatesForViewModelsInAssembly(Assembly assembly,
