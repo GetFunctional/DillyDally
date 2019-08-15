@@ -32,7 +32,7 @@ namespace GF.DillyDally.Wpf.Client.Core.ApplicationState
         Task<T> OnUiThreadAsync<T>(Func<T> function);
 
 
-        SynchronizationContext GetSynchronizationContext { get; }
+        SynchronizationContext SynchronizationContext { get; }
 
         #endregion
     }

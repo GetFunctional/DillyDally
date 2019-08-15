@@ -45,7 +45,7 @@ namespace GF.DillyDally.Wpf.Client.Core.ApplicationState
             return await this._uiDispatcher.InvokeAsync(function);
         }
 
-        public SynchronizationContext GetSynchronizationContext
+        public SynchronizationContext SynchronizationContext
         {
             get
             {

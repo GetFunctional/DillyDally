@@ -44,7 +44,7 @@ namespace GF.DillyDally.Wpf.Client.Core.ApplicationState
             return Task.Run(function);
         }
 
-        public SynchronizationContext GetSynchronizationContext
+        public SynchronizationContext SynchronizationContext
         {
             get
             {

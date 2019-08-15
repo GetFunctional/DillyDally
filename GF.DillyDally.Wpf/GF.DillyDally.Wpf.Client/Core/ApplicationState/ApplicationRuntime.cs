@@ -27,7 +27,7 @@ namespace GF.DillyDally.Wpf.Client.Core.ApplicationState
         {
             this.ServiceContainer = serviceContainer;
             this._platformProvider = platformProvider;
-            this.ApplicationSynchronizationContext = this._platformProvider.GetSynchronizationContext;
+            this.ApplicationSynchronizationContext = this._platformProvider.SynchronizationContext;
         }
 
         /// <summary>
