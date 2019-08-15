@@ -77,6 +77,11 @@ namespace GF.DillyDally.Wpf.Client.Core.ApplicationState
             return null;
         }
 
+        public void AddResource(ResourceDictionary resourceDictionary)
+        {
+            this._wpfApplication.Resources.MergedDictionaries.Add(resourceDictionary);
+        }
+
         public void SendException(Exception exception)
         {
             this.ApplicationSynchronizationContext.Send(state => this._exceptionSolver.Solve(exception), null);

@@ -15,6 +15,8 @@ namespace GF.DillyDally.Wpf.Client.Core.ApplicationState
         void ShowOverlayDialog(IViewModel overlayContent, DialogSettings dialogSettings);
         void ConfirmOverlayWith(IDialogResult result);
         object TryFindResource(DataTemplateKey key);
+
+        void AddResource(ResourceDictionary resourceDictionary);
         void SendException(Exception exception);
     }
 }

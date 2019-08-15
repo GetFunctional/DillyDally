@@ -17,7 +17,7 @@ namespace GF.DillyDally.WriteModel.Core
 
         private IAggregateRepository AggregateRepository { get; }
         private IMediator Mediator { get; }
-        private IGuidGenerator GuidGenerator { get; } = new GuidGenerator();
+        protected IGuidGenerator GuidGenerator { get; } = new GuidGenerator();
 
         protected Guid GenerateGuid()
         {
