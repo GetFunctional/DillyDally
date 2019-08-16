@@ -13,7 +13,6 @@ namespace GF.DillyDally.Wpf.Client.Core.DataTemplates
         {
             var dataTemplateAggregator = new ViewDataTemplateAggregator();
 
-            //var dataTemplates = dataTemplateAggregator.CreateDataTemplatesForViewModelsInAssembly(this.GetType().GetTypeInfo().Assembly, application);
             var stopWatch = new Stopwatch();
             stopWatch.Start();
             var dataTemplateDictionary = dataTemplateAggregator.CreateDataTemplateDictionaryForViewModelsInAssembly(this.GetType().GetTypeInfo().Assembly);
@@ -24,11 +23,6 @@ namespace GF.DillyDally.Wpf.Client.Core.DataTemplates
             {
                 application.AddResource(dataTemplateDictionary);
             }
-
-            //foreach (var dataTemplate in dataTemplates)
-            //{
-            //    application.AddDataTemplate(dataTemplate.DataTemplateKey, dataTemplate);
-            //}
         }
     }
 }

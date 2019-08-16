@@ -34,8 +34,8 @@ namespace GF.DillyDally.Wpf.Client.Core.DataTemplates
 
         internal ResourceDictionary CreateDataTemplateDictionaryForViewModelsInAssembly(Assembly assembly)
         {
-            var viewModelTypes = assembly.GetTypes().Where(this.TypeRespectsViewModelConvention).ToList();
-            var viewTypes = assembly.GetTypes().Where(this.TypeRespectsViewConvention).ToList();
+            var viewModelTypes = assembly.GetExportedTypes().Where(this.TypeRespectsViewModelConvention).ToList();
+            var viewTypes = assembly.GetExportedTypes().Where(this.TypeRespectsViewConvention).ToList();
 
             var viewModelViewCombinations = new Dictionary<Type, Type>();
             foreach (var viewModelType in viewModelTypes)
@@ -63,8 +63,8 @@ namespace GF.DillyDally.Wpf.Client.Core.DataTemplates
         internal IList<DataTemplate> CreateDataTemplatesForViewModelsInAssembly(Assembly assembly,
             IApplicationRuntime application)
         {
-            var viewModelTypes = assembly.GetTypes().Where(this.TypeRespectsViewModelConvention).ToList();
-            var viewTypes = assembly.GetTypes().Where(this.TypeRespectsViewConvention).ToList();
+            var viewModelTypes = assembly.GetExportedTypes().Where(this.TypeRespectsViewModelConvention).ToList();
+            var viewTypes = assembly.GetExportedTypes().Where(this.TypeRespectsViewConvention).ToList();
             var viewModelTypesWithoutDataTemplate =
                 viewModelTypes.Where(type => !this.HasDataTemplateResourceForType(type, application)).ToList();
 

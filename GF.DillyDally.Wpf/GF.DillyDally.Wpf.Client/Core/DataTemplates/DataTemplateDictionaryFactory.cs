@@ -11,12 +11,7 @@ namespace GF.DillyDally.Wpf.Client.Core.DataTemplates
     internal sealed class DataTemplateDictionaryFactory
     {
         private readonly DataTemplateFactory _dataTemplateFactory = new DataTemplateFactory();
-
-        private string GetProcessorNameFromNamespace(string valueNamespace)
-        {
-            return valueNamespace.Replace(".", "").ToLower();
-        }
-
+        
         private string CreateDataTemplatesXamlForDictionary(IReadOnlyDictionary<Type, Type> viewModelViewCombinations,
             Dictionary<Type, string> typeNamespaceProcessors)
         {
@@ -41,8 +36,7 @@ namespace GF.DillyDally.Wpf.Client.Core.DataTemplates
                 return new ResourceDictionary();
             }
 
-            var typeNamespaceProcessors = viewModelViewCombinations.Keys.Concat(viewModelViewCombinations.Values)
-                .ToDictionary(key => key, value => this.GetProcessorNameFromNamespace(value.Namespace));
+            var typeNamespaceProcessors = this.CreateTypeNamespaceProcessors(viewModelViewCombinations);
 
             var dataTemplatesXaml =
                 this.CreateDataTemplatesXamlForDictionary(viewModelViewCombinations, typeNamespaceProcessors);
@@ -52,6 +46,18 @@ namespace GF.DillyDally.Wpf.Client.Core.DataTemplates
             }
 
             return this.CreateDictionaryWithDataTemplates(assembly, dataTemplatesXaml, typeNamespaceProcessors);
+        }
+
+        private Dictionary<Type, string> CreateTypeNamespaceProcessors(IReadOnlyDictionary<Type, Type> viewModelViewCombinations)
+        {
+            int nsCounter = 1;
+            var neededNamespaces = viewModelViewCombinations.Keys.Concat(viewModelViewCombinations.Values)
+                .Select(x => x.Namespace).GroupBy(x => x)
+                .ToDictionary(key => key.Key, value => $"ns{nsCounter++}");
+
+            var typeNamespaceProcessors = viewModelViewCombinations.Keys.Concat(viewModelViewCombinations.Values)
+                .ToDictionary(key => key, value => neededNamespaces[value.Namespace]);
+            return typeNamespaceProcessors;
         }
 
         private XamlTypeMapper CreateXamlTypeMapper(Assembly assembly,
@@ -69,11 +75,11 @@ namespace GF.DillyDally.Wpf.Client.Core.DataTemplates
         }
 
         private ResourceDictionary CreateDictionaryWithDataTemplates(Assembly assembly, string dataTemplatesXaml,
-            Dictionary<Type, string> typeNamespaceProcessors)
+            IReadOnlyDictionary<Type, string> typeNamespaceProcessors)
         {
-            var resourceDictionaryTemplate = string.Format(@"<ResourceDictionary>
-{0}
-</ResourceDictionary>", dataTemplatesXaml);
+            var resourceDictionaryTemplate = $@"<ResourceDictionary>
+{dataTemplatesXaml}
+</ResourceDictionary>";
             var context = new ParserContext();
             var xamlTypeMapper = this.CreateXamlTypeMapper(assembly, typeNamespaceProcessors);
             context.XamlTypeMapper = xamlTypeMapper;
@@ -88,4 +94,4 @@ namespace GF.DillyDally.Wpf.Client.Core.DataTemplates
             return template;
         }
     }
-//}
+}
